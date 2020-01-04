@@ -15,13 +15,13 @@
 
 	<!-- 파일로 로그를 남김 -->
 	<appender name="fileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>c:\1HARI_LOG\data.log</file>
+		<!-- <file>c:\1HARI_LOG\data.log</file> -->
 		<!-- 일자별로 로그파일 적용하기 -->
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<FileNamePattern>
-				c:\1HARI_LOG\data.log.%d{yyyyMMdd}
+				c:\1HARI_LOG\data-%d{yyyyMMdd}.log
 			</FileNamePattern>
-			<maxHistory>60</maxHistory> <!-- 일자별 백업파일의 보관기간 -->
+			<maxHistory>90</maxHistory> <!-- 일자별 백업파일의 보관기간 -->
 		</rollingPolicy>
 		
 		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
