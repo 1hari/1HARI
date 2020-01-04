@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<!-- 콘솔로 로그를 남김 -->
+	<appender name="consoleAppender"
+		class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<charset>UTF-8</charset>
+			<!-- 로그 메시지 패턴 -->
+			<Pattern>
+				%d{HH:mm:ss.SSS} [%thread] %-5level %logger{5} - %msg%n
+			</Pattern>
+			<!-- %d{yyyy-MM-dd HH:mm:ss} [%-5p] [%F]%M\(%L\) : %m%n -->
+		</encoder>
+	</appender>
+
+	<!-- 파일로 로그를 남김 -->
+	<appender name="fileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>c:\1HARI_LOG\data.log</file>
+		<!-- 일자별로 로그파일 적용하기 -->
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>
+				c:\1HARI_LOG\data.log.%d{yyyyMMdd}
+			</FileNamePattern>
+			<maxHistory>60</maxHistory> <!-- 일자별 백업파일의 보관기간 -->
+		</rollingPolicy>
+		
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>
+				%d{HH:mm:ss.SSS} [%thread] %-5level %logger{5} - %msg%n
+				<!-- 로그시간 [실행thread명] 로깅레벨 고정폭5자리 - 로깅내용 -->
+			</Pattern>
+			<!-- <pattern>%d{yyyy-MM-dd HH:mm:ss} [%-5p] [%F]%M\(%L\) : %m%n</pattern> -->
+		</encoder>
+
+	</appender>
+
+	<!-- Application Loggers -->
+	<logger name="kr.coo.onehari">
+		<level value="DEBUG" />
+		<appender-ref ref="fileAppender" />
+	</logger>
+	
+	<!-- 3rdparty Loggers -->
+	<logger name="org.springframework.core">
+		<level value="info" />
+	</logger>
+	
+	<logger name="org.springframework.beans">
+		<level value="info" />
+	</logger>
+	
+	<logger name="org.springframework.context">
+		<level value="info" />
+	</logger>
+
+	<logger name="org.springframework.web">
+		<level value="info" />
+	</logger>
+	
+	<!-- root는 글로벌 로거를 의미하며, 위의 logger에 해당하지 않으면 root 로거가 실행된다. -->
+	<root level="warn">
+		<appender-ref ref="consoleAppender" />
+		<appender-ref ref="fileAppender" />
+	</root>
+
+</configuration>
