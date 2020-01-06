@@ -37,13 +37,13 @@
 		
 		<!-- default-target-url="/index.htm" 로그인 후 이동할 기본 페이지 -->
 		<security:form-login
-			default-target-url="/index.hari" login-page="/joinus/login.htm"
-			authentication-failure-url="/joinus/login.htm?error" />
+			default-target-url="/main.hari" login-page="/index.hari"
+			authentication-failure-url="/index.hari?error" />
 		
 		<security:logout logout-success-url="/index.hari" />
 		<!-- 수정하기 -->
-		<security:intercept-url pattern="/customer/*Reg.htm" access="hasRole('ROLE_USER')" />
-		<security:intercept-url pattern="/admin/**"	access="hasRole('ROLE_ADMIN')" />
+		<!-- <security:intercept-url pattern="/customer/*Reg.htm" access="hasRole('ROLE_USER')" />
+		<security:intercept-url pattern="/admin/**"	access="hasRole('ROLE_ADMIN')" /> -->
 		
 	</security:http>
 	
