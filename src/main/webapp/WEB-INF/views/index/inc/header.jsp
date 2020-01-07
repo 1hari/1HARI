@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="site-wrap"> <!-- 끝 footer 부분에 있음 -->
 	<div class="site-mobile-menu site-navbar-target">
 		<div class="site-mobile-menu-header">
@@ -22,25 +23,24 @@
 					</h1>
 				</div>
 				<!-- 로고 끝 -->
-
+				<c:url value="/login" var="loginURL"/>
 				<!--로그인 모달 시작 -->
 				<div class="col-12 col-md-10 d-none d-xl-block">
 					<nav class="site-navigation position-relative text-right" role="navigation">
 						<ul class="site-menu main-menu js-clone-nav mr-auto d-lg-block">
 							<li class="dropdown">
-								<a href="http://www.jquery2dotnet.com" class="dropdown-toggle" data-toggle="dropdown">로그인<bclass="caret"></b></a>
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">로그인<bclass="caret"></b></a>
 								<ul class="dropdown-menu" style="padding: 15px; min-width: 250px;">
 									<li>
-									
 										<!-- sign in 로그인 네브바 모달 내려오기  -->
-										<form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
+										<form class="form" role="form" method="post" action="${loginURL}" accept-charset="UTF-8" id="login-nav">
 											<div class="form-group">
 												<label class="sr-only" for="exampleInputEmail2">아이디 입력</label>
-												<input type="email" class="form-control" id="exampleInputEmail2" placeholder="아이디 입력" required>
+												<input type="text" class="form-control" name="empNum" id="exampleInputEmail2" placeholder="사번 입력" required>
 											</div>
 											<div class="form-group">
 												<label class="sr-only" for="exampleInputPassword2">비밀번호 입력</label>
-												<input type="password" class="form-control" id="exampleInputPassword2" placeholder="비밀번호 입력" required>
+												<input type="password" name="password" class="form-control" id="exampleInputPassword2" placeholder="비밀번호 입력" required>
 											</div>
 											<div class="checkbox">
 												<label> <input type="checkbox"> 아이디 기억하기 </label>
@@ -49,12 +49,10 @@
 												<!-- <button type="submit" class="btn btn-success btn-block">로그인</button>  -->
 
 												<!-- <button type ="button" data-toggle="modal" href="#shortModal" class="btn btn-primary">로그인</button>  -->
-												<a href="javascript:void(0)" data-toggle="modal" data-target="#add-new-event" class="btn m-t-20 btn-info btn-block waves-effect waves-light">
-													<i class="ti-plus"></i> 로그인
-												</a>
+												<input type="button" value="로그인" data-toggle="modal" data-target="#add-new-event" class="btn m-t-20 btn-info btn-block waves-effect waves-light">
+													
 											</div>
 										</form>
-
 									</li>
 								</ul>
 							</li>
