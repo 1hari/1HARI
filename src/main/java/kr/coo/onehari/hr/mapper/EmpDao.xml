@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="kr.coo.onehari.hr.dao.EmpDao">
+	<insert id="aa">
+		INSERT INTO emp(TEAMCODE, RANKCODE, POSITIONCODE, EMPLOYMENTCODE, ENAME, PASSWORD) VALUES(2001, 3001, 4001, 5001, 'EMP6', '1004');
+	</insert>
+</mapper>
