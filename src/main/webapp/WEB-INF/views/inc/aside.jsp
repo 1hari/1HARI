@@ -84,7 +84,7 @@
 					</a>
 					<ul aria-expanded="false" class="collapse  first-level">
 						<li class="sidebar-item">
-							<a href="#" class="sidebar-link">
+							<a href="${pageContext.request.contextPath}/1hariPay/payList.hari" class="sidebar-link">
 								<i class="mdi mdi-note-outline"></i>
 								<span class="hide-menu">급여조회 </span>
 							</a>
