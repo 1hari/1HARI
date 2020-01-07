@@ -49,7 +49,7 @@
 												<!-- <button type="submit" class="btn btn-success btn-block">로그인</button>  -->
 
 												<!-- <button type ="button" data-toggle="modal" href="#shortModal" class="btn btn-primary">로그인</button>  -->
-												<input type="button" value="로그인" data-toggle="modal" data-target="#add-new-event" class="btn m-t-20 btn-info btn-block waves-effect waves-light">
+												<input type="submit" value="로그인" data-toggle="modal" class="btn m-t-20 btn-info btn-block waves-effect waves-light">
 													
 											</div>
 										</form>
