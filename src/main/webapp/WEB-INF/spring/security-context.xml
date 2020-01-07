@@ -61,10 +61,9 @@
 			<security:jdbc-user-service
 				data-source-ref="driverManagerDataSource"
 				users-by-username-query="SELECT empNum, password, 1 enabled FROM EMP WHERE empNum=?"
-				authorities-by-username-query="select m.userid, r.ROLE_NAME 
-																	from member m join roll r
-																	on m.userid = r.userid
-																	where m.userid=?"
+				authorities-by-username-query="select empNum
+																	from EMPROLELIST
+																	where empNum=?"
            									/>
 			<security:password-encoder ref="bCryptPasswordEncoder" />
 		</security:authentication-provider>

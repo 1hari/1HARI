@@ -16,7 +16,7 @@ public class EmpDto {
 	private int rankCode; //직급코드
 	private int positionCode; //직책코드
 	private int employmentCode; //재직구분코드
-	private String eName; //사원이름
+	private String empName; //사원이름
 	private String password; //비밀번호
 	private Date birth; //생년월일
 	private String phoneNum; //핸드폰번호
