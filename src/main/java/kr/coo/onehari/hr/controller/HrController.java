@@ -1,9 +1,15 @@
 package kr.coo.onehari.hr.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
+import kr.coo.onehari.hr.dao.EmpDao;
+import kr.coo.onehari.hr.dto.EmpDto;
 import kr.coo.onehari.hr.service.EmpService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -28,10 +34,20 @@ public class HrController {
 	}
 	
 	//사원리스트 화면
-	@RequestMapping("personnel/empList.hari")
-	public String empList() {
-		int result = empservice.test();
-		log.info("DB Test : " + result);
+	@RequestMapping(value = "personnel/empList.hari", method = RequestMethod.GET)
+	public String empList(Model model) {
+//		int result = empservice.test();
+//		log.info("DB Test : " + result);
+		List<EmpDto> emplist = null;
+		
+		try {
+			emplist = empservice.empList();
+			model.addAttribute("emplist", emplist);
+			log.info("emplist: " + emplist);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
 		return "1hariHr.empList";
 	}
 	

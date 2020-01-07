@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!-- Custom CSS -->
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/hari/assets/extra-libs/multicheck/multicheck.css">
@@ -63,37 +64,49 @@
 											</label>
 										</th>
 										
-										<th>Position</th>
-										<th>Office</th>
-										<th>Age</th>
-										<th>수정</th>
-										<th>삭제</th>
+										<th>사번</th>
+										<th>이름</th>
+										<th>소속</th>
+										<th>직급</th>
+										<th>직책</th>
+										<th>재직구분</th>
+										<th>생년월일</th>
+										<th>핸드폰번호</th>
+										<th>이메일</th>
+										<th>입사일</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<th>
-											<label class="customcheckbox m-b-20">
-												<input type="checkbox" class="listCheckbox">
-												<span class="checkmark"></span>
-											</label>
-										</th>
-										
-										<td>System Architect</td>
-										<td>Edinburgh</td>
-										<td>61</td>
-										<td>
-											<button type="button" class="btn m-t-5 btn-info btn-block waves-effect waves-light" style="width: 80%; background-color: #20B2AA">
-												<a href="empModify.hari" style="color: white;">수정</a>
-											</button>
-										</td>
-										<td>
-											<button type="button" class="btn m-t-5 btn-info btn-block waves-effect waves-light" style="width: 80%; background-color: #20B2AA">
-												<a href="#" style="color: white;">삭제</a>
-											</button>
-										</td>
-									</tr>
-
+									<c:forEach var="emplist" items="${emplist}">
+										<tr>
+											<th>
+												<label class="customcheckbox m-b-20">
+													<input type="checkbox" class="listCheckbox">
+													<span class="checkmark"></span>
+												</label>
+											</th>
+											<td>${emplist.empNum}</td>
+											<td>${emplist.eName}</td>
+											<td>${emplist.teamCode}</td>
+											<td>${emplist.rankCode}</td>
+											<td>${emplist.positionCode}</td>
+											<td>${emplist.employmentCode}</td>
+											<td>${emplist.birth}</td>
+											<td>${emplist.phoneNum}</td>
+											<td>${emplist.email}</td>
+											<td>${emplist.hireDate}</td>
+											<td>
+												<button type="button" class="btn m-t-5 btn-info btn-block waves-effect waves-light" style="width: 80%; background-color: #20B2AA">
+													<a href="empModify.hari" style="color: white;">수정</a>
+												</button>
+											</td>
+											<td>
+												<button type="button" class="btn m-t-5 btn-info btn-block waves-effect waves-light" style="width: 80%; background-color: #20B2AA">
+													<a href="#" style="color: white;">삭제</a>
+												</button>
+											</td>
+										</tr>
+									</c:forEach>
 								</tbody>
 								
 								<tfoot>

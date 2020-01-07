@@ -5,6 +5,10 @@
  
 <mapper namespace="kr.coo.onehari.hr.dao.EmpDao">
 	<insert id="aa">
-		INSERT INTO emp(TEAMCODE, RANKCODE, POSITIONCODE, EMPLOYMENTCODE, ENAME, PASSWORD) VALUES(2001, 3001, 4001, 5001, 'EMP6', '1004');
+		INSERT INTO emp(TEAMCODE, RANKCODE, POSITIONCODE, EMPLOYMENTCODE, ENAME, PASSWORD) VALUES(2001, 3001, 4001, 5001, 'EMP6', '1004')
 	</insert>
+	
+	<select id="empList" resultType="kr.coo.onehari.hr.dto.EmpDto">
+		SELECT * FROM emp
+	</select>
 </mapper>
