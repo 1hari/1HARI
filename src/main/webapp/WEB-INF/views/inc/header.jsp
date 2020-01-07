@@ -94,18 +94,19 @@
 						</div>
 					</li>
 					<!--top navbar 에서 오른쪽 기능 담당 (출/퇴근과 프로필) 끝 -->
-
+					
+					<!-- 2020.1.7.19:50 김수연  -->
+					
 					<!--내 프로필 시작-->
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<img src="${pageContext.request.contextPath}/resources/hari/assets/images/users/1.jpg" alt="user" class="rounded-circle" width="31">
 						</a>
 						<div class="dropdown-menu dropdown-menu-right user-dd animated">
-							<a class="dropdown-item" href="javascript:void(0)">
-								<i class="ti-user m-r-5 m-l-5"></i>내 프로필</a>
+							<a class="dropdown-item" href="${pageContext.request.contextPath}/1hariMy/myInfo.hari">
+								<i class="ti-user m-r-5 m-l-5"></i>내 프로필</a> <!--경로 1hariMy 폴더안에 myInfo.jsp (controller myInfo.hari를) -->
 								<a class="dropdown-item" href="javascript:void(0)">
-									<i class="ti-wallet m-r-5 m-l-5"></i>
-									내 업무
+									<i class="ti-wallet m-r-5 m-l-5"></i>내 업무
 								</a>
 							<div class="dropdown-divider"></div>
 							<a class="dropdown-item" href="javascript:void(0)">
