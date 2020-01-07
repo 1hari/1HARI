@@ -106,25 +106,28 @@
 					</a>
 					
 					<ul aria-expanded="false" class="collapse  first-level">
+						
 						<li class="sidebar-item">
-							<a href="#" class="sidebar-link">
-								<i class="mdi mdi-note-outline"></i><span class="hide-menu">휴가 신청 처리 </span>
+							<a href="${pageContext.request.contextPath}/1hariSign/signForm.hari" class="sidebar-link">
+								<i class="mdi mdi-note-plus"></i>
+								<span class="hide-menu">전자결재</span>
+							</a>
+						</li>
+						
+						<!-- ROLE_ADMIN -->
+						<li class="sidebar-item">
+							<a href="${pageContext.request.contextPath}/1hariSign/admin/formInsert.hari" class="sidebar-link">
+								<i class="mdi mdi-note-outline"></i><span class="hide-menu">양식 등록 </span>
 							</a>
 						</li>
 						
 						<li class="sidebar-item">
-							<a href="#" class="sidebar-link">
+							<a href="${pageContext.request.contextPath}/1hariSign/myDocu.hari" class="sidebar-link">
 								<i class="mdi mdi-note-plus"></i>
-								<span class="hide-menu"> 인사 이동 처리 </span>
+								<span class="hide-menu">내 문서함</span>
 							</a>
 						</li>
 						
-						<li class="sidebar-item">
-							<a href="#" class="sidebar-link">
-								<i class="mdi mdi-note-plus"></i>
-								<span class="hide-menu"> 증명서 발급 처리 </span>
-							</a>
-						</li>
 					</ul>
 				</li>
 
@@ -144,7 +147,7 @@
 						<li class="sidebar-item">
 							<a href="#" class="sidebar-link">
 								<i class="mdi mdi-note-plus"></i>
-								<span class="hide-menu"> 타임라인 </span>
+								<span class="hide-menu"> 부서 게시판 </span>
 							</a>
 						</li>
 					</ul>
