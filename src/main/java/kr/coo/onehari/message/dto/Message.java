@@ -14,10 +14,10 @@ public class Message {
 	private int messageNum; //메세지 시퀀스
 	private int recEmp; //수신자 사번
 	private int sendEmp; //발신자 사번
-	private Timestamp mDate; //발송시간
-	private String mContent; //메세지 내용
-	private String mFileName; //첨부파일명
-	private String mFileRoot; //첨부파일 경로
+	private Timestamp messageDate; //발송시간
+	private String messageContent; //메세지 내용
+	private String messageFileName; //첨부파일명
+	private String messageFileRoot; //첨부파일 경로
 	private int isReceive; //수신 여부
 	private int isMDel; //삭제 여부
 }

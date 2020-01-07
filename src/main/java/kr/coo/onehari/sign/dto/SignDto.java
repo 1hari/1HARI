@@ -17,12 +17,12 @@ public class SignDto {
 	private int empSign2; //결재자2
 	private int signFormCode; //문서양식 코드
 	private int signCode; //결재 구분번호
-	private String sTitle; //전자결재 제목
-	private String sContent; //전자결재 내용
-	private Timestamp sDate; //작성일
+	private String signTitle; //전자결재 제목
+	private String signContent; //전자결재 내용
+	private Timestamp signDate; //작성일
 	private int isSign1; //결재여부1
 	private int isSign2; //결재여부2
-	private String comment; //전자결재 코멘트
-	private String sFileName; //첨부파일명
-	private String sFileRoot; //첨부파일 경로
+	private String signComment; //전자결재 코멘트
+	private String signFileName; //첨부파일명
+	private String signFileRoot; //첨부파일 경로
 }
