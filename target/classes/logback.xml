@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 	<!-- 콘솔로 로그를 남김 -->
-	<appender name="consoleAppender"
-		class="ch.qos.logback.core.ConsoleAppender">
+	<appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder>
 			<charset>UTF-8</charset>
 			<!-- 로그 메시지 패턴 -->
