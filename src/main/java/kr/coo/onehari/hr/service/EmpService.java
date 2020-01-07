@@ -27,7 +27,6 @@ public class EmpService {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		
 		return emplist;
 	}
 	

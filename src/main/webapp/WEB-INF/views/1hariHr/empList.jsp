@@ -77,7 +77,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach var="emplist" items="${emplist}">
+									<c:forEach var="emp" items="${emplist}">
 										<tr>
 											<th>
 												<label class="customcheckbox m-b-20">
@@ -85,16 +85,16 @@
 													<span class="checkmark"></span>
 												</label>
 											</th>
-											<td>${emplist.empNum}</td>
-											<td>${emplist.eName}</td>
-											<td>${emplist.teamCode}</td>
-											<td>${emplist.rankCode}</td>
-											<td>${emplist.positionCode}</td>
-											<td>${emplist.employmentCode}</td>
-											<td>${emplist.birth}</td>
-											<td>${emplist.phoneNum}</td>
-											<td>${emplist.email}</td>
-											<td>${emplist.hireDate}</td>
+											<td>${emp.empNum}</td>
+											<td>${emp.empName}</td>
+											<td>${emp.teamCode}</td>
+											<td>${emp.rankCode}</td>
+											<td>${emp.positionCode}</td>
+											<td>${emp.employmentCode}</td>
+											<td>${emp.birth}</td>
+											<td>${emp.phoneNum}</td>
+											<td>${emp.email}</td>
+											<td>${emp.hireDate}</td>
 											<td>
 												<button type="button" class="btn m-t-5 btn-info btn-block waves-effect waves-light" style="width: 80%; background-color: #20B2AA">
 													<a href="empModify.hari" style="color: white;">수정</a>
