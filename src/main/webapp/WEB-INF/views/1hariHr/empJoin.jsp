@@ -200,18 +200,14 @@
 	/****************************************
 	*      필수 테이블 1. 데이터 테이블 , 2. datepicker 제이쿼리 스크립트 *
 	****************************************/
-	$(funcion() {
-		
-	$('#zero_config').DataTable();
-		/*datepicker*/
-		jQuery('.mydatepicker').datepicker();
-		jQuery('#datepicker-autoclose').datepicker({
-			autoclose: true,
-			todayHighlight: true
+	/*datepicker*/
+	$('.mydatepicker').datepicker({
+		dateFormat: "yyyy-mm-dd"
 	});
-	})
-
-
+	$('#datepicker-autoclose').datepicker({
+		autoclose: true,
+		todayHighlight: true
+	});
 </script>
 <!-- this page js , 1단계 2단계 3단계 제출 구성 쿼리 필수! 지우지 마세요 -->
     <script src="${pageContext.request.contextPath}/resources/hari/assets/libs/jquery-steps/build/jquery.steps.min.js"></script>
@@ -354,7 +350,7 @@
 				for(var i = 0; i < dArray.length; i++) {
 					var option = document.createElement("option");
 					$(option).text(dArray[i]);
-					$("#deptSelect").append(option);
+					$("#teamSelect").append(option);
 				}
 			}
 		});
