@@ -12,12 +12,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 폼 등록하기 김정하 / 2020. 1. 8-->
 	<insert id="insertForm">
-		INSERT INTO signform (SIGNFORMFORMNAME, SIGNFORMFORMCONTENT) VALUES (#{signFormName}, #{signFormContent});
+		INSERT INTO signform (SIGNFORMFORMNAME, SIGNFORMFORMCONTENT) VALUES (#{signFormName}, #{signFormContent})
 	</insert>
 	
+	<select id="selectAllForm" resultType="kr.coo.onehari.sign.dto.SignFormDto">
+		SELECT SIGNFORMCODE, SIGNFORMFORMNAME, SIGNFORMFORMCONTENT FROM signform
+	</select>
+	
 	<!-- 폼 가져오기 김정하 / 2020. 1. 8-->
-	<select id="selectFrom">
-		SELECT SIGNFORMCODE, SIGNFORMFORMNAME, SIGNFORMFORMCONTENT FROM signform;
+	<select id="selectForm" resultType="kr.coo.onehari.sign.dto.SignFormDto">
+		SELECT SIGNFORMCODE, SIGNFORMFORMNAME, SIGNFORMFORMCONTENT FROM signform where SIGNFORMCODE = #{SIGNFORMCODE}
 	</select>
 	
 </mapper>

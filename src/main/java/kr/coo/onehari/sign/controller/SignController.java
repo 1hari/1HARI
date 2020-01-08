@@ -34,7 +34,7 @@ public class SignController {
 		int result = service.insertForm(form);
 		String view = "";
 		if(result > 0) {
-			view = "1hariSign.signForm";
+			view = "redirect:1hariSign.signForm";
 			model.addAttribute("msg", "등록완료되었습니다.");
 		}else {
 			view = "1hariSign.formInsert";

@@ -1,6 +1,7 @@
 package kr.coo.onehari.sign.dao;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import kr.coo.onehari.sign.dto.SignFormDto;
 
@@ -16,7 +17,10 @@ public interface SignFormDao {
 	//폼 등록 김정하 / 2020. 1. 8
 	public int insertForm(SignFormDto form) throws ClassNotFoundException, SQLException;
 	
+	//폼 리스트 가져오기 김정하 / 2020. 1. 8
+	public List<SignFormDto> selectAllForm() throws ClassNotFoundException, SQLException;
+	
 	//폼 가져오기 김정하 / 2020. 1. 8
-	public SignFormDto selectFrom(int formNum) throws ClassNotFoundException, SQLException;
+	public SignFormDto selectForm(int signFormCode) throws ClassNotFoundException, SQLException;
 	
 }
