@@ -43,6 +43,13 @@ public class SignController {
 		return view;
 	}
 	
+	
+	//문서기안 화면 김정하 / 2020. 1. 8~
+	@RequestMapping(value="docuDraft.hari", method = RequestMethod.GET)
+	public String formDraft(int signFormCode) {
+		return "1hariSign.docuDraft";
+	}
+	
 	//내 문서함 화면 김정하 / 2020. 1. 7~
 	@RequestMapping("myDocu.hari")
 	public String myDocu() {
