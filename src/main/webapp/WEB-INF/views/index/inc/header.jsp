@@ -36,7 +36,7 @@
 										<form class="form" role="form" method="post" action="${loginURL}" accept-charset="UTF-8" id="login-nav">
 											<div class="form-group">
 												<label class="sr-only" for="exampleInputEmail2">아이디 입력</label>
-												<input type="text" class="form-control" name="empNum" id="exampleInputEmail2" placeholder="사번 입력" required>
+												<input type="text" class="form-control" name="username" id="exampleInputEmail2" placeholder="사번 입력" required>
 											</div>
 											<div class="form-group">
 												<label class="sr-only" for="exampleInputPassword2">비밀번호 입력</label>

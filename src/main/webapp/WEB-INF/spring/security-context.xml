@@ -43,10 +43,12 @@
 	
 	<security:authentication-manager>
 		<security:authentication-provider>
-		
 			<security:jdbc-user-service data-source-ref="driverManagerDataSource"
-			 users-by-username-query="SELECT empNum, password, 1 enabled FROM emp where empNum=?"/>  
-			
+			 users-by-username-query="SELECT EMPNUM as username, password, 1 enabled FROM emp where EMPNUM=?"
+			 authorities-by-username-query="	select e.EMPNUM, r.ROLECODE    
+ 													           from EMP e join EMPROLELIST r  
+													           on e.EMPNUM = r.EMPNUM
+													           where e.EMPNUM=?"/>  
 		</security:authentication-provider>
 	</security:authentication-manager>
 </beans>

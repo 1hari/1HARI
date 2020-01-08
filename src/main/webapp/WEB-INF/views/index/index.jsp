@@ -21,7 +21,7 @@
 </div>
 <!--로그인 하기 전 메인 화면에서 회사 소개 div 끝 -->
 <div>
-	<p><c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}" /> </p>
+	<p>에러내용 <c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}" /> </p>
 </div>
 
 <!--main 화면 2번째 입니다 contents 소개-->
