@@ -19,4 +19,9 @@ public interface EmpDao {
 	// 사원등록 김진호 / 2020. 1. 7
 	public int empJoin(EmpDto empdto) throws ClassNotFoundException, SQLException;
 	
+	// 사원디테일(수정에 필요) 양찬식 / 2020. 1. 8
+	public EmpDto empModify(int empNum) throws ClassNotFoundException, SQLException;
+	
+	
+	
 }
