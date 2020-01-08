@@ -183,26 +183,34 @@
 <!--left sidebar끝 !! css는 sidebar.css 파일 참고 -->
 
 <!-- DRAFT Modal -->
-<div class="modal fade" id="draftModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- jsTree -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+     
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#formTree').jstree();
+	});
+</script>
+
+<div class="modal fade" id="draftModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="width: 700px; top: 112px;">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
+		
 			<div class="modal-header">
 				<h5 class="modal-title" id="exampleModalLabel">결재양식 선택 </h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
-			</div>
-			<div class="modal-body">반으로 갈라 조직도와 품의서 종류를 올려볼까
+			</div><!-- modal-header 끝 -->
+			
+			<div class="modal-body">
 				<div class="set_wrap">
-					<div class="set_nav" id="appr_form_searchTree">
 						<form onsubmit="return false;">
 							<section class="search">
 								<div class="search_wrap">
 									<input id="searchInput" class="search" maxlength="20" type="text" placeholder="양식제목">
-									<input class="btn_search" type="button" value="" title="" evt-rol="mail-search">
-								</div>
-								
-								<div id="detailSearchLayerWrap" style="position:relative;display:none;z-index:60">
+									<i class="fas fa-search" value="" title=""></i>
 								</div>
 							</section>
 						</form>
@@ -211,104 +219,32 @@
 							<div id="formTree" class="jstree jstree-0 jstree-focused jstree-default">
 								<ul>
 									<li class="jstree-open">
-										<ins class="jstree-icon">&nbsp;</ins>
-										<a title="일반" rel="FOLDER" nodeid="21" href="#" data-bypass="1" class="">
-											<ins class="jstree-icon">&nbsp;</ins>일반
+										<i class="jstree-icon">&nbsp;</i>
+										<a title="품의서" rel="FOLDER" nodeid="21" href="#" data-bypass="1">
+											<i class="jstree-icon">&nbsp;</i>품의서
 										</a>
 											
-										<ul>
+										<ul>										
 											<li class="jstree-leaf">
-												<ins class="jstree-icon">&nbsp;</ins>
-												<a title="업무기안" rel="FORM" nodeid="784" href="#" data-bypass="1" class="">
-													<ins class="jstree-icon appr_form">&nbsp;</ins>업무기안
+												<i class="jstree-icon">&nbsp;</i>
+												<a title="일반품의서" rel="FORM" href="#" data-bypass="1">
+													<i class="jstree-icon appr_form">&nbsp;</i>일반품의서
 												</a>
 											</li>
-													
-											<li class="jstree-leaf">
-												<ins class="jstree-icon">&nbsp;</ins>
-												<a title="업무협조" rel="FORM" nodeid="799" href="#" data-bypass="1">
-													<ins class="jstree-icon appr_form">&nbsp;</ins>업무협조
-												</a>
-											</li>
-													
-											<li class="jstree-leaf">
-												<ins class="jstree-icon">&nbsp;</ins>
-												<a title="일반품의서" rel="FORM" nodeid="689" href="#" data-bypass="1" class="">
-													<ins class="jstree-icon appr_form">&nbsp;</ins>일반품의서
-												</a>
-											</li>
-													
-											<li class="jstree-last jstree-leaf">
-												<ins class="jstree-icon">&nbsp;</ins>
-												<a title="회계(입금,출금,대체)품의서" rel="FORM" nodeid="688" href="#" data-bypass="1" class="">
-													<ins class="jstree-icon appr_form">&nbsp;</ins>회계(입금,출금,대체)품의서
-												</a>
-											</li>
-													
 										</ul>
-									</li>
-											
+										
+									</li><!-- jstree-open 끝 -->
 								</ul>
-								<li class="jstree-last jstree-leaf">
-									<ins class="jstree-icon">&nbsp;</ins>
-									<a title="테스트양식" rel="FORM" nodeid="768" href="#" data-bypass="1">
-										<ins class="jstree-icon appr_form">&nbsp;</ins>테스트양식
-									</a>
-								</li>
-							</div>
-							<div id="searchResult" style="min-height: 150px; max-height: 375px; display: none;">
-								<div class="jstree jstree-default" style="border-bottom:1px dashed #c8c8c8;margin:5px;display:block">
-									<ul class="mail_folder"></ul>
-								</div>
-							</div>
-						</div>
-					</div>
-				
-					<!-- 문서정보 form_detail -->
-					<div class="doc_info">
-						<div class="tit_type2">상세정보</div>
-						<form>
-							<fieldset>
-								<table id="form_detail" class="form_type tb_doc_info">
-									<tbody id="form_detail_tbody">
-										<tr>
-											<th><span class="title">제목</span></th>
-											<td></td>
-										</tr>
-										<tr>
-											<th><span class="title">전사문서함</span></th>
-											<td></td>
-										</tr>
-										<tr>
-											<th><span class="title">보존연한</span></th>
-											<td>
-											</td>
-										</tr>
-									<!-- 	<tr>
-											<th><span class="title">설명</span></th>
-											<td></td>
-										</tr> -->
-										<tr>
-											<th><span class="title">기안부서</span></th>
-											<td></td>
-										</tr>
-										<tr>
-									        <th><span class="title">부서문서함</span></th>
-									        <td></td>
-									    </tr>
-									</tbody>
-								</table>
-							</fieldset>
-						</form>
-					</div>
-				</div>
-			</div>
+							</div> <!-- formTree 끝 -->
+						</div> <!-- content_tab_wrap 끝 -->
+				</div><!-- set_wrap 끝 -->
+			</div><!-- modal-body 끝 -->
 			
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
 				<a href="${pageContext.request.contextPath}/1hariSign/docuDraft.hari" class="btn btn-primary">선택완료</a>
-			</div>
+			</div><!-- modal-footer 끝 -->
 			
-		</div>
-	</div>
-</div>
+		</div><!-- modal-content 끝 -->
+	</div><!-- modal-dialog 끝 -->
+</div><!--  draftModal 끝 -->
