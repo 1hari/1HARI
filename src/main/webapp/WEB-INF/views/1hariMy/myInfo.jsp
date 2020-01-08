@@ -89,104 +89,58 @@
 		<!-- Start Page Content -->
 		<!-- ============================================================== -->
 		<div class="row">
-			<div class="col-12">
+			<div class="col-6" style = "text-align: center;">
 
 				<!-- 사원 등록 input div 시작 -->
-				<div class="container" style="background-color: #ffffff; margin-top: 8%;">
-					
-						<div class="row setup-content" id="step-1">
-							<div class="col-xs-12">
-								<div class="col-md-12">
-
-									<div class="container">
-										<div class="row">
-										<!--form 태그 시작 -->
-											<form action="#">
-
-												<!--왼쪽 input 태그들 -->
-												<div class="col-xs-6">
-													<div class="form-group">
-														<label for="firstname" style="margin-top: 8%;">소속 번호</label>
-														
-														<!-- ★★ 소속번호 DB에서 조회해서 가져오기 -->
-														<select type="text" class="form-control" placeholder="소속 번호" style="height: 1000%;">
-														</select>
-													</div>
-													
-													<div class="form-group">
-														<label for="lastname" style="margin-top: 1%;">직책 번호</label>
-														
-														<!-- ★★ 직책번호 DB에서 조회해서 가져오기 -->
-														<select type="text" class="form-control" placeholder="직책 번호" style="height: 150%;">
-														</select>
-													</div>
-
-													<div class="form-group">
-														<label for="AddressLine1" style="margin-top: 1%;">직급 번호 </label>
-														
-														<!-- ★★ 직급번호 DB에서 조회해서 가져오기 -->
-														<select type="text" class="form-control" placeholder="직급 번호" style="height: 150%;">
-														</select>
-													</div>
-													<div class="form-group">
-														<label for="Address Line 1" style="margin-top: 1%;">재직 구분 번호 </label>
-														
-														<!-- ★★ 재직 번호 DB에서 조회해서 가져오기 -->
-														<select type="text" class="form-control" placeholder="직책 번호" style="height: 150%;">
-														</select>
-													</div>
-													<div class="form-group">
-														<label for="Address Line 1" style="margin-top: 1%;">이름</label>
-														<input type="text" class="form-control" placeholder="이름" style="margin-bottom: 10%">
-													</div>
-												</div>
-												<!--왼쪽 input 태그들 끝-->
-												<!--오른쪽 input 태그들 시작 -->
-												<div class="col-xs-5">
-
-													<div class="input-group">
-														<label style="margin-top: 9%;">생년 월일 </label>
-														<input type="text" class="form-control mydatepicker" placeholder="mm/dd/yyyy">
-														<div class="input-group-append"></div>
-													</div>
-
-													<div class="form-group">
-														<label for="State">핸드폰 번호</label> <br>
-														<input type="text" style="width: 32%; display: inline;" class="form-control" placeholder="010">
-														<input type="text" style="width: 32%; display: inline;" class="form-control" placeholder="" >
-														<input type="text" style="width: 32%; display: inline-block;" class="form-control" placeholder="">
-													</div>
-													<!--
-						                                상위 선택자에 text-align:center를 넣고,
-						                                하위 선택자 중 , 좌측 정렬 되어야 할 선택자에 display:inline 을 적용,
-						                                우측 정렬 되어야 할 선택자에 display:inline-block 을 적용시키면 해결된다.
-						
-						                                출처: https://biju.tistory.com/317 [에헤라디야~]-->
-													<div class="form-group">
-														<label for="zip">주민번호</label> <br>
-														<input type="text" style="width: 49%; display: inline;" class="form-control" placeholder="주민 번호" >
-														<input type="password" style="width: 49%; display: inline-block;" class="form-control" placeholder="뒷자리">
-													</div>
-													<div class="form-group">
-														<label for="zip">이메일 </label> <br>
-														<input type="text" style="width: 49%; display: inline;" class="form-control" id="zip" placeholder="이메일">
-														<span type="text" style="width: 49%; display: inline-block;">@gmail.com</span>
-													</div>
-
-													<div class="input-group">
-														<label>입사일</label>
-														<input type="text" class="form-control mydatepicker" placeholder="yyyy/mm/dd">
-														<div class="input-group-append"></div>
-													</div>
-												</div>
-												<!--오른쪽 input 태그들 끝-->
-
-											</form>
-											<!--폼 action 태그 끝 -->
-										</div>
-										<!--div= "row" 끝 -->
-									</div>
-									<!--컨테이너 디브태그 끝 -->
+					            <div class="card">
+	                            <form class="form-horizontal">
+	                                <div class="card-body">
+	                                    <h4 class="card-title">Personal Info</h4>
+	                                    <div class="form-group row">
+	                                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">First Name</label>
+	                                        <div class="col-sm-9">
+	                                            <input type="text" class="form-control" id="fname" placeholder="First Name Here">
+	                                        </div>
+	                                    </div>
+	                                    <div class="form-group row">
+	                                        <label for="lname" class="col-sm-3 text-right control-label col-form-label">Last Name</label>
+	                                        <div class="col-sm-9">
+	                                            <input type="text" class="form-control" id="lname" placeholder="Last Name Here">
+	                                        </div>
+	                                    </div>
+	                                    <div class="form-group row">
+	                                        <label for="lname" class="col-sm-3 text-right control-label col-form-label">Password</label>
+	                                        <div class="col-sm-9">
+	                                            <input type="password" class="form-control" id="lname" placeholder="Password Here">
+	                                        </div>
+	                                    </div>
+	                                    <div class="form-group row">
+	                                        <label for="email1" class="col-sm-3 text-right control-label col-form-label">Company</label>
+	                                        <div class="col-sm-9">
+	                                            <input type="text" class="form-control" id="email1" placeholder="Company Name Here">
+	                                        </div>
+	                                    </div>
+	                                    <div class="form-group row">
+	                                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Contact No</label>
+	                                        <div class="col-sm-9">
+	                                            <input type="text" class="form-control" id="cono1" placeholder="Contact No Here">
+	                                        </div>
+	                                    </div>
+	                                    <div class="form-group row">
+	                                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Message</label>
+	                                        <div class="col-sm-9">
+	                                            <textarea class="form-control"></textarea>
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                                <div class="border-top">
+	                                    <div class="card-body">
+	                                        <button type="button" class="btn btn-primary">Submit</button>
+	                                    </div>
+	                                </div>
+	                            </form>
+	                        </div>
+										<!--컨테이너 디브태그 끝 -->
 
 
 									<!--   <button href="#step-2" class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Next</button> -->

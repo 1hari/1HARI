@@ -14,11 +14,10 @@
 								<thead>
 									<tr>
 										<th class="text-center w-20">글번호</th>
-										<th class="text-center w-20 d-none d-xl-table-cell">제목</th>
-										<th class="text-center w-20 d-none d-xl-table-cell">작성날짜</th>
-										<th class="text-center w-20 d-none d-xl-table-cell">작성날짜</th>
-										<th class="text-center w-20 d-none d-xl-table-cell">작성날짜</th>
-
+										<th class="text-center w-15 d-none d-xl-table-cell">제목</th>
+										<th class="text-center w-15 d-none d-xl-table-cell">작성날짜</th>
+										<th class="text-center w-15 d-none d-xl-table-cell">작성날짜</th>
+										<th class="text-center w-15 d-none d-xl-table-cell">작성날짜</th>
 									</tr>
 								</thead>
 								<tbody>
