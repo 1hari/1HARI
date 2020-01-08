@@ -9,6 +9,6 @@ import lombok.ToString;
 @ToString
 //권한 테이블
 public class Role {
-	private int roleCode; //권한코드
 	private String roleName; //권한명
+	private String roleDSCR; //권한명
 }
