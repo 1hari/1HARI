@@ -173,6 +173,176 @@
                 <!-- ============================================================== -->
             </div>
             <!-- ============================================================== -->
+	<div class="container-fluid">
+		<!-- ============================================================== -->
+		<!-- Start Page Content -->
+		<!-- ============================================================== -->
+		<div class="card">
+			<div class="card-body wizard-content">
+				<h6 class="card-subtitle"></h6>
+				<form id="example-form" action="" class="m-t-40" name="joinform" method="post">
+					<div>
+						<h3>재직 정보</h3>
+						<section>
+							<label for="teamCode">소속</label> 
+							<select class="required form-control" id="teamSelect" name="teamCode" style="height: 300%; margin-bottom: 1%;">
+								<option>1</option>
+							</select> 
+							
+							<label for="positionCode">직책</label> 
+							<select class="required form-control" id="positionSelect" name="positionCode" style="height: 300%; margin-bottom: 1%;">
+								<option>1</option>
+							</select> 
+							
+							<label for="rankcode">직급</label> 
+							<select class="required form-control" id="rankSelect" name="rankCode" style="height: 300%; margin-bottom: 1%;">
+								<option>1</option>
+							</select> 
+							
+							<label for="employmentcode">재직구분</label> 
+							<select class="required form-control" id="employmentSelect" name="employmentCode" style="height: 300%; margin-bottom: 1%;">
+								<option>1</option>
+							</select>
+						</section>
+
+						<h3>사원 정보</h3>
+						<section>
+							<div>
+								<label for="empName" style="margin-top: 10px; margin-bottom: 0px;">이름</label> 
+								<input id="empName" name="empName" type="text" class="required form-control"> 
+							</div>
+							<div class="input-group">
+								<label for="birthFull" style="margin-top: 10px; margin-bottom: 0px;">생년월일</label> 
+								<input type="text" id="birth" name="birth" class="form-control mydatepicker" placeholder="yyyy-mm-dd">
+								<div class="input-group-append"></div>
+							</div>
+							<div>
+								<label for="phoneNum" style="margin-top: 10px; margin-bottom: 0px;">핸드폰번호</label> 
+								<input id="phoneNum" name="phoneNum" type="text" class="required form-control"> 
+							</div>
+							<div>
+								<label for="birthNum" style="margin-top: 10px; margin-bottom: 0px;">주민등록번호</label>
+								<button type="button" class="btn btn-outline-success" style="padding-top: 0px; padding-bottom: 0px;" onclick="CheckForm()">확인</button><br>
+								<input name="birthday" type="text" class="form-control" maxlength="6" style="width: 50%; display: inline-block;" placeholder="생년월일 6자리">
+								<input name="regNum" type="password" class="form-control" maxlength="7" style="width: 49%; display: inline-block;" placeholder="주민등록번호 뒷자리">
+							</div>
+							<div>
+								<label for="email" style="margin-top: 10px; margin-bottom: 0px;">이메일</label><br>
+								<input id="email" name="email" type="text" class="form-control" style="width: 50%; display: inline;">
+								<input type="text" id="gmail" name="gmail" class="required form-control" style="width: 49%; display: inline;" value="@gmail.com" readonly="readonly">
+							</div>
+							<div class="input-group">
+								<label for="hireDate" style="margin-top: 10px; margin-bottom: 0px;">입사일</label>
+								<input type="text" id="hireDate" name="hireDate" class="form-control mydatepicker" placeholder="yyyy-mm-dd">
+								<div class="input-group-append"></div>
+							</div>
+						</section>
+
+						<h3>Finish</h3>
+						<section>
+							<input id="acceptTerms" name="acceptTerms" type="checkbox" class="required"> <label for="acceptTerms">I agree with the Terms and Conditions.</label>
+						</section>
+					</div>
+				</form>
+			</div>
+		</div>
+		<!-- ============================================================== -->
+		<!-- End PAge Content -->
+		<!-- ============================================================== -->
+		<!-- ============================================================== -->
+		<!-- Right sidebar -->
+		<!-- ============================================================== -->
+		<!-- .right-sidebar -->
+		<!-- ============================================================== -->
+		<!-- End Right sidebar -->
+		<!-- ============================================================== -->
+	</div>
+	<!-- ============================================================== -->
+	<div class="container-fluid">
+		<!-- ============================================================== -->
+		<!-- Start Page Content -->
+		<!-- ============================================================== -->
+		<div class="card">
+			<div class="card-body wizard-content">
+				<h6 class="card-subtitle"></h6>
+				<form id="example-form" action="" class="m-t-40" name="joinform" method="post">
+					<div>
+						<h3>재직 정보</h3>
+						<section>
+							<label for="teamCode">소속</label> 
+							<select class="required form-control" id="teamSelect" name="teamCode" style="height: 300%; margin-bottom: 1%;">
+								<option>1</option>
+							</select> 
+							
+							<label for="positionCode">직책</label> 
+							<select class="required form-control" id="positionSelect" name="positionCode" style="height: 300%; margin-bottom: 1%;">
+								<option>1</option>
+							</select> 
+							
+							<label for="rankcode">직급</label> 
+							<select class="required form-control" id="rankSelect" name="rankCode" style="height: 300%; margin-bottom: 1%;">
+								<option>1</option>
+							</select> 
+							
+							<label for="employmentcode">재직구분</label> 
+							<select class="required form-control" id="employmentSelect" name="employmentCode" style="height: 300%; margin-bottom: 1%;">
+								<option>1</option>
+							</select>
+						</section>
+
+						<h3>사원 정보</h3>
+						<section>
+							<div>
+								<label for="empName" style="margin-top: 10px; margin-bottom: 0px;">이름</label> 
+								<input id="empName" name="empName" type="text" class="required form-control"> 
+							</div>
+							<div class="input-group">
+								<label for="birthFull" style="margin-top: 10px; margin-bottom: 0px;">생년월일</label> 
+								<input type="text" id="birth" name="birth" class="form-control mydatepicker" placeholder="yyyy-mm-dd">
+								<div class="input-group-append"></div>
+							</div>
+							<div>
+								<label for="phoneNum" style="margin-top: 10px; margin-bottom: 0px;">핸드폰번호</label> 
+								<input id="phoneNum" name="phoneNum" type="text" class="required form-control"> 
+							</div>
+							<div>
+								<label for="birthNum" style="margin-top: 10px; margin-bottom: 0px;">주민등록번호</label>
+								<button type="button" class="btn btn-outline-success" style="padding-top: 0px; padding-bottom: 0px;" onclick="CheckForm()">확인</button><br>
+								<input name="birthday" type="text" class="form-control" maxlength="6" style="width: 50%; display: inline-block;" placeholder="생년월일 6자리">
+								<input name="regNum" type="password" class="form-control" maxlength="7" style="width: 49%; display: inline-block;" placeholder="주민등록번호 뒷자리">
+							</div>
+							<div>
+								<label for="email" style="margin-top: 10px; margin-bottom: 0px;">이메일</label><br>
+								<input id="email" name="email" type="text" class="form-control" style="width: 50%; display: inline;">
+								<input type="text" id="gmail" name="gmail" class="required form-control" style="width: 49%; display: inline;" value="@gmail.com" readonly="readonly">
+							</div>
+							<div class="input-group">
+								<label for="hireDate" style="margin-top: 10px; margin-bottom: 0px;">입사일</label>
+								<input type="text" id="hireDate" name="hireDate" class="form-control mydatepicker" placeholder="yyyy-mm-dd">
+								<div class="input-group-append"></div>
+							</div>
+						</section>
+
+						<h3>Finish</h3>
+						<section>
+							<input id="acceptTerms" name="acceptTerms" type="checkbox" class="required"> <label for="acceptTerms">I agree with the Terms and Conditions.</label>
+						</section>
+					</div>
+				</form>
+			</div>
+		</div>
+		<!-- ============================================================== -->
+		<!-- End PAge Content -->
+		<!-- ============================================================== -->
+		<!-- ============================================================== -->
+		<!-- Right sidebar -->
+		<!-- ============================================================== -->
+		<!-- .right-sidebar -->
+		<!-- ============================================================== -->
+		<!-- End Right sidebar -->
+		<!-- ============================================================== -->
+	</div>
+	<!-- ============================================================== -->
             <!-- End Container fluid  -->
 	<!--    <div class="container-fluid"> 끝 -->
 	<!-- ============================================================== -->
@@ -203,6 +373,14 @@
     //1. 데이터 테이블
 	$('#zero_config').DataTable();
 
+	/*datepicker*/
+	$('.mydatepicker').datepicker({
+		dateFormat: "yyyy-mm-dd"
+	});
+	$('#datepicker-autoclose').datepicker({
+		autoclose: true,
+		todayHighlight: true
+	});
 	/*2.datepicker*/
 	jQuery('.mydatepicker').datepicker();
 	
@@ -222,34 +400,19 @@
 
     
     
-    <script>
-        // Basic Example with form
-    var form = $("#example-form");
-    form.validate({
-        errorPlacement: function errorPlacement(error, element) { element.before(error); },
-        rules: {
-            confirm: {
-                equalTo: "#password"
-            }
-        }
-    });
-    
-     form.children("div").steps({
-        headerTag: "h3",
-        bodyTag: "section",
-        transitionEffect: "slideLeft",
-        onStepChanging: function(event, currentIndex, newIndex) {
-            form.validate().settings.ignore = ":disabled,:hidden";
-            return form.valid();
-        },
-        onFinishing: function(event, currentIndex) {
-            form.validate().settings.ignore = ":disabled";
-            return form.valid();
-        },
-        onFinished: function(event, currentIndex) {
-            alert("Submitted!");
-        }
-    });
+<script>
+    // Basic Example with form
+	var form = $("#example-form");
+	form.validate({
+		errorPlacement : function errorPlacement(error, element) {
+			element.before(error);
+		},
+		rules : {
+			confirm : {
+				equalTo : "#password"
+			}
+		}
+	});
 
 
     </script>
