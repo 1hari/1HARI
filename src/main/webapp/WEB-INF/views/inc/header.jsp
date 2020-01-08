@@ -113,7 +113,7 @@
 								<i class="ti-settings m-r-5 m-l-5"></i>계정관리
 							</a>
 							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="javascript:void(0)">
+							<a class="dropdown-item" href="${pageContext.request.contextPath}/logout">
 								<i class="fa fa-power-off m-r-5 m-l-5"></i>로그아웃
 							</a>
 							<div class="dropdown-divider"></div>
