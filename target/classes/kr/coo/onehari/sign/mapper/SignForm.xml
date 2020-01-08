@@ -10,6 +10,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 -->
 <mapper namespace="kr.coo.onehari.sign.dao.SignFormDao">
 
+	<!-- 폼 등록하기 김정하 / 2020. 1. 8-->
+	<insert id="insertForm">
+		INSERT INTO signform (SIGNFORMFORMNAME, SIGNFORMFORMCONTENT) VALUES (#{signFormName}, #{signFormContent});
+	</insert>
 	
 	<!-- 폼 가져오기 김정하 / 2020. 1. 8-->
 	<select id="selectFrom">
