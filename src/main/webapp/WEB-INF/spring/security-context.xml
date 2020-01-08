@@ -39,8 +39,8 @@
 		                     authentication-failure-url="/index.hari?error"
 		                     default-target-url="/main.hari" />
 		<security:logout  logout-success-url="/index.hari" />
-		<security:intercept-url pattern="/1hariHr/**" access="hasRole('ROLE_PERSONNEL')" />
-		<security:intercept-url pattern="/1hariHr/*" access="hasRole('ROLE_PERSONNEL')" />
+		<!-- <security:intercept-url pattern="/1hariHr/**" access="hasRole('ROLE_PERSONNEL')" />
+		<security:intercept-url pattern="/1hariHr/*" access="hasRole('ROLE_PERSONNEL')" /> -->
 		<security:access-denied-handler error-page="/1hariHr/error403.hari"/>
 		
 	</security:http>
