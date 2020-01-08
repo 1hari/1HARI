@@ -98,7 +98,7 @@
 											<td>${emp.hireDate}</td>
 											<td>
 												<button type="button" class="btn m-t-5 btn-info btn-block waves-effect waves-light" style="width: 80%; background-color: #20B2AA">
-													<a href="empModify.hari" style="color: white;">수정</a>
+													<a href="empModify.hari?empNum=${emp.empNum}" style="color: white;">수정</a>
 												</button>
 											</td>
 											<!-- <td>

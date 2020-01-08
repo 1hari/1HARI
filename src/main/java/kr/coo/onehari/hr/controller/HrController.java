@@ -57,9 +57,19 @@ public class HrController {
 		return "1hariHr.empJoin";
 	}
 	
+		
 	//사원수정
-	@RequestMapping("personnel/empModify.hari")
-	public String empModify() {
+	@RequestMapping(value = "personnel/empModify.hari", method = RequestMethod.GET)
+	public String empModify1(int empNum, Model model) {
+		EmpDto emp = null;
+			try {
+			emp = empservice.empModify(empNum);
+			model.addAttribute("emp", emp);
+			log.info("emp: " + emp);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+					
 		return "1hariHr.empModify";
 	}
 }

@@ -30,6 +30,20 @@ public class EmpService {
 		return emplist;
 	}
 	
+	
+	public EmpDto empModify(int empNum) {
+		EmpDto emp = null;
+		
+		try {
+			EmpDao empdao = sqlsession.getMapper(EmpDao.class);
+			emp = empdao.empModify();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return emp;
+	}
+	
+	
 //	public int test() {
 //		EmpDao empdao = sqlsession.getMapper(EmpDao.class);
 //		int result = 0;

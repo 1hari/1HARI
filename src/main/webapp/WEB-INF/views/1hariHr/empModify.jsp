@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	
 <!-- Custom CSS -->
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/hari/assets/extra-libs/multicheck/multicheck.css">
 <link href="${pageContext.request.contextPath}/resources/hari/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet">
@@ -106,10 +107,12 @@
 												<!--왼쪽 input 태그들 -->
 												<div class="col-xs-6">
 													<div class="form-group">
+														<c:set var="emp" value="${requestScope.emp}"/>
 														<label for="firstname" style="margin-top: 8%;">소속 번호</label>
 														
-														<select type="text" class="form-control" placeholder="소속 번호" required="" style="height: 1000%;">
-														</select>
+														<input type="text" id="empNum" name="empNum" class="form-control" placeholder="소속 번호" required="" style="height: 1000%;"
+														value="${emp.empNum }">
+														<!-- </select> -->
 													</div>
 													
 													<div class="form-group">
@@ -184,7 +187,8 @@
 														<input type="text" class="form-control mydatepicker" placeholder="mm/dd/yyyy">
 														<div class="input-group-append"></div>
 													</div>
-
+									
+									
 												</div>
 												<!--오른쪽 input 태그들 끝-->
 
