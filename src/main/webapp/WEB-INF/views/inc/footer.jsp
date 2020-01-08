@@ -4,6 +4,7 @@
 
 <!--bottom 시작 -->
 <footer class="footer text-center">
-	All Rights Reserved by Matrix-admin. Designed and Developed by
+	
+	<div style = "text-align: center;">All Rights Reserved by Matrix-admin. Designed and Developed by 1HARI</div>
 </footer>
 <!--bottom 끝-->

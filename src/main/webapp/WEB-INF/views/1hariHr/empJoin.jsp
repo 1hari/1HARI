@@ -3,6 +3,10 @@
 <!-- Custom CSS -->
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/hari/assets/extra-libs/multicheck/multicheck.css">
 <link href="${pageContext.request.contextPath}/resources/hari/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet">
+<!-- 사원등록 step by step을 위해 필요한 css --> 
+  
+<link href="${pageContext.request.contextPath}/resources/hari/assets/libs/jquery-steps/jquery.steps.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/hari/assets/libs/jquery-steps/steps.css" rel="stylesheet">
 
 <!--datepicker link 필수 !!! -->
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/hari/assets/libs/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
@@ -11,7 +15,7 @@
 <!--datepicker link 필수 end-->
 <link href="${pageContext.request.contextPath}/resources/hari/dist/css/style.min.css" rel="stylesheet">
 
-<!--아래 3개는 사원 등록에서 필요한 js -->
+<!--아래 사원 등록에서 필요한 js -->
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -84,130 +88,91 @@
 	<!--컨텐츠 제목 끝 -->
 
 	<!-- ============================================================== -->
-	<div class="container-fluid">
-		<!-- ============================================================== -->
-		<!-- Start Page Content -->
-		<!-- ============================================================== -->
-		<div class="row">
-			<div class="col-12">
-
-				<!-- 사원 등록 input div 시작 -->
-				<div class="container" style="background-color: #ffffff; margin-top: 8%;">
-					
-						<div class="row setup-content" id="step-1">
-							<div class="col-xs-12">
-								<div class="col-md-12">
-
-									<div class="container">
-										<div class="row">
-										
-										<!--form 태그 시작 -->
-											<form action="" method="post">
-												<!--왼쪽 input 태그들 -->
-												<div class="col-xs-6">
-													<div class="form-group">
-														<label for="firstname" style="margin-top: 8%;">소속 번호</label>
-														
-														<!-- ★★ 소속번호 DB에서 조회해서 가져오기 -->
-														<select type="text" class="form-control" placeholder="소속 번호" style="height: 1000%;">
-														</select>
-													</div>
-													
-													<div class="form-group">
-														<label for="lastname" style="margin-top: 1%;">직책 번호</label>
-														
-														<!-- ★★ 직책번호 DB에서 조회해서 가져오기 -->
-														<select type="text" class="form-control" placeholder="직책 번호" style="height: 150%;">
-														</select>
-													</div>
-
-													<div class="form-group">
-														<label for="AddressLine1" style="margin-top: 1%;">직급 번호 </label>
-														
-														<!-- ★★ 직급번호 DB에서 조회해서 가져오기 -->
-														<select type="text" class="form-control" placeholder="직급 번호" style="height: 150%;">
-														</select>
-													</div>
-													<div class="form-group">
-														<label for="Address Line 1" style="margin-top: 1%;">재직 구분 번호 </label>
-														
-														<!-- ★★ 재직 번호 DB에서 조회해서 가져오기 -->
-														<select type="text" class="form-control" placeholder="직책 번호" style="height: 150%;">
-														</select>
-													</div>
-													<div class="form-group">
-														<label for="Address Line 1" style="margin-top: 1%;">이름</label>
-														<input type="text" class="form-control" placeholder="이름" style="margin-bottom: 10%">
-													</div>
-												</div>
-												<!--왼쪽 input 태그들 끝-->
-												<!--오른쪽 input 태그들 시작 -->
-												<div class="col-xs-5">
-													<div class="form-group">
-														<label style="margin-top: 9%;">생년 월일 </label>
-														<input type="text" class="form-control mydatepicker" placeholder="mm/dd/yyyy">
-														<div class="input-group-append"></div>
-													</div>
-
-													<div class="form-group">
-														<label for="State">핸드폰 번호</label> <br>
-														<input type="text" style="width: 32%; display: inline;" class="form-control" placeholder="010">
-														<input type="text" style="width: 32%; display: inline;" class="form-control" placeholder="" >
-														<input type="text" style="width: 32%; display: inline-block;" class="form-control" placeholder="">
-													</div>
-													<!--
-									                                상위 선택자에 text-align:center를 넣고,
-									                                하위 선택자 중 , 좌측 정렬 되어야 할 선택자에 display:inline 을 적용,
-									                                우측 정렬 되어야 할 선택자에 display:inline-block 을 적용시키면 해결된다.
-									
-									                                출처: https://biju.tistory.com/317 [에헤라디야~]-->
-													<div class="form-group">
-														<label for="zip">주민번호</label> <br>
-														<input type="text" style="width: 49%; display: inline;" class="form-control" placeholder="주민 번호" >
-														<input type="password" style="width: 49%; display: inline-block;" class="form-control" placeholder="뒷자리">
-													</div>
-													<div class="form-group">
-														<label for="zip">이메일 </label> <br>
-														<input type="text" style="width: 49%; display: inline;" class="form-control" id="zip" placeholder="이메일">
-														<span type="text" style="width: 49%; display: inline-block;">@gmail.com</span>
-													</div>
-
-													<div class="input-group">
-														<label>입사일</label>
-														<input type="text" class="form-control mydatepicker" placeholder="yyyy/mm/dd">
-														<div class="input-group-append"></div>
-													</div>
-												</div>
-												<!--오른쪽 input 태그들 끝-->
-
-											</form>
-											<!--form 태그 끝 -->
-											
-										</div>
-										<!--div= "row" 끝 -->
-									</div>
-									<!--컨테이너 디브태그 끝 -->
-
-
-									<!--   <button href="#step-2" class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Next</button> -->
-								</div>
-								<!--   <div class="col-md-12"> 끝 -->
-							</div>
-							<!--     <div class="col-xs-12"> 끝-->
-						</div>
-						<!-- <div class="row setup-content" id="step-1">끝 -->
-				</div>
-				<!--입사/퇴사 관리 end-->
-
-			</div>
-			<!--  <div class="col-12"> 끝-->
-
-		</div>
-		<!--div= row 끝 -->
-		<!-- ============================================================== -->
-		<!-- End Page wrapper  -->
-		<!-- ============================================================== -->
-	</div>
+   <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <div class="card">
+                    <div class="card-body wizard-content">
+                        <h4 class="card-title">Basic Form Example</h4>
+                        <h6 class="card-subtitle"></h6>
+                        <form id="example-form" action="#" class="m-t-40">
+                            <div>
+                                <h3>번호</h3>
+                                <section>
+                                    <label for="teamcode">소속번호</label>
+                                    <select class="required form-control" id="teamcode" name="teamcode" style = "height: 300%; margin-bottom:1%;">
+	                                 	<option>1</option>
+	                                 	<option>2</option>
+	                                 	<option>3</option>
+	                                 	<option>4</option>
+                                 	</select>
+                                 	
+                                    <label for="positioncode">직책번호</label>
+                                    <select class="required form-control" id="positioncode" name="positioncode" style = "height: 300%; margin-bottom:1%;">
+	                                 	<option>1</option>
+	                                 	<option>2</option>
+	                                 	<option>3</option>
+	                                 	<option>4</option>
+                                 	</select>
+                                    
+                                    <label for="rankcode">직급번호</label>
+                                    <select class="required form-control" id="rankcode" name="rankcode" style = "height: 300%; margin-bottom:1%;">
+	                                 	<option>1</option>
+	                                 	<option>2</option>
+	                                 	<option>3</option>
+	                                 	<option>4</option>
+                                 	</select>
+                                 	
+                                 	  <label for="employmentcode">재직구분번호</label>
+                                    <select class="required form-control" id="employmentcode" name="employmentcode" style = "height: 300%; margin-bottom:1%;">
+	                                 	<option>1</option>
+	                                 	<option>2</option>
+	                                 	<option>3</option>
+	                                 	<option>4</option>
+                                 	</select>
+                                    
+                                </section>
+                                
+                                <h3>사원 정보</h3>
+                                <section>
+                                    <label for="ename">이름</label>
+                                    <input id="ename" name="ename" type="text" class="required form-control">
+                                    <label for="birth">생년 월일</label>
+                                    <input type ="text" id="birth" name ="birth" class="form-control mydatepicker" placeholder="mm/dd/yyyy">
+                                    <label for="phonenum">핸드폰 번호</label>
+                                    <input id="phonenum" name="phonenum" type="text" class="required form-control">
+                                    <label for="birth2">주민 번호</label>
+                                    <input id="birth2" name="birth2" type="text" class=" form-control">
+                                    <label for="email">이메일</label><hr>
+                                    <input id="email"  style = "width:49%;  display:inline;" name="email" type="text" class="required form-control">
+                                    <span type="text"   style = "width:49%;  display:inline-block;"  id="zip" placeholder="@gmail.com" required="">@gmail.com</span>
+				                    <label>입사일</label>
+				                	<input type ="text" id="hiredate" name ="hiredate" class="form-control mydatepicker" placeholder="mm/dd/yyyy">
+                                </section>
+                                
+                                <h3>Finish</h3>
+                                <section>
+                                    <input id="acceptTerms" name="acceptTerms" type="checkbox" class="required">
+                                    <label for="acceptTerms">I agree with the Terms and Conditions.</label>
+                                </section>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End PAge Content -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- Right sidebar -->
+                <!-- ============================================================== -->
+                <!-- .right-sidebar -->
+                <!-- ============================================================== -->
+                <!-- End Right sidebar -->
+                <!-- ============================================================== -->
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
 	<!--    <div class="container-fluid"> 끝 -->
 	<!-- ============================================================== -->
 
@@ -243,6 +208,43 @@
 		});
 
 </script>
+<!-- this page js , 1단계 2단계 3단계 제출 구성 쿼리 필수! 지우지 마세요 -->
+    <script src="${pageContext.request.contextPath}/resources/hari/assets/libs/jquery-steps/build/jquery.steps.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/hari/assets/libs/jquery-validation/dist/jquery.validate.min.js"></script>
+
+    
+    
+    <script>
+        // Basic Example with form
+    var form = $("#example-form");
+    form.validate({
+        errorPlacement: function errorPlacement(error, element) { element.before(error); },
+        rules: {
+            confirm: {
+                equalTo: "#password"
+            }
+        }
+    });
+    
+     form.children("div").steps({
+        headerTag: "h3",
+        bodyTag: "section",
+        transitionEffect: "slideLeft",
+        onStepChanging: function(event, currentIndex, newIndex) {
+            form.validate().settings.ignore = ":disabled,:hidden";
+            return form.valid();
+        },
+        onFinishing: function(event, currentIndex) {
+            form.validate().settings.ignore = ":disabled";
+            return form.valid();
+        },
+        onFinished: function(event, currentIndex) {
+            alert("Submitted!");
+        }
+    });
+
+
+    </script>
 
 <!-- 주민등록번호 유효성 체크 -->
 <script>
