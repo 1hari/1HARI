@@ -4,10 +4,6 @@ $(function(){
 	console.log(contextPath);
 	var app = new Vue({
 		el : '#app',
-		components : {
-			'top-menu' : httpVueLoader(contextPath+'/resources/vue/components/common/top_menu.vue'),
-			'bottom-info' : httpVueLoader(contextPath+'/resources/vue/components/common/bottom_info.vue')
-		},
 		router : router,//(router.js) 등록한 객체를 이용 해 원하는 정보를 이용할 수 있음
 		store : store,
 		beforeCreate : function(){
