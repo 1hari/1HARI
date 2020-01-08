@@ -110,15 +110,35 @@
 														<c:set var="emp" value="${requestScope.emp}"/>
 														<label for="firstname" style="margin-top: 8%;">소속 번호</label>
 														
+<%-- 														<select type="text" id="empNum" name="empNum" class="form-control" placeholder="소속 번호" required="" style="height: 1000%;"
+														value="${emp.empNum }">
+														<option>${emp.empNum }</option> 
+												 		<option>1001</option>
+														<option>1002</option>
+														<option>1003</option> 
+														
+														</select> --%>
 														<input type="text" id="empNum" name="empNum" class="form-control" placeholder="소속 번호" required="" style="height: 1000%;"
 														value="${emp.empNum }">
+														<option>${emp.empNum }</option> 
+												 		<option>1001</option>
+														<option>1002</option>
+														<option>1003</option> 
+														
+														
 														<!-- </select> -->
 													</div>
 													
 													<div class="form-group">
 														<label for="lastname" style="margin-top: 1%;">직책 번호</label>
-														<select type="text" class="form-control" placeholder="직책 번호" required="" style="height: 150%;">
-														</select>
+										<!-- 				<select type="text" class="form-control" placeholder="직책 번호" required="" style="height: 150%;">
+															<option>1</option>
+															<option>2</option>
+															<option>3</option>
+														
+														</select> -->
+														
+														
 													</div>
 
 													<div class="form-group">

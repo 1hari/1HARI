@@ -36,7 +36,7 @@ public class EmpService {
 		
 		try {
 			EmpDao empdao = sqlsession.getMapper(EmpDao.class);
-			emp = empdao.empModify();
+			emp = empdao.empModify(empNum);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
