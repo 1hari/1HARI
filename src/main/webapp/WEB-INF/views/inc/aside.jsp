@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!--left sidebar시작 !!  css는 sidebar.css 파일 참고 -->
 <aside class="left-sidebar" data-sidebarbg="skin5">
@@ -193,9 +194,9 @@
 	});
 </script>
 
-<div class="modal fade" id="draftModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="width: 700px; top: 112px;">
+<div class="modal fade" id="draftModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
-		<div class="modal-content">
+		<div class="modal-content" style="width: 250px;height: 500px;">
 		
 			<div class="modal-header">
 				<h5 class="modal-title" id="exampleModalLabel">결재양식 선택 </h5>
@@ -220,17 +221,21 @@
 								<ul>
 									<li class="jstree-open">
 										<i class="jstree-icon">&nbsp;</i>
-										<a title="품의서" rel="FOLDER" nodeid="21" href="#" data-bypass="1">
-											<i class="jstree-icon">&nbsp;</i>품의서
+										<a title="품의서" rel="FOLDER" href="#" data-bypass="1">
+											<i class="far fa-folder-open">&nbsp;</i>품의서
 										</a>
 											
-										<ul>										
-											<li class="jstree-leaf">
-												<i class="jstree-icon">&nbsp;</i>
-												<a title="일반품의서" rel="FORM" href="#" data-bypass="1">
-													<i class="jstree-icon appr_form">&nbsp;</i>일반품의서
-												</a>
-											</li>
+										<ul>	
+											<c:forEach var="form" items="${requestScope.list}">
+												<!-- 문서1개 시작-->									
+												<li class="jstree-leaf">
+													<i class="jstree-icon">&nbsp;</i>
+													<a title="${form.signFormFormName}" rel="FORM" href="#" data-bypass="1">
+														<!-- <i class="far fa-file-alt">&nbsp;</i> -->${form.signFormFormName}
+													</a>
+												</li>
+												<!-- 문서1개 끝-->
+											</c:forEach>
 										</ul>
 										
 									</li><!-- jstree-open 끝 -->
