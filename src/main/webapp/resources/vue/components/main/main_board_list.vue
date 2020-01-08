@@ -1,29 +1,42 @@
 <template>
- 		<div class="col-lg-6" style="margin-top:20px">
-			<div class="card shadow">
-				<div class="card-body">
-					<h4 class="card-title">{{server_data.board_info_name}}</h4>
-					<table class="table table-hover" id='board_list'>
-						<thead>
-							<tr>
-								<th class="text-center w-25">글번호</th>
-								<th>제목</th>
-								<th class="text-center w-25 d-none d-xl-table-cell">작성날짜</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr v-for="a1 in server_data.board_list" :key="a1"> 
-								<td class="text-center">{{a1.content_idx}}</td>
-								<td @click="go_board_read(a1.content_idx)">{{a1.content_subject}}</td>
-								<td class="text-center d-none d-xl-table-cell">{{a1.content_data}}</td>
-							</tr>
-						</tbody>
-					</table>
-					
-					<router-link :to="'/board_main/' + board_idx +'/1'" class="btn btn-primary">더보기</router-link>
+
+<div class="container-fluid">
+		<!-- ============================================================== -->
+		<!-- Start Page Content -->
+		<!-- ============================================================== -->
+		<div class="row">
+			<div class="col-12">
+				<div class="col-lg-9" style="margin-top:10%; margin-left:10%; margin-right: 10%; text-align: center;">
+					<div class="card shadow">
+						<div class="card-body">
+							<h4 class="card-title">{{server_data.board_info_name}}</h4>
+							<table class="table table-hover" id='board_list'>
+								<thead>
+									<tr>
+										<th class="text-center w-20">글번호</th>
+										<th class="text-center w-20 d-none d-xl-table-cell">제목</th>
+										<th class="text-center w-20 d-none d-xl-table-cell">작성날짜</th>
+										<th class="text-center w-20 d-none d-xl-table-cell">작성날짜</th>
+										<th class="text-center w-20 d-none d-xl-table-cell">작성날짜</th>
+
+									</tr>
+								</thead>
+								<tbody>
+									<tr v-for="a1 in server_data.board_list" :key="a1"> 
+										<td class="text-center">{{a1.content_idx}}</td>
+										<td @click="go_board_read(a1.content_idx)">{{a1.content_subject}}</td>
+										<td class="text-center d-none d-xl-table-cell">{{a1.content_data}}</td>
+									</tr>
+								</tbody>
+							</table>
+							
+							<router-link :to="'/board_main/' + board_idx +'/1'" class="btn m-t-5 btn-info btn-block waves-effect waves-light" style = "width: 20%;">더보기</router-link>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
+</div>
 </template>
 <style>
 #board_list > tbody > tr {
