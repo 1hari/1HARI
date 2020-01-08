@@ -242,4 +242,150 @@
 			todayHighlight: true
 		});
 
-    </script>
+</script>
+
+<!-- 주민등록번호 유효성 체크 -->
+<script>
+	function CheckForm() {
+	
+		var birth = regform.birth.value;
+		var resnum = regform.resnum.value;
+		var SUM = 0;
+	
+		for (i = 0; i < birth.length; i++) // 주민등록번호 1 ~ 6 자리까지의 처리
+		{
+			if (birth.charAt(i) >= 0 || birth.charAt(i) <= 9) // 지정한 인덱스에 해당하는 문자를 반환(charAt) 즉, 반환된 값들이 숫자면 곱해 더함
+			{
+				if (i == 0) // 앞 자리 첫번째 숫자
+				{
+					SUM = (i + 2) * birth.charAt(i);
+				} else {
+					SUM = SUM + (i + 2) * birth.charAt(i);
+				}
+			}
+
+			else // 숫자가 아닌 문자가 있을 때의 처리
+			{
+				alert("주민등록번호에 숫자만 입력하세요");
+				document.regform.jumin1.focus();
+				return false;
+			}
+		}
+
+		for (i = 0; i < 2; i++) // 주민등록번호 7 ~ 8 자리까지의 처리
+		{
+			if (resnum.charAt(i) >= 0 || resnum.charAt(i) <= 9) {
+				SUM = SUM + (i + 8) * resnum.charAt(i);
+			} else // 숫자가 아닌 문자가 있을 때의 처리
+			{
+				alert("주민등록번호에 숫자만 입력하세요");
+				document.regform.jumin1.focus();
+				return false;
+			}
+		}
+
+		for (i = 2; i < 6; i++) // 주민등록번호 9 ~ 12 자리까지의 처리
+		{
+			if (resnum.charAt(i) >= 0 || resnum.charAt(i) <= 9) {
+				SUM = SUM + (i) * resnum.charAt(i);
+			} else // 숫자가 아닌 문자가 있을 때의 처리
+			{
+				alert("주민등록번호에 숫자만 입력하세요");
+				document.regform.jumin1.focus();
+				return false;
+			}
+		}
+
+		var checkSUM = SUM % 11; // 나머지 구하기
+
+		if (checkSUM == 0) // 나머지가 0 이면 10 을 설정
+		{
+			var checkCODE = 10;
+		} else if (checkSUM == 1) // 나머지가 1 이면 11 을 설정
+		{
+			var checkCODE = 11;
+		} else {
+			var checkCODE = checkSUM;
+		}
+
+		var check1 = 11 - checkCODE; // 나머지를 11 에서 뺀다
+
+		if (resnum.charAt(6) >= 0 || resnum.charAt(6) <= 9) {
+			var check2 = parseInt(resnum.charAt(6))
+		} else // 숫자가 아닌 문자가 있을 때의 처리
+		{
+			alert("주민등록번호에 숫자만 입력하세요");
+			document.regform.jumin1.focus();
+			return false;
+		}
+
+		if (check1 != check2) // 주민등록번호가 틀릴 때의 처리
+		{
+			alert("주민등록번호를 다시 확인 하세요.");
+			document.regform.jumin1.focus();
+			return false;
+		} else {
+			return true;
+		}
+	}
+</script>
+
+<!-- 소속코드, 직책코드, 직급코드, 재직구분 Select Box -->
+<script>
+	$(function() {
+		$.ajax({
+			url:"getTeamCode.hari",
+			type: "post",
+			dataType: "json",
+			success: function(data) {
+	    		console.log(data);
+	    		
+				var dArray = [];
+				dArray = data;
+				
+				for(var i = 0; i < dArray.length; i++) {
+					var option = document.createElement("option");
+					$(option).text(dArray[i]);
+					$("#deptSelect").append(option);
+				}
+			}
+		});
+		
+		$.ajax({
+			url:"getRankCode.hari",
+			type: "post",
+			dataType: "json",
+			success: function(data) {
+	    		console.log(data);
+	    		
+				var dArray = [];
+				dArray = data;
+				
+				for(var i = 0; i < dArray.length; i++) {
+					var option = document.createElement("option");
+					$(option).text(dArray[i]);
+					$("#deptSelect").append(option);
+				}
+			}
+		});
+		
+		$.ajax({
+			url:"getPositionCode.hari",
+			type: "post",
+			dataType: "json",
+			success: function(data) {
+	    		console.log(data);
+	    		
+				var dArray = [];
+				dArray = data;
+				
+				for(var i = 0; i < dArray.length; i++) {
+					var option = document.createElement("option");
+					$(option).text(dArray[i]);
+					$("#deptSelect").append(option);
+				}
+			}
+		});
+	});
+</script>
+
