@@ -74,10 +74,11 @@
 										<th>핸드폰번호</th>
 										<th>이메일</th>
 										<th>입사일</th>
+										<th>정보수정</th>
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach var="emp" items="${emplist}">
+									<c:forEach var="emp" items="${requestScope.emplist}">
 										<tr>
 											<th>
 												<label class="customcheckbox m-b-20">
@@ -87,10 +88,10 @@
 											</th>
 											<td>${emp.empNum}</td>
 											<td>${emp.empName}</td>
-											<td>${emp.teamCode}</td>
-											<td>${emp.rankCode}</td>
-											<td>${emp.positionCode}</td>
-											<td>${emp.employmentCode}</td>
+											<td>${emp.teamName}</td>
+											<td>${emp.rankName}</td>
+											<td>${emp.positionName}</td>
+											<td>${emp.employmentName}</td>
 											<td>${emp.birth}</td>
 											<td>${emp.phoneNum}</td>
 											<td>${emp.email}</td>
@@ -100,11 +101,11 @@
 													<a href="empModify.hari" style="color: white;">수정</a>
 												</button>
 											</td>
-											<td>
+											<!-- <td>
 												<button type="button" class="btn m-t-5 btn-info btn-block waves-effect waves-light" style="width: 80%; background-color: #20B2AA">
 													<a href="#" style="color: white;">삭제</a>
 												</button>
-											</td>
+											</td> -->
 										</tr>
 									</c:forEach>
 								</tbody>

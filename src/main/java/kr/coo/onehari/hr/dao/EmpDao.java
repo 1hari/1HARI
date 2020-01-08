@@ -1,5 +1,6 @@
 package kr.coo.onehari.hr.dao;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import kr.coo.onehari.hr.dto.EmpDto;
@@ -13,9 +14,9 @@ import kr.coo.onehari.hr.dto.EmpDto;
 public interface EmpDao {
 
 	// 사원목록 김진호 / 2020. 1. 7
-	public List<EmpDto> empList();
+	public List<EmpDto> empList() throws ClassNotFoundException, SQLException;
 	
 	// 사원등록 김진호 / 2020. 1. 7
-	public int empJoin(EmpDto empdto);
+	public int empJoin(EmpDto empdto) throws ClassNotFoundException, SQLException;
 	
 }

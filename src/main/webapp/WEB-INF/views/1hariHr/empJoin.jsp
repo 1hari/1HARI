@@ -100,9 +100,9 @@
 
 									<div class="container">
 										<div class="row">
+										
 										<!--form 태그 시작 -->
-											<form action="#">
-
+											<form action="" method="post">
 												<!--왼쪽 input 태그들 -->
 												<div class="col-xs-6">
 													<div class="form-group">
@@ -143,8 +143,7 @@
 												<!--왼쪽 input 태그들 끝-->
 												<!--오른쪽 input 태그들 시작 -->
 												<div class="col-xs-5">
-
-													<div class="input-group">
+													<div class="form-group">
 														<label style="margin-top: 9%;">생년 월일 </label>
 														<input type="text" class="form-control mydatepicker" placeholder="mm/dd/yyyy">
 														<div class="input-group-append"></div>
@@ -157,11 +156,11 @@
 														<input type="text" style="width: 32%; display: inline-block;" class="form-control" placeholder="">
 													</div>
 													<!--
-						                                상위 선택자에 text-align:center를 넣고,
-						                                하위 선택자 중 , 좌측 정렬 되어야 할 선택자에 display:inline 을 적용,
-						                                우측 정렬 되어야 할 선택자에 display:inline-block 을 적용시키면 해결된다.
-						
-						                                출처: https://biju.tistory.com/317 [에헤라디야~]-->
+									                                상위 선택자에 text-align:center를 넣고,
+									                                하위 선택자 중 , 좌측 정렬 되어야 할 선택자에 display:inline 을 적용,
+									                                우측 정렬 되어야 할 선택자에 display:inline-block 을 적용시키면 해결된다.
+									
+									                                출처: https://biju.tistory.com/317 [에헤라디야~]-->
 													<div class="form-group">
 														<label for="zip">주민번호</label> <br>
 														<input type="text" style="width: 49%; display: inline;" class="form-control" placeholder="주민 번호" >
@@ -182,7 +181,8 @@
 												<!--오른쪽 input 태그들 끝-->
 
 											</form>
-											<!--폼 action 태그 끝 -->
+											<!--form 태그 끝 -->
+											
 										</div>
 										<!--div= "row" 끝 -->
 									</div>
