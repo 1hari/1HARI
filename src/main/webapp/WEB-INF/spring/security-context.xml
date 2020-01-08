@@ -39,19 +39,13 @@
 		                     authentication-failure-url="/index.hari?error"
 		                     default-target-url="/main.hari" />
 		<security:logout  logout-success-url="/index.hari" />
-		  <security:intercept-url pattern="/customer/*.htm" access="hasRole('ROLE_USER')" />
- 		 <security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />          
 	</security:http>
 	
 	<security:authentication-manager>
 		<security:authentication-provider>
 		
 			<security:jdbc-user-service data-source-ref="driverManagerDataSource"
-			 users-by-username-query="SELECT empNum, password, 1 enabled FROM emp where empNum=?"
-			     authorities-by-username-query="select e.empNum, r.roleName  
- 													           from emp m join rolelist r  
-													           on e.empnum = r.empnum  
-													           where r.empnum=?"/>  
+			 users-by-username-query="SELECT empNum, password, 1 enabled FROM emp where empNum=?"/>  
 			
 		</security:authentication-provider>
 	</security:authentication-manager>

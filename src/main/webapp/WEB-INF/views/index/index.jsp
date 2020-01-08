@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!--로그인 하기 전 메인 화면에서 회사 소개 div-->
 <div class="site-block-wrap">
@@ -20,7 +20,9 @@
 	</div>
 </div>
 <!--로그인 하기 전 메인 화면에서 회사 소개 div 끝 -->
-
+<div>
+	<p><c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}" /> </p>
+</div>
 
 <!--main 화면 2번째 입니다 contents 소개-->
 <section class="site-section bg-light" id="services-section">
