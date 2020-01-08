@@ -1,25 +1,30 @@
 package kr.coo.onehari.home.controller;
 
+import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
-import org.springframework.security.access.AccessDeniedException;
-import org.springframework.security.web.WebAttributes;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import kr.coo.onehari.sign.dto.SignFormDto;
+import kr.coo.onehari.sign.service.SignFormService;
+
 @Controller
 public class HomeController {
+	@Autowired
+	private SignFormService service;
 	
 	@RequestMapping("index.hari")
 	public String index() {
 		return "home.index";
 	}
 	
+	//품의서 리스트 김정하 / 2020. 1. 8~
 	@RequestMapping("main.hari")
-	public String main() {
+	public String main(Model model) {
+		List<SignFormDto> list = service.selectAllForm(); 
+		model.addAttribute("list", list);
 		return "1hari.main";
 	}
 	
