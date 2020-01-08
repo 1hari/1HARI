@@ -3,8 +3,8 @@
 <!-- Custom CSS -->
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/hari/assets/extra-libs/multicheck/multicheck.css">
 <link href="${pageContext.request.contextPath}/resources/hari/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet">
+
 <!-- 사원등록 step by step을 위해 필요한 css --> 
-  
 <link href="${pageContext.request.contextPath}/resources/hari/assets/libs/jquery-steps/jquery.steps.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/hari/assets/libs/jquery-steps/steps.css" rel="stylesheet">
 
@@ -19,7 +19,6 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/hari/assets/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/hari/assets/libs/quill/dist/quill.min.js"></script>
 <!--필수 js 지우지 말기 -->
 	
@@ -138,8 +137,10 @@
                                 <section>
                                     <label for="ename">이름</label>
                                     <input id="ename" name="ename" type="text" class="required form-control">
+                                    <div class = "form-group">
                                     <label for="birth">생년 월일</label>
                                     <input type ="text" id="birth" name ="birth" class="form-control mydatepicker" placeholder="mm/dd/yyyy">
+                                    </div>
                                     <label for="phonenum">핸드폰 번호</label>
                                     <input id="phonenum" name="phonenum" type="text" class="required form-control">
                                     <label for="birth2">주민 번호</label>
@@ -199,14 +200,21 @@
 	/****************************************
 	*      필수 테이블 1. 데이터 테이블 , 2. datepicker 제이쿼리 스크립트 *
 	****************************************/
+    //1. 데이터 테이블
 	$('#zero_config').DataTable();
-		/*datepicker*/
-		jQuery('.mydatepicker').datepicker();
-		jQuery('#datepicker-autoclose').datepicker({
-			autoclose: true,
-			todayHighlight: true
-		});
 
+	/*2.datepicker*/
+	jQuery('.mydatepicker').datepicker();
+	
+	jQuery('#datepicker-autoclose').datepicker({
+		autoclose: true,
+		todayHighlight: true
+	});
+
+	$.datepicker.setDefaults({
+	    dateFormat: 'yyyy-mm-dd' //Input Display Format 변경
+	});
+				
 </script>
 <!-- this page js , 1단계 2단계 3단계 제출 구성 쿼리 필수! 지우지 마세요 -->
     <script src="${pageContext.request.contextPath}/resources/hari/assets/libs/jquery-steps/build/jquery.steps.min.js"></script>

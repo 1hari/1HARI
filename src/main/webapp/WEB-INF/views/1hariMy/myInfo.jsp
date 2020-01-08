@@ -89,50 +89,85 @@
 		<!-- Start Page Content -->
 		<!-- ============================================================== -->
 		<div class="row">
-			<div class="col-6" style = "text-align: center;">
+			<div class="col-12" >
 
 				<!-- 사원 등록 input div 시작 -->
-					            <div class="card">
+					            <div class="card" style = "position:relative;width:100%;">
+					       
 	                            <form class="form-horizontal">
 	                                <div class="card-body">
-	                                    <h4 class="card-title">Personal Info</h4>
-	                                    <div class="form-group row">
-	                                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">First Name</label>
-	                                        <div class="col-sm-9">
-	                                            <input type="text" class="form-control" id="fname" placeholder="First Name Here">
+	                                    <h4 class="card-title">개인 정보 프로필</h4>
+	                                      <div class="form-group row">
+	                                        <label for="file" class="col-sm-3 text-right control-label col-form-label">프로필 사진</label>
+	                                        <div class="col-sm-3">
+	                                            <input type="file" name="profile_pt" id="profile_pt" onchange="previewImage(this,'View_area')">
+													<div id='View_area' style='position:relative; width: 100px; height: 100px; color: black; border: 0px solid black; dispaly: inline; '></div>
 	                                        </div>
 	                                    </div>
 	                                    <div class="form-group row">
-	                                        <label for="lname" class="col-sm-3 text-right control-label col-form-label">Last Name</label>
+	                                        <label for="teamcode" class="col-sm-3 text-right control-label col-form-label">소속 번호</label>
 	                                        <div class="col-sm-9">
-	                                            <input type="text" class="form-control" id="lname" placeholder="Last Name Here">
+	                                            <input type="text" class="form-control" id="teamcode" name="teamcode" placeholder="소속 번호">
 	                                        </div>
 	                                    </div>
 	                                    <div class="form-group row">
-	                                        <label for="lname" class="col-sm-3 text-right control-label col-form-label">Password</label>
+	                                        <label for="positioncode" class="col-sm-3 text-right control-label col-form-label">직책 번호 </label>
 	                                        <div class="col-sm-9">
-	                                            <input type="password" class="form-control" id="lname" placeholder="Password Here">
+	                                            <input type="text" class="form-control" id="positioncode" name = "positioncode" placeholder="직책번호">
 	                                        </div>
 	                                    </div>
 	                                    <div class="form-group row">
-	                                        <label for="email1" class="col-sm-3 text-right control-label col-form-label">Company</label>
+	                                        <label for="rankcode" class="col-sm-3 text-right control-label col-form-label">직급 번호</label>
 	                                        <div class="col-sm-9">
-	                                            <input type="text" class="form-control" id="email1" placeholder="Company Name Here">
+	                                            <input type="text" class="form-control" id="rankcode" name = "rankcode" placeholder="직급 번호">
 	                                        </div>
 	                                    </div>
 	                                    <div class="form-group row">
-	                                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Contact No</label>
+	                                        <label for="employmentcode" class="col-sm-3 text-right control-label col-form-label">재직구분 번호</label>
 	                                        <div class="col-sm-9">
-	                                            <input type="text" class="form-control" id="cono1" placeholder="Contact No Here">
+	                                            <input type="text" class="form-control" id="employmentcode" name ="employmentcode" placeholder="재직구분 번호">
 	                                        </div>
 	                                    </div>
 	                                    <div class="form-group row">
-	                                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Message</label>
+	                                        <label for="ename" class="col-sm-3 text-right control-label col-form-label">이름</label>
 	                                        <div class="col-sm-9">
-	                                            <textarea class="form-control"></textarea>
+	                                            <input type="text" class="form-control" id="ename" name="ename" placeholder="이름" readonly>
 	                                        </div>
 	                                    </div>
-	                                </div>
+	                                    <div class="form-group row">
+	                                        <label for="birth" class="col-sm-3 text-right control-label col-form-label">생년월일</label>
+	                                        <div class="col-sm-9">
+	                                               <input type="text" class="form-control mydatepicker"  placeholder="yyyy/mm/dd" readonly>
+	                                        </div>
+	                                    </div>
+	                                    <div class="form-group row">
+	                                        <label for="phonenum" class="col-sm-3 text-right control-label col-form-label">핸드폰 번호</label>
+	                                        <div class="col-sm-9">
+	                                            <input type="text" class="form-control" id="phonenum" name="phonenum" placeholder="핸드폰 번호">
+	                                            
+	                                        </div>
+	                                    </div>
+	                                    <div class="form-group row">
+	                                        <label for="email" class="col-sm-3 text-right control-label col-form-label">이메일</label>
+	                                        <div class="col-sm-9">
+	                                            <input type="text" style = "width:49%; display:inline;" class="form-control" id="email" name="email" placeholder="이메일">
+	                                            <span type="text"   style = "width:49%;  display:inline-block;"  id="zip" placeholder="@gmail.com" required="">@gmail.com</span>
+	                                        </div>
+	                                    </div>
+	                                    <div class="form-group row">
+	                                        <label for="hiredate" class="col-sm-3 text-right control-label col-form-label">입사일</label>
+	                                        <div class="col-sm-9">
+	                                               <input type="text" id="hiredate" name ="hiredate" class="form-control mydatepicker"  placeholder="yyyy/mm/dd" readonly>
+	                                        </div>
+	                                    </div>
+	                                    <div class="form-group row">
+	                                        <label for="leavedate" class="col-sm-3 text-right control-label col-form-label">퇴사일</label>
+	                                        <div class="col-sm-9">
+	                                               <input type="text" id="leavedate" name="leavedate" class="form-control mydatepicker"  placeholder="yyyy/mm/dd">
+	                                        </div>
+	                                    </div>
+	                                 </div>
+	                                 
 	                                <div class="border-top">
 	                                    <div class="card-body">
 	                                        <button type="button" class="btn btn-primary">Submit</button>
@@ -188,12 +223,89 @@
 	/****************************************
 	*      필수 테이블 1. 데이터 테이블 , 2. datepicker 제이쿼리 스크립트 *
 	****************************************/
-	$('#zero_config').DataTable();
-		/*datepicker*/
+	    //1. 데이터 테이블
+		$('#zero_config').DataTable();
+	
+		/*2.datepicker*/
 		jQuery('.mydatepicker').datepicker();
+		
 		jQuery('#datepicker-autoclose').datepicker({
 			autoclose: true,
 			todayHighlight: true
 		});
 
+		$.datepicker.setDefaults({
+		    dateFormat: 'yyyy-mm-dd' //Input Display Format 변경
+		});
+
+
+		//3. 파일 첨부, 파일 미리보기 스크립트 
+		function previewImage(targetObj, View_area) {
+			var preview = document.getElementById(View_area); //div id
+			var ua = window.navigator.userAgent;
+
+		  //ie일때(IE8 이하에서만 작동)
+			if (ua.indexOf("MSIE") > -1) {
+				targetObj.select();
+				try {
+					var src = document.selection.createRange().text; // get file full path(IE9, IE10에서 사용 불가)
+					var ie_preview_error = document.getElementById("ie_preview_error_" + View_area);
+
+
+					if (ie_preview_error) {
+						preview.removeChild(ie_preview_error); //error가 있으면 delete
+					}
+
+					var img = document.getElementById(View_area); //이미지가 뿌려질 곳
+
+					//이미지 로딩, sizingMethod는 div에 맞춰서 사이즈를 자동조절 하는 역할
+					img.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"+src+"', sizingMethod='scale')";
+				} catch (e) {
+					if (!document.getElementById("ie_preview_error_" + View_area)) {
+						var info = document.createElement("<p>");
+						info.id = "ie_preview_error_" + View_area;
+						info.innerHTML = e.name;
+						preview.insertBefore(info, null);
+					}
+				}
+		  //ie가 아닐때(크롬, 사파리, FF)
+			} else {
+				var files = targetObj.files;
+				for ( var i = 0; i < files.length; i++) {
+					var file = files[i];
+					var imageType = /image.*/; //이미지 파일일경우만.. 뿌려준다.
+					if (!file.type.match(imageType))
+						continue;
+					var prevImg = document.getElementById("prev_" + View_area); //이전에 미리보기가 있다면 삭제
+					if (prevImg) {
+						preview.removeChild(prevImg);
+					}
+					var img = document.createElement("img"); 
+					img.id = "prev_" + View_area;
+					img.classList.add("obj");
+					img.file = file;
+					img.style.width = '100px'; 
+					img.style.height = '100px';
+					preview.appendChild(img);
+					if (window.FileReader) { // FireFox, Chrome, Opera 확인.
+						var reader = new FileReader();
+						reader.onloadend = (function(aImg) {
+							return function(e) {
+								aImg.src = e.target.result;
+							};
+						})(img);
+						reader.readAsDataURL(file);
+					} else { // safari is not supported FileReader
+						//alert('not supported FileReader');
+						if (!document.getElementById("sfr_preview_error_"
+								+ View_area)) {
+							var info = document.createElement("p");
+							info.id = "sfr_preview_error_" + View_area;
+							info.innerHTML = "not supported FileReader";
+							preview.insertBefore(info, null);
+						}
+					}
+				}
+			}
+		}
     </script>

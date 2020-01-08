@@ -118,13 +118,12 @@
 														<option>1003</option> 
 														
 														</select> --%>
-														<input type="text" id="empNum" name="empNum" class="form-control" placeholder="소속 번호" required="" style="height: 1000%;"
-														value="${emp.empNum }">
+														<select  id="empNum" name="empNum" class="form-control" placeholder="소속 번호" required="" style="height: 1000%;" value="${emp.empNum }">
 														<option>${emp.empNum }</option> 
 												 		<option>1001</option>
 														<option>1002</option>
 														<option>1003</option> 
-														
+														</select>
 														
 														<!-- </select> -->
 													</div>
