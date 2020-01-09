@@ -31,12 +31,12 @@
    
   	<update id="empUpdate" parameterType="kr.coo.onehari.hr.dto.EmpDto">
 		UPDATE EMP 
-		SET TEAMCODE=${teamCode}, 
+		SET <!-- TEAMCODE=${teamCode}, 
 		POSITIONCODE=${positionCode} ,  
 		RANKCODE=${rankCode},
-		EMPLOYMENTCODE=${employmentCode}, 
+		EMPLOYMENTCODE=${employmentCode},--> 
 		PHONENUM=#{phoneNum}}
-		WHERE EMPNUM=${empNum}
+		WHERE EMPNUM=${empNum} 
 	</update>
    
 </mapper>

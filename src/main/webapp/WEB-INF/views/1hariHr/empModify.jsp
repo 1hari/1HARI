@@ -108,14 +108,14 @@
 												<div class="col-xs-6">
 													<div class="form-group">
 														<c:set var="emp" value="${requestScope.emp}"/>
-														<c:set var="team" value="${requestScope.team}"/>
+														<%-- <c:set var="team" value="${requestScope.team}"/> --%>
 														
 														<label for="firstname" style="margin-top: 8%;">소속 번호</label>
 														
 														<%-- <input type="text" value="${emp.teamName }" id="empNum" name="empNum" class="form-control" placeholder="소속 번호" required=""> --%>
-														<select id="empNum" name="empNum" class="form-control" placeholder="소속 번호" required="" style="height: 1000%;"">
-														<option>${emp.teamName }</option> 
-												 		<option>${team.teamName }</option>
+														<select id="teamName" name="teamName" class="form-control" placeholder="소속 번호" required="" style="height: 1000%;"">
+														<option>${emp.teamCode }</option> 
+												 		<%-- <option>${team.teamName }</option> --%>
 														<option>1002</option>
 														<option>1003</option> 
 														
@@ -126,7 +126,7 @@
 													<div class="form-group">
 														<label for="lastname" style="margin-top: 1%;">직책 번호</label>
 										 				<select type="text" class="form-control" placeholder="직책 번호" required="" style="height: 150%;">
-															<option>${emp.positionName }</option>
+															<option>${emp.positionCode }</option>
 															<option>2</option>
 															<option>3</option>
 														
@@ -138,7 +138,7 @@
 													<div class="form-group">
 														<label for="AddressLine1" style="margin-top: 1%;">직급 번호 </label>
 														<select type="text" class="form-control" placeholder="직급 번호" required="" style="height: 150%;">
-														<option>${emp.rankName }</option>
+														<option>${emp.rankCode }</option>
 															<option>2</option>
 															<option>3</option>
 														</select>
@@ -147,7 +147,7 @@
 													<div class="form-group">
 														<label for="Address Line 1" style="margin-top: 1%;">재직 구분 번호 </label>
 														<select type="text" class="form-control" placeholder="직책 번호" required="" style="height: 150%;">
-														<option>${emp.employmentName }</option>
+														<option>${emp.employmentCode }</option>
 															<option>2</option>
 															<option>3</option>
 														</select>
@@ -217,7 +217,7 @@
 												
 												</div>
 												<!--오른쪽 input 태그들 끝-->
-													<input type="submit" class="form-control" value="수정" onClick="empList.hari" style="margin-bottom: 10%">									
+													<input type="submit" class="form-control" value="수정" style="margin-bottom: 10%">									
 											</form>
 											<!--폼 action 태그 끝 -->
 										</div>
