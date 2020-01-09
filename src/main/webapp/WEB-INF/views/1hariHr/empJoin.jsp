@@ -120,18 +120,12 @@
 								<input id="email" name="email" type="text" class="form-control" style="width: 50%; display: inline;">
 								<input type="text" id="gmail" name="gmail" class="required form-control" style="width: 49%; display: inline;" value="@gmail.com" readonly="readonly">
 							</div>
-							<div class="input-group">
-								<label for="hireDate" style="margin-top: 10px; margin-bottom: 0px;">입사일</label>
-								<input type="text" id="hireDate" name="hireDate" class="form-control datepicker-autoclose" placeholder="yyyy-mm-dd">
-								<div class="input-group-append"></div>
-							</div>
 						</section>
 
 						<h3>재직 정보</h3>
 						<section>
 							<label for="teamCode">소속</label> 
 							<select class="required form-control" id="teamSelect" name="teamCode" style="height: 300%; margin-bottom: 1%;">
-								<option>1</option>
 							</select> 
 							
 							<label for="positionCode">직책</label> 
@@ -148,6 +142,11 @@
 							<select class="required form-control" id="employmentSelect" name="employmentCode" style="height: 300%; margin-bottom: 1%;">
 								<option>1</option>
 							</select>
+							<div class="input-group">
+								<label for="hireDate" style="margin-top: 10px; margin-bottom: 0px;">입사일</label>
+								<input type="text" id="hireDate" name="hireDate" class="form-control datepicker-autoclose" placeholder="yyyy-mm-dd">
+								<div class="input-group-append"></div>
+							</div>
 						</section>
 
 						<h3>Finish</h3>
@@ -275,7 +274,7 @@
 			{
 				swal({
 					text: "주민등록번호에 숫자만 입력해주세요.",
-					icon: "fail",
+					icon: "warning",
 					button: "닫기"
 				});
 				document.joinform.resNum.focus();
@@ -291,7 +290,7 @@
 			{
 				swal({
 					text: "주민등록번호에 숫자만 입력해주세요.",
-					icon: "fail",
+					icon: "warning",
 					button: "닫기"
 				});
 				document.joinform.resNum.focus();
@@ -307,7 +306,7 @@
 			{
 				swal({
 					text: "주민등록번호에 숫자만 입력해주세요.",
-					icon: "fail",
+					icon: "warning",
 					button: "닫기"
 				});
 				document.joinform.resNum.focus();
@@ -335,7 +334,7 @@
 		{
 			swal({
 				text: "주민등록번호에 숫자만 입력해주세요.",
-				icon: "fail",
+				icon: "warning",
 				button: "닫기"
 			});
 			document.joinform.resNum.focus();
@@ -346,13 +345,17 @@
 		{
 			swal({
 				text: "주민등록번호에 숫자만 입력해주세요.",
-				icon: "fail",
+				icon: "warning",
 				button: "닫기"
 			});
 			document.joinform.resNum.focus();
 			return false;
 		} else {
-			alert("주민등록번호 확인되었습니다.");
+			swal({
+				text: "주민등록번호가 확인되었습니다.",
+				icon: "success",
+				button: "확인"
+			});
 			return true;
 		}
 	}
@@ -365,11 +368,11 @@
 			url:"getTeamCode.hari",
 			type: "post",
 			dataType: "json",
-			success: function(data) {
-	    		console.log(data);
+			success: function(teamCode) {
+	    		console.log(teamCode);
 	    		
 				var dArray = [];
-				dArray = data;
+				dArray = teamCode;
 				
 				for(var i = 0; i < dArray.length; i++) {
 					var option = document.createElement("option");
