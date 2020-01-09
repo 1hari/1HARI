@@ -4,35 +4,34 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 <mapper namespace="kr.coo.onehari.hr.dao.EmpDao">
-	<insert id="aa">
-		INSERT INTO emp(TEAMCODE, RANKCODE, POSITIONCODE, EMPLOYMENTCODE, ENAME, PASSWORD) VALUES(2001, 3001, 4001, 5001, 'EMP6', '1004')
-	</insert>
-	
-	<select id="empList" resultType="kr.coo.onehari.hr.dto.EmpDto">
-		SELECT E.EMPNUM, E.EMPNAME, T.TEAMNAME, R.RANKNAME, P.POSITIONNAME, EM.EMPLOYMENTNAME, S.BIRTH, S.PHONENUM, S.EMAIL, S.HIREDATE
-		FROM emp AS E 
-		JOIN subemp AS S ON E.EMPNUM = S.EMPNUM
-		JOIN team AS T ON E.TEAMCODE = T.TEAMCODE
-		JOIN ranks AS R ON E.RANKCODE = R.RANKCODE
-		JOIN position AS P ON E.POSITIONCODE = P.POSITIONCODE
-		JOIN employment AS EM ON E.EMPLOYMENTCODE = EM.EMPLOYMENTCODE
-	</select>
-	
-	<select id="empModify" resultType="kr.coo.onehari.hr.dto.EmpDto">
-		SELECT E.EMPNUM, E.EMPNAME, T.TEAMNAME, R.RANKNAME, P.POSITIONNAME, EM.EMPLOYMENTNAME, S.BIRTH, S.PHONENUM, S.EMAIL, S.HIREDATE
-		FROM emp AS E 
-		JOIN subemp AS S ON E.EMPNUM = S.EMPNUM
-		JOIN team AS T ON E.TEAMCODE = T.TEAMCODE
-		JOIN ranks AS R ON E.RANKCODE = R.RANKCODE
-		JOIN position AS P ON E.POSITIONCODE = P.POSITIONCODE
-		JOIN employment AS EM ON E.EMPLOYMENTCODE = EM.EMPLOYMENTCODE
-		WHERE E.EMPNUM=#{empNum}
-	</select>
-	
-	
-	
-	
-	
-	
-	
+   <insert id="aa">
+      INSERT INTO emp(TEAMCODE, RANKCODE, POSITIONCODE, EMPLOYMENTCODE, ENAME, PASSWORD) VALUES(2001, 3001, 4001, 5001, 'EMP6', '1004')
+   </insert>
+   
+   <select id="empList" resultType="kr.coo.onehari.hr.dto.EmpDto">
+      SELECT E.EMPNUM, E.EMPNAME, T.TEAMNAME, R.RANKNAME, P.POSITIONNAME, EM.EMPLOYMENTNAME, S.BIRTH, S.PHONENUM, S.EMAIL, S.HIREDATE
+      FROM emp AS E 
+      JOIN subemp AS S ON E.EMPNUM = S.EMPNUM
+      JOIN team AS T ON E.TEAMCODE = T.TEAMCODE
+      JOIN ranks AS R ON E.RANKCODE = R.RANKCODE
+      JOIN position AS P ON E.POSITIONCODE = P.POSITIONCODE
+      JOIN employment AS EM ON E.EMPLOYMENTCODE = EM.EMPLOYMENTCODE
+   </select>
+   
+   <select id="empModify" resultType="kr.coo.onehari.hr.dto.EmpDto">
+      SELECT E.EMPNUM, E.EMPNAME, T.TEAMNAME, R.RANKNAME, P.POSITIONNAME, EM.EMPLOYMENTNAME, S.BIRTH, S.PHONENUM, S.EMAIL, S.HIREDATE
+      FROM emp AS E 
+      JOIN subemp AS S ON E.EMPNUM = S.EMPNUM
+      JOIN team AS T ON E.TEAMCODE = T.TEAMCODE
+      JOIN ranks AS R ON E.RANKCODE = R.RANKCODE
+      JOIN position AS P ON E.POSITIONCODE = P.POSITIONCODE
+      JOIN employment AS EM ON E.EMPLOYMENTCODE = EM.EMPLOYMENTCODE
+      WHERE E.EMPNUM=#{empNum}
+   </select>
+   
+   <select id="teamCode" resultType="kr.coo.onehari.hr.dto.Team">
+      SELECT TEAMCODE, TEAMNAME
+      FROM team
+   </select>
+   
 </mapper>

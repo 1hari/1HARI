@@ -41,8 +41,8 @@
 		<security:http>
 		<security:csrf disabled="true" />
 		<security:form-login login-page="/index.hari"
-		                     authentication-failure-url="/index.hari?error"
 		                     authentication-success-handler-ref="loginSuccessHandler"
+		                     authentication-failure-handler-ref="loginFailureHandler"
 		                     />
 		<security:logout  logout-success-url="/index.hari" />
 		<!-- <security:intercept-url pattern="/1hariHr/**" access="hasRole('ROLE_PERSONNEL')" />
@@ -52,8 +52,15 @@
 	
 	<bean id="loginSuccessHandler" class="kr.coo.onehari.login.handler.LoginSuccessHandler">
    		<property name="loginidname" value="username"/>
-    	<property name="defaultUrl" value="/"/>
+    	<property name="defaultUrl" value="/main.hari"/>
 	</bean>
+	<bean id="loginFailureHandler" class="tody.common.handler.LoginFailureHandler">
+	    <property name="username" value="username"/>
+	    <property name="userpassword" value="userpassword"/>
+	    <property name="errormsgname" value="ERRORMSG"/>
+	    <property name="defaultFailureUrl" value="/index.hari?error"/>
+	</bean>
+
 
 	<security:authentication-manager>
 		<security:authentication-provider>
