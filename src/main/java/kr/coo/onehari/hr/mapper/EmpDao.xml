@@ -29,9 +29,4 @@
       WHERE E.EMPNUM=#{empNum}
    </select>
    
-   <select id="teamCode" resultType="kr.coo.onehari.hr.dto.Team">
-      SELECT TEAMCODE, TEAMNAME
-      FROM team
-   </select>
-   
 </mapper>

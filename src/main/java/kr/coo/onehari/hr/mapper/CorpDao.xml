@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+	김진호 200108
+--> 
+<mapper namespace="kr.coo.onehari.hr.dao.CorpDao">
+
+	<!-- 소속코드 비동기 -->
+	<select id="getTeamCodes" resultType="String">
+		SELECT TEAMNAME
+		FROM team
+		ORDER BY teamcode ASC
+	</select>
+	
+	<!-- 직책코드 비동기 -->
+	<select id="getPositionCodes" resultType="String">
+		SELECT POSITIONNAME
+		FROM position
+		ORDER BY positioncode ASC
+	</select>
+
+	<!-- 직급코드 비동기 -->
+	<select id="getRankCodes" resultType="String">
+		SELECT RANKNAME
+		FROM ranks
+		ORDER BY rankcode ASC
+	</select>
+
+	<!-- 재직구분 비동기 -->
+	<select id="getEmploymentCodes" resultType="String">
+		SELECT EMPLOYMENTNAME
+		FROM employment
+		ORDER BY employmentcode ASC
+	</select>
+</mapper>
