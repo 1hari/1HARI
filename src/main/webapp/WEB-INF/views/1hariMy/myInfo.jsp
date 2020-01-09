@@ -20,6 +20,95 @@
 <!--필수 js 지우지 말기 -->
 	
 <style>
+	body {margin: 10px;}
+	.where {
+	  display: block;
+	  margin: 25px 15px;
+	  font-size: 11px;
+	  color: #000;
+	  text-decoration: none;
+	  font-family: verdana;
+	  font-style: italic;
+	} 
+	
+	.filebox input[type="file"] {
+	    position: absolute;
+	    width: 1px;
+	    height: 1px;
+	    padding: 0;
+	    margin: -1px;
+	    overflow: hidden;
+	    clip:rect(0,0,0,0);
+	    border: 0;
+	}
+	
+	.filebox label {
+	    display: inline-block;
+	    padding: .5em .75em;
+	    color: #999;
+	    font-size: inherit;
+	    line-height: normal;
+	    vertical-align: middle;
+	    background-color: #fdfdfd;
+	    cursor: pointer;
+	    border: 1px solid #ebebeb;
+	    border-bottom-color: #e2e2e2;
+	    border-radius: .25em;
+	}
+	
+	/* named upload */
+	.filebox .upload-name {
+	    display: inline-block;
+	    padding: .5em .75em;
+	    font-size: inherit;
+	    font-family: inherit;
+	    line-height: normal;
+	    vertical-align: middle;
+	    background-color: #f5f5f5;
+	  border: 1px solid #ebebeb;
+	  border-bottom-color: #e2e2e2;
+	  border-radius: .25em;
+	  -webkit-appearance: none; /* 네이티브 외형 감추기 */
+	  -moz-appearance: none;
+	  appearance: none;
+	}
+	
+	/* imaged preview */
+	.filebox .upload-display {
+	    margin-bottom: 5px;
+	}
+	
+	@media(min-width: 768px) {
+	    .filebox .upload-display {
+	        display: inline-block;
+	        margin-right: 5px;
+	        margin-bottom: 0;
+	    }
+	}
+	
+	.filebox .upload-thumb-wrap {
+	    display: inline-block;
+	    width: 54px;
+	    padding: 2px;
+	    vertical-align: middle;
+	    border: 1px solid #ddd;
+	    border-radius: 5px;
+	    background-color: #fff;
+	}
+	
+	.filebox .upload-display img {
+	    display: block;
+	    max-width: 100%;
+	    width: 100% \9;
+	    height: auto;
+	}
+	
+	.filebox.bs3-primary label {
+	  color: #fff;
+	  background-color: #2ab2aa;
+	  border-color: #2ab2aa;
+	}
+	
 	.stepwizard-step p {
 		margin-top: 10px;
 	}
@@ -66,6 +155,20 @@
 		border-radius: 0px;
 	}
 	
+	#profile_pt input[type="file"] { 
+	
+		position: absolute; 
+		width: 10px; 
+		height: 10px;
+		padding: 0; 
+		margin: -1px;
+		overflow: hidden; 
+		clip:rect(0,0,0,0);
+		border: 0; 
+		background-color:#20B2AA;
+	}
+
+
 
 </style>
 
@@ -101,20 +204,14 @@
 	                                    <h4 class="card-title">개인 정보 프로필</h4>
 	                                      <div class="form-group row">
 	                                        <label for="file" class="col-sm-3 text-right control-label col-form-label">프로필 사진</label>
-	                                        <div class="col-sm-3" >
-	               <!--                              <input type="file" name="profile_pt" id="profile_pt"  onchange="previewImage(this,'View_area')"> -->
-	               
-							               			
-						                                        <div class="custom-file">
-						                                            <input type="file" class="custom-file-input" id="validatedCustomFile" style ="background-color:#20B2AA; width:150%;"  onchange="previewImage(this,'View_area')" required="">
-						                                            <label class="custom-file-label" for="validatedCustomFile">파일 선택</label>
-						                                            <div class="invalid-feedback"></div>
-						                                        </div>
-						                             
-						                                
-	               						<!-- 			<button type="file" class="btn btn-success" style ="background-color:#20B2AA;" name="profile_pt" id="profile_pt" onchange="previewImage(this,'View_area')">파일 선택</button> -->
-													<div id='View_area' style='position:relative; width: 100px; height: 100px; color: black; border: 0px solid black; dispaly: inline;'></div>
-	                                        </div>
+	                                        <div class="col-sm-6" >
+	              	                          <div class="filebox bs3-primary preview-image">
+						                            <input class="upload-name" value="파일선택" disabled="disabled" style="width: 200px;">
+						
+						                            <label for="input_file">업로드</label> 
+						                          <input type="file" id="input_file" class="upload-hidden"> 
+						                        </div> 
+						                     </div>
 	                                    </div>
 	                                    <div class="form-group row">
 	                                        <label for="teamcode" class="col-sm-3 text-right control-label col-form-label">소속 번호</label>
@@ -251,8 +348,60 @@
 		});
 
 
+
+
+
+		// 3. 파일 업로드 , 파일 미리보기 
+		$(document).ready(function(){
+			   var fileTarget = $('.filebox .upload-hidden');
+
+			    fileTarget.on('change', function(){
+			        if(window.FileReader){
+			            // 파일명 추출
+			            var filename = $(this)[0].files[0].name;
+			        } 
+
+			        else {
+			            // Old IE 파일명 추출
+			            var filename = $(this).val().split('/').pop().split('\\').pop();
+			        };
+
+			        $(this).siblings('.upload-name').val(filename);
+			    });
+
+			    //preview image 
+			    var imgTarget = $('.preview-image .upload-hidden');
+
+			    imgTarget.on('change', function(){
+			        var parent = $(this).parent();
+			        parent.children('.upload-display').remove();
+
+			        if(window.FileReader){
+			            //image 파일만
+			            if (!$(this)[0].files[0].type.match(/image\//)) return;
+			            
+			            var reader = new FileReader();
+			            reader.onload = function(e){
+			                var src = e.target.result;
+			                parent.prepend('<div class="upload-display"><div class="upload-thumb-wrap"><img src="'+src+'" class="upload-thumb"></div></div>');
+			            }
+			            reader.readAsDataURL($(this)[0].files[0]);
+			        }
+
+			        else {
+			            $(this)[0].select();
+			            $(this)[0].blur();
+			            var imgSrc = document.selection.createRange().text;
+			            parent.prepend('<div class="upload-display"><div class="upload-thumb-wrap"><img class="upload-thumb"></div></div>');
+
+			            var img = $(this).siblings('.upload-display').find('img');
+			            img[0].style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(enable='true',sizingMethod='scale',src=\""+imgSrc+"\")";        
+			        }
+			    });
+			});
+
 		//3. 파일 첨부, 파일 미리보기 스크립트 
-		function previewImage(targetObj, View_area) {
+		/* function previewImage(targetObj, View_area) {
 			var preview = document.getElementById(View_area); //div id
 			var ua = window.navigator.userAgent;
 
@@ -280,12 +429,12 @@
 						preview.insertBefore(info, null);
 					}
 				}
-		  //ie가 아닐때(크롬, 사파리, FF)
+		  ie가 아닐때(크롬, 사파리, FF)
 			} else {
 				var files = targetObj.files;
 				for ( var i = 0; i < files.length; i++) {
 					var file = files[i];
-					var imageType = /image.*/; //이미지 파일일경우만.. 뿌려준다.
+					var imageType = /image.; //이미지 파일일경우만.. 뿌려준다.
 					if (!file.type.match(imageType))
 						continue;
 					var prevImg = document.getElementById("prev_" + View_area); //이전에 미리보기가 있다면 삭제
@@ -319,5 +468,5 @@
 					}
 				}
 			}
-		}
+		} */
     </script>
