@@ -7,43 +7,6 @@
 <!-- Page wrapper  -->
 <!-- ============================================================== -->
 <div class="page-wrapper">
-
-	<!--전자 결재 모달 -->
-	<div id="add-new-event" class="modal modal-wide fade">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h1>결재양식 선택</h1>
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-				</div>
-
-				<div class="modal-body">
-					<form onsubmit="return false;">
-						<section>
-							<div></div>
-						</section>
-					</form>
-					<div></div>
-				</div>
-				<div class="modal-body">
-					<form></form>
-					<div></div>
-				</div>
-
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<a href="javascript:void(0)" data-toggle="modal" data-target="#add"
-						class="btn m-t-20 btn-info btn-block waves-effect waves-light">
-						<i class="ti-plus"></i> 인증번호 받기
-					</a>
-				</div>
-			</div>
-			<!-- /.modal-content -->
-		</div>
-		<!-- /.modal-dialog -->
-	</div>
-	<!-- /.modal -->
-
 	<!-- ============================================================== -->
 	<!-- Bread crumb and right sidebar toggle -->
 	<!-- ============================================================== -->

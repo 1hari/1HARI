@@ -34,6 +34,9 @@
 					<!--form 태그 시작 -->
 					<form action="" method="POST">
 						<div class="row">
+							<div class="col-md-12">
+								<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#signModal">결재선</button>
+							</div>
 							<!-- input 태그 -->
 							<div class="col-md-12">
 									<input type="text" class="form-control" id="signFormName" name="signFormName" placeholder="제목" style="width:93%; display: inline;">
@@ -118,40 +121,52 @@
 <!-- this page js -->
 <script src="${pageContext.request.contextPath}/resources/hari/assets/extra-libs/multicheck/jquery.multicheck.js"></script>
 
-	<!--전자 결재 모달 -->
-	<div id="add-new-event" class="modal modal-wide fade">
-		<div class="modal-dialog">
-			<div class="modal-content">
+<!-- sign Modal -->
+<div class="modal fade" id="signModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content" >
+			<form action="${pageContext.request.contextPath}/1hariSign/docuDraft.hari">
 				<div class="modal-header">
-					<h1>결재양식 선택</h1>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">×</button>
-				</div>
-
-				<div class="modal-body">
-					<form onsubmit="return false;">
-						<section>
-							<div></div>
-						</section>
-					</form>
-					<div></div>
-				</div>
-				<div class="modal-body">
-					<form></form>
-					<div></div>
-				</div>
-
+					<h5 class="modal-title" id="exampleModalLabel">결재자 선택</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div><!-- modal-header 끝 -->
+			
+				<div class="modal-body" >
+					<!-- accoridan part -->
+					<div class="accordion" id="accordionExample">
+						<!-- 부서시작 -->
+						<div class="card m-b-0 border-top">
+							<div class="card-header" id="headingOne">
+								<h5 class="mb-0">
+									<a class="collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+										<i class="m-r-5 fa fa-magnet" aria-hidden="true"></i>
+										<span>부서명</span>
+									</a>
+								</h5>
+							</div>
+							<!-- 부서원 -->
+							<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+								<div class="card-body">
+									<ul>
+										<li><a href="">부서사람1</a></li>
+										<li><a href="">부서사람2</a></li>
+									</ul>
+								</div>
+							</div>
+							<!-- 부서원끝 -->
+						</div>
+						<!-- 부서시작 -->
+					</div><!-- accordion 끝 -->
+				</div><!-- modal-body 끝 -->
+                        
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<a href="javascript:void(0)" data-toggle="modal" data-target="#add"
-						class="btn m-t-20 btn-info btn-block waves-effect waves-light">
-						<i class="ti-plus"></i> 인증번호 받기
-					</a>
-				</div>
-			</div>
-			<!-- /.modal-content -->
-		</div>
-		<!-- /.modal-dialog -->
-	</div>
-	<!-- /.modal -->
-	<!-- 전자 결재 모달 끝 -->
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+					<button type="submit" class="btn btn-primary" id="formChoice">선택완료</button>
+				</div><!-- modal-footer 끝 -->
+				<input type="hidden" value="" id="signFormCode" name="signFormCode">
+			</form>
+		</div><!-- modal-content 끝 -->
+	</div><!-- modal-dialog 끝 -->
+</div><!--  signModal 끝 -->

@@ -255,7 +255,6 @@
 <!--left sidebar끝 !! css는 sidebar.css 파일 참고 -->
 
 <!-- DRAFT Modal -->
-
 <div class="modal fade" id="draftModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content" style="width: 250px;">
