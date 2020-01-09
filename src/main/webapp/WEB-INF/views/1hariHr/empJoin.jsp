@@ -126,21 +126,22 @@
 						<section>
 							<label for="teamCode">소속</label> 
 							<select class="required form-control" id="teamSelect" name="teamCode" style="height: 300%; margin-bottom: 1%;">
+								<option hidden>소속을 선택하세요</option>
 							</select> 
 							
 							<label for="positionCode">직책</label> 
 							<select class="required form-control" id="positionSelect" name="positionCode" style="height: 300%; margin-bottom: 1%;">
-								<option>1</option>
+								<option hidden>직책을 선택하세요</option>
 							</select> 
 							
 							<label for="rankcode">직급</label> 
 							<select class="required form-control" id="rankSelect" name="rankCode" style="height: 300%; margin-bottom: 1%;">
-								<option>1</option>
+								<option hidden>직급을 선택하세요</option>
 							</select> 
 							
 							<label for="employmentcode">재직구분</label> 
 							<select class="required form-control" id="employmentSelect" name="employmentCode" style="height: 300%; margin-bottom: 1%;">
-								<option>1</option>
+								<option hidden>재직 유형을 선택하세요</option>
 							</select>
 							<div class="input-group">
 								<label for="hireDate" style="margin-top: 10px; margin-bottom: 0px;">입사일</label>
@@ -209,6 +210,79 @@
 			format: "yymmdd",
 			autoclose: true,
 			todayHighlight: true
+		});
+
+		<!-- 소속코드, 직책코드, 직급코드, 재직구분 Select Box -->
+		$.ajax({ // 소속코드 비동기 가져오기
+			url: "${pageContext.request.contextPath}/ajax/getTeamCode.hari",
+			type: "post",
+			dataType: "json",
+			success: function(team) {
+	    		console.log(team.teamname);
+	    		
+				var dArray = [];
+				dArray = team;
+				console.log(dArray);
+				for(var i = 0; i < dArray.length; i++) {
+					var option = document.createElement("option");
+					$(option).text(dArray[i]);
+					$("#teamSelect").append(option);
+				}
+			}
+		});
+
+		$.ajax({ // 직책코드 비동기 가져오기
+			url: "${pageContext.request.contextPath}/ajax/getPositionCode.hari",
+			type: "post",
+			dataType: "json",
+			success: function(position) {
+	    		console.log(position.positionname);
+	    		
+				var dArray = [];
+				dArray = team;
+				console.log(dArray);
+				for(var i = 0; i < dArray.length; i++) {
+					var option = document.createElement("option");
+					$(option).text(dArray[i]);
+					$("#teamSelect").append(option);
+				}
+			}
+		});
+
+		$.ajax({ // 직급코드 비동기 가져오기
+			url: "${pageContext.request.contextPath}/ajax/getRankCode.hari",
+			type: "post",
+			dataType: "json",
+			success: function(rank) {
+	    		console.log(rank.rankname);
+	    		
+				var dArray = [];
+				dArray = team;
+				console.log(dArray);
+				for(var i = 0; i < dArray.length; i++) {
+					var option = document.createElement("option");
+					$(option).text(dArray[i]);
+					$("#teamSelect").append(option);
+				}
+			}
+		});
+
+		$.ajax({ // 직책코드 비동기 가져오기
+			url: "${pageContext.request.contextPath}/ajax/getEmploymentCode.hari",
+			type: "post",
+			dataType: "json",
+			success: function(employment) {
+	    		console.log(employment.employmentname);
+	    		
+				var dArray = [];
+				dArray = team;
+				console.log(dArray);
+				for(var i = 0; i < dArray.length; i++) {
+					var option = document.createElement("option");
+					$(option).text(dArray[i]);
+					$("#teamSelect").append(option);
+				}
+			}
 		});
 	});
 </script>
@@ -361,62 +435,5 @@
 	}
 </script>
 
-<!-- 소속코드, 직책코드, 직급코드, 재직구분 Select Box -->
-<script>
-	$(function() {
-		$.ajax({
-			url:"getTeamCode.hari",
-			type: "post",
-			dataType: "json",
-			success: function(teamCode) {
-	    		console.log(teamCode);
-	    		
-				var dArray = [];
-				dArray = teamCode;
-				
-				for(var i = 0; i < dArray.length; i++) {
-					var option = document.createElement("option");
-					$(option).text(dArray[i]);
-					$("#teamSelect").append(option);
-				}
-			}
-		});
-		
-		$.ajax({
-			url:"getRankCode.hari",
-			type: "post",
-			dataType: "json",
-			success: function(data) {
-	    		console.log(data);
-	    		
-				var dArray = [];
-				dArray = data;
-				
-				for(var i = 0; i < dArray.length; i++) {
-					var option = document.createElement("option");
-					$(option).text(dArray[i]);
-					$("#deptSelect").append(option);
-				}
-			}
-		});
-		
-		$.ajax({
-			url:"getPositionCode.hari",
-			type: "post",
-			dataType: "json",
-			success: function(data) {
-	    		console.log(data);
-	    		
-				var dArray = [];
-				dArray = data;
-				
-				for(var i = 0; i < dArray.length; i++) {
-					var option = document.createElement("option");
-					$(option).text(dArray[i]);
-					$("#deptSelect").append(option);
-				}
-			}
-		});
-	});
-</script>
+
 
