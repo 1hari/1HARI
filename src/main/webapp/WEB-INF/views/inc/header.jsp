@@ -100,7 +100,7 @@
 					<!--내 프로필 시작-->
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							<img src="${pageContext.request.contextPath}/resources/hari/assets/images/users/1.jpg" alt="user" class="rounded-circle" width="31">
+							<img src="${pageContext.request.contextPath}/resources/hari/assets/images/users/profile-02.png" alt="user" class="rounded-circle" width="31">
 						</a>
 						<div class="dropdown-menu dropdown-menu-right user-dd animated">
 							<a class="dropdown-item" href="${pageContext.request.contextPath}/1hariMy/myInfo.hari">
@@ -116,10 +116,6 @@
 							<a class="dropdown-item" href="${pageContext.request.contextPath}/logout">
 								<i class="fa fa-power-off m-r-5 m-l-5"></i>로그아웃
 							</a>
-							<div class="dropdown-divider"></div>
-							<div class="p-l-30 p-10">
-								<a href="javascript:void(0)" class="btn btn-sm btn-success btn-rounded">내 정보</a>
-							</div>
 						</div>
 					</li>
 					<!--내 프로필 끝 -->
