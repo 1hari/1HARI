@@ -3,6 +3,11 @@ package kr.coo.onehari.hr.dao;
 import java.sql.SQLException;
 import java.util.List;
 
+import kr.coo.onehari.hr.dto.Employment;
+import kr.coo.onehari.hr.dto.Position;
+import kr.coo.onehari.hr.dto.Rank;
+import kr.coo.onehari.hr.dto.Team;
+
 /*
 작성자: 김진호
 시작: 2020. 1. 8
@@ -11,14 +16,14 @@ import java.util.List;
 public interface CorpDao {
 
 	// 소속목록 김진호 200108
-	public List<String> getTeamCodes() throws ClassNotFoundException, SQLException;
+	public List<Team> getTeamCodes() throws ClassNotFoundException, SQLException;
 	
 	// 직책목록 김진호 200108
-	public List<String> getPositionCodes() throws ClassNotFoundException, SQLException;
+	public List<Position> getPositionCodes() throws ClassNotFoundException, SQLException;
 	
 	// 직급목록 김진호 200108
-	public List<String> getRankCodes() throws ClassNotFoundException, SQLException;
+	public List<Rank> getRankCodes() throws ClassNotFoundException, SQLException;
 	
 	// 재직구분 김진호 200108
-	public List<String> getEmploymentCodes() throws ClassNotFoundException, SQLException;
+	public List<Employment> getEmploymentCodes() throws ClassNotFoundException, SQLException;
 }

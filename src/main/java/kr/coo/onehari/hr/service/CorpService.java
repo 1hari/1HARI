@@ -7,6 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.coo.onehari.hr.dao.CorpDao;
+import kr.coo.onehari.hr.dto.Employment;
+import kr.coo.onehari.hr.dto.Position;
+import kr.coo.onehari.hr.dto.Rank;
+import kr.coo.onehari.hr.dto.Team;
 import lombok.extern.slf4j.Slf4j;
 
 
@@ -18,8 +22,8 @@ public class CorpService {
 	private SqlSession sqlsession;
 	
 	// 소속목록 가져오기 김진호 200108
-	public List<String> getTeamCodes() {
-		List<String> getTeamCodes = null;
+	public List<Team> getTeamCodes() {
+		List<Team> getTeamCodes = null;
 		
 		try {
 			CorpDao corpdao = sqlsession.getMapper(CorpDao.class);
@@ -32,8 +36,8 @@ public class CorpService {
 	}
 	
 	// 직책목록 가져오기 김진호 200108
-	public List<String> getPositionCodes() {
-		List<String> getPositionCodes = null;
+	public List<Position> getPositionCodes() {
+		List<Position> getPositionCodes = null;
 		
 		try {
 			CorpDao corpdao = sqlsession.getMapper(CorpDao.class);
@@ -46,12 +50,12 @@ public class CorpService {
 	}
 	
 	// 직급목록 가져오기 김진호 200108
-	public List<String> getRankCodes() {
-		List<String> getRankCodes = null;
+	public List<Rank> getRankCodes() {
+		List<Rank> getRankCodes = null;
 		
 		try {
 			CorpDao corpdao = sqlsession.getMapper(CorpDao.class);
-			getRankCodes = corpdao.getTeamCodes();
+			getRankCodes = corpdao.getRankCodes();
 		} catch (Exception e) {
 			System.out.println("CorpService getRankCodes 예외발생: " + e.getMessage());
 			log.debug("CorpService getRankCodes 예외발생: " + e.getMessage());
@@ -60,12 +64,12 @@ public class CorpService {
 	}
 	
 	// 재직구분목록 가져오기 김진호 200108
-	public List<String> getEmploymentCodes() {
-		List<String> getEmploymentCodes = null;
+	public List<Employment> getEmploymentCodes() {
+		List<Employment> getEmploymentCodes = null;
 		
 		try {
 			CorpDao corpdao = sqlsession.getMapper(CorpDao.class);
-			getEmploymentCodes = corpdao.getTeamCodes();
+			getEmploymentCodes = corpdao.getEmploymentCodes();
 		} catch (Exception e) {
 			System.out.println("CorpService getEmploymentCodes 예외발생: " + e.getMessage());
 			log.debug("CorpService getEmploymentCodes 예외발생: " + e.getMessage());

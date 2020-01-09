@@ -7,6 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import kr.coo.onehari.hr.dto.Employment;
+import kr.coo.onehari.hr.dto.Position;
+import kr.coo.onehari.hr.dto.Rank;
+import kr.coo.onehari.hr.dto.Team;
 import kr.coo.onehari.hr.service.CorpService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -19,9 +23,9 @@ public class AjaxController {
 	private CorpService corpservice;
 
 	// 사원등록 시 소속 SELECT BOX 김진호 200108
-	@RequestMapping(value = "getTeamCode.hari", method = RequestMethod.POST)
-	public List<String> getTeamCodes() {
-		List<String> teamlist = null;
+	@RequestMapping(value = "getTeamCode.hari", method = {RequestMethod.POST, RequestMethod.GET})
+	public List<Team> getTeamCodes() {
+		List<Team> teamlist = null;
 		
 		try {
 			teamlist = corpservice.getTeamCodes();
@@ -33,9 +37,9 @@ public class AjaxController {
 	}
 	
 	// 사원등록 시 직책 SELECT BOX 김진호 200108
-	@RequestMapping(value = "getPositionCode.hari", method = RequestMethod.POST)
-	public List<String> getPositionCodes() {
-		List<String> positionlist = null;
+	@RequestMapping(value = "getPositionCode.hari", method = {RequestMethod.POST, RequestMethod.GET})
+	public List<Position> getPositionCodes() {
+		List<Position> positionlist = null;
 		
 		try {
 			positionlist = corpservice.getPositionCodes();
@@ -47,9 +51,9 @@ public class AjaxController {
 	}
 	
 	// 사원등록 시 직급 SELECT BOX 김진호 200108
-	@RequestMapping(value = "getRankCode.hari", method = RequestMethod.POST)
-	public List<String> getRankCodes() {
-		List<String> ranklist = null;
+	@RequestMapping(value = "getRankCode.hari", method = {RequestMethod.POST, RequestMethod.GET})
+	public List<Rank> getRankCodes() {
+		List<Rank> ranklist = null;
 		
 		try {
 			ranklist = corpservice.getRankCodes();
@@ -61,9 +65,9 @@ public class AjaxController {
 	}
 	
 	// 사원등록 시 재직구분 SELECT BOX 김진호 200108
-	@RequestMapping(value = "getEmploymentCode.hari", method = RequestMethod.POST)
-	public List<String> getEmploymentCodes() {
-		List<String> employmentlist = null;
+	@RequestMapping(value = "getEmploymentCode.hari", method = {RequestMethod.POST, RequestMethod.GET})
+	public List<Employment> getEmploymentCodes() {
+		List<Employment> employmentlist = null;
 		
 		try {
 			employmentlist = corpservice.getEmploymentCodes();

@@ -8,30 +8,30 @@
 <mapper namespace="kr.coo.onehari.hr.dao.CorpDao">
 
 	<!-- 소속코드 비동기 -->
-	<select id="getTeamCodes" resultType="String">
+	<select id="getTeamCodes" resultType="kr.coo.onehari.hr.dto.Team">
 		SELECT TEAMCODE, TEAMNAME
 		FROM team
-		ORDER BY teamcode ASC
+		ORDER BY TEAMCODE ASC
 	</select>
 	
 	<!-- 직책코드 비동기 -->
-	<select id="getPositionCodes" resultType="String">
+	<select id="getPositionCodes" resultType="kr.coo.onehari.hr.dto.Position">
 		SELECT POSITIONCODE, POSITIONNAME
 		FROM position
-		ORDER BY positioncode ASC
+		ORDER BY POSITIONCODE ASC
 	</select>
 
 	<!-- 직급코드 비동기 -->
-	<select id="getRankCodes" resultType="String">
+	<select id="getRankCodes" resultType="kr.coo.onehari.hr.dto.Rank">
 		SELECT RANKCODE, RANKNAME
 		FROM ranks
-		ORDER BY rankcode ASC
+		ORDER BY RANKCODE ASC
 	</select>
 
 	<!-- 재직구분 비동기 -->
-	<select id="getEmploymentCodes" resultType="String">
+	<select id="getEmploymentCodes" resultType="kr.coo.onehari.hr.dto.Employment">
 		SELECT EMPLOYMENTCODE, EMPLOYMENTNAME
 		FROM employment
-		ORDER BY employmentcode ASC
+		ORDER BY EMPLOYMENTCODE ASC
 	</select>
 </mapper>
