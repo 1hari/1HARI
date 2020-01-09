@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.coo.onehari.hr.dao.EmpDao;
+import kr.coo.onehari.hr.dao.CorpDao;
 import kr.coo.onehari.hr.dto.EmpDto;
 import kr.coo.onehari.hr.dto.Team;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +27,8 @@ public class EmpService {
 			EmpDao empdao = sqlsession.getMapper(EmpDao.class);
 			emplist = empdao.empList();
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			log.debug("EmpService empList 예외발생: " + e.getMessage());
+			System.out.println("EmpService emplist 예외발생: " + e.getMessage());
 		}
 		return emplist;
 	}
@@ -46,28 +48,15 @@ public class EmpService {
 	
 	//DB에서 TEAMNAME 불러오는 함수 2020. 1. 9 양찬식 
 	//시작 시간 : 오전 10시 10분 끝난시간 10시 15분 
-	public Team teamCode() {
-		Team team = null;
-
-		try {
-			EmpDao empdao = sqlsession.getMapper(EmpDao.class);
-			team = empdao.teamCode();
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-		return team;
-	}
-	
-	
-//	public int test() {
-//		EmpDao empdao = sqlsession.getMapper(EmpDao.class);
-//		int result = 0;
+//	public List<Integer> getTeamCodes() {
+//		List<Integer> teamlist = null;
+//
 //		try {
-//			result = empdao.aa();
-//			log.info("test 실행");
-//		} catch (ClassNotFoundException | SQLException e) {
-//			
+//			TeamDao teamdao = sqlsession.getMapper(TeamDao.class);
+//			teamlist = teamdao.getTeamCodes();
+//		} catch (Exception e) {
+//			System.out.println(e.getMessage());
 //		}
-//		return result;
+//		return teamlist;
 //	}
 }
