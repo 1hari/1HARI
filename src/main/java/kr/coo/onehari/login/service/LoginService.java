@@ -6,11 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kr.coo.onehari.hr.dao.EmpDao;
-import kr.coo.onehari.hr.dto.EmpDto;
 import kr.coo.onehari.login.dao.LoginDao;
-import kr.coo.onehari.sign.dao.SignFormDao;
-import kr.coo.onehari.sign.dto.SignFormDto;
 import lombok.extern.slf4j.Slf4j;
 
 /*
@@ -27,8 +23,10 @@ public class LoginService {
 	private SqlSession sqlsession;
 	
 	//로그인 성공 시 로그인 횟수 초기화
-	public void loginCntInit(String str) {
+	public int loginCntInit(String str) {
+		System.out.println("str: " + str);
 		int result = 0;
+		
 		LoginDao dao = sqlsession.getMapper(LoginDao.class);
 		try {
 			System.out.println("초기화 함수 시작");
@@ -40,6 +38,7 @@ public class LoginService {
 		} catch (ClassNotFoundException | SQLException e) {
 			log.debug("loginCntInit : " + e.getMessage());
 		}
+		return result;
 	}
 
 	
