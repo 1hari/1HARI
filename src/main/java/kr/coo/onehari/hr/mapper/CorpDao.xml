@@ -9,28 +9,28 @@
 
 	<!-- 소속코드 비동기 -->
 	<select id="getTeamCodes" resultType="String">
-		SELECT TEAMNAME
+		SELECT TEAMCODE, TEAMNAME
 		FROM team
 		ORDER BY teamcode ASC
 	</select>
 	
 	<!-- 직책코드 비동기 -->
 	<select id="getPositionCodes" resultType="String">
-		SELECT POSITIONNAME
+		SELECT POSITIONCODE, POSITIONNAME
 		FROM position
 		ORDER BY positioncode ASC
 	</select>
 
 	<!-- 직급코드 비동기 -->
 	<select id="getRankCodes" resultType="String">
-		SELECT RANKNAME
+		SELECT RANKCODE, RANKNAME
 		FROM ranks
 		ORDER BY rankcode ASC
 	</select>
 
 	<!-- 재직구분 비동기 -->
 	<select id="getEmploymentCodes" resultType="String">
-		SELECT EMPLOYMENTNAME
+		SELECT EMPLOYMENTCODE, EMPLOYMENTNAME
 		FROM employment
 		ORDER BY employmentcode ASC
 	</select>

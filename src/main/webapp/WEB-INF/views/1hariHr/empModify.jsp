@@ -102,7 +102,7 @@
 									<div class="container">
 										<div class="row">
 											<!--form 태그 시작 -->
-											<form action="#">
+											<form action="empModify1.hari" mehtod="post">
 												
 												<!--왼쪽 input 태그들 -->
 												<div class="col-xs-6">
@@ -112,6 +112,7 @@
 														
 														<label for="firstname" style="margin-top: 8%;">소속 번호</label>
 														
+														<%-- <input type="text" value="${emp.teamName }" id="empNum" name="empNum" class="form-control" placeholder="소속 번호" required=""> --%>
 														<select id="empNum" name="empNum" class="form-control" placeholder="소속 번호" required="" style="height: 1000%;"">
 														<option>${emp.teamName }</option> 
 												 		<option>${team.teamName }</option>
@@ -125,7 +126,7 @@
 													<div class="form-group">
 														<label for="lastname" style="margin-top: 1%;">직책 번호</label>
 										 				<select type="text" class="form-control" placeholder="직책 번호" required="" style="height: 150%;">
-															<option>1</option>
+															<option>${emp.positionName }</option>
 															<option>2</option>
 															<option>3</option>
 														
@@ -137,18 +138,24 @@
 													<div class="form-group">
 														<label for="AddressLine1" style="margin-top: 1%;">직급 번호 </label>
 														<select type="text" class="form-control" placeholder="직급 번호" required="" style="height: 150%;">
+														<option>${emp.rankName }</option>
+															<option>2</option>
+															<option>3</option>
 														</select>
 													</div>
 													
 													<div class="form-group">
 														<label for="Address Line 1" style="margin-top: 1%;">재직 구분 번호 </label>
 														<select type="text" class="form-control" placeholder="직책 번호" required="" style="height: 150%;">
+														<option>${emp.employmentName }</option>
+															<option>2</option>
+															<option>3</option>
 														</select>
 													</div>
 													
 													<div class="form-group">
 														<label for="Address Line 1" style="margin-top: 1%;">이름 </label>
-														<input type="text" class="form-control" placeholder="이름" required="" style="margin-bottom: 10%" readonly>
+														<input type="text" value="${emp.empName }" class="form-control" placeholder="이름" required="" style="margin-bottom: 10%" readonly>
 													</div>
 													
 												</div>
@@ -158,13 +165,13 @@
 
 													<div class="input-group">
 														<label style="margin-top: 9%;">생년 월일 </label>
-														<input type="text" class="form-control" placeholder="mm/dd/yyyy" readonly>
+														<input type="text" value="${emp.birth }" class="form-control" placeholder="mm/dd/yyyy" readonly>
 														<div class="input-group-append"></div>
 													</div>
 
 													<div class="form-group">
 														<label for="State" style="margin-top: 1%;">핸드폰 번호</label> <br>
-														<input type="text" style="width: 32%; display: inline;" class="form-control" placeholder="010" required="">
+														<input type="text" value="${emp.phoneNum }" style="width: 32%; display: inline;" class="form-control" placeholder="010" required="">
 														<input type="text" style="width: 32%; display: inline;" class="form-control" placeholder="" required="">
 														<input type="text" style="width: 32%; display: inline-block;" class="form-control" placeholder="" required="">
 													</div>
@@ -182,16 +189,21 @@
 									                    <input type="password"   style = "width:49%;  display:inline-block;"  class="form-control" id="zip" placeholder="뒷자리" required="">
 									                    </div> 
 								                	-->
-													
 													<div class="form-group">
+														<%-- <c:forTokens  var="email1" items="${emp.email }" delims="@"> --%>
+														<%-- <c:set var="emp" var="email1" items="${emp.email }" delims="@"/>
+														<c:forEach var="email2" begin="0" end="1">
+														    <p><c:out value="${i}" /></p> --%>
 														<label for="zip">이메일 </label> <br>
-														<input type="text" style="width: 49%; display: inline;" class="form-control" placeholder="이메일" required="" readonly>
+														<input type="text" <c:out value="${emp.email }" /> style="width: 49%; display: inline;" class="form-control" placeholder="이메일" required="" readonly>
 														<span type="text" style="width: 49%; display: inline-block;" placeholder="@gmail.com" required="">@gmail.com</span>
-													</div>
+														<%-- </c:forEach> --%>
 
+													</div>
+														
 													<div class="input-group">
 														<label>입사일</label>
-														<input type="text" class="form-control" placeholder="mm/dd/yyyy" readonly>
+														<input type="text" value="${emp.hireDate }" class="form-control" placeholder="mm/dd/yyyy" readonly>
 														<div class="input-group-append"></div>
 													</div>
 
@@ -200,11 +212,12 @@
 														<input type="text" class="form-control mydatepicker" placeholder="mm/dd/yyyy">
 														<div class="input-group-append"></div>
 													</div>
-									
+														
+														
 												
 												</div>
 												<!--오른쪽 input 태그들 끝-->
-											
+													<input type="submit" class="form-control" value="수정" onClick="empList.hari" style="margin-bottom: 10%">									
 											</form>
 											<!--폼 action 태그 끝 -->
 										</div>

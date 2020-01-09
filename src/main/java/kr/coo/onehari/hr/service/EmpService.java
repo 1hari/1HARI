@@ -20,6 +20,7 @@ public class EmpService {
 	@Autowired
 	private SqlSession sqlsession;
 	
+	// 사원목록 김진호 200108
 	public List<EmpDto> empList() {
 		List<EmpDto> emplist = null;
 		
@@ -48,15 +49,28 @@ public class EmpService {
 	
 	//DB에서 TEAMNAME 불러오는 함수 2020. 1. 9 양찬식 
 	//시작 시간 : 오전 10시 10분 끝난시간 10시 15분 
-//	public List<Integer> getTeamCodes() {
-//		List<Integer> teamlist = null;
-//
-//		try {
-//			TeamDao teamdao = sqlsession.getMapper(TeamDao.class);
-//			teamlist = teamdao.getTeamCodes();
-//		} catch (Exception e) {
-//			System.out.println(e.getMessage());
-//		}
-//		return teamlist;
-//	}
+	public Team teamCode() {
+		Team team = null;
+
+		try {
+			EmpDao empdao = sqlsession.getMapper(EmpDao.class);
+			team = empdao.teamCode();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return team;
+	}
+
+	//수정된 사원 정보 저장하는 함수 2020. 1. 10 양찬식 
+	//시작 시간 : 오후 3시 20분 끝난시간 3시 25분 
+	public void empUpdate(EmpDto emp) {
+		
+		try {
+			EmpDao empdao = sqlsession.getMapper(EmpDao.class);
+			empdao.empUpdate(emp);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		/*return result;*/
+	}
 }

@@ -59,25 +59,38 @@ public class HrController {
 		return "1hariHr.empJoin";
 	}
 		
-	//사원수정
+	//사원수정(디테일)
 	@RequestMapping(value = "personnel/empModify.hari", method = RequestMethod.GET)
 	public String empModify1(int empNum, Model model) {
 		EmpDto emp = null;
-		List<Integer> team = null;
+		Team team = null;
 		
 		try {
 			emp = empservice.empModify(empNum);
 			model.addAttribute("emp", emp);
-			
-			team = teamservice.getTeamCodes();
+			team = empservice.teamCode();
 			model.addAttribute("team", team); 
-			
 			log.info("emp: " + emp);
 			log.info("team: " + team);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			log.debug("사원수정 예외발생: " + e.getMessage());
+			log.debug("사원수정1 예외발생: " + e.getMessage());
 		}
 		return "1hariHr.empModify";
+	}
+
+	//사원수정(정보수정)
+	@RequestMapping(value = "personnel/empModify1.hari", method = RequestMethod.POST)
+	public String empModify2(EmpDto emp) {
+		
+		try {
+			empservice.empUpdate(emp);
+			log.info("emp: " + emp);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			log.debug("사원수정2 예외발생: " + e.getMessage());
+		}
+		return "redirect:empList.hari";
+		/* return "redirect:personnel/empList.hari"; */
 	}
 }

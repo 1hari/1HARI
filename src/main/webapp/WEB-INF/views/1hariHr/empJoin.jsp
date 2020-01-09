@@ -244,7 +244,7 @@
 				for(var i = 0; i < dArray.length; i++) {
 					var option = document.createElement("option");
 					$(option).text(dArray[i]);
-					$("#teamSelect").append(option);
+					$("#positionSelect").append(option);
 				}
 			}
 		});
@@ -262,7 +262,7 @@
 				for(var i = 0; i < dArray.length; i++) {
 					var option = document.createElement("option");
 					$(option).text(dArray[i]);
-					$("#teamSelect").append(option);
+					$("#rankSelect").append(option);
 				}
 			}
 		});
@@ -280,7 +280,7 @@
 				for(var i = 0; i < dArray.length; i++) {
 					var option = document.createElement("option");
 					$(option).text(dArray[i]);
-					$("#teamSelect").append(option);
+					$("#employmentSelect").append(option);
 				}
 			}
 		});

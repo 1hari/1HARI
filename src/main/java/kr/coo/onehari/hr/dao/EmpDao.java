@@ -22,6 +22,6 @@ public interface EmpDao {
 	// 사원디테일(수정에 필요) 양찬식 / 2020. 1. 8
 	public EmpDto empModify(int empNum) throws ClassNotFoundException, SQLException;
 	
-	// 소속(사원정보수정에 필요, teamName 가져오는 함수) 양찬식 / 2020. 1. 8
-//	public List<Team> teamCode() throws ClassNotFoundException, SQLException;
+	// 사원 수정 저장 양찬식 / 2020. 1. 9
+	public int empUpdate(EmpDto emp) throws ClassNotFoundException, SQLException;
 }
