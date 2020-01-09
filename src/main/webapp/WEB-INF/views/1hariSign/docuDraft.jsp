@@ -134,31 +134,35 @@
 				</div><!-- modal-header 끝 -->
 			
 				<div class="modal-body" >
-					<!-- accoridan part -->
-					<div class="accordion" id="accordionExample">
-						<!-- 부서시작 -->
-						<div class="card m-b-0 border-top">
-							<div class="card-header" id="headingOne">
-								<h5 class="mb-0">
-									<a class="collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-										<i class="m-r-5 fa fa-magnet" aria-hidden="true"></i>
-										<span>부서명</span>
-									</a>
-								</h5>
-							</div>
-							<!-- 부서원 -->
-							<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-								<div class="card-body">
-									<ul>
-										<li><a href="">부서사람1</a></li>
-										<li><a href="">부서사람2</a></li>
-									</ul>
+				
+					<c:forEach var="team" items="${requstScope.teamList}">
+						<!-- accoridan part -->
+						<div class="accordion" id="accordionExample">
+							<!-- 부서시작 -->
+							<div class="card m-b-0 border-top">
+								<div class="card-header" id="headingOne">
+									<h5 class="mb-0">
+										<a class="collapsed" data-toggle="collapse" data-target="#collapse${team.teamCode}" aria-expanded="false" aria-controls="collapse${team.teamCode}">
+											<i class="m-r-5 fa fa-magnet" aria-hidden="true"></i>
+											<span>${team.teamName}</span>
+										</a>
+									</h5>
 								</div>
+								<!-- 부서원 data-parent="#accordionExample" -->
+								<div id="collapse${team.teamCode}" class="collapse show" aria-labelledby="headingOne">
+									<div class="card-body">
+										<ul>
+											<li><a href="">부서사람1</a></li>
+											<li><a href="">부서사람2</a></li>
+										</ul>
+									</div>
+								</div>
+								<!-- 부서원끝 -->
 							</div>
-							<!-- 부서원끝 -->
-						</div>
-						<!-- 부서시작 -->
-					</div><!-- accordion 끝 -->
+							<!-- 부서시작 -->
+						</div><!-- accordion 끝 -->
+					</c:forEach>
+					
 				</div><!-- modal-body 끝 -->
                         
 				<div class="modal-footer">

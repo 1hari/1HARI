@@ -24,4 +24,7 @@ public interface EmpDao {
 	
 	// 사원 수정 저장 양찬식 / 2020. 1. 9
 	public int empUpdate(EmpDto emp) throws ClassNotFoundException, SQLException;
+	
+	//사원목록(주 table) 김정하 / 2020. 1. 9
+	public List<EmpDto> empDefaultList() throws ClassNotFoundException, SQLException;
 }

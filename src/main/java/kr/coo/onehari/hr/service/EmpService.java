@@ -1,5 +1,6 @@
 package kr.coo.onehari.hr.service;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -58,5 +59,18 @@ public class EmpService {
 			System.out.println(e.getMessage());
 		}
 		/*return result;*/
+	}
+	
+	//사원조회(팀코드,사번,이름) 김정하 2020. 1. 9
+	public List<EmpDto> empDefaultList(){
+		List<EmpDto> empDefaultList = null;
+		
+		try {
+			EmpDao empdao = sqlsession.getMapper(EmpDao.class);
+			empDefaultList = empdao.empDefaultList();
+		} catch (ClassNotFoundException | SQLException e) {
+			log.debug("EmpService empDefaultList 예외발생: " + e.getMessage());
+		}
+		return empDefaultList;
 	}
 }
