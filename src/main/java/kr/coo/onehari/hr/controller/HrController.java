@@ -8,8 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import kr.coo.onehari.hr.dao.EmpDao;
 import kr.coo.onehari.hr.dto.EmpDto;
+import kr.coo.onehari.hr.dto.Team;
 import kr.coo.onehari.hr.service.EmpService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -62,14 +62,29 @@ public class HrController {
 	@RequestMapping(value = "personnel/empModify.hari", method = RequestMethod.GET)
 	public String empModify1(int empNum, Model model) {
 		EmpDto emp = null;
-			try {
+		Team team = null;
+		try {
 			emp = empservice.empModify(empNum);
 			model.addAttribute("emp", emp);
+			
+			team = empservice.teamCode();
+			model.addAttribute("team", team); 
+			
 			log.info("emp: " + emp);
+			log.info("team: " + team);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
+			log.debug("사원수정 예외발생: " + e.getMessage());
 		}
 					
 		return "1hariHr.empModify";
 	}
+
+
+
+
+
+
+
+
 }

@@ -18,6 +18,16 @@
 		JOIN employment AS EM ON E.EMPLOYMENTCODE = EM.EMPLOYMENTCODE
 	</select>
 	
+<!-- 	<select id="empModify" resultType="kr.coo.onehari.hr.dto.EmpDto">
+		SELECT E.EMPNUM, E.EMPNAME, T.TEAMNAME, R.RANKNAME, P.POSITIONNAME, EM.EMPLOYMENTNAME, S.BIRTH, S.PHONENUM, S.EMAIL, S.HIREDATE
+		FROM emp AS E 
+		JOIN subemp AS S ON E.EMPNUM = S.EMPNUM
+		JOIN team AS T ON E.TEAMCODE = T.TEAMCODE
+		JOIN ranks AS R ON E.RANKCODE = R.RANKCODE
+		JOIN position AS P ON E.POSITIONCODE = P.POSITIONCODE
+		JOIN employment AS EM ON E.EMPLOYMENTCODE = EM.EMPLOYMENTCODE
+		WHERE E.EMPNUM=#{empNum}
+	</select> -->
 	<select id="empModify" resultType="kr.coo.onehari.hr.dto.EmpDto">
 		SELECT E.EMPNUM, E.EMPNAME, T.TEAMNAME, R.RANKNAME, P.POSITIONNAME, EM.EMPLOYMENTNAME, S.BIRTH, S.PHONENUM, S.EMAIL, S.HIREDATE
 		FROM emp AS E 
@@ -30,6 +40,12 @@
 	</select>
 	
 	
+	
+	<select id="teamCode" resultType="kr.coo.onehari.hr.dto.Team">
+		SELECT *
+		FROM team 
+		where TEAMCODE = 2001 or 2002 or 2003
+	</select>
 	
 	
 	

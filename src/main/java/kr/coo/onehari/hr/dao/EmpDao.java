@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import kr.coo.onehari.hr.dto.EmpDto;
+import kr.coo.onehari.hr.dto.Team;
 
 /*
 작성자: 김진호
@@ -21,6 +22,9 @@ public interface EmpDao {
 	
 	// 사원디테일(수정에 필요) 양찬식 / 2020. 1. 8
 	public EmpDto empModify(int empNum) throws ClassNotFoundException, SQLException;
+	
+	// 사원디테일(수정에 필요, teamName 가져오는 함수) 양찬식 / 2020. 1. 8
+	public Team teamCode() throws ClassNotFoundException, SQLException;
 	
 	
 	

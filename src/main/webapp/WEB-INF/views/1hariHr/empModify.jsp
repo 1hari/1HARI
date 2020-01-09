@@ -103,39 +103,33 @@
 										<div class="row">
 											<!--form 태그 시작 -->
 											<form action="#">
-
+												
 												<!--왼쪽 input 태그들 -->
 												<div class="col-xs-6">
 													<div class="form-group">
 														<c:set var="emp" value="${requestScope.emp}"/>
+														<c:set var="team" value="${requestScope.team}"/>
+														
 														<label for="firstname" style="margin-top: 8%;">소속 번호</label>
 														
-<%-- 														<select type="text" id="empNum" name="empNum" class="form-control" placeholder="소속 번호" required="" style="height: 1000%;"
-														value="${emp.empNum }">
-														<option>${emp.empNum }</option> 
-												 		<option>1001</option>
+														<select id="empNum" name="empNum" class="form-control" placeholder="소속 번호" required="" style="height: 1000%;"">
+														<option>${emp.teamName }</option> 
+												 		<option>${team.teamName }</option>
 														<option>1002</option>
 														<option>1003</option> 
 														
-														</select> --%>
-														<select  id="empNum" name="empNum" class="form-control" placeholder="소속 번호" required="" style="height: 1000%;" value="${emp.empNum }">
-														<option>${emp.empNum }</option> 
-												 		<option>1001</option>
-														<option>1002</option>
-														<option>1003</option> 
 														</select>
 														
-														<!-- </select> -->
 													</div>
 													
 													<div class="form-group">
 														<label for="lastname" style="margin-top: 1%;">직책 번호</label>
-										<!-- 				<select type="text" class="form-control" placeholder="직책 번호" required="" style="height: 150%;">
+										 				<select type="text" class="form-control" placeholder="직책 번호" required="" style="height: 150%;">
 															<option>1</option>
 															<option>2</option>
 															<option>3</option>
 														
-														</select> -->
+														</select> 
 														
 														
 													</div>
@@ -207,10 +201,10 @@
 														<div class="input-group-append"></div>
 													</div>
 									
-									
+												
 												</div>
 												<!--오른쪽 input 태그들 끝-->
-
+											
 											</form>
 											<!--폼 action 태그 끝 -->
 										</div>

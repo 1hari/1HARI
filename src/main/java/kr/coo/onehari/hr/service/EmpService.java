@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import kr.coo.onehari.hr.dao.EmpDao;
 import kr.coo.onehari.hr.dto.EmpDto;
+import kr.coo.onehari.hr.dto.Team;
 import lombok.extern.slf4j.Slf4j;
 
 
@@ -30,7 +31,7 @@ public class EmpService {
 		return emplist;
 	}
 	
-	
+	//사원수정 2020. 1. 8 양찬식
 	public EmpDto empModify(int empNum) {
 		EmpDto emp = null;
 		
@@ -41,6 +42,20 @@ public class EmpService {
 			System.out.println(e.getMessage());
 		}
 		return emp;
+	}
+	
+	//DB에서 TEAMNAME 불러오는 함수 2020. 1. 9 양찬식 
+	//시작 시간 : 오전 10시 10분 끝난시간 10시 15분 
+	public Team teamCode() {
+		Team team = null;
+
+		try {
+			EmpDao empdao = sqlsession.getMapper(EmpDao.class);
+			team = empdao.teamCode();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return team;
 	}
 	
 	
