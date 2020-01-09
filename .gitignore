@@ -1,5 +1,10 @@
 /.classpath
 /.project
+<<<<<<< HEAD
 /target/
 /.settings/
 /.tern-project
+=======
+/.settings/
+/target/
+>>>>>>> branch 'master' of https://github.com/1hari/1HARI.git
