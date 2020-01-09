@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.coo.onehari.hr.dto.EmpDto;
-import kr.coo.onehari.hr.dto.Team;
+import kr.coo.onehari.hr.service.CorpService;
 import kr.coo.onehari.hr.service.EmpService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -20,6 +20,9 @@ public class HrController {
 	
 	@Autowired
 	private EmpService empservice;
+	
+	@Autowired
+	private CorpService teamservice;
 	
 	//근태관리 화면
 	@RequestMapping("attendance.hari")
@@ -33,11 +36,9 @@ public class HrController {
 		return "1hariHr.annual";
 	}
 	
-	//사원리스트 화면
+	//사원목록 김진호 200107
 	@RequestMapping(value = "personnel/empList.hari", method = RequestMethod.GET)
 	public String empList(Model model) {
-//		int result = empservice.test();
-//		log.info("DB Test : " + result);
 		List<EmpDto> emplist = null;
 		
 		try {
@@ -45,7 +46,8 @@ public class HrController {
 			model.addAttribute("emplist", emplist);
 			log.info("emplist: " + emplist);
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			System.out.println("사원목록 예외발생: " + e.getMessage());
+			log.debug("사원목록 예외발생: " + e.getMessage());
 		}
 		return "1hariHr.empList";
 	}
@@ -56,18 +58,18 @@ public class HrController {
 		
 		return "1hariHr.empJoin";
 	}
-	
 		
 	//사원수정
 	@RequestMapping(value = "personnel/empModify.hari", method = RequestMethod.GET)
 	public String empModify1(int empNum, Model model) {
 		EmpDto emp = null;
-		Team team = null;
+		List<Integer> team = null;
+		
 		try {
 			emp = empservice.empModify(empNum);
 			model.addAttribute("emp", emp);
 			
-			team = empservice.teamCode();
+			team = teamservice.getTeamCodes();
 			model.addAttribute("team", team); 
 			
 			log.info("emp: " + emp);
@@ -76,15 +78,6 @@ public class HrController {
 			System.out.println(e.getMessage());
 			log.debug("사원수정 예외발생: " + e.getMessage());
 		}
-					
 		return "1hariHr.empModify";
 	}
-
-
-
-
-
-
-
-
 }
