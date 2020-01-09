@@ -48,7 +48,7 @@
 	}
 	
 	input[type=button], input[type=submit], input[type=reset] {
-		background-color: #56baed;
+		background-color: #2ab2aa;
 		border: none;
 		color: white;
 		padding: 15px 80px;
@@ -61,7 +61,7 @@
 		box-shadow: 0 10px 30px 0 rgba(95, 186, 233, 0.4);
 		-webkit-border-radius: 5px 5px 5px 5px;
 		border-radius: 5px 5px 5px 5px;
-		margin: 5px 20px 40px 20px;
+		margin: 5px 10px 40px 10px;
 		-webkit-transition: all 0.3s ease-in-out;
 		-moz-transition: all 0.3s ease-in-out;
 		-ms-transition: all 0.3s ease-in-out;
@@ -71,7 +71,7 @@
 	
 	input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover
 		{
-		background-color: #39ace7;
+		background-color: #2ab2aa;
 	}
 	
 	input[type=button]:active, input[type=submit]:active, input[type=reset]:active
@@ -106,7 +106,7 @@
 	
 	input[type=text]:focus {
 		background-color: #fff;
-		border-bottom: 2px solid #5fbae9;
+		border-bottom: 2px solid #2ab2aa;
 	}
 	
 	input[type=text]:placeholder {
