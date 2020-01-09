@@ -46,14 +46,11 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
 		System.out.println("권한성공");
+		clearAuthenticationAttributes(request);
 		resultRedirectStrategy(request, response, authentication);
+		
 	}
-	protected void clearAuthenticationAttributes(HttpServletRequest request) {
-        HttpSession session = request.getSession(false);
-        if(session==null) return;
-        session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
-    }
-
+	
 	public String getLoginidname() {
 		return loginidname;
 	}
