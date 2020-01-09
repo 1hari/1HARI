@@ -24,6 +24,7 @@
 	<context:component-scan base-package="kr.coo.onehari.sign.*" />
 	<context:component-scan base-package="kr.coo.onehari.pay.*" />
 	<context:component-scan base-package="kr.coo.onehari.my.*" />
+	<context:component-scan base-package="kr.coo.onehari.login.*" />
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />

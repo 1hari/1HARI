@@ -22,10 +22,11 @@ public class EmpDto {
 	private String employmentName; // 재직구분명
 	private String empName; //사원이름
 	private String password; //비밀번호
-	private Date birth; //생년월일
+	private String birth; //생년월일
 	private String phoneNum; //핸드폰번호
 	private String resNum; //주민등록번호 뒷자리
 	private String email; //이메일
 	private Date hireDate; //입사일
 	private Date leaveDate;//퇴사일
+	private int loginCnt; //로그인 시도 횟수
 }
