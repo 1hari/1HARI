@@ -107,13 +107,13 @@
 							               			
 						                                        <div class="custom-file">
 						                                            <input type="file" class="custom-file-input" id="validatedCustomFile" style ="background-color:#20B2AA; width:150%;"  onchange="previewImage(this,'View_area')" required="">
-						                                            <label class="custom-file-label" for="validatedCustomFile">파일을 선택해주세요</label>
+						                                            <label class="custom-file-label" for="validatedCustomFile">파일 선택</label>
 						                                            <div class="invalid-feedback"></div>
 						                                        </div>
 						                             
 						                                
 	               						<!-- 			<button type="file" class="btn btn-success" style ="background-color:#20B2AA;" name="profile_pt" id="profile_pt" onchange="previewImage(this,'View_area')">파일 선택</button> -->
-													<div id='View_area' style='position:relative; width: 100px; height: 100px; color: black; border: 0px solid black; dispaly: inline; '></div>
+													<div id='View_area' style='position:relative; width: 100px; height: 100px; color: black; border: 0px solid black; dispaly: inline;'></div>
 	                                        </div>
 	                                    </div>
 	                                    <div class="form-group row">
