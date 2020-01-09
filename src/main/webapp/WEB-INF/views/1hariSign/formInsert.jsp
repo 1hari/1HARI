@@ -34,16 +34,16 @@
 						<div class="row">
 							<!-- input 태그 -->
 							<div class="col-md-12">
-									<input type="text" class="form-control" id="signFormName" name="signFormName" placeholder="양식명" style="width:93%; display: inline;">
+									<input type="text" class="form-control" id="signFormFormName" name="signFormFormName" placeholder="양식명" style="width:93%; display: inline;">
 									<button type="submit" class="btn btn-success" style="display: inline-block;">등록</button>
 							</div>
 						</div><!-- row 끝 -->
 						<!-- ck 에디터 form -->
-						<textarea name="signFormContent" id="signFormContent" rows="10" cols="80">
+						<textarea name="signFormFormContent" id="signFormFormContent" rows="10" cols="80">
 							양식을 붙여주세요.(워드,엑셀 붙여넣기 가능 / html 태그 입력 시 오른쪽 상단 소스 클릭)
 						</textarea>
 						<script>
-							CKEDITOR.replace('signFormContent', {
+							CKEDITOR.replace('signFormFormContent', {
 								// 도구 모음 정의: https://ckeditor.com/docs/ckeditor4/latest/features/toolbar
 								// 기본적으로 CDN의 전체 사전 설정은 필요 이상의 기능을 제공합니다.
 								// The full preset from CDN which we used as a base provides more features than we need.

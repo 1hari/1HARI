@@ -21,6 +21,6 @@ public interface SignFormDao {
     public List<SignFormDto> selectAllForm() throws ClassNotFoundException, SQLException;
 	
 	//폼 가져오기 김정하 / 2020. 1. 8
-    public SignFormDto selectForm(int signFormCode) throws ClassNotFoundException, SQLException;
+    public SignFormDto selectForm(String signFormCode) throws ClassNotFoundException, SQLException;
 	
 }

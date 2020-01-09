@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!-- Custom CSS -->
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/hari/assets/extra-libs/multicheck/multicheck.css">
 <link href="${pageContext.request.contextPath}/resources/hari/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet">
@@ -16,7 +18,7 @@
 	<div class="page-breadcrumb">
 		<div class="row">
 			<div class="col-12 d-flex no-block align-items-center">
-				<h4 class="page-title">양식 등록</h4>
+				<h4 class="page-title">문서 기안</h4>
 				<div class="ml-auto text-right"></div>
 			</div>
 		</div>
@@ -34,13 +36,13 @@
 						<div class="row">
 							<!-- input 태그 -->
 							<div class="col-md-12">
-									<input type="text" class="form-control" id="signFormName" name="signFormName" placeholder="양식명" style="width:93%; display: inline;">
-									<button type="submit" class="btn btn-success" style="display: inline-block;">등록</button>
+									<input type="text" class="form-control" id="signFormName" name="signFormName" placeholder="제목" style="width:93%; display: inline;">
+									<button type="submit" class="btn btn-success" style="display: inline-block;">기안</button>
 							</div>
 						</div><!-- row 끝 -->
 						<!-- ck 에디터 form -->
 						<textarea name="signFormContent" id="signFormContent" rows="10" cols="80">
-							양식을 붙여주세요.(워드,엑셀 붙여넣기 가능 / html 태그 입력 시 오른쪽 상단 소스 클릭)
+							${form.signFormFormContent}
 						</textarea>
 						<script>
 							CKEDITOR.replace('signFormContent', {

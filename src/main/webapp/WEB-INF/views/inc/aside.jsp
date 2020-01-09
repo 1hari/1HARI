@@ -7,10 +7,10 @@
 		
 		//품의서 양식 목록 가져오기
 		$.ajax({
-			url:"selectAllForm.hari",			
+			url:"${pageContext.request.contextPath}/ajax/selectAllForm.hari",
 			type:"post",
 			success: function(list){
-				console.log(list);
+// 				console.log(list);
 				var formlist = "<ul>";
 				$.each(list, function(index, form){
 					//문서1개 시작 <i class="far fa-file-alt">&nbsp;</i> 아이콘 안먹힘..
@@ -23,11 +23,16 @@
 					//문서1개 끝
 				}) //each 끝
 				formlist += "</ul>";
+				
 				$('#formlist').append(formlist);
-				$('#formTree').jstree();
+				$('#formTree').jstree(); //비동기 완료 후 태그생성 -> jstree 활성화
 
+				var signFormCode;
+				//품의서 선택 시
 				$('.formcode').click(function() {
-					console.log($('.jstree-clicked').val());
+					console.log($(this).attr('title'));
+					signFormCode = $(this).attr('title');
+					$('#signFormCode').val(signFormCode);
 				})
 				
 			},
@@ -183,12 +188,13 @@
 						<!-- ROLE_ADMIN -->
 						<li class="sidebar-item">
 							<a href="${pageContext.request.contextPath}/1hariSign/admin/formInsert.hari" class="sidebar-link">
-								<i class="mdi mdi-note-outline"></i><span class="hide-menu">양식 등록 </span>
+								<i class="mdi mdi-note-outline"></i>
+								<span class="hide-menu">양식 등록 </span>
 							</a>
 						</li>
 						
 						<li class="sidebar-item">
-							<a class="sidebar-link" data-toggle="modal" data-target="#draftModal">
+							<a href="#" class="sidebar-link" data-toggle="modal" data-target="#draftModal">
 							<i class="mdi mdi-note-plus"></i>
 							<span class="hide-menu">문서기안</span>
 							</a>
@@ -249,32 +255,27 @@
 <!--left sidebar끝 !! css는 sidebar.css 파일 참고 -->
 
 <!-- DRAFT Modal -->
-<!-- jsTree -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
 
 <div class="modal fade" id="draftModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
-		<div class="modal-content" style="width: 250px;height: 500px;">
-		
-			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">결재양식 선택 </h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div><!-- modal-header 끝 -->
+		<div class="modal-content" style="width: 250px;">
+			<form action="${pageContext.request.contextPath}/1hariSign/docuDraft.hari">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">결재양식 선택 </h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div><!-- modal-header 끝 -->
 			
-			<div class="modal-body">
-				<div class="set_wrap">
-						<form onsubmit="return false;">
-							<section class="search">
-								<div class="search_wrap">
-									<input id="searchInput" class="search" maxlength="20" type="text" placeholder="양식제목">
-									<i class="fas fa-search" value="" title=""></i>
-								</div>
-							</section>
-						</form>
-						
+				<div class="modal-body" style="height: 450px;">
+					<div class="set_wrap">
+						<section class="search">
+							<div class="search_wrap">
+								<input id="searchInput" class="search" maxlength="20" type="text" placeholder="양식제목">
+								<i class="fas fa-search" value="" title=""></i>
+							</div>
+						</section>
+					
 						<div class="content_tab_wrap">
 							<div id="formTree" class="jstree jstree-0 jstree-focused jstree-default">
 								<ul>
@@ -301,14 +302,15 @@
 								</ul>
 							</div> <!-- formTree 끝 -->
 						</div> <!-- content_tab_wrap 끝 -->
-				</div><!-- set_wrap 끝 -->
-			</div><!-- modal-body 끝 -->
+					</div><!-- set_wrap 끝 -->
+				</div><!-- modal-body 끝 -->
 			
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-				<a href="${pageContext.request.contextPath}/1hariSign/docuDraft.hari" class="btn btn-primary">선택완료</a>
-			</div><!-- modal-footer 끝 -->
-			
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+					<button type="submit" class="btn btn-primary" id="formChoice">선택완료</button>
+				</div><!-- modal-footer 끝 -->
+				<input type="hidden" value="" id="signFormCode" name="signFormCode">
+			</form>
 		</div><!-- modal-content 끝 -->
 	</div><!-- modal-dialog 끝 -->
 </div><!--  draftModal 끝 -->

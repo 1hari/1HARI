@@ -34,19 +34,21 @@ public class SignController {
 		int result = service.insertForm(form);
 		String view = "";
 		if(result > 0) {
-			view = "1hariSign.signForm";
+			view = "redirect:../signForm.hari";
 			model.addAttribute("msg", "등록완료되었습니다.");
 		}else {
-			view = "1hariSign.formInsert";
+			view = "redirect:formInsert.hari";
 			model.addAttribute("msg", "등록실패했습니다. 다시확인바랍니다.");
 		}
 		return view;
 	}
 	
-	
 	//문서기안 화면 김정하 / 2020. 1. 8~
 	@RequestMapping(value="docuDraft.hari", method = RequestMethod.GET)
-	public String formDraft(int signFormCode) {
+	public String formDraft(String signFormCode, Model model) {
+		System.out.println(signFormCode);
+		SignFormDto form = service.selectForm(signFormCode);
+		model.addAttribute("form", form);
 		return "1hariSign.docuDraft";
 	}
 	

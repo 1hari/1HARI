@@ -49,7 +49,7 @@ public class SignFormService {
     }
 	
 	//폼 가져오기 김정하 / 2020. 1. 8
-	public SignFormDto selectForm(int signFormCode) {
+	public SignFormDto selectForm(String signFormCode) {
 		SignFormDto form = null;
 		SignFormDao dao = sqlsession.getMapper(SignFormDao.class);
 		try {
