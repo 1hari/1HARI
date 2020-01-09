@@ -65,6 +65,8 @@
 		line-height: 1.428571429;
 		border-radius: 0px;
 	}
+	
+
 </style>
 
 <!-- 컨텐츠 제목 -->
@@ -99,33 +101,43 @@
 	                                    <h4 class="card-title">개인 정보 프로필</h4>
 	                                      <div class="form-group row">
 	                                        <label for="file" class="col-sm-3 text-right control-label col-form-label">프로필 사진</label>
-	                                        <div class="col-sm-3">
-	                                            <input type="file" name="profile_pt" id="profile_pt" onchange="previewImage(this,'View_area')">
+	                                        <div class="col-sm-3" >
+	               <!--                              <input type="file" name="profile_pt" id="profile_pt"  onchange="previewImage(this,'View_area')"> -->
+	               
+							               			
+						                                        <div class="custom-file">
+						                                            <input type="file" class="custom-file-input" id="validatedCustomFile" style ="background-color:#20B2AA; width:150%;"  onchange="previewImage(this,'View_area')" required="">
+						                                            <label class="custom-file-label" for="validatedCustomFile">파일을 선택해주세요</label>
+						                                            <div class="invalid-feedback"></div>
+						                                        </div>
+						                             
+						                                
+	               						<!-- 			<button type="file" class="btn btn-success" style ="background-color:#20B2AA;" name="profile_pt" id="profile_pt" onchange="previewImage(this,'View_area')">파일 선택</button> -->
 													<div id='View_area' style='position:relative; width: 100px; height: 100px; color: black; border: 0px solid black; dispaly: inline; '></div>
 	                                        </div>
 	                                    </div>
 	                                    <div class="form-group row">
 	                                        <label for="teamcode" class="col-sm-3 text-right control-label col-form-label">소속 번호</label>
 	                                        <div class="col-sm-9">
-	                                            <input type="text" class="form-control" id="teamcode" name="teamcode" placeholder="소속 번호">
+	                                            <input type="text" class="form-control" id="teamcode" name="teamcode" placeholder="소속 번호" readonly>
 	                                        </div>
 	                                    </div>
 	                                    <div class="form-group row">
 	                                        <label for="positioncode" class="col-sm-3 text-right control-label col-form-label">직책 번호 </label>
 	                                        <div class="col-sm-9">
-	                                            <input type="text" class="form-control" id="positioncode" name = "positioncode" placeholder="직책번호">
+	                                            <input type="text" class="form-control" id="positioncode" name = "positioncode" placeholder="직책번호" readonly>
 	                                        </div>
 	                                    </div>
 	                                    <div class="form-group row">
 	                                        <label for="rankcode" class="col-sm-3 text-right control-label col-form-label">직급 번호</label>
 	                                        <div class="col-sm-9">
-	                                            <input type="text" class="form-control" id="rankcode" name = "rankcode" placeholder="직급 번호">
+	                                            <input type="text" class="form-control" id="rankcode" name = "rankcode" placeholder="직급 번호" readonly>
 	                                        </div>
 	                                    </div>
 	                                    <div class="form-group row">
 	                                        <label for="employmentcode" class="col-sm-3 text-right control-label col-form-label">재직구분 번호</label>
 	                                        <div class="col-sm-9">
-	                                            <input type="text" class="form-control" id="employmentcode" name ="employmentcode" placeholder="재직구분 번호">
+	                                            <input type="text" class="form-control" id="employmentcode" name ="employmentcode" placeholder="재직구분 번호" readonly>
 	                                        </div>
 	                                    </div>
 	                                    <div class="form-group row">
@@ -160,17 +172,17 @@
 	                                               <input type="text" id="hiredate" name ="hiredate" class="form-control mydatepicker"  placeholder="yyyy/mm/dd" readonly>
 	                                        </div>
 	                                    </div>
-	                                    <div class="form-group row">
+	                                   <!--  <div class="form-group row">
 	                                        <label for="leavedate" class="col-sm-3 text-right control-label col-form-label">퇴사일</label>
 	                                        <div class="col-sm-9">
 	                                               <input type="text" id="leavedate" name="leavedate" class="form-control mydatepicker"  placeholder="yyyy/mm/dd">
 	                                        </div>
-	                                    </div>
+	                                    </div> -->
 	                                 </div>
 	                                 
 	                                <div class="border-top">
 	                                    <div class="card-body">
-	                                        <button type="button" class="btn btn-primary">Submit</button>
+	                                        <button type="button" style ="color: #fff; background-color: #20B2AA; border-color: #20B2AA;" class="btn btn-success">변경하기</button>
 	                                    </div>
 	                                </div>
 	                            </form>
