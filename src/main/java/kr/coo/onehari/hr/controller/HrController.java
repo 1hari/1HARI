@@ -84,7 +84,7 @@ public class HrController {
 
 	//사원수정(정보수정)
 	@RequestMapping(value = "personnel/empModify1.hari")
-	public String empModify2(EmpDto emp, Position p, Rank r, Team t) {
+	public String empModify2(EmpDto emp) {
 		
 		try {
 			empservice.empUpdate(emp);
