@@ -95,37 +95,11 @@
 				<h6 class="card-subtitle"></h6>
 				<form id="example-form" action="" class="m-t-40" name="joinform" method="post">
 					<div>
-						<h3>사원 정보</h3>
-						<section>
-							<div>
-								<label for="empName" style="margin-top: 10px; margin-bottom: 0px;">이름</label> 
-								<input id="empName" name="empName" type="text" class="required form-control"> 
-							</div>
-							<div class="input-group">
-								<label for="birthFull" style="margin-top: 10px; margin-bottom: 0px;">생년월일</label> 
-								<input type="text" id="birth" name="birth" class="form-control datepicker-autoclose" placeholder="yymmdd">
-								<div class="input-group-append"></div>
-							</div>
-							<div>
-								<label for="phoneNum" style="margin-top: 10px; margin-bottom: 0px;">핸드폰번호</label> 
-								<input id="phoneNum" name="phoneNum" type="text" class="required form-control"> 
-							</div>
-							<div>
-								<label for="resNum" style="margin-top: 10px; margin-bottom: 0px;">주민등록번호</label>
-								<button type="button" class="btn btn-outline-success" style="padding-top: 0px; padding-bottom: 0px;" onclick="CheckForm()">확인</button><br>
-								<input type="password" id="resNum" name="resNum" class="form-control" maxlength="7" placeholder="주민등록번호 뒷자리">
-							</div>
-							<div>
-								<label for="email" style="margin-top: 10px; margin-bottom: 0px;">이메일</label><br>
-								<input id="email" name="email" type="text" class="form-control" style="width: 50%; display: inline;">
-								<input type="text" id="gmail" name="gmail" class="required form-control" style="width: 49%; display: inline;" value="@gmail.com" readonly="readonly">
-							</div>
-						</section>
-
 						<h3>재직 정보</h3>
 						<section>
 							<label for="teamCode">소속</label> 
 							<select class="required form-control" id="teamSelect" name="teamCode" style="height: 300%; margin-bottom: 1%;">
+								<option>1</option>
 							</select> 
 							
 							<label for="positionCode">직책</label> 
@@ -142,9 +116,37 @@
 							<select class="required form-control" id="employmentSelect" name="employmentCode" style="height: 300%; margin-bottom: 1%;">
 								<option>1</option>
 							</select>
+						</section>
+
+						<h3>사원 정보</h3>
+						<section>
+							<div>
+								<label for="empName" style="margin-top: 10px; margin-bottom: 0px;">이름</label> 
+								<input id="empName" name="empName" type="text" class="required form-control"> 
+							</div>
+							<div class="input-group">
+								<label for="birthFull" style="margin-top: 10px; margin-bottom: 0px;">생년월일</label> 
+								<input type="text" id="birth" name="birth" class="form-control mydatepicker" placeholder="yyyy-mm-dd">
+								<div class="input-group-append"></div>
+							</div>
+							<div>
+								<label for="phoneNum" style="margin-top: 10px; margin-bottom: 0px;">핸드폰번호</label> 
+								<input id="phoneNum" name="phoneNum" type="text" class="required form-control"> 
+							</div>
+							<div>
+								<label for="birthNum" style="margin-top: 10px; margin-bottom: 0px;">주민등록번호</label>
+								<button type="button" class="btn btn-outline-success" style="padding-top: 0px; padding-bottom: 0px;" onclick="CheckForm()">확인</button><br>
+								<input name="birthday" type="text" class="form-control" maxlength="6" style="width: 50%; display: inline-block;" placeholder="생년월일 6자리">
+								<input name="regNum" type="password" class="form-control" maxlength="7" style="width: 49%; display: inline-block;" placeholder="주민등록번호 뒷자리">
+							</div>
+							<div>
+								<label for="email" style="margin-top: 10px; margin-bottom: 0px;">이메일</label><br>
+								<input id="email" name="email" type="text" class="form-control" style="width: 50%; display: inline;">
+								<input type="text" id="gmail" name="gmail" class="required form-control" style="width: 49%; display: inline;" value="@gmail.com" readonly="readonly">
+							</div>
 							<div class="input-group">
 								<label for="hireDate" style="margin-top: 10px; margin-bottom: 0px;">입사일</label>
-								<input type="text" id="hireDate" name="hireDate" class="form-control datepicker-autoclose" placeholder="yyyy-mm-dd">
+								<input type="text" id="hireDate" name="hireDate" class="form-control mydatepicker" placeholder="yyyy-mm-dd">
 								<div class="input-group-append"></div>
 							</div>
 						</section>
@@ -190,23 +192,20 @@
 <script src="${pageContext.request.contextPath}/resources/hari/assets/libs/jquery-minicolors/jquery.minicolors.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/hari/assets/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/hari/assets/libs/quill/dist/quill.min.js"></script>
-
-<!-- SweetAlert -->
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
+    
+    
 <script>
 	/****************************************
 	*      필수 테이블 1. 데이터 테이블 , 2. datepicker 제이쿼리 스크립트 *
 	****************************************/
 	/*datepicker*/
 	$(function() {
-/* 		$('.mydatepicker').datepicker(
+		$('.mydatepicker').datepicker(
 			{
-				format: "yymmdd"
+				dateFormat: "yyyy-mm-dd"
 			}
-		); */
-		$('.datepicker-autoclose').datepicker({
-			format: "yymmdd",
+		);
+		$('#datepicker-autoclose').datepicker({
 			autoclose: true,
 			todayHighlight: true
 		});
@@ -254,62 +253,50 @@
 <script>
 	function CheckForm() {
 	
-		var birthday = joinform.birth.value;
-		var regNum = joinform.resNum.value;
+		var birth = joinform.birthday.value;
+		var resnum = joinform.regNum.value;
 		var SUM = 0;
 	
-		for (i = 0; i < birthday.length; i++) // 주민등록번호 1 ~ 6 자리까지의 처리
+		for (i = 0; i < birth.length; i++) // 주민등록번호 1 ~ 6 자리까지의 처리
 		{
-			if (birthday.charAt(i) >= 0 || birthday.charAt(i) <= 9) // 지정한 인덱스에 해당하는 문자를 반환(charAt) 즉, 반환된 값들이 숫자면 곱해 더함
+			if (birth.charAt(i) >= 0 || birth.charAt(i) <= 9) // 지정한 인덱스에 해당하는 문자를 반환(charAt) 즉, 반환된 값들이 숫자면 곱해 더함
 			{
 				if (i == 0) // 앞 자리 첫번째 숫자
 				{
-					SUM = (i + 2) * birthday.charAt(i);
+					SUM = (i + 2) * birth.charAt(i);
 				} else {
-					SUM = SUM + (i + 2) * birthday.charAt(i);
+					SUM = SUM + (i + 2) * birth.charAt(i);
 				}
 			}
 
 			else // 숫자가 아닌 문자가 있을 때의 처리
 			{
-				swal({
-					text: "주민등록번호에 숫자만 입력해주세요.",
-					icon: "warning",
-					button: "닫기"
-				});
-				document.joinform.resNum.focus();
+				alert("주민등록번호에 숫자만 입력하세요");
+				document.joinform.birthday.focus();
 				return false;
 			}
 		}
 
 		for (i = 0; i < 2; i++) // 주민등록번호 7 ~ 8 자리까지의 처리
 		{
-			if (regNum.charAt(i) >= 0 || regNum.charAt(i) <= 9) {
-				SUM = SUM + (i + 8) * regNum.charAt(i);
+			if (resnum.charAt(i) >= 0 || resnum.charAt(i) <= 9) {
+				SUM = SUM + (i + 8) * resnum.charAt(i);
 			} else // 숫자가 아닌 문자가 있을 때의 처리
 			{
-				swal({
-					text: "주민등록번호에 숫자만 입력해주세요.",
-					icon: "warning",
-					button: "닫기"
-				});
-				document.joinform.resNum.focus();
+				alert("주민등록번호에 숫자만 입력하세요");
+				document.joinform.regNum.focus();
 				return false;
 			}
 		}
 
 		for (i = 2; i < 6; i++) // 주민등록번호 9 ~ 12 자리까지의 처리
 		{
-			if (regNum.charAt(i) >= 0 || regNum.charAt(i) <= 9) {
-				SUM = SUM + (i) * regNum.charAt(i);
+			if (resnum.charAt(i) >= 0 || resnum.charAt(i) <= 9) {
+				SUM = SUM + (i) * resnum.charAt(i);
 			} else // 숫자가 아닌 문자가 있을 때의 처리
 			{
-				swal({
-					text: "주민등록번호에 숫자만 입력해주세요.",
-					icon: "warning",
-					button: "닫기"
-				});
-				document.joinform.resNum.focus();
+				alert("주민등록번호에 숫자만 입력하세요");
+				document.joinform.regNum.focus();
 				return false;
 			}
 		}
@@ -328,34 +315,22 @@
 
 		var check1 = 11 - checkCODE; // 나머지를 11 에서 뺀다
 
-		if (regNum.charAt(6) >= 0 || regNum.charAt(6) <= 9) {
-			var check2 = parseInt(regNum.charAt(6))
+		if (resnum.charAt(6) >= 0 || resnum.charAt(6) <= 9) {
+			var check2 = parseInt(resnum.charAt(6))
 		} else // 숫자가 아닌 문자가 있을 때의 처리
 		{
-			swal({
-				text: "주민등록번호에 숫자만 입력해주세요.",
-				icon: "warning",
-				button: "닫기"
-			});
-			document.joinform.resNum.focus();
+			alert("주민등록번호에 숫자만 입력하세요");
+			document.joinform.birthday.focus();
 			return false;
 		}
 
 		if (check1 != check2) // 주민등록번호가 틀릴 때의 처리
 		{
-			swal({
-				text: "주민등록번호에 숫자만 입력해주세요.",
-				icon: "warning",
-				button: "닫기"
-			});
-			document.joinform.resNum.focus();
+			alert("주민등록번호를 다시 확인 하세요.");
+			document.joinform.birthday.focus();
 			return false;
 		} else {
-			swal({
-				text: "주민등록번호가 확인되었습니다.",
-				icon: "success",
-				button: "확인"
-			});
+			alert("주민등록번호 확인되었습니다.");
 			return true;
 		}
 	}
@@ -368,11 +343,11 @@
 			url:"getTeamCode.hari",
 			type: "post",
 			dataType: "json",
-			success: function(teamCode) {
-	    		console.log(teamCode);
+			success: function(data) {
+	    		console.log(data);
 	    		
 				var dArray = [];
-				dArray = teamCode;
+				dArray = data;
 				
 				for(var i = 0; i < dArray.length; i++) {
 					var option = document.createElement("option");
