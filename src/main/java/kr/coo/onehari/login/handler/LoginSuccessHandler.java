@@ -2,7 +2,6 @@ package kr.coo.onehari.login.handler;
 
 import java.io.IOException;
 
-import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,8 +21,13 @@ import kr.coo.onehari.login.service.LoginService;
 public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler
 		implements AuthenticationSuccessHandler {
 	
-	@Autowired
+	@Autowired	
 	private LoginService login;
+
+	public void setLogin(LoginService login) {
+		this.login = login;
+	}
+
 	private String loginidname;
 	private String defaultUrl;
 
@@ -50,7 +54,7 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
-		System.out.println("login.toString(): "+ login.toString());
+		System.out.println("login.toString(): "+ login);
 		System.out.println("권한성공");
 	    String username = request.getParameter(loginidname);
 	    System.out.println(username);

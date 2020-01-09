@@ -2,10 +2,13 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
   						http://www.springframework.org/schema/beans/spring-beans.xsd
   						http://www.springframework.org/schema/security 
-  						http://www.springframework.org/schema/security/spring-security.xsd">
+  						http://www.springframework.org/schema/security/spring-security.xsd
+  						http://www.springframework.org/schema/context
+						https://www.springframework.org/schema/context/spring-context.xsd">
 
 	<!-- 2단계 1단계 >> 로그인 자동화 처리 >> /login >> (controller > id, pwd > 인증 , 권한 
 		확인 > session ...) >> /logout >> 직접처리 http://localhost:8090/SpringMVC_Basic03_Sts_Mybatis_Security/login?error 
@@ -32,7 +35,9 @@
 		name="kglim" password="1004" authorities="ROLE_USER"/> <security:user name="admin" 
 		password="1004" authorities="ROLE_ADMIN,ROLE_USER" /> </security:user-service> 
 		</security:authentication-provider> </security:authentication-manager> -->
-	
+		<context:annotation-config />
+		<context:component-scan base-package="kr.coo.onehari.login.*" />
+		
 		<security:http>
 		<security:csrf disabled="true" />
 		<security:form-login login-page="/index.hari"
@@ -44,6 +49,7 @@
 		<security:intercept-url pattern="/1hariHr/*" access="hasRole('ROLE_PERSONNEL')" /> -->
 		<security:access-denied-handler error-page="/1hariHr/error403.hari"/>
 	</security:http>
+	
 	<bean id="loginSuccessHandler" class="kr.coo.onehari.login.handler.LoginSuccessHandler">
    		<property name="loginidname" value="username"/>
     	<property name="defaultUrl" value="/"/>
@@ -53,7 +59,7 @@
 		<security:authentication-provider>
 			<security:jdbc-user-service data-source-ref="driverManagerDataSource"
 			 users-by-username-query="SELECT EMPNUM as username, password, 1 enabled FROM emp where EMPNUM=?"
-			 authorities-by-username-query="	select e.EMPNUM, r.ROLECODE    
+			 authorities-by-username-query="	select e.EMPNUM, r.ROLENAME    
  													           from EMP e join EMPROLELIST r  
 													           on e.EMPNUM = r.EMPNUM
 													           where e.EMPNUM=?"/>  

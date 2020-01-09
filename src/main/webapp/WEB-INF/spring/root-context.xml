@@ -17,7 +17,7 @@
 		
 		<!-- log4jdbc net.sf.log4jdbc.sql.jdbcapi.DriverSpy-->
 		<property name="driverClassName" value="net.sf.log4jdbc.DriverSpy" />
-		<property name="url" value="jdbc:log4jdbc:mysql://192.168.6.10:3306/onehari?characterEncoding=UTF8&amp;useSSL=false&amp;serverTimezone=UTC&amp;useUnicode=true&amp;allowPublicKeyRetrieval=true" />
+		<property name="url" value="jdbc:log4jdbc:mysql://192.168.6.58:3306/onehari?characterEncoding=UTF8&amp;useSSL=false&amp;serverTimezone=UTC&amp;useUnicode=true&amp;allowPublicKeyRetrieval=true" />
 		<!-- allowPublicKeyRetrieval=true&amp;serverTimezone=UTC -->
 		
 		<property name="username" value="onehari" />
