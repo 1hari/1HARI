@@ -1,6 +1,7 @@
 package kr.coo.onehari.sign.service;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,12 +36,24 @@ public class SignFormService {
 		return result;
 	}
 	
+    //폼 리스트 가져오기 김정하 / 2020. 1. 8~
+    public List<SignFormDto> selectAllForm(){
+        List<SignFormDto> list = null;
+        SignFormDao dao = sqlsession.getMapper(SignFormDao.class);
+        try {
+            list = dao.selectAllForm();
+        } catch (ClassNotFoundException | SQLException e) {
+            log.debug("selectAllForm : " + e.getMessage());
+        }
+        return list;
+    }
+	
 	//폼 가져오기 김정하 / 2020. 1. 8
-	public SignFormDto selectForm(int formNum) {
+	public SignFormDto selectForm(int signFormCode) {
 		SignFormDto form = null;
 		SignFormDao dao = sqlsession.getMapper(SignFormDao.class);
 		try {
-			form = dao.selectFrom(formNum);
+			form = dao.selectForm(signFormCode);
 		} catch (ClassNotFoundException | SQLException e) {
 			log.debug("selectForm : " + e.getMessage());
 		}

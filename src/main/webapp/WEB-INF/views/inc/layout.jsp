@@ -34,6 +34,9 @@
     <!-- Custom JavaScript -->
     <script src="${pageContext.request.contextPath}/resources/hari/dist/js/custom.min.js"></script>
      <!-- dashboard.html에서 필요한 제이쿼리 부분 끝 -->
+     <script type="text/javascript">
+	
+     </script>
 </head>
 <body>
 	<!-- header 영역 -->
