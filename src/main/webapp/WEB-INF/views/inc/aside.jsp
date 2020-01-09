@@ -5,18 +5,41 @@
 <script>
 	$(function(){
 		
+		//품의서 양식 목록 가져오기
 		$.ajax({
-			url:,			
-			dataType:,
-			type:,
-			success:,
-			error:,
-			beforeSend:function(){//이미지 보여주기
-				$('.wrap-loading').removeClass('display-none');
+			url:"selectAllForm.hari",			
+			type:"post",
+			success: function(list){
+				console.log(list);
+				var formlist = "<ul>";
+				$.each(list, function(index, form){
+					//문서1개 시작 <i class="far fa-file-alt">&nbsp;</i> 아이콘 안먹힘..
+					formlist += '<li class="jstree-leaf">'
+									+'<i class="jstree-icon">&nbsp;</i>'
+									+'<a class="formcode" title="'+form.signFormCode+'" rel="FORM" href="#" data-bypass="1">'
+									+form.signFormFormName
+									+'</a>'
+								+'</li>'
+					//문서1개 끝
+				}) //each 끝
+				formlist += "</ul>";
+				$('#formlist').append(formlist);
+				$('#formTree').jstree();
+
+				$('.formcode').click(function() {
+					console.log($('.jstree-clicked').val());
+				})
+				
 			},
-			complete:function(){ //이미지 감추기
-		        $('.wrap-loading').addClass('display-none');
+			error: function(xhr){
+				console.log(xhr.status);
 			},
+// 			beforeSend:function(){//이미지 보여주기
+// 				$('.wrap-loading').removeClass('display-none');
+// 			},
+// 			complete:function(){ //이미지 감추기
+// 		        $('.wrap-loading').addClass('display-none');
+// 			},
 		});//ajax 끝
 	});//document ready 끝
 </script>
@@ -229,12 +252,6 @@
 <!-- jsTree -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
-     
-<script type="text/javascript">
-	$(document).ready(function(){
-		$('#formTree').jstree();
-	});
-</script>
 
 <div class="modal fade" id="draftModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
@@ -261,23 +278,23 @@
 						<div class="content_tab_wrap">
 							<div id="formTree" class="jstree jstree-0 jstree-focused jstree-default">
 								<ul>
-									<li class="jstree-open">
+									<li class="jstree-open" id="formlist">
 										<i class="jstree-icon">&nbsp;</i>
 										<a title="품의서" rel="FOLDER" href="#" data-bypass="1">
 											<i class="far fa-folder-open">&nbsp;</i>품의서
 										</a>
 											
 										<ul>	
-											<c:forEach var="form" items="${requestScope.list}">
-												<!-- 문서1개 시작-->									
-												<li class="jstree-leaf">
-													<i class="jstree-icon">&nbsp;</i>
-													<a title="${form.signFormFormName}" rel="FORM" href="#" data-bypass="1">
-														<!-- <i class="far fa-file-alt">&nbsp;</i> -->${form.signFormFormName}
-													</a>
-												</li>
-												<!-- 문서1개 끝-->
-											</c:forEach>
+<%-- 											<c:forEach var="form" items="${requestScope.list}"> --%>
+<!-- 												문서1개 시작									 -->
+<!-- 												<li class="jstree-leaf"> -->
+<!-- 													<i class="jstree-icon">&nbsp;</i> -->
+<%-- 													<a title="${form.signFormFormName}" rel="FORM" href="#" data-bypass="1"> --%>
+<%-- 														<!-- <i class="far fa-file-alt">&nbsp;</i> -->${form.signFormFormName} --%>
+<!-- 													</a> -->
+<!-- 												</li> -->
+<!-- 												문서1개 끝 -->
+<%-- 											</c:forEach> --%>
 										</ul>
 										
 									</li><!-- jstree-open 끝 -->
