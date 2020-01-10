@@ -120,11 +120,27 @@
 <!-- End Page wrapper  -->
 <!-- this page js -->
 <script src="${pageContext.request.contextPath}/resources/hari/assets/extra-libs/multicheck/jquery.multicheck.js"></script>
+<script src="${pageContext.request.contextPath}/resources/hari/assets/extra-libs/multicheck/datatable-checkbox-init.js"></script>
+
+<script>
+	$(function(){
+		//listCheckbox
+		//결재자 클릭
+		$('.empSign').click(function(){
+			console.log($(this).attr('teamCode'));
+			console.log($(this).val());
+
+			$('.listCheckbox')
+			
+		});//결재자 클릭 끝
+			
+	});//document ready 끝
+</script>
 
 <!-- sign Modal -->
 <div class="modal fade" id="signModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
-		<div class="modal-content" >
+		<div class="modal-content"  style="width: 500px;">
 			<form action="${pageContext.request.contextPath}/1hariSign/docuDraft.hari">
 				<div class="modal-header">
 					<h5 class="modal-title" id="exampleModalLabel">결재자 선택</h5>
@@ -134,40 +150,100 @@
 				</div><!-- modal-header 끝 -->
 			
 				<div class="modal-body" >
-				
-					<c:forEach var="team" items="${requestScope.teamList}">
-						<!-- accoridan part -->
-						<div class="accordion" id="accordionExample">
-							<!-- 부서시작 -->
-							<div class="card m-b-0 border-top">
-								<div class="card-header" id="headingOne">
-									<h5 class="mb-0">
-										<a class="collapsed" data-toggle="collapse" data-target="#collapse${team.teamCode}" aria-expanded="false" aria-controls="collapse${team.teamCode}">
-											<i class="m-r-5 fa fa-magnet" aria-hidden="true"></i>
-											<span>${team.teamName}</span>
-										</a>
-									</h5>
-								</div>
-
-								<!-- 부서원 data-parent="#accordionExample" -->
-								<div id="collapse${team.teamCode}" class="collapse show" aria-labelledby="headingOne">
-									<div class="card-body">
-										<ul>
-											<c:forEach var="emp" items="${requestScope.empList}">
-												<c:if test="${emp.teamCode == team.teamCode}">
-													<li>${emp.empName}</li>
-												</c:if>
-												
-											</c:forEach>
-										</ul>
+					<div class="row">
+						<div class="col-md-4">
+							<c:forEach var="team" items="${requestScope.teamList}">
+								<!-- accoridan part -->
+								<div class="accordion" id="accordionExample">
+									<!-- 부서시작 -->
+									<div class="card m-b-0 border-top">
+										<div class="card-header" id="headingOne">
+											<h5 class="mb-0">
+												<a class="collapsed" data-toggle="collapse" data-target="#collapse${team.teamCode}" aria-expanded="false" aria-controls="collapse${team.teamCode}">
+													<i class="m-r-5 fa fa-magnet" aria-hidden="true"></i>
+													<span>${team.teamName}</span>
+												</a>
+											</h5>
+										</div>
+		
+										<!-- 부서원 data-parent="#accordionExample" -->
+										<div id="collapse${team.teamCode}" class="collapse" aria-labelledby="headingOne">
+											<div class="card-body">
+												<ul>
+													<c:forEach var="emp" items="${requestScope.empList}">
+														<c:if test="${emp.teamCode == team.teamCode}">
+															<li class="empSign" teamCode="${emp.teamCode}" value="${emp.empNum}">${emp.empName}</li>
+														</c:if>
+													</c:forEach>
+												</ul>
+											</div>
+										</div>
+										<!-- 부서원끝 -->
 									</div>
-								</div>
-								<!-- 부서원끝 -->
-							</div>
-							<!-- 부서시작 -->
-						</div><!-- accordion 끝 -->
-					</c:forEach>
-					
+									<!-- 부서시작 -->
+								</div><!-- accordion 끝 -->
+							</c:forEach>
+						</div>
+						<div class="col-md-8">
+							<table class="table">
+								<thead class="thead-light">
+									<tr>
+										<th>
+											<label class="customcheckbox m-b-20">
+												<input type="checkbox" id="mainCheckbox" />
+												<span class="checkmark"></span>
+											</label>
+										</th>
+										<th scope="col">
+											부서
+										</th>
+										<th scope="col">
+											사번
+										</th>
+										<th scope="col">
+											이름
+										</th>
+									</tr>
+								</thead>
+								<tbody class="customtable">
+									<tr>
+										<th>
+											<label class="customcheckbox">
+												<input type="checkbox" class="listCheckbox" />
+												<span class="checkmark"></span>
+											</label>
+										</th>
+										<td class="empTeam" id="empTeam1" name="empTeam1">
+											
+										</td>
+										<td class="empSign" id="empSign1" name="empSign1">
+											
+										</td>
+										<td class="empName" id="empName1" name="empName1">
+											
+										</td>
+									</tr>
+									<tr>
+										<th>
+											<label class="customcheckbox">
+												<input type="checkbox" class="listCheckbox" />
+												<span class="checkmark"></span>
+											</label>
+										</th>
+										<td class="empTeam" id="empTeam2" name="empTeam2">
+											
+										</td>
+										<td class="empSign" id="empSign2" name="empSign2">
+											
+										</td>
+										<td class="empName" id="empName2" name="empName2">
+											
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
 				</div><!-- modal-body 끝 -->
                         
 				<div class="modal-footer">
