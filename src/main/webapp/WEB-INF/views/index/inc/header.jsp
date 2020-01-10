@@ -50,7 +50,7 @@
 
 												<!-- <button type ="button" data-toggle="modal" href="#shortModal" class="btn btn-primary">로그인</button>  -->
 												<input type="submit" value="로그인" data-toggle="modal" class="btn m-t-20 btn-info btn-block waves-effect waves-light">
-												<label><a data-toggle="modal" data-target="#add-new-event" style="color: black">비밀번호 초기화</a></label>
+												<label><a href="emailSubmit.hari"style="color: black">비밀번호 초기화</a></label>
 											</div>
 										</form>
 									</li>

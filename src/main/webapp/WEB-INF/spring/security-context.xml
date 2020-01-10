@@ -38,34 +38,37 @@
 		<context:annotation-config />
 		<context:component-scan base-package="kr.coo.onehari.login.*" />
 		
-		<security:http>
+		<security:http auto-config="true" use-expressions="true">
 		<security:csrf disabled="true" />
 		<security:form-login login-page="/index.hari"
+							 authentication-failure-handler-ref="loginFailureHandler"
 		                     authentication-success-handler-ref="loginSuccessHandler"
-		                     authentication-failure-url="/index.hari?error"
+		                     login-processing-url="/login"
 		                     />
 		<security:logout  logout-success-url="/index.hari" />
-		<!-- <security:intercept-url pattern="/1hariHr/**" access="hasRole('ROLE_PERSONNEL')" />
-		<security:intercept-url pattern="/1hariHr/*" access="hasRole('ROLE_PERSONNEL')" /> -->
+<!-- 		<security:intercept-url pattern="/1hariHr/**" access="hasRole('ROLE_PERSONNEL')" /> -->
+<!-- 		<security:intercept-url pattern="/1hariHr/*" access="hasRole('ROLE_PERSONNEL')" /> -->
 		<security:access-denied-handler error-page="/1hariHr/error403.hari"/>
 	</security:http>
-	
 	<bean id="loginSuccessHandler" class="kr.coo.onehari.login.handler.LoginSuccessHandler">
    		<property name="loginidname" value="username"/>
     	<property name="defaultUrl" value="/main.hari"/>
 	</bean>
-<!-- 	<bean id="loginFailureHandler" class="tody.common.handler.LoginFailureHandler">
+	
+	<bean id="loginFailureHandler" class="kr.coo.onehari.login.handler.LoginFailureHandler">
 	    <property name="username" value="username"/>
-	    <property name="userpassword" value="userpassword"/>
+	    <property name="userpassword" value="password"/>
 	    <property name="errormsgname" value="ERRORMSG"/>
 	    <property name="defaultFailureUrl" value="/index.hari?error"/>
-	</bean> -->
+	</bean>
 
+	<bean id="login" class="kr.coo.onehari.login.service.LoginService">
+	</bean>
 
 	<security:authentication-manager>
 		<security:authentication-provider>
 			<security:jdbc-user-service data-source-ref="driverManagerDataSource"
-			 users-by-username-query="SELECT EMPNUM as username, password, 1 enabled FROM emp where EMPNUM=?"
+			 users-by-username-query="SELECT EMPNUM as username, password, islock as enabled FROM emp where EMPNUM=?"
 			 authorities-by-username-query="	select e.EMPNUM, r.ROLENAME    
  													           from EMP e join EMPROLELIST r  
 													           on e.EMPNUM = r.EMPNUM
