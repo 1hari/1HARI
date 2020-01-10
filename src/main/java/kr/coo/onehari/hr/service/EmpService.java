@@ -103,7 +103,7 @@ public class EmpService {
 		/*return result;*/
 	}
 	
-	//사원조회(팀코드,사번,이름) 김정하 2020. 1. 9
+	//사원조회(팀코드,사번,이름,직급)리스트 김정하 2020. 1. 9
 	public List<EmpDto> empDefaultList(){
 		List<EmpDto> empDefaultList = null;
 		
@@ -114,5 +114,18 @@ public class EmpService {
 			log.debug("EmpService empDefaultList 예외발생: " + e.getMessage());
 		}
 		return empDefaultList;
+	}
+	
+	//사원조회(팀코드,사번,이름,직급) 김정하 2020. 1. 10
+	public EmpDto empDefault(String empNum) {
+		EmpDto empDefault = null;
+		
+		EmpDao empdao = sqlsession.getMapper(EmpDao.class);
+		try {
+			empDefault = empdao.empDefault(empNum);
+		} catch (ClassNotFoundException | SQLException e) {
+			log.debug("EmpService empDefault 예외발생: " + e.getMessage());
+		}
+		return empDefault;
 	}
 }

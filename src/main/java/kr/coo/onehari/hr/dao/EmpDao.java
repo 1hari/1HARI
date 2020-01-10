@@ -30,4 +30,7 @@ public interface EmpDao {
 	
 	//사원목록(주 table) 김정하 / 2020. 1. 9
 	public List<EmpDto> empDefaultList() throws ClassNotFoundException, SQLException;
+	
+	//사원정보(기안자) 김정하 / 2020. 1. 10
+	public EmpDto empDefault(String empNum) throws ClassNotFoundException, SQLException;
 }
