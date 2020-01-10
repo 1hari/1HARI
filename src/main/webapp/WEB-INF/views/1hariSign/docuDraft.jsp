@@ -34,9 +34,15 @@
 					<!--form 태그 시작 -->
 					<form action="" method="POST">
 						<div class="row">
-							<div class="col-md-12">
-								<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#signModal">결재선</button>
+							<div class="col-md-2">
+								<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#signModal">결재자 선택</button>
 							</div>
+							<div class="col-md-10">
+								
+							</div>
+						</div>
+						
+						<div class="row">
 							<!-- input 태그 -->
 							<div class="col-md-12">
 									<input type="text" class="form-control" id="signFormName" name="signFormName" placeholder="제목" style="width:93%; display: inline;">
@@ -131,14 +137,16 @@
 // 			console.log($(this).attr('teamName'));
 // 			console.log($(this).val());
 // 			console.log($(this).html());
-
+			
 			//체크된 줄의 부모 요소 중 tr을 찾음
-			var check = $('.listCheckbox:checked').closest('tr');
+			let check = $('.listCheckbox:checked').closest('tr');
+			let empName = $(this).html().split('[')[0];
 			
 			//찾은 tr의 자식 중 class가 일치하는 것을 찾아서 값 대입
 			check.children('.empTeam').html($(this).attr('teamName'));
+			check.children('.rankName').html($(this).attr('rankName'));
 			check.children('.empSign').html($(this).val());
-			check.children('.empName').html($(this).html());
+			check.children('.empName').html(empName);
 			
 		});//결재자 클릭 끝
 			
@@ -148,8 +156,8 @@
 <!-- sign Modal -->
 <div class="modal fade" id="signModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
-		<div class="modal-content"  style="width: 500px;">
-			<form action="${pageContext.request.contextPath}/1hariSign/docuDraft.hari">
+		<div class="modal-content"  style="width: 600px;">
+			<!-- <form action=""> -->
 				<div class="modal-header">
 					<h5 class="modal-title" id="exampleModalLabel">결재자 선택</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -177,13 +185,13 @@
 										<!-- 부서원 data-parent="#accordionExample" -->
 										<div id="collapse${team.teamCode}" class="collapse" aria-labelledby="headingOne">
 											<div class="card-body">
-												<ul>
+												<!-- <ul> -->
 													<c:forEach var="emp" items="${requestScope.empList}">
 														<c:if test="${emp.teamCode == team.teamCode}">
-															<li class="empSign" teamCode="${emp.teamCode}" teamName ="${team.teamName}" value="${emp.empNum}">${emp.empName}</li>
+															<li class="empSign" teamCode="${emp.teamCode}" teamName ="${team.teamName}" value="${emp.empNum}" rankName="${emp.rankName}">${emp.empName} [${emp.rankName}]</li>
 														</c:if>
 													</c:forEach>
-												</ul>
+												<!-- </ul> -->
 											</div>
 										</div>
 										<!-- 부서원끝 -->
@@ -227,6 +235,9 @@
 										<td class="empTeam" id="empTeam1" name="empTeam1">
 											
 										</td>
+										<td class="rankName" id="rankName1" name="rankName1">
+											
+										</td>
 										<td class="empSign" id="empSign1" name="empSign1">
 											
 										</td>
@@ -244,6 +255,9 @@
 										<td class="empTeam" id="empTeam2" name="empTeam2">
 											
 										</td>
+										<td class="rankName" id="rankName2" name="rankName2">
+											
+										</td>
 										<td class="empSign" id="empSign2" name="empSign2">
 											
 										</td>
@@ -258,11 +272,10 @@
 				</div><!-- modal-body 끝 -->
                         
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-					<button type="submit" class="btn btn-primary" id="formChoice">선택완료</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal">선택완료</button>
 				</div><!-- modal-footer 끝 -->
-				<input type="hidden" value="" id="signFormCode" name="signFormCode">
-			</form>
+				<input type="hidden" value="${requestScope.signFormCode}" id="signFormCode" name="signFormCode" >
+			<!-- </form> -->
 		</div><!-- modal-content 끝 -->
 	</div><!-- modal-dialog 끝 -->
 </div><!--  signModal 끝 -->
