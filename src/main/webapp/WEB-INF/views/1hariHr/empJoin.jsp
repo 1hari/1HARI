@@ -152,7 +152,8 @@
 
 						<h3>Finish</h3>
 						<section>
-							<input id="acceptTerms" name="acceptTerms" type="checkbox" class="required"> <label for="acceptTerms">I agree with the Terms and Conditions.</label>
+							<input id="acceptTerms" name="acceptTerms" type="checkbox" class="required">
+							<label for="acceptTerms">모든 입력정보를 확인하였으며 사원등록을 완료하겠습니다.</label>
 						</section>
 					</div>
 				</form>
@@ -254,7 +255,7 @@ $(function() {
 			let rank = "";
 			$.each(rankCodes, function(index, element) {
 				rank += '<option value="' + element.rankCode + '">' + element.rankName + '</option>';
-				console.log(position);
+				console.log(rank);
 			})
 			$("#rankSelect").append(rank);
 		}
@@ -308,7 +309,11 @@ $(function() {
 			return form.valid();
 		},
 		onFinished : function(event, currentIndex) {
-			alert("Submitted!");
+			swal({
+				text: "사원등록이 정상적으로 완료되었습니다.",
+				icon: "success",
+				button: "확인"
+			});
 		}
 	});
 </script>
