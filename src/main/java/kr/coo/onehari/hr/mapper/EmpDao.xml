@@ -38,9 +38,10 @@
 		JOIN position AS P ON E.POSITIONCODE = P.POSITIONCODE
 		JOIN employment AS EM ON E.EMPLOYMENTCODE = EM.EMPLOYMENTCODE
 	</select>
-   
+
+	<!-- 사원정보수정 화면 김진호 2020. 1. 10 -->
 	<select id="empModify" resultType="kr.coo.onehari.hr.dto.EmpDto">
-		SELECT E.EMPNUM, E.TEAMCODE, E.EMPNAME, T.TEAMNAME, R.RANKNAME, P.POSITIONNAME, EM.EMPLOYMENTNAME, S.BIRTH, S.PHONENUM, S.EMAIL, S.HIREDATE
+		SELECT E.EMPNUM, E.EMPNAME, E.TEAMCODE, T.TEAMNAME, E.RANKCODE, R.RANKNAME, E.POSITIONCODE, P.POSITIONNAME, EM.EMPLOYMENTCODE, EM.EMPLOYMENTNAME, S.BIRTH, S.PHONENUM, S.EMAIL, S.HIREDATE, S.LEAVEDATE
 		FROM emp AS E 
 		JOIN subemp AS S ON E.EMPNUM = S.EMPNUM
 		JOIN team AS T ON E.TEAMCODE = T.TEAMCODE
@@ -48,16 +49,21 @@
 		JOIN position AS P ON E.POSITIONCODE = P.POSITIONCODE
 		JOIN employment AS EM ON E.EMPLOYMENTCODE = EM.EMPLOYMENTCODE
 		WHERE E.EMPNUM=#{empNum}
-   </select>
-   
+	</select>
+	
+	<!-- 사원정보수정 변경 김진호 2020. 1. 10 -->
   	<update id="empUpdate" parameterType="kr.coo.onehari.hr.dto.EmpDto">
-		UPDATE EMP 
-		SET TEAMCODE=${teamCode}, 
-		POSITIONCODE=${positionCode} ,  
+		UPDATE EMP
+		SET TEAMCODE=${teamCode},
+		POSITIONCODE=${positionCode},
 		RANKCODE=${rankCode},
-		EMPLOYMENTCODE=${employmentCode}, 
-		PHONENUM=#{phoneNum}}
-		WHERE EMPNUM=${empNum} 
+		EMPLOYMENTCODE=${employmentCode},
+		WHERE EMPNUM=${empNum}
+	</update>
+  	<update id="subempUpdate" parameterType="kr.coo.onehari.hr.dto.EmpDto">
+		UPDATE SUBEMP
+		SET PHONENUM=${phoneNum}
+		WHERE EMPNUM=${empNum}
 	</update>
    
 </mapper>

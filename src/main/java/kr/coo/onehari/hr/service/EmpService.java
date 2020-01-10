@@ -52,7 +52,6 @@ public class EmpService {
 			empdao.empJoin(empdto);
 			empdao.subempJoin(empdto);
 			result = empdao.empJoin(empdto);
-			System.out.println("empJoin result: " + result);
 		} catch (Exception e) {
 			System.out.println("EmpService empJoin 예외발생: " + e.getMessage());
 			log.debug("EmpService empJoin 예외발생: " + e.getMessage());
@@ -61,44 +60,38 @@ public class EmpService {
 		return result;
 	}
 	
-	// 사원등록 김진호 2020. 1. 10
-//	public int subempJoin(EmpDto empdto) {
-//		int result = 0;
-//		EmpDao empdao = sqlsession.getMapper(EmpDao.class);
-//		
-//		try {
-//			System.out.println("empdto2: " + empdto);
-//			result = empdao.subempJoin(empdto);
-//		} catch (ClassNotFoundException | SQLException e) {
-//			System.out.println("EmpService subempJoin 예외발생: " + e.getMessage());
-//			log.debug("EmpService subempJoin 예외발생: " + e.getMessage());
-//		}
-//		System.out.println("subempJoin result: " + result);
-//		return result;
-//	}
-	
-	//사원수정 2020. 1. 8 양찬식
+	//사원정보수정(화면) 2020. 1. 8 양찬식
 	public EmpDto empModify(int empNum) {
 		EmpDto emp = null;
+		EmpDao empdao = sqlsession.getMapper(EmpDao.class);
 		
 		try {
-			EmpDao empdao = sqlsession.getMapper(EmpDao.class);
 			emp = empdao.empModify(empNum);
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			System.out.println("EmpService empModify 예외발생: " + e.getMessage());
+			log.debug("EmpService empModify 예외발생: " + e.getMessage());
 		}
 		return emp;
 	}
 
-	//수정된 사원 정보 저장하는 함수 2020. 1. 10 양찬식 
-	//시작 시간 : 오후 3시 20분 끝난시간 3시 25분 
+	//사원정보수정(변경) 2020. 1. 10 양찬식 
+	//시작 시간 : 오후 3시 20분 끝난시간 3시 25분
+	@Transactional
 	public void empUpdate(EmpDto emp) {
+		EmpDao empdao = sqlsession.getMapper(EmpDao.class);
+		int result = 0; // 사원정보수정 확인을 위한 변수
 		
 		try {
-			EmpDao empdao = sqlsession.getMapper(EmpDao.class);
-			empdao.empUpdate(emp);
+			result = empdao.empUpdate(emp);
+			if (result > 0) {
+				System.out.println("사원정보수정 성공");
+				empdao.subempUpdate(emp);
+			} else {
+				System.out.println("사원정보수정 실패");
+			}
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			System.out.println("EmpService empUpdate 예외발생: " + e.getMessage());
+			log.debug("EmpService empUpdate 예외발생: " + e.getMessage());
 		}
 		/*return result;*/
 	}

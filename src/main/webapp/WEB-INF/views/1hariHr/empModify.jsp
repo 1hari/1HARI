@@ -108,7 +108,7 @@
 												</div>
 												<div class="form-group">
 													<label for="empNum">사번</label> 
-													<input id="empNum" name="empNum" type="text" class="form-control" value="${emp.empNum}" readonly>
+													<input  type="text" id="empNum" name="empNum" class="form-control" value="${emp.empNum}" readonly>
 												</div>
 												<div class="form-group">
 													<label for="birth">생년월일</label>
@@ -156,7 +156,7 @@
 												</div>
 											</div>
 											<!--오른쪽 input 태그들 끝-->
-											<input type="submit" class="form-control" value="수정" style="margin-bottom: 10%">									
+											<input type="submit" class="form-control" value="수정">									
 										</form>
 											<!--폼 action 태그 끝 -->
 									</div>
