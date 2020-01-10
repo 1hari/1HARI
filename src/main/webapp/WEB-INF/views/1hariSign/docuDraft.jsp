@@ -154,10 +154,11 @@
 									<div class="card-body">
 										<ul>
 											<c:forEach var="emp" items="${requestScope.empList}">
-								
+												<c:if test="${emp.teamCode == team.teamCode}">
+													<li>${emp.empName}</li>
+												</c:if>
+												
 											</c:forEach>
-											<li><a href="">부서사람1</a></li>
-											<li><a href="">부서사람2</a></li>
 										</ul>
 									</div>
 								</div>
