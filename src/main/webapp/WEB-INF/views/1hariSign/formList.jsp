@@ -40,9 +40,11 @@
 						<h5 class="card-title"></h5>
 						<div class="table-responsive">
 							<div style="text-align: right; margin-bottom: 5%;">
-								<button type="button" class="btn m-t-5 btn-info btn-block waves-effect waves-light" style="width: 20%; background-color: #20B2AA; margin-right: 1%;">
-									<a href="formInsert.hari" style="color: white;">양식 등록</a>
-								</button>
+								<a href="formInsert.hari" style="color: white;">
+									<button type="button" class="btn m-t-5 btn-info btn-block waves-effect waves-light" style="width: 20%; background-color: #20B2AA; margin-right: 1%;">
+									양식 등록
+									</button>
+								</a>
 							</div>
 							<table id="zero_config" class="table table-striped table-bordered">
 								<thead>
@@ -53,17 +55,29 @@
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach var="form" items="${requestScope.formList}">
-										<tr>
-											<td>${form.signFormCode}</td>
-											<td>${form.signFormFormName}</td>
-											<td>
-												<button type="button" class="btn m-t-5 btn-info btn-block waves-effect waves-light" style="width: 80%; background-color: #20B2AA">
-													<a href="formDelete.hari?signFormCode=${form.signFormCode}" style="color: white;">삭제</a>
-												</button>
-											</td>
-										</tr>
-									</c:forEach>
+									<c:choose>
+										<c:when test="${requestScope.formList != '[]'}">
+											<c:forEach var="form" items="${requestScope.formList}">
+												<tr>
+													<td>${form.signFormCode}</td>
+													<td>${form.signFormFormName}</td>
+													<td>
+														<a href="formDelete.hari?signFormCode=${form.signFormCode}" style="color: white;">
+															<button type="button" class="btn m-t-5 btn-info btn-block waves-effect waves-light" style="width: 80%; background-color: #20B2AA">
+																삭제
+															</button>
+														</a>
+													</td>
+												</tr>
+											</c:forEach>
+										</c:when>
+										<c:otherwise>
+											<tr>
+												<td colspan="3" style="text-align: center">양식이 없습니다.</td>
+											</tr>
+										</c:otherwise>									
+									</c:choose>
+									
 								</tbody>
 							</table>
 						</div>
@@ -101,16 +115,27 @@
 
 <!-- SweetAlert -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<<c:set var="msg" value="${requestScope.msg}" />
+
 <script>
-	/****************************************
-	*       Basic Table                   *
-	****************************************/
-	$('#zero_config').DataTable();
-	
-	swal({
-		text: "뿅",
-		icon: "warning",//"success"
-		button: "닫기"
+	$(function(){
+		var icon;
+		if('${reqiestScope.isOk}' == 'true'){
+			icon = 'success';
+		}else {
+			icon = 'warning';
+		}
+
+		if('${requestScope.msg}' != ''){
+			swal({
+				text: "${requestScope.msg}",
+				icon: icon,
+				button: "닫기"
+			});
+		}
+		
+		/****************************************
+		*       Basic Table                   *
+		****************************************/
+		$('#zero_config').DataTable();	
 	});
 </script>

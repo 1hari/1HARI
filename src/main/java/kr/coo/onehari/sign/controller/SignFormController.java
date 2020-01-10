@@ -20,9 +20,11 @@ public class SignFormController {
 	
 	//양식관리 화면 김정하 / 2020. 1. 10~
 	@RequestMapping("formList.hari")
-	public String formList(Model model) {
+	public String formList(Model model, String msg, String isOk) {
 		List<SignFormDto> formList = service.selectAllForm();
 		model.addAttribute("formList", formList);
+		model.addAttribute("msg", msg);
+		model.addAttribute("isOk", isOk);
 		return "1hariSign.formList";
 	}
 	
@@ -40,9 +42,11 @@ public class SignFormController {
 		if(result > 0) {
 			view = "redirect:formList.hari";
 			model.addAttribute("msg", "등록완료되었습니다.");
+			model.addAttribute("isOk", "true");
 		}else {
 			view = "redirect:formInsert.hari";
 			model.addAttribute("msg", "등록실패했습니다. 다시확인바랍니다.");
+			model.addAttribute("isOk", "false");
 		}
 		return view;
 	}
@@ -54,8 +58,10 @@ public class SignFormController {
 		
 		if(result > 0) {
 			model.addAttribute("msg", "삭제완료되었습니다.");
+			model.addAttribute("isOk", "true");
 		}else {
 			model.addAttribute("msg", "삭제실패했습니다. 다시확인바랍니다.");
+			model.addAttribute("isOk", "false");
 		}
 		return "redirect:formList.hari";
 	}
