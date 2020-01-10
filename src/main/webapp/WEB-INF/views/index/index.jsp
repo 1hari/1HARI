@@ -4,7 +4,8 @@
 
 	<!--컨텐츠 시작 -->
     <!--메인 백그라운드 이미지-->
-    <div class="hero-wrap" style = "background-images:url('${pageContext.request.contextPath}/resources/index/images/bg_1.jpg;')" data-stellar-background-ratio="0.5">
+    <div class="hero-wrap" style="background-image: url(resources/index/images/bg_2.jpg);" data-stellar-background-ratio="0.5">
+      
       <div class="overlay"></div>
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-start" data-scrollax-parent="true">
@@ -36,11 +37,39 @@
 								</div>
 							</div>
 	            <div class="form-group">
-	              <input type="submit" value="로그인" class="btn btn-primary py-3 px-4">
+	              <input type="submit" value="로그인"  class="btn btn-primary py-3 px-4">
+	              <span data-toggle="modal" data-target="#add-new-event" >이메일 인증하기</span>
 	            </div>
 	    			</form>
 					</div>
 					<!--로그인 화면 끝 -->
+					
+					
+					<!--이메일 인증 모달 -->
+			<div id="add-new-event" class="modal modal-wide fade">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<input type="text" class="modal-title" placeholder="이메일 주소 입력">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						</div>
+						<div class="modal-body">
+							<input type="password" id="password" class="form-control">
+							<input type="password" id="password2" class="form-control">
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							<a href="javascript:void(0)" data-toggle="modal" data-target="#add" class="btn m-t-20 btn-info btn-block waves-effect waves-light">
+								<i class="ti-plus"></i> 인증번호 받기
+							</a>
+						</div>
+					</div>
+					<!-- /.modal-content -->
+				</div>
+				<!-- /.modal-dialog -->
+			</div>		
+					
+					
         </div>
       </div>
     </div>
