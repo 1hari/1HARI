@@ -14,7 +14,7 @@ var router = new VueRouter({
 	routes : [
 		{
 			path : '/',
-			component : httpVueLoader(contextPath+'/resources/vue/components/main/main_board_list.vue')
+			component : httpVueLoader(contextPath+'/resources/vue/components/board/board_main.vue')
 		},
 		{
 			path : '/board_main/:board_idx/:page',
