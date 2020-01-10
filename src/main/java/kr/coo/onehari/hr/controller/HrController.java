@@ -3,6 +3,7 @@ package kr.coo.onehari.hr.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -56,12 +57,27 @@ public class HrController {
 	}
 	
 	//사원등록
-	@RequestMapping("personnel/empJoin.hari")
+	@RequestMapping(value = "personnel/empJoin.hari", method = RequestMethod.GET)
 	public String empJoin() {
 		
 		return "1hariHr.empJoin";
 	}
+	
+	@RequestMapping(value = "personnel/empJoin.hari", method = RequestMethod.POST)
+	public String empJoin(EmpDto empdto, Model model) {
+		String view = "";
+		int result = empservice.empJoin(empdto);
 		
+		if (result > 0) {
+			view = "redirect:../empList.hari";
+			model.addAttribute("empdto", empdto);
+		} else {
+			view = "";
+			model.addAttribute();
+		}
+		return view;
+	}
+
 	//사원수정(디테일)
 	@RequestMapping(value = "personnel/empModify.hari", method = RequestMethod.GET)
 	public String empModify1(int empNum, Model model) {

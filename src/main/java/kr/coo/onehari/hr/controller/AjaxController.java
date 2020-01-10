@@ -23,56 +23,56 @@ public class AjaxController {
 	private CorpService corpservice;
 
 	// 사원등록 시 소속 SELECT BOX 김진호 200108
-	@RequestMapping(value = "getTeamCode.hari", method = {RequestMethod.POST, RequestMethod.GET})
+	@RequestMapping(value = "getTeamCode.hari", method = RequestMethod.POST)
 	public List<Team> getTeamCodes() {
 		List<Team> teamlist = null;
 		
 		try {
 			teamlist = corpservice.getTeamCodes();
 		} catch (Exception e) {
-			System.out.println("소속예외: " + e.getMessage());
+			System.out.println("Ajax TeamCode 예외발생: " + e.getMessage());
 			log.debug("Ajax TeamCode 예외발생: " + e.getMessage());
 		}
 		return teamlist;
 	}
 	
 	// 사원등록 시 직책 SELECT BOX 김진호 200108
-	@RequestMapping(value = "getPositionCode.hari", method = {RequestMethod.POST, RequestMethod.GET})
+	@RequestMapping(value = "getPositionCode.hari", method = RequestMethod.POST)
 	public List<Position> getPositionCodes() {
 		List<Position> positionlist = null;
 		
 		try {
 			positionlist = corpservice.getPositionCodes();
 		} catch (Exception e) {
-			System.out.println("직책예외: " + e.getMessage());
+			System.out.println("Ajax PositionCode 예외발생: " + e.getMessage());
 			log.debug("Ajax PositionCode 예외발생: " + e.getMessage());
 		}
 		return positionlist;
 	}
 	
 	// 사원등록 시 직급 SELECT BOX 김진호 200108
-	@RequestMapping(value = "getRankCode.hari", method = {RequestMethod.POST, RequestMethod.GET})
+	@RequestMapping(value = "getRankCode.hari", method = RequestMethod.POST)
 	public List<Rank> getRankCodes() {
 		List<Rank> ranklist = null;
 		
 		try {
 			ranklist = corpservice.getRankCodes();
 		} catch (Exception e) {
-			System.out.println("직급예외: " + e.getMessage());
+			System.out.println("Ajax RankCode 예외발생: " + e.getMessage());
 			log.debug("Ajax RankCode 예외발생: " + e.getMessage());
 		}
 		return ranklist;
 	}
 	
 	// 사원등록 시 재직구분 SELECT BOX 김진호 200108
-	@RequestMapping(value = "getEmploymentCode.hari", method = {RequestMethod.POST, RequestMethod.GET})
+	@RequestMapping(value = "getEmploymentCode.hari", method = RequestMethod.POST)
 	public List<Employment> getEmploymentCodes() {
 		List<Employment> employmentlist = null;
 		
 		try {
 			employmentlist = corpservice.getEmploymentCodes();
 		} catch (Exception e) {
-			System.out.println("재직구분예외: " + e.getMessage());
+			System.out.println("Ajax EmploymentCode 예외발생: " + e.getMessage());
 			log.debug("Ajax EmploymentCode 예외발생: " + e.getMessage());
 		}
 		return employmentlist;
