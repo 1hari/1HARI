@@ -40,7 +40,7 @@
         ]]>
     </select>
     
-    <!-- 계정정지  -->
+   <!--  
     <update id="updateFailureCount">
         <![CDATA[
             UPDATE
@@ -51,5 +51,5 @@
                 EMPNUM=#{empNum}
         ]]>
     </update>
-    
+     -->
 </mapper>
