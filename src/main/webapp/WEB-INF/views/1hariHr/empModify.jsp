@@ -116,7 +116,7 @@
 												</div>
 												<div class="form-group">
 													<label for="email">이메일</label>
-													<input type="text" id="email" name="email" class="form-control" value="${emp.email}" readonly>
+													<input type="text" id="email" name="email" class="form-control" value="${emp.email}@gmail.com" readonly>
 												</div>
 												<div class="form-group">
 													<label for="phoneNum">핸드폰번호</label>
@@ -128,47 +128,35 @@
 											<div class="col-xs-6" style="margin-top: 3%;">
 												<div class="form-group">
 													<label for="teamCode">소속</label>
-													<select id="teamName" name="teamName" class="form-control" style="height: 100%;" required>
-														<option selected="selected">${emp.teamName}</option>
+													<select id="teamSelect" name="teamCode" class="form-control" style="height: 100%;" required>
 													</select>
 												</div>
 												<div class="form-group">
 													<label for="positionCode">직책</label>
-													<select id="positionName" name="positionName" class="form-control" style="height: 100%;" required>
-														<option selected="selected">${emp.positionName}</option>
+													<select id="positionSelect" name="positionCode" class="form-control" style="height: 100%;" required>
 													</select>
 												</div>
 												<div class="form-group">
 													<label for="rankCode">직급</label>
-													<select id="rankName" name="rankName" class="form-control" style="height: 100%;" required>
-														<option selected="selected">${emp.rankName}</option>
+													<select id="rankSelect" name="rankCode" class="form-control" style="height: 100%;" required>
 													</select>
 												</div>
 												<div class="form-group">
 													<label for="employmentCode">재직구분</label>
-													<select id="employmentName" name="employmentName" class="form-control" style="height: 100%;" required>
-														<option selected="selected">${emp.employmentName}</option>
+													<select id="employmentSelect" name="employmentCode" class="form-control" style="height: 100%;" required>
 													</select>
 												</div>
 												<div class="form-group">
 													<label for="hireDate">입사일</label>
-													<input type="text" id="hireDate" name="hireDate" class="form-control mydatepicker" value="${emp.hireDate}" readonly>
-													<div class="input-group-append"></div>
+													<input type="text" id="hireDate" name="hireDate" class="form-control" value="${emp.hireDate}" readonly>
 												</div>
 												<div class="form-group">
 													<label>퇴사일</label>
-													<input type="text" class="form-control mydatepicker" placeholder="mm/dd/yyyy">
-													<div class="input-group-append"></div>
+													<input type="text" class="form-control mydatepicker" placeholder="yyyy-mm-dd">
 												</div>
 											</div>
 											<!--오른쪽 input 태그들 끝-->
-											<div class="row">
-												<div class="col-xs-1"></div>
-												<div class="col-xs-10">
-													<input type="submit" class="form-control" value="수정" style="margin-bottom: 10%">									
-												</div>
-												<div class="col-xs-1"></div>
-											</div>
+											<input type="submit" class="form-control" value="수정" style="margin-bottom: 10%">									
 										</form>
 											<!--폼 action 태그 끝 -->
 									</div>
@@ -218,12 +206,84 @@
 	/****************************************
 	*      필수 테이블 1. 데이터 테이블 , 2. datepicker 제이쿼리 스크립트 *
 	****************************************/
-	$('#zero_config').DataTable();
-
-	/*datepicker*/
-	jQuery('.mydatepicker').datepicker();
-	jQuery('#datepicker-autoclose').datepicker({
-		autoclose: true,
-		todayHighlight: true
+	$('.mydatepicker').datepicker(
+		{
+			format: "yyyy-mm-dd", // 입사일 Date 형식
+			autoclose: true,
+			todayHighlight: true
+		}
+	);
+	
+	$(function() {
+		<!-- 소속코드, 직책코드, 직급코드, 재직구분 Select Box -->
+		$.ajax({ // 소속코드 비동기 가져오기
+			url: "${pageContext.request.contextPath}/ajax/getTeamCode.hari",
+			type: "post",
+			dataType: "json",
+			success: function(teamCodes) {
+				let team = "";
+				$.each(teamCodes, function(index, element) {
+					if (${emp.teamCode} == element.teamCode) {
+						team += '<option value="' + element.teamCode + '" selected>' + element.teamName + '</option>';
+					} else {
+						team += '<option value="' + element.teamCode + '">' + element.teamName + '</option>';
+					}
+				})
+				$("#teamSelect").append(team);
+			}
+		});
+	
+		$.ajax({ // 직책코드 비동기 가져오기
+			url: "${pageContext.request.contextPath}/ajax/getPositionCode.hari",
+			type: "post",
+			dataType: "json",
+			success: function(positionCodes) {
+				let position = "";
+				$.each(positionCodes, function(index, element) {
+					if (${emp.positionCode} == element.positionCode) {
+						position += '<option value="' + element.positionCode + '" selected>' + element.positionName + '</option>';
+					} else {
+						position += '<option value="' + element.positionCode + '">' + element.positionName + '</option>';
+					}
+				})
+				$("#positionSelect").append(position);
+			}
+		});
+	
+		$.ajax({ // 직급코드 비동기 가져오기
+			url: "${pageContext.request.contextPath}/ajax/getRankCode.hari",
+			type: "post",
+			dataType: "json",
+			success: function(rankCodes) {
+				let rank = "";
+				$.each(rankCodes, function(index, element) {
+					if (${emp.rankCode} == element.rankCode) {
+						rank += '<option value="' + element.rankCode + '" selected>' + element.rankName + '</option>';
+					} else {
+						rank += '<option value="' + element.rankCode + '">' + element.rankName + '</option>';
+					}
+				})
+				$("#rankSelect").append(rank);
+			}
+		});
+	
+		$.ajax({ // 직책코드 비동기 가져오기
+			url: "${pageContext.request.contextPath}/ajax/getEmploymentCode.hari",
+			type: "post",
+			dataType: "json",
+			success: function(employmentCodes) {
+				let employment = "";
+				$.each(employmentCodes, function(index, element) {
+					if (${emp.employmentCode} == element.employmentCode) {
+						employment += '<option value="' + element.employmentCode + '" selected>' + element.employmentName + '</option>';
+					} else {
+						employment += '<option value="' + element.employmentCode + '">' + element.employmentName + '</option>';
+					}
+				})
+				$("#employmentSelect").append(employment);
+			}
+		});
 	});
 </script>
+
+
