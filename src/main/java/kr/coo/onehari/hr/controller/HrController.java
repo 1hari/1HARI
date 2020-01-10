@@ -3,15 +3,12 @@ package kr.coo.onehari.hr.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.coo.onehari.hr.dto.EmpDto;
-import kr.coo.onehari.hr.dto.Position;
-import kr.coo.onehari.hr.dto.Rank;
 import kr.coo.onehari.hr.dto.Team;
 import kr.coo.onehari.hr.service.CorpService;
 import kr.coo.onehari.hr.service.EmpService;

@@ -2,9 +2,7 @@ package kr.coo.onehari.my.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-
-
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("1hariMy/")
@@ -20,6 +18,13 @@ public class MyController {
 	@RequestMapping("myInfo.hari")
 	public String Myinfo() {
 		return "1hariMy.myInfo";
+	}
+	
+	//비밀번호 초기화, 변경
+	@RequestMapping("chaagePassword.hari")
+	public String chaagePassword(@RequestParam("email") String email, @RequestParam("newPassword") String password) {
+		
+		return "1hari.main";
 	}
 
 }

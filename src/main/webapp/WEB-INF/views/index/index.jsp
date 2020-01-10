@@ -4,23 +4,70 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
    <script type="text/javascript">
 	$(function(){
-			//이메일 인증
-		$('#emailCheck').click(function() {
+		//정규표현식
+		let pw_pattern = /^[a-z0-9_]{4,10}$/;
+		let email_pattern = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+
+        let pw_check = false;
+        let pwck_check = false;
+        let email_check = false;
+        
+		//이메일 유효성검사
+		$('#email').keyup(function(){
+            if(email_pattern.test($(this).val()) != true){
+                $('#emailcheck').text("이메일 형식에 맞지 않습니다.");
+            }else{
+                $('#emailcheck').text("이메일 형식에 맞습니다.");
+                email_check=true;
+            }
+        });
+	    //인증번호 전송버튼 클릭
+		$('#emailSend').click(function() {
 			//이메일이 입력되면 새창으로 이동
-			if($('#emailCheck').val() != null){
-				var url = "emailSubmit.hari?email="+$('#email').val();
-				//console.log(url);
-				open(url,"Email Check","statusber=no, scrollbar=no, menuber=no, width=400, height=130");
+			if(!email_check){
+				alert("이메일이 형식이 올바르지 않습니다.");
+				return;
 			}else {
-				alert("이메일이 입력되지 않았습니다.");
+				var url = "emailSubmit.hari?email="+$('#email').val();
+				open(url,"Email Check","statusber=no, scrollbar=no, menuber=no, width=400, height=130");
+				return;
 			}
-		});//이벤트 끝
+		});
+
+		//창 닫으면 초기화
 		$('#closeModal').click(function(){
 			console.log('cliack');
 			$('#email').val('');
-			})
-		$('#chaagePassword').click(function(){
+			$('#newPassword').val('');
+			$('#newPassword2').val('');
 		})
+		
+		//pw 유효성체크
+		$('#newPassword').keyup(function() {
+			if (pw_pattern.test($(this).val()) != true){
+				$('#pwcheck').text("비밀번호가 조건에 일치하지 않습니다.");
+			}else {
+				$('#pwcheck').text("사용가능한 비밀번호 입니다.");
+				pw_check = true;
+			}
+		});//이벤트 끝
+		
+		//pw재입력 체크
+		$('#newPassword2').keyup(function() {
+			if($('#newPassword').val() != $('#newPassword2').val()){
+				$('#pwckcheck').text("비밀번호가 일치하지 않습니다.");
+			}else {
+				$('#pwckcheck').text("비밀번호가 확인되었습니다.");
+				pwck_check = true;
+			}
+		});//이벤트 끝
+		if(pwck_check && pw_check && email_check){
+			$('#chaagePassword').removeAttr('disabled');	
+		}
+		//비밀번호 변경 버튼
+// 		$('#chaagePassword').click(function(){
+// 			location.href='1hariMy/chaagePassword.hari?password=' + $('#newPassword').val() + '&email=' + $('#email').val();
+// 		})
 		
 	});
 </script>
@@ -77,11 +124,16 @@
 							<button type="button" class="close" id="closeModal"data-dismiss="modal" aria-hidden="true">×</button>
 						</div>
 						<div class="modal-body">
-							<input type="text" class="modal-title" id="email" placeholder="이메일 주소 입력">
-							<button type="button" class="btn btn-default" id="emailCheck">인증번호</button>
-							<input type="password" id="password" class="form-control" disabled="disabled">
-							<input type="password" id="password2" class="form-control" disabled="disabled">
-							<button type="button" id="chaagePassword" class="form-control" disabled="disabled">변경하기</button>
+							<form action="1hariMy/chaagePassword.hari" method="post">
+								<input type="text" class="modal-title" id="email" name="email" placeholder="이메일 주소 입력">
+								<small id="emailcheck">이메일을 입력해주세요.</small><br>
+								<button type="button" class="btn btn-default" id=emailSend>인증번호 전송</button>
+								<input type="password" id="newPassword" name="newPassword"class="form-control" disabled="disabled">
+								<small id="pwcheck">비밀번호는 4자~10자 입니다.</small>
+								<input type="password" id="newPassword2" name="newPassword2"class="form-control" disabled="disabled">
+								<small id="pwckcheck">비밀번호를 다시한번 입력해주세요.</small>
+								<button type="submit" id="chaagePassword" class="form-control" disabled="disabled">변경하기</button>
+							</form>
 						</div>
 					</div>
 					<!-- /.modal-content -->

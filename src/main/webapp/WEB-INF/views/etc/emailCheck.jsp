@@ -24,9 +24,10 @@
 				}else if($('#userAuthNum').val() == authNum){
 					alert("인증되었습니다.");
 					$('#emailCheckReturn', parent.opener.document).val("true");
-					$('#password', parent.opener.document).removeAttr('disabled');
-					$('#password2', parent.opener.document).removeAttr('disabled');
+					$('#newPassword', parent.opener.document).removeAttr('disabled');
+					$('#newPassword2', parent.opener.document).removeAttr('disabled');
 					$('#chaagePassword', parent.opener.document).removeAttr('disabled');
+					$('#emailSend', parent.opener.document).attr('disabled', 'disabled');
 					$('#email', parent.opener.document).attr("readonly", "readonly");
 					$('#emailcheck', parent.opener.document).text("이메일 인증이 완료되었습니다.");
 					window.self.close();
