@@ -132,16 +132,9 @@
 					
 					<ul aria-expanded="false" class="collapse  first-level">
 						<li class="sidebar-item">
-							<a href="#" class="sidebar-link">
+							<a href="${pageContext.request.contextPath}/1hariTeam/teamList.hari" class="sidebar-link">
 								<i class="mdi mdi-note-outline"></i>
 								<span class="hide-menu">조직도 조회 </span>
-							</a>
-						</li>
-						
-						<li class="sidebar-item">
-							<a href="#" class="sidebar-link">
-								<i class="mdi mdi-note-plus"></i>
-								<span class="hide-menu">조직도 설정 </span>
 							</a>
 						</li>
 					</ul>
@@ -157,14 +150,7 @@
 						<li class="sidebar-item">
 							<a href="${pageContext.request.contextPath}/1hariPay/payList.hari" class="sidebar-link">
 								<i class="mdi mdi-note-outline"></i>
-								<span class="hide-menu">급여조회 </span>
-							</a>
-						</li>
-						
-						<li class="sidebar-item">
-							<a href="#" class="sidebar-link">
-								<i class="mdi mdi-note-plus"></i>
-								<span class="hide-menu"> 급여명세서 조회 </span>
+								<span class="hide-menu">급여현황</span>
 							</a>
 						</li>
 					</ul>
