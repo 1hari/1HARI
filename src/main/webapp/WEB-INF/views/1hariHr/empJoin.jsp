@@ -145,7 +145,7 @@
 							</select>
 							<div class="input-group">
 								<label for="hireDate" style="margin-top: 10px; margin-bottom: 0px;">입사일</label>
-								<input type="text" id="hireDate" name="hireDate" class="form-control datepicker-autoclose" placeholder="yyyy-mm-dd">
+								<input type="text" id="hireDate" name="hireDate" class="form-control mydatepicker" placeholder="yyyy-mm-dd">
 								<div class="input-group-append"></div>
 							</div>
 						</section>
@@ -196,95 +196,84 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script>
-	/****************************************
-	*      필수 테이블 1. 데이터 테이블 , 2. datepicker 제이쿼리 스크립트 *
-	****************************************/
-	/*datepicker*/
-	$(function() {
-/* 		$('.mydatepicker').datepicker(
-			{
-				format: "yymmdd"
-			}
-		); */
-		$('.datepicker-autoclose').datepicker({
-			format: "yymmdd",
+/****************************************
+*      필수 테이블 1. 데이터 테이블 , 2. datepicker 제이쿼리 스크립트 *
+****************************************/
+/*datepicker*/
+$(function() {
+	$('.mydatepicker').datepicker(
+		{
+			format: "yyyy-mm-dd", // 입사일 Date 형식
 			autoclose: true,
 			todayHighlight: true
-		});
+		}
+	);
+	
+	$('.datepicker-autoclose').datepicker(
+		{
+			format: "yymmdd", // 생년월일 Date 형식
+			autoclose: true,
+			todayHighlight: true
+		}
+	);
 
-		<!-- 소속코드, 직책코드, 직급코드, 재직구분 Select Box -->
-		$.ajax({ // 소속코드 비동기 가져오기
-			url: "${pageContext.request.contextPath}/ajax/getTeamCode.hari",
-			type: "post",
-			dataType: "json",
-			success: function(team) {
-	    		console.log(team.teamname);
-	    		
-				var dArray = [];
-				dArray = team;
-				console.log(dArray);
-				for(var i = 0; i < dArray.length; i++) {
-					var option = document.createElement("option");
-					$(option).text(dArray[i]);
-					$("#teamSelect").append(option);
-				}
-			}
-		});
-
-		$.ajax({ // 직책코드 비동기 가져오기
-			url: "${pageContext.request.contextPath}/ajax/getPositionCode.hari",
-			type: "post",
-			dataType: "json",
-			success: function(position) {
-	    		console.log(position.positionname);
-	    		
-				var dArray = [];
-				dArray = team;
-				console.log(dArray);
-				for(var i = 0; i < dArray.length; i++) {
-					var option = document.createElement("option");
-					$(option).text(dArray[i]);
-					$("#positionSelect").append(option);
-				}
-			}
-		});
-
-		$.ajax({ // 직급코드 비동기 가져오기
-			url: "${pageContext.request.contextPath}/ajax/getRankCode.hari",
-			type: "post",
-			dataType: "json",
-			success: function(rank) {
-	    		console.log(rank.rankname);
-	    		
-				var dArray = [];
-				dArray = team;
-				console.log(dArray);
-				for(var i = 0; i < dArray.length; i++) {
-					var option = document.createElement("option");
-					$(option).text(dArray[i]);
-					$("#rankSelect").append(option);
-				}
-			}
-		});
-
-		$.ajax({ // 직책코드 비동기 가져오기
-			url: "${pageContext.request.contextPath}/ajax/getEmploymentCode.hari",
-			type: "post",
-			dataType: "json",
-			success: function(employment) {
-	    		console.log(employment.employmentname);
-	    		
-				var dArray = [];
-				dArray = team;
-				console.log(dArray);
-				for(var i = 0; i < dArray.length; i++) {
-					var option = document.createElement("option");
-					$(option).text(dArray[i]);
-					$("#employmentSelect").append(option);
-				}
-			}
-		});
+	<!-- 소속코드, 직책코드, 직급코드, 재직구분 Select Box -->
+	$.ajax({ // 소속코드 비동기 가져오기
+		url: "${pageContext.request.contextPath}/ajax/getTeamCode.hari",
+		type: "post",
+		dataType: "json",
+		success: function(teamCodes) {
+			let team = "";
+			$.each(teamCodes, function(index, element) {
+				team += '<option value="' + element.teamCode + '">' + element.teamName + '</option>';
+				console.log(team);
+			})
+			$("#teamSelect").append(team);
+		}
 	});
+
+	$.ajax({ // 직책코드 비동기 가져오기
+		url: "${pageContext.request.contextPath}/ajax/getPositionCode.hari",
+		type: "post",
+		dataType: "json",
+		success: function(positionCodes) {
+			let position = "";
+			$.each(positionCodes, function(index, element) {
+				position += '<option value="' + element.positionCode + '">' + element.positionName + '</option>';
+				console.log(position);
+			})
+			$("#positionSelect").append(position);
+		}
+	});
+
+	$.ajax({ // 직급코드 비동기 가져오기
+		url: "${pageContext.request.contextPath}/ajax/getRankCode.hari",
+		type: "post",
+		dataType: "json",
+		success: function(rankCodes) {
+			let rank = "";
+			$.each(rankCodes, function(index, element) {
+				rank += '<option value="' + element.rankCode + '">' + element.rankName + '</option>';
+				console.log(position);
+			})
+			$("#rankSelect").append(rank);
+		}
+	});
+
+	$.ajax({ // 직책코드 비동기 가져오기
+		url: "${pageContext.request.contextPath}/ajax/getEmploymentCode.hari",
+		type: "post",
+		dataType: "json",
+		success: function(employmentCodes) {
+			let employment = "";
+			$.each(employmentCodes, function(index, element) {
+				employment += '<option value="' + element.employmentCode + '">' + element.employmentName + '</option>';
+				console.log(employment);
+			})
+			$("#employmentSelect").append(employment);
+		}
+	});
+});
 </script>
 <!-- this page js , 1단계 2단계 3단계 제출 구성 쿼리 필수! 지우지 마세요 -->
 <script src="${pageContext.request.contextPath}/resources/hari/assets/libs/jquery-steps/build/jquery.steps.min.js"></script>

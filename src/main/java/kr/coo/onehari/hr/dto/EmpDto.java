@@ -29,4 +29,5 @@ public class EmpDto {
 	private Date hireDate; //입사일
 	private Date leaveDate;//퇴사일
 	private int loginCnt; //로그인 시도 횟수
+	private int isLock; // 로그인 잠금여부
 }
