@@ -86,28 +86,28 @@
 				<li class="sidebar-item">
 					<a class="sidebar-link has-arrow waves-effect waves-dark" href="hr_attendance.html" aria-expanded="false">
 						<i class="mdi mdi-receipt"></i>
-						<span class="hide-menu">인사관리</span>
+						<span class="hide-menu">인사 관리</span>
 					</a>
 					
 					<ul aria-expanded="false" class="collapse  first-level">
 						<li class="sidebar-item">
 							<a href="${pageContext.request.contextPath}/1hariHr/attendance.hari" class="sidebar-link">
 								<i class="mdi mdi-note-plus"></i>
-								<span class="hide-menu"> 근태관리 </span>
+								<span class="hide-menu"> 근태 관리 </span>
 							</a>
 						</li>
 						
 						<li class="sidebar-item">
 							<a href="${pageContext.request.contextPath}/1hariHr/annual.hari" class="sidebar-link">
 								<i class="mdi mdi-note-plus"></i>
-								<span class="hide-menu"> 연차관리 </span>
+								<span class="hide-menu"> 연차 관리 </span>
 							</a>
 						</li>
 						
 						<li class="sidebar-item">
 							<a href="hr_proof.jsp" class="sidebar-link">
 								<i class="mdi mdi-note-plus"></i>
-								<span class="hide-menu"> 재직증명 </span>
+								<span class="hide-menu"> 재직 증명 </span>
 							</a>
 						</li>
 						
@@ -127,14 +127,14 @@
 				<li class="sidebar-item">
 					<a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
 						<i class="mdi mdi-receipt"></i>
-						<span class="hide-menu">조직관리</span>
+						<span class="hide-menu">조직 관리</span>
 					</a>
 					
 					<ul aria-expanded="false" class="collapse  first-level">
 						<li class="sidebar-item">
 							<a href="${pageContext.request.contextPath}/1hariTeam/teamList.hari" class="sidebar-link">
 								<i class="mdi mdi-note-outline"></i>
-								<span class="hide-menu">조직도 조회 </span>
+								<span class="hide-menu">사원 조회</span>
 							</a>
 						</li>
 					</ul>
@@ -150,7 +150,7 @@
 						<li class="sidebar-item">
 							<a href="${pageContext.request.contextPath}/1hariPay/payList.hari" class="sidebar-link">
 								<i class="mdi mdi-note-outline"></i>
-								<span class="hide-menu">급여현황</span>
+								<span class="hide-menu">급여 현황</span>
 							</a>
 						</li>
 					</ul>
@@ -167,22 +167,22 @@
 						<li class="sidebar-item">
 							<a href="${pageContext.request.contextPath}/1hariSign/signForm.hari" class="sidebar-link">
 								<i class="mdi mdi-note-plus"></i>
-								<span class="hide-menu">전자결재</span>
+								<span class="hide-menu">전자 결재</span>
 							</a>
 						</li>
 						
 						<!-- ROLE_ADMIN -->
 						<li class="sidebar-item">
-							<a href="${pageContext.request.contextPath}/1hariSign/admin/formInsert.hari" class="sidebar-link">
+							<a href="${pageContext.request.contextPath}/1hariSign/admin/formList.hari" class="sidebar-link">
 								<i class="mdi mdi-note-outline"></i>
-								<span class="hide-menu">양식 등록 </span>
+								<span class="hide-menu">양식 관리</span>
 							</a>
 						</li>
 						
 						<li class="sidebar-item">
 							<a href="#" class="sidebar-link" data-toggle="modal" data-target="#draftModal">
 							<i class="mdi mdi-note-plus"></i>
-							<span class="hide-menu">문서기안</span>
+							<span class="hide-menu">문서 기안</span>
 							</a>
 						</li>
 						

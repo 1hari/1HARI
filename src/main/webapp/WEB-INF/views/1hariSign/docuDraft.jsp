@@ -48,17 +48,18 @@
 							<div class="col-md-6">
 							</div>
 							<div class="col-md-4">
+								<c:set var="emp" value="${requestScope.emp}" />
 								<table style="border-color:#000000; border-style:solid; border-width:1px 1px 1px; width:250px; vertical-align:middle; text-align: center;">
 									<tr class="draft" style="height:40px; vertical-align:middle;">
 										<td rowspan="3">결<br>재<br>선</td>
 										<!-- 직급 -->
-										<td id="rankName0" name="rankName0"></td>
+										<td id="rankName0" name="rankName0">${emp.rankName}</td>
 										<td id="rankName1" name="rankName1"></td>
 										<td id="rankName2" name="rankName2"></td>
 									</tr>
 									<tr class="draft" style="height:63px; vertical-align:middle;">
 										<!-- 사원명 -->
-										<td id="empName0" name="empName0"></td>
+										<td id="empName0" name="empName0">${emp.empName}</td>
 										<td id="empName1" name="empName1"></td>
 										<td id="empName2" name="empName2"></td>
 									</tr>

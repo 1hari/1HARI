@@ -22,5 +22,7 @@ public interface SignFormDao {
 	
 	//폼 가져오기 김정하 / 2020. 1. 8
     public SignFormDto selectForm(String signFormCode) throws ClassNotFoundException, SQLException;
-	
+    
+    //폼 삭제 김정하 / 2020. 1. 10
+    public int deleteForm(String signFormCode) throws ClassNotFoundException, SQLException;
 }

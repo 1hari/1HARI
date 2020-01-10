@@ -1,5 +1,6 @@
 package kr.coo.onehari.sign.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,17 +42,18 @@ public class SignController {
 	
 	//문서기안 화면 김정하 / 2020. 1. 8~
 	@RequestMapping(value="docuDraft.hari", method = RequestMethod.GET)
-	public String formDraft(String signFormCode, Model model) {
+	public String formDraft(String signFormCode, Model model, Principal principal) {
 		
 		//폼가져오기
 		SignFormDto form = signFormService.selectForm(signFormCode);
 		model.addAttribute("form", form);
 		
+		//기안자 정보 가져오기
+		EmpDto emp = empService.empDefault(principal.getName());
+		model.addAttribute("emp", emp);
+		
 		//부서 가져오기
 		List<Team> teamList = corpService.getTeamCodes();
-		System.out.println(teamList.get(0).getTeamCode());
-		System.out.println(teamList.get(0).getTeamName());
-		
 		model.addAttribute("teamList", teamList);
 		
 		

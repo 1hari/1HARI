@@ -60,4 +60,16 @@ public class SignFormService {
 		return form;
 	}
 	
+	//폼 삭제하기 김정하 / 2020. 1. 10
+	public int deleteForm(String signFormCode) {
+		SignFormDao dao = sqlsession.getMapper(SignFormDao.class);
+		int result = 0;
+		try {
+			result = dao.deleteForm(signFormCode);
+		} catch (ClassNotFoundException | SQLException e) {
+			log.debug("deleteForm : " + e.getMessage());
+		}
+		return result;
+	}
+	
 }

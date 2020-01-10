@@ -15,6 +15,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		INSERT INTO signform (SIGNFORMFORMNAME, SIGNFORMFORMCONTENT) VALUES (#{signFormFormName}, #{signFormFormContent})
 	</insert>
 	
+	<!-- 폼 리스트 가져오기 김정하 / 2020. 1. 8 -->
 	<select id="selectAllForm" resultType="kr.coo.onehari.sign.dto.SignFormDto">
 		SELECT SIGNFORMCODE, SIGNFORMFORMNAME, SIGNFORMFORMCONTENT FROM signform
 	</select>
@@ -24,4 +25,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT SIGNFORMCODE, SIGNFORMFORMNAME, SIGNFORMFORMCONTENT FROM signform where SIGNFORMCODE = #{SIGNFORMCODE}
 	</select>
 	
+	<!-- 폼 삭제하기 김정하 / 2020. 1. 10 -->
+	<delete id="deleteForm">
+		DELETE FROM signform WHERE SIGNFORMCODE = #{SIGNFORMCODE}
+	</delete>
 </mapper>
