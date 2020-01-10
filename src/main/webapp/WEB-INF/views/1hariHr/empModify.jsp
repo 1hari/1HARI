@@ -76,7 +76,7 @@
 	<div class="page-breadcrumb">
 		<div class="row">
 			<div class="col-12 d-flex no-block align-items-center">
-				<h4 class="page-title">사원 정보 수정</h4>
+				<h3 class="page-title">사원정보수정</h3>
 				<div class="ml-auto text-right"></div>
 			</div>
 		</div>
@@ -90,151 +90,101 @@
 		<!-- ============================================================== -->
 		<div class="row">
 			<div class="col-12">
-
 				<!-- 사원 등록 input div 시작 -->
-				<div class="container"
-					style="background-color: #ffffff; margin-top: 8%;">
-					
-						<div class="row setup-content" id="step-1">
-							<div class="col-xs-12">
-								<div class="col-md-12">
-
-									<div class="container">
-										<div class="row">
-											<!--form 태그 시작 -->
-											<form action="empModify1.hari" mehtod="post">
-												
-												<!--왼쪽 input 태그들 -->
-												<div class="col-xs-6">
-													<div class="form-group">
-														<c:set var="emp" value="${requestScope.emp}"/>
-														<c:set var="team" value="${requestScope.team}"/>
-														
-														<label for="firstname" style="margin-top: 8%;">소속</label>
-														
-														<%-- <input type="text" value="${emp.teamName }" id="empNum" name="empNum" class="form-control" placeholder="소속 번호" required=""> --%>
-														<select id="teamName" name="teamName" class="form-control" placeholder="소속 번호" required="" style="height: 1000%;"">
-														<option>${emp.teamName }</option> 
-												 		<%-- <option>${team.teamName }</option> --%>
-														<option>1002</option>
-														<option>1003</option> 
-														
-														</select>
-														
-													</div>
-													
-													<div class="form-group">
-														<label for="lastname" style="margin-top: 1%;">직책</label>
-										 				<select type="text" class="form-control" placeholder="직책 번호" required="" style="height: 150%;">
-															<option>${emp.positionName }</option>
-															<option>2</option>
-															<option>3</option>
-														
-														</select> 
-														
-														
-													</div>
-
-													<div class="form-group">
-														<label for="AddressLine1" style="margin-top: 1%;">직급</label>
-														<select type="text" class="form-control" placeholder="직급 번호" required="" style="height: 150%;">
-														<option>${emp.rankName }</option>
-															<option>2</option>
-															<option>3</option>
-														</select>
-													</div>
-													
-													<div class="form-group">
-														<label for="Address Line 1" style="margin-top: 1%;">재직 구분</label>
-														<select type="text" class="form-control" placeholder="직책 번호" required="" style="height: 150%;">
-														<option>${emp.employmentName }</option>
-															<option>2</option>
-															<option>3</option>
-														</select>
-													</div>
-													
-													<div class="form-group">
-														<label for="Address Line 1" style="margin-top: 1%;">이름 </label>
-														<input type="text" value="${emp.empName }" class="form-control" placeholder="이름" required="" style="margin-bottom: 10%" readonly>
-													</div>
-													
+				<div class="container" style="background-color: #ffffff;">
+					<div class="row setup-content" id="step-1">
+						<div class="col-xs-12">
+							<div class="col-md-12">
+								<div class="container">
+									<div class="row">
+										<!--form 태그 시작 -->
+										<form action="" method="post">
+											<c:set var="emp" value="${requestScope.emp}" />
+											<!--왼쪽 input 태그들 -->
+											<div class="col-xs-6" style="margin-top: 3%;">
+												<div class="form-group">
+													<label for="empName">이름</label> 
+													<input type="text" id="empName" name="empName" class="form-control" value="${emp.empName}" readonly>
 												</div>
-												<!--왼쪽 input 태그들 끝-->
-												<!--오른쪽 input 태그들 시작 -->
-												<div class="col-xs-5">
-
-													<div class="input-group">
-														<label style="margin-top: 9%;">생년 월일 </label>
-														<input type="text" value="${emp.birth }" class="form-control" placeholder="mm/dd/yyyy" readonly>
-														<div class="input-group-append"></div>
-													</div>
-
-													<div class="form-group">
-														<label for="State" style="margin-top: 1%;">핸드폰 번호</label> <br>
-														<input type="text" value="${emp.phoneNum }" style="width: 32%; display: inline;" class="form-control" placeholder="010" required="">
-														<input type="text" style="width: 32%; display: inline;" class="form-control" placeholder="" required="">
-														<input type="text" style="width: 32%; display: inline-block;" class="form-control" placeholder="" required="">
-													</div>
-													<!--
-						                                상위 선택자에 text-align:center를 넣고,
-						                                하위 선택자 중 , 좌측 정렬 되어야 할 선택자에 display:inline 을 적용,
-						                                우측 정렬 되어야 할 선택자에 display:inline-block 을 적용시키면 해결된다.
-						
-						
-						                                출처: https://biju.tistory.com/317 [에헤라디야~]-->
-																			<!-- <div class="form-group">
-									                    <label for="zip" style = "margin-top:1%;">주민번호</label>
-									                    <br>
-									                    <input type="text" style = "width:49%; display:inline;" class="form-control" id="zip" placeholder="주민 번호" required="">
-									                    <input type="password"   style = "width:49%;  display:inline-block;"  class="form-control" id="zip" placeholder="뒷자리" required="">
-									                    </div> 
-								                	-->
-													<div class="form-group">
-														<%-- <c:forTokens  var="email1" items="${emp.email }" delims="@"> --%>
-														<%-- <c:set var="emp" var="email1" items="${emp.email }" delims="@"/>
-														<c:forEach var="email2" begin="0" end="1">
-														    <p><c:out value="${i}" /></p> --%>
-														<label for="zip">이메일 </label> <br>
-														<input type="text" <c:out value="${emp.email }" /> style="width: 49%; display: inline;" class="form-control" placeholder="이메일" required="" readonly>
-														<span type="text" style="width: 49%; display: inline-block;" placeholder="@gmail.com" required="">@gmail.com</span>
-														<%-- </c:forEach> --%>
-
-													</div>
-														
-													<div class="input-group">
-														<label>입사일</label>
-														<input type="text" value="${emp.hireDate }" class="form-control" placeholder="mm/dd/yyyy" readonly>
-														<div class="input-group-append"></div>
-													</div>
-
-													<div class="input-group">
-														<label>퇴사일</label>
-														<input type="text" class="form-control mydatepicker" placeholder="mm/dd/yyyy">
-														<div class="input-group-append"></div>
-													</div>
-														
-														
-												
+												<div class="form-group">
+													<label for="empNum">사번</label> 
+													<input id="empNum" name="empNum" type="text" class="form-control" value="${emp.empNum}" readonly>
 												</div>
-												<!--오른쪽 input 태그들 끝-->
+												<div class="form-group">
+													<label for="birth">생년월일</label>
+													<input type="text" id="birth" name="birth" class="form-control" value="${emp.birth}" readonly>
+												</div>
+												<div class="form-group">
+													<label for="email">이메일</label>
+													<input type="text" id="email" name="email" class="form-control" value="${emp.email}" readonly>
+												</div>
+												<div class="form-group">
+													<label for="phoneNum">핸드폰번호</label>
+													<input type="text" id="phoneNum" name="phoneNum" class="form-control" value="${emp.phoneNum}" placeholder="010-0000-0000" required>
+												</div>
+											</div>
+											<!--왼쪽 input 태그들 끝-->
+											<!--오른쪽 input 태그들 시작 -->
+											<div class="col-xs-6" style="margin-top: 3%;">
+												<div class="form-group">
+													<label for="teamCode">소속</label>
+													<select id="teamName" name="teamName" class="form-control" style="height: 100%;" required>
+														<option selected="selected">${emp.teamName}</option>
+													</select>
+												</div>
+												<div class="form-group">
+													<label for="positionCode">직책</label>
+													<select id="positionName" name="positionName" class="form-control" style="height: 100%;" required>
+														<option selected="selected">${emp.positionName}</option>
+													</select>
+												</div>
+												<div class="form-group">
+													<label for="rankCode">직급</label>
+													<select id="rankName" name="rankName" class="form-control" style="height: 100%;" required>
+														<option selected="selected">${emp.rankName}</option>
+													</select>
+												</div>
+												<div class="form-group">
+													<label for="employmentCode">재직구분</label>
+													<select id="employmentName" name="employmentName" class="form-control" style="height: 100%;" required>
+														<option selected="selected">${emp.employmentName}</option>
+													</select>
+												</div>
+												<div class="form-group">
+													<label for="hireDate">입사일</label>
+													<input type="text" id="hireDate" name="hireDate" class="form-control mydatepicker" value="${emp.hireDate}" readonly>
+													<div class="input-group-append"></div>
+												</div>
+												<div class="form-group">
+													<label>퇴사일</label>
+													<input type="text" class="form-control mydatepicker" placeholder="mm/dd/yyyy">
+													<div class="input-group-append"></div>
+												</div>
+											</div>
+											<!--오른쪽 input 태그들 끝-->
+											<div class="row">
+												<div class="col-xs-1"></div>
+												<div class="col-xs-10">
 													<input type="submit" class="form-control" value="수정" style="margin-bottom: 10%">									
-											</form>
+												</div>
+												<div class="col-xs-1"></div>
+											</div>
+										</form>
 											<!--폼 action 태그 끝 -->
-										</div>
-										<!--div= "row" 끝 -->
 									</div>
-									<!--컨테이너 디브태그 끝 -->
-
-									<!--   <button href="#step-2" class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Next</button> -->
+									<!--div= "row" 끝 -->
 								</div>
-								<!--   <div class="col-md-12"> 끝 -->
+								<!--컨테이너 디브태그 끝 -->
+
+								<!--   <button href="#step-2" class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Next</button> -->
 							</div>
-							<!--     <div class="col-xs-12"> 끝-->
+							<!--   <div class="col-md-12"> 끝 -->
 						</div>
-						<!-- <div class="row setup-content" id="step-1">끝 -->
+						<!--     <div class="col-xs-12"> 끝-->
+					</div>
+					<!-- <div class="row setup-content" id="step-1">끝 -->
 				</div>
 				<!--입사/퇴사 관리 end-->
-
 			</div>
 			<!--      <div class="col-12"> 끝-->
 
