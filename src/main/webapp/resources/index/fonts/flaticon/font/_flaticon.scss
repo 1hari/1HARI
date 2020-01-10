@@ -1,13 +1,12 @@
     /*
     Flaticon icon font: Flaticon
-    Creation date: 28/03/2019 08:10
+    Creation date: 05/01/2019 03:24
     */
 
     @font-face {
   font-family: "Flaticon";
   src: url("./Flaticon.eot");
   src: url("./Flaticon.eot?#iefix") format("embedded-opentype"),
-       url("./Flaticon.woff2") format("woff2"),
        url("./Flaticon.woff") format("woff"),
        url("./Flaticon.ttf") format("truetype"),
        url("./Flaticon.svg#Flaticon") format("svg");
@@ -37,16 +36,20 @@
   font-smoothing: antialiased;
     }
 
-    .flaticon-house:before { content: "\f100"; }
-.flaticon-coin:before { content: "\f101"; }
-.flaticon-home:before { content: "\f102"; }
-.flaticon-flat:before { content: "\f103"; }
-.flaticon-location:before { content: "\f104"; }
-.flaticon-mobile-phone:before { content: "\f105"; }
+    .flaticon-placeholder:before { content: "\f100"; }
+.flaticon-world:before { content: "\f101"; }
+.flaticon-hotel:before { content: "\f102"; }
+.flaticon-cooking:before { content: "\f103"; }
+.flaticon-guest:before { content: "\f104"; }
+.flaticon-idea:before { content: "\f105"; }
+.flaticon-handshake:before { content: "\f106"; }
+.flaticon-chair:before { content: "\f107"; }
     
-    $font-Flaticon-house: "\f100";
-    $font-Flaticon-coin: "\f101";
-    $font-Flaticon-home: "\f102";
-    $font-Flaticon-flat: "\f103";
-    $font-Flaticon-location: "\f104";
-    $font-Flaticon-mobile-phone: "\f105";
+    $font-Flaticon-placeholder: "\f100";
+    $font-Flaticon-world: "\f101";
+    $font-Flaticon-hotel: "\f102";
+    $font-Flaticon-cooking: "\f103";
+    $font-Flaticon-guest: "\f104";
+    $font-Flaticon-idea: "\f105";
+    $font-Flaticon-handshake: "\f106";
+    $font-Flaticon-chair: "\f107";

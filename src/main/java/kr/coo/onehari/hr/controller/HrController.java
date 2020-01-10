@@ -26,7 +26,7 @@ public class HrController {
 	private EmpService empservice;
 	
 	@Autowired
-	private CorpService teamservice;
+	private CorpService corpservice;
 	
 	//근태관리 화면
 	@RequestMapping("attendance.hari")
@@ -67,13 +67,14 @@ public class HrController {
 	public String empJoin(EmpDto empdto, Model model) {
 		String view = "";
 		int result = empservice.empJoin(empdto);
-		
+		System.out.println("HrController empJoin result: " + result);
+		System.out.println("empdto: " + empdto);
 		if (result > 0) {
-			view = "redirect:../empList.hari";
+			view = "redirect:../personnel/empList.hari";
 			model.addAttribute("empdto", empdto);
 		} else {
-			view = "";
-			model.addAttribute();
+			view = "redirect:1hariHr.empList";
+			model.addAttribute("사원등록실패");
 		}
 		return view;
 	}
@@ -87,7 +88,7 @@ public class HrController {
 		try {
 			emp = empservice.empModify(empNum);
 			model.addAttribute("emp", emp);
-			teamlist = teamservice.getTeamCodes();
+			teamlist = corpservice.getTeamCodes();
 			model.addAttribute("teamlist", teamlist); 
 			log.info("emp: " + emp);
 			log.info("teamlist: " + teamlist);
