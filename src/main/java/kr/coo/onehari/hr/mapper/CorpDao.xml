@@ -7,6 +7,7 @@
 --> 
 <mapper namespace="kr.coo.onehari.hr.dao.CorpDao">
 
+
 	<!-- 소속코드 비동기 -->
 	<select id="getTeamCodes" resultType="kr.coo.onehari.hr.dto.Team">
 		SELECT TEAMCODE, TEAMNAME
