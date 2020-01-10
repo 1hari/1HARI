@@ -153,7 +153,7 @@
 						<h3>Finish</h3>
 						<section>
 							<input id="acceptTerms" name="acceptTerms" type="checkbox" class="required">
-							<label for="acceptTerms">모든 입력정보를 확인하였으며 사원등록을 완료하겠습니다.</label>
+							<label for="acceptTerms">모든 입력정보를 확인하였으며, 사원등록을 완료하겠습니다.</label>
 						</section>
 					</div>
 				</form>
@@ -309,13 +309,16 @@ $(function() {
 			return form.valid();
 		},
 		onFinished : function(event, currentIndex) {
-			swal({
+			$('#example-form').submit();
+			/* swal({
 				text: "사원등록이 정상적으로 완료되었습니다.",
 				icon: "success",
 				button: "확인"
-			});
+			}); */
 		}
 	});
+
+	
 </script>
 
 <!-- 주민등록번호 유효성 체크 -->

@@ -48,12 +48,11 @@ public class EmpService {
 		
 		try {
 //			empdto.setPassword(this.bCryptPasswordEncoder.encode(empdto.getPassword())); // 비밀번호 암호화
+			empdto.setPassword("1004");
+			empdao.empJoin(empdto);
+			empdao.subempJoin(empdto);
 			result = empdao.empJoin(empdto);
-			if (result > 0) {
-				empdao.subempJoin(empdto);
-			} else {
-				System.out.println("EmpService empJoin result = 0" + result);
-			}
+			System.out.println("empJoin result: " + result);
 		} catch (Exception e) {
 			System.out.println("EmpService empJoin 예외발생: " + e.getMessage());
 			log.debug("EmpService empJoin 예외발생: " + e.getMessage());
@@ -63,19 +62,20 @@ public class EmpService {
 	}
 	
 	// 사원등록 김진호 2020. 1. 10
-	public int subempJoin(EmpDto empdto) {
-		int result = 0;
-		EmpDao empdao = sqlsession.getMapper(EmpDao.class);
-		
-		try {
-			result = empdao.subempJoin(empdto);
-		} catch (ClassNotFoundException | SQLException e) {
-			System.out.println("EmpService subempJoin 예외발생: " + e.getMessage());
-			log.debug("EmpService subempJoin 예외발생: " + e.getMessage());
-		}
-		System.out.println("subempJoin result: " + result);
-		return result;
-	}
+//	public int subempJoin(EmpDto empdto) {
+//		int result = 0;
+//		EmpDao empdao = sqlsession.getMapper(EmpDao.class);
+//		
+//		try {
+//			System.out.println("empdto2: " + empdto);
+//			result = empdao.subempJoin(empdto);
+//		} catch (ClassNotFoundException | SQLException e) {
+//			System.out.println("EmpService subempJoin 예외발생: " + e.getMessage());
+//			log.debug("EmpService subempJoin 예외발생: " + e.getMessage());
+//		}
+//		System.out.println("subempJoin result: " + result);
+//		return result;
+//	}
 	
 	//사원수정 2020. 1. 8 양찬식
 	public EmpDto empModify(int empNum) {

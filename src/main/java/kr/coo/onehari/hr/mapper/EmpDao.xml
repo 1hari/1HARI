@@ -10,8 +10,8 @@
 		VALUES(#{teamcode}, #{rankcode}, #{positioncode}, #{employmentcode}, #{empname}, #{PASSWORD});
 	</insert>
 	<insert id="subempJoin" parameterType="kr.coo.onehari.hr.dto.EmpDto">
-		INSERT INTO subemp(empnum, birth, phonenum, email, hiredate)
-		VALUES(LAST_INSERT_ID(), #{birth}, #{phonenum}, #{email}, #{hiredate});
+		INSERT INTO subemp(empnum, birth, resnum, phonenum, email, hiredate)
+		VALUES(LAST_INSERT_ID(), #{birth}, #{resnum}, #{phonenum}, #{email}, #{hiredate});
 	</insert>
 	
 	<!-- 조직도에서 부서별 사원을 출력해주기 위해 김정하 / 2020. 1. 9 -->
