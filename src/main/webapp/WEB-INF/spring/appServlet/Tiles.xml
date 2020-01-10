@@ -9,11 +9,13 @@
 		<put-attribute name="footer" value="/WEB-INF/views/index/inc/footer.jsp" /> 
 		<put-attribute name="content" value="/WEB-INF/views/index/{1}.jsp" /> 
 	</definition>
+	
     	<!-- 이메일 인증페이지 등 -->
 	<definition name="etc.*" template="/WEB-INF/views/etc/inc/layout.jsp"> 
 		<put-attribute name="title"  value="1HARI" />
 		<put-attribute name="content" value="/WEB-INF/views/etc/{1}.jsp" />
 	</definition>
+	
 	<!-- "1hari.main" -->
 	<definition name="*.*" template="/WEB-INF/views/inc/layout.jsp"> 
 		<put-attribute name="title"  value="1HARI" />
@@ -21,6 +23,17 @@
 		<put-attribute name="footer"  value="/WEB-INF/views/inc/footer.jsp" />
 		<put-attribute name="aside"   value="/WEB-INF/views/inc/aside.jsp" />
 		<put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" />
+	</definition>
+	
+	
+	
+		<!-- color 코드 변경  -->
+	<definition name="haricolor.*" template="/WEB-INF/views/haricolor/inc/layout.jsp"> 
+		<put-attribute name="title"  value="1HARI" />
+		<put-attribute name="header"  value="/WEB-INF/views/haricolor/inc/header.jsp" /> 
+		<put-attribute name="footer"  value="/WEB-INF/views/haricolor/inc/footer.jsp" />
+		<put-attribute name="aside"   value="/WEB-INF/views/haricolor/inc/aside.jsp" />
+		<put-attribute name="content" value="/WEB-INF/views/haricolor/{2}.jsp" />
 	</definition>
 	
 
