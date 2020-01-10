@@ -12,7 +12,6 @@
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
 	          <li class="nav-item active"><a href="${pageContext.request.contextPath}/index/index.hari" class="nav-link">Home</a></li>	  
-
 	        </ul>
 	      </div>
 	    </div>

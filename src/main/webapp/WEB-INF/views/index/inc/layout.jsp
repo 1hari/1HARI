@@ -8,8 +8,8 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<title>1HARI</title>
-    
-    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,600,700,800,900&display=swap" rel="stylesheet">
+ <!--    
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,600,700,800,900&display=swap" rel="stylesheet"> -->
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/index/css/open-iconic-bootstrap.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/index/css/animate.css">
@@ -55,7 +55,7 @@
   <script src="${pageContext.request.contextPath}/resources/index/js/aos.js"></script>
   <script src="${pageContext.request.contextPath}/resources/index/js/jquery.animateNumber.min.js"></script>
   <script src="${pageContext.request.contextPath}/resources/index/js/scrollax.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+<!--   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script> -->
   <script src="${pageContext.request.contextPath}/resources/index/js/google-map.js"></script>
   <script src="${pageContext.request.contextPath}/resources/index/js/main.js"></script>
   <!--layout 끝-->
