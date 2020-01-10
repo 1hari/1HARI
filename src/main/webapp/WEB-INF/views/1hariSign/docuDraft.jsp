@@ -9,6 +9,14 @@
 <!--이 페이지에서만 쓰는  ckeditor 필수 제이쿼리 지우지 마세요! -->
 <script src="https://cdn.ckeditor.com/4.13.1/standard-all/ckeditor.js"></script>
 
+<style>
+	.draft > td{
+		border-color:#000000;
+		border-style:solid;
+		border-width:1px 1px 1px;
+		width: 80px;
+	}
+</style>
 <!-- Page wrapper  -->
 <!-- ============================================================== -->
 <div class="page-wrapper">
@@ -37,8 +45,30 @@
 							<div class="col-md-2">
 								<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#signModal">결재자 선택</button>
 							</div>
-							<div class="col-md-10">
-								
+							<div class="col-md-6">
+							</div>
+							<div class="col-md-4">
+								<table style="border-color:#000000; border-style:solid; border-width:1px 1px 1px; width:250px; vertical-align:middle; text-align: center;">
+									<tr class="draft" style="height:40px; vertical-align:middle;">
+										<td rowspan="3">결<br>재<br>선</td>
+										<!-- 직급 -->
+										<td id="rankName0" name="rankName0"></td>
+										<td id="rankName1" name="rankName1"></td>
+										<td id="rankName2" name="rankName2"></td>
+									</tr>
+									<tr class="draft" style="height:63px; vertical-align:middle;">
+										<!-- 사원명 -->
+										<td id="empName0" name="empName0"></td>
+										<td id="empName1" name="empName1"></td>
+										<td id="empName2" name="empName2"></td>
+									</tr>
+									<tr class="draft" style="height:40px; vertical-align:middle;">
+										<!-- 빈칸 : 승인일 -->
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+								</table>
 							</div>
 						</div>
 						
@@ -147,6 +177,18 @@
 			check.children('.rankName').html($(this).attr('rankName'));
 			check.children('.empSign').html($(this).val());
 			check.children('.empName').html(empName);
+
+			//선택된 곳이 결재자 1인지, 2인지 구분하기 위해 id값을 가져온다.
+			let checkNum = $('.listCheckbox:checked').attr('id');
+
+			//선택된 결재자에 따라 값 대입
+			if(checkNum == 'sign1'){
+				$('#rankName1').html($(this).attr('rankName'));
+				$('#empName1').html(empName);
+			}else {
+				$('#rankName2').html($(this).attr('rankName'));
+				$('#empName2').html(empName);
+			}
 			
 		});//결재자 클릭 끝
 			
@@ -228,42 +270,40 @@
 									<tr>
 										<th>
 											<label class="customcheckbox">
-												<input type="checkbox" class="listCheckbox" />
+												<input type="checkbox" class="listCheckbox" id="sign1"/>
 												<span class="checkmark"></span>
 											</label>
 										</th>
-										<td class="empTeam" id="empTeam1" name="empTeam1">
-											
-										</td>
-										<td class="rankName" id="rankName1" name="rankName1">
-											
-										</td>
-										<td class="empSign" id="empSign1" name="empSign1">
-											
-										</td>
-										<td class="empName" id="empName1" name="empName1">
-											
-										</td>
+										<!-- 부서 -->
+										<td class="empTeam"></td>
+										
+										<!-- 직급 -->
+										<td class="rankName"></td>
+										
+										<!-- 사번 -->
+										<td class="empSign"></td>
+										
+										<!-- 이름 -->
+										<td class="empName"></td>
 									</tr>
 									<tr>
 										<th>
 											<label class="customcheckbox">
-												<input type="checkbox" class="listCheckbox" />
+												<input type="checkbox" class="listCheckbox" id="sign2"/>
 												<span class="checkmark"></span>
 											</label>
 										</th>
-										<td class="empTeam" id="empTeam2" name="empTeam2">
-											
-										</td>
-										<td class="rankName" id="rankName2" name="rankName2">
-											
-										</td>
-										<td class="empSign" id="empSign2" name="empSign2">
-											
-										</td>
-										<td class="empName" id="empName2" name="empName2">
-											
-										</td>
+										<!-- 부서 -->
+										<td class="empTeam"></td>
+										
+										<!-- 직급 -->
+										<td class="rankName"></td>
+										
+										<!-- 사번 -->
+										<td class="empSign"></td>
+										
+										<!-- 이름 -->
+										<td class="empName"></td>
 									</tr>
 								</tbody>
 							</table>
