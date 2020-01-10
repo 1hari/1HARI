@@ -1,26 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script type="text/javascript">
-		$(function(){
-				//이메일 인증
-			$('#emailCheck').click(function() {
-				//이메일이 입력되면 새창으로 이동
-				if($('#emailCheck').val() != null){
-					var url = "emailSubmit.hari?email="+$('#email').val();
-					//console.log(url);
-					open(url,"Email Check","statusber=no, scrollbar=no, menuber=no, width=400, height=130");
-				}else {
-					alert("이메일이 입력되지 않았습니다.");
-				}
-			});//이벤트 끝
-			$('#closeModal').click(function(){
-				console.log('cliack');
-				$('#email').val('');
-				})
-		});
-	</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+   <script type="text/javascript">
+	$(function(){
+			//이메일 인증
+		$('#emailCheck').click(function() {
+			//이메일이 입력되면 새창으로 이동
+			if($('#emailCheck').val() != null){
+				var url = "emailSubmit.hari?email="+$('#email').val();
+				//console.log(url);
+				open(url,"Email Check","statusber=no, scrollbar=no, menuber=no, width=400, height=130");
+			}else {
+				alert("이메일이 입력되지 않았습니다.");
+			}
+		});//이벤트 끝
+		$('#closeModal').click(function(){
+			console.log('cliack');
+			$('#email').val('');
+			})
+		$('#chaagePassword').click(function(){
+		})
+		
+	});
+</script>
 
 	<!--컨텐츠 시작 -->
     <!--메인 백그라운드 이미지-->
@@ -42,14 +45,15 @@
 					<div class="col-lg-2 col"></div>
 
 					<!--로그인 화면 시작-->
+			<c:url value="/login" var="loginURL"/>	
           <div class="col-lg-4 col-md-6 mt-0 mt-md-5">
-          	<form action="#" class="request-form ftco-animate">
+          	<form action="${loginURL}" class="request-form ftco-animate" method="post">
           		<h2>로그인</h2>
 	    				<div class="form-group">
-	    					<input type="text" class="form-control" placeholder="사번 번호 입력">
+	    					<input type="text" id="username" name="username" class="form-control" placeholder="사번 번호 입력">
 	    				</div>
 	    				<div class="form-group">
-	    					<input type="password" class="form-control" placeholder="비밀 번호 입력">
+	    					<input type="password" id="password" name="password" class="form-control" placeholder="비밀 번호 입력">
 	    				</div>
 	    				<div class="form-group">
 								<div class="checkbox">

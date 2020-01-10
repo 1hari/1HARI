@@ -14,6 +14,7 @@ import javax.mail.internet.MimeMessage;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeUtility;
 
@@ -26,11 +27,11 @@ public class HomeController {
 		return "home.index";
 	}
 	
+	
 	@RequestMapping("emailSubmit.hari")
-	public String emailSubmit(Model model) {
+	public String emailSubmit(@RequestParam("email") String email, Model model) {
 			//1. 데이터 받기
-			String email = "zzzsh789@naver.com";
-			//System.out.println(email);
+			System.out.println(email);
 			
 			//2.이메일 보내기 위한 변수설정
 			String host = "smtp.gmail.com"; //smtp 서버
@@ -96,19 +97,10 @@ public class HomeController {
 			}catch(Exception e){
 				System.out.println("Email : " + e.getMessage());
 			}
-			
-			//4.발생시킨 난수 저장
-//			request.setAttribute("authNum", authNum);
-			
-			//5.이동경로 설정
-//			ActionForward forward = new ActionForward();
-//			forward.setPath("/WEB-INF/views/emailCheck.jsp");
 			model.addAttribute("authNum", authNum);
 			
 			return "etc.emailCheck";
 		}
-			
-		
 		//난수발생 함수
 		public static String authNum() {
 			Random ran = new Random();
