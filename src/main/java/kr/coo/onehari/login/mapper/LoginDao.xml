@@ -4,6 +4,7 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 <mapper namespace="kr.coo.onehari.login.dao.LoginDao">
+	<!-- 로그인 시도횟수 초기화 -->
 	<update id="loginCntInit" parameterType="Integer">
 		 <![CDATA[
         UPDATE
@@ -14,4 +15,41 @@
             EMPNUM = #{empNum}
  	   ]]>
 	</update>
+	
+    <!-- 로그인 실패 시 실패 카운트 +1  -->
+    <update id="updateFailureCount">
+        <![CDATA[
+            UPDATE
+                EMP
+            SET
+                LOGINCNT = LOGINCNT + 1
+            WHERE
+                EMPNUM=#{empNum}
+        ]]>
+    </update>
+	
+	<!-- 실패 횟수 가져오기 -->
+     <select id="checkFailureCount" resultType="Integer">
+        <![CDATA[
+            SELECT
+                LOGINCNT
+            FROM
+                EMP
+            WHERE
+                EMPNUM=#{empNum}
+        ]]>
+    </select>
+    
+    <!-- 계정정지  -->
+    <update id="updateFailureCount">
+        <![CDATA[
+            UPDATE
+                EMP
+            SET
+                LOGINCNT = LOGINCNT + 1
+            WHERE
+                EMPNUM=#{empNum}
+        ]]>
+    </update>
+    
 </mapper>

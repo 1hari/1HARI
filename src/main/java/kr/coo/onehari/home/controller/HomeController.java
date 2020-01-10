@@ -15,5 +15,6 @@ public class HomeController {
 	public String main() {
 		return "1hari.main";
 	}
+	
 }
 

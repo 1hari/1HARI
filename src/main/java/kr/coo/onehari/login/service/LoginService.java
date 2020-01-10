@@ -4,6 +4,7 @@ import java.sql.SQLException;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.stereotype.Service;
 
 import kr.coo.onehari.login.dao.LoginDao;
@@ -30,16 +31,60 @@ public class LoginService {
 		
 		LoginDao dao = sqlsession.getMapper(LoginDao.class);
 		try {
-			System.out.println("초기화 함수 시작");
 			int empNum= Integer.parseInt(str);
-			System.out.println("받은 empNum: " + empNum);
-			System.out.println("초기화 전:" + result);
 			result = dao.loginCntInit(empNum);
-			System.out.println("초기화 후:" + result);
 		} catch (ClassNotFoundException | SQLException e) {
 			log.debug("loginCntInit : " + e.getMessage());
 		}
 		return result;
+	}
+	
+	
+	//로그인 실패, 로그인 시도횟수 증가
+	public void countFailure(String str) {
+		LoginDao dao = sqlsession.getMapper(LoginDao.class);
+		int result = 0;
+		int empNum=Integer.parseInt(str);
+		try {
+			result = dao.updateFailureCount(empNum);
+			if(result >0) {
+				System.out.println("로그인 실패, 로그인 시도횟수 증가 업데이트 성공");
+			}else {
+				System.out.println("로그인 실패, 로그인 시도횟수 증가 업데이트 성공");
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			log.debug("countFailure : " + e.getMessage());
+		}
+	}
+	
+	//현재 로그인 시도 횟수
+	public int checkFailureCount(String str) {
+		int result = 0;
+		int empNum=Integer.parseInt(str);
+		LoginDao dao = sqlsession.getMapper(LoginDao.class);
+		try {
+			result = dao.checkFailureCount(empNum);
+		} catch (ClassNotFoundException | SQLException e) {
+			log.debug("loginCntInit : " + e.getMessage());
+		}
+		return result;
+	}
+	
+	//로그인 잠금처리
+	public void disabledUsername(String str) {
+		int result = 0;
+		int empNum=Integer.parseInt(str);
+		LoginDao dao = sqlsession.getMapper(LoginDao.class);
+		try {
+			result=dao.disabledUsername(empNum);
+			if(result >0) {
+				System.out.println("로그인 잠금처리 업데이트 성공");
+			}else {
+				System.out.println("로그인 잠금처리 업데이트 성공");
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			log.debug("loginCntInit : " + e.getMessage());
+		}
 	}
 
 	

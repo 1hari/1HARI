@@ -6,15 +6,24 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.CredentialsExpiredException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
-import sun.misc.MessageUtils;
+import kr.coo.onehari.login.service.LoginService;
 
-public class LoginFailureHandler {
+public class LoginFailureHandler implements AuthenticationFailureHandler{
+	
+	@Autowired	
+	private LoginService login;
+	public void setLogin(LoginService login) {
+		this.login = login;
+	}
+	
 	//HttpServletRequest 에서 저장되어 있는 파라미터 이름. input 태그 name
 	private String username;
 	private String userpassword;
@@ -31,18 +40,31 @@ public class LoginFailureHandler {
         if(exception instanceof BadCredentialsException) {
             errormsg = "아이디나 비밀번호가 맞지 않습니다. 다시 확인해주세요.";
         } else if(exception instanceof InternalAuthenticationServiceException) {
-            errormsg = "";
+            errormsg = "아이디나 비밀번호가 맞지 않습니다. 다시 확인해주세요.";
         } else if(exception instanceof DisabledException) {
-            errormsg = "";
+            errormsg = "계정이 비활성화되었습니다. 관리자에게 문의하세요.";
         } else if(exception instanceof CredentialsExpiredException) {
-            errormsg = "";
+            errormsg = "비밀번호 유효기간이 만료 되었습니다. 관리자에게 문의하세요.";
         }
+        loginFailureCount(empNum);
 
 		request.setAttribute(username, empNum);
 		request.setAttribute(userpassword, password);
 		//에러메세지 세팅
+		request.setAttribute(errormsgname, errormsg);
+
 		request.getRequestDispatcher(defaultFailureUrl).forward(request, response);
 	}
+	
+	protected void loginFailureCount(String username) {
+		//실패 카운트 증가
+		login.countFailure(username);
+		//현재 로그인 시도 횟수
+        int cnt = login.checkFailureCount(username);
+        if(cnt==3) {
+        	login.disabledUsername(username);
+        }
+    }
 
 	public String getUsername() {
 		return username;

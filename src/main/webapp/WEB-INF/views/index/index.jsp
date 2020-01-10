@@ -22,6 +22,12 @@
 <!--로그인 하기 전 메인 화면에서 회사 소개 div 끝 -->
 <div>
 	<p>에러내용 <c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}" /> </p>
+	    <c:if test="${not empty ERRORMSG}">
+        <font color="red">
+        <p>Your login attempt was not successful due to <br/>
+        ${ERRORMSG }</p>
+        </font>
+    </c:if>
 </div>
 
 <!--main 화면 2번째 입니다 contents 소개-->
