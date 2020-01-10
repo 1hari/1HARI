@@ -12,7 +12,7 @@
     	<!-- 이메일 인증페이지 등 -->
 	<definition name="etc.*" template="/WEB-INF/views/etc/inc/layout.jsp"> 
 		<put-attribute name="title"  value="1HARI" />
-		<put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" />
+		<put-attribute name="content" value="/WEB-INF/views/etc/{1}.jsp" />
 	</definition>
 	<!-- "1hari.main" -->
 	<definition name="*.*" template="/WEB-INF/views/inc/layout.jsp"> 
