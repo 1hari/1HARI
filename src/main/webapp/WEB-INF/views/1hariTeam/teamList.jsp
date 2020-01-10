@@ -32,7 +32,7 @@
 		<div class="row">
 			<div class="col-12">
 				<div id='app'>
-					<router-view></router-view>
+					<router-view></router-view><!-- 조직도 조회 -->
 				</div>
 			</div>
 		</div>
