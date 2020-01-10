@@ -1,5 +1,6 @@
 package kr.coo.onehari.home.controller;
 
+import java.util.Date;
 import java.util.Properties;
 import java.util.Random;
 
@@ -11,6 +12,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeUtility;
@@ -25,7 +27,7 @@ public class HomeController {
 	}
 	
 	@RequestMapping("emailSubmit.hari")
-	public String emailSubmit() {
+	public String emailSubmit(Model model) {
 			//1. 데이터 받기
 			String email = "zzzsh789@naver.com";
 			//System.out.println(email);
@@ -70,7 +72,7 @@ public class HomeController {
 				props.put("mail.transport.protocol", "smtp");
 				props.put("mail.smtp.host", host);
 				props.setProperty ("mail.smtp.socketFactory.class","javax.net.ssl.SSLSocketFactory");
-				props.put("mail.smtp.port","465");
+				props.put("mail.smtp.port","587");
 				props.put("mail.smtp.user",from);
 				props.put("mail.smtp.auth","true");
 				
@@ -86,7 +88,7 @@ public class HomeController {
 		                      (from, MimeUtility.encodeText(fromName,"utf-8","B")));
 				msg.setRecipients(Message.RecipientType.TO, address1); // 받는사람 설정
 				msg.setSubject(subject); // 제목설정
-				msg.setSentDate(new java.util.Date()); // 보내는 날짜 설정
+				msg.setSentDate(new Date()); // 보내는 날짜 설정
 				msg.setContent(content,"text/html; charset=utf-8"); // 내용설정
 				
 				Transport.send(msg); // 메일보내기
@@ -101,8 +103,9 @@ public class HomeController {
 			//5.이동경로 설정
 //			ActionForward forward = new ActionForward();
 //			forward.setPath("/WEB-INF/views/emailCheck.jsp");
+			model.addAttribute("authNum", authNum);
 			
-			return "1hari.main";
+			return "home.emailCheck";
 		}
 			
 		
