@@ -127,10 +127,18 @@
 		//listCheckbox
 		//결재자 클릭
 		$('.empSign').click(function(){
-			console.log($(this).attr('teamCode'));
-			console.log($(this).val());
+// 			console.log($(this).attr('teamCode'));
+// 			console.log($(this).attr('teamName'));
+// 			console.log($(this).val());
+// 			console.log($(this).html());
 
-			$('.listCheckbox')
+			//체크된 줄의 부모 요소 중 tr을 찾음
+			var check = $('.listCheckbox:checked').closest('tr');
+			
+			//찾은 tr의 자식 중 class가 일치하는 것을 찾아서 값 대입
+			check.children('.empTeam').html($(this).attr('teamName'));
+			check.children('.empSign').html($(this).val());
+			check.children('.empName').html($(this).html());
 			
 		});//결재자 클릭 끝
 			
@@ -172,7 +180,7 @@
 												<ul>
 													<c:forEach var="emp" items="${requestScope.empList}">
 														<c:if test="${emp.teamCode == team.teamCode}">
-															<li class="empSign" teamCode="${emp.teamCode}" value="${emp.empNum}">${emp.empName}</li>
+															<li class="empSign" teamCode="${emp.teamCode}" teamName ="${team.teamName}" value="${emp.empNum}">${emp.empName}</li>
 														</c:if>
 													</c:forEach>
 												</ul>
@@ -196,6 +204,9 @@
 										</th>
 										<th scope="col">
 											부서
+										</th>
+										<th scope="col">
+											직급
 										</th>
 										<th scope="col">
 											사번
