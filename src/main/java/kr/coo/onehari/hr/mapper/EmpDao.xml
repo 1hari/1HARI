@@ -16,7 +16,9 @@
 	
 	<!-- 조직도에서 부서별 사원을 출력해주기 위해 김정하 / 2020. 1. 9 -->
 	<select id="empDefaultList" resultType="kr.coo.onehari.hr.dto.EmpDto">
-		select EMPNUM, TEAMCODE, EMPNAME from emp
+		SELECT E.EMPNUM, E.EMPNAME, E.TEAMCODE, R.RANKCODE, R.RANKNAME
+		FROM emp AS E
+		JOIN ranks AS R ON E.RANKCODE = R.RANKCODE
 	</select>
 
 	<select id="empList" resultType="kr.coo.onehari.hr.dto.EmpDto">
