@@ -70,7 +70,7 @@ public class HrController {
 		System.out.println("HrController empJoin result: " + result);
 		System.out.println("empdto: " + empdto);
 		if (result > 0) {
-			view = "redirect:../empList.hari";
+			view = "redirect:../personnel/empList.hari";
 			model.addAttribute("empdto", empdto);
 		} else {
 			view = "redirect:1hariHr.empList";

@@ -6,12 +6,12 @@
 <mapper namespace="kr.coo.onehari.hr.dao.EmpDao">
 	<!-- 사원등록 (입퇴사관리 메뉴) 김진호 2020. 1. 10 -->
 	<insert id="empJoin" parameterType="kr.coo.onehari.hr.dto.EmpDto">
-		INSERT INTO emp(teamcode, rankcode, positioncode, employmentcode, empname, PASSWORD)
-		VALUES(#{teamcode}, #{rankcode}, #{positioncode}, #{employmentcode}, #{empname}, #{PASSWORD});
+		INSERT INTO emp(TEAMCODE, RANKCODE, POSITIONCODE, EMPLOYMENTCODE, EMPNAME, PASSWORD)
+		VALUES(#{teamCode}, #{rankCode}, #{positionCode}, #{employmentCode}, #{empName}, #{password});
 	</insert>
 	<insert id="subempJoin" parameterType="kr.coo.onehari.hr.dto.EmpDto">
 		INSERT INTO subemp(empnum, birth, resnum, phonenum, email, hiredate)
-		VALUES(LAST_INSERT_ID(), #{birth}, #{resnum}, #{phonenum}, #{email}, #{hiredate});
+		VALUES(LAST_INSERT_ID(), #{birth}, #{resNum}, #{phoneNum}, #{email}, #{hireDate});
 	</insert>
 	
 	<!-- 조직도에서 부서별 사원을 출력해주기 위해 김정하 / 2020. 1. 9 -->
