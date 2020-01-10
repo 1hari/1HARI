@@ -135,7 +135,7 @@
 			
 				<div class="modal-body" >
 				
-					<c:forEach var="team" items="${requstScope.teamList}">
+					<c:forEach var="team" items="${requestScope.teamList}">
 						<!-- accoridan part -->
 						<div class="accordion" id="accordionExample">
 							<!-- 부서시작 -->
@@ -148,10 +148,14 @@
 										</a>
 									</h5>
 								</div>
+
 								<!-- 부서원 data-parent="#accordionExample" -->
 								<div id="collapse${team.teamCode}" class="collapse show" aria-labelledby="headingOne">
 									<div class="card-body">
 										<ul>
+											<c:forEach var="emp" items="${requestScope.empList}">
+								
+											</c:forEach>
 											<li><a href="">부서사람1</a></li>
 											<li><a href="">부서사람2</a></li>
 										</ul>

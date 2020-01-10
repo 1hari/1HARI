@@ -42,19 +42,23 @@ public class SignController {
 	//문서기안 화면 김정하 / 2020. 1. 8~
 	@RequestMapping(value="docuDraft.hari", method = RequestMethod.GET)
 	public String formDraft(String signFormCode, Model model) {
-		System.out.println(signFormCode);
 		
 		//폼가져오기
 		SignFormDto form = signFormService.selectForm(signFormCode);
 		model.addAttribute("form", form);
 		
-		//부서명 가져오기
+		//부서 가져오기
 		List<Team> teamList = corpService.getTeamCodes();
+		System.out.println(teamList.get(0).getTeamCode());
+		System.out.println(teamList.get(0).getTeamName());
+		
 		model.addAttribute("teamList", teamList);
+		
 		
 		//사원 가져오기
 		List<EmpDto> empList = empService.empDefaultList();
 		model.addAttribute("empList", empList);
+		
 		return "1hariSign.docuDraft";
 	}
 		
