@@ -105,7 +105,7 @@ public class HomeController {
 //			forward.setPath("/WEB-INF/views/emailCheck.jsp");
 			model.addAttribute("authNum", authNum);
 			
-			return "home.emailCheck";
+			return "etc.emailCheck";
 		}
 			
 		

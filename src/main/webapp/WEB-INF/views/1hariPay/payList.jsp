@@ -19,7 +19,7 @@
 		cursor: pointer;
 	}
 </style>
-
+<!-- 급여 조회 -->
 <!-- Page wrapper  -->
 <!-- ============================================================== -->
 <!-- vue.js 코드 contents (webapp/vue folder 안에서 이루어짐) -->
@@ -31,7 +31,7 @@
 		<div class="row">
 			<div class="col-12">
 				<div id='app'>
-					<router-view></router-view>
+					<router-view></router-view> <!-- 급여조회 -->
 				</div>
 			</div>
 		</div>
