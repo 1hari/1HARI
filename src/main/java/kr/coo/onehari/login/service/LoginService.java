@@ -86,6 +86,5 @@ public class LoginService {
 			log.debug("loginCntInit : " + e.getMessage());
 		}
 	}
-
 	
 }

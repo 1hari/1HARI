@@ -8,6 +8,11 @@
 		INSERT INTO emp(TEAMCODE, RANKCODE, POSITIONCODE, EMPLOYMENTCODE, ENAME, PASSWORD) VALUES(2001, 3001, 4001, 5001, 'EMP6', '1004')
 	</insert>
    
+   <!-- 조직도에서 부서별 사원을 출력해주기 위해 김정하 / 2020. 1. 9 -->
+   <select id="empDefaultList" resultType="kr.coo.onehari.hr.dto.EmpDto">
+		select EMPNUM, TEAMCODE, EMPNAME from emp
+   </select>
+   
 	<select id="empList" resultType="kr.coo.onehari.hr.dto.EmpDto">
 		SELECT E.EMPNUM, E.EMPNAME, T.TEAMNAME, R.RANKNAME, P.POSITIONNAME, EM.EMPLOYMENTNAME, S.BIRTH, S.PHONENUM, S.EMAIL, S.HIREDATE
 		FROM emp AS E 
@@ -19,7 +24,7 @@
 	</select>
    
 	<select id="empModify" resultType="kr.coo.onehari.hr.dto.EmpDto">
-		SELECT E.EMPNUM, E.EMPNAME, T.TEAMNAME, R.RANKNAME, P.POSITIONNAME, EM.EMPLOYMENTNAME, S.BIRTH, S.PHONENUM, S.EMAIL, S.HIREDATE
+		SELECT E.EMPNUM, E.TEAMCODE, E.EMPNAME, T.TEAMNAME, R.RANKNAME, P.POSITIONNAME, EM.EMPLOYMENTNAME, S.BIRTH, S.PHONENUM, S.EMAIL, S.HIREDATE
 		FROM emp AS E 
 		JOIN subemp AS S ON E.EMPNUM = S.EMPNUM
 		JOIN team AS T ON E.TEAMCODE = T.TEAMCODE
@@ -36,7 +41,7 @@
 		RANKCODE=${rankCode},
 		EMPLOYMENTCODE=${employmentCode}, 
 		PHONENUM=#{phoneNum}}
-		WHERE EMPNUM=${empNum}
+		WHERE EMPNUM=${empNum} 
 	</update>
    
 </mapper>

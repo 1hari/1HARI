@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -16,6 +17,7 @@ import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
 
+import kr.coo.onehari.hr.dto.EmpDto;
 import kr.coo.onehari.login.service.LoginService;
 
 public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler
@@ -61,7 +63,7 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
 	    login.loginCntInit(username);
 		clearAuthenticationAttributes(request);
 		resultRedirectStrategy(request, response, authentication);
-		
+
 	}
 	
 	public String getLoginidname() {

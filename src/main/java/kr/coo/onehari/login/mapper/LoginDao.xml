@@ -40,16 +40,15 @@
         ]]>
     </select>
     
-   <!--  
-    <update id="updateFailureCount">
-        <![CDATA[
-            UPDATE
-                EMP
-            SET
-                LOGINCNT = LOGINCNT + 1
-            WHERE
-                EMPNUM=#{empNum}
-        ]]>
-    </update>
-     -->
+    <!-- 로그인 실패 일정횟수 초과 시 계정잠금 -->
+   	<update id="disabledUsername" parameterType="Integer">
+		 <![CDATA[
+        UPDATE
+            EMP
+        SET
+            ISLOCK = 0
+        WHERE
+            EMPNUM = #{empNum}
+ 	   ]]>
+	</update>
 </mapper>

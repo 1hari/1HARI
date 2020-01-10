@@ -19,16 +19,14 @@ import kr.coo.onehari.login.service.LoginService;
 public class LoginFailureHandler implements AuthenticationFailureHandler{
 	
 	@Autowired	
-	private LoginService login;
-	public void setLogin(LoginService login) {
-		this.login = login;
-	}
+	private LoginService loginService;
 	
 	//HttpServletRequest 에서 저장되어 있는 파라미터 이름. input 태그 name
 	private String username;
 	private String userpassword;
 	private String errormsgname;
 	private String defaultFailureUrl;
+	
 
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
 			AuthenticationException exception) throws IOException, ServletException {
@@ -36,17 +34,17 @@ public class LoginFailureHandler implements AuthenticationFailureHandler{
 		String empNum = request.getParameter(username);
 		String password = request.getParameter(userpassword);
         String errormsg = null;
-        
+        int cnt=loginFailureCount(empNum);
         if(exception instanceof BadCredentialsException) {
-            errormsg = "아이디나 비밀번호가 맞지 않습니다. 다시 확인해주세요.";
+            errormsg = "아이디 또는 비밀번호 " + cnt +"회 오류입니다. 다시 확인해주세요.";
         } else if(exception instanceof InternalAuthenticationServiceException) {
-            errormsg = "아이디나 비밀번호가 맞지 않습니다. 다시 확인해주세요.";
+        	errormsg = "아이디 또는 비밀번호 " + cnt +"회 오류입니다. 다시 확인해주세요.";
         } else if(exception instanceof DisabledException) {
             errormsg = "계정이 비활성화되었습니다. 관리자에게 문의하세요.";
         } else if(exception instanceof CredentialsExpiredException) {
             errormsg = "비밀번호 유효기간이 만료 되었습니다. 관리자에게 문의하세요.";
         }
-        loginFailureCount(empNum);
+        
 
 		request.setAttribute(username, empNum);
 		request.setAttribute(userpassword, password);
@@ -56,14 +54,15 @@ public class LoginFailureHandler implements AuthenticationFailureHandler{
 		request.getRequestDispatcher(defaultFailureUrl).forward(request, response);
 	}
 	
-	protected void loginFailureCount(String username) {
+	protected int loginFailureCount(String username) {
 		//실패 카운트 증가
-		login.countFailure(username);
+		loginService.countFailure(username);
 		//현재 로그인 시도 횟수
-        int cnt = login.checkFailureCount(username);
-        if(cnt==3) {
-        	login.disabledUsername(username);
+		int cnt = loginService.checkFailureCount(username);
+        if(cnt>=10) {
+        	loginService.disabledUsername(username);
         }
+        return cnt;
     }
 
 	public String getUsername() {
