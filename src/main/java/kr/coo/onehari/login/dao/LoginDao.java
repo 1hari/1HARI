@@ -15,4 +15,5 @@ public interface LoginDao {
 	public int disabledUsername(int str) throws ClassNotFoundException, SQLException;
 
 
+
 }

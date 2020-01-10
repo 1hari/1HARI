@@ -10,7 +10,7 @@
 		<put-attribute name="content" value="/WEB-INF/views/index/{1}.jsp" /> 
 	</definition>
 	
-    	<!-- 이메일 인증페이지 등 -->
+   	<!-- 이메일 인증페이지 등 -->
 	<definition name="etc.*" template="/WEB-INF/views/etc/inc/layout.jsp"> 
 		<put-attribute name="title"  value="1HARI" />
 		<put-attribute name="content" value="/WEB-INF/views/etc/{1}.jsp" />
