@@ -79,16 +79,10 @@ public class EmpService {
 	@Transactional
 	public void empUpdate(EmpDto emp) {
 		EmpDao empdao = sqlsession.getMapper(EmpDao.class);
-		int result = 0; // 사원정보수정 확인을 위한 변수
 		
 		try {
-			result = empdao.empUpdate(emp);
-			if (result > 0) {
-				System.out.println("사원정보수정 성공");
-				empdao.subempUpdate(emp);
-			} else {
-				System.out.println("사원정보수정 실패");
-			}
+			empdao.empUpdate(emp);
+			empdao.subempUpdate(emp);
 		} catch (Exception e) {
 			System.out.println("EmpService empUpdate 예외발생: " + e.getMessage());
 			log.debug("EmpService empUpdate 예외발생: " + e.getMessage());

@@ -54,16 +54,18 @@
 	<!-- 사원정보수정 변경 김진호 2020. 1. 10 -->
   	<update id="empUpdate" parameterType="kr.coo.onehari.hr.dto.EmpDto">
 		UPDATE EMP
-		SET TEAMCODE=${teamCode},
-		POSITIONCODE=${positionCode},
-		RANKCODE=${rankCode},
-		EMPLOYMENTCODE=${employmentCode},
-		WHERE EMPNUM=${empNum}
+		SET TEAMCODE=#{teamCode},
+		POSITIONCODE=#{positionCode},
+		RANKCODE=#{rankCode},
+		EMPLOYMENTCODE=#{employmentCode}
+		WHERE EMPNUM=#{empNum}
 	</update>
   	<update id="subempUpdate" parameterType="kr.coo.onehari.hr.dto.EmpDto">
 		UPDATE SUBEMP
-		SET PHONENUM=${phoneNum}
-		WHERE EMPNUM=${empNum}
+		SET PHONENUM=#{phoneNum}
+		WHERE EMPNUM=#{empNum}
 	</update>
    
 </mapper>
+
+

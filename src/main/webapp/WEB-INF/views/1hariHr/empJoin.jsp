@@ -107,18 +107,18 @@
 								<div class="input-group-append"></div>
 							</div>
 							<div>
-								<label for="phoneNum" style="margin-top: 10px; margin-bottom: 0px;">핸드폰번호</label> 
-								<input id="phoneNum" name="phoneNum" type="text" class="required form-control"> 
-							</div>
-							<div>
 								<label for="resNum" style="margin-top: 10px; margin-bottom: 0px;">주민등록번호</label>
 								<button type="button" class="btn btn-outline-success" style="padding-top: 0px; padding-bottom: 0px;" onclick="CheckForm()">확인</button><br>
 								<input type="password" id="resNum" name="resNum" class="form-control" maxlength="7" placeholder="주민등록번호 뒷자리">
 							</div>
 							<div>
+								<label for="phoneNum" style="margin-top: 10px; margin-bottom: 0px;">핸드폰번호</label> 
+								<input id="phoneNum" name="phoneNum" type="text" class="required form-control"> 
+							</div>
+							<div>
 								<label for="email" style="margin-top: 10px; margin-bottom: 0px;">이메일</label><br>
 								<input id="email" name="email" type="text" class="form-control" style="width: 50%; display: inline;">
-								<input type="text" id="gmail" name="gmail" class="required form-control" style="width: 49%; display: inline;" value="@gmail.com" readonly="readonly">
+								<input type="text" class="required form-control" style="width: 49%; display: inline;" value="@gmail.com" readonly="readonly">
 							</div>
 						</section>
 
@@ -201,80 +201,80 @@
 *      필수 테이블 1. 데이터 테이블 , 2. datepicker 제이쿼리 스크립트 *
 ****************************************/
 /*datepicker*/
-$(function() {
-	$('.mydatepicker').datepicker(
-		{
-			format: "yyyy-mm-dd", // 입사일 Date 형식
-			autoclose: true,
-			todayHighlight: true
-		}
-	);
+	$(function() {
+		$('.mydatepicker').datepicker(
+			{
+				format: "yyyy-mm-dd", // 입사일 Date 형식
+				autoclose: true,
+				todayHighlight: true
+			}
+		);
+		
+		$('.datepicker-autoclose').datepicker(
+			{
+				format: "yymmdd", // 생년월일 Date 형식
+				autoclose: true,
+				todayHighlight: true
+			}
+		);
 	
-	$('.datepicker-autoclose').datepicker(
-		{
-			format: "yymmdd", // 생년월일 Date 형식
-			autoclose: true,
-			todayHighlight: true
-		}
-	);
-
-	<!-- 소속코드, 직책코드, 직급코드, 재직구분 Select Box -->
-	$.ajax({ // 소속코드 비동기 가져오기
-		url: "${pageContext.request.contextPath}/ajax/getTeamCode.hari",
-		type: "post",
-		dataType: "json",
-		success: function(teamCodes) {
-			let team = "";
-			$.each(teamCodes, function(index, element) {
-				team += '<option value="' + element.teamCode + '">' + element.teamName + '</option>';
-				console.log(team);
-			})
-			$("#teamSelect").append(team);
-		}
+		<!-- 소속코드, 직책코드, 직급코드, 재직구분 Select Box -->
+		$.ajax({ // 소속코드 비동기 가져오기
+			url: "${pageContext.request.contextPath}/ajax/getTeamCode.hari",
+			type: "post",
+			dataType: "json",
+			success: function(teamCodes) {
+				let team = "";
+				$.each(teamCodes, function(index, element) {
+					team += '<option value="' + element.teamCode + '">' + element.teamName + '</option>';
+					console.log(team);
+				})
+				$("#teamSelect").append(team);
+			}
+		});
+	
+		$.ajax({ // 직책코드 비동기 가져오기
+			url: "${pageContext.request.contextPath}/ajax/getPositionCode.hari",
+			type: "post",
+			dataType: "json",
+			success: function(positionCodes) {
+				let position = "";
+				$.each(positionCodes, function(index, element) {
+					position += '<option value="' + element.positionCode + '">' + element.positionName + '</option>';
+					console.log(position);
+				})
+				$("#positionSelect").append(position);
+			}
+		});
+	
+		$.ajax({ // 직급코드 비동기 가져오기
+			url: "${pageContext.request.contextPath}/ajax/getRankCode.hari",
+			type: "post",
+			dataType: "json",
+			success: function(rankCodes) {
+				let rank = "";
+				$.each(rankCodes, function(index, element) {
+					rank += '<option value="' + element.rankCode + '">' + element.rankName + '</option>';
+					console.log(rank);
+				})
+				$("#rankSelect").append(rank);
+			}
+		});
+	
+		$.ajax({ // 직책코드 비동기 가져오기
+			url: "${pageContext.request.contextPath}/ajax/getEmploymentCode.hari",
+			type: "post",
+			dataType: "json",
+			success: function(employmentCodes) {
+				let employment = "";
+				$.each(employmentCodes, function(index, element) {
+					employment += '<option value="' + element.employmentCode + '">' + element.employmentName + '</option>';
+					console.log(employment);
+				})
+				$("#employmentSelect").append(employment);
+			}
+		});
 	});
-
-	$.ajax({ // 직책코드 비동기 가져오기
-		url: "${pageContext.request.contextPath}/ajax/getPositionCode.hari",
-		type: "post",
-		dataType: "json",
-		success: function(positionCodes) {
-			let position = "";
-			$.each(positionCodes, function(index, element) {
-				position += '<option value="' + element.positionCode + '">' + element.positionName + '</option>';
-				console.log(position);
-			})
-			$("#positionSelect").append(position);
-		}
-	});
-
-	$.ajax({ // 직급코드 비동기 가져오기
-		url: "${pageContext.request.contextPath}/ajax/getRankCode.hari",
-		type: "post",
-		dataType: "json",
-		success: function(rankCodes) {
-			let rank = "";
-			$.each(rankCodes, function(index, element) {
-				rank += '<option value="' + element.rankCode + '">' + element.rankName + '</option>';
-				console.log(rank);
-			})
-			$("#rankSelect").append(rank);
-		}
-	});
-
-	$.ajax({ // 직책코드 비동기 가져오기
-		url: "${pageContext.request.contextPath}/ajax/getEmploymentCode.hari",
-		type: "post",
-		dataType: "json",
-		success: function(employmentCodes) {
-			let employment = "";
-			$.each(employmentCodes, function(index, element) {
-				employment += '<option value="' + element.employmentCode + '">' + element.employmentName + '</option>';
-				console.log(employment);
-			})
-			$("#employmentSelect").append(employment);
-		}
-	});
-});
 </script>
 <!-- this page js , 1단계 2단계 3단계 제출 구성 쿼리 필수! 지우지 마세요 -->
 <script src="${pageContext.request.contextPath}/resources/hari/assets/libs/jquery-steps/build/jquery.steps.min.js"></script>

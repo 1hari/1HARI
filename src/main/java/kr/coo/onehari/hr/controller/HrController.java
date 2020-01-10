@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.coo.onehari.hr.dto.EmpDto;
-import kr.coo.onehari.hr.dto.Team;
-import kr.coo.onehari.hr.service.CorpService;
 import kr.coo.onehari.hr.service.EmpService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,9 +19,6 @@ public class HrController {
 	
 	@Autowired
 	private EmpService empservice;
-	
-	@Autowired
-	private CorpService corpservice;
 	
 	//근태관리 화면
 	@RequestMapping("attendance.hari")
@@ -37,7 +32,7 @@ public class HrController {
 		return "1hariHr.annual";
 	}
 	
-	//사원목록 김진호 200107
+	//사원목록 김진호 2020. 1. 7
 	@RequestMapping(value = "personnel/empList.hari", method = RequestMethod.GET)
 	public String empList(Model model) {
 		List<EmpDto> emplist = null;
@@ -45,7 +40,6 @@ public class HrController {
 		try {
 			emplist = empservice.empList();
 			model.addAttribute("emplist", emplist);
-			log.info("emplist: " + emplist);
 		} catch (Exception e) {
 			System.out.println("사원목록 예외발생: " + e.getMessage());
 			log.debug("사원목록 예외발생: " + e.getMessage());
@@ -53,19 +47,21 @@ public class HrController {
 		return "1hariHr.empList";
 	}
 	
-	//사원등록
+	// 사원등록 김진호 시작 2020. 1. 7 <> 완성 2020. 1. 10
 	@RequestMapping(value = "personnel/empJoin.hari", method = RequestMethod.GET)
 	public String empJoin() {
 		
 		return "1hariHr.empJoin";
 	}
 	
+	// 사원등록 김진호 시작 2020. 1. 7 <> 완성 2020. 1. 10
 	@RequestMapping(value = "personnel/empJoin.hari", method = RequestMethod.POST)
 	public String empJoin(EmpDto empdto, Model model) {
 		String view = "";
 		int result = empservice.empJoin(empdto);
-		System.out.println("HrController empJoin result: " + result);
-		System.out.println("empdto: " + empdto);
+		
+//		empdto.setEmail(empdto.getEmail()+"@gmail.com"); // 이메일 형식붙여서 DB에 넣을 때
+		
 		if (result > 0) {
 			view = "redirect:../personnel/empList.hari";
 			model.addAttribute("empdto", empdto);
@@ -76,36 +72,30 @@ public class HrController {
 		return view;
 	}
 
-	//사원수정(디테일)
+	// 사원정보수정(화면)
 	@RequestMapping(value = "personnel/empModify.hari", method = RequestMethod.GET)
-	public String empModify1(int empNum, Model model) {
+	public String empModify(int empNum, Model model) {
 		EmpDto emp = null;
-		List<Team> teamlist = null;
 		
 		try {
 			emp = empservice.empModify(empNum);
 			model.addAttribute("emp", emp);
-			teamlist = corpservice.getTeamCodes();
-			model.addAttribute("teamlist", teamlist); 
-			log.info("emp: " + emp);
-			log.info("teamlist: " + teamlist);
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			log.debug("사원수정1 예외발생: " + e.getMessage());
+			System.out.println("HrController empModify 예외발생: " + e.getMessage());
+			log.debug("HrController empModify 예외발생: " + e.getMessage());
 		}
 		return "1hariHr.empModify";
 	}
 
-	//사원수정(정보수정)
-	@RequestMapping(value = "personnel/empModify1.hari")
-	public String empModify2(EmpDto emp) {
+	// 사원정보수정(변경)
+	@RequestMapping(value = "personnel/empModify.hari", method = RequestMethod.POST)
+	public String empUpdate(EmpDto emp) {
 		
 		try {
 			empservice.empUpdate(emp);
-			log.info("emp: " + emp);
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			log.debug("사원수정2 예외발생: " + e.getMessage());
+			System.out.println("HrController empUpdate 예외발생: " + e.getMessage());
+			log.debug("HrController empUpdate 예외발생: " + e.getMessage());
 		}
 		return "redirect:empList.hari";
 		/* return "redirect:empList.hari"; */
