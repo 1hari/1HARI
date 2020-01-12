@@ -31,6 +31,9 @@ public interface EmpDao {
 	// 사원정보수정 변경(관리자권한) 김진호 / 2020. 1. 10
 	public int subempUpdate(EmpDto emp) throws ClassNotFoundException, SQLException;
 	
+	// 사원정보수정 변경(권한추가) 김진호 / 2020. 1. 12
+	public int insertRole(EmpDto empdto) throws ClassNotFoundException, SQLException;
+	
 	//사원목록(주 table) 김정하 / 2020. 1. 9
 	public List<EmpDto> empDefaultList() throws ClassNotFoundException, SQLException;
 	

@@ -53,16 +53,16 @@
 <!-- 		WHERE E.EMPNUM=#{empNum} -->
 		
  		
-			SELECT @rownum := @rownum + 1 AS ROWNUM, E.EMPNUM, E.EMPNAME, E.TEAMCODE, T.TEAMNAME, E.RANKCODE, R.RANKNAME, E.POSITIONCODE, P.POSITIONNAME, EM.EMPLOYMENTCODE, EM.EMPLOYMENTNAME, S.BIRTH, S.PHONENUM, S.EMAIL, S.HIREDATE, S.LEAVEDATE, ER.ROLENAME 
-			FROM EMP AS E
-				JOIN subemp AS S ON E.EMPNUM = S.EMPNUM
-				JOIN team AS T ON E.TEAMCODE = T.TEAMCODE
-				JOIN ranks AS R ON E.RANKCODE = R.RANKCODE
-				JOIN position AS P ON E.POSITIONCODE = P.POSITIONCODE
-				JOIN employment AS EM ON E.EMPLOYMENTCODE = EM.EMPLOYMENTCODE
-				JOIN emprolelist AS ER ON E.EMPNUM = ER.EMPNUM
-			WHERE E.EMPNUM=#{empNum} AND (@rownum := 0) = 0 AND @rownum=0
-			
+		SELECT @rownum := @rownum + 1 AS ROWNUM, E.EMPNUM, E.EMPNAME, E.TEAMCODE, T.TEAMNAME, E.RANKCODE, R.RANKNAME, E.POSITIONCODE, P.POSITIONNAME, EM.EMPLOYMENTCODE, EM.EMPLOYMENTNAME, S.BIRTH, S.PHONENUM, S.EMAIL, S.HIREDATE, S.LEAVEDATE, ER.ROLENAME, RO.ROLEDSCR 
+		FROM EMP AS E
+			JOIN subemp AS S ON E.EMPNUM = S.EMPNUM
+			JOIN team AS T ON E.TEAMCODE = T.TEAMCODE
+			JOIN ranks AS R ON E.RANKCODE = R.RANKCODE
+			JOIN position AS P ON E.POSITIONCODE = P.POSITIONCODE
+			JOIN employment AS EM ON E.EMPLOYMENTCODE = EM.EMPLOYMENTCODE
+			JOIN emprolelist AS ER ON E.EMPNUM = ER.EMPNUM
+			JOIN role AS RO ON ER.ROLENAME = RO.ROLENAME
+		WHERE E.EMPNUM=#{empNum} AND (@rownum := 0) = 0 AND @rownum=0
 	</select>
 	
 	<!-- 사원정보수정 변경 김진호 2020. 1. 10 -->
@@ -76,13 +76,20 @@
 	</update>
   	<update id="subempUpdate" parameterType="kr.coo.onehari.hr.dto.EmpDto">
 		UPDATE SUBEMP
-		SET PHONENUM=#{phoneNum}
+		SET PHONENUM=#{phoneNum},
+		LEAVEDATE=#{leaveDate}
 		WHERE EMPNUM=#{empNum}
 	</update>
+	<insert id="insertRole" parameterType="kr.coo.onehari.hr.dto.Role">
+		INSERT INTO emprolelist 
+		VALUES (#{empNum}, #{roleName})
+	</insert>
+	
    	<!-- 사원 출근기능 형남 0112 -->
 	<insert id="insertStartWorkTA" parameterType="Integer">
 		INSERT INTO TALIST(EMPNUM, TACODE, TADATE) VALUES(#{empNum}, 1, SYSDATE())
 	</insert>
+	
 	<!-- 사원 퇴근기능 형남 0112 -->
 	<insert id="insertEndWorkTA" parameterType="Integer">
 		INSERT INTO TALIST(EMPNUM, TACODE, TADATE) VALUES(#{empNum}, 2, SYSDATE())

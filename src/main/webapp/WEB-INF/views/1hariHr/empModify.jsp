@@ -299,7 +299,7 @@
 			success: function(Roles) {
 				let role = "";
 				$.each(Roles, function(index, element) {
-					if (${emp.roleName} == 'ROLE_ADMIN') {
+					if ('${emp.roleName}' == element.roleName) {
 						role += '<option value="' + element.roleName + '" selected>' + element.roleDSCR + '</option>';
 					} else {
 						role += '<option value="' + element.roleName + '">' + element.roleDSCR + '</option>';

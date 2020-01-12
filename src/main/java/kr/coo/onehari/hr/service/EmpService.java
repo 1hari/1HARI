@@ -78,12 +78,13 @@ public class EmpService {
 	//사원정보수정(변경) 2020. 1. 10 양찬식 
 	//시작 시간 : 오후 3시 20분 끝난시간 3시 25분
 	@Transactional
-	public void empUpdate(EmpDto emp) {
+	public void empUpdate(EmpDto empdto) {
 		EmpDao empdao = sqlsession.getMapper(EmpDao.class);
 		
 		try {
-			empdao.empUpdate(emp);
-			empdao.subempUpdate(emp);
+			empdao.empUpdate(empdto);
+			empdao.subempUpdate(empdto);
+			empdao.insertRole(empdto);
 		} catch (Exception e) {
 			System.out.println("EmpService empUpdate 예외발생: " + e.getMessage());
 			log.debug("EmpService empUpdate 예외발생: " + e.getMessage());
