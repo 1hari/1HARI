@@ -151,12 +151,12 @@
 													<select id="employmentSelect" name="employmentCode" class="form-control" style="height: 100%;" required>
 													</select>
 												</div>
-												<se:authorize access="hasRole('ROLE_ADMIN')">
-													<div class="form-group">
-														<label for="roleName">권한</label>
-														<select id="roleSelect" name="roleName" class="form-control" style="height: 100%;" required>
-														</select>
-													</div>
+ 												<se:authorize access="hasRole('ROLE_ADMIN')">
+ 													<div class="form-group">
+ 														<label for="roleName">권한</label>
+ 														<select id="roleSelect" name="roleName" class="form-control" style="height: 100%;" required>
+ 														</select>
+ 													</div>
 												</se:authorize>
 												<div class="form-group">
 													<label>퇴사일</label>
