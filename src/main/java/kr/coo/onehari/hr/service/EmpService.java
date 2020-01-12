@@ -13,6 +13,7 @@ import kr.coo.onehari.hr.dao.EmpDao;
 import kr.coo.onehari.hr.dao.CorpDao;
 import kr.coo.onehari.hr.dto.EmpDto;
 import kr.coo.onehari.hr.dto.Team;
+import kr.coo.onehari.my.dao.MyDao;
 import lombok.extern.slf4j.Slf4j;
 
 
@@ -114,5 +115,77 @@ public class EmpService {
 			log.debug("EmpService empDefault 예외발생: " + e.getMessage());
 		}
 		return empDefault;
+	}
+	
+	//형남 0112 출근
+	public int insertStartWorkTA(String empNumStr) {
+		EmpDao dao = sqlsession.getMapper(EmpDao.class);
+		int result = 0;
+		int empNum=Integer.parseInt(empNumStr);
+		try {
+			result=dao.insertStartWorkTA(empNum);
+			if(result >0) {
+				System.out.println("출근 등록 성공");
+			}else {
+				System.out.println("출근 등록 실패");
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			log.debug("insertStartWorkTA : " + e.getMessage());
+		}
+		return result;
+	}
+	
+	//형남 0112 퇴근
+	public int insertEndWorkTA(String empNumStr) {
+		EmpDao dao = sqlsession.getMapper(EmpDao.class);
+		int result = 0;
+		int empNum=Integer.parseInt(empNumStr);
+		try {
+			result=dao.insertEndWorkTA(empNum);
+			if(result >0) {
+				System.out.println("퇴근 등록 성공");
+			}else {
+				System.out.println("퇴근 등록 실패");
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			log.debug("insertStartWorkTA : " + e.getMessage());
+		}
+		return result;
+	}
+	
+	//형남 0112 오늘 퇴근이 있는지
+	public int todayEndWorkCheck(String empNumStr) {
+		EmpDao dao = sqlsession.getMapper(EmpDao.class);
+		int result = 0;
+		int empNum=Integer.parseInt(empNumStr);
+		try {
+			result=dao.todayEndWorkCheck(empNum);
+			if(result >0) {
+				System.out.println("퇴근기록 있음");
+			}else {
+				System.out.println("퇴근기록 없음");
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			log.debug("todayEndWorkCheck : " + e.getMessage());
+		}
+		return result;
+	}
+	
+	//형남 0112 오늘 출근이 있는지
+	public int todayStartWorkCheck(String empNumStr) {
+		EmpDao dao = sqlsession.getMapper(EmpDao.class);
+		int result = 0;
+		int empNum=Integer.parseInt(empNumStr);
+		try {
+			result=dao.todayStartWorkCheck(empNum);
+			if(result >0) {
+				System.out.println("출근기록 있음");
+			}else {
+				System.out.println("출근기록 없음");
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			log.debug("todayStartWorkCheck : " + e.getMessage());
+		}
+		return result;
 	}
 }

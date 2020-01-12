@@ -36,4 +36,16 @@ public interface EmpDao {
 	
 	//사원정보(기안자) 김정하 / 2020. 1. 10
 	public EmpDto empDefault(String empNum) throws ClassNotFoundException, SQLException;
+	
+	//사원 출근 오형남 / 2020. 1. 12
+	public int insertStartWorkTA(int empNum) throws ClassNotFoundException, SQLException;
+	
+	//사원 퇴근 오형남 / 2020. 1. 12
+	public int insertEndWorkTA(int empNum) throws ClassNotFoundException, SQLException;
+	
+	//사원 퇴근기록 조회 오형남 / 2020. 1. 12
+	public int todayEndWorkCheck(int empNum) throws ClassNotFoundException, SQLException;
+	
+	//사원 출근기록 조회 오형남 / 2020. 1. 12
+	public int todayStartWorkCheck(int empNum) throws ClassNotFoundException, SQLException;
 }

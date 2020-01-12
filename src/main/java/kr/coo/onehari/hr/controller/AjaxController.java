@@ -1,5 +1,6 @@
 package kr.coo.onehari.hr.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import kr.coo.onehari.hr.dto.Rank;
 import kr.coo.onehari.hr.dto.Role;
 import kr.coo.onehari.hr.dto.Team;
 import kr.coo.onehari.hr.service.CorpService;
+import kr.coo.onehari.hr.service.EmpService;
 import kr.coo.onehari.my.service.MyService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -27,6 +29,9 @@ public class AjaxController {
 	
 	@Autowired
 	private MyService myService;
+	
+	@Autowired
+	private EmpService empSercive;
 
 	// 사원등록 시 소속 SELECT BOX 김진호 200108
 	@RequestMapping(value = "getTeamCode.hari", method = RequestMethod.POST)
@@ -110,6 +115,63 @@ public class AjaxController {
 			log.debug("empNumEmail 예외발생: " + e.getMessage());
 		}
 		return isExist;
+	}
+	
+	//형남 0112 출근하기
+	@RequestMapping(value = "startWork.hari", method = RequestMethod.POST)
+	public boolean startWork(Principal pri) {
+		System.out.println("pri.toString(): " + pri.toString());
+		
+		int result = 0;
+		try {
+			result = empSercive.insertStartWorkTA(pri.getName());
+		} catch (Exception e) {
+			System.out.println("startWork 예외발생: " + e.getMessage());
+			log.debug("startWork 예외발생: " + e.getMessage());
+		}
+		return result > 0 ? true : false;
+	}
+	
+	//형남 0112 퇴근하기
+	@RequestMapping(value = "endWork.hari", method = RequestMethod.POST)
+	public boolean endWork(Principal pri) {
+		System.out.println("pri.toString(): " + pri.toString());
+		int result = 0;
+		try {
+			result = empSercive.insertEndWorkTA(pri.getName());
+		} catch (Exception e) {
+			System.out.println("endWork 예외발생: " + e.getMessage());
+			log.debug("endWork 예외발생: " + e.getMessage());
+		}
+		return result > 0 ? true : false;
+	}
+	
+	//형남 0112 퇴근조회
+	@RequestMapping(value = "todayEndWorkCheck.hari", method = RequestMethod.POST)
+	public boolean todayEndWorkCheck(Principal pri) {
+		System.out.println("pri.toString(): " + pri.toString());
+		int result = 0;
+		try {
+			result = empSercive.todayEndWorkCheck(pri.getName());
+		} catch (Exception e) {
+			System.out.println("todayEndWorkCheck 예외발생: " + e.getMessage());
+			log.debug("todayEndWorkCheck 예외발생: " + e.getMessage());
+		}
+		return result > 0 ? true : false;
+	}
+	
+	//형남 0112 출근조회
+	@RequestMapping(value = "todayStartWorkCheck.hari", method = RequestMethod.POST)
+	public boolean todayStartWorkCheck(Principal pri) {
+		System.out.println("pri.toString(): " + pri.toString());
+		int result = 0;
+		try {
+			result = empSercive.todayStartWorkCheck(pri.getName());
+		} catch (Exception e) {
+			System.out.println("todayStartWorkCheck 예외발생: " + e.getMessage());
+			log.debug("todayStartWorkCheck 예외발생: " + e.getMessage());
+		}
+		return result > 0 ? true : false;
 	}
 	
 }

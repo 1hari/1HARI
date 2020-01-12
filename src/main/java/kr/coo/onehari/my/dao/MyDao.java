@@ -15,4 +15,5 @@ public interface MyDao {
 	public int empNumEmail(int empNum, String email) throws ClassNotFoundException, SQLException;
 	//형남 0110 유저 잠금처리
 	public int updatePassword(int empNum, String password) throws ClassNotFoundException, SQLException;
+
 }

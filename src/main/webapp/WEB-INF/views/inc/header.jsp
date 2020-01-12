@@ -1,6 +1,88 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script type="text/javascript">
+
+$(function(){
+	var isStart=false;
+	var isEnd=false;
+	//오늘 퇴근기록 체크
+	$.ajax({
+		url: "${pageContext.request.contextPath}/ajax/todayEndWorkCheck.hari",
+		type: "post",
+		dataType: "json",
+		success: function(data) {
+			//퇴근근기록이 있으면 true, 없으면 false
+			isEnd=data;
+			console.log(isEnd);
+		}
+	})
+	//오늘 출근기록 체크
+	$.ajax({
+		url: "${pageContext.request.contextPath}/ajax/todayStartWorkCheck.hari",
+		type: "post",
+		dataType: "json",
+		success: function(data) {
+			//퇴근근기록이 있으면 true, 없으면 false
+			isStart=data;
+			console.log(isStart);
+			if(isStart == false && isEnd==false){
+				console.log('요기1')
+				$('#startWork').removeAttr('disabled');	
+				$('#endWork').attr('disabled', 'disabled');	
+			}else if(isStart == true && isEnd==false){
+				console.log('요기2')
+				$('#startWork').attr('disabled', 'disabled');
+				$('#endWork').removeAttr('disabled');	
+			} else if(isStart == true && isEnd==true) {
+				console.log('요기3')
+				$('#endWork').attr('disabled', 'disabled');
+				$('#startWork').attr('disabled', 'disabled');
+			}
+		}
+	})
+
+
 	
+	$('#startWork').click(function() {
+	   //형남 0112 출근기능
+		$.ajax({
+			url: "${pageContext.request.contextPath}/ajax/startWork.hari",
+			type: "post",
+			dataType: "json",
+			success: function(data) {
+			//있으면 true, 없으면 false
+				if(data==true){
+					alert('출근 등록되었습니다.');	
+					$('#endWork').removeAttr('disabled');	
+					$('#startWork').attr('disabled', 'disabled');
+				}else{
+					alert('출근 등록에 실패하였습니다.');
+				}
+			}
+		})
+	})
+	$('#endWork').click(function() {
+		   //형남 0112 퇴근기능
+		$.ajax({
+			url: "${pageContext.request.contextPath}/ajax/endWork.hari",
+			type: "post",
+			dataType: "json",
+			success: function(data) {
+			//있으면 true, 없으면 false
+				if(data==true){
+					alert('퇴근 등록되었습니다.');
+					$('#endWork').attr('disabled', 'disabled');
+					$('#startWork').attr('disabled', 'disabled');
+				}else{
+					alert('퇴근 등록에 실패하였습니다.');
+				}
+			}
+		})
+	})
+});
+</script>
 <!-- ============================================================== -->
 <!-- Preloader - style you can find in spinners.css -->
 <!-- ============================================================== -->
@@ -89,8 +171,8 @@
 							<i class="mdi mdi-bell font-24"></i>
 						</a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<a class="dropdown-item" href="#">출근하기 </a>
-							<a class="dropdown-item" href="#">퇴근하기 </a>
+							<button class="dropdown-item" id="startWork" disabled="disabled">출근하기</button>
+							<button class="dropdown-item" id="endWork" disabled="disabled">퇴근하기</button>
 						</div>
 					</li>
 					<!--top navbar 에서 오른쪽 기능 담당 (출/퇴근과 프로필) 끝 -->
