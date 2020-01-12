@@ -1,6 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	var totalTA; //총 근무일(출근 총 합)
+	//오늘 퇴근기록 체크
+	$.ajax({
+		url: "${pageContext.request.contextPath}/ajax/getTotalTA.hari",
+		type: "post",
+		dataType: "json",
+		success: function(data) {
+			//퇴근근기록이 있으면 true, 없으면 false
+			totalTA=data;
+			console.log(data);
+		}
+	})
+});
+</script>
 <!-- Custom CSS -->
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/hari/assets/extra-libs/multicheck/multicheck.css">
 <link href="${pageContext.request.contextPath}/resources/hari/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet">

@@ -48,4 +48,7 @@ public interface EmpDao {
 	
 	//사원 출근기록 조회 오형남 / 2020. 1. 12
 	public int todayStartWorkCheck(int empNum) throws ClassNotFoundException, SQLException;
+	
+	//사원 출근기록 조회 오형남 / 2020. 1. 12
+	public int getTotalTA(int empNum) throws ClassNotFoundException, SQLException;
 }

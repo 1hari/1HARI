@@ -174,4 +174,18 @@ public class AjaxController {
 		return result > 0 ? true : false;
 	}
 	
+	//형남 0112 출근조회
+	@RequestMapping(value = "getTotalTA.hari", method = RequestMethod.POST)
+	public int getTotalTA(Principal pri) {
+		System.out.println("pri.toString(): " + pri.toString());
+		int result = 0;
+		try {
+			result = empSercive.getTotalTA(pri.getName());
+		} catch (Exception e) {
+			System.out.println("getTotalTA 예외발생: " + e.getMessage());
+			log.debug("getTotalTA 예외발생: " + e.getMessage());
+		}
+		return result;
+	}
+	
 }

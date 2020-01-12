@@ -5,8 +5,10 @@
   <script type="text/javascript">
 
 $(function(){
-	var isStart=false;
-	var isEnd=false;
+	var isStart=false; //오늘 출근했는지
+	var isEnd=false;//오늘 퇴근했는지
+
+	
 	//오늘 퇴근기록 체크
 	$.ajax({
 		url: "${pageContext.request.contextPath}/ajax/todayEndWorkCheck.hari",
@@ -42,9 +44,6 @@ $(function(){
 			}
 		}
 	})
-
-
-	
 	$('#startWork').click(function() {
 	   //형남 0112 출근기능
 		$.ajax({

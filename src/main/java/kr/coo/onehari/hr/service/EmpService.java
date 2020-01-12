@@ -188,4 +188,22 @@ public class EmpService {
 		}
 		return result;
 	}
+	
+	//형남 0112 오늘 출근이 있는지
+	public int getTotalTA(String empNumStr) {
+		EmpDao dao = sqlsession.getMapper(EmpDao.class);
+		int result = 0;
+		int empNum=Integer.parseInt(empNumStr);
+		try {
+			result=dao.getTotalTA(empNum);
+			if(result >0) {
+				System.out.println("출근기록: " + result);
+			}else {
+				System.out.println("출근기록 없음");
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			log.debug("getTotalTA : " + e.getMessage());
+		}
+		return result;
+	}
 }
