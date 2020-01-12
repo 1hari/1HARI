@@ -40,7 +40,7 @@
 			<div class="col-12">
 				<div class="container">
 					<!--form 태그 시작 -->
-					<form action="" method="POST">
+					<form action="" method="POST" enctype="multipart/form-data">
 						<div class="row">
 							<div class="col-md-2">
 								<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#signModal">결재자 선택</button>

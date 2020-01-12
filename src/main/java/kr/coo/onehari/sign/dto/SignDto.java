@@ -1,6 +1,9 @@
 package kr.coo.onehari.sign.dto;
 
 import java.sql.Timestamp;
+import java.util.List;
+
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -26,5 +29,6 @@ public class SignDto {
 	private String signFileName; //첨부파일명
 	private String signFileRoot; //첨부파일 경로
 	
-
+	//파일업로드를 위해서
+	private CommonsMultipartFile file;
 }
