@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="kr.coo.onehari.my.dao.MyDao">
+	<!--형남 0110  로그인 -->
+	<select id="empNumEmail" resultType="Integer">
+	 <![CDATA[
+		SELECT COUNT(*) 
+		FROM EMP E JOIN SUBEMP SE ON E.EMPNUM = SE.EMPNUM 
+		WHERE E.EMPNUM= ${param1} AND SE.EMAIL=#{param2};
+	 ]]> 
+	</select>
+	
+	<!--형남 0110  로그인 시도횟수 초기화 -->
+	<update id="updatePassword">
+		 <![CDATA[
+			UPDATE EMP
+			SET PASSWORD = #{param2}
+			WHERE EMPNUM =#{param1}
+		]]>
+	</update>
+</mapper>

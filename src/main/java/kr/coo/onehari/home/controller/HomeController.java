@@ -22,13 +22,13 @@ import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeUtility;
 @Controller
 public class HomeController {
 	
-	@RequestMapping("index.hari")
+	@RequestMapping("/index.hari")
 	public String index() {
 		return "home.index";
 	}
 	
-	
-	@RequestMapping("emailSubmit.hari")
+	//형남 0110 이메일인증
+	@RequestMapping("/emailSubmit.hari")
 	public String emailSubmit(@RequestParam("email") String email, Model model) {
 			//1. 데이터 받기
 			System.out.println(email);
@@ -119,9 +119,14 @@ public class HomeController {
 			return buffer.toString();
 		}
 	
-	@RequestMapping("main.hari")
+	@RequestMapping("/main.hari")
 	public String main() {
 		return "1hari.main";
+	}
+	
+	@RequestMapping("/accessDenied.hari")
+	public String accessDenied() {
+		return "1hari.accessDenied";
 	}
 	
 	
