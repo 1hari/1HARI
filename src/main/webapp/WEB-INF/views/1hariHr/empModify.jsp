@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="se" uri="http://www.springframework.org/security/tags" %>
 <!-- Custom CSS -->
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/hari/assets/extra-libs/multicheck/multicheck.css">
 <link href="${pageContext.request.contextPath}/resources/hari/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet">
@@ -122,6 +123,10 @@
 													<label for="phoneNum">핸드폰번호</label>
 													<input type="text" id="phoneNum" name="phoneNum" class="form-control" value="${emp.phoneNum}" placeholder="010-0000-0000" required>
 												</div>
+												<div class="form-group">
+													<label for="hireDate">입사일</label>
+													<input type="text" id="hireDate" name="hireDate" class="form-control" value="${emp.hireDate}" readonly>
+												</div>
 											</div>
 											<!--왼쪽 input 태그들 끝-->
 											<!--오른쪽 input 태그들 시작 -->
@@ -146,10 +151,13 @@
 													<select id="employmentSelect" name="employmentCode" class="form-control" style="height: 100%;" required>
 													</select>
 												</div>
-												<div class="form-group">
-													<label for="hireDate">입사일</label>
-													<input type="text" id="hireDate" name="hireDate" class="form-control" value="${emp.hireDate}" readonly>
-												</div>
+												<se:authorize access="hasRole('ROLE_ADMIN')">
+													<div class="form-group">
+														<label for="roleName">권한</label>
+														<select id="roleSelect" name="roleName" class="form-control" style="height: 100%;" required>
+														</select>
+													</div>
+												</se:authorize>
 												<div class="form-group">
 													<label>퇴사일</label>
 													<input type="text" class="form-control mydatepicker" placeholder="yyyy-mm-dd">
@@ -281,6 +289,23 @@
 					}
 				})
 				$("#employmentSelect").append(employment);
+			}
+		});
+	
+		$.ajax({ // 권한 비동기 가져오기
+			url: "${pageContext.request.contextPath}/ajax/getRole.hari",
+			type: "post",
+			dataType: "json",
+			success: function(Roles) {
+				let role = "";
+				$.each(Roles, function(index, element) {
+					if (${emp.roleName} == 'ROLE_ADMIN') {
+						role += '<option value="' + element.roleName + '" selected>' + element.roleDSCR + '</option>';
+					} else {
+						role += '<option value="' + element.roleName + '">' + element.roleDSCR + '</option>';
+					}
+				})
+				$("#roleSelect").append(role);
 			}
 		});
 	});

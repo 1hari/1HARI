@@ -10,6 +10,7 @@ import kr.coo.onehari.hr.dao.CorpDao;
 import kr.coo.onehari.hr.dto.Employment;
 import kr.coo.onehari.hr.dto.Position;
 import kr.coo.onehari.hr.dto.Rank;
+import kr.coo.onehari.hr.dto.Role;
 import kr.coo.onehari.hr.dto.Team;
 import lombok.extern.slf4j.Slf4j;
 
@@ -75,5 +76,19 @@ public class CorpService {
 			log.debug("CorpService getEmploymentCodes 예외발생: " + e.getMessage());
 		}
 		return getEmploymentCodes;
+	}
+	
+	// 권한목록 가져오기 김진호 2020. 1. 12
+	public List<Role> getRoles() {
+		List<Role> getRoles = null;
+		
+		try {
+			CorpDao corpdao = sqlsession.getMapper(CorpDao.class);
+			getRoles = corpdao.getRoles();
+		} catch (Exception e) {
+			System.out.println("CorpService getRoles 예외발생: " + e.getMessage());
+			log.debug("CorpService getRoles 예외발생: " + e.getMessage());
+		}
+		return getRoles;
 	}
 }

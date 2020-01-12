@@ -101,7 +101,7 @@
 								<label for="empName" style="margin-top: 10px; margin-bottom: 0px;">이름</label> 
 								<input id="empName" name="empName" type="text" class="required form-control"> 
 							</div>
-							<div class="input-group">
+							<div>
 								<label for="birthFull" style="margin-top: 10px; margin-bottom: 0px;">생년월일</label> 
 								<input type="text" id="birth" name="birth" class="form-control datepicker-autoclose" placeholder="yymmdd">
 								<div class="input-group-append"></div>
@@ -143,10 +143,9 @@
 							<select class="required form-control" id="employmentSelect" name="employmentCode" style="height: 300%; margin-bottom: 1%;">
 								<option hidden>재직 유형을 선택하세요</option>
 							</select>
-							<div class="input-group">
+							<div>
 								<label for="hireDate" style="margin-top: 10px; margin-bottom: 0px;">입사일</label>
 								<input type="text" id="hireDate" name="hireDate" class="form-control mydatepicker" placeholder="yyyy-mm-dd">
-								<div class="input-group-append"></div>
 							</div>
 						</section>
 

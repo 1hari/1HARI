@@ -11,6 +11,7 @@ import kr.coo.onehari.hr.dto.EmpDto;
 import kr.coo.onehari.hr.dto.Employment;
 import kr.coo.onehari.hr.dto.Position;
 import kr.coo.onehari.hr.dto.Rank;
+import kr.coo.onehari.hr.dto.Role;
 import kr.coo.onehari.hr.dto.Team;
 import kr.coo.onehari.hr.service.CorpService;
 import kr.coo.onehari.my.service.MyService;
@@ -81,6 +82,20 @@ public class AjaxController {
 			log.debug("Ajax EmploymentCode 예외발생: " + e.getMessage());
 		}
 		return employmentlist;
+	}
+	
+	// 사원정보수정 시 권한 SELECT BOX 김진호 200112
+	@RequestMapping(value = "getRole.hari", method = RequestMethod.POST)
+	public List<Role> getRoles() {
+		List<Role> rolelist = null;
+		
+		try {
+			rolelist = corpservice.getRoles();
+		} catch (Exception e) {
+			System.out.println("Ajax Role 예외발생: " + e.getMessage());
+			log.debug("Ajax Role 예외발생: " + e.getMessage());
+		}
+		return rolelist;
 	}
 	
 	//형남 0110 비밀번호 변경 시 이메일과 사번 일치여부 확인

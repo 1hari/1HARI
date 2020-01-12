@@ -34,4 +34,11 @@
 		FROM employment
 		ORDER BY EMPLOYMENTCODE ASC
 	</select>
+	
+	<!-- 권한 비동기 -->
+	<select id="getRoles" resultType="kr.coo.onehari.hr.dto.Role">
+		SELECT ROLENAME, ROLEDSCR
+		FROM role
+	</select>
+	
 </mapper>

@@ -30,4 +30,6 @@ public class EmpDto {
 	private Date leaveDate;//퇴사일
 	private int loginCnt; //로그인 시도 횟수
 	private int isLock; // 로그인 잠금여부
+	private String roleName; // 권한명 김진호 2020. 1. 12
+	private String roleDSCR; // 권한설명 김진호 2020. 1. 12
 }
