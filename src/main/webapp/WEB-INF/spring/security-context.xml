@@ -45,26 +45,22 @@
 		                     authentication-success-handler-ref="loginSuccessHandler"
 		                     login-processing-url="/login"
 		                     />
-		                     
-		<!--로그아웃 시 이동 페이지 -->
-		<security:logout  logout-success-url="/index.hari" />
-		
-		<!-- 권한이 필요한 페이지 -->
+
+		<!-- 전체페이지 ROLEUSER 권한 필요 -->
+		<security:intercept-url pattern="/1hari*/*" access="hasRole('ROLE_USER')" />
 		<security:intercept-url pattern="/main.hari" access="hasRole('ROLE_USER')" />
+		<!-- 권한이 필요한 페이지 -->
 		<security:intercept-url pattern="/1hariHr/personnel/*" access="hasRole('ROLE_PERSONNEL')" />
-		<security:intercept-url pattern="/1hariSign/admin/*" access="hasRole('ROLE_PERSONNEL')" />
-		<security:intercept-url pattern="/1hariHr/personnel/*" access="hasRole('ROLE_ADMIN')" />
 		<security:intercept-url pattern="/1hariSign/admin/*" access="hasRole('ROLE_ADMIN')" />
-		
+		<security:intercept-url pattern="/1hariSign/admin/*" access="hasRole('ROLE_PERSONNEL')" />
 		<!-- 권한 없는 페이지 접근시 -->
 		<security:access-denied-handler error-page="/accessDenied.hari"/>
-		
 		<!-- 중복로그인 방지 -->
-	    <security:session-management invalid-session-url="/index.hari"><!-- 세션이 끊어졌을 때 이동 할 페이지 -->
-	    	<!-- 최대 허용 가능 중복 세션 수 /중복 로그인이 일어났을 경우 이동 할 페이지/기존/기존 로그인 한 세션을 유지-->
-	        <security:concurrency-control max-sessions="1" expired-url="/index.hari" error-if-maximum-exceeded="true"/>
-	    </security:session-management>
+		<security:session-management invalid-session-url="/index.hari">
+			 <security:concurrency-control max-sessions="1" expired-url="/index.hari" error-if-maximum-exceeded="true"/>
+		</security:session-management> 
 	</security:http>
+	
 	<bean id="loginSuccessHandler" class="kr.coo.onehari.login.handler.LoginSuccessHandler">
    		<property name="loginidname" value="username"/>
     	<property name="defaultUrl" value="/main.hari"/>
@@ -76,7 +72,7 @@
 	    <property name="errormsgname" value="ERRORMSG"/>
 	    <property name="defaultFailureUrl" value="/index.hari?error"/>
 	</bean>
-
+	<bean id="logoutSuccessHandler" class="kr.coo.onehari.login.handler.HariLogoutSuccessHandler"></bean>
 	<bean id="login" class="kr.coo.onehari.login.service.LoginService">
 	</bean>
 

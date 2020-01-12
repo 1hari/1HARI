@@ -113,9 +113,11 @@
 								<i class="ti-settings m-r-5 m-l-5"></i>계정관리
 							</a>
 							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="${pageContext.request.contextPath}/logout">
-								<i class="fa fa-power-off m-r-5 m-l-5"></i>로그아웃
-							</a>
+							<!-- 로그아웃 -->
+							<a href="#" onclick="document.getElementById('logout-form').submit();"><i class="fa fa-power-off m-r-5 m-l-5"></i>로그아웃</a>
+							<form id="logout-form" action="${pageContext.request.contextPath}/logout" method="POST">
+							   <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
+							</form>
 						</div>
 					</li>
 					<!--내 프로필 끝 -->
