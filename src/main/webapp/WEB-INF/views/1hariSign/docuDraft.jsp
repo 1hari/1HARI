@@ -148,6 +148,14 @@
 							});
 						</script>
 						<!-- ck 에디터 form 끝 -->
+						<div class="form-group row">
+							<div class="col-md-12">
+								<div class="custom-file">
+									<input type="file" class="custom-file-input" id="validatedCustomFile" required="" name="">
+									<label class="custom-file-label" for="validatedCustomFile">파일을 선택하세요.</label>
+								</div>
+							</div>
+						</div>
 					</form>
 				</div><!-- container -->
 			</div><!-- col-12 끝 -->

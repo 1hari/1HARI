@@ -101,4 +101,10 @@ public class HrController {
 		/* return "redirect:empList.hari"; */
 		/* return "redirect:personnel/empList.hari"; */
 	}
+	
+	//User - 사원리스트 김정하 / 2020. 1. 12
+	@RequestMapping("teamList.hari")
+	public String teamList() {
+		return "1hariHr.teamList";
+	}
 }

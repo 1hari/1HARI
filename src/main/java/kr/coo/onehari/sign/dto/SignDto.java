@@ -25,4 +25,6 @@ public class SignDto {
 	private String signComment; //전자결재 코멘트
 	private String signFileName; //첨부파일명
 	private String signFileRoot; //첨부파일 경로
+	
+
 }

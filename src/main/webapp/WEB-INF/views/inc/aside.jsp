@@ -111,6 +111,13 @@
 							</a>
 						</li>
 						
+						<li class="sidebar-item">
+							<a href="${pageContext.request.contextPath}/1hariHr/teamList.hari" class="sidebar-link">
+								<i class="mdi mdi-note-outline"></i>
+								<span class="hide-menu">사원 조회</span>
+							</a>
+						</li>
+						
 						<!-- 권한처리 메뉴 : ROLE_ADMIN & ROLE_PERSONNEL-->
 						<li class="sidebar-item">
 							<a href="${pageContext.request.contextPath}/1hariHr/personnel/empList.hari" class="sidebar-link">
@@ -122,24 +129,6 @@
 					</ul>
 				</li>
 				<!--인사관리 끝 -->
-				
-				<!--조직관리 시작-->
-				<li class="sidebar-item">
-					<a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
-						<i class="mdi mdi-receipt"></i>
-						<span class="hide-menu">조직 관리</span>
-					</a>
-					
-					<ul aria-expanded="false" class="collapse  first-level">
-						<li class="sidebar-item">
-							<a href="${pageContext.request.contextPath}/1hariTeam/teamList.hari" class="sidebar-link">
-								<i class="mdi mdi-note-outline"></i>
-								<span class="hide-menu">사원 조회</span>
-							</a>
-						</li>
-					</ul>
-				</li>
-				<!--조직관리 끝-->
 
 				<li class="sidebar-item">
 					<a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
