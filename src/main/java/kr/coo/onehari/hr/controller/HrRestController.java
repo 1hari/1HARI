@@ -189,6 +189,20 @@ public class HrRestController {
 		return result;
 	}
 	
+	//형남 0113 오늘 근무시간
+	@RequestMapping(value = "getTodayTotalTime.hari", method = RequestMethod.POST)
+	public Date getTodayTotalTime(Principal pri) {
+		System.out.println("pri.toString(): " + pri.toString());
+		Date totalTime = null;
+		try {
+			totalTime = empSercive.getTodayTotalTime(pri.getName());
+		} catch (Exception e) {
+			System.out.println("getTodayTotalTime 예외발생: " + e.getMessage());
+			log.debug("getTodayTotalTime 예외발생: " + e.getMessage());
+		}
+		return totalTime;
+	}
+	
 	//형남 0113 이번주 총 근무시간
 	@RequestMapping(value = "getWeekTotalTime.hari", method = RequestMethod.POST)
 	public Date getWeekTotalTime(Principal pri) {
@@ -202,5 +216,4 @@ public class HrRestController {
 		}
 		return totalTime;
 	}
-	
 }

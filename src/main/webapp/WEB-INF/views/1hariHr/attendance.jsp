@@ -50,13 +50,23 @@ $(function(){
 		}
 	})
 	
+// 	$.ajax({
+// 		url: "${pageContext.request.contextPath}/ajax/getWeekTotalTime.hari",
+// 		type: "post",
+// 		dataType: "json",
+// 		success: function(weekTotalTime) {
+// 			$('#weekTotalTime').append(weekTotalTime);
+// 			console.log(weekTotalTime);
+// 		}
+// 	})
+	
 	$.ajax({
-		url: "${pageContext.request.contextPath}/ajax/getWeekTotalTime.hari",
+		url: "${pageContext.request.contextPath}/ajax/getTodayTotalTime.hari",
 		type: "post",
 		dataType: "json",
-		success: function(weekTotalTime) {
-			$('#weekTotalTime').append(weekTotalTime);
-			console.log(weekTotalTime);
+		success: function(todayTotalTime) {
+			$('#todayTotalTime').append(todayTotalTime);
+			console.log(todayTotalTime);
 		}
 	})
 

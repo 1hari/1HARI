@@ -221,8 +221,8 @@ public class EmpService {
 		return result;
 	}
 	
-    //형남 0112 오늘 출근이 있는지
-    public java.util.Date getStartWorkTime(String empNumStr) {
+    //형남 0113 오늘 출근시간
+    public Date getStartWorkTime(String empNumStr) {
         EmpDao dao = sqlsession.getMapper(EmpDao.class);
         Date startTime = null;
         int empNum=Integer.parseInt(empNumStr);
@@ -239,8 +239,26 @@ public class EmpService {
         return startTime;
     }
     
+    //형남 0113 오늘 총 근무시간
+    public Date getTodayTotalTime(String empNumStr) {
+    	EmpDao dao = sqlsession.getMapper(EmpDao.class);
+    	Date totalTime = null;
+    	int empNum=Integer.parseInt(empNumStr);
+    	try {
+    		totalTime=dao.getTodayTotalTime(empNum);
+    		if(totalTime !=null) {
+    			System.out.println("오늘 근무시간: " + totalTime);
+    		}else {
+    			System.out.println("오늘 근무시간 못가져옴");
+    		}
+    	} catch (ClassNotFoundException | SQLException e) {
+    		log.debug("getTodayTotalTime : " + e.getMessage());
+    	}
+    	return totalTime;
+    }
+    
     //형남 0113 이번주 총 근무시간
-    public java.util.Date getWeekTotalTime(String empNumStr) {
+    public Date getWeekTotalTime(String empNumStr) {
     	EmpDao dao = sqlsession.getMapper(EmpDao.class);
     	Date totalTime = null;
     	int empNum=Integer.parseInt(empNumStr);

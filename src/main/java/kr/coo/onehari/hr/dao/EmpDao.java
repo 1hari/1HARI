@@ -69,5 +69,8 @@ public interface EmpDao {
     public Date getStartWorkTime(int empNum) throws ClassNotFoundException, SQLException;
     
     //이번주 총 근무시간 오형남 / 2020. 1. 13
+    public Date getTodayTotalTime(int empNum) throws ClassNotFoundException, SQLException;
+    
+    //이번주 총 근무시간 오형남 / 2020. 1. 13
     public Date getWeekTotalTime(int empNum) throws ClassNotFoundException, SQLException;
 }
