@@ -43,12 +43,6 @@
 						<table class="table">
 							<thead class="thead-light">
 								<tr>
-									<th>
-										<label class="customcheckbox m-b-20">
-										<input type="checkbox" id="mainCheckbox" />
-											<span class="checkmark"></span>
-										</label>
-									</th>
 									<th scope="col">Rendering engine</th>
 									<th scope="col">Browser</th>
 									<th scope="col">Platform(s)</th>
@@ -57,42 +51,11 @@
 							</thead>
 							<tbody class="customtable">
 								<tr>
-									<th>
-										<label class="customcheckbox">
-											<input type="checkbox" class="listCheckbox" />
-											<span class="checkmark"></span>
-										</label>
-									</th>
 									<td>Trident</td>
 									<td>Internet Explorer 4.0</td>
 									<td>Win 95+</td>
 									<td>4</td>
 								</tr>
-								<tr>
-									<th>
-										<label class="customcheckbox">
-											<input type="checkbox" class="listCheckbox" />
-											<span class="checkmark"></span>
-										</label>
-									</th>
-									<td>Trident</td>
-									<td>Internet Explorer 5.0</td>
-									<td>Win 95+</td>
-									<td>5</td>
-								</tr>
-								<tr>
-									<th>
-										<label class="customcheckbox">
-											<input type="checkbox" class="listCheckbox" />
-											<span class="checkmark"></span>
-										</label>
-									</th>
-									<td>Trident</td>
-									<td>Internet Explorer 4.0</td>
-									<td>Win 95+</td>
-									<td>4</td>
-								</tr>
-
 							</tbody>
 						</table>
 					</div>
@@ -102,7 +65,7 @@
 				<!--전자결재 관리2  테이블 -->
 				<div class="card">
 					<div class="card-body">
-						<h5 class="card-title m-b-0">최근 기안 진행 문서</h5>
+						<h5 class="card-title m-b-0">최근 기안 문서</h5>
 					</div>
 					<div class="table-responsive">
 						<table class="table">
@@ -131,7 +94,7 @@
 														<div role="progressbar" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-striped bg-danger" style="width: 30%" aria-valuenow="30"></div>
 													</c:when>
 													<c:otherwise>
-														<div role="progressbar" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-striped bg-success" style="width: 70%" aria-valuenow="70"></div>
+														<div role="progressbar" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-striped" style="width: 70%" aria-valuenow="70"></div>
 													</c:otherwise>
 												</c:choose>
 											</div>
@@ -154,62 +117,74 @@
 						<table class="table">
 							<thead class="thead-light">
 								<tr>
-									<th>
-										<label class="customcheckbox m-b-20">
-											<input type="checkbox" id="mainCheckbox" />
-											<span class="checkmark"></span>
-										</label>
-									</th>
-									<th scope="col">Rendering engine</th>
-									<th scope="col">Browser</th>
-									<th scope="col">Platform(s)</th>
-									<th scope="col">Engine version</th>
+									<th scope="col">기안일</th>
+									<th scope="col">결재양식</th>
+									<th scope="col">제목</th>
+									<th scope="col">결재상태</th>
 								</tr>
 							</thead>
 							<tbody class="customtable">
-								<tr>
-									<th>
-										<label class="customcheckbox">
-											<input type="checkbox" class="listCheckbox" />
-											<span class="checkmark"></span>
-										</label>
-									</th>
-									<td>Trident</td>
-									<td>Internet Explorer 4.0</td>
-									<td>Win 95+</td>
-									<td>4</td>
-								</tr>
-								<tr>
-									<th>
-										<label class="customcheckbox">
-											<input type="checkbox" class="listCheckbox" />
-											<span class="checkmark"></span>
-										</label>
-									</th>
-									<td>Trident</td>
-									<td>Internet Explorer 5.0</td>
-									<td>Win 95+</td>
-									<td>5</td>
-								</tr>
-								<tr>
-									<th>
-										<label class="customcheckbox">
-											<input type="checkbox" class="listCheckbox" />
-											<span class="checkmark"></span>
-										</label>
-									</th>
-									<td>Trident</td>
-									<td>Internet Explorer 4.0</td>
-									<td>Win 95+</td>
-									<td>4</td>
-								</tr>
-
+								<!-- 완료리스트 1줄 -->
+								<c:forEach var="completet" items="${requestScope.signCompletetList}">
+									<tr>
+										<td>${completet.signDate}</td>
+										<td>${completet.signFormFormName}</td>
+										<td><a href="?signNum=${completet.signNum}">${completet.signTitle}</a></td>
+										<td>
+											<div class="d-flex no-block align-items-center m-t-15">
+                                        		<span>${completet.signName}</span>
+                                    		</div>
+											<div class="progress">
+												<div role="progressbar" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-striped bg-success" style="width: 100%" aria-valuenow="100"></div>
+											</div>
+										</td>
+									</tr>
+								</c:forEach>
+								<!-- 완료리스트 1줄 -->
 							</tbody>
 						</table>
 					</div>
 				</div>
 				<!--데이터 테이블3 끝 -->
-
+				
+				<!--전자결재 관리4  테이블 -->
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title m-b-0">최근 반려 문서</h5>
+					</div>
+					<div class="table-responsive">
+						<table class="table">
+							<thead class="thead-light">
+								<tr>
+									<th scope="col">기안일</th>
+									<th scope="col">결재양식</th>
+									<th scope="col">제목</th>
+									<th scope="col">결재상태</th>
+								</tr>
+							</thead>
+							<tbody class="customtable">
+								<!-- 반려리스트 1줄 -->
+								<c:forEach var="signReturn" items="${requestScope.signReturnList}">
+									<tr>
+										<td>${signReturn.signDate}</td>
+										<td>${signReturn.signFormFormName}</td>
+										<td><a href="?signNum=${signReturn.signNum}">${signReturn.signTitle}</a></td>
+										<td>
+											<div class="d-flex no-block align-items-center m-t-15">
+                                        		<span>${signReturn.signName}</span>
+                                    		</div>
+											<div class="progress">
+												<div role="progressbar" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-striped bg-danger" style="width: 100%" aria-valuenow="100"></div>
+											</div>
+										</td>
+									</tr>
+								</c:forEach>
+								<!-- 반려리스트 1줄 -->
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<!--데이터 테이블4 끝 -->
 			</div>
 		</div>
 		<!-- ============================================================== -->

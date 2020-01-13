@@ -22,4 +22,10 @@ public interface SignDao {
 	
 	//전자결재 완료 리스트 (전자결재 홈) 김정하 / 2020. 1. 13
 	public List<SignDto> selectSignCompleteListHome (String draftEmp) throws ClassNotFoundException, SQLException;
+	
+	//전자결재 반려 리스트 (전자결재 홈) 김정하 / 2020. 1. 13
+	public List<SignDto> selectSignReturnListHome (String draftEmp) throws ClassNotFoundException, SQLException;
+	
+	//전자결재 결재대기 리스트 (전자결재 홈) 김정하 / 2020. 1 13
+	public List<SignDto> selectSignWaitingListHome (String draftEmp) throws ClassNotFoundException, SQLException;
 }
