@@ -7,18 +7,18 @@
    
    <script type="text/javascript">
    //형남 0110 비밀번호 변경
-	$(function(){
-		//정규표현식
-		let pw_pattern = /^[a-z0-9_]{4,10}$/;
-		let email_pattern = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
-	
+   $(function(){
+      //정규표현식
+      let pw_pattern = /^[a-z0-9_]{4,10}$/;
+      let email_pattern = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+   
         let pw_check = false;
         let pwck_check = false;
         let email_check = false;
         let isExist = false;
         
-		//이메일 유효성검사
-		$('#email').keyup(function(){
+      //이메일 유효성검사
+      $('#email').keyup(function(){
             if(email_pattern.test($(this).val()) != true){
                 $('#emailcheck').text("이메일 형식에 맞지 않습니다.");
             }else{
@@ -27,70 +27,70 @@
             }
         });
         
-	    //인증번호 전송버튼 클릭
-		$('#emailSend').click(function() {
-			//이메일 형식체크
-			if(!email_check){
-				swal("warning", "이메일을 다시 입력해주세요.", "warning")
-				return;
-			}else {
-				//이메일 형식이 맞으면 사번과 이메일이 일치하는 계정이 있는지 확인
-				$.ajax({
-					url: "${pageContext.request.contextPath}/1hariMy/empNumEmail.hari",
-					type: "post",
-					data:"empNum="+$('#empNum').val() + "&email=" + $('#email').val() ,
-					dataType: "json",
-					success: function(data) {
-					//있으면 true, 없으면 false
-					isExist=data;
-					}
-				});
-				if(isExist!=false){
-					alert("해당하는 계정이 없습니다.");
-					return;
-				}else{
-					//인증번호 입력 창 오픈
-					var url = "emailSubmit.hari?email="+$('#email').val();
-					open(url,"Email Check","statusber=no, scrollbar=no, menuber=no, width=560, height=240 top=270 left=530");
-				}
-			}
-		});
+       //인증번호 전송버튼 클릭
+      $('#emailSend').click(function() {
+         //이메일 형식체크
+         if(!email_check){
+            swal("warning", "이메일을 다시 입력해주세요.", "warning")
+            return;
+         }else {
+            //이메일 형식이 맞으면 사번과 이메일이 일치하는 계정이 있는지 확인
+            $.ajax({
+               url: "${pageContext.request.contextPath}/1hariMy/empNumEmail.hari",
+               type: "post",
+               data:"empNum="+$('#empNum').val() + "&email=" + $('#email').val() ,
+               dataType: "json",
+               success: function(data) {
+               //있으면 true, 없으면 false
+               isExist=data;
+               }
+            });
+            if(isExist!=false){
+               alert("해당하는 계정이 없습니다.");
+               return;
+            }else{
+               //인증번호 입력 창 오픈
+               var url = "emailSubmit.hari?email="+$('#email').val();
+               open(url,"Email Check","statusber=no, scrollbar=no, menuber=no, width=560, height=240 top=270 left=530");
+            }
+         }
+      });
 
-		//창 닫으면 초기화
-		$('#closeModal').click(function(){
-			console.log('cliack');
-			$('#email').val('');
-			$('#newPassword').val('');
-			$('#newPassword2').val('');
-		})
-		
-		//비밀번호 유효성검사
-		$('#newPassword').keyup(function() {
-			if (pw_pattern.test($(this).val()) != true){
-				$('#pwcheck').text("비밀번호가 조건에 일치하지 않습니다.");
-			}else {
-				$('#pwcheck').text("사용가능한 비밀번호 입니다.");
-				pw_check = true;
-			}
-		});
-		
-		//비밀번호 확인
-		$('#newPassword2').keyup(function() {
-			if($('#newPassword').val() != $('#newPassword2').val()){
-				$('#pwckcheck').text("비밀번호가 일치하지 않습니다.");
-			}else {
-				$('#pwckcheck').text("비밀번호가 확인되었습니다.");
-				pwck_check = true;
-			}
-		});
-		
-		if(pwck_check && pw_check && email_check){
-			$('#chagePassword').removeAttr('disabled');	
-		}
-	});
+      //창 닫으면 초기화
+      $('#closeModal').click(function(){
+         console.log('cliack');
+         $('#email').val('');
+         $('#newPassword').val('');
+         $('#newPassword2').val('');
+      })
+      
+      //비밀번호 유효성검사
+      $('#newPassword').keyup(function() {
+         if (pw_pattern.test($(this).val()) != true){
+            $('#pwcheck').text("비밀번호가 조건에 일치하지 않습니다.");
+         }else {
+            $('#pwcheck').text("사용가능한 비밀번호 입니다.");
+            pw_check = true;
+         }
+      });
+      
+      //비밀번호 확인
+      $('#newPassword2').keyup(function() {
+         if($('#newPassword').val() != $('#newPassword2').val()){
+            $('#pwckcheck').text("비밀번호가 일치하지 않습니다.");
+         }else {
+            $('#pwckcheck').text("비밀번호가 확인되었습니다.");
+            pwck_check = true;
+         }
+      });
+      
+      if(pwck_check && pw_check && email_check){
+         $('#chagePassword').removeAttr('disabled');   
+      }
+   });
 </script>
 
-	<!--컨텐츠 시작 -->
+   <!--컨텐츠 시작 -->
     <!--메인 백그라운드 이미지-->
     <div class="hero-wrap" style="background-image: url(resources/index/images/bg_2.jpg);" data-stellar-background-ratio="0.5">
       
@@ -101,85 +101,85 @@
             <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">1HARI<br><span>HR system</span></h1>
             <p class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="icon-calendar mr-2"></span>2020-01-10 SOUTH KOREA</p>
             <div id="timer" class="d-flex">
-						  <div class="time" id="days"></div>
-						  <div class="time pl-3" id="hours"></div>
-						  <div class="time pl-3" id="minutes"></div>
-						  <div class="time pl-3" id="seconds"></div>
-						</div>
-					</div>
-					<div class="col-lg-2 col"></div>
+                    <div class="time" id="days"></div>
+                    <div class="time pl-3" id="hours"></div>
+                    <div class="time pl-3" id="minutes"></div>
+                    <div class="time pl-3" id="seconds"></div>
+                  </div>
+               </div>
+               <div class="col-lg-2 col"></div>
 
-					<!--로그인 화면 시작-->
-			<c:url value="/login" var="loginURL"/>	
+               <!--로그인 화면 시작-->
+         <c:url value="/login" var="loginURL"/>   
           <div class="col-lg-4 col-md-6 mt-0 mt-md-5">
-          	<form action="${loginURL}" class="request-form ftco-animate" method="post">
-          		<h2>로그인</h2>
-	    				<div class="form-group">
-	    					<input type="text" id="username" name="username" class="form-control" placeholder="사번 번호 입력">
-	    				</div>
-	    				<div class="form-group">
-	    					<input type="password" id="password" name="password" class="form-control" placeholder="비밀 번호 입력">
-	    				</div>
-	    				<div class="form-group">
-								<div class="checkbox">
-								   <label><input type="checkbox" value="" class="mr-2">사번 번호 기억하기</label>
-								</div>
-							</div>
-	            <div class="form-group">
-	              <input type="submit" value="로그인" class="btn btn-primary py-3 px-4">
-	              <br>
-	              <span data-toggle="modal" data-target="#add-new-event" style="cursor:pointer;">이메일 인증하기</span>
-	            </div>
-	    			</form>
-					</div>
-					<!--로그인 화면 끝 -->
-					
-					
-					<!--이메일 인증 모달 -->
-			<div id="add-new-event" class="modal modal-wide fade">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-						<h5>이메일 인증하기</h5>
-							<button type="button" class="close" id="closeModal"data-dismiss="modal" aria-hidden="true">×</button>
-						</div>
-						<div class="modal-body">
-							<form action="1hariMy/chagePassword.hari" method="post">
-								<div class="input-group">
-									<span class="input-group-addon" style="color:#20B2AA"><small>&nbsp;&nbsp;</small><i class="fa fa-user fa-3x"></i></span>
-									<small>&nbsp;&nbsp;</small>
-									<input type="text" class="form-control" id="empNum" name="empNum" placeholder="사번 입력">
-								</div>
-								<small>&nbsp;</small>
-								<div class="input-group">
-									<span class="input-group-addon" style="color:#20B2AA"><i class="fa fa-envelope fa-3x"></i></span>
-									<small>&nbsp;</small>
-									<input type="text" class="form-control" id="email" name="email" placeholder="이메일 주소 입력">
-								</div>
-								<small id="emailcheck">이메일을 입력해주세요.</small><br>
-								<button type="button" class="btn btn-default" id=emailSend><strong>인증번호 전송</strong></button>
-								<i class="fa fa-paper-plane fa-1x" style="color:#20B2AA"></i>
-								<input type="password" id="newPassword" name="newPassword"class="form-control">
-								<small id="pwcheck">비밀번호는 4자~10자 입니다.</small>
-								<input type="password" id="newPassword2" name="newPassword2"class="form-control">
-								<small id="pwckcheck">비밀번호를 다시 한 번 입력해주세요.</small>
-								<br>
-								<br>
-								<div style="text-align:center;">
-									<button type="submit" id="chagePassword" class="btn btn-primary py-3 px-4">변경하기</button>
-								</div>
-							</form>
-						</div>
-					</div>
-					<!-- /.modal-content -->
-				</div>
-				<!-- /.modal-dialog -->
-			</div>		
+             <form action="${loginURL}" class="request-form ftco-animate" method="post">
+                <h2>로그인</h2>
+                   <div class="form-group">
+                      <input type="text" id="username" name="username" class="form-control" placeholder="사번 번호 입력">
+                   </div>
+                   <div class="form-group">
+                      <input type="password" id="password" name="password" class="form-control" placeholder="비밀 번호 입력">
+                   </div>
+                   <div class="form-group">
+                        <div class="checkbox">
+                           <label><input type="checkbox" value="" class="mr-2">사번 번호 기억하기</label>
+                        </div>
+                     </div>
+               <div class="form-group">
+                 <input type="submit" value="로그인" class="btn btn-primary py-3 px-4">
+                 <br>
+                 <span data-toggle="modal" data-target="#add-new-event" style="cursor:pointer;">이메일 인증하기</span>
+               </div>
+                </form>
+               </div>
+               <!--로그인 화면 끝 -->
+               
+               
+               <!--이메일 인증 모달 -->
+         <div id="add-new-event" class="modal modal-wide fade">
+            <div class="modal-dialog">
+               <div class="modal-content">
+                  <div class="modal-header">
+                  <h5>이메일 인증하기</h5>
+                     <button type="button" class="close" id="closeModal"data-dismiss="modal" aria-hidden="true">×</button>
+                  </div>
+                  <div class="modal-body">
+                     <form action="1hariMy/chagePassword.hari" method="post">
+                        <div class="input-group">
+                           <span class="input-group-addon" style="color:#20B2AA"><small>&nbsp;</small><i class="fa fa-user fa-3x"></i></span>
+                           <small>&nbsp;&nbsp;</small>
+                           <input type="text" class="form-control" id="empNum" name="empNum" placeholder="사번 입력">
+                        </div>
+                        <small>&nbsp;</small>
+                        <div class="input-group">
+                           <span class="input-group-addon" style="color:#20B2AA"><i class="fa fa-envelope fa-3x"></i></span>
+                           <small>&nbsp;</small>
+                           <input type="text" class="form-control" id="email" name="email" placeholder="이메일 주소 입력">
+                        </div>
+                        <small id="emailcheck">이메일을 입력해주세요.</small><br>
+                        <button type="button" class="btn btn-default" id=emailSend style="color:#20B2AA"><strong> <i class="fa fa-paper-plane fa-1x" style="color:#20B2AA"></i>&nbsp;인증번호 전송</strong></button>
+               
+                        <input type="password" id="newPassword" name="newPassword"class="form-control">
+                        <small id="pwcheck">비밀번호는 4자~10자 입니다.</small>
+                        <input type="password" id="newPassword2" name="newPassword2"class="form-control">
+                        <small id="pwckcheck">비밀번호를 다시 한 번 입력해주세요.</small>
+                        <br>
+                        <br>
+                        <div style="text-align:center;">
+                           <button type="submit" id="chagePassword" class="btn btn-primary py-3 px-4">변경하기</button>
+                        </div>
+                     </form>
+                  </div>
+               </div>
+               <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+         </div>      
         </div>
       </div>
     </div>
 
-		<!--회사 소개 페이지 컨텐츠 시작 -->
+      <!--회사 소개 페이지 컨텐츠 시작 -->
     <section class="ftco-section services-section bg-primary">
       <div class="container">
         <div class="row d-flex">
@@ -188,7 +188,7 @@
               <div class="icon"><span class="flaticon-placeholder"></span></div>
               <div class="media-body">
                 <h3 class="heading mb-3">Venue</h3>
-                <p>	203 Fake St. Mountain View, San Francisco, California, USA</p>
+                <p>   203 Fake St. Mountain View, San Francisco, California, USA</p>
               </div>
             </div>      
           </div>
@@ -222,7 +222,7 @@
         </div>
       </div>
 </section>
-		<!--회사 소개 페이지 컨텐츠 끝 -->
-			 <!--컨텐츠 끝!!  -->
-			 
+      <!--회사 소개 페이지 컨텐츠 끝 -->
+          <!--컨텐츠 끝!!  -->
+          
 <!--main 화면 끝입니다 contents -->
