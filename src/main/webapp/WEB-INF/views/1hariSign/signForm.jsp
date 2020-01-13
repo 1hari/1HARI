@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!-- Custom CSS -->
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/hari/assets/extra-libs/multicheck/multicheck.css">
 <link href="${pageContext.request.contextPath}/resources/hari/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet">
@@ -106,56 +108,23 @@
 						<table class="table">
 							<thead class="thead-light">
 								<tr>
-									<th>
-										<label class="customcheckbox m-b-20">
-											<input type="checkbox" id="mainCheckbox" />
-											<span class="checkmark"></span>
-										</label>
-									</th>
-									<th scope="col">Rendering engine</th>
-									<th scope="col">Browser</th>
-									<th scope="col">Platform(s)</th>
-									<th scope="col">Engine version</th>
+									<th scope="col">기안일</th>
+									<th scope="col">결재양식</th>
+									<th scope="col">제목</th>
+									<th scope="col">결재상태</th>
 								</tr>
 							</thead>
 							<tbody class="customtable">
-								<tr>
-									<th>
-										<label class="customcheckbox">
-										<input type="checkbox" class="listCheckbox" />
-											<span class="checkmark"></span>
-										</label>
-									</th>
-									<td>Trident</td>
-									<td>Internet Explorer 4.0</td>
-									<td>Win 95+</td>
-									<td>4</td>
-								</tr>
-								<tr>
-									<th>
-										<label class="customcheckbox">
-											<input type="checkbox" class="listCheckbox" />
-											<span class="checkmark"></span>
-										</label>
-									</th>
-									<td>Trident</td>
-									<td>Internet Explorer 5.0</td>
-									<td>Win 95+</td>
-									<td>5</td>
-								</tr>
-								<tr>
-									<th>
-										<label class="customcheckbox">
-											<input type="checkbox" class="listCheckbox" />
-											<span class="checkmark"></span>
-										</label>
-									</th>
-									<td>Trident</td>
-									<td>Internet Explorer 4.0</td>
-									<td>Win 95+</td>
-									<td>4</td>
-								</tr>
-
+								<!-- 기안 리스트 1줄 -->
+								<c:forEach var="draft" items="${requestScope.signDraftList}">
+									<tr>
+										<td>${draft.signDate}</td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+								</c:forEach>
+								<!-- 기안 리스트 1줄 -->
 							</tbody>
 						</table>
 					</div>

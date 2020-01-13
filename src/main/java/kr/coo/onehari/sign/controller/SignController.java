@@ -49,9 +49,11 @@ public class SignController {
 
 	//홈 화면 김정하 / 2020. 1. 7
 	@RequestMapping("signForm.hari")
-	public String signForm(Model model, String msg, String isOk) {
+	public String signForm(String draftEmp, Model model, String msg, String isOk) {
+		//전자결재 기안 리스트
+		List<SignDto> signDraftList = signService.selectSignDraftListHome(draftEmp);
 		
-		
+		model.addAttribute("signDraftList", signDraftList);
 		model.addAttribute("msg", msg);
 		model.addAttribute("isOk", isOk);
 		

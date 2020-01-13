@@ -1,6 +1,7 @@
 package kr.coo.onehari.sign.service;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class SignService {
 	@Autowired
 	private SqlSession sqlsession;
 	
-	//폼 등록하기 김정하 / 2020. 1. 8
+	//문서기안 김정하 / 2020. 1. 8
 	public int insertSign(SignDto sign) {
 		int result = 0;
 		SignDao dao = sqlsession.getMapper(SignDao.class);
@@ -34,5 +35,18 @@ public class SignService {
 			log.debug("insertSign : " + e.getMessage());
 		}
 		return result;
+	}
+	
+	//전자결재 기안 리스트 (전자결재 홈) 김정하 / 2020. 1. 13
+	public List<SignDto> selectSignDraftListHome(String draftEmp){
+		List<SignDto> signList = null;
+		SignDao dao = sqlsession.getMapper(SignDao.class);
+		
+		try {
+			signList = dao.selectSignDraftListHome(draftEmp);
+		} catch (ClassNotFoundException | SQLException e) {
+			log.debug("selectSignListHome : " + e.getMessage());
+		}
+		return signList;
 	}
 }
