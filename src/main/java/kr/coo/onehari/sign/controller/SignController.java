@@ -54,8 +54,12 @@ public class SignController {
 		
 		//전자결재 기안 리스트
 		List<SignDto> signDraftList = signService.selectSignDraftListHome(draftEmp);
+
+		//전자결재 완료 리스트
+		List<SignDto> signCompletetList = signService.selectSignCompleteListHome(draftEmp);
 		
 		model.addAttribute("signDraftList", signDraftList);
+		model.addAttribute("signCompletetList", signCompletetList);
 		model.addAttribute("msg", msg);
 		model.addAttribute("isOk", isOk);
 		

@@ -44,10 +44,22 @@ public class SignService {
 		
 		try {
 			signDraftList = dao.selectSignDraftListHome(draftEmp);
-			System.out.println(signDraftList);
 		} catch (ClassNotFoundException | SQLException e) {
-			log.debug("selectSignListHome : " + e.getMessage());
+			log.debug("selectSignDraftListHome : " + e.getMessage());
 		}
 		return signDraftList;
+	}
+	
+	//전자결재 완료 리스트 (전자결재 홈) 김정하 / 2020. 1. 13
+	public List<SignDto> selectSignCompleteListHome(String draftEmp){
+		List<SignDto> signCompletetList = null;
+		SignDao dao = sqlsession.getMapper(SignDao.class);
+		
+		try {
+			signCompletetList = dao.selectSignCompleteListHome(draftEmp);
+		} catch (ClassNotFoundException | SQLException e) {
+			log.debug("selectSignCompleteListHome : " + e.getMessage());
+		}
+		return signCompletetList;
 	}
 }

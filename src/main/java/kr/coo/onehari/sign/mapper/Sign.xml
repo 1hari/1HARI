@@ -27,12 +27,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 전자결재 기안 리스트 (전자결재 홈) 김정하 / 2020. 1. 13 -->
 	<select id="selectSignDraftListHome" resultType="kr.coo.onehari.sign.dto.SignDto">
-		SELECT s.SIGNDATE, f.SIGNFORMFORMNAME, s.SIGNTITLE, t.SIGNNAME
+		SELECT s.SIGNNUM, s.SIGNDATE, f.SIGNFORMFORMNAME, s.SIGNTITLE, t.SIGNNAME, s.SIGNCODE
 		FROM sign s JOIN signform f 
 						ON s.SIGNFORMCODE = f.SIGNFORMCODE
 					JOIN signtype t
 						ON s.SIGNCODE = t.SIGNCODE
-		WHERE s.SIGNCODE = 1 AND s.DRAFTEMP = #{draftEmp}
+		WHERE s.SIGNCODE IN(1,2) AND s.DRAFTEMP = #{draftEmp}
+		ORDER BY s.SIGNDATE DESC
+		LIMIT 3
+	</select>
+	
+	<!-- 전자결재 완료 리스트 (전자결재 홈) 김정하 / 2020. 1. 13 -->
+	<select id="selectSignCompleteListHome" resultType="kr.coo.onehari.sign.dto.SignDto">
+		SELECT s.SIGNNUM, s.SIGNDATE, f.SIGNFORMFORMNAME, s.SIGNTITLE, t.SIGNNAME, s.SIGNCODE
+		FROM sign s JOIN signform f 
+						ON s.SIGNFORMCODE = f.SIGNFORMCODE
+					JOIN signtype t
+						ON s.SIGNCODE = t.SIGNCODE
+		WHERE s.SIGNCODE = 3 AND s.DRAFTEMP = #{draftEmp}
 		ORDER BY s.SIGNDATE DESC
 		LIMIT 3
 	</select>

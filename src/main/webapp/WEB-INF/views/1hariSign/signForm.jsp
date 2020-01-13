@@ -102,7 +102,7 @@
 				<!--전자결재 관리2  테이블 -->
 				<div class="card">
 					<div class="card-body">
-						<h5 class="card-title m-b-0">기안 진행 문서</h5>
+						<h5 class="card-title m-b-0">최근 기안 진행 문서</h5>
 					</div>
 					<div class="table-responsive">
 						<table class="table">
@@ -120,8 +120,22 @@
 									<tr>
 										<td>${draft.signDate}</td>
 										<td>${draft.signFormFormName}</td>
-										<td>${draft.signFormFormName}</td>
-										<td>${draft.signName}</td>
+										<td><a href="?signNum=${draft.signNum}">${draft.signTitle}</a></td>
+										<td>
+											<div class="d-flex no-block align-items-center m-t-15">
+                                        		<span>${draft.signName}</span>
+                                    		</div>
+											<div class="progress">
+												<c:choose>
+													<c:when test="${draft.signCode == 1}">
+														<div role="progressbar" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-striped bg-danger" style="width: 30%" aria-valuenow="30"></div>
+													</c:when>
+													<c:otherwise>
+														<div role="progressbar" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-striped bg-success" style="width: 70%" aria-valuenow="70"></div>
+													</c:otherwise>
+												</c:choose>
+											</div>
+										</td>
 									</tr>
 								</c:forEach>
 								<!-- 기안 리스트 1줄 -->
@@ -134,7 +148,7 @@
 				<!--전자결재 관리3  테이블 -->
 				<div class="card">
 					<div class="card-body">
-						<h5 class="card-title m-b-0">완료 문서</h5>
+						<h5 class="card-title m-b-0">최근 완료 문서</h5>
 					</div>
 					<div class="table-responsive">
 						<table class="table">

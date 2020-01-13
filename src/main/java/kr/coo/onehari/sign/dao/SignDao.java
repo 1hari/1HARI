@@ -19,5 +19,7 @@ public interface SignDao {
 	
 	//전자결재 기안 리스트 (전자결재 홈) 김정하 / 2020. 1. 13
 	public List<SignDto> selectSignDraftListHome (String draftEmp) throws ClassNotFoundException, SQLException;
-
+	
+	//전자결재 완료 리스트 (전자결재 홈) 김정하 / 2020. 1. 13
+	public List<SignDto> selectSignCompleteListHome (String draftEmp) throws ClassNotFoundException, SQLException;
 }
