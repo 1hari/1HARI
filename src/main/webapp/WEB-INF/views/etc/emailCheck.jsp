@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script type="text/javascript">
 	//형남 0110 인증번호 창
 		$(function(){
@@ -13,11 +14,10 @@
 				
 				//인증번호 입력값 체크 
 				if($('#userAuthNum').val() == null){
-					alser("인증번호가 입력되지 않았습니다.");
+					alert("인증번호가 입력되지 않았습니다.");
 					$('#authNumCheck').focus();
 				}else if($('#userAuthNum').val() != authNum){
 					alert("인증번호가 맞지 않습니다.");
-					window.self.close();
 				//인증번호 일치
 				}else if($('#userAuthNum').val() == authNum){
 					alert("인증되었습니다.");
@@ -35,9 +35,12 @@
 	</script>
 	<form method="post" action="" name="emailcheck">
 		<div class="form-group" style="text-align:center">
+			<br>
 			<label class="control-label" for="email">인증번호를 입력하세요.</label>
+			<br>
 			<input type="text" class="form-control " id="userAuthNum" name="userAuthNum" style="width:80%;text-align:center;display:inline;"/>
-			<div style="padding-top: 15px">
+			<br>
+				<div style="padding-top: 15px">
 				<button type="button" class="btn btn-primary" id="authNumCheck">확인</button>
 			</div>
 		</div>
