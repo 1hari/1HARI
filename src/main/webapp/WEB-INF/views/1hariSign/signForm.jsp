@@ -34,34 +34,51 @@
 			<div class="col-12">
 
 				<!--전자결재 관리1  테이블 -->
-
 				<div class="card">
 					<div class="card-body">
-						<h5 class="card-title m-b-0">결재할 문서</h5>
+						<h5 class="card-title m-b-0">결재 대기 문서</h5>
 					</div>
 					<div class="table-responsive">
 						<table class="table">
 							<thead class="thead-light">
 								<tr>
-									<th scope="col">Rendering engine</th>
-									<th scope="col">Browser</th>
-									<th scope="col">Platform(s)</th>
-									<th scope="col">결재 단계</th>
+									<th scope="col">기안일</th>
+									<th scope="col">결재양식</th>
+									<th scope="col">제목</th>
+									<th scope="col">결재상태</th>
 								</tr>
 							</thead>
 							<tbody class="customtable">
-								<tr>
-									<td>Trident</td>
-									<td>Internet Explorer 4.0</td>
-									<td>Win 95+</td>
-									<td>4</td>
-								</tr>
+								<!-- 결재대기 리스트 1줄 -->
+								<c:forEach var="waiting" items="${requestScope.signWaitingList}">
+									<tr>
+										<td>${waiting.signDate}</td>
+										<td>${waiting.signFormFormName}</td>
+										<td><a href="?signNum=${waiting.signNum}">${waiting.signTitle}</a></td>
+										<td>
+											<div class="d-flex no-block align-items-center m-t-15">
+                                        		<span>${waiting.signName}</span>
+                                    		</div>
+											<div class="progress">
+												<c:choose>
+													<c:when test="${waiting.signCode == 1}">
+														<div role="progressbar" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-striped bg-danger" style="width: 30%" aria-valuenow="30"></div>
+													</c:when>
+													<c:otherwise>
+														<div role="progressbar" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-striped" style="width: 70%" aria-valuenow="70"></div>
+													</c:otherwise>
+												</c:choose>
+											</div>
+										</td>
+									</tr>
+								</c:forEach>
+								<!-- 결재대기 리스트 1줄 -->
 							</tbody>
 						</table>
 					</div>
 				</div>
 				<!--데이터 테이블1 끝 -->
-
+				<hr>
 				<!--전자결재 관리2  테이블 -->
 				<div class="card">
 					<div class="card-body">
@@ -107,7 +124,7 @@
 					</div>
 				</div>
 				<!--데이터 테이블2 끝 -->
-
+				<hr>
 				<!--전자결재 관리3  테이블 -->
 				<div class="card">
 					<div class="card-body">
@@ -146,7 +163,7 @@
 					</div>
 				</div>
 				<!--데이터 테이블3 끝 -->
-				
+				<hr>
 				<!--전자결재 관리4  테이블 -->
 				<div class="card">
 					<div class="card-body">

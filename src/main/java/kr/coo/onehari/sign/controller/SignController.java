@@ -61,9 +61,13 @@ public class SignController {
 		//전자결재 반려 리스트
 		List<SignDto> signReturnList = signService.selectSignReturnListHome(draftEmp);
 		
+		//전자결재 결재대기 리스트
+		List<SignDto> signWaitingList = signService.selectSignWaitingListHome(draftEmp);
+		
 		model.addAttribute("signDraftList", signDraftList);
 		model.addAttribute("signCompletetList", signCompletetList);
 		model.addAttribute("signReturnList", signReturnList);
+		model.addAttribute("signWaitingList", signWaitingList);
 		model.addAttribute("msg", msg);
 		model.addAttribute("isOk", isOk);
 		

@@ -63,6 +63,7 @@ public class SignService {
 		return signCompletetList;
 	}
 	
+	//전자결재 반려 리스트 (전자결재 홈) 김정하 / 2020. 1. 13
 	public List<SignDto> selectSignReturnListHome (String draftEmp){
 		List<SignDto> signReturnList = null;
 		SignDao dao = sqlsession.getMapper(SignDao.class);
@@ -73,5 +74,18 @@ public class SignService {
 			log.debug("selectSignCompleteListHome : " + e.getMessage());
 		}
 		return signReturnList;
+	}
+	
+	//전자결재 결재대기 리스트 (전자결재 홈) 김정하 / 2020. 1 13
+	public List<SignDto> selectSignWaitingListHome (String draftEmp){
+		List<SignDto> signWaitingList = null;
+		SignDao dao = sqlsession.getMapper(SignDao.class);
+		
+		try {
+			signWaitingList = dao.selectSignWaitingListHome(draftEmp);
+		} catch (ClassNotFoundException | SQLException e) {
+			log.debug("selectSignWaitingListHome : " + e.getMessage());
+		}
+		return signWaitingList;
 	}
 }
