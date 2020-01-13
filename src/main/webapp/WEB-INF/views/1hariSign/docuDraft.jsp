@@ -40,7 +40,7 @@
 			<div class="col-12">
 				<div class="container">
 					<!--form 태그 시작 -->
-					<form action="" method="POST" enctype="multipart/form-data">
+					<form action="" method="POST" enctype="multipart/form-data" id="draftForm">
 						<div class="row">
 							<div class="col-md-2">
 								<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#signModal">결재자 선택</button>
@@ -81,7 +81,7 @@
 							<!-- input 태그 -->
 							<div class="col-md-12">
 								<input type="text" class="form-control" id="signTitle" name="signTitle" placeholder="제목" style="width:93%; display: inline;">
-								<button type="submit" class="btn btn-success" style="display: inline-block;">기안</button>
+								<button type="button" id="draftSubmit" class="btn btn-success" style="display: inline-block;">기안</button>
 							</div>
 						</div><!-- row 끝 -->
 						
@@ -100,7 +100,7 @@
 							</div>
 						</div>
 						<input type="hidden" id="draftEmp" name="draftEmp" value="${emp.empNum}">
-						<input type="hidden" value="${requestScope.signFormCode}" id="signFormCode" name="signFormCode" >
+<%-- 						<input type="hidden" value="${requestScope.signFormCode}" id="signFormCode" name="signFormCode" > --%>
 					</form>
 				</div><!-- container -->
 			</div><!-- col-12 끝 -->
@@ -112,8 +112,25 @@
 <script src="${pageContext.request.contextPath}/resources/hari/assets/extra-libs/multicheck/jquery.multicheck.js"></script>
 <script src="${pageContext.request.contextPath}/resources/hari/assets/extra-libs/multicheck/datatable-checkbox-init.js"></script>
 
+<!-- SweetAlert -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 <script>
 	$(function(){
+		var icon;
+		if('${reqiestScope.isOk}' == 'true'){
+			icon = 'success';
+		}else {
+			icon = 'warning';
+		}
+
+		if('${requestScope.msg}' != ''){
+			swal({
+				text: "${requestScope.msg}",
+				icon: icon,
+				button: "닫기"
+			});
+		}
 		CKEDITOR.replace('signContent', {
 			// 도구 모음 정의: https://ckeditor.com/docs/ckeditor4/latest/features/toolbar
 			// 기본적으로 CDN의 전체 사전 설정은 필요 이상의 기능을 제공합니다.
@@ -207,6 +224,33 @@
 			}
 			
 		});//결재자 클릭 끝
+
+		//기안submit 클릭
+		$('#draftSubmit').click(function(){
+			let submit = false;
+			let signEmp = false;
+			//console.log($('#empName1').html().trim() == "");
+			//console.log($('#empName2').html());
+			
+			//결재선 확인
+			if( $('#empName1').html().trim() == "" || $('#empName1').html().trim() == "" ){
+				swal({
+					text: "결재선 확인바랍니다.",
+					icon: "warning",
+					button: "닫기"
+				});
+			}else {
+				signEmp = true;
+			}
+			
+			
+			//if($('#'))
+
+			if(signEmp){
+				draftForm.submit();
+			}
+			
+		}) //기안 클릭 끝
 			
 	});//document ready 끝
 </script>

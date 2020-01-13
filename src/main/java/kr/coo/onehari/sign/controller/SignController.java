@@ -49,13 +49,13 @@ public class SignController {
 
 	//홈 화면 김정하 / 2020. 1. 7
 	@RequestMapping("signForm.hari")
-	public String signForm() {
+	public String signForm(String msg, String isOk) {
 		return "1hariSign.signForm";
 	}	
 	
 	//문서기안 화면 김정하 / 2020. 1. 8~
 	@RequestMapping(value="docuDraft.hari", method = RequestMethod.GET)
-	public String formDraft(String signFormCode, Model model, Principal principal) {
+	public String formDraft(String signFormCode, Model model, Principal principal,String msg, String isOk) {
 		
 		//폼가져오기
 		SignFormDto form = signFormService.selectForm(signFormCode);
@@ -73,6 +73,10 @@ public class SignController {
 		//사원 가져오기
 		List<EmpDto> empList = empService.empDefaultList();
 		model.addAttribute("empList", empList);
+		
+		//성공,실패 메시지 전달
+		model.addAttribute("msg", msg);
+		model.addAttribute("isOk", isOk);
 		
 		return "1hariSign.docuDraft";
 	}
@@ -105,8 +109,8 @@ public class SignController {
 				}
 			}
 		}
-//		sign.setSignFileName(filename);
-		int result = 0;//signService.insertSign(sign);
+		sign.setSignFileName(filename);
+		int result = signService.insertSign(sign);
 		String view = "";
 			
 		if(result > 0 ) { //DB insert 성공시
@@ -115,7 +119,8 @@ public class SignController {
 			model.addAttribute("isOk", "true");
 			
 		}else {
-			view = "1hariSign.docuDraft";
+			view = "redirect:docuDraft.hari";
+			model.addAttribute("signFormCode", sign.getSignFormCode());
 			model.addAttribute("msg", "기안 실패 되었습니다. 다시 확인 바랍니다.");
 			model.addAttribute("isOk", "false");
 			
