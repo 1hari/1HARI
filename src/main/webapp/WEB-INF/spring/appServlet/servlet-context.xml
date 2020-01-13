@@ -39,14 +39,22 @@
 			</beans:list>
 		</beans:property>
 	</beans:bean>
+	
+	<!-- Bean Name View Resolver -->
+	<beans:bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<beans:property name="order" value="1" />
+	</beans:bean>
+	
 	<beans:bean id="urlBasedViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 		<beans:property name="viewClass" value="org.springframework.web.servlet.view.tiles2.TilesView" />
+		<beans:property name="order" value="1" />
 	</beans:bean> 
 
 	<!-- @Transactional Annotation 적용하기 위해서 -->
 	<beans:bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
     	<beans:property name="dataSource" ref="driverManagerDataSource" /> 
 	</beans:bean>
+	
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 	
 </beans:beans>
