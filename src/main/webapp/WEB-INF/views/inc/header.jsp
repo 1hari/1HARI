@@ -98,12 +98,13 @@ $(function(){
 	<!-- ============================================================== -->
 	<!-- Topbar header - style you can find in pages.scss -->
 
+<!-- 원래 inc 헤더 임 !!!!!  -->
 
 	<!--상단 topnavbar 시작 -->
 	<header class="topbar" data-navbarbg="skin5">
 
 		<nav class="navbar top-navbar navbar-expand-md navbar-dark">
-			<div class="navbar-header" data-logobg="skin5">
+			<div class="navbar-header" data-logobg="skin5" id="main-header" data-background-color="purple">
 				<!-- 모바일용 토글러-->
 				<a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)">
 					<i class="ti-menu ti-close"></i>

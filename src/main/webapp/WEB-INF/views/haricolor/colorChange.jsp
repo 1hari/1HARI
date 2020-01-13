@@ -24,7 +24,6 @@
 		</div>
 		<!--메인 컨텐츠 끝  -->
 
-
 		<!-- Custom template | don't include it in your project! -->
 		<div class="custom-template">
 			<div class="title">Settings</div>

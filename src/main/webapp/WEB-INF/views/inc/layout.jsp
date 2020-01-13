@@ -12,6 +12,8 @@
 		<tiles:getAsString name="title"/>	
 	</title>
 	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	
 	<!-- Favicon 아이콘-->
     <link rel="icon" type="image/png" sizes="16x16" href="${pageContext.request.contextPath}/resources/hari/assets/images/favicon.png">
     
