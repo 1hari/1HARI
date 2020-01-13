@@ -40,21 +40,35 @@
 						<h5 class="card-title"></h5>
 						<div class="table-responsive">
 							<table id="zero_config" class="table table-striped table-bordered">
+						<form action="" id="excelForm" name="excelForm" method="post" enctype="multipart/form-data">
 								<div style="text-align: right; margin-bottom: 5%;">
-									<button type="button" class="btn m-t-5 btn-info btn-block waves-effect waves-light" style="width: 20%; background-color: #20B2AA; margin-right: 1%;">
-										<a href="empJoin.hari" style="color: white;">사원등록</a>
-									</button>
-									<button type="button" class="btn m-t-5 btn-info btn-block waves-effect waves-light" style="width: 20%; background-color: #20B2AA; margin-right: 1%;">
-										<a href="hr_join&resign2.jsp" style="color: white;">엑셀다운로드</a>
-									</button>
-									<button type="button" class="btn m-t-5 btn-info btn-block waves-effect waves-light" style="width: 20%; background-color: #20B2AA; margin-right: 1%;">
-										<a href="hr_join&resign2.jsp" style="color: white;">엑셀업로드</a>
-									</button>
-									<button type="button" class="btn m-t-5 btn-info btn-block waves-effect waves-light" style="width: 20%; background-color: #20B2AA; margin-right: 1%;">
-										<a href="hr_join&resign2.jsp" style="color: white;">양식받기</a>
-									</button>
+									<a href="empJoin.hari" style="color: white;">
+										<button type="button" class="btn m-t-5 btn-info btn-block waves-effect waves-light" 
+												style="width: 20%; background-color: #20B2AA; margin-right: 1%;">
+											사원등록
+										</button>
+									</a>
+									<a href="excelDownload.hari" style="color: white;">
+										<button type="button" class="btn m-t-5 btn-info btn-block waves-effect waves-light" 
+												style="width: 20%; background-color: #20B2AA; margin-right: 1%;" onclick="doExcelDownloadProcess()">
+											Excel 다운로드
+										</button>
+									</a>
+									<a href="hr_join&resign2.jsp" style="color: white;">
+										<button type="button" class="btn m-t-5 btn-info btn-block waves-effect waves-light" 
+												style="width: 20%; background-color: #20B2AA; margin-right: 1%;" onclick="doExcelUploadProcess()">
+											Excel 업로드
+										</button>
+									</a>
+									<a href="hr_join&resign2.jsp" style="color: white;">
+										<button type="button" class="btn m-t-5 btn-info btn-block waves-effect waves-light" 
+												style="width: 20%; background-color: #20B2AA; margin-right: 1%;">
+											양식 받기
+										</button>
+									</a>
 								</div>
-								
+						</form>
+						<form action="" id="excelForm" name="excelForm" method="post" enctype="multipart/form-data">
 								<thead>
 									<tr>
 										<th>
@@ -120,6 +134,7 @@
 										<th></th>
 									</tr>
 								</tfoot>
+								</form>
 							</table>
 						</div>
 
@@ -158,4 +173,26 @@
 	*       Basic Table                   *
 	****************************************/
 	$('#zero_config').DataTable();
+
+	/* Excel Upload / Download를 위한 script */
+    function doExcelUploadProcess(){
+        var form = new FormData(document.getElementById('excelForm'));
+        $.ajax({
+            url: "uploadExcelFile",
+            data: form,
+            processData: false,
+            contentType: false,
+            type: "POST",
+            success: function(data){
+                console.log(data);
+                document.getElementById('result').innerHTML = JSON.stringify(data);
+            }
+        })
+    }
+    
+    function doExcelDownloadProcess(){
+        var form = document.excelForm;
+        form.action = "downloadExcelFile";
+        form.submit();
+    }
 </script>
