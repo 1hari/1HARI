@@ -1,6 +1,7 @@
 package kr.coo.onehari.hr.controller;
 
 import java.security.Principal;
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -174,7 +175,7 @@ public class AjaxController {
 		return result > 0 ? true : false;
 	}
 	
-	//형남 0112 출근조회
+	//형남 0112 출근횟수
 	@RequestMapping(value = "getTotalTA.hari", method = RequestMethod.POST)
 	public int getTotalTA(Principal pri) {
 		System.out.println("pri.toString(): " + pri.toString());
@@ -187,5 +188,20 @@ public class AjaxController {
 		}
 		return result;
 	}
+	
+	//형남 0113 금일 출근시간 가져오기
+	@RequestMapping(value = "getStartWorkTime.hari", method = RequestMethod.POST)
+	public java.util.Date getStartWorkTime(Principal pri) {
+		System.out.println("pri.toString(): " + pri.toString());
+		java.util.Date startTime = null;
+		try {
+			startTime = empSercive.getStartWorkTime(pri.getName());
+		} catch (Exception e) {
+			System.out.println("getStartWorkTime 예외발생: " + e.getMessage());
+			log.debug("getStartWorkTime 예외발생: " + e.getMessage());
+		}
+		return startTime;
+	}
+	
 	
 }

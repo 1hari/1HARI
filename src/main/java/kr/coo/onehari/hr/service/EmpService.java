@@ -1,6 +1,7 @@
 package kr.coo.onehari.hr.service;
 
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -219,4 +220,22 @@ public class EmpService {
 		}
 		return result;
 	}
+	
+    //형남 0112 오늘 출근이 있는지
+    public java.util.Date getStartWorkTime(String empNumStr) {
+        EmpDao dao = sqlsession.getMapper(EmpDao.class);
+        Date startTime = null;
+        int empNum=Integer.parseInt(empNumStr);
+        try {
+            startTime=dao.getStartWorkTime(empNum);
+            if(startTime !=null) {
+                System.out.println("출근시간: " + startTime);
+            }else {
+                System.out.println("출근시간 못가져옴");
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            log.debug("getStartWorkTime : " + e.getMessage());
+        }
+        return startTime;
+    }
 }

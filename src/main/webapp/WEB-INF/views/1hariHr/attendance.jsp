@@ -3,18 +3,72 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript">
 $(function(){
-	var totalTA; //총 근무일(출근 총 합)
+	function date_to_str(format)
+	{
+	    var year = format.getFullYear();
+
+	    var month = format.getMonth() + 1;
+
+	    if(month<10) month = '0' + month;
+
+	    var date = format.getDate();
+
+	    if(date<10) date = '0' + date;
+
+	    var hour = format.getHours();
+
+	    if(hour<10) hour = '0' + hour;
+
+	    var min = format.getMinutes();
+
+	    if(min<10) min = '0' + min;
+
+	    var sec = format.getSeconds();
+
+	    if(sec10) sec = '0' + sec;
+	    return year + "-" + month + "-" + date + " " + hour + ":" + min + ":" + sec;
+	}
+	
+	var todayWorkTime;
+	var currTime;
+	console.log(currTime);
 	//오늘 퇴근기록 체크
 	$.ajax({
 		url: "${pageContext.request.contextPath}/ajax/getTotalTA.hari",
 		type: "post",
 		dataType: "json",
-		success: function(data) {
+		success: function(totalTA) {
 			//퇴근근기록이 있으면 true, 없으면 false
-			totalTA=data;
-			console.log(data);
+			$('#totalTA').append(totalTA);
 		}
 	})
+	
+	$.ajax({
+		url: "${pageContext.request.contextPath}/ajax/getWeekTotalTime.hari",
+		type: "post",
+		dataType: "json",
+		success: function(weekTotalTime) {
+			//퇴근근기록이 있으면 true, 없으면 false
+			$('#weekTotalTime').append(weekTotalTime);
+		}
+	})
+	//오늘 일한시간 구하기
+	function updateTime(){
+		$.ajax({
+			url: "${pageContext.request.contextPath}/ajax/getStartWorkTime.hari",
+			type: "post",
+			dataType: "json",
+			success: function(startWorkTime) {
+				//퇴근근기록이 있으면 true, 없으면 false
+				currTime = new Date(startWorkTime);
+				console.log(currTime);
+				var sysdate = date_to_str(currTime);
+				console.log(sysdate);
+			}
+		})
+	}
+	updateTime();
+//	tid=setInterval('updateTime()',1000); // 타이머 1초간격으로 수행
 });
 </script>
 <!-- Custom CSS -->
@@ -78,7 +132,7 @@ $(function(){
 										<div class="col col-stats">
 											<div class="numbers">
 												<p class="card-category">총 근무일</p>
-												<h4 class="card-title">150</h4>
+												<h4 class="card-title" id="totalTA"></h4>
 											</div>
 										</div>
 									</div>
@@ -96,7 +150,7 @@ $(function(){
 										</div>
 										<div class="col col-stats">
 											<div class="numbers">
-												<p class="card-category">총 근무</p>
+												<p class="card-category">총 근무시간</p>
 												<h4 class="card-title">1,345</h4>
 											</div>
 										</div>
@@ -115,8 +169,8 @@ $(function(){
 										</div>
 										<div class="col col-stats">
 											<div class="numbers">
-												<p class="card-category">총 근무</p>
-												<h4 class="card-title">23</h4>
+												<p class="card-category">이번주 근무시간</p>
+												<h4 class="card-title" id="weekTotalTime">23</h4>
 											</div>
 										</div>
 									</div>
@@ -134,7 +188,7 @@ $(function(){
 										</div>
 										<div class="col col-stats">
 											<div class="numbers">
-												<p class="card-category">총근무</p>
+												<p class="card-category">오늘 근무시간</p>
 												<h4 class="card-title">45</h4>
 											</div>
 										</div>

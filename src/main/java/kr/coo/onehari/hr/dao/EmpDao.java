@@ -1,6 +1,7 @@
 package kr.coo.onehari.hr.dao;
 
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 import kr.coo.onehari.hr.dto.EmpDto;
@@ -63,4 +64,7 @@ public interface EmpDao {
 	
 	//사원 출근기록 조회 오형남 / 2020. 1. 12
 	public int getTotalTA(int empNum) throws ClassNotFoundException, SQLException;
+	
+    //사원 출근시간 가져오기 오형남 / 2020. 1. 13
+    public Date getStartWorkTime(int empNum) throws ClassNotFoundException, SQLException;
 }
