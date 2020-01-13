@@ -1,25 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript">
 $(function(){
-	//오늘 퇴근기록 체크
-	$.ajax({
-		url: "${pageContext.request.contextPath}/ajax/getTotalTA.hari",
-		type: "post",
-		dataType: "json",
-		success: function(totalTA) {
-			$('#totalTA').append(totalTA);
-		}
-	});
-	$.ajax({
-		url: "${pageContext.request.contextPath}/ajax/getTodayTotalTime.hari",
-		type: "post",
-		dataType: "text",
-		success: function(getTodayTotalTime) {
-			$('#getTodayTotalTime').append(getTodayTotalTime);
-		}
-	});
+
+
+
 });
 </script>
 <!-- Custom CSS -->
@@ -102,7 +87,7 @@ $(function(){
 										<div class="col col-stats">
 											<div class="numbers">
 												<p class="card-category">총 근무시간</p>
-												<h4 class="card-title">1,345</h4>
+												<h4 class="card-title" id="getTotalTime"></h4>
 											</div>
 										</div>
 									</div>
@@ -121,7 +106,7 @@ $(function(){
 										<div class="col col-stats">
 											<div class="numbers">
 												<p class="card-category">이번주 근무시간</p>
-												<h4 class="card-title" id="weekTotalTime">23</h4>
+												<h4 class="card-title" id=getWeekTotalTime></h4>
 											</div>
 										</div>
 									</div>
@@ -140,7 +125,7 @@ $(function(){
 										<div class="col col-stats">
 											<div class="numbers">
 												<p class="card-category">오늘 근무시간</p>
-												<h4 class="card-title" id="getTodayTotalTime"></h4>
+												<h4 class="card-title" id="getWorkTime"></h4>
 											</div>
 										</div>
 									</div>

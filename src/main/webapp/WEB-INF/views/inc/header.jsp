@@ -7,7 +7,16 @@
 $(function(){
 	var isStart=false; //오늘 출근했는지
 	var isEnd=false;//오늘 퇴근했는지
-
+	//총 근무일
+	$.ajax({
+		url: "${pageContext.request.contextPath}/ajax/getTotalTA.hari",
+		type: "post",
+		dataType: "json",
+		success: function(totalTA) {
+			console.log(totalTA);
+			$('#totalTA').append(totalTA);
+		}
+	});
 	
 	//오늘 퇴근기록 체크
 	$.ajax({
@@ -16,7 +25,41 @@ $(function(){
 		dataType: "json",
 		success: function(data) {
 			//퇴근근기록이 있으면 true, 없으면 false
+			console.log(data);
 			isEnd=data;
+
+			if(isEnd==false){
+				//false 면 현재시간 - 출근시간
+				console.log('getWorkTime ' + ': ' + isEnd);
+				$.ajax({
+					url: "${pageContext.request.contextPath}/ajax/getWorkTime.hari",
+					type: "post",
+					dataType: "text",
+					success: function(getWorkTime) {
+						if(getWorkTime.trim() != "empty" ){
+							console.log('getWorkTime!=null');
+							$('#getWorkTime').text('');
+							$('#getWorkTime').append(getWorkTime);
+						} else{
+							console.log('getWorkTime==null');
+							$('#getWorkTime').text('');
+							$('#getWorkTime').append('00:00');
+						}
+					}
+				});
+			} else{
+				//true면 퇴근시간 - 출근시간
+				$.ajax({
+					url: "${pageContext.request.contextPath}/ajax/getTodayTotalTime.hari",
+					type: "post",
+					dataType: "text",
+					success: function(getTodayTotalTime) {
+						console.log('getTodayTotalTime ' + ': ' + isEnd);
+						$('#getWorkTime').text('');
+						$('#getWorkTime').append(getTodayTotalTime);
+					}
+				});
+			}
 		}
 	})
 	//오늘 출근기록 체크
@@ -46,7 +89,18 @@ $(function(){
 			type: "post",
 			dataType: "json",
 			success: function(data) {
-			//있으면 true, 없으면 false
+			//총 근무일 갱신
+				$.ajax({
+					url: "${pageContext.request.contextPath}/ajax/getTotalTA.hari",
+					type: "post",
+					dataType: "json",
+					success: function(totalTA) {
+						console.log(totalTA);
+						$('#totalTA').text('');
+						$('#totalTA').append(totalTA);
+					}
+				});
+				//있으면 true, 없으면 false
 				if(data==true){
 					alert('출근 등록되었습니다.');	
 					$('#endWork').removeAttr('disabled');	
@@ -75,6 +129,40 @@ $(function(){
 			}
 		})
 	})
+	
+	//이번주 총 근무
+	$.ajax({
+		url: "${pageContext.request.contextPath}/ajax/getWeekTotalTime.hari",
+		type: "post",
+		dataType: "text",
+		success: function(getWeekTotalTime) {
+			if(getWeekTotalTime.trim() != "empty" ){
+				$('#getWeekTotalTime').text('');
+				$('#getWeekTotalTime').append(getWeekTotalTime);
+			} else{
+				$('#getWeekTotalTime').text('');
+				$('#getWeekTotalTime').append('00:00');
+			}
+		}
+	});
+	
+	//총 근무
+	$.ajax({
+		url: "${pageContext.request.contextPath}/ajax/getTotalTime.hari",
+		type: "post",
+		dataType: "text",
+		success: function(getTotalTime) {
+			if(getTotalTime.trim() != "empty" ){
+				$('#getTotalTime').text('');
+				$('#getTotalTime').append(getTotalTime);
+			} else{
+				$('#getTotalTime').text('');
+				$('#getTotalTime').append('00:00');
+			}
+		}
+	});
+
+	
 });
 
 

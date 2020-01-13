@@ -240,6 +240,24 @@ public class EmpService {
     }
     
     //형남 0113 오늘 총 근무시간
+    public String getWorkTime(String empNumStr) {
+    	EmpDao dao = sqlsession.getMapper(EmpDao.class);
+    	String totalTime = null;
+    	int empNum=Integer.parseInt(empNumStr);
+    	try {
+    		totalTime=dao.getWorkTime(empNum);
+    		if(totalTime !=null) {
+    			System.out.println("현재까지 근무시간: " + totalTime);
+    		}else {
+    			System.out.println("현재까지 근무시간 못가져옴");
+    		}
+    	} catch (ClassNotFoundException | SQLException e) {
+    		log.debug("getWorkTime : " + e.getMessage());
+    	}
+    	return totalTime;
+    }
+    
+    //형남 0113 오늘 총 근무시간
     public String getTodayTotalTime(String empNumStr) {
     	EmpDao dao = sqlsession.getMapper(EmpDao.class);
     	String totalTime = null;
@@ -247,9 +265,9 @@ public class EmpService {
     	try {
     		totalTime=dao.getTodayTotalTime(empNum);
     		if(totalTime !=null) {
-    			System.out.println("오늘 근무시간: " + totalTime);
+    			System.out.println("오늘 총 근무시간: " + totalTime);
     		}else {
-    			System.out.println("오늘 근무시간 못가져옴");
+    			System.out.println("오늘 총 근무시간 못가져옴");
     		}
     	} catch (ClassNotFoundException | SQLException e) {
     		log.debug("getTodayTotalTime : " + e.getMessage());
@@ -258,9 +276,9 @@ public class EmpService {
     }
     
     //형남 0113 이번주 총 근무시간
-    public Date getWeekTotalTime(String empNumStr) {
+    public String getWeekTotalTime(String empNumStr) {
     	EmpDao dao = sqlsession.getMapper(EmpDao.class);
-    	Date totalTime = null;
+    	String totalTime = null;
     	int empNum=Integer.parseInt(empNumStr);
     	try {
     		totalTime=dao.getWeekTotalTime(empNum);
@@ -274,4 +292,24 @@ public class EmpService {
     	}
     	return totalTime;
     }
+    
+    //형남 0113 총 근무시간
+    public String getTotalTime(String empNumStr) {
+    	EmpDao dao = sqlsession.getMapper(EmpDao.class);
+    	String totalTime = null;
+    	int empNum=Integer.parseInt(empNumStr);
+    	try {
+    		totalTime=dao.getTotalTime(empNum);
+    		if(totalTime !=null) {
+    			System.out.println(" 총 근무시간: " + totalTime);
+    		}else {
+    			System.out.println("총 근무시간 못가져옴");
+    		}
+    	} catch (ClassNotFoundException | SQLException e) {
+    		log.debug("getTotalTime : " + e.getMessage());
+    	}
+    	return totalTime;
+    }
+    
+
 }

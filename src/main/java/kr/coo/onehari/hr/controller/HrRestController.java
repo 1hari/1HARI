@@ -189,14 +189,33 @@ public class HrRestController {
 		return result;
 	}
 	
-	//형남 0113 오늘 근무시간
+	//형남 0113 현재까지 근무시간
+	@RequestMapping(value = "getWorkTime.hari", method = RequestMethod.POST)
+	public String getWorkTime(Principal pri) {
+		System.out.println("pri.toString(): " + pri.toString());
+		String totalTime = null;
+		try {
+			totalTime = empSercive.getWorkTime(pri.getName());
+			if(totalTime==null) {
+				totalTime="empty";
+			}
+		} catch (Exception e) {
+			System.out.println("getWorkTime 예외발생: " + e.getMessage());
+			log.debug("getWorkTime 예외발생: " + e.getMessage());
+		}
+		return totalTime;
+	}
+	
+	//형남 0113 퇴근시간 가져오기
 	@RequestMapping(value = "getTodayTotalTime.hari", method = RequestMethod.POST)
 	public String getTodayTotalTime(Principal pri) {
 		System.out.println("pri.toString(): " + pri.toString());
 		String totalTime = null;
 		try {
 			totalTime = empSercive.getTodayTotalTime(pri.getName());
-			System.out.println("컨트롤러 getTodayTotalTime: " + totalTime);
+			if(totalTime==null) {
+				totalTime="empty";
+			}
 		} catch (Exception e) {
 			System.out.println("getTodayTotalTime 예외발생: " + e.getMessage());
 			log.debug("getTodayTotalTime 예외발생: " + e.getMessage());
@@ -206,14 +225,34 @@ public class HrRestController {
 	
 	//형남 0113 이번주 총 근무시간
 	@RequestMapping(value = "getWeekTotalTime.hari", method = RequestMethod.POST)
-	public Date getWeekTotalTime(Principal pri) {
+	public String getWeekTotalTime(Principal pri) {
 		System.out.println("pri.toString(): " + pri.toString());
-		Date totalTime = null;
+		String totalTime = null;
 		try {
 			totalTime = empSercive.getWeekTotalTime(pri.getName());
+			if(totalTime==null) {
+				totalTime="empty";
+			}
 		} catch (Exception e) {
 			System.out.println("getWeekTotalTime 예외발생: " + e.getMessage());
 			log.debug("getWeekTotalTime 예외발생: " + e.getMessage());
+		}
+		return totalTime;
+	}
+	
+	//형남 0113 총 근무시간
+	@RequestMapping(value = "getTotalTime.hari", method = RequestMethod.POST)
+	public String getTotalTime(Principal pri) {
+		System.out.println("pri.toString(): " + pri.toString());
+		String totalTime = null;
+		try {
+			totalTime = empSercive.getTotalTime(pri.getName());
+			if(totalTime==null) {
+				totalTime="empty";
+			}
+		} catch (Exception e) {
+			System.out.println("getTotalTime 예외발생: " + e.getMessage());
+			log.debug("getTotalTime 예외발생: " + e.getMessage());
 		}
 		return totalTime;
 	}
