@@ -109,6 +109,11 @@
 	<select id="getTotalTA" resultType="Integer">
 		SELECT COUNT(*) FROM TALIST WHERE EMPNUM = #{empNum} AND TACODE=1
 	</select>
+	
+    <!-- 오늘 출근시간 구하기-->
+    <select id="getStartWorkTime" resultType="Date">
+        SELECT TADATE FROM TALIST WHERE EMPNUM=#{empNum} AND DATE(TADATE) = DATE(NOW());
+    </select>
 </mapper>
 
 
