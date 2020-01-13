@@ -102,7 +102,7 @@
 										<form action="" method="post">
 											<c:set var="emp" value="${requestScope.emp}" />
 											<!--왼쪽 input 태그들 -->
-											<div class="col-xs-6" style="margin-top: 3%;">
+											<div class="col-xs-12" style="margin-top: 3%;">
 												<div class="form-group">
 													<label for="empName">이름</label> 
 													<input type="text" id="empName" name="empName" class="form-control" value="${emp.empName}" readonly>
@@ -130,7 +130,7 @@
 											</div>
 											<!--왼쪽 input 태그들 끝-->
 											<!--오른쪽 input 태그들 시작 -->
-											<div class="col-xs-6" style="margin-top: 3%;">
+											<div class="col-xs-12" style="margin-top: 3%;">
 												<div class="form-group">
 													<label for="teamCode">소속</label>
 													<select id="teamSelect" name="teamCode" class="form-control" style="height: 100%;" required>

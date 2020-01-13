@@ -36,6 +36,21 @@
     <!-- Custom JavaScript -->
     <script src="${pageContext.request.contextPath}/resources/hari/dist/js/custom.min.js"></script>
      <!-- dashboard.html에서 필요한 제이쿼리 부분 끝 -->
+     
+     <!-- 색상컬러 변경때문에 추가함  -->
+<%--     <script src="${pageContext.request.contextPath}/resources/colorcode/assets/js/core/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/colorcode/assets/js/core/jquery.3.2.1.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/colorcode/assets/js/core/popper.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/colorcode/assets/js/plugin/demo.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/colorcode/assets/js/plugin/ready.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/colorcode/assets/js/plugin/ready.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/colorcode/assets/js/plugin/setting-demo.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/colorcode/assets/sass/azzara/_layouts-colors.scss"></script>
+    <script src="${pageContext.request.contextPath}/resources/colorcode/assets/sass/azzara/_layouts.scss"></script>
+    <script src="${pageContext.request.contextPath}/resources/colorcode/assets/sass/azzara/_responsive.scss"></script>
+    <script src="${pageContext.request.contextPath}/resources/colorcode/assets/sass/plugin/_toggle.scss"></script> --%>
+    
+    
      <script type="text/javascript">
 	
      </script>

@@ -81,6 +81,59 @@ $(function(){
 		})
 	})
 });
+
+
+//수연이가 추가했음 2020.01.13
+//Setting Color
+
+$(window).resize(function() {
+	$(window).width(); 
+});
+
+
+$('.changeMainHeaderColor').on('click', function(){
+	if($(this).attr('data-color') == 'default'){
+		$('#main-header').removeAttr('data-background-color');
+	} else {
+		$('#main-header').attr('data-background-color', $(this).attr('data-color'));
+	}
+
+	$(this).parent().find('.changeMainHeaderColor').removeClass("selected");
+	$(this).addClass("selected");
+	layoutsColors();
+});
+
+$('.changeBackgroundColor').on('click', function(){
+	$('.page-wrapper').removeAttr('data-background-color');
+	$('.page-wrapper').attr('data-background-color', $(this).attr('data-color'));
+	$(this).parent().find('.changeBackgroundColor').removeClass("selected");
+	$(this).addClass("selected");
+});
+
+var toggle_customSidebar = false,
+custom_open = 0;
+
+if(!toggle_customSidebar) {
+	var toggle = $('.custom-template .custom-toggle');
+
+	toggle.on('click', (function(){
+		if (custom_open == 1){
+			$('.custom-template').removeClass('open');
+			toggle.removeClass('toggled');
+			custom_open = 0;
+		}  else {
+			$('.custom-template').addClass('open');
+			toggle.addClass('toggled');
+			custom_open = 1;
+		}
+	})
+	);
+	toggle_customSidebar = true;
+}
+
+/// ready.js 
+
+
 </script>
 <!-- ============================================================== -->
 <!-- Preloader - style you can find in spinners.css -->
@@ -101,10 +154,10 @@ $(function(){
 <!-- 원래 inc 헤더 임 !!!!!  -->
 
 	<!--상단 topnavbar 시작 -->
-	<header class="topbar" data-navbarbg="skin5">
+	<header class="topbar"  id="main-header" data-background-color="purple"> <!-- data-navbarbg="skin5" -->
 
 		<nav class="navbar top-navbar navbar-expand-md navbar-dark">
-			<div class="navbar-header" data-logobg="skin5" id="main-header" data-background-color="purple">
+			<div class="navbar-header"  id="main-header" data-background-color="purple"> <!-- data-logobg="skin5" -->
 				<!-- 모바일용 토글러-->
 				<a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)">
 					<i class="ti-menu ti-close"></i>
@@ -115,7 +168,7 @@ $(function(){
 				<a class="navbar-brand" href="${pageContext.request.contextPath}/main.hari"> <!-- 로고 아이콘 시작 -->
 					<b class="logo-icon p-l-10"> <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
 						<!-- 로고 아이콘 png-->
-						<img src="${pageContext.request.contextPath}/resources/hari/assets/images/logo-img-final.png" alt="homepage" class="light-logo" style="width: 30%; height: 20%;" />
+						<img src="${pageContext.request.contextPath}/resources/hari/assets/images/logo-img-final.png" alt="homepage" class="light-logo" style="width: 30%; height: 20%; color:#2ab2aa;" />
 					</b><!--로고 아이콘 끝  -->
 					<!-- 로고 글씨 시작 -->
 					<span class="logo-text">
@@ -137,14 +190,14 @@ $(function(){
 
 
 			<!--top navbar 더보기 & 검색 -->
-			<div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
+			<div class="navbar-collapse collapse" id="main-header" data-background-color="purple"> <!-- id="navbarSupportedContent" data-navbarbg="skin5" -->
 				<!-- ============================================================== -->
 				<!-- toggle and nav items -->
 				<!-- ============================================================== -->
-				<ul class="navbar-nav float-left mr-auto">
+				<ul class="navbar-nav float-left mr-auto" style = "color:#2ab2aa;">
 					<!--더보기 메뉴 버튼 left bar 이용가능 -->
 					<li class="nav-item d-none d-md-block">
-						<a class="nav-link sidebartoggler waves-effect waves-light" href="javascript:void(0)" data-sidebartype="mini-sidebar">
+						<a class="nav-link sidebartoggler waves-effect waves-light" style = "font-color:#2ab2aa;" href="javascript:void(0)" data-sidebartype="mini-sidebar">
 							<i class="mdi mdi-menu font-24"></i>
 						</a>
 					</li>
@@ -167,7 +220,7 @@ $(function(){
 				<!--top navbar 에서 오른쪽 기능 담당 (출/퇴근과 프로필)-->
 				<ul class="navbar-nav float-right">
 					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<a class="nav-link dropdown-toggle waves-effect waves-dark" style = "color:#2ab2aa;" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<i class="mdi mdi-bell font-24"></i>
 						</a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
