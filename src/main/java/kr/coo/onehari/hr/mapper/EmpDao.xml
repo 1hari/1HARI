@@ -80,10 +80,24 @@
 		LEAVEDATE=#{leaveDate}
 		WHERE EMPNUM=#{empNum}
 	</update>
-	<insert id="insertRole" parameterType="kr.coo.onehari.hr.dto.Role">
+	<insert id="insertRoleaAdmin" parameterType="kr.coo.onehari.hr.dto.Role">
 		INSERT INTO emprolelist 
-		VALUES (#{empNum}, #{roleName})
+		VALUES (#{empNum}, 'ROLE_ADMIN')
+		ON DUPLICATE KEY UPDATE rolename = 'ROLE_ADMIN'
 	</insert>
+	<insert id="insertRoleaPersonnel" parameterType="kr.coo.onehari.hr.dto.Role">
+		INSERT INTO emprolelist 
+		VALUES (#{empNum}, 'ROLE_PERSONNEL')
+		ON DUPLICATE KEY UPDATE rolename = 'ROLE_PERSONNEL'
+	</insert>
+	<delete id="deleteRoleAdmin">
+		DELETE FROM emprolelist
+		WHERE empnum = #{empNum} AND rolename = 'ROLE_ADMIN'
+	</delete>
+	<delete id="deleteRolePersonnel">
+		DELETE FROM emprolelist
+		WHERE empnum = #{empNum} AND rolename = 'ROLE_PERSONNEL'
+	</delete>
 	
    	<!-- 사원 출근기능 형남 0112 -->
 	<insert id="insertStartWorkTA" parameterType="Integer">

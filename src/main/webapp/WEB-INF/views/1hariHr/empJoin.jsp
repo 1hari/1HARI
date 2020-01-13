@@ -113,7 +113,7 @@
 							</div>
 							<div>
 								<label for="phoneNum" style="margin-top: 10px; margin-bottom: 0px;">핸드폰번호</label> 
-								<input id="phoneNum" name="phoneNum" type="text" class="required form-control"> 
+								<input id="phoneNum" name="phoneNum" type="text" class="required form-control" maxlength="13" placeholder="010-0000-0000">
 							</div>
 							<div>
 								<label for="email" style="margin-top: 10px; margin-bottom: 0px;">이메일</label><br>

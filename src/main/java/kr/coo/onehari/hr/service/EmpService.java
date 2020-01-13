@@ -80,11 +80,23 @@ public class EmpService {
 	@Transactional
 	public void empUpdate(EmpDto empdto) {
 		EmpDao empdao = sqlsession.getMapper(EmpDao.class);
-		
 		try {
-			empdao.empUpdate(empdto);
-			empdao.subempUpdate(empdto);
-			empdao.insertRole(empdto);
+			if (empdto.getRoleName().equals("ROLE_USER")) {
+				empdao.empUpdate(empdto);
+				empdao.subempUpdate(empdto);
+				empdao.deleteRolePersonnel(empdto);
+				empdao.deleteRoleAdmin(empdto);
+			} else if (empdto.getRoleName().equals("ROLE_PERSONNEL")) {
+				empdao.empUpdate(empdto);
+				empdao.subempUpdate(empdto);
+				empdao.insertRoleaPersonnel(empdto);
+				empdao.deleteRoleAdmin(empdto);
+			} else if (empdto.getRoleName().equals("ROLE_ADMIN")) {
+				empdao.empUpdate(empdto);
+				empdao.subempUpdate(empdto);
+				empdao.insertRoleaPersonnel(empdto);
+				empdao.insertRoleaAdmin(empdto);
+			}
 		} catch (Exception e) {
 			System.out.println("EmpService empUpdate 예외발생: " + e.getMessage());
 			log.debug("EmpService empUpdate 예외발생: " + e.getMessage());
