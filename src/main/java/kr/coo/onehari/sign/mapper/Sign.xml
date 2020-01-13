@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+작성자: 김정하
+시작: 2020. 1. 13
+완료: 
+내용: 문서기안 작업 시작
+-->
+<mapper namespace="kr.coo.onehari.sign.dao.SignDao">
+
+	<!-- 문서기안 등록하기 김정하 / 2020. 1. 13-->
+	<insert id="insertSign">
+		INSERT INTO sign (DRAFTEMP, EMPSIGN1, EMPSIGN2, SIGNFORMCODE, SIGNTITLE, SIGNCONTENT, SIGNFILENAME, SIGNFILEROOT)
+		VALUES (
+			#{draftEmp}, <!-- 기안자 -->
+			#{empSign1}, <!-- 결재자1 -->
+			#{empSign2}, <!-- 결재자1 -->
+			#{signFormCode}, <!-- 문서양식 코드 -->
+			#{signTitle}, <!-- 결재자1 -->
+			#{signContent}, <!-- 결재내용 -->
+			#{signFileName}, <!-- 첨부파일명 -->
+			#{signFileRoot} <!-- 첨부파일경로 -->
+		)
+	</insert>
+	
+</mapper>

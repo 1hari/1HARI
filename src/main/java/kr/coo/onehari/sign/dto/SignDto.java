@@ -32,3 +32,4 @@ public class SignDto {
 	//파일업로드를 위해서
 	private CommonsMultipartFile file;
 }
+//SignDto(draftEmp=0, empSign1=0, empSign2=0, signFormCode=1, signTitle=null, signContent=null, signDate=null, isSign1=0, isSign2=0, signComment=null, signFileName=null, signFileRoot=null, file=null)

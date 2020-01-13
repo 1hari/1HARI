@@ -21,6 +21,7 @@ import kr.coo.onehari.hr.service.EmpService;
 import kr.coo.onehari.sign.dto.SignDto;
 import kr.coo.onehari.sign.dto.SignFormDto;
 import kr.coo.onehari.sign.service.SignFormService;
+import kr.coo.onehari.sign.service.SignService;
 import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 
@@ -41,6 +42,10 @@ public class SignController {
 	//사원 가져오는 service;
 	@Autowired
 	private EmpService empService;
+	
+	//sign service
+	@Autowired
+	private SignService signService;
 
 	//홈 화면 김정하 / 2020. 1. 7
 	@RequestMapping("signForm.hari")
@@ -72,16 +77,17 @@ public class SignController {
 		return "1hariSign.docuDraft";
 	}
 	
-	//문서기안 화면 김정하 / 2020. 1. 8~
-	@RequestMapping(value="docuDraft.hari", method = RequestMethod.GET)
-	public String formDraft(SignDto sign, HttpServletRequest request) {
-		CommonsMultipartFile file = sign.getFile();
+	//문서기안 화면 김정하 / 2020. 1. 12~
+	@RequestMapping(value="docuDraft.hari", method = RequestMethod.POST)
+	public String formDraft(SignDto sign, HttpServletRequest request, Model model) {
+		CommonsMultipartFile file = sign.getFile(); //view에서 DTO에 저장된 파일받아오기
 		String filename = "";
+		System.out.println(sign);
 		
-		if(file != null) {
-			filename = file.getOriginalFilename();
+		if(file != null) { //파일이 있으면
+			filename = file.getOriginalFilename(); //파일명
 			String path = request.getServletContext().getRealPath("/WEB-INF/views/1hariSign/upload"); //서버의 실 경로
-			System.out.println(path);
+			System.out.println("폴더경로 : " + path);
 			
 			String fpath = path + "\\" + filename;
 			
@@ -94,15 +100,29 @@ public class SignController {
 					fs.close();
 					
 				} catch (Exception e) {
-					System.out.println("filewrite : " + e.getMessage());
+					System.out.println("filewrite : " + e.getMessage()); //syso 나중에 지워야지
 					log.debug("filewrite : " + e.getMessage());
 				}
 			}
-			sign.setSignFileName(filename);
 		}
-		
-		return "redirect:signForm.hari";
+//		sign.setSignFileName(filename);
+		int result = 0;//signService.insertSign(sign);
+		String view = "";
+			
+		if(result > 0 ) { //DB insert 성공시
+			view = "redirect:signForm.hari";
+			model.addAttribute("msg", "기안완료되었습니다.");
+			model.addAttribute("isOk", "true");
+			
+		}else {
+			view = "1hariSign.docuDraft";
+			model.addAttribute("msg", "기안 실패 되었습니다. 다시 확인 바랍니다.");
+			model.addAttribute("isOk", "false");
+			
+		}
+		return view;
 	}
+	
 	//내 문서함 화면 김정하 / 2020. 1. 7~
 	@RequestMapping("myDocu.hari")
 	public String myDocu() {

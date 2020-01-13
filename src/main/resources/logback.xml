@@ -40,21 +40,21 @@
 	</logger>
 	
 	<!-- 3rdparty Loggers -->
-	<logger name="org.springframework.core">
-		<level value="info" />
-	</logger>
+<!-- 	<logger name="org.springframework.core"> -->
+<!-- 		<level value="info" /> -->
+<!-- 	</logger> -->
 	
-	<logger name="org.springframework.beans">
-		<level value="info" />
-	</logger>
+<!-- 	<logger name="org.springframework.beans"> -->
+<!-- 		<level value="info" /> -->
+<!-- 	</logger> -->
 	
-	<logger name="org.springframework.context">
-		<level value="info" />
-	</logger>
+<!-- 	<logger name="org.springframework.context"> -->
+<!-- 		<level value="info" /> -->
+<!-- 	</logger> -->
 
-	<logger name="org.springframework.web">
-		<level value="info" />
-	</logger>
+<!-- 	<logger name="org.springframework.web"> -->
+<!-- 		<level value="info" /> -->
+<!-- 	</logger> -->
 	
 	<!-- root는 글로벌 로거를 의미하며, 위의 logger에 해당하지 않으면 root 로거가 실행된다. -->
 	<root level="warn">
