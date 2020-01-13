@@ -245,7 +245,25 @@
 <script src="${pageContext.request.contextPath}/resources/hari/assets/extra-libs/multicheck/datatable-checkbox-init.js"></script>
 <script src="${pageContext.request.contextPath}/resources/hari/assets/extra-libs/multicheck/jquery.multicheck.js"></script>
 <script src="${pageContext.request.contextPath}/resources/hari/assets/extra-libs/DataTables/datatables.min.js"></script>
+
+<!-- SweetAlert -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 <script>
+	var icon;
+	if('${reqiestScope.isOk}' == 'true'){
+		icon = 'success';
+	}else {
+		icon = 'warning';
+	}
+	
+	if('${requestScope.msg}' != ''){
+		swal({
+			text: "${requestScope.msg}",
+			icon: icon,
+			button: "닫기"
+		});
+	}
 	/****************************************
 	*       Basic Table                   *
 	****************************************/

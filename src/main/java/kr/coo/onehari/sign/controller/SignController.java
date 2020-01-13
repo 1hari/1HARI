@@ -49,7 +49,12 @@ public class SignController {
 
 	//홈 화면 김정하 / 2020. 1. 7
 	@RequestMapping("signForm.hari")
-	public String signForm(String msg, String isOk) {
+	public String signForm(Model model, String msg, String isOk) {
+		
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("isOk", isOk);
+		
 		return "1hariSign.signForm";
 	}	
 	
@@ -108,8 +113,10 @@ public class SignController {
 					log.debug("filewrite : " + e.getMessage());
 				}
 			}
+			sign.setSignFileRoot(path); //첨부파일경로 저장
 		}
-		sign.setSignFileName(filename);
+		sign.setSignFileName(filename); //첨부파일 이름 저장
+		
 		int result = signService.insertSign(sign);
 		String view = "";
 			

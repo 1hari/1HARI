@@ -131,6 +131,7 @@
 				button: "닫기"
 			});
 		}
+		
 		CKEDITOR.replace('signContent', {
 			// 도구 모음 정의: https://ckeditor.com/docs/ckeditor4/latest/features/toolbar
 			// 기본적으로 CDN의 전체 사전 설정은 필요 이상의 기능을 제공합니다.
