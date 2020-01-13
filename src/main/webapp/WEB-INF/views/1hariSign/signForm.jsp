@@ -119,9 +119,9 @@
 								<c:forEach var="draft" items="${requestScope.signDraftList}">
 									<tr>
 										<td>${draft.signDate}</td>
-										<td></td>
-										<td></td>
-										<td></td>
+										<td>${draft.signFormFormName}</td>
+										<td>${draft.signFormFormName}</td>
+										<td>${draft.signName}</td>
 									</tr>
 								</c:forEach>
 								<!-- 기안 리스트 1줄 -->

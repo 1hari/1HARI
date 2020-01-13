@@ -27,14 +27,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 전자결재 기안 리스트 (전자결재 홈) 김정하 / 2020. 1. 13 -->
 	<select id="selectSignDraftListHome" resultType="kr.coo.onehari.sign.dto.SignDto">
-		SELECT @rownum:=@rownum+1 as rn, a.* from
-			(SELECT s.SIGNDATE, f.SIGNFORMFORMNAME, s.SIGNTITLE, t.SIGNNAME
-			FROM sign s JOIN signform f 
-							ON s.SIGNFORMCODE = f.SIGNFORMCODE
-						JOIN signtype t
-							ON s.SIGNCODE = t.SIGNCODE
-			WHERE s.SIGNCODE = 1 AND s.DRAFTEMP = #{draftEmp}
-			ORDER BY s.SIGNDATE DESC) a
-		WHERE (@rownum:=0)=0 AND @rownum &lt;= 2
+		SELECT s.SIGNDATE, f.SIGNFORMFORMNAME, s.SIGNTITLE, t.SIGNNAME
+		FROM sign s JOIN signform f 
+						ON s.SIGNFORMCODE = f.SIGNFORMCODE
+					JOIN signtype t
+						ON s.SIGNCODE = t.SIGNCODE
+		WHERE s.SIGNCODE = 1 AND s.DRAFTEMP = #{draftEmp}
+		ORDER BY s.SIGNDATE DESC
+		LIMIT 3
 	</select>
 </mapper>

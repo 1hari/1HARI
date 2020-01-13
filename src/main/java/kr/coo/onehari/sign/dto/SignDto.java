@@ -1,8 +1,5 @@
 package kr.coo.onehari.sign.dto;
 
-import java.sql.Timestamp;
-import java.util.List;
-
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import lombok.Getter;
@@ -21,10 +18,12 @@ public class SignDto {
 	private String empSign2; //결재자2 사번
 	private String signFormCode; //문서양식 코드
 	//----------------------------------------------
+	private String signFormFormName; //문서양식명 김정하 / 2020. 1.13
 	private int signCode; //결재 구분번호
+	private String signName; //결재구분명 김정하 / 2020. 1.13
 	private String signTitle; //전자결재 제목
 	private String signContent; //전자결재 내용
-	private Timestamp signDate; //작성일
+	private String signDate; //작성일
 	private int isSign1; //결재여부1
 	private int isSign2; //결재여부2
 	private String signComment; //전자결재 코멘트

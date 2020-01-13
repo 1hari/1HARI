@@ -39,14 +39,15 @@ public class SignService {
 	
 	//전자결재 기안 리스트 (전자결재 홈) 김정하 / 2020. 1. 13
 	public List<SignDto> selectSignDraftListHome(String draftEmp){
-		List<SignDto> signList = null;
+		List<SignDto> signDraftList = null;
 		SignDao dao = sqlsession.getMapper(SignDao.class);
 		
 		try {
-			signList = dao.selectSignDraftListHome(draftEmp);
+			signDraftList = dao.selectSignDraftListHome(draftEmp);
+			System.out.println(signDraftList);
 		} catch (ClassNotFoundException | SQLException e) {
 			log.debug("selectSignListHome : " + e.getMessage());
 		}
-		return signList;
+		return signDraftList;
 	}
 }
