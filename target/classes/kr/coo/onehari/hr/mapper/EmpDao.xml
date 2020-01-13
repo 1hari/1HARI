@@ -16,38 +16,118 @@
 	
 	<!-- 조직도에서 부서별 사원을 출력해주기 위해 김정하 / 2020. 1. 9 -->
 	<select id="empDefaultList" resultType="kr.coo.onehari.hr.dto.EmpDto">
-		select EMPNUM, TEAMCODE, EMPNAME from emp
+		SELECT E.EMPNUM, E.EMPNAME, E.TEAMCODE, R.RANKCODE, R.RANKNAME
+		FROM emp AS E
+		JOIN ranks AS R ON E.RANKCODE = R.RANKCODE
+	</select>
+	
+	<!-- 조직도에서 기안자 출력해주기 위해 김정하 / 2020. 1. 10 -->
+	<select id="empDefault" resultType="kr.coo.onehari.hr.dto.EmpDto">
+		SELECT E.EMPNUM, E.EMPNAME, E.TEAMCODE, R.RANKCODE, R.RANKNAME
+		FROM emp AS E
+		JOIN ranks AS R ON E.RANKCODE = R.RANKCODE
+		WHERE EMPNUM = #{empnum}
 	</select>
 
+	<!-- 사원목록 김진호 2020. 1. 7 -->
 	<select id="empList" resultType="kr.coo.onehari.hr.dto.EmpDto">
 		SELECT E.EMPNUM, E.EMPNAME, T.TEAMNAME, R.RANKNAME, P.POSITIONNAME, EM.EMPLOYMENTNAME, S.BIRTH, S.PHONENUM, S.EMAIL, S.HIREDATE
 		FROM emp AS E 
 		JOIN subemp AS S ON E.EMPNUM = S.EMPNUM
 		JOIN team AS T ON E.TEAMCODE = T.TEAMCODE
-		JOIN ranks AS R ON E.RANKCODE = R.RANKCODE
+		JOIN ranks AS R ON E.RANKCODE = R.RANKCODE	
 		JOIN position AS P ON E.POSITIONCODE = P.POSITIONCODE
 		JOIN employment AS EM ON E.EMPLOYMENTCODE = EM.EMPLOYMENTCODE
 	</select>
-   
+
+	<!-- 사원정보수정 화면 김진호 2020. 1. 10 -->
 	<select id="empModify" resultType="kr.coo.onehari.hr.dto.EmpDto">
-		SELECT E.EMPNUM, E.TEAMCODE, E.EMPNAME, T.TEAMNAME, R.RANKNAME, P.POSITIONNAME, EM.EMPLOYMENTNAME, S.BIRTH, S.PHONENUM, S.EMAIL, S.HIREDATE
-		FROM emp AS E 
-		JOIN subemp AS S ON E.EMPNUM = S.EMPNUM
-		JOIN team AS T ON E.TEAMCODE = T.TEAMCODE
-		JOIN ranks AS R ON E.RANKCODE = R.RANKCODE
-		JOIN position AS P ON E.POSITIONCODE = P.POSITIONCODE
-		JOIN employment AS EM ON E.EMPLOYMENTCODE = EM.EMPLOYMENTCODE
-		WHERE E.EMPNUM=#{empNum}
-   </select>
-   
+<!--  		SELECT E.EMPNUM, E.EMPNAME, E.TEAMCODE, T.TEAMNAME, E.RANKCODE, R.RANKNAME, E.POSITIONCODE, P.POSITIONNAME, EM.EMPLOYMENTCODE, EM.EMPLOYMENTNAME, S.BIRTH, S.PHONENUM, S.EMAIL, S.HIREDATE, S.LEAVEDATE, ER.ROLENAME -->
+<!-- 		FROM emp AS E  -->
+<!-- 		JOIN subemp AS S ON E.EMPNUM = S.EMPNUM -->
+<!-- 		JOIN team AS T ON E.TEAMCODE = T.TEAMCODE -->
+<!-- 		JOIN ranks AS R ON E.RANKCODE = R.RANKCODE -->
+<!-- 		JOIN position AS P ON E.POSITIONCODE = P.POSITIONCODE -->
+<!-- 		JOIN employment AS EM ON E.EMPLOYMENTCODE = EM.EMPLOYMENTCODE -->
+<!-- 		JOIN emprolelist AS ER ON E.EMPNUM = ER.EMPNUM -->
+<!-- 		WHERE E.EMPNUM=#{empNum} -->
+		
+ 		
+		SELECT @rownum := @rownum + 1 AS ROWNUM, E.EMPNUM, E.EMPNAME, E.TEAMCODE, T.TEAMNAME, E.RANKCODE, R.RANKNAME, E.POSITIONCODE, P.POSITIONNAME, EM.EMPLOYMENTCODE, EM.EMPLOYMENTNAME, S.BIRTH, S.PHONENUM, S.EMAIL, S.HIREDATE, S.LEAVEDATE, ER.ROLENAME, RO.ROLEDSCR 
+		FROM EMP AS E
+			JOIN subemp AS S ON E.EMPNUM = S.EMPNUM
+			JOIN team AS T ON E.TEAMCODE = T.TEAMCODE
+			JOIN ranks AS R ON E.RANKCODE = R.RANKCODE
+			JOIN position AS P ON E.POSITIONCODE = P.POSITIONCODE
+			JOIN employment AS EM ON E.EMPLOYMENTCODE = EM.EMPLOYMENTCODE
+			JOIN emprolelist AS ER ON E.EMPNUM = ER.EMPNUM
+			JOIN role AS RO ON ER.ROLENAME = RO.ROLENAME
+		WHERE E.EMPNUM=#{empNum} AND (@rownum := 0) = 0 AND @rownum=0
+	</select>
+	
+	<!-- 사원정보수정 변경 김진호 2020. 1. 10 -->
   	<update id="empUpdate" parameterType="kr.coo.onehari.hr.dto.EmpDto">
-		UPDATE EMP 
-		SET TEAMCODE=${teamCode}, 
-		POSITIONCODE=${positionCode} ,  
-		RANKCODE=${rankCode},
-		EMPLOYMENTCODE=${employmentCode}, 
-		PHONENUM=#{phoneNum}}
-		WHERE EMPNUM=${empNum} 
+		UPDATE EMP
+		SET TEAMCODE=#{teamCode},
+		POSITIONCODE=#{positionCode},
+		RANKCODE=#{rankCode},
+		EMPLOYMENTCODE=#{employmentCode}
+		WHERE EMPNUM=#{empNum}
 	</update>
-   
+  	<update id="subempUpdate" parameterType="kr.coo.onehari.hr.dto.EmpDto">
+		UPDATE SUBEMP
+		SET PHONENUM=#{phoneNum},
+		LEAVEDATE=#{leaveDate}
+		WHERE EMPNUM=#{empNum}
+	</update>
+	<insert id="insertRoleaAdmin" parameterType="kr.coo.onehari.hr.dto.Role">
+		INSERT INTO emprolelist 
+		VALUES (#{empNum}, 'ROLE_ADMIN')
+		ON DUPLICATE KEY UPDATE rolename = 'ROLE_ADMIN'
+	</insert>
+	<insert id="insertRoleaPersonnel" parameterType="kr.coo.onehari.hr.dto.Role">
+		INSERT INTO emprolelist 
+		VALUES (#{empNum}, 'ROLE_PERSONNEL')
+		ON DUPLICATE KEY UPDATE rolename = 'ROLE_PERSONNEL'
+	</insert>
+	<delete id="deleteRoleAdmin">
+		DELETE FROM emprolelist
+		WHERE empnum = #{empNum} AND rolename = 'ROLE_ADMIN'
+	</delete>
+	<delete id="deleteRolePersonnel">
+		DELETE FROM emprolelist
+		WHERE empnum = #{empNum} AND rolename = 'ROLE_PERSONNEL'
+	</delete>
+	
+   	<!-- 사원 출근기능 형남 0112 -->
+	<insert id="insertStartWorkTA" parameterType="Integer">
+		INSERT INTO TALIST(EMPNUM, TACODE, TADATE) VALUES(#{empNum}, 1, SYSDATE())
+	</insert>
+	
+	<!-- 사원 퇴근기능 형남 0112 -->
+	<insert id="insertEndWorkTA" parameterType="Integer">
+		INSERT INTO TALIST(EMPNUM, TACODE, TADATE) VALUES(#{empNum}, 2, SYSDATE())
+	</insert>
+	
+	<!-- 오늘 퇴근기록이 있는지 조회 형남 0112-->
+	<select id="todayEndWorkCheck" resultType="Integer">
+		SELECT COUNT(*) FROM TALIST WHERE DATE(TADATE) = DATE(NOW()) and EMPNUM=#{empNum} AND tacode = 2
+	</select>
+	
+	<!-- 오늘 출근기록이 있는지 조회 형남 0112-->
+	<select id="todayStartWorkCheck" resultType="Integer">
+		SELECT COUNT(*) FROM TALIST WHERE DATE(TADATE) = DATE(NOW()) and EMPNUM=#{empNum} AND tacode = 1
+	</select>
+	
+	<!-- 오늘 출근기록이 있는지 조회 형남 0112-->
+	<select id="getTotalTA" resultType="Integer">
+		SELECT COUNT(*) FROM TALIST WHERE EMPNUM = #{empNum} AND TACODE=1
+	</select>
+	
+    <!-- 오늘 출근시간 구하기-->
+    <select id="getStartWorkTime" resultType="Date">
+        SELECT TADATE FROM TALIST WHERE EMPNUM=#{empNum} AND DATE(TADATE) = DATE(NOW());
+    </select>
 </mapper>
+
+
