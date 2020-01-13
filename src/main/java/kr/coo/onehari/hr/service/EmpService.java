@@ -238,4 +238,22 @@ public class EmpService {
         }
         return startTime;
     }
+    
+    //형남 0113 이번주 총 근무시간
+    public java.util.Date getWeekTotalTime(String empNumStr) {
+    	EmpDao dao = sqlsession.getMapper(EmpDao.class);
+    	Date totalTime = null;
+    	int empNum=Integer.parseInt(empNumStr);
+    	try {
+    		totalTime=dao.getWeekTotalTime(empNum);
+    		if(totalTime !=null) {
+    			System.out.println("이번주 총 근무시간: " + totalTime);
+    		}else {
+    			System.out.println("이번주 총 근무시간 못가져옴");
+    		}
+    	} catch (ClassNotFoundException | SQLException e) {
+    		log.debug("getWeekTotalTime : " + e.getMessage());
+    	}
+    	return totalTime;
+    }
 }

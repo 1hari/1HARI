@@ -1,6 +1,7 @@
 package kr.coo.onehari.hr.controller;
 
 import java.security.Principal;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -174,7 +175,7 @@ public class HrRestController {
 		return result > 0 ? true : false;
 	}
 	
-	//형남 0112 출근조회
+	//형남 0113 총 근무일조회
 	@RequestMapping(value = "getTotalTA.hari", method = RequestMethod.POST)
 	public int getTotalTA(Principal pri) {
 		System.out.println("pri.toString(): " + pri.toString());
@@ -186,6 +187,20 @@ public class HrRestController {
 			log.debug("getTotalTA 예외발생: " + e.getMessage());
 		}
 		return result;
+	}
+	
+	//형남 0113 이번주 총 근무시간
+	@RequestMapping(value = "getWeekTotalTime.hari", method = RequestMethod.POST)
+	public Date getWeekTotalTime(Principal pri) {
+		System.out.println("pri.toString(): " + pri.toString());
+		Date totalTime = null;
+		try {
+			totalTime = empSercive.getWeekTotalTime(pri.getName());
+		} catch (Exception e) {
+			System.out.println("getWeekTotalTime 예외발생: " + e.getMessage());
+			log.debug("getWeekTotalTime 예외발생: " + e.getMessage());
+		}
+		return totalTime;
 	}
 	
 }

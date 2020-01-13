@@ -3,33 +3,49 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript">
 $(function(){
-	//javascript new Date() 를 mysql 형식으로 바꾸기
-	function date_to_str(format)
-	{
-	    var year = format.getFullYear();
-	    var month = format.getMonth() + 1;
-	    if(month<10) month = '0' + month;
-	    var date = format.getDate();
-	    if(date<10) date = '0' + date;
-	    var hour = format.getHours();
-	    if(hour<10) hour = '0' + hour;
-	    var min = format.getMinutes();
-	    if(min<10) min = '0' + min;
-	    var sec = format.getSeconds();
-	    if(sec<10) sec = '0' + sec;
-	    return hour + ":" + min + ":" + sec;
-	}
+	//잠깐 스탑...//////////////////////////////////////////////////////////////////////////////////////
+// 	//javascript new Date() 를 mysql 형식으로 바꾸기
+// 	function date_to_str(format)
+// 	{
+// 	    var year = format.getFullYear();
+// 	    var month = format.getMonth() + 1;
+// 	    if(month<10) month = '0' + month;
+// 	    var date = format.getDate();
+// 	    if(date<10) date = '0' + date;
+// 	    var hour = format.getHours();
+// 	    if(hour<10) hour = '0' + hour;
+// 	    var min = format.getMinutes();
+// 	    if(min<10) min = '0' + min;
+// 	    var sec = format.getSeconds();
+// 	    if(sec<10) sec = '0' + sec;
+// 	    return hour + ":" + min + ":" + sec;
+// 	}
 	
-	var todayWorkTime;
-	var currTime;
-	console.log(currTime);
+// 	var todayWorkTime;
+// 	var currTime;
+// 	console.log(currTime);
+
+// 	//오늘 일한시간 구하기
+// 	$.ajax({
+// 		url: "${pageContext.request.contextPath}/ajax/getStartWorkTime.hari",
+// 		type: "post",
+// 		dataType: "json",
+// 		success: function(startWorkTime) {
+// 			//퇴근근기록이 있으면 true, 없으면 false
+// 			startWorkTime = new Date(startWorkTime);
+// 			console.log(startWorkTime);
+// 			startWorkTime = date_to_str(startWorkTime);
+// 			console.log(startWorkTime);
+// 			console.log(date_to_str(new Date()));
+// 			console.log(date_to_str(new Date()) - startWorkTime);
+// 		}
+// 	})
 	//오늘 퇴근기록 체크
 	$.ajax({
 		url: "${pageContext.request.contextPath}/ajax/getTotalTA.hari",
 		type: "post",
 		dataType: "json",
 		success: function(totalTA) {
-			//퇴근근기록이 있으면 true, 없으면 false
 			$('#totalTA').append(totalTA);
 		}
 	})
@@ -39,25 +55,16 @@ $(function(){
 		type: "post",
 		dataType: "json",
 		success: function(weekTotalTime) {
-			//퇴근근기록이 있으면 true, 없으면 false
 			$('#weekTotalTime').append(weekTotalTime);
+			console.log(weekTotalTime);
 		}
 	})
-	//오늘 일한시간 구하기
-	$.ajax({
-		url: "${pageContext.request.contextPath}/ajax/getStartWorkTime.hari",
-		type: "post",
-		dataType: "json",
-		success: function(startWorkTime) {
-			//퇴근근기록이 있으면 true, 없으면 false
-			startWorkTime = new Date(startWorkTime);
-			console.log(startWorkTime);
-			startWorkTime = date_to_str(startWorkTime);
-			console.log(startWorkTime);
-			console.log(date_to_str(new Date()));
-			console.log(date_to_str(new Date()) - startWorkTime);
-		}
-	})
+
+
+
+
+
+
 });
 </script>
 <!-- Custom CSS -->
@@ -121,7 +128,6 @@ $(function(){
 										<div class="col col-stats">
 											<div class="numbers">
 												<p class="card-category">총 근무일</p>
-												<button id="testButton"></button>
 												<h4 class="card-title" id="totalTA"></h4>
 											</div>
 										</div>
