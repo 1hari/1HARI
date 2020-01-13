@@ -240,9 +240,9 @@ public class EmpService {
     }
     
     //형남 0113 오늘 총 근무시간
-    public Date getTodayTotalTime(String empNumStr) {
+    public String getTodayTotalTime(String empNumStr) {
     	EmpDao dao = sqlsession.getMapper(EmpDao.class);
-    	Date totalTime = null;
+    	String totalTime = null;
     	int empNum=Integer.parseInt(empNumStr);
     	try {
     		totalTime=dao.getTodayTotalTime(empNum);

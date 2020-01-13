@@ -191,11 +191,12 @@ public class HrRestController {
 	
 	//형남 0113 오늘 근무시간
 	@RequestMapping(value = "getTodayTotalTime.hari", method = RequestMethod.POST)
-	public Date getTodayTotalTime(Principal pri) {
+	public String getTodayTotalTime(Principal pri) {
 		System.out.println("pri.toString(): " + pri.toString());
-		Date totalTime = null;
+		String totalTime = null;
 		try {
 			totalTime = empSercive.getTodayTotalTime(pri.getName());
+			System.out.println("컨트롤러 getTodayTotalTime: " + totalTime);
 		} catch (Exception e) {
 			System.out.println("getTodayTotalTime 예외발생: " + e.getMessage());
 			log.debug("getTodayTotalTime 예외발생: " + e.getMessage());

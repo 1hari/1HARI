@@ -17,7 +17,6 @@ $(function(){
 		success: function(data) {
 			//퇴근근기록이 있으면 true, 없으면 false
 			isEnd=data;
-			console.log(isEnd);
 		}
 	})
 	//오늘 출근기록 체크
@@ -28,17 +27,13 @@ $(function(){
 		success: function(data) {
 			//퇴근근기록이 있으면 true, 없으면 false
 			isStart=data;
-			console.log(isStart);
 			if(isStart == false && isEnd==false){
-				console.log('요기1')
 				$('#startWork').removeAttr('disabled');	
 				$('#endWork').attr('disabled', 'disabled');	
 			}else if(isStart == true && isEnd==false){
-				console.log('요기2')
 				$('#startWork').attr('disabled', 'disabled');
 				$('#endWork').removeAttr('disabled');	
 			} else if(isStart == true && isEnd==true) {
-				console.log('요기3')
 				$('#endWork').attr('disabled', 'disabled');
 				$('#startWork').attr('disabled', 'disabled');
 			}
