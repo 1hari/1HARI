@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+   
    <script type="text/javascript">
    //형남 0110 비밀번호 변경
 	$(function(){
@@ -28,7 +31,7 @@
 		$('#emailSend').click(function() {
 			//이메일 형식체크
 			if(!email_check){
-				alert("이메일이 형식이 올바르지 않습니다.");
+				swal("warning", "이메일을 다시 입력해주세요.", "warning")
 				return;
 			}else {
 				//이메일 형식이 맞으면 사번과 이메일이 일치하는 계정이 있는지 확인
@@ -48,7 +51,7 @@
 				}else{
 					//인증번호 입력 창 오픈
 					var url = "emailSubmit.hari?email="+$('#email').val();
-					open(url,"Email Check","statusber=no, scrollbar=no, menuber=no, width=400, height=130");
+					open(url,"Email Check","statusber=no, scrollbar=no, menuber=no, width=560, height=240 top=270 left=530");
 				}
 			}
 		});
@@ -123,8 +126,9 @@
 								</div>
 							</div>
 	            <div class="form-group">
-	              <input type="submit" value="로그인"  class="btn btn-primary py-3 px-4">
-	              <span data-toggle="modal" data-target="#add-new-event" >이메일 인증하기</span>
+	              <input type="submit" value="로그인" class="btn btn-primary py-3 px-4">
+	              <br>
+	              <span data-toggle="modal" data-target="#add-new-event" style="cursor:pointer;">이메일 인증하기</span>
 	            </div>
 	    			</form>
 					</div>
@@ -136,19 +140,34 @@
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
+						<h5>이메일 인증하기</h5>
 							<button type="button" class="close" id="closeModal"data-dismiss="modal" aria-hidden="true">×</button>
 						</div>
 						<div class="modal-body">
 							<form action="1hariMy/chagePassword.hari" method="post">
-								<input type="text" class="form-control" id="empNum" name="empNum" placeholder="사번 입력">
-								<input type="text" class="form-control" id="email" name="email" placeholder="이메일 주소 입력">
+								<div class="input-group">
+									<span class="input-group-addon" style="color:#20B2AA"><small>&nbsp;&nbsp;</small><i class="fa fa-user fa-3x"></i></span>
+									<small>&nbsp;&nbsp;</small>
+									<input type="text" class="form-control" id="empNum" name="empNum" placeholder="사번 입력">
+								</div>
+								<small>&nbsp;</small>
+								<div class="input-group">
+									<span class="input-group-addon" style="color:#20B2AA"><i class="fa fa-envelope fa-3x"></i></span>
+									<small>&nbsp;</small>
+									<input type="text" class="form-control" id="email" name="email" placeholder="이메일 주소 입력">
+								</div>
 								<small id="emailcheck">이메일을 입력해주세요.</small><br>
-								<button type="button" class="btn btn-default" id=emailSend>인증번호 전송</button>
-								<input type="password" id="newPassword" name="newPassword"class="form-control" disabled="disabled">
+								<button type="button" class="btn btn-default" id=emailSend><strong>인증번호 전송</strong></button>
+								<i class="fa fa-paper-plane fa-1x" style="color:#20B2AA"></i>
+								<input type="password" id="newPassword" name="newPassword"class="form-control">
 								<small id="pwcheck">비밀번호는 4자~10자 입니다.</small>
-								<input type="password" id="newPassword2" name="newPassword2"class="form-control" disabled="disabled">
-								<small id="pwckcheck">비밀번호를 다시한번 입력해주세요.</small>
-								<button type="submit" id="chagePassword" class="form-control" disabled="disabled">변경하기</button>
+								<input type="password" id="newPassword2" name="newPassword2"class="form-control">
+								<small id="pwckcheck">비밀번호를 다시 한 번 입력해주세요.</small>
+								<br>
+								<br>
+								<div style="text-align:center;">
+									<button type="submit" id="chagePassword" class="btn btn-primary py-3 px-4">변경하기</button>
+								</div>
 							</form>
 						</div>
 					</div>
