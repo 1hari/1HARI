@@ -9,6 +9,12 @@ import lombok.ToString;
 @Setter
 @ToString
 //공지사항 + 타임라인 테이블
+/*
+작성자: 김수연
+시작: 2020. 1. 14
+완료: 
+내용: board 작업 시작
+*/
 public class Board {
 	private int boardNum; //게시판 시퀀스번호
 	private int empNum; //사번
