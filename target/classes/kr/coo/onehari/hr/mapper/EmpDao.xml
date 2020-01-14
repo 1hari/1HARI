@@ -106,7 +106,10 @@
 	
 	<!-- 사원 퇴근기능 형남 0112 -->
 	<insert id="insertEndWorkTA" parameterType="Integer">
-		INSERT INTO TALIST(EMPNUM, TACODE, TADATE) VALUES(#{empNum}, 2, SYSDATE())
+		INSERT INTO TALIST(EMPNUM, TACODE, TADATE, TODAYWORK) VALUES(#{empNum}, 2, NOW(),
+		 (
+		SELECT TIME_TO_SEC(NOW()) - (SELECT TIME_TO_SEC((SELECT tadate FROM talist AS temp WHERE EMPNUM=#{empNum} AND tacode=1 AND DATE(tadate) = DATE(NOW())))))
+		);
 	</insert>
 	
 	<!-- 오늘 퇴근기록이 있는지 조회 형남 0112-->
@@ -127,6 +130,31 @@
     <!-- 오늘 출근시간 구하기-->
     <select id="getStartWorkTime" resultType="Date">
         SELECT TADATE FROM TALIST WHERE EMPNUM=#{empNum} AND DATE(TADATE) = DATE(NOW());
+    </select>
+    
+    <!-- 현재까지 근무시간-->
+    <select id="getWorkTime" resultType="String">
+		SELECT DATE_FORMAT(SEC_TO_TIME((SELECT TIME_TO_SEC(NOW()) - (SELECT TIME_TO_SEC((SELECT tadate FROM talist AS temp WHERE EMPNUM=#{empNum} AND tacode=1 AND DATE(tadate) = DATE(NOW())))))),"%H:%i");
+    </select>
+    <!-- 오늘총 근무시간-->
+    <select id="getTodayTotalTime" resultType="String">
+		SELECT DATE_FORMAT(SEC_TO_TIME((SELECT TODAYWORK FROM TALIST WHERE EMPNUM=#{empNum} AND TACODE=2 AND DATE(TADATE)=DATE(NOW()))),"%H:%i")
+    </select>
+    
+    <!-- 이번주 총 근무시간-->
+    <select id="getWeekTotalTime" resultType="String">
+		SELECT DATE_FORMAT(SEC_TO_TIME((SELECT SUM(TODAYWORK) FROM TALIST
+		WHERE YEARWEEK(TADATE) = YEARWEEK(NOW()) AND EMPNUM=#{empNum})),"%H:%i")
+    </select>
+    
+    <!-- 총 근무시간-->
+	<select id="getTotalTime" resultType="String">
+		SELECT DATE_FORMAT(SEC_TO_TIME((SELECT SUM(TODAYWORK) FROM TALIST WHERE EMPNUM=#{empNum})),"%H:%i")
+    </select>
+    
+    <!-- dataDate-->
+	<select id="getDataDate" resultType="String">
+		SELECT DATE_FORMAT(NOW(),"%Y-%m-%d")
     </select>
 </mapper>
 

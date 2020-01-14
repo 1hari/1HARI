@@ -58,15 +58,21 @@ public class HrController {
 	@RequestMapping(value = "personnel/empJoin.hari", method = RequestMethod.POST)
 	public String empJoin(EmpDto empdto, Model model) {
 		String view = "";
-		int result = empservice.empJoin(empdto);
+		int result =0;
+		try {
+			result = empservice.empJoin(empdto);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 //		empdto.setEmail(empdto.getEmail()+"@gmail.com"); // 이메일 형식붙여서 DB에 넣을 때
 		
 		if (result > 0) {
-			view = "redirect:../personnel/empList.hari";
+			view = "redirect:empList.hari";
 			model.addAttribute("empdto", empdto);
 		} else {
-			view = "redirect:1hariHr.empList";
+			view = "redirect:empJoin.hari";
 			model.addAttribute("사원등록실패");
 		}
 		return view;

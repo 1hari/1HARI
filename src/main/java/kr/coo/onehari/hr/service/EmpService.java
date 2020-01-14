@@ -44,7 +44,7 @@ public class EmpService {
 	
 	// 사원등록 김진호 2020. 1. 9
 	@Transactional
-	public int empJoin(EmpDto empdto) {
+	public int empJoin(EmpDto empdto) throws Exception {
 		int result = 0;
 		EmpDao empdao = sqlsession.getMapper(EmpDao.class);
 		
@@ -53,10 +53,10 @@ public class EmpService {
 			empdto.setPassword("1004");
 			empdao.empJoin(empdto);
 			empdao.subempJoin(empdto);
-			result = empdao.empJoin(empdto);
 		} catch (Exception e) {
 			System.out.println("EmpService empJoin 예외발생: " + e.getMessage());
 			log.debug("EmpService empJoin 예외발생: " + e.getMessage());
+			throw e;
 		}
 		System.out.println("empJoin result: " + result);
 		return result;
