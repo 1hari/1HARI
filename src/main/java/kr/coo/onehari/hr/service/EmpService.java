@@ -329,5 +329,23 @@ public class EmpService {
     	return totalTime;
     }
     
+    //형남 0114 이번달 출근기록 yyyy-mm-dd
+    public List<String> getStartList(String empNumStr) {
+    	EmpDao dao = sqlsession.getMapper(EmpDao.class);
+    	List<String> totalTime = null;
+    	int empNum=Integer.parseInt(empNumStr);
+    	try {
+    		totalTime=dao.getStartList(empNum);
+    		if(totalTime !=null) {
+    			System.out.println("getStartList: " + totalTime);
+    		}else {
+    			System.out.println("getStartList 못가져옴");
+    		}
+    	} catch (ClassNotFoundException | SQLException e) {
+    		log.debug("getStartList : " + e.getMessage());
+    	}
+    	return totalTime;
+    }
+    
 
 }
