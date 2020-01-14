@@ -7,6 +7,13 @@
 $(function(){
 	var isStart=false; //오늘 출근했는지
 	var isEnd=false;//오늘 퇴근했는지
+	var currYear;
+	var currMonth;
+
+	currYear=new Date().getFullYear();
+	currMonth=new Date().getMonth()+1;
+	console.log(currYear);
+	console.log(currMonth);
 	//총 근무일
 	$.ajax({
 		url: "${pageContext.request.contextPath}/ajax/getTotalTA.hari",
@@ -181,7 +188,8 @@ $(function(){
 			}
 		});
 	})
-
+	var item=document.querySelector('.fc-prev-button');
+	console.log(item);
 	//이번달 출근기록 yyyy-mm-dd
 	$.ajax({
 		url: "${pageContext.request.contextPath}/ajax/getStartList.hari",
@@ -192,8 +200,8 @@ $(function(){
 			for(var i=0; i<itemArray.length; i++){
 				for(var j=0; j<getStartList.length; j++){
 					if($(itemArray[i]).attr('data-date') == getStartList[j]){
-						console.log($(itemArray[i]));
-						//$(itemArray[i]).append('<br><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-warning fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">출근</span></div><div class="fc-resizer fc-end-resizer"></div></a></td>');
+// 						console.log($(itemArray[i]).text());
+						$(itemArray[i]).append('<br><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-warning fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">출근</span></div><div class="fc-resizer fc-end-resizer"></div></a></td>');
 					}
 				}
 			}
@@ -207,7 +215,7 @@ $(function(){
 					for(var i=0; i<itemArray2.length; i++){
 						for(var j=0; j<getEndList.length; j++){
 							if($(itemArray2[i]).attr('data-date') == getEndList[j]){
-								//$(itemArray2[i]).append('<a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-success fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">퇴근</span></div><div class="fc-resizer fc-end-resizer"></div></a>');
+								$(itemArray2[i]).append('<a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-success fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">퇴근</span></div><div class="fc-resizer fc-end-resizer"></div></a>');
 							}
 						}
 					}
@@ -215,6 +223,10 @@ $(function(){
 			});
 		}
 	});
+
+	$('.fc-month-button fc-button fc-state-default fc-corner-left fc-state-active').click(function(){
+		
+	})
 });
 
 
