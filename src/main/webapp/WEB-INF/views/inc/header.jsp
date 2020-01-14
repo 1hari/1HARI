@@ -161,8 +161,9 @@ $(function(){
 			}
 		}
 	});
+	
 	//출근 클릭했을 때 날짜 data-date 형식으로 가져오기
-	var item;
+	
 	$('#test').click(function(){
 		$.ajax({
 			url: "${pageContext.request.contextPath}/ajax/getDataDate.hari",
@@ -171,6 +172,7 @@ $(function(){
 			success: function(dataDate) {
 				var itemArray=document.querySelectorAll('.fc-day.fc-widget-content');
 				for(var i=0;i<itemArray.length;i++){
+					console.log($(itemArray[i]).attr('data-date'));
 					if($(itemArray[i]).attr('data-date') == dataDate.trim()){
 						console.log($(itemArray[i]).attr('data-date') + ' ==> 이 친구');
 						$(itemArray[i]).removeAttr("td");
@@ -187,12 +189,38 @@ $(function(){
 		type: "post",
 		dataType: "json",
 		success: function(getStartList) {
-			console.log(getStartList);
+// 			console.log(getStartList[1]);
+			var itemArray=document.querySelectorAll('.fc-day.fc-widget-content');
+			for(var i=0; i<itemArray.length; i++){
+				console.log($(itemArray[i]).attr('data-date'));
+				for(var j=0; j<getStartList.length; j++){
+					if($(itemArray[i]).attr('data-date') == getStartList[j]){
+// 						$(itemArray[i]).removeAttr("td");
+						$(itemArray[i]).append('<br><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-warning fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">출근</span></div><div class="fc-resizer fc-end-resizer"></div></a></td>');
+					}
+				}
+			}
 		}
 	});
 	
-
-	
+	//이번달 출근기록 yyyy-mm-dd
+	$.ajax({
+		url: "${pageContext.request.contextPath}/ajax/getEndList.hari",
+		type: "post",
+		dataType: "json",
+		success: function(getEndList) {
+			var itemArray2=document.querySelectorAll('.fc-day.fc-widget-content');
+			for(var i=0; i<itemArray2.length; i++){
+				console.log($(itemArray2[i]));
+				for(var j=0; j<getEndList.length; j++){
+					if($(itemArray2[i]).attr('data-date') == getEndList[j]){
+			 			console.log('ddddddddddddddddddddddddd');
+						$(itemArray2[i]).append('<a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-success fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">퇴근</span></div><div class="fc-resizer fc-end-resizer"></div></a>');
+					}
+				}
+			}
+		}
+	});
 });
 
 

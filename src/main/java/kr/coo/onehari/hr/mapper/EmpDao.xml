@@ -161,6 +161,11 @@
 	<select id="getStartList" resultType="String">
 		SELECT DATE_FORMAT(TADATE,"%Y-%m-%d") FROM TALIST WHERE MONTH(TADATE) = MONTH(NOW()) AND TACODE=1 AND EMPNUM=#{empNum};
     </select>
+    
+    <!-- 이번달 출근기록 yyyy-mm-dd-->
+	<select id="getEndList" resultType="String">
+		SELECT DATE_FORMAT(TADATE,"%Y-%m-%d") FROM TALIST WHERE MONTH(TADATE) = MONTH(NOW()) AND TACODE=2 AND EMPNUM=#{empNum};
+    </select>
 </mapper>
 
 
