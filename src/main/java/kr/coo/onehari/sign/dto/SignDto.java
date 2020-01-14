@@ -14,8 +14,11 @@ public class SignDto {
 	private int signNum; //전자결재 시퀀스
 	//DB는 int / form 태그 값 받기위해 String 으로 변경
 	private String draftEmp; //작성자 사번
+	private String draftEmpName; //작성자 이름 김정하 / 2020. 1. 14
 	private String empSign1; //결재자1 사번
+	private String empSign1Name; //결재자1 이름 김정하 / 2020. 1. 14
 	private String empSign2; //결재자2 사번
+	private String empSign2Name; //결재자2 이름 김정하 / 2020. 1. 14
 	private String signFormCode; //문서양식 코드
 	//----------------------------------------------
 	private String signFormFormName; //문서양식명 김정하 / 2020. 1.13
@@ -33,4 +36,3 @@ public class SignDto {
 	//파일업로드를 위해서
 	private CommonsMultipartFile file;
 }
-//SignDto(draftEmp=0, empSign1=0, empSign2=0, signFormCode=1, signTitle=null, signContent=null, signDate=null, isSign1=0, isSign2=0, signComment=null, signFileName=null, signFileRoot=null, file=null)

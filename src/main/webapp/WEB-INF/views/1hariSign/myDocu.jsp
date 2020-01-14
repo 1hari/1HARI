@@ -30,63 +30,33 @@
 		<div class="row">
 			<div class="col-12">
 
-				<!--사원 관리  테이블 -->
-
+				<!--내 문서함 테이블 -->
 				<div class="card">
 					<div class="card-body">
-						<h5 class="card-title"></h5>
-						<div class="table-responsive">
-							<table id="zero_config" class="table table-striped table-bordered">
-								<thead>
-									<tr>
-										<th>
-											<label class="customcheckbox m-b-20">
-												<input type="checkbox" class="listCheckbox">
-												<span class="checkmark"></span>
-											</label>
-										</th>
-										<th>기안일</th>
-										<th>결재양식</th>
-										<th>제목</th>
-										<th>첨부파일</th>
-										<th>문서번호</th>
-										<th>결제상태</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<th>
-											<label class="customcheckbox m-b-20">
-												<input type="checkbox" class="listCheckbox">
-												<span class="checkmark"></span>
-											</label>
-										</th>
-										<td>System Architect</td>
-										<td>Edinburgh</td>
-										<td>61</td>
-										<td></td>
-										<td></td>
-										<td>
-											<button type="button" class="btn m-t-5 btn-info btn-block waves-effect waves-light" style="width: 80%; background-color: #20B2AA">결재상태</button>
-										</td>
-									</tr>
-								</tbody>
-								<tfoot>
-									<tr>
-										<th></th>
-										<th></th>
-										<th></th>
-										<th></th>
-										<th></th>
-										<th></th>
-									</tr>
-								</tfoot>
-							</table>
-						</div>
-
+						<h5 class="card-title">전자결재 문서함</h5>
 					</div>
-				</div>
-				<!--데이터 테이블 끝 -->
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col">기안일</th>
+								<th scope="col">문서번호</th>
+								<th scope="col">결재양식</th>
+								<th scope="col">제목</th>
+								<th scope="col">결재상태</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>기안일</td>
+								<td>문서번호</td>
+								<td>결재양식</td>
+								<td>제목</td>
+                                  <td>결재상태</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                        </div>					
+				
 			</div>
 		</div>
 		<!-- ============================================================== -->

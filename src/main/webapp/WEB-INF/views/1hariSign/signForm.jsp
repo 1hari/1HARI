@@ -43,8 +43,10 @@
 							<thead class="thead-light">
 								<tr>
 									<th scope="col">기안일</th>
+									<th scope="col">문서번호</th>
 									<th scope="col">결재양식</th>
 									<th scope="col">제목</th>
+									<th scope="col">기안자 (사번)</th>
 									<th scope="col">결재상태</th>
 								</tr>
 							</thead>
@@ -53,8 +55,10 @@
 								<c:forEach var="waiting" items="${requestScope.signWaitingList}">
 									<tr>
 										<td>${waiting.signDate}</td>
+										<td>${waiting.signNum}</td>
 										<td>${waiting.signFormFormName}</td>
 										<td><a href="?signNum=${waiting.signNum}">${waiting.signTitle}</a></td>
+										<td>${waiting.draftEmpName} (${waiting.draftEmp})</td>
 										<td>
 											<div class="d-flex no-block align-items-center m-t-15">
                                         		<span>${waiting.signName}</span>
@@ -89,8 +93,10 @@
 							<thead class="thead-light">
 								<tr>
 									<th scope="col">기안일</th>
+									<th scope="col">문서번호</th>
 									<th scope="col">결재양식</th>
 									<th scope="col">제목</th>
+									<th scope="col">기안자  (사번)</th>
 									<th scope="col">결재상태</th>
 								</tr>
 							</thead>
@@ -99,8 +105,10 @@
 								<c:forEach var="draft" items="${requestScope.signDraftList}">
 									<tr>
 										<td>${draft.signDate}</td>
+										<td>${draft.signNum}</td>
 										<td>${draft.signFormFormName}</td>
 										<td><a href="?signNum=${draft.signNum}">${draft.signTitle}</a></td>
+										<td>${draft.draftEmpName} (${draft.draftEmp})</td>
 										<td>
 											<div class="d-flex no-block align-items-center m-t-15">
                                         		<span>${draft.signName}</span>
@@ -135,8 +143,10 @@
 							<thead class="thead-light">
 								<tr>
 									<th scope="col">기안일</th>
+									<th scope="col">문서번호</th>
 									<th scope="col">결재양식</th>
 									<th scope="col">제목</th>
+									<th scope="col">기안자  (사번)</th>
 									<th scope="col">결재상태</th>
 								</tr>
 							</thead>
@@ -145,8 +155,10 @@
 								<c:forEach var="completet" items="${requestScope.signCompletetList}">
 									<tr>
 										<td>${completet.signDate}</td>
+										<td>${completet.signNum}</td>
 										<td>${completet.signFormFormName}</td>
 										<td><a href="?signNum=${completet.signNum}">${completet.signTitle}</a></td>
+										<td>${completet.draftEmpName} (${completet.draftEmp})</td>
 										<td>
 											<div class="d-flex no-block align-items-center m-t-15">
                                         		<span>${completet.signName}</span>
@@ -174,8 +186,10 @@
 							<thead class="thead-light">
 								<tr>
 									<th scope="col">기안일</th>
+									<th scope="col">문서번호</th>
 									<th scope="col">결재양식</th>
 									<th scope="col">제목</th>
+									<th scope="col">기안자  (사번)</th>
 									<th scope="col">결재상태</th>
 								</tr>
 							</thead>
@@ -184,8 +198,10 @@
 								<c:forEach var="signReturn" items="${requestScope.signReturnList}">
 									<tr>
 										<td>${signReturn.signDate}</td>
+										<td>${signReturn.signNum}</td>
 										<td>${signReturn.signFormFormName}</td>
 										<td><a href="?signNum=${signReturn.signNum}">${signReturn.signTitle}</a></td>
+										<td>${signReturn.draftEmpName} (${signReturn.draftEmp})</td>
 										<td>
 											<div class="d-flex no-block align-items-center m-t-15">
                                         		<span>${signReturn.signName}</span>
