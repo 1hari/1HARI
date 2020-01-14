@@ -2,6 +2,7 @@ package kr.coo.onehari.sign.service;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,55 +38,17 @@ public class SignService {
 		return result;
 	}
 	
-	//전자결재 기안 리스트 (전자결재 홈) 김정하 / 2020. 1. 13
-	public List<SignDto> selectSignDraftListHome(String draftEmp){
-		List<SignDto> signDraftList = null;
+	//전자결재 리스트 (다이나믹쿼리) 김정하 / 2020. 1. 14
+	public List<SignDto> selectSignList (Map<String, String> map){
+		List<SignDto> selectSignList = null;
 		SignDao dao = sqlsession.getMapper(SignDao.class);
 		
-		try {
-			signDraftList = dao.selectSignDraftListHome(draftEmp);
+		try {		
+			selectSignList = dao.selectSignList(map);
 		} catch (ClassNotFoundException | SQLException e) {
-			log.debug("selectSignDraftListHome : " + e.getMessage());
+			log.debug("selectSign : " + e.getMessage());
 		}
-		return signDraftList;
+		return selectSignList;
 	}
 	
-	//전자결재 완료 리스트 (전자결재 홈) 김정하 / 2020. 1. 13
-	public List<SignDto> selectSignCompleteListHome(String draftEmp){
-		List<SignDto> signCompletetList = null;
-		SignDao dao = sqlsession.getMapper(SignDao.class);
-		
-		try {
-			signCompletetList = dao.selectSignCompleteListHome(draftEmp);
-		} catch (ClassNotFoundException | SQLException e) {
-			log.debug("selectSignCompleteListHome : " + e.getMessage());
-		}
-		return signCompletetList;
-	}
-	
-	//전자결재 반려 리스트 (전자결재 홈) 김정하 / 2020. 1. 13
-	public List<SignDto> selectSignReturnListHome (String draftEmp){
-		List<SignDto> signReturnList = null;
-		SignDao dao = sqlsession.getMapper(SignDao.class);
-		
-		try {
-			signReturnList = dao.selectSignReturnListHome(draftEmp);
-		} catch (ClassNotFoundException | SQLException e) {
-			log.debug("selectSignCompleteListHome : " + e.getMessage());
-		}
-		return signReturnList;
-	}
-	
-	//전자결재 결재대기 리스트 (전자결재 홈) 김정하 / 2020. 1 13
-	public List<SignDto> selectSignWaitingListHome (String draftEmp){
-		List<SignDto> signWaitingList = null;
-		SignDao dao = sqlsession.getMapper(SignDao.class);
-		
-		try {
-			signWaitingList = dao.selectSignWaitingListHome(draftEmp);
-		} catch (ClassNotFoundException | SQLException e) {
-			log.debug("selectSignWaitingListHome : " + e.getMessage());
-		}
-		return signWaitingList;
-	}
 }

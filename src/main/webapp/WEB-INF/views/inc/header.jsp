@@ -7,6 +7,16 @@
 $(function(){
 	var isStart=false; //오늘 출근했는지
 	var isEnd=false;//오늘 퇴근했는지
+	var currYear;
+	var currMonth;
+	var fixLatitude=parseFloat(37.4995124);
+	var fixLongitude=parseFloat(127.0292657);
+	var myLatitude; //사용자 위도
+	var myLongitude;////사용자 경도
+	currYear=new Date().getFullYear();
+	currMonth=new Date().getMonth()+1;
+	console.log(currYear);
+	console.log(currMonth);
 	//총 근무일
 	$.ajax({
 		url: "${pageContext.request.contextPath}/ajax/getTotalTA.hari",
@@ -25,7 +35,6 @@ $(function(){
 		dataType: "json",
 		success: function(data) {
 			//퇴근근기록이 있으면 true, 없으면 false
-			console.log(data);
 			isEnd=data;
 
 			if(isEnd==false){
@@ -54,7 +63,6 @@ $(function(){
 					type: "post",
 					dataType: "text",
 					success: function(getTodayTotalTime) {
-						console.log('getTodayTotalTime ' + ': ' + isEnd);
 						$('#getWorkTime').text('');
 						$('#getWorkTime').append(getTodayTotalTime);
 					}
@@ -82,6 +90,7 @@ $(function(){
 			}
 		}
 	})
+	
 	$('#startWork').click(function() {
 	   //형남 0112 출근기능
 		$.ajax({
@@ -128,6 +137,23 @@ $(function(){
 				}
 			}
 		})
+		$.ajax({
+			url: "${pageContext.request.contextPath}/ajax/getDataDate.hari",
+			type: "post",
+			dataType: "text",
+			success: function(dataDate) {
+				var itemArray=document.querySelectorAll('.fc-day.fc-widget-content');
+				for(var i=0;i<itemArray.length;i++){
+					console.log($(itemArray[i]).attr('data-date'));
+					if($(itemArray[i]).attr('data-date') == dataDate.trim()){
+						console.log($(itemArray[i]).attr('data-date') + ' ==> 이 친구');
+						$(itemArray[i]).removeAttr("td");
+						$(itemArray[i]).append('<a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-success fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">퇴근</span></div><div class="fc-resizer fc-end-resizer"></div></a>');
+					}
+					
+		        }
+			}
+		});
 	})
 	
 	//이번주 총 근무
@@ -161,38 +187,117 @@ $(function(){
 			}
 		}
 	});
-	//출근 클릭했을 때 날짜 data-date 형식으로 가져오기
-	var item;
+	
 	$('#test').click(function(){
-		$.ajax({
-			url: "${pageContext.request.contextPath}/ajax/getDataDate.hari",
-			type: "post",
-			dataType: "text",
-			success: function(dataDate) {
-				var itemArray=document.querySelectorAll('.fc-day.fc-widget-content');
-				for(var i=0;i<itemArray.length;i++){
-					if($(itemArray[i]).attr('data-date') == dataDate.trim()){
-						console.log($(itemArray[i]).attr('data-date') + ' ==> 이 친구');
-						$(itemArray[i]).removeAttr("td");
-						$(itemArray[i]).append('<br><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-warning fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">Event Four</span></div><div class="fc-resizer fc-end-resizer"></div></a></td>');
-					}
-		        }
-			}
-		});
-	})
+		if (navigator.geolocation) {
+// 			var apiGeolocationSuccess = function(position) {
+// 				alert("API geolocation success!\n\nlat = " + position.coords.latitude + "\nlng = " + position.coords.longitude);
+// 			};
 
+// 			var tryAPIGeolocation = function() {
+// 				jQuery.post( "https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyDCa1LUe1vOczX1hO_iGYgyo8p_jYuGOPU", function(success) {
+// 					apiGeolocationSuccess({coords: {latitude: success.location.lat, longitude: success.location.lng}});
+// 			  })
+// 			  .fail(function(err) {
+// 			    alert("API Geolocation error! \n\n"+err);
+// 			  });
+// 			};
+
+// 			var browserGeolocationSuccess = function(position) {
+// 				alert("Browser geolocation success!\n\nlat = " + position.coords.latitude + "\nlng = " + position.coords.longitude);
+// 			};
+
+// 			var browserGeolocationFail = function(error) {
+// 			  switch (error.code) {
+// 			    case error.TIMEOUT:
+// 			      alert("Browser geolocation error !\n\nTimeout.");
+// 			      break;
+// 			    case error.PERMISSION_DENIED:
+// 			      if(error.message.indexOf("Only secure origins are allowed") == 0) {
+// 			        tryAPIGeolocation();
+// 			      }
+// 			      break;
+// 			    case error.POSITION_UNAVAILABLE:
+// 			      alert("Browser geolocation error !\n\nPosition unavailable.");
+// 			      break;
+// 			  }
+// 			};
+// 			var tryGeolocation = function() {
+// 				  if (navigator.geolocation) {
+// 				    navigator.geolocation.getCurrentPosition(
+// 				    	browserGeolocationSuccess,
+// 				      browserGeolocationFail,
+// 				      {maximumAge: 50000, timeout: 20000, enableHighAccuracy: true});
+// 				  }
+// 				};
+
+// 			tryGeolocation();
+			navigator.geolocation.getCurrentPosition(function(position) {
+				myLatitude=position.coords.latitude; //위도
+				myLongitude=position.coords.longitude;//경도
+				
+				if(Math.abs(fixLatitude - myLatitude) >0.001 || Math.abs(fixLongitude - myLongitude) > 0.001){
+					console.log('실패');
+					return;
+				} else{
+					console.log('성공');
+				}
+				$.ajax({
+					url: "${pageContext.request.contextPath}/ajax/getDataDate.hari",
+					type: "post",
+					dataType: "text",
+					success: function(dataDate) {
+						var itemArray=document.querySelectorAll('.fc-day.fc-widget-content');
+						for(var i=0;i<itemArray.length;i++){
+							console.log($(itemArray[i]).attr('data-date'));
+							if($(itemArray[i]).attr('data-date') == dataDate.trim()){
+								console.log($(itemArray[i]).attr('data-date') + ' ==> 이 친구');
+								$(itemArray[i]).removeAttr("td");
+								$(itemArray[i]).append('<br><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-warning fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">Event Four</span></div><div class="fc-resizer fc-end-resizer"></div></a></td>');
+							}
+				        }
+					}
+				});
+			});
+		}else { 
+			alert('현재 브라우저에서 지원하지 않는 기능입니다.');
+		}
+	})
+	var item=document.querySelectorAll('.fc-prev-button');
+	console.log(item);
+	
 	//이번달 출근기록 yyyy-mm-dd
 	$.ajax({
 		url: "${pageContext.request.contextPath}/ajax/getStartList.hari",
 		type: "post",
 		dataType: "json",
 		success: function(getStartList) {
-			console.log(getStartList);
+			var itemArray=document.querySelectorAll('.fc-day.fc-widget-content');
+			for(var i=0; i<itemArray.length; i++){
+				for(var j=0; j<getStartList.length; j++){
+					if($(itemArray[i]).attr('data-date') == getStartList[j]){
+						$(itemArray[i]).append('<br><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-warning fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">출근</span></div><div class="fc-resizer fc-end-resizer"></div></a></td>');
+					}
+				}
+			}
+			//이번달 출근기록 yyyy-mm-dd
+			$.ajax({
+				url: "${pageContext.request.contextPath}/ajax/getEndList.hari",
+				type: "post",
+				dataType: "json",
+				success: function(getEndList) {
+					var itemArray2=document.querySelectorAll('.fc-day.fc-widget-content');
+					for(var i=0; i<itemArray2.length; i++){
+						for(var j=0; j<getEndList.length; j++){
+							if($(itemArray2[i]).attr('data-date') == getEndList[j]){
+								$(itemArray2[i]).append('<a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-success fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">퇴근</span></div><div class="fc-resizer fc-end-resizer"></div></a>');
+							}
+						}
+					}
+				}
+			});
 		}
 	});
-	
-
-	
 });
 
 

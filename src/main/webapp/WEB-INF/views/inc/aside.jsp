@@ -197,13 +197,6 @@
 								<span class="hide-menu">공지 사항 </span>
 							</a>
 						</li>
-						
-						<li class="sidebar-item">
-							<a href="#" class="sidebar-link">
-								<i class="mdi mdi-note-plus"></i>
-								<span class="hide-menu"> 부서 게시판 </span>
-							</a>
-						</li>
 					</ul>
 				</li>
 				

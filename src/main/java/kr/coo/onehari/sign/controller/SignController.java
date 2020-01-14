@@ -2,7 +2,9 @@ package kr.coo.onehari.sign.controller;
 
 import java.io.FileOutputStream;
 import java.security.Principal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -51,18 +53,26 @@ public class SignController {
 	@RequestMapping("signForm.hari")
 	public String signForm(Model model, String msg, String isOk, Principal principal) {
 		String draftEmp = principal.getName();
+		HashMap<String, String> map = new HashMap<String, String>(); 
+		
+		map.put("draftEmp", draftEmp);
+		map.put("pg", "3");
 		
 		//전자결재 기안 리스트
-		List<SignDto> signDraftList = signService.selectSignDraftListHome(draftEmp);
+		map.put("code","1");
+		List<SignDto> signDraftList = signService.selectSignList(map);
 
 		//전자결재 완료 리스트
-		List<SignDto> signCompletetList = signService.selectSignCompleteListHome(draftEmp);
+		map.put("code","2");
+		List<SignDto> signCompletetList = signService.selectSignList(map);
 		
 		//전자결재 반려 리스트
-		List<SignDto> signReturnList = signService.selectSignReturnListHome(draftEmp);
+		map.put("code","3");
+		List<SignDto> signReturnList = signService.selectSignList(map);
 		
 		//전자결재 결재대기 리스트
-		List<SignDto> signWaitingList = signService.selectSignWaitingListHome(draftEmp);
+		map.put("code","4");
+		List<SignDto> signWaitingList = signService.selectSignList(map);
 		
 		model.addAttribute("signDraftList", signDraftList);
 		model.addAttribute("signCompletetList", signCompletetList);
@@ -146,7 +156,6 @@ public class SignController {
 			model.addAttribute("signFormCode", sign.getSignFormCode());
 			model.addAttribute("msg", "기안 실패 되었습니다. 다시 확인 바랍니다.");
 			model.addAttribute("isOk", "false");
-			
 		}
 		return view;
 	}
@@ -154,6 +163,7 @@ public class SignController {
 	//내 문서함 화면 김정하 / 2020. 1. 7~
 	@RequestMapping("myDocu.hari")
 	public String myDocu() {
+		
 		return "1hariSign.myDocu";
 	}
 }

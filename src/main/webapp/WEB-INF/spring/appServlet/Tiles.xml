@@ -27,14 +27,13 @@
 	
 	
 	
-		<!-- color 코드 변경  -->
-	<definition name="haricolor.*" template="/WEB-INF/views/haricolor/inc/layout.jsp"> 
+	<!-- color 코드 변경  -->
+	<definition name="color.*" template="/WEB-INF/views/color/inc/layout.jsp"> 
 		<put-attribute name="title"  value="1HARI" />
-		<put-attribute name="header"  value="/WEB-INF/views/haricolor/inc/header.jsp" /> 
-		<put-attribute name="footer"  value="/WEB-INF/views/haricolor/inc/footer.jsp" />
-		<put-attribute name="aside"   value="/WEB-INF/views/haricolor/inc/aside.jsp" />
-		<put-attribute name="content" value="/WEB-INF/views/haricolor/{2}.jsp" />
+		<put-attribute name="header"  value="/WEB-INF/views/color/inc/header.jsp" /> 
+		<put-attribute name="footer"  value="/WEB-INF/views/color/inc/footer.jsp" />
+		<put-attribute name="aside"   value="/WEB-INF/views/color/inc/aside.jsp" />
+		<put-attribute name="content" value="/WEB-INF/views/color/{2}.jsp" />
 	</definition>
-	
 
  </tiles-definitions>

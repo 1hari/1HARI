@@ -46,4 +46,9 @@
 		<property name="maxUploadSize" value="10485760"><!-- 10485760 == 10M 최대업로드용량-->
 		</property>
 	</bean>	
+	
+	<!-- @Transactional Annotation 적용하기 위해서 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    	<property name="dataSource" ref="driverManagerDataSource" /> 
+	</bean>
 </beans>

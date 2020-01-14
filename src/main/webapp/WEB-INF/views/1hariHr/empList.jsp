@@ -40,7 +40,7 @@
 						<h5 class="card-title"></h5>
 						<div class="table-responsive">
 
-							<div style="text-align: right; margin-bottom: 1%;">
+							<div style="text-align: right; margin-bottom: 3%;">
 								<a href="empJoin.hari" style="color: white;">
 									<button type="button" class="btn m-t-5 btn-info btn-block waves-effect waves-light" 
 											style="width: 20%; background-color: #20B2AA; margin-right: 1%;">
@@ -49,29 +49,29 @@
 								</a>
 								<a href="excelDownload.hari" style="color: white;">
 									<button type="button" class="btn m-t-5 btn-info btn-block waves-effect waves-light" 
-											style="width: 20%; background-color: #20B2AA; margin-right: 1%;" onclick="doExcelDownloadProcess()">
+											style="width: 20%; background-color: #20B2AA; margin-right: 1%;">
 										Excel 다운로드
 									</button>
 								</a>
-								<a href="hr_join&resign2.jsp" style="color: white;">
+								<a href="javascript:excelUpload()" style="color: white;">
 									<button type="button" class="btn m-t-5 btn-info btn-block waves-effect waves-light" 
-											style="width: 20%; background-color: #20B2AA; margin-right: 1%;" onclick="doExcelUploadProcess()">
+											style="width: 20%; background-color: #20B2AA; margin-right: 1%;">
 										Excel 업로드
 									</button>
 								</a>
-								<a href="hr_join&resign2.jsp" style="color: white;">
+								<a href="" style="color: white;">
 									<button type="button" class="btn m-t-5 btn-info btn-block waves-effect waves-light" 
 											style="width: 20%; background-color: #20B2AA; margin-right: 1%;">
 										양식 받기
 									</button>
 								</a>
 							</div>
-							<div style="text-align: right; margin-bottom: 1%;">
-								<input type="file" id="excelFile" name="excelFile" style="width: 280px;">
-								<button type="button" class="btn m-t-5 btn-info btn-block waves-effect waves-light" 
-										id="uploadExcel" style="width: 8%; background-color: #20B2AA; margin-right: 1%;" onclick="check()">업로드
-								</button>
-							</div>
+<!-- 							<div style="text-align: right; margin-bottom: 1%;"> -->
+<!-- 								<input type="file" id="excelFile" name="excelFile" style="width: 300px;"> -->
+<!-- 								<button type="button" class="btn m-t-5 btn-info btn-block waves-effect waves-light"  -->
+<!-- 										id="uploadExcel" style="width: 20%; background-color: #20B2AA; margin-right: 1%;" onclick="excelUpload()">Excel 업로드 -->
+<!-- 								</button> -->
+<!-- 							</div> -->
 							
 							<table id="zero_config" class="table table-striped table-bordered">
 								<thead>
@@ -131,12 +131,16 @@
 								
 								<tfoot>
 									<tr>
-										<th></th>
-										<th></th>
-										<th></th>
-										<th></th>
-										<th></th>
-										<th></th>
+										<th>사번</th>
+										<th>이름</th>
+										<th>소속</th>
+										<th>직급</th>
+										<th>직책</th>
+										<th>재직구분</th>
+<!-- 										<th>권한</th> -->
+										<th>입사일</th>
+										<th>퇴사일</th>
+										<th>정보수정</th>
 									</tr>
 								</tfoot>
 							</table>
@@ -191,37 +195,43 @@
 		}
 	}
 	
-	function check() {
-		var file = $("#excelFile").val();
-		if (file == "" || file == null) {
-			swal({
-				text: "파일을 선택해주세요.",
-				icon: "warning",
-				button: "닫기"
-			});
-			return false;
-		} else if (!checkFileType(file)) {
-			swal({
-				text: "Excel 파일만 업로드 가능합니다.",
-				icon: "warning",
-				button: "닫기"
-			});
-			return false;
-		}
+	function excelUpload() {
+		var popupUrl = "${pageContext.request.contextPath}/util/personnel/excelUpload.hari";
+		var popupName = "Excel Upload";
+		var popupOption = "statusber=no, scrollbar=no, menuber=no, width=900, height=500 top=270 left=530";
+		
+		window.open(popupUrl, popupName, popupOption);
+// 		var file = $("#excelFile").val();
+// 		if (file == "" || file == null) {
+// 			swal({
+// 				text: "파일을 선택해주세요.",
+// 				icon: "warning",
+// 				button: "닫기"
+// 			});
+// 			return false;
+// 		} else if (!checkFileType(file)) {
+// 			swal({
+// 				text: "Excel 파일만 업로드 가능합니다.",
+// 				icon: "warning",
+// 				button: "닫기"
+// 			});
+// 			return false;
+// 		}
 	
-		if (confirm("업로드 하시겠습니까?")) {
-			var options = 
-				{
-					success : function(data) {
-						swal({
-							text: "모든 데이터가 업로드 되었습니다.",
-							icon: "success",
-							button: "확인"
-						});
-					},
-					type : "POST"
-				};
-			$("#excelUploadForm").ajaxSubmit(options);
-		}
+// 		if (swal("업로드 하시겠습니까?")) {
+// 			var options = 
+// 				{
+// 					url: "${pageContext.request.contextPath}/util/excelUpload.hari",
+// 					type : "POST",
+// 					success : function(data) {
+// 						swal({
+// 							text: "모든 데이터가 업로드 되었습니다.",
+// 							icon: "success",
+// 							button: "확인"
+// 						});
+// 					}
+// 				};
+// 			$("#excelUploadForm").ajaxSubmit(options);
+// 		}
 	}
 </script>

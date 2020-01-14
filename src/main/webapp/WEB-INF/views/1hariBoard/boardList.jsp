@@ -29,7 +29,7 @@
 		<div class="row">
 			<div class="col-12">
 				<div id='app'>
-					<router-view></router-view> <!-- 급여조회 -->
+					<router-view></router-view> <!-- 공지사항 게시판 -->
 				</div>
 			</div>
 		</div>

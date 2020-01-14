@@ -292,4 +292,23 @@ public class HrRestController {
 		return totalTime;
 	}
 	
+	//형남 0114 이번달 출근기록 yyyy-mm-dd
+	@RequestMapping(value = "getEndList.hari", method = RequestMethod.POST)
+	public List<String> getEndList(Principal pri) {
+		System.out.println("pri.toString(): " + pri.toString());
+		List<String> totalTime = null;
+		try {
+			totalTime = empSercive.getEndList(pri.getName());
+			if(totalTime==null) {
+				totalTime=null;
+			}else {
+				System.out.println(totalTime.toString());
+			}
+		} catch (Exception e) {
+			System.out.println("getEndList 예외발생: " + e.getMessage());
+			log.debug("getEndList 예외발생: " + e.getMessage());
+		}
+		return totalTime;
+	}
+	
 }

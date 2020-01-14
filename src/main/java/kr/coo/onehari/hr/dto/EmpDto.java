@@ -1,7 +1,5 @@
 package kr.coo.onehari.hr.dto;
 
-import java.sql.Date;
-
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -23,11 +21,11 @@ public class EmpDto {
 	private String empName; //사원이름
 	private String password; //비밀번호
 	private String birth; //생년월일
-	private String phoneNum; //핸드폰번호
 	private String resNum; //주민등록번호 뒷자리
+	private String phoneNum; //핸드폰번호
 	private String email; //이메일
-	private Date hireDate; //입사일
-	private Date leaveDate;//퇴사일
+	private String hireDate; //입사일
+	private String leaveDate;//퇴사일
 	private int loginCnt; //로그인 시도 횟수
 	private int isLock; // 로그인 잠금여부
 	private String roleName; // 권한명 김진호 2020. 1. 12
