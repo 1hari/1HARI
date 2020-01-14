@@ -1,25 +1,51 @@
-/*
- * package kr.coo.onehari.board.controller;
- * 
- * import org.springframework.stereotype.Controller; import
- * org.springframework.web.bind.annotation.RequestMapping;
- */
+
+package kr.coo.onehari.board.controller;
+ 
+import org.json.simple.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller; 
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import kr.coo.onehari.board.dto.Board;
+import kr.coo.onehari.board.service.BoardService;  
+
 /*
 작성자: 김수연
 시작: 2020. 1. 14
 완료: 
 내용: board 작업 시작
 */
-/*
- * @Controller
- * 
- * @RequestMapping("/1hariBoard") public class BoardController {
- * 
- * @RequestMapping("/boardList.hari") public String boardList() { return
- * "1hariBoard.boardList"; } }
- * 
- */
 
+
+@RestController
+public class BoardController {
+
+	@Autowired
+	private BoardService boardservice;
+	
+	
+	// 컨텐츠 추가  작업 하는 중 1.14
+	@RequestMapping(value = "/add_content.do", method = RequestMethod.POST)
+	public @ResponseBody String addContent(Board board) { 
+		System.out.println(board.toString());
+		JSONObject root = boardservice.add_content(board);
+		System.out.println(root.toString());
+		return root.toJSONString();
+	}
+}
+/*@Controller
+
+@RequestMapping("/1hariBoard") public class BoardController {
+ 
+ @RequestMapping("/boardList.hari") public String boardList() {
+	 return "1hariBoard.boardList"; 
+	 
+ }
+
+}*/
 
 /* vue controller만들었던 거 참고 
 package controller;
@@ -154,7 +180,7 @@ public class VueController {
 		return root.toJSONString();
 	}
 	
-	// 컨텐츠 추가
+	// 컨텐츠 추가  작업 하는 중 1.14
 	@RequestMapping(value = "/add_content.do", method = RequestMethod.POST)
 	public @ResponseBody String add_content(Content content) {
 		System.out.println(content.toString());

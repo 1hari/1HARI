@@ -9,6 +9,7 @@
               <label for="board_subject">제목</label>
               <input type="text" id="board_subject" v-model="board_subject" class="form-control" />
             </div>
+            
             <div class="form-group">
               <label for="board_content">내용</label>
               <textarea
@@ -18,6 +19,14 @@
                 rows="10"
                 style="resize:none"
               ></textarea>
+            </div>
+             <div class="form-group">
+              <label for="board_subject">작성자</label>
+              <input type="text" id="board_subject" class="form-control" /><!--v-model="board_subject" -->
+            </div>
+             <div class="form-group">
+              <label for="board_subject">작성일</label>
+              <input type="text" id="board_subject"  class="form-control" /><!--v-model="board_subject" -->
             </div>
             <div class="form-group">
               <label for="board_file">첨부 이미지</label>

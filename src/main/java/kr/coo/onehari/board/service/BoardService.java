@@ -1,24 +1,69 @@
 /*
- * package kr.coo.onehari.board.service;
- * 
- * import java.util.List;
- * 
- * import javax.servlet.ServletContext;
- * 
- * import org.apache.ibatis.session.SqlSession; import
- * org.json.simple.JSONArray; import org.json.simple.JSONObject; import
- * org.springframework.beans.factory.annotation.Autowired; import
- * org.springframework.stereotype.Service;
- * 
- * import kr.coo.onehari.board.dao.BoardDao; import
- * kr.coo.onehari.board.dto.Board; import kr.coo.onehari.board.dto.BoardType;
- */
-/*
 작성자: 김수연
 시작: 2020. 1. 14
 완료: 
 내용: board 작업 시작
 */
+
+
+package kr.coo.onehari.board.service;
+
+import java.util.List;
+
+import javax.servlet.ServletContext;
+
+import org.apache.ibatis.session.SqlSession;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import kr.coo.onehari.board.dao.BoardDao;
+import kr.coo.onehari.board.dto.*;
+
+@Service
+public class BoardService {
+
+	@Autowired
+	private SqlSession sqlsession;
+	
+	@Autowired
+    ServletContext context;
+	
+//컨텐츠 추가
+	public JSONObject add_content(Board board) {
+		
+	
+		JSONObject root = new JSONObject();
+		BoardDao dao = sqlsession.getMapper(BoardDao.class);
+//		CommonsMultipartFile file = content.getFile(); // 파일 가져오기
+//		String filename =file.getOriginalFilename();
+//		String path = context.getRealPath("/upload");
+//
+//		String fpath = path + "\\" + filename; // 문자로 인식
+//		System.out.println("path입니당: " + fpath);
+//		if (!filename.equals("") || filename!=null) { // 실제 파일 업로드
+//			FileOutputStream fs = null;
+//			try {
+//				fs = new FileOutputStream(fpath);
+//				fs.write(file.getBytes());
+//				fs.close();
+//			} catch (Exception e) {
+//				System.out.println("filewrite : " + e.getMessage());
+//			}
+//		}
+//		content.setContent_file(filename);
+
+		int result = dao.addContent(board);
+		if(result >0) {
+			root.put("result", true);
+			root.put("boardnum", board.getBoardNum()); //글번호를 뿌려놓기.... 
+		}else {
+			root.put("result", false);
+		}
+		return root;
+	}
+}
 
 /*
 @Service

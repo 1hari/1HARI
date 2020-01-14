@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="kr.coo.onehari.board.dao.BoardDao">
+
+	<!-- 글쓰기 등록 (공지사항 게시판 ) 김수연 2020. 1. 14  화-->
+	<insert id="addContent" parameterType="kr.coo.onehari.board.dto.Board">
+		INSERT INTO BOARD (BOARDNUM, BOARDTITLE, BOARDCONTENT, WRITER, BOARDNUM, BOARDWRITEDATE)
+		VALUES(#{BOARDTITLE}, #{BOARDCONTENT}, #{WRITER}, #{BOARDNUM}, BOARDWRITEDATE) 
+	</insert>
+	
+	
+</mapper>
+
+

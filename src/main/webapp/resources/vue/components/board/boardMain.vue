@@ -4,12 +4,13 @@
     <div class="card shadow" style=" height: 500%;">
       <div class="card-body" style="height:700px;">
 
-        <h4 class="card-title">{{server_data.board_info_name}}</h4> <!--게시판 타이틀 가져오기 -->
+        <h4 class="card-title">{{server_data.boardName}}</h4> <!--게시판 이름  가져오기 -->
         <table class="table table-hover" id="board_list" >
           <thead>
             <tr>
               <th class="text-center d-none d-md-table-cell">번호</th>
               <th class="text-center d-none d-md-table-cell">제목</th>
+               <th class="text-center d-none d-md-table-cell">첨부파일</th>
               <th class="text-center d-none d-md-table-cell">작성자</th>
               <th class="text-center d-none d-md-table-cell">작성일</th>
           
@@ -22,7 +23,7 @@
               <td class="text-center d-none d-md-table-cell">2</td>
               <td class="text-center d-none d-md-table-cell">3</td>
               <td class="text-center d-none d-md-table-cell">4</td>
-   
+              <td class="text-center d-none d-md-table-cell">5</td>
             </tr> 
           </tbody>
           <tbody>
@@ -58,7 +59,7 @@
         </div>
 
         <!--글쓰기--> 
-        <div class="text-right" v-if='$store.state.user_login_chk == true'>
+        <div class="text-right"> <!--v-if='$store.state.user_login_chk == true'-->
           <router-link :to="'/board_write/' + $route.params.board_idx" class="btn btn-primary">글쓰기</router-link>
         </div>
       </div>

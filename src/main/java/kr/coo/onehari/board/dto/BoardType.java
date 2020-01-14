@@ -14,7 +14,7 @@ import lombok.ToString;
  * 
  * */
 public class BoardType {
-	private int boardCode; //게시판 시퀀스번호
-	private String boardName; //게시판 이름 
+	private int boardCode; //게시판 시퀀스번호 board_info_idx; private int board_info_idx; //게시판 번호 
+	private String boardName; //게시판 이름  board_info_name; private String board_info_name; //게시판 이름 : 자유게시판  
 
 }

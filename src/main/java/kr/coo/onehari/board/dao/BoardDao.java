@@ -1,3 +1,6 @@
+package kr.coo.onehari.board.dao;
+
+import kr.coo.onehari.board.dto.Board;
 
 /*
 작성자: 김수연
@@ -6,7 +9,15 @@
 내용: board 작업 시작
 */
 
+//게시판 컨텐츠 추가하기 김수연 01.14 화요일 
+public interface BoardDao { 
+	//컨텐츠 추가하기 
+	public int addContent(Board boardContent);
+	
+	//추가한 컨텐츠 글번호 가져오기
+	public int getBoardNum();
 
+}
 	
 // 아래가 vue 로 만든 dao코드 참고
 //	//회원가입
