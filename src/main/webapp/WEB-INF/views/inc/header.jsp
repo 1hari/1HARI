@@ -25,7 +25,6 @@ $(function(){
 		dataType: "json",
 		success: function(data) {
 			//퇴근근기록이 있으면 true, 없으면 false
-			console.log(data);
 			isEnd=data;
 
 			if(isEnd==false){
@@ -54,7 +53,6 @@ $(function(){
 					type: "post",
 					dataType: "text",
 					success: function(getTodayTotalTime) {
-						console.log('getTodayTotalTime ' + ': ' + isEnd);
 						$('#getWorkTime').text('');
 						$('#getWorkTime').append(getTodayTotalTime);
 					}
@@ -178,6 +176,7 @@ $(function(){
 						$(itemArray[i]).removeAttr("td");
 						$(itemArray[i]).append('<br><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-warning fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">Event Four</span></div><div class="fc-resizer fc-end-resizer"></div></a></td>');
 					}
+					
 		        }
 			}
 		});
@@ -189,36 +188,31 @@ $(function(){
 		type: "post",
 		dataType: "json",
 		success: function(getStartList) {
-// 			console.log(getStartList[1]);
 			var itemArray=document.querySelectorAll('.fc-day.fc-widget-content');
 			for(var i=0; i<itemArray.length; i++){
-				console.log($(itemArray[i]).attr('data-date'));
 				for(var j=0; j<getStartList.length; j++){
 					if($(itemArray[i]).attr('data-date') == getStartList[j]){
-// 						$(itemArray[i]).removeAttr("td");
-						$(itemArray[i]).append('<br><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-warning fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">출근</span></div><div class="fc-resizer fc-end-resizer"></div></a></td>');
+						console.log($(itemArray[i]));
+						//$(itemArray[i]).append('<br><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-warning fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">출근</span></div><div class="fc-resizer fc-end-resizer"></div></a></td>');
 					}
 				}
 			}
-		}
-	});
-	
-	//이번달 출근기록 yyyy-mm-dd
-	$.ajax({
-		url: "${pageContext.request.contextPath}/ajax/getEndList.hari",
-		type: "post",
-		dataType: "json",
-		success: function(getEndList) {
-			var itemArray2=document.querySelectorAll('.fc-day.fc-widget-content');
-			for(var i=0; i<itemArray2.length; i++){
-				console.log($(itemArray2[i]));
-				for(var j=0; j<getEndList.length; j++){
-					if($(itemArray2[i]).attr('data-date') == getEndList[j]){
-			 			console.log('ddddddddddddddddddddddddd');
-						$(itemArray2[i]).append('<a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-success fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">퇴근</span></div><div class="fc-resizer fc-end-resizer"></div></a>');
+			//이번달 출근기록 yyyy-mm-dd
+			$.ajax({
+				url: "${pageContext.request.contextPath}/ajax/getEndList.hari",
+				type: "post",
+				dataType: "json",
+				success: function(getEndList) {
+					var itemArray2=document.querySelectorAll('.fc-day.fc-widget-content');
+					for(var i=0; i<itemArray2.length; i++){
+						for(var j=0; j<getEndList.length; j++){
+							if($(itemArray2[i]).attr('data-date') == getEndList[j]){
+								//$(itemArray2[i]).append('<a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-success fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">퇴근</span></div><div class="fc-resizer fc-end-resizer"></div></a>');
+							}
+						}
 					}
 				}
-			}
+			});
 		}
 	});
 });
