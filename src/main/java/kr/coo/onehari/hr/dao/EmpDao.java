@@ -79,5 +79,8 @@ public interface EmpDao {
     
     //총 근무시간 오형남 / 2020. 1. 13
     public String getTotalTime(int empNum) throws ClassNotFoundException, SQLException;
+    
+    //dataDate 오형남 / 2020. 1. 14
+    public String getDataDate(int empNum) throws ClassNotFoundException, SQLException;
 
 }

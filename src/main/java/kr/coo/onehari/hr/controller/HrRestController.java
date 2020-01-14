@@ -122,7 +122,6 @@ public class HrRestController {
 	@RequestMapping(value = "startWork.hari", method = RequestMethod.POST)
 	public boolean startWork(Principal pri) {
 		System.out.println("pri.toString(): " + pri.toString());
-		
 		int result = 0;
 		try {
 			result = empSercive.insertStartWorkTA(pri.getName());
@@ -256,4 +255,22 @@ public class HrRestController {
 		}
 		return totalTime;
 	}
+	
+	//형남 0114 dataDate 형식으로 가져오기
+	@RequestMapping(value = "getDataDate.hari", method = RequestMethod.POST)
+	public String getDataDate(Principal pri) {
+		System.out.println("pri.toString(): " + pri.toString());
+		String totalTime = null;
+		try {
+			totalTime = empSercive.getDataDate(pri.getName());
+			if(totalTime==null) {
+				totalTime="empty";
+			}
+		} catch (Exception e) {
+			System.out.println("getDataDate 예외발생: " + e.getMessage());
+			log.debug("getDataDate 예외발생: " + e.getMessage());
+		}
+		return totalTime;
+	}
+	
 }

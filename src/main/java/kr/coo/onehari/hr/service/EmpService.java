@@ -311,5 +311,23 @@ public class EmpService {
     	return totalTime;
     }
     
+    //형남 0114 dataDate 형식으로 가져오기
+    public String getDataDate(String empNumStr) {
+    	EmpDao dao = sqlsession.getMapper(EmpDao.class);
+    	String totalTime = null;
+    	int empNum=Integer.parseInt(empNumStr);
+    	try {
+    		totalTime=dao.getDataDate(empNum);
+    		if(totalTime !=null) {
+    			System.out.println("dataDate: " + totalTime);
+    		}else {
+    			System.out.println("dataDate 못가져옴");
+    		}
+    	} catch (ClassNotFoundException | SQLException e) {
+    		log.debug("getDataDate : " + e.getMessage());
+    	}
+    	return totalTime;
+    }
+    
 
 }

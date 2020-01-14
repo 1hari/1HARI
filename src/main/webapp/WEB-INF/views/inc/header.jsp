@@ -161,6 +161,28 @@ $(function(){
 			}
 		}
 	});
+	//출근 클릭했을 때 날짜 data-date 형식으로 가져오기
+
+	
+	var item;
+	$('#test').click(function(){
+		$.ajax({
+			url: "${pageContext.request.contextPath}/ajax/getDataDate.hari",
+			type: "post",
+			dataType: "text",
+			success: function(dataDate) {
+				var itemArray=document.querySelectorAll('.fc-day.fc-widget-content');
+				for(var i=0;i<itemArray.length;i++){
+					if($(itemArray[i]).attr('data-date') == dataDate.trim()){
+						console.log($(itemArray[i]).attr('data-date') + ' ==> 이 친구');
+						$(itemArray[i]).removeAttr("td");
+						$(itemArray[i]).append('<br><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-warning fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">Event Four</span></div><div class="fc-resizer fc-end-resizer"></div></a></td>');
+					}
+		        }
+			}
+		});
+	})
+	
 
 	
 });
@@ -309,6 +331,7 @@ if(!toggle_customSidebar) {
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<button class="dropdown-item" id="startWork" disabled="disabled">출근하기</button>
 							<button class="dropdown-item" id="endWork" disabled="disabled">퇴근하기</button>
+							<button class="dropdown-item" id="test" >퇴근하기</button>
 						</div>
 					</li>
 					<!--top navbar 에서 오른쪽 기능 담당 (출/퇴근과 프로필) 끝 -->
