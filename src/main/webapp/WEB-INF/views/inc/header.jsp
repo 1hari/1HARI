@@ -162,8 +162,6 @@ $(function(){
 		}
 	});
 	//출근 클릭했을 때 날짜 data-date 형식으로 가져오기
-
-	
 	var item;
 	$('#test').click(function(){
 		$.ajax({
@@ -182,6 +180,16 @@ $(function(){
 			}
 		});
 	})
+
+	//이번달 출근기록 yyyy-mm-dd
+	$.ajax({
+		url: "${pageContext.request.contextPath}/ajax/getStartList.hari",
+		type: "post",
+		dataType: "json",
+		success: function(getStartList) {
+			console.log(getStartList);
+		}
+	});
 	
 
 	
