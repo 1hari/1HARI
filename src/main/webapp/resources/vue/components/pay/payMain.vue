@@ -1,5 +1,5 @@
 <template>
-  <!-- 게시글 리스트 -->
+  <!-- pay 급여조회 -->
   <div class="container" style="margin-top:5%;">
     <div class="card shadow" style=" height: 500%;">
       <div class="card-body" style="height:700px;">

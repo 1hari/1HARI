@@ -12,7 +12,7 @@
 </script>
 
 <script src="${pageContext.request.contextPath}/resources/vue/js/vue-router.js"></script>
-<script src='${pageContext.request.contextPath}/resources/vue/js/router.js'></script>
+<script src='${pageContext.request.contextPath}/resources/vue/js/payRouter.js'></script>
 <script src='${pageContext.request.contextPath}/resources/vue/js/app.js'></script>
 <style>
 	#board_list>tbody>tr {

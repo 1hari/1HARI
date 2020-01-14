@@ -3,52 +3,26 @@
   <div class="container" style="margin-top:5%;">
     <div class="card shadow" style=" height: 500%;">
       <div class="card-body" style="height:700px;">
-        <div>
-            <select style = "width:10%;">
-              <option>1월</option>
-              <option>2월</option>
-              <option>3월</option>
-              <option>4월</option>
-              <option>5월</option>
-              <option>6월</option>
-              <option>7월</option>
-              <option>8월</option>
-              <option>9월</option>
-              <option>10월</option>
-              <option>11월</option>
-              <option>12월</option>
-            </select>
-            <span style = "margin-left:75%;" value ="사번">사번</span>
-        </div>
-        <h4 class="card-title">{{server_data.board_info_name}}</h4>
+
+        <h4 class="card-title">{{server_data.board_info_name}}</h4> <!--게시판 타이틀 가져오기 -->
         <table class="table table-hover" id="board_list" >
           <thead>
             <tr>
-              <th class="text-center d-none d-md-table-cell">기본급</th>
-              <th class="text-center d-none d-md-table-cell">국민연금</th>
-              <th class="text-center d-none d-md-table-cell">건강보험</th>
-              <th class="text-center d-none d-md-table-cell">장기요양보험</th>
-              <th class="text-center d-none d-md-table-cell">고용보험</th>
-              <th class="text-center d-none d-md-table-cell">소득세</th>
-              <th class="text-center d-none d-md-table-cell">지방소득세</th>
-              <th class="text-center d-none d-md-table-cell">공제금액</th>
-              <th class="text-center d-none d-md-table-cell">실급여</th>
-              <th class="text-center d-none d-md-table-cell">급여명세</th>
+              <th class="text-center d-none d-md-table-cell">번호</th>
+              <th class="text-center d-none d-md-table-cell">제목</th>
+              <th class="text-center d-none d-md-table-cell">작성자</th>
+              <th class="text-center d-none d-md-table-cell">작성일</th>
+          
             </tr>
           </thead>
 
           <tbody>
             <tr>
-              <td>1</td>
-              <td>2</td>
-              <td>3</td>
-              <td>4</td>
-              <td>5</td>
-              <td>6</td>
-              <td>7</td>
-              <td>8</td>
-              <td>9</td>
-              <td><button class ="btn btn-sucess" style = "background-color: #2ab2aa; text-color:white;">급여명세</button></td>
+              <td class="text-center d-none d-md-table-cell">1</td>
+              <td class="text-center d-none d-md-table-cell">2</td>
+              <td class="text-center d-none d-md-table-cell">3</td>
+              <td class="text-center d-none d-md-table-cell">4</td>
+   
             </tr> 
           </tbody>
           <tbody>
