@@ -43,9 +43,7 @@ public class SignService {
 		List<SignDto> selectSignList = null;
 		SignDao dao = sqlsession.getMapper(SignDao.class);
 		
-		try {
-			System.out.println("code : " + map.get("code"));
-			
+		try {		
 			selectSignList = dao.selectSignList(map);
 		} catch (ClassNotFoundException | SQLException e) {
 			log.debug("selectSign : " + e.getMessage());

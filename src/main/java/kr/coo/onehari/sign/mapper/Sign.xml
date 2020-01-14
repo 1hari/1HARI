@@ -36,6 +36,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 						ON s.DRAFTEMP = e.EMPNUM
 		<where>
 			<choose>
+				<when test="code.equalsIgnoreCase('0')"> <!-- 전체문서 -->
+					s.DRAFTEMP = #{draftEmp}
+				</when>
 				<when test="code.equalsIgnoreCase('1')"> <!-- 기안문서 -->
 					s.SIGNCODE IN(1,2) AND s.DRAFTEMP = #{draftEmp}
 				</when>
@@ -52,6 +55,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>				
 		ORDER BY s.SIGNDATE DESC
 		LIMIT ${pg}
+		<if test="cp != null">
+			OFFSET ${cp}
+		</if>
 	</select>
 	
 </mapper>

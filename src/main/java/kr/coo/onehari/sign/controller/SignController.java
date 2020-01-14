@@ -156,7 +156,6 @@ public class SignController {
 			model.addAttribute("signFormCode", sign.getSignFormCode());
 			model.addAttribute("msg", "기안 실패 되었습니다. 다시 확인 바랍니다.");
 			model.addAttribute("isOk", "false");
-			
 		}
 		return view;
 	}
@@ -164,6 +163,7 @@ public class SignController {
 	//내 문서함 화면 김정하 / 2020. 1. 7~
 	@RequestMapping("myDocu.hari")
 	public String myDocu() {
+		
 		return "1hariSign.myDocu";
 	}
 }
