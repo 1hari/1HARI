@@ -51,8 +51,8 @@ public class EmpService {
 		try {
 //			empdto.setPassword(this.bCryptPasswordEncoder.encode(empdto.getPassword())); // 비밀번호 암호화
 			empdto.setPassword("1004");
-			empdao.empJoin(empdto);
-			empdao.subempJoin(empdto);
+			result = empdao.empJoin(empdto);
+			result = empdao.subempJoin(empdto);
 		} catch (Exception e) {
 			System.out.println("EmpService empJoin 예외발생: " + e.getMessage());
 			log.debug("EmpService empJoin 예외발생: " + e.getMessage());
@@ -79,7 +79,7 @@ public class EmpService {
 	//사원정보수정(변경) 2020. 1. 10 양찬식 
 	//시작 시간 : 오후 3시 20분 끝난시간 3시 25분
 	@Transactional
-	public void empUpdate(EmpDto empdto) {
+	public void empUpdate(EmpDto empdto) throws Exception {
 		EmpDao empdao = sqlsession.getMapper(EmpDao.class);
 		try {
 			if (empdto.getRoleName().equals("ROLE_USER")) {
@@ -101,6 +101,7 @@ public class EmpService {
 		} catch (Exception e) {
 			System.out.println("EmpService empUpdate 예외발생: " + e.getMessage());
 			log.debug("EmpService empUpdate 예외발생: " + e.getMessage());
+			throw e;
 		}
 		/*return result;*/
 	}

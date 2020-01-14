@@ -59,10 +59,10 @@ public class HrController {
 	public String empJoin(EmpDto empdto, Model model) {
 		String view = "";
 		int result =0;
+		
 		try {
 			result = empservice.empJoin(empdto);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

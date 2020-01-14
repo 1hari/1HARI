@@ -103,22 +103,22 @@
 							</div>
 							<div>
 								<label for="birthFull" style="margin-top: 10px; margin-bottom: 0px;">생년월일</label> 
-								<input type="text" id="birth" name="birth" class="form-control datepicker-autoclose" placeholder="yymmdd">
+								<input type="text" id="birth" name="birth" class="required form-control datepicker-autoclose" placeholder="yymmdd">
 								<div class="input-group-append"></div>
 							</div>
 							<div>
 								<label for="resNum" style="margin-top: 10px; margin-bottom: 0px;">주민등록번호</label>
 								<button type="button" class="btn btn-outline-success" style="padding-top: 0px; padding-bottom: 0px;" onclick="CheckForm()">확인</button><br>
-								<input type="password" id="resNum" name="resNum" class="form-control" maxlength="7" placeholder="주민등록번호 뒷자리">
+								<input type="password" id="resNum" name="resNum" class="required form-control" maxlength="7" placeholder="주민등록번호 뒷자리">
 							</div>
 							<div>
 								<label for="phoneNum" style="margin-top: 10px; margin-bottom: 0px;">핸드폰번호</label> 
 								<input id="phoneNum" name="phoneNum" type="text" class="required form-control" maxlength="13" placeholder="010-0000-0000">
 							</div>
 							<div>
-								<label for="email" style="margin-top: 10px; margin-bottom: 0px;">이메일</label><br>
-								<input id="email" name="email" type="text" class="form-control" style="width: 50%; display: inline;">
-								<input type="text" class="required form-control" style="width: 49%; display: inline;" value="@gmail.com" readonly="readonly">
+								<label for="email" style="margin-top: 10px; margin-bottom: 0px;">이메일</label>
+								<br><input id="email" name="email" type="text" class="required form-control" style="width: 50%; display: inline;">
+								<input type="text" class="form-control" style="width: 49%; display: inline;" value="@gmail.com" readonly="readonly">
 							</div>
 						</section>
 
