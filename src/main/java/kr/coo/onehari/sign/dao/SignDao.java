@@ -2,6 +2,7 @@ package kr.coo.onehari.sign.dao;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import kr.coo.onehari.sign.dto.SignDto;
 
@@ -16,6 +17,9 @@ public interface SignDao {
 	
 	//전자결재 기안 김정하 / 2020. 1. 12
 	public int insertSign(SignDto sign) throws ClassNotFoundException, SQLException;
+	
+	//전자결재 리스트 (다이나믹쿼리) 김정하 / 2020. 1. 14
+	public List<SignDto> selectSignList (Map<String, String> map) throws ClassNotFoundException, SQLException;
 	
 	//전자결재 기안 리스트 (전자결재 홈) 김정하 / 2020. 1. 13
 	public List<SignDto> selectSignDraftListHome (String draftEmp) throws ClassNotFoundException, SQLException;
