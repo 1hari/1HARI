@@ -7,14 +7,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<title>Azzara Bootstrap 4 Admin Dashboard</title>
-	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="icon" href="${pageContext.request.contextPath}/resources/colorcode/assets/img/icon.ico" type="image/x-icon"/>
 
 	<!-- Fonts and icons -->
 	<script src="${pageContext.request.contextPath}/resources/colorcode/assets/js/plugin/webfont/webfont.min.js"></script>
-	<script type = "text/javascript">
+<!-- 	<script type = "text/javascript">
 		WebFont.load({
 			google: {"families":["Open+Sans:300,400,600,700"]},
 			custom: {"families":["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands"], urls: ['.../assets/css/fonts.css']},
@@ -22,7 +21,7 @@
 				sessionStorage.fonts = true;
 			}
 		});
-	</script>
+	</script> -->
 
 	<!-- CSS Files -->
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/colorcode/assets/css/bootstrap.min.css">
@@ -51,7 +50,7 @@
 </body>
 
 
-<!--   Core JS Files   -->
+<!--   Core JS Files-->
 <script src="${pageContext.request.contextPath}/resources/colorcode/assets/js/core/jquery.3.2.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/colorcode/assets/js/core/popper.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/colorcode/assets/js/core/bootstrap.min.js"></script>
