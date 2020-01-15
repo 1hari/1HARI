@@ -49,17 +49,17 @@
 	});//document ready 끝
 </script>
 <style>
-	.wrap-loading{ /*화면 전체를 어둡게 합니다.*/
+	/* .wrap-loading{ /*화면 전체를 어둡게 합니다.
 		    position: fixed;
 		    left:0;
 		    right:0;
 		    top:0;
 		    bottom:0;
-		    background: rgba(0,0,0,0.2); /*not in ie */
-		    filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#20000000', endColorstr='#20000000');    /* ie */
+		    background: rgba(0,0,0,0.2); /*not in ie 
+		    filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#20000000', endColorstr='#20000000');    /* ie 
 		}
 
-	    .wrap-loading div{ /*로딩 이미지*/
+	    .wrap-loading div{ /*로딩 이미지
 	        position: fixed;
 	        top:50%;
 	        left:50%;
@@ -67,9 +67,9 @@
 	        margin-top: -21px;
 	    }
 	
-	    .display-none{ /*감추기*/
+	    .display-none{ /*감추기
 	        display:none;
-	    }
+	    } */
 </style>
 
 <!--left sidebar시작 !!  css는 sidebar.css 파일 참고 -->
@@ -85,14 +85,14 @@
 				<!--인사관리-->
 				<li class="sidebar-item">
 					<a class="sidebar-link has-arrow waves-effect waves-dark" href="hr_attendance.html" aria-expanded="false">
-						<i class="mdi mdi-receipt"></i>
+						<i class="mdi mdi-view-dashboard"></i>
 						<span class="hide-menu">인사 관리</span>
 					</a>
 					
-					<ul aria-expanded="false" class="collapse  first-level">
+					<ul aria-expanded="false" class="collapse first-level">
 						<li class="sidebar-item">
 							<a href="${pageContext.request.contextPath}/1hariHr/attendance.hari" class="sidebar-link">
-								<i class="mdi mdi-note-plus"></i>
+								<i class="mdi mdi-calendar-check"></i>
 								<span class="hide-menu"> 근태 관리 </span>
 							</a>
 						</li>
@@ -106,14 +106,14 @@
 						
 						<li class="sidebar-item">
 							<a href="hr_proof.jsp" class="sidebar-link">
-								<i class="mdi mdi-note-plus"></i>
+								<i class="mdi mdi mdi-emoticon"></i>
 								<span class="hide-menu"> 재직 증명 </span>
 							</a>
 						</li>
 						
 						<li class="sidebar-item">
 							<a href="${pageContext.request.contextPath}/1hariHr/teamList.hari" class="sidebar-link">
-								<i class="mdi mdi-note-outline"></i>
+								<i class="mdi mdi-emoticon-cool"></i>
 								<span class="hide-menu">사원 조회</span>
 							</a>
 						</li>
@@ -121,7 +121,7 @@
 						<!-- 권한처리 메뉴 : ROLE_ADMIN & ROLE_PERSONNEL-->
 						<li class="sidebar-item">
 							<a href="${pageContext.request.contextPath}/1hariHr/personnel/empList.hari" class="sidebar-link">
-								<i class="mdi mdi-note-plus"></i>
+								<i class="mdi mdi-multiplication-box"></i>
 								<span class="hide-menu"> 입사 & 퇴사관리 </span>
 							</a>
 						</li>
