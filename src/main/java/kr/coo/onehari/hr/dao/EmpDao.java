@@ -74,11 +74,17 @@ public interface EmpDao {
     //오늘 퇴근시간 오형남 / 2020. 1. 13
     public String getTodayTotalTime(int empNum) throws ClassNotFoundException, SQLException;
     
-    //이번주 총 근무시간 오형남 / 2020. 1. 13
+    //이번주 현재까지 총  근무시간 오형남 / 2020. 1. 13
     public String getWeekTotalTime(int empNum) throws ClassNotFoundException, SQLException;
     
-    //총 근무시간 오형남 / 2020. 1. 13
+    //현재까지 총 근무시간 오형남 / 2020. 1. 13
     public String getTotalTime(int empNum) throws ClassNotFoundException, SQLException;
+    
+    //이번주 총 근무시간 오형남 / 2020. 1. 13
+    public String getWeekWorkTime(int empNum) throws ClassNotFoundException, SQLException;
+    
+    //총 근무시간 오형남 / 2020. 1. 13
+    public String getTotalWorkTime(int empNum) throws ClassNotFoundException, SQLException;
     
     //dataDate 오형남 / 2020. 1. 14
     public String getDataDate(int empNum) throws ClassNotFoundException, SQLException;

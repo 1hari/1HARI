@@ -7,7 +7,7 @@ $(function(){
 	var isEnd=false;//오늘 퇴근했는지
 	var currYear;
 	var currMonth;
-	var fixLatitude=parseFloat(37.4995124);
+	var fixLatitude=parseFloat(38.4995124);
 	var fixLongitude=parseFloat(127.0292657);
 	var myLatitude; //사용자 위도
 	var myLongitude;////사용자 경도
@@ -80,6 +80,38 @@ $(function(){
 						}
 					}
 				});
+
+				//이번주 현재까지 근무시간
+				$.ajax({
+					url: "${pageContext.request.contextPath}/ajax/getWeekTotalTime.hari",
+					type: "post",
+					dataType: "text",
+					success: function(getWeekTotalTime) {
+						if(getWeekTotalTime != "empty" ){
+							$('#getWeekTotalTime').text('');
+							$('#getWeekTotalTime').append(getWeekTotalTime);
+						} else{
+							$('#getWeekTotalTime').text('');
+							$('#getWeekTotalTime').append('00:00');
+						}
+					}
+				});
+				
+				//총 현재까지 근무시간
+				$.ajax({
+					url: "${pageContext.request.contextPath}/ajax/getTotalTime.hari",
+					type: "post",
+					dataType: "text",
+					success: function(getTotalTime) {
+						if(getTotalTime != "empty" ){
+							$('#getTotalTime').text('');
+							$('#getTotalTime').append(getTotalTime);
+						} else{
+							$('#getTotalTime').text('');
+							$('#getTotalTime').append('00:00');
+						}
+					}
+				});
 			} else{
 				//true면 퇴근시간 - 출근시간
 				$.ajax({
@@ -89,6 +121,37 @@ $(function(){
 					success: function(getTodayTotalTime) {
 						$('#getWorkTime').text('');
 						$('#getWorkTime').append(getTodayTotalTime);
+					}
+				});
+				//이번주 총 근무시간
+				$.ajax({
+					url: "${pageContext.request.contextPath}/ajax/getWeekWorkTime.hari",
+					type: "post",
+					dataType: "text",
+					success: function(getWeekWorkTime) {
+						if(getWeekWorkTime != "empty" ){
+							$('#getWeekTotalTime').text('');
+							$('#getWeekTotalTime').append(getWeekWorkTime);
+						} else{
+							$('#getWeekTotalTime').text('');
+							$('#getWeekTotalTime').append('00:00');
+						}
+					}
+				});
+				
+				//총 근무시간
+				$.ajax({
+					url: "${pageContext.request.contextPath}/ajax/getTotalWorkTime.hari",
+					type: "post",
+					dataType: "text",
+					success: function(getTotalWorkTime) {
+						if(getTotalWorkTime != "empty" ){
+							$('#getTotalTime').text('');
+							$('#getTotalTime').append(getTotalWorkTime);
+						} else{
+							$('#getTotalTime').text('');
+							$('#getTotalTime').append('00:00');
+						}
 					}
 				});
 			}
@@ -114,11 +177,12 @@ $(function(){
 				$('#endWork').attr('disabled', 'disabled');
 				$('#startWork').attr('disabled', 'disabled');
 			} else if(isStart == false && isEnd==true) {
-				alert('');
+				alert('근퇴문제 오형남한테 문의해주세요');
 			} 
 		}
 	})
 	
+	//출근버튼
 	$('#startWork').click(function() {
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(function(position) {
@@ -209,37 +273,6 @@ $(function(){
 		});
 	})
 	
-	//이번주 총 근무
-	$.ajax({
-		url: "${pageContext.request.contextPath}/ajax/getWeekTotalTime.hari",
-		type: "post",
-		dataType: "text",
-		success: function(getWeekTotalTime) {
-			if(getWeekTotalTime.trim() != "empty" ){
-				$('#getWeekTotalTime').text('');
-				$('#getWeekTotalTime').append(getWeekTotalTime);
-			} else{
-				$('#getWeekTotalTime').text('');
-				$('#getWeekTotalTime').append('00:00');
-			}
-		}
-	});
-	
-	//총 근무
-	$.ajax({
-		url: "${pageContext.request.contextPath}/ajax/getTotalTime.hari",
-		type: "post",
-		dataType: "text",
-		success: function(getTotalTime) {
-			if(getTotalTime.trim() != "empty" ){
-				$('#getTotalTime').text('');
-				$('#getTotalTime').append(getTotalTime);
-			} else{
-				$('#getTotalTime').text('');
-				$('#getTotalTime').append('00:00');
-			}
-		}
-	});
 	
 	$('#test').click(function(){
 		if (navigator.geolocation) {
@@ -303,6 +336,42 @@ $(function(){
 			});
 		}
 	});
+
+	//보낼 parameter
+	var parameter_noti = {
+		title:"HARI",
+		icon:"m-r-10 mdi mdi-checkerboard",
+		body:"나는 하리"
+	};
+	// 브라우저가 Notification 기능을 지원하는지 체크
+	if (!"Notification" in window) {
+		alert("This browser does not support desktop notification");
+	  }
+	// 사용자가 Notification 사용을 허락했는지 체크
+	else if (Notification.permission === "granted") {
+		// 허락했다면 Notification을 생성
+		var notification = new Notification(parameter_noti.title,{
+	    	icon:parameter_noti.icon,
+	    	body:parameter_noti.body
+	    });
+	  }
+	  // 크롬 브라우저는 permission 속성이 구현되어 있지 않기 때문에
+	  // 사용자가 의도적으로 'denied' 한 경우를 체크
+	else if (Notification.permission !== 'denied') {
+		Notification.requestPermission(function (permission) {
+		// 사용자가 사용 여부를 체크했다면, 크롬 Notification 상태를 갱신
+		if(!('permission' in Notification)) {
+			Notification.permission = permission;
+		}
+	   // 사용자가 승낙했다면, Notification을 생성
+		if (permission === "granted") {
+			var notification = new Notification(parameter_noti.title,{
+				icon:parameter_noti.icon,
+	        	body:parameter_noti.body
+			});
+			}
+		});
+	}
 });
 </script>
 <!-- ============================================================== -->
