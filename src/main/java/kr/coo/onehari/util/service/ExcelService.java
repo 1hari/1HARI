@@ -216,21 +216,20 @@ public class ExcelService {
 	
 	// Excel 파일 사원등록
 	@Transactional
-	public List<ExcelEmpDto> insertExcelEmp(ExcelEmpDto excelemp) throws Exception {
+	public int insertExcelEmp(HashMap<String, List<EmpDto>> map) throws Exception {
 		ExcelDao exceldao = sqlsession.getMapper(ExcelDao.class);
-		List<ExcelEmpDto> excelEmplist = new ArrayList<ExcelEmpDto>();
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		
+				
+		int result = 0;
 		try {
-			excelEmplist = exceldao.insertExcelEmp(excelemp);
-			excelEmplist = exceldao.insertExcelSubEmp(excelemp);
-			System.out.println("Service try excelEmplist: " + excelEmplist);
+			result = exceldao.insertExcelEmp(map);
+			//result = exceldao.insertExcelSubEmp(map);
+			
 		} catch (ClassNotFoundException | SQLException e) {
 			System.out.println("ExcelService insertExcelEmp 예외발생: " + e.getMessage());
 			log.debug("ExcelService insertExcelEmp 예외발생: " + e.getMessage());
 			throw e;
 		}
-		System.out.println("excelEmpList: " + excelEmplist);
-		return excelEmplist;
+		
+		return result;
 	}
 }

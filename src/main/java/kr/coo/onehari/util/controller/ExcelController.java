@@ -1,5 +1,7 @@
 package kr.coo.onehari.util.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -46,23 +48,36 @@ public class ExcelController {
 	@RequestMapping(value = "personnel/insertExcelEmp.hari", method = RequestMethod.POST)
 	public String insertExcelEmp(ExcelEmpDto excelemp, Model model) {
 		String view = "";
-		List<ExcelEmpDto> excelEmplist = null;
-		System.out.println(excelemp);
+		
+		List<EmpDto> empList = new ArrayList<EmpDto>();
+		
+		for(int i = 0; i < excelemp.getEmpName().size(); i++) {
+			EmpDto emp = new EmpDto();
+			emp.setEmpName(excelemp.getEmpName().get(i));
+			empList.add(emp);
+		}
+		
+		int result = 0;
+		
+		HashMap<String, List<EmpDto>> map = new HashMap<>();
+		map.put("list", empList);
+		
+		System.out.println(map.get("list"));
+		
 		try {
-			excelEmplist = excelservice.insertExcelEmp(excelemp);
-			System.out.println("Controller insertExcelEmp: " + excelEmplist);
+			 result = excelservice.insertExcelEmp(map);
+			
 		} catch (Exception e) {
 			System.out.println("ExcelController insertExcelEmp 예외발생: " + e.getMessage());
 			log.debug("ExcelController insertExcelEmp 예외발생: " + e.getMessage());
 		}
 		
-		if (excelEmplist != null) {
-			view = "redirect:etc.excelForm";
-			model.addAttribute("Excel 사원등록 실패");
-		} else {
-			view = "redirect:1hariHr.empList";
-			model.addAttribute("excelEmplist", excelEmplist);
-		}
+		/*
+		 * if (excelEmplist != null) { view = "redirect:etc.excelForm";
+		 * model.addAttribute("Excel 사원등록 실패"); } else { view =
+		 * "redirect:1hariHr.empList"; model.addAttribute("excelEmplist", excelEmplist);
+		 * }
+		 */
 		return view;
 	}
 }
