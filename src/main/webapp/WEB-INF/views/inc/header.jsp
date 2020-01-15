@@ -301,55 +301,7 @@ $(function(){
 });
 
 
-//수연이가 추가했음 2020.01.13
-//Setting Color
 
-$(window).resize(function() {
-	$(window).width(); 
-});
-
-
-$('.changeMainHeaderColor').on('click', function(){
-	if($(this).attr('data-color') == 'default'){
-		$('#main-header').removeAttr('data-background-color');
-	} else {
-		$('#main-header').attr('data-background-color', $(this).attr('data-color'));
-	}
-
-	$(this).parent().find('.changeMainHeaderColor').removeClass("selected");
-	$(this).addClass("selected");
-	layoutsColors();
-});
-
-$('.changeBackgroundColor').on('click', function(){
-	$('.page-wrapper').removeAttr('data-background-color');
-	$('.page-wrapper').attr('data-background-color', $(this).attr('data-color'));
-	$(this).parent().find('.changeBackgroundColor').removeClass("selected");
-	$(this).addClass("selected");
-});
-
-var toggle_customSidebar = false,
-custom_open = 0;
-
-if(!toggle_customSidebar) {
-	var toggle = $('.custom-template .custom-toggle');
-
-	toggle.on('click', (function(){
-		if (custom_open == 1){
-			$('.custom-template').removeClass('open');
-			toggle.removeClass('toggled');
-			custom_open = 0;
-		}  else {
-			$('.custom-template').addClass('open');
-			toggle.addClass('toggled');
-			custom_open = 1;
-		}
-	})
-	);
-	toggle_customSidebar = true;
-}
-
-/// ready.js 
 
 
 </script>
@@ -372,10 +324,10 @@ if(!toggle_customSidebar) {
 <!-- 원래 inc 헤더 임 !!!!!  -->
 
 	<!--상단 topnavbar 시작 -->
-	<header class="topbar"  id="main-header" data-background-color="purple"> <!-- data-navbarbg="skin5" -->
+	<header class="topbar" data-navbarbg="skin5"> 
 
 		<nav class="navbar top-navbar navbar-expand-md navbar-dark">
-			<div class="navbar-header"  id="main-header" data-background-color="purple"> <!-- data-logobg="skin5" -->
+			<div class="navbar-header" data-logobg="skin5"> 
 				<!-- 모바일용 토글러-->
 				<a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)">
 					<i class="ti-menu ti-close"></i>
@@ -408,7 +360,7 @@ if(!toggle_customSidebar) {
 
 
 			<!--top navbar 더보기 & 검색 -->
-			<div class="navbar-collapse collapse" id="main-header" data-background-color="purple"> <!-- id="navbarSupportedContent" data-navbarbg="skin5" -->
+			<div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5"> 
 				<!-- ============================================================== -->
 				<!-- toggle and nav items -->
 				<!-- ============================================================== -->
