@@ -6,34 +6,34 @@
         <div class="card shadow">
           <div class="card-body">
             <div class="form-group">
-              <label for="board_subject">제목</label>
-              <input type="text" id="board_subject" v-model="board_subject" class="form-control" />
+              <label for="boardTitle">제목</label>
+              <input type="text" id="boardTitle" v-model="boardTitle" class="form-control" />
             </div>
             
             <div class="form-group">
-              <label for="board_content">내용</label>
+              <label for="boardContent">내용</label>
               <textarea
-                id="board_content"
-                v-model="board_content"
+                id="boardContent"
+                v-model="boardContent"
                 class="form-control"
                 rows="10"
                 style="resize:none"
               ></textarea>
             </div>
              <div class="form-group">
-              <label for="board_subject">작성자</label>
-              <input type="text" id="board_subject" class="form-control" /><!--v-model="board_subject" -->
+              <label for="boardWriter">작성자</label>
+              <input type="text" id="boardWriter" class="form-control" /><!--v-model="board_subject" -->
             </div>
              <div class="form-group">
-              <label for="board_subject">작성일</label>
-              <input type="text" id="board_subject"  class="form-control" /><!--v-model="board_subject" -->
+              <label for="bWriteDate">작성일</label>
+              <input type="text" id="bWriteDate"  class="form-control" /><!--v-model="board_subject" -->
             </div>
             <div class="form-group">
-              <label for="board_file">첨부 이미지</label>
+              <label for="boardFileName">첨부 이미지</label>
               <input
                 type="file"
-                id="board_file"
-                name="board_file"
+                id="boardFileName"
+                name="boardFileName"
                 class="form-control"
                 accept="image/*"
               />
@@ -54,36 +54,38 @@
 module.exports = {
   data: function() {
     return {
-      board_subject: "",
-      board_content: ""
+      boardTitle: "",
+      boardContent: ""
     };
   },
 
   methods: {
     check_input: function() {
-      if (this.board_subject.length == 0) {
+      if (this.boardTitle.length == 0) {
         alert("제목을 입력해주세요");
-        $("#board_subject").focus();
+        $("#boardTitle").focus();
         return;
       }
-      if (this.board_content.length == 0) {
+      if (this.boardContent.length == 0) {
         alert("내용을 입력해주세요");
-        $("#board_content").focus();
+        $("#boardContent").focus();
         return;
       }
 
       var params = new FormData(); //파일까지 보낼 땐 formdata, 문자열만 보낼땐 urlsearchparams 사용
-      params.append('content_writer_idx', this.$store.state.user_idx)
-      params.append('content_subject', this.board_subject)
-      params.append('content_text', this.board_content)
-      params.append('board_file', $('#board_file')[0].files[0])
-      params.append('content_board_idx', this.$route.params.board_idx)
+      //params.append('content_writer_idx', this.$store.state.user_idx)
+      params.append('boardTitle', this.boardTitle)
+      params.append('boardContent', this.boardContent)
+      params.append('boardWriter', this.boardWriter)
+      params.append('bWriteDate', this.bWriteDate)
+      params.append('boardFileName', $('#boardFileName')[0].files[0])
+      params.append('boardNum', this.$route.params.boardNum)
 
-      axios.post('add_content.do', params).then((response) =>{
+      axios.post('boardList.hari', params).then((response) =>{ //컨트롤러로 보냄 
         if(response.data.result==true){
           alert('저장되었습니다.')
-          this.$router.push('/board_read/' + this.$route.params.board_idx + '/1/' + response.data.content_idx)
-        }else{
+            this.$router.push('/board_read/' + this.$route.params.boardCode + '/1/' + response.data.boardNum) //넘어가는 view단.. 보내는 곳 
+        }else{                                                //게시판 번호                                                             //글번호 
           alert('작성실패' + response.data.result)
         } 
       })

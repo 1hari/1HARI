@@ -1,17 +1,17 @@
 
 package kr.coo.onehari.board.controller;
  
+import java.sql.SQLException;
+
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller; 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import kr.coo.onehari.board.dto.Board;
 import kr.coo.onehari.board.service.BoardService;
-import kr.coo.onehari.hr.controller.HrController;
 import lombok.extern.slf4j.Slf4j;  
 
 /*
@@ -29,6 +29,21 @@ public class BoardController {
 	@Autowired
 	private BoardService boardservice;
 	
+	/*
+	@RequestMapping(value = "boardList.hari", method = RequestMethod.GET)
+	public String boardlist(Model model) {
+		List<Board> boardlist = null;
+		
+		try {
+			boardlist = boardservice.boardlist();
+			model.addAttribute("boardlist", boardlist);
+		} catch (Exception e) {
+			System.out.println("게시판 예외발생: " + e.getMessage());
+			log.debug("게시판 예외발생: " + e.getMessage());
+		}
+		return "1hariBoard.boardList";
+	}*/
+	
 	//add_content 등록하기 0115수 시작
 	@RequestMapping("boardList.hari")
 	public String boardInsert() {
@@ -36,10 +51,11 @@ public class BoardController {
 	}
 	
 	//add_content 등록하기 0115수 시작
-	@RequestMapping(value = "boardList.hari", method = RequestMethod.GET)
-	public String boardList() {
+	@RequestMapping(value = "boardList.hari", method = RequestMethod.POST) //axios.post 로 보낸 걸로 받아서 
+	public @ResponseBody String boardList(Board board) throws ClassNotFoundException, SQLException {
+		JSONObject root = boardservice.add_content(board);
 		
-		return "1hariBoard.boardList";
+		return root.toJSONString(); //"1hariBoard.boardList";
 	}
 	
 	
@@ -204,8 +220,8 @@ public class VueController {
 		System.out.println(root.toString());
 		return root.toJSONString();
 	}
-	
-	// 컨텐츠 가져오기(Read)
+	ㅇ
+		// 컨텐츠 가져오기(Read)
 	@RequestMapping(value = "/get_content.do", method = RequestMethod.POST)
 	public @ResponseBody String get_content(int content_idx) {
 		JSONObject root = board_service.get_content(content_idx);

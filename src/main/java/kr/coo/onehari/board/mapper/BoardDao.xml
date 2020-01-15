@@ -7,11 +7,9 @@
 
 	<!-- 글쓰기 등록 (공지사항 게시판 ) 김수연 2020. 1. 14  화-->
 	<insert id="addContent" parameterType="kr.coo.onehari.board.dto.Board">
-		INSERT INTO BOARD (BOARDNUM, BOARDTITLE, BOARDCONTENT, BOARDWRITER, BWRITEDATE)
-		VALUES(#{boardNum},#{boardTitle}, #{boardContent}, #{boardWriter}, #{bWriteDate}) 
+		INSERT INTO BOARD (BOARDTITLE, BOARDCONTENT, WRITER, BOARDWRITEDATE)
+		VALUES(#{boardTitle}, #{boardContent}, #{writer}, #{boardWriteDate}) 
 	</insert>
-	
-
 	
 </mapper>
 

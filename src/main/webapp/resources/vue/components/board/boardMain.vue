@@ -13,7 +13,6 @@
                <th class="text-center d-none d-md-table-cell">첨부파일</th>
               <th class="text-center d-none d-md-table-cell">작성자</th>
               <th class="text-center d-none d-md-table-cell">작성일</th>
-          
             </tr>
           </thead>
 
@@ -26,18 +25,13 @@
               <td class="text-center d-none d-md-table-cell">5</td>
             </tr> 
           </tbody>
+
           <tbody>
-            <tr v-for="a1 in server_data.board_list" :key="a1" >
+            <tr v-for="a1 in server_data.board_list" :key="a1" > <!---->
               <td class="text-center d-none d-md-table-cell">{{a1.content_idx}}</td><!--기본급으로 받으세요 -->
               <td @click="go_board_read(a1.content_idx)">{{a1.content_subject}}</td><!--국민연금으로 데이터 받으세요-->
               <td class="text-center d-none d-md-table-cell">{{a1.content_writer_name}}</td>
-              <td class="text-center d-none d-md-table-cell">{{a1.content_writer_name}}</td>
-              <td class="text-center d-none d-md-table-cell">{{a1.content_writer_name}}</td>
-              <td class="text-center d-none d-md-table-cell">{{a1.content_writer_name}}</td>
-              <td class="text-center d-none d-md-table-cell">{{a1.content_writer_name}}</td>
-              <td class="text-center d-none d-md-table-cell">{{a1.content_writer_name}}</td>
               <td class="text-center d-none d-md-table-cell">{{a1.content_date}}</td><!--실급여로 데이터 받으세요 -->
-              <td class="text-center d-none d-md-table-cell"><button class ="btn btn-sucess" style = "background-color: #2ab2aa; text-color:white;">급여명세</button></td>
             </tr>
           </tbody>
         </table>
@@ -59,7 +53,9 @@
         </div>
 
         <!--글쓰기--> 
-        <div class="text-right"> <!--v-if='$store.state.user_login_chk == true'-->
+        <div class="text-right"> <!--v-if='$store.state.user_login_chk == 
+        
+        true'-->
           <router-link :to="'/board_write/' + $route.params.board_idx" class="btn btn-primary">글쓰기</router-link>
         </div>
       </div>
@@ -85,19 +81,19 @@ module.exports = {
       alert(content_idx)	
       //this.$router router 객체 불러오기
       this.$router.push('/board_read/' + this.$route.params.board_idx + '/' + this.$route.params.page + '/' + content_idx) //.push에 파라미터값에 알맞는 컴포넌트를 찾아 그 컴포넌트 주소로 이동시켜줌
-    },
+    },                  
     get_board_data: function() {
       var params = new URLSearchParams();
       params.append("board_idx", this.$route.params.board_idx);
       params.append("page", this.$route.params.page)
-      axios.post("get_board_list.do", params).then((response)=>{
+      axios.post("get_board_list.do", params).then((response)=>{ //컨트롤러로 보내는
       console.log(response.data)
         this.server_data=response.data
       })
     }
   },
   created() {
-    //alert(this.$route.params.board_idx) //주소를 관리하는 객체 route, 주소가 바뀌면 route객체도 변경됨, route객체의 변경을 감지해줘야함
+    //alert(this.$route.params.board_idx)//주소를 관리하는 객체 route, 주소가 바뀌면 route객체도 변경됨, route객체의 변경을 감지해줘야함
     this.get_board_data();
   },
   watch: {

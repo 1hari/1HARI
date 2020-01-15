@@ -17,8 +17,8 @@ var router = new VueRouter({
 			component : httpVueLoader(contextPath+'/resources/vue/components/board/boardMain.vue')
 		},
 		{
-			path : '/board_main/:board_idx/:page',
-			component : httpVueLoader(contextPath+'/resources/vue/components/board/board_main.vue')
+			path : '/boardMain/:boardCode/:page',
+			component : httpVueLoader(contextPath+'/resources/vue/components/board/boardMain.vue')
 		},
 		{
 			path : '/board_read/:board_idx/:page/:content_idx',
@@ -42,7 +42,7 @@ var router = new VueRouter({
 			}
 		},
 		{
-			path : '/board_write/:board_idx',
+			path : '/board_write/:boardCode',
 			component : httpVueLoader(contextPath+'/resources/vue/components/board/board_write.vue')
 		},
 		{

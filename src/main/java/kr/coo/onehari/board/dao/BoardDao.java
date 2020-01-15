@@ -1,5 +1,7 @@
 package kr.coo.onehari.board.dao;
 
+import java.sql.SQLException;
+
 import kr.coo.onehari.board.dto.Board;
 
 /*
@@ -12,10 +14,10 @@ import kr.coo.onehari.board.dto.Board;
 //게시판 컨텐츠 추가하기 김수연 01.14 화요일 
 public interface BoardDao { 
 	//컨텐츠 추가하기 
-	public int addContent(Board boardContent);
+	public int addContent(Board board) throws ClassNotFoundException, SQLException;
 	
 	//추가한 컨텐츠 글번호 가져오기
-	public int getBoardNum();
+	public int getBoardNum() throws ClassNotFoundException, SQLException;
 
 }
 	
@@ -48,7 +50,7 @@ public interface BoardDao {
 //	//컨텐츠 수정하기
 //	public int modifyContent(Content content);
 //	//이미 파일이 있던 컨텐츠 수정하기
-//	public int modifyContentFile(Content content);
+//	public int modifyContentFile(Content content); 
 //	//컨텐츠 삭제하기
 //	public int deleteContent(int contentIdx);
 

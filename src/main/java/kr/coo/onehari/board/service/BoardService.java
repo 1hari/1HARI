@@ -8,6 +8,7 @@
 
 package kr.coo.onehari.board.service;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -31,11 +32,11 @@ public class BoardService {
     ServletContext context;
 	
 //컨텐츠 추가
-	public JSONObject add_content(Board board) {
+	public JSONObject add_content(Board board) throws ClassNotFoundException, SQLException {
 		
 	
 		JSONObject root = new JSONObject();
-		BoardDao dao = sqlsession.getMapper(BoardDao.class);
+		BoardDao boarddao = sqlsession.getMapper(BoardDao.class);
 //		CommonsMultipartFile file = content.getFile(); // 파일 가져오기
 //		String filename =file.getOriginalFilename();
 //		String path = context.getRealPath("/upload");
@@ -54,7 +55,7 @@ public class BoardService {
 //		}
 //		content.setContent_file(filename);
 
-		int result = dao.addContent(board);
+		int result = boarddao.addContent(board);
 		if(result >0) {
 			root.put("result", true);
 			root.put("boardnum", board.getBoardNum()); //글번호를 뿌려놓기.... 
