@@ -26,7 +26,7 @@
 	<!-- All Jquery -->
     <!-- dashboard.html에서 필요한 제이쿼리 부분 -->
     <script src="${pageContext.request.contextPath}/resources/hari/assets/libs/jquery/dist/jquery.min.js"></script>
-
+	<script src="${pageContext.request.contextPath}/resources/hari/assets/dist/jquery-ui.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->
     <script src="${pageContext.request.contextPath}/resources/hari/assets/libs/popper.js/dist/umd/popper.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/hari/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -38,10 +38,10 @@
     <!-- Menu sidebar -->
     <script src="${pageContext.request.contextPath}/resources/hari/dist/js/sidebarmenu.js"></script>
     <!-- Custom JavaScript -->
-    <script src="${pageContext.request.contextPath}/resources/hari/dist/js/custom.js"></script>
-       <!-- Custom JavaScript -->
     <script src="${pageContext.request.contextPath}/resources/hari/dist/js/custom.min.js"></script>
-   
+	<script src="${pageContext.request.contextPath}/resources/hari/dist/js/custom.js"></script>
+  	<!-- Custom JavaScript -->
+    <script src="${pageContext.request.contextPath}/resources/hari/dist/js/app-style-switcher.js"></script>
      <!-- dashboard.html에서 필요한 제이쿼리 부분 끝 -->
      <!-- jquery -->
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
