@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import kr.coo.onehari.board.dto.Board;
-import kr.coo.onehari.board.service.BoardService;  
+import kr.coo.onehari.board.service.BoardService;
+import kr.coo.onehari.hr.controller.HrController;
+import lombok.extern.slf4j.Slf4j;  
 
 /*
 작성자: 김수연
@@ -19,22 +21,36 @@ import kr.coo.onehari.board.service.BoardService;
 내용: board 작업 시작
 */
 
-
-@RestController
+@Slf4j
+@Controller
+@RequestMapping("1hariBoard/")
 public class BoardController {
 
 	@Autowired
 	private BoardService boardservice;
 	
+	//add_content 등록하기 0115수 시작
+	@RequestMapping("boardList.hari")
+	public String boardInsert() {
+		return "1hariBoard.boardList";
+	}
+	
+	//add_content 등록하기 0115수 시작
+	@RequestMapping(value = "boardList.hari", method = RequestMethod.GET)
+	public String boardList() {
+		
+		return "1hariBoard.boardList";
+	}
+	
 	
 	// 컨텐츠 추가  작업 하는 중 1.14
-	@RequestMapping(value = "/add_content.hari", method = RequestMethod.POST)
-	public @ResponseBody String addContent(Board board) { 
-		System.out.println(board.toString());
-		JSONObject root = boardservice.add_content(board);
-		System.out.println(root.toString());
-		return root.toJSONString();
-	}
+	/*
+	 * @RequestMapping(value = "/add_content.hari", method = RequestMethod.POST)
+	 * public @ResponseBody String addContent(Board board) {
+	 * System.out.println(board.toString()); JSONObject root =
+	 * boardservice.add_content(board); System.out.println(root.toString()); return
+	 * root.toJSONString(); }
+	 */
 }
 /*@Controller
 
