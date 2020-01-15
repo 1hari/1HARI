@@ -41,4 +41,26 @@ public class ExcelController {
 		
 		return "jsonView";
 	}
+	
+	@RequestMapping(value = "personnel/insertExcelEmp.hari", method = RequestMethod.POST)
+	public String insertExcelEmp(EmpDto empdto, Model model) {
+		String view = "";
+		List<EmpDto> excelEmplist = null;
+		
+		try {
+			excelEmplist = excelservice.insertExcelEmp(empdto);
+		} catch (Exception e) {
+			System.out.println("ExcelController insertExcelEmp 예외발생: " + e.getMessage());
+			log.debug("ExcelController insertExcelEmp 예외발생: " + e.getMessage());
+		}
+		
+		if (excelEmplist != null) {
+			view = "redirect:personnel/excelUpload.hari";
+			model.addAttribute("Excel 사원등록 실패");
+		} else {
+			view = "redirect:1hariHr.empList";
+			model.addAttribute("excelEmplist", excelEmplist);
+		}
+		return view;
+	}
 }

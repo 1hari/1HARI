@@ -1,25 +1,43 @@
 package kr.coo.onehari.util.service;
 
 import java.util.Date;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
 import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.coo.onehari.hr.dto.EmpDto;
+import kr.coo.onehari.util.dao.ExcelDao;
 import lombok.extern.slf4j.Slf4j;
+
+/*
+ * 작성자: 김진호
+ * 시작: 2020. 1. 13
+ * 내용: Excel Upload/Download
+ */
 
 @Service
 @Slf4j
 public class ExcelService {
 
+	@Autowired
+	private SqlSession sqlsession;
+	
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	
 	/**
 	 * 엑셀파일로 만들 리스트 생성
 	 * 
@@ -136,63 +154,52 @@ public class ExcelService {
 //				String leaveDate = "";
 				
 				// 행의 첫 번째 열 받아오기
-				cell = row.getCell(0);
-				System.out.println("0: " + cell);
-				if (null != cell)
-					empdto.setEmpNum((int) cell.getNumericCellValue());
+//				cell = row.getCell(0);
+//				System.out.println("0: " + cell);
+//				if (null != cell)
+//					empdto.setEmpNum((int) cell.getNumericCellValue());
 				// 행의 두 번째 열 받아오기
 				cell = row.getCell(1);
-				System.out.println("1: " + cell);
 				if (null != cell)
 					empdto.setEmpName(cell.getStringCellValue());
 				// 행의 세 번째 열 받아오기
 				cell = row.getCell(2);
-				System.out.println("2: " + cell);
 				if (null != cell)
 					empdto.setTeamCode((int) cell.getNumericCellValue());
 				// 행의 네 번째 열 받아오기
 				cell = row.getCell(3);
-				System.out.println("3: " + cell);
 				if (null != cell)
 					empdto.setRankCode((int) cell.getNumericCellValue());
 				// 행의 다섯 번째 열 받아오기
 				cell = row.getCell(4);
-				System.out.println("4: " + cell);
 				if (null != cell)
 					empdto.setPositionCode((int) cell.getNumericCellValue());
 				// 행의 여섯 번째 열 받아오기
 				cell = row.getCell(5);
-				System.out.println("5: " + cell);
 				if (null != cell)
 					empdto.setEmploymentCode((int) cell.getNumericCellValue());
 				// 행의 일곱 번째 열 받아오기
 				cell = row.getCell(6);
-				System.out.println("6: " + cell);
 				if (null != cell)
 					empdto.setBirth(cell.getStringCellValue());
 				// 행의 여덟 번째 열 받아오기
 				cell = row.getCell(7);
-				System.out.println("7: " + cell);
 				if (null != cell)
 					empdto.setResNum(cell.getStringCellValue());
 				// 행의 아홉 번째 열 받아오기
 				cell = row.getCell(8);
-				System.out.println("8: " + cell);
 				if (null != cell)
 					empdto.setPhoneNum(cell.getStringCellValue());
 				// 행의 열 번째 열 받아오기
 				cell = row.getCell(9);
-				System.out.println("9: " + cell);
 				if (null != cell)
 					empdto.setEmail(cell.getStringCellValue());
 				// 행의 열한 번째 열 받아오기
 				cell = row.getCell(10);
-				System.out.println("10: " + cell);
 				if (null != cell)
 					empdto.setHireDate(cell.getStringCellValue());
 				// 행의 열두 번째 열 받아오기
 				cell = row.getCell(11);
-				System.out.println("11: " + cell);
 				if (null != cell)
 					empdto.setLeaveDate(cell.getStringCellValue());
 
@@ -203,5 +210,25 @@ public class ExcelService {
 			log.debug("ExcelService uploadExcel 예외발생: " + e.getMessage());
 		}
 		return list;
+	}
+	
+	// Excel 파일 사원등록
+	@Transactional
+	public List<EmpDto> insertExcelEmp(EmpDto empdto) throws Exception {
+		ExcelDao exceldao = sqlsession.getMapper(ExcelDao.class);
+		List<EmpDto> excelEmplist = new ArrayList<EmpDto>();
+		System.out.println("Service excelEmplist: " + excelEmplist);
+		try {
+			empdto.setPassword("1004");
+			excelEmplist = exceldao.insertExcelEmp(empdto);
+			excelEmplist = exceldao.insertExcelSubEmp(empdto);
+			System.out.println("Service try excelEmplist: " + excelEmplist);
+		} catch (ClassNotFoundException | SQLException e) {
+			System.out.println("ExcelService insertExcelEmp 예외발생: " + e.getMessage());
+			log.debug("ExcelService insertExcelEmp 예외발생: " + e.getMessage());
+			throw e;
+		}
+		System.out.println("excelEmpList: " + excelEmplist);
+		return excelEmplist;
 	}
 }

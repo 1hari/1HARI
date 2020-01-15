@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+작성자: 김진호
+시작: 2020. 1. 15
+완료: 
+내용: Excel Upload/Download
+-->
+<mapper namespace="kr.coo.onehari.util.dao.ExcelDao">
+
+	<!-- Excel 파일 Upload 사원등록 -->
+	<insert id="insertExcelEmp" parameterType="kr.coo.onehari.hr.dto.EmpDto">
+		INSERT INTO emp(TEAMCODE, RANKCODE, POSITIONCODE, EMPLOYMENTCODE, EMPNAME, PASSWORD)
+		VALUES(#{teamCode}, #{rankCode}, #{positionCode}, #{employmentCode}, #{empName}, #{password})
+	</insert>
+	<!-- 사원등록 subemp Transaction -->
+	<insert id="insertExcelSubEmp" parameterType="kr.coo.onehari.hr.dto.EmpDto">
+		INSERT INTO subemp(empnum, birth, resnum, phonenum, email, hiredate)
+		VALUES(LAST_INSERT_ID(), #{birth}, #{resNum}, #{phoneNum}, #{email}, #{hireDate})
+	</insert>
+
+</mapper>

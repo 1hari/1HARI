@@ -35,11 +35,11 @@
 				<div class="card">
 					<div class="card-body">
 						<h5 class="card-title" style="float: left;">Excel Upload</h5>
-							    	<button type="button" class="btn m-t-5 btn-info btn-block waves-effect waves-light" 
-							    			style="width: 12%; background-color: #20B2AA; float: right; margin-bottom: 1%;" 
-							    			onclick="doExcelUploadProcess()">올리기</button>
+				    	<button type="button" class="btn m-t-5 btn-info btn-block waves-effect waves-light" 
+				    			style="width: 12%; background-color: #20B2AA; float: right; margin-bottom: 1%;" 
+				    			onclick="doExcelUploadProcess()">올리기</button>
 						<div class="table-responsive">
-							<form id="excelUploadForm" name="excelUploadForm" method="post" enctype="multipart/form-data">
+							<form id="excelUploadForm" name="insertExcelEmp" method="post" enctype="multipart/form-data">
 								<div class="form-group row">
 									<div class="col-md-12">
 										<div class="custom-file">
@@ -51,7 +51,7 @@
 								<table id="zero_config" class="table table-striped table-bordered">
 									<thead>
 										<tr>
-											<th>사번</th>
+<!-- 											<th>사번</th> -->
 											<th>이름</th>
 											<th>소속</th>
 											<th>직급</th>
@@ -68,6 +68,10 @@
 									<tbody id="excelForm">
 									</tbody>
 								</table>
+								<div>
+									<button type="submit" class="btn m-t-5 btn-info btn-block waves-effect waves-light" 
+							    			style="width: 12%; background-color: #20B2AA; float: right; margin-bottom: 1%;">저장하기</button>
+								</div>
 							</form>
 						</div>
 
@@ -171,27 +175,24 @@
 				console.log(excelData);
 				
 				let formdata = "";
-				$.each(excelData, function(index, element) {
-					console.log(element);
-					$.each(element, function(index, ele){
-						console.log(ele.empNum);
+				$.each(excelData, function(index, data) {
+					console.log(data);
+					$.each(data, function(index, element){
+						
 					/* document.getElementById('excelForm').innerHTML = JSON.stringify(emp.empNum); */
-					formdata += '<tr><td>' + ele.empNum + '</td>'
-								+ '<td>' + ele.empName + '</td>'
-								+ '<td>' + ele.teamCode + '</td>'
-								+ '<td>' + ele.rankCode + '</td>'
-								+ '<td>' + ele.positionCode + '</td>'
-								+ '<td>' + ele.employmentCode + '</td>'
-								+ '<td>' + ele.birth + '</td>'
-								+ '<td>' + ele.resNum + '</td>'
-								+ '<td>' + ele.phoneNum + '</td>'
-								+ '<td>' + ele.email + '</td>'
-								+ '<td>' + ele.hireDate + '</td>'
-								+ '<td>' + ele.leaveDate + '</td></tr>'
+					formdata += '<tr><td><input type="text" name="empName[' + index + ']" value="' + element.empName + '"></td>'
+								+ '<td><input type="text" name="teamCode[' + index + ']" value="' + element.teamCode + '"></td>'
+								+ '<td><input type="text" name="rankCode[' + index + ']" value="' + element.rankCode + '"></td>'
+								+ '<td><input type="text" name="positionCode[' + index + ']" value="' + element.positionCode + '"></td>'
+								+ '<td><input type="text" name="employmentCode[' + index + ']" value="' + element.employmentCode + '"></td>'
+								+ '<td><input type="text" name="birth[' + index + ']" value="' + element.birth + '"></td>'
+								+ '<td><input type="text" name="resNum[' + index + ']" value="' + element.resNum + '"></td>'
+								+ '<td><input type="text" name="phoneNum[' + index + ']" value="' + element.phoneNum + '"></td>'
+								+ '<td><input type="text" name="email[' + index + ']" value="' + element.email + '"></td>'
+								+ '<td><input type="text" name="hireDate[' + index + ']" value="' + element.hireDate + '"></td>'
+								+ '<td><input type="text" name="leaveDate[' + index + ']" value="' + element.leaveDate + '"></td>'
 					})
-					
 				})
-				
 				$('#excelForm').append(formdata);
 				/* document.getElementById('excelForm').innerHTML = JSON.stringify(data); */
 			}

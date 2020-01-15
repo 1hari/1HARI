@@ -4,14 +4,16 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 <mapper namespace="kr.coo.onehari.hr.dao.EmpDao">
+
 	<!-- 사원등록 (입퇴사관리 메뉴) 김진호 2020. 1. 10 -->
 	<insert id="empJoin" parameterType="kr.coo.onehari.hr.dto.EmpDto">
 		INSERT INTO emp(TEAMCODE, RANKCODE, POSITIONCODE, EMPLOYMENTCODE, EMPNAME, PASSWORD)
-		VALUES(#{teamCode}, #{rankCode}, #{positionCode}, #{employmentCode}, #{empName}, #{password});
+		VALUES(#{teamCode}, #{rankCode}, #{positionCode}, #{employmentCode}, #{empName}, #{password})
 	</insert>
+	<!-- 사원등록 subemp Transaction -->
 	<insert id="subempJoin" parameterType="kr.coo.onehari.hr.dto.EmpDto">
 		INSERT INTO subemp(empnum, birth, resnum, phonenum, email, hiredate)
-		VALUES(LAST_INSERT_ID(), #{birth}, #{resNum}, #{phoneNum}, #{email}, #{hireDate});
+		VALUES(LAST_INSERT_ID(), #{birth}, #{resNum}, #{phoneNum}, #{email}, #{hireDate})
 	</insert>
 	
 	<!-- 조직도에서 부서별 사원을 출력해주기 위해 김정하 / 2020. 1. 9 -->
@@ -109,7 +111,7 @@
 		INSERT INTO TALIST(EMPNUM, TACODE, TADATE, TODAYWORK) VALUES(#{empNum}, 2, NOW(),
 		 (
 		SELECT TIME_TO_SEC(NOW()) - (SELECT TIME_TO_SEC((SELECT tadate FROM talist AS temp WHERE EMPNUM=#{empNum} AND tacode=1 AND DATE(tadate) = DATE(NOW())))))
-		);
+		)
 	</insert>
 	
 	<!-- 오늘 퇴근기록이 있는지 조회 형남 0112-->
@@ -129,12 +131,12 @@
 	
     <!-- 오늘 출근시간 구하기-->
     <select id="getStartWorkTime" resultType="Date">
-        SELECT TADATE FROM TALIST WHERE EMPNUM=#{empNum} AND DATE(TADATE) = DATE(NOW());
+        SELECT TADATE FROM TALIST WHERE EMPNUM=#{empNum} AND DATE(TADATE) = DATE(NOW())
     </select>
     
     <!-- 현재까지 근무시간-->
     <select id="getWorkTime" resultType="String">
-		SELECT DATE_FORMAT(SEC_TO_TIME((SELECT TIME_TO_SEC(NOW()) - (SELECT TIME_TO_SEC((SELECT tadate FROM talist AS temp WHERE EMPNUM=#{empNum} AND tacode=1 AND DATE(tadate) = DATE(NOW())))))),"%H:%i");
+		SELECT DATE_FORMAT(SEC_TO_TIME((SELECT TIME_TO_SEC(NOW()) - (SELECT TIME_TO_SEC((SELECT tadate FROM talist AS temp WHERE EMPNUM=#{empNum} AND tacode=1 AND DATE(tadate) = DATE(NOW())))))),"%H:%i")
     </select>
     <!-- 오늘총 근무시간-->
     <select id="getTodayTotalTime" resultType="String">

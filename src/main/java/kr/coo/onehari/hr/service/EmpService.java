@@ -31,9 +31,9 @@ public class EmpService {
 	// 사원목록 김진호 2020. 1. 7
 	public List<EmpDto> empList() {
 		List<EmpDto> emplist = null;
+		EmpDao empdao = sqlsession.getMapper(EmpDao.class);
 		
 		try {
-			EmpDao empdao = sqlsession.getMapper(EmpDao.class);
 			emplist = empdao.empList();
 		} catch (Exception e) {
 			log.debug("EmpService empList 예외발생: " + e.getMessage());
