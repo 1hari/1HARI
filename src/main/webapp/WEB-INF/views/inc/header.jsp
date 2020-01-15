@@ -13,8 +13,39 @@ $(function(){
 	var fixLongitude=parseFloat(127.0292657);
 	var myLatitude; //사용자 위도
 	var myLongitude;////사용자 경도
-	currYear=new Date().getFullYear();
-	currMonth=new Date().getMonth()+1;
+	var currTime;
+	var integerTime;
+
+	
+	function getTimeStamp() {
+	  var d = new Date();
+	  var s =
+	    leadingZeros(d.getHours(), 2) +
+	    leadingZeros(d.getMinutes(), 2);
+	  return s;
+	}
+	function leadingZeros(n, digits) {
+	  var zero = '';
+	  n = n.toString();
+	  if (n.length < digits) {
+	    for (i = 0; i < digits - n.length; i++)
+	      zero += '0';
+	  }
+	  return zero + n;
+	}
+
+	//현재시간
+	var timeCheck=setInterval(function(){
+		integerTime=parseInt(getTimeStamp());
+		if(integerTime >=1210){
+			 clearTimeout(timeCheck);
+			 if(isStart == false){
+				 alert('출근이 등록되지 않았습니다.');
+			}
+		}else{
+			console.log(integerTime);
+		}
+	},1000);
 
 	//총 근무일
 	$.ajax({
@@ -34,7 +65,6 @@ $(function(){
 		success: function(data) {
 			//퇴근근기록이 있으면 true, 없으면 false
 			isEnd=data;
-
 			if(isEnd==false){
 				//false 면 현재시간 - 출근시간
 				console.log('getWorkTime ' + ': ' + isEnd);
@@ -279,11 +309,6 @@ $(function(){
 		}
 	});
 });
-
-
-
-
-
 </script>
 <!-- ============================================================== -->
 <!-- Preloader - style you can find in spinners.css -->
@@ -304,10 +329,10 @@ $(function(){
 <!-- 원래 inc 헤더 임 !!!!!  -->
 
 	<!--상단 topnavbar 시작 -->
-	<header class="topbar" data-navbarbg="skin5"> 
+	    <header class="topbar" data-navbarbg="skin5"> 
 
 		<nav class="navbar top-navbar navbar-expand-md navbar-dark">
-			<div class="navbar-header" data-logobg="skin5"> 
+              <div class="navbar-header" data-logobg="skin5">  
 				<!-- 모바일용 토글러-->
 				<a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)">
 					<i class="ti-menu ti-close"></i>
@@ -329,7 +354,6 @@ $(function(){
 					<!-- </b> --> <!--End Logo icon -->
 				</a>
 				<!-- 로고 전체 끝 !! -->
-
 				<a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 					<i class="ti-more"></i>
 				</a>
@@ -340,7 +364,7 @@ $(function(){
 
 
 			<!--top navbar 더보기 & 검색 -->
-			<div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5"> 
+				<div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5"> 
 				<!-- ============================================================== -->
 				<!-- toggle and nav items -->
 				<!-- ============================================================== -->

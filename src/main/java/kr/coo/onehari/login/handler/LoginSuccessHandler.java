@@ -1,6 +1,8 @@
 package kr.coo.onehari.login.handler;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -43,10 +45,8 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
 
 		if (savedRequest != null) {
 			String targetUrl = savedRequest.getRedirectUrl();
-			System.out.println("savedRequest!=null");
 			redirectStratgy.sendRedirect(request, response, targetUrl);
 		} else {
-			System.out.println("savedRequest==null");
 			redirectStratgy.sendRedirect(request, response, defaultUrl);
 		}
 
@@ -63,6 +63,9 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
 	    login.loginCntInit(username);
 		clearAuthenticationAttributes(request);
 		resultRedirectStrategy(request, response, authentication);
+		SimpleDateFormat format = new SimpleDateFormat("yyyy:MM:dd");
+		System.out.println(format.format(new Date()));
+		
 
 	}
 	
