@@ -51,4 +51,17 @@ public class SignService {
 		return selectSignList;
 	}
 	
+	//내문서함 페이징 김정하 / 2020. 1. 15
+	public int signPage(Map<String, String> map) {
+		int count = 0;
+		SignDao dao = sqlsession.getMapper(SignDao.class);
+		
+		try {
+			count = dao.signPage(map);
+		} catch (ClassNotFoundException | SQLException e) {
+			log.debug("signPage : " + e.getMessage());
+		}
+		return count;
+	}
+	
 }

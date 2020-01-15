@@ -48,10 +48,24 @@ public class SignRestController {
 		map.put("draftEmp", draftEmp); //현재 로그인한 사번
 		map.put("pg", "3"); //page 에 보여줄 갯수
 		map.put("cp", Integer.toString(offset)); //보여줄 페이지
-		map.put("code", code); //결재분류 : 1.기안 / 2.완료 / 3.반려 / 4.결재대기
+		map.put("code", code); //결재분류 : 0.전체 / 1.기안 / 2.완료 / 3.반려 / 4.결재대기
 		List<SignDto> signList = signService.selectSignList(map);
 		
 		return signList;
+	}
+	
+	//내문서함 페이징 김정하 / 2020. 1. 15~
+	@RequestMapping("signPage.hari")
+	public int signPage(String code, Principal principal) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		
+		System.out.println(code);
+		
+		String draftEmp = principal.getName();
+		map.put("draftEmp", draftEmp); //현재 로그인한 사번
+		map.put("code", code); //결재분류 : 0.전체 / 1.기안 / 2.완료 / 3.반려 / 4.결재대기
+		int count = signService.signPage(map);
+		return count;
 	}
 	
 }

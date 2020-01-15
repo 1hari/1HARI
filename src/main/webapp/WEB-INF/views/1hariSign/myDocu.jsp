@@ -9,8 +9,74 @@
 
 <script>
 	$(function(){
-		list(0,1,3);
+		var code = 0
+		var cp = 1;
+		var pg = 3;
+		
+		list(code, cp, pg);
+		page(code);
+		
 	});//onload 끝
+
+	//페이징처리
+	function page(code){
+		$.ajax({
+			url:"${pageContext.request.contextPath}/ajax/signPage.hari",
+			type:"post",
+			data :{"code" : code},
+			success: function(count){
+ 				//console.log(count);
+ 				//count = count.trim();
+ 				count = count/4;
+				count = Math.ceil(count);
+				<!-- 페이지 -->
+				var page = '<li class="page-item">'
+							+'<a class="page-link" id="first">'
+								+'<span aria-hidden="true">&laquo;</span>'
+							+'</a>'
+						+'</li>';
+					
+				for(var i = 1; i <= count ; i++){
+					page += '<li class="page-item"><a class="page-link" id="page'+i+'">'+i+'</a></li>';
+				}
+
+				page += '<li class="page-item">'
+						+'<a class="page-link" id="last">'
+							+'<span aria-hidden="true">&raquo;</span>'
+						+'</a>'
+					+'</li>'
+				<!-- 페이지 -->
+
+				$('#pagination').append(page);
+
+				$('.page-link').click(function(){
+					console.log($(this).text());
+
+					var cur = $(this).text();
+
+					if(cur == "&laquo;"){
+						cp = 1;
+					}else if(cut == "&raquo;"){
+						cp = count;
+					}else {
+						cp = cur;
+					}
+					console.log(cp);
+					list(code, cp, pg);
+				});//페이지 클릭 이벤트 끝
+
+			},
+			error: function(xhr){
+				console.log(xhr.status);
+			},
+// 			beforeSend:function(){//이미지 보여주기
+// 				$('.wrap-loading').removeClass('display-none');
+// 			},
+// 			complete:function(){ //이미지 감추기
+// 		        $('.wrap-loading').addClass('display-none');
+// 			}
+		});//ajax 끝
+	}//페이징처리 끝
 	
 	//전자결재 가져오기
 	function list(code, cp, pg){	
@@ -45,9 +111,9 @@
 // 			},
 // 			complete:function(){ //이미지 감추기
 // 		        $('.wrap-loading').addClass('display-none');
-// 			},
+// 			}
 		});//ajax 끝
-	}
+	}//전자결재 가져오기 끝
 </script>
 <style>
 	.wrap-loading{ /*화면 전체를 어둡게 합니다.*/
@@ -132,9 +198,10 @@
 			<div class="col-md-4"></div>
 			<!-- 페이징처리 -->
 			<div class="col-md-4">
-				<nav aria-label="Page navigation example">
-					<ul class="pagination">
-						<li class="page-item">
+				<nav aria-label="Page navigation">
+					<ul class="pagination" id="pagination">
+						<!-- 페이지 -->
+						<!-- <li class="page-item">
 							<a class="page-link" href="#" aria-label="Previous">
 								<span aria-hidden="true">&laquo;</span>
 								<span class="sr-only">Previous</span>
@@ -150,7 +217,8 @@
 								<span aria-hidden="true">&raquo;</span>
 								<span class="sr-only">Next</span>
 							</a>
-						</li>
+						</li> -->
+						<!-- 페이지 -->
 					</ul>
 				</nav>
 			</div>

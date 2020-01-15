@@ -25,6 +25,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)
 	</insert>
 	
+	<!-- 내 문서함 페이징 다이나믹쿼리 김정하 / 2020. 1 15 -->
+	<select id="signPage" parameterType="hashmap" resultType="int">
+		SELECT COUNT(SIGNNUM) FROM sign
+		<where>
+			<choose>
+				<when test="code.equalsIgnoreCase('0')"> <!-- 전체문서 -->
+					if(ISSIGN1 = 0, EMPSIGN1 = #{draftEmp}, EMPSIGN2 = #{draftEmp}) OR DRAFTEMP = #{draftEmp}
+				</when>
+			</choose>
+		</where>
+	</select>
+	
 	<!-- 전자결재 리스트 다이나믹 쿼리로 변경해보기 김정하 / 2020. 1.14 -->
 	<select id="selectSignList" parameterType="hashmap" resultType="kr.coo.onehari.sign.dto.SignDto">
 		SELECT s.SIGNNUM, s.SIGNDATE, f.SIGNFORMFORMNAME, s.SIGNTITLE, t.SIGNNAME, s.SIGNCODE, s.DRAFTEMP, e.EMPNAME as draftEmpName
@@ -37,7 +49,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<where>
 			<choose>
 				<when test="code.equalsIgnoreCase('0')"> <!-- 전체문서 -->
-					s.DRAFTEMP = #{draftEmp}
+					s.DRAFTEMP = #{draftEmp} OR if(s.ISSIGN1 = 0, s.EMPSIGN1 = #{draftEmp}, s.EMPSIGN2 = #{draftEmp})
 				</when>
 				<when test="code.equalsIgnoreCase('1')"> <!-- 기안문서 -->
 					s.SIGNCODE IN(1,2) AND s.DRAFTEMP = #{draftEmp}

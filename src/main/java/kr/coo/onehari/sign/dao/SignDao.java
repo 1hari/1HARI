@@ -21,15 +21,6 @@ public interface SignDao {
 	//전자결재 리스트 (다이나믹쿼리) 김정하 / 2020. 1. 14
 	public List<SignDto> selectSignList (Map<String, String> map) throws ClassNotFoundException, SQLException;
 	
-	//전자결재 기안 리스트 (전자결재 홈) 김정하 / 2020. 1. 13
-	public List<SignDto> selectSignDraftListHome (String draftEmp) throws ClassNotFoundException, SQLException;
-	
-	//전자결재 완료 리스트 (전자결재 홈) 김정하 / 2020. 1. 13
-	public List<SignDto> selectSignCompleteListHome (String draftEmp) throws ClassNotFoundException, SQLException;
-	
-	//전자결재 반려 리스트 (전자결재 홈) 김정하 / 2020. 1. 13
-	public List<SignDto> selectSignReturnListHome (String draftEmp) throws ClassNotFoundException, SQLException;
-	
-	//전자결재 결재대기 리스트 (전자결재 홈) 김정하 / 2020. 1 13
-	public List<SignDto> selectSignWaitingListHome (String draftEmp) throws ClassNotFoundException, SQLException;
+	//내 문서함 페이징 김정하 / 2020. 1 15
+	public int signPage (Map<String, String> map) throws ClassNotFoundException, SQLException;
 }
