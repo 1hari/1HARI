@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import kr.coo.onehari.hr.dto.EmpDto;
+import kr.coo.onehari.util.dto.ExcelEmpDto;
 
 /*
  * 작성자: 김진호
@@ -13,8 +14,8 @@ import kr.coo.onehari.hr.dto.EmpDto;
 public interface ExcelDao {
 
 	// Upload Excel 파일 내용을 DB에 넣기
-	public List<EmpDto> insertExcelEmp(EmpDto empdto) throws ClassNotFoundException, SQLException;
+	public List<ExcelEmpDto> insertExcelEmp(ExcelEmpDto excelemp) throws ClassNotFoundException, SQLException;
 
 	// Upload Excel 파일 내용을 DB에 넣기
-	public List<EmpDto> insertExcelSubEmp(EmpDto empdto) throws ClassNotFoundException, SQLException;
+	public List<ExcelEmpDto> insertExcelSubEmp(ExcelEmpDto excelemp) throws ClassNotFoundException, SQLException;
 }

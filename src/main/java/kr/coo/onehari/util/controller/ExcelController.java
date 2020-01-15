@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import kr.coo.onehari.hr.dto.EmpDto;
+import kr.coo.onehari.util.dto.ExcelEmpDto;
 import kr.coo.onehari.util.service.ExcelService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -43,19 +44,20 @@ public class ExcelController {
 	}
 	
 	@RequestMapping(value = "personnel/insertExcelEmp.hari", method = RequestMethod.POST)
-	public String insertExcelEmp(EmpDto empdto, Model model) {
+	public String insertExcelEmp(ExcelEmpDto excelemp, Model model) {
 		String view = "";
-		List<EmpDto> excelEmplist = null;
-		
+		List<ExcelEmpDto> excelEmplist = null;
+		System.out.println(excelemp);
 		try {
-			excelEmplist = excelservice.insertExcelEmp(empdto);
+			excelEmplist = excelservice.insertExcelEmp(excelemp);
+			System.out.println("Controller insertExcelEmp: " + excelEmplist);
 		} catch (Exception e) {
 			System.out.println("ExcelController insertExcelEmp 예외발생: " + e.getMessage());
 			log.debug("ExcelController insertExcelEmp 예외발생: " + e.getMessage());
 		}
 		
 		if (excelEmplist != null) {
-			view = "redirect:personnel/excelUpload.hari";
+			view = "redirect:etc.excelForm";
 			model.addAttribute("Excel 사원등록 실패");
 		} else {
 			view = "redirect:1hariHr.empList";

@@ -7,6 +7,17 @@
 <script src="${pageContext.request.contextPath}/resources/hari/assets/extra-libs/DataTables/datatables.min.js"></script>
 <link href="${pageContext.request.contextPath}/resources/hari/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet">
 
+<!--datepicker link 필수 !!! -->
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/hari/assets/libs/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/hari/assets/libs/quill/dist/quill.snow.css">
+
+<!--datepicker link 필수 end-->
+<link href="${pageContext.request.contextPath}/resources/hari/dist/css/style.min.css" rel="stylesheet">
+
+<!-- datepicker script -->
+<script src="${pageContext.request.contextPath}/resources/hari/assets/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/hari/assets/libs/quill/dist/quill.min.js"></script>
+
 <div class="page-wrapper">
 	<!-- ============================================================== -->
 	<!-- Bread crumb and right sidebar toggle -->
@@ -39,7 +50,8 @@
 				    			style="width: 12%; background-color: #20B2AA; float: right; margin-bottom: 1%;" 
 				    			onclick="doExcelUploadProcess()">올리기</button>
 						<div class="table-responsive">
-							<form id="excelUploadForm" name="insertExcelEmp" method="post" enctype="multipart/form-data">
+							<form id="excelUploadForm" name="insertExcelEmp" method="post" enctype="multipart/form-data"
+									action="${pageContext.request.contextPath}/util/personnel/insertExcelEmp.hari">
 								<div class="form-group row">
 									<div class="col-md-12">
 										<div class="custom-file">
@@ -185,7 +197,7 @@
 								+ '<td><input type="text" name="rankCode[' + index + ']" value="' + element.rankCode + '"></td>'
 								+ '<td><input type="text" name="positionCode[' + index + ']" value="' + element.positionCode + '"></td>'
 								+ '<td><input type="text" name="employmentCode[' + index + ']" value="' + element.employmentCode + '"></td>'
-								+ '<td><input type="text" name="birth[' + index + ']" value="' + element.birth + '"></td>'
+								+ '<td><input type="text" name="birth[' + index + ']" class="datepicker-autoclose" value="' + element.birth + '"></td>'
 								+ '<td><input type="text" name="resNum[' + index + ']" value="' + element.resNum + '"></td>'
 								+ '<td><input type="text" name="phoneNum[' + index + ']" value="' + element.phoneNum + '"></td>'
 								+ '<td><input type="text" name="email[' + index + ']" value="' + element.email + '"></td>'
@@ -204,6 +216,25 @@
 		f.action = "downloadExcelFile";
 		f.submit();
 	}
+	
+	$(function() {
+		$('.mydatepicker').datepicker(
+			{
+				format: "yyyy-mm-dd", // 입사일 Date 형식
+				autoclose: true,
+				todayHighlight: true
+			}
+		);
+		
+		$('.datepicker-autoclose').datepicker(
+			{
+				format: "yymmdd", // 생년월일 Date 형식
+				autoclose: true,
+				todayHighlight: true
+			}
+		);
+	})
+
 </script>
 
 

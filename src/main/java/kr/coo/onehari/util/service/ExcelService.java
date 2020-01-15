@@ -1,6 +1,7 @@
 package kr.coo.onehari.util.service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.coo.onehari.hr.dto.EmpDto;
 import kr.coo.onehari.util.dao.ExcelDao;
+import kr.coo.onehari.util.dto.ExcelEmpDto;
 import lombok.extern.slf4j.Slf4j;
 
 /*
@@ -214,14 +216,14 @@ public class ExcelService {
 	
 	// Excel 파일 사원등록
 	@Transactional
-	public List<EmpDto> insertExcelEmp(EmpDto empdto) throws Exception {
+	public List<ExcelEmpDto> insertExcelEmp(ExcelEmpDto excelemp) throws Exception {
 		ExcelDao exceldao = sqlsession.getMapper(ExcelDao.class);
-		List<EmpDto> excelEmplist = new ArrayList<EmpDto>();
-		System.out.println("Service excelEmplist: " + excelEmplist);
+		List<ExcelEmpDto> excelEmplist = new ArrayList<ExcelEmpDto>();
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
 		try {
-			empdto.setPassword("1004");
-			excelEmplist = exceldao.insertExcelEmp(empdto);
-			excelEmplist = exceldao.insertExcelSubEmp(empdto);
+			excelEmplist = exceldao.insertExcelEmp(excelemp);
+			excelEmplist = exceldao.insertExcelSubEmp(excelemp);
 			System.out.println("Service try excelEmplist: " + excelEmplist);
 		} catch (ClassNotFoundException | SQLException e) {
 			System.out.println("ExcelService insertExcelEmp 예외발생: " + e.getMessage());
