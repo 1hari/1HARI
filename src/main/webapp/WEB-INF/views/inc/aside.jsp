@@ -197,6 +197,12 @@
 								<span class="hide-menu">공지 사항 </span>
 							</a>
 						</li>
+							<li class="sidebar-item">
+							<a href="${pageContext.request.contextPath}/1hariDepart/departList.hari" class="sidebar-link">
+								<i class="mdi mdi-note-outline"></i>
+								<span class="hide-menu">부서별 게시판 </span>
+							</a>
+						</li>
 					</ul>
 				</li>
 				

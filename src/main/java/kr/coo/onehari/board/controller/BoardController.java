@@ -28,7 +28,7 @@ public class BoardController {
 	
 	
 	// 컨텐츠 추가  작업 하는 중 1.14
-	@RequestMapping(value = "/add_content.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/add_content.hari", method = RequestMethod.POST)
 	public @ResponseBody String addContent(Board board) { 
 		System.out.println(board.toString());
 		JSONObject root = boardservice.add_content(board);
