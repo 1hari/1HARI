@@ -15,8 +15,7 @@ $(function(){
 	var myLongitude;////사용자 경도
 	var currTime;
 	var integerTime;
-
-	
+	//현재시간 예쁘게 출력
 	function getTimeStamp() {
 	  var d = new Date();
 	  var s =
@@ -34,17 +33,20 @@ $(function(){
 	  return zero + n;
 	}
 
-	//현재시간
+	//현재시간 정수로 비교해 알람창 띄어주기
 	var timeCheck=setInterval(function(){
 		integerTime=parseInt(getTimeStamp());
-		if(integerTime >=1210){
+		if(integerTime ==1210){
 			 clearTimeout(timeCheck);
 			 if(isStart == false){
 				 alert('출근이 등록되지 않았습니다.');
 			}
+		}else if(integerTime >1250){
+			clearTimeout(timeCheck);
 		}else{
 			console.log(integerTime);
 		}
+
 	},1000);
 
 	//총 근무일
