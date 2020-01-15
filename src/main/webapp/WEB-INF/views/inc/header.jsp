@@ -9,21 +9,19 @@ $(function(){
 	var isEnd=false;//오늘 퇴근했는지
 	var currYear;
 	var currMonth;
-	var fixLatitude=parseFloat(37.4995124);
+	var fixLatitude=parseFloat(38.4995124);
 	var fixLongitude=parseFloat(127.0292657);
 	var myLatitude; //사용자 위도
 	var myLongitude;////사용자 경도
 	currYear=new Date().getFullYear();
 	currMonth=new Date().getMonth()+1;
-	console.log(currYear);
-	console.log(currMonth);
+
 	//총 근무일
 	$.ajax({
 		url: "${pageContext.request.contextPath}/ajax/getTotalTA.hari",
 		type: "post",
 		dataType: "json",
 		success: function(totalTA) {
-			console.log(totalTA);
 			$('#totalTA').append(totalTA);
 		}
 	});
@@ -46,7 +44,6 @@ $(function(){
 					dataType: "text",
 					success: function(getWorkTime) {
 						if(getWorkTime.trim() != "empty" ){
-							console.log('getWorkTime!=null');
 							$('#getWorkTime').text('');
 							$('#getWorkTime').append(getWorkTime);
 						} else{
@@ -87,38 +84,69 @@ $(function(){
 			} else if(isStart == true && isEnd==true) {
 				$('#endWork').attr('disabled', 'disabled');
 				$('#startWork').attr('disabled', 'disabled');
-			}
+			} else if(isStart == false && isEnd==true) {
+				$('#endWorkstartWork').removeAttr('disabled');
+				$('#endWork').attr('disabled', 'disabled');
+			} 
 		}
 	})
 	
 	$('#startWork').click(function() {
-	   //형남 0112 출근기능
-		$.ajax({
-			url: "${pageContext.request.contextPath}/ajax/startWork.hari",
-			type: "post",
-			dataType: "json",
-			success: function(data) {
-			//총 근무일 갱신
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(function(position) {
+				myLatitude=position.coords.latitude; //위도
+				myLongitude=position.coords.longitude;//경도
+				
+				if(Math.abs(fixLatitude - myLatitude) >0.001 || Math.abs(fixLongitude - myLongitude) > 0.001){
+					alert('위치정보가 다릅니다. 로그인 실패');
+					return;
+				}
 				$.ajax({
-					url: "${pageContext.request.contextPath}/ajax/getTotalTA.hari",
+					url: "${pageContext.request.contextPath}/ajax/getDataDate.hari",
 					type: "post",
-					dataType: "json",
-					success: function(totalTA) {
-						console.log(totalTA);
-						$('#totalTA').text('');
-						$('#totalTA').append(totalTA);
+					dataType: "text",
+					success: function(dataDate) {
+						var itemArray=document.querySelectorAll('.fc-day.fc-widget-content');
+						for(var i=0;i<itemArray.length;i++){
+							if($(itemArray[i]).attr('data-date') == dataDate.trim()){
+								$(itemArray[i]).removeAttr("td");
+								$(itemArray[i]).append('<br><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-warning fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">Event Four</span></div><div class="fc-resizer fc-end-resizer"></div></a></td>');
+							}
+				        }
 					}
 				});
-				//있으면 true, 없으면 false
-				if(data==true){
-					alert('출근 등록되었습니다.');	
-					$('#endWork').removeAttr('disabled');	
-					$('#startWork').attr('disabled', 'disabled');
-				}else{
-					alert('출근 등록에 실패하였습니다.');
-				}
-			}
-		})
+				   //형남 0112 출근기능
+				$.ajax({
+					url: "${pageContext.request.contextPath}/ajax/startWork.hari",
+					type: "post",
+					dataType: "json",
+					success: function(data) {
+					//총 근무일 갱신
+						$.ajax({
+							url: "${pageContext.request.contextPath}/ajax/getTotalTA.hari",
+							type: "post",
+							dataType: "json",
+							success: function(totalTA) {
+								console.log(totalTA);
+								$('#totalTA').text('');
+								$('#totalTA').append(totalTA);
+							}
+						});
+						//있으면 true, 없으면 false
+						if(data==true){
+							alert('출근 등록되었습니다.');	
+							$('#endWork').removeAttr('disabled');	
+							$('#startWork').attr('disabled', 'disabled');
+						}else{
+							alert('출근 등록에 실패하였습니다.');
+						}
+					}
+				})
+			});
+		}else { 
+			alert('현재 브라우저에서 지원하지 않는 기능입니다.');
+			return;
+		}
 	})
 	$('#endWork').click(function() {
 		   //형남 0112 퇴근기능
@@ -190,57 +218,13 @@ $(function(){
 	
 	$('#test').click(function(){
 		if (navigator.geolocation) {
-// 			var apiGeolocationSuccess = function(position) {
-// 				alert("API geolocation success!\n\nlat = " + position.coords.latitude + "\nlng = " + position.coords.longitude);
-// 			};
-
-// 			var tryAPIGeolocation = function() {
-// 				jQuery.post( "https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyDCa1LUe1vOczX1hO_iGYgyo8p_jYuGOPU", function(success) {
-// 					apiGeolocationSuccess({coords: {latitude: success.location.lat, longitude: success.location.lng}});
-// 			  })
-// 			  .fail(function(err) {
-// 			    alert("API Geolocation error! \n\n"+err);
-// 			  });
-// 			};
-
-// 			var browserGeolocationSuccess = function(position) {
-// 				alert("Browser geolocation success!\n\nlat = " + position.coords.latitude + "\nlng = " + position.coords.longitude);
-// 			};
-
-// 			var browserGeolocationFail = function(error) {
-// 			  switch (error.code) {
-// 			    case error.TIMEOUT:
-// 			      alert("Browser geolocation error !\n\nTimeout.");
-// 			      break;
-// 			    case error.PERMISSION_DENIED:
-// 			      if(error.message.indexOf("Only secure origins are allowed") == 0) {
-// 			        tryAPIGeolocation();
-// 			      }
-// 			      break;
-// 			    case error.POSITION_UNAVAILABLE:
-// 			      alert("Browser geolocation error !\n\nPosition unavailable.");
-// 			      break;
-// 			  }
-// 			};
-// 			var tryGeolocation = function() {
-// 				  if (navigator.geolocation) {
-// 				    navigator.geolocation.getCurrentPosition(
-// 				    	browserGeolocationSuccess,
-// 				      browserGeolocationFail,
-// 				      {maximumAge: 50000, timeout: 20000, enableHighAccuracy: true});
-// 				  }
-// 				};
-
-// 			tryGeolocation();
 			navigator.geolocation.getCurrentPosition(function(position) {
 				myLatitude=position.coords.latitude; //위도
 				myLongitude=position.coords.longitude;//경도
 				
 				if(Math.abs(fixLatitude - myLatitude) >0.001 || Math.abs(fixLongitude - myLongitude) > 0.001){
-					console.log('실패');
+					alert('위치정보가 다릅니다. 로그인 실패');
 					return;
-				} else{
-					console.log('성공');
 				}
 				$.ajax({
 					url: "${pageContext.request.contextPath}/ajax/getDataDate.hari",
@@ -249,9 +233,7 @@ $(function(){
 					success: function(dataDate) {
 						var itemArray=document.querySelectorAll('.fc-day.fc-widget-content');
 						for(var i=0;i<itemArray.length;i++){
-							console.log($(itemArray[i]).attr('data-date'));
 							if($(itemArray[i]).attr('data-date') == dataDate.trim()){
-								console.log($(itemArray[i]).attr('data-date') + ' ==> 이 친구');
 								$(itemArray[i]).removeAttr("td");
 								$(itemArray[i]).append('<br><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-warning fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">Event Four</span></div><div class="fc-resizer fc-end-resizer"></div></a></td>');
 							}
@@ -263,8 +245,6 @@ $(function(){
 			alert('현재 브라우저에서 지원하지 않는 기능입니다.');
 		}
 	})
-	var item=document.querySelectorAll('.fc-prev-button');
-	console.log(item);
 	
 	//이번달 출근기록 yyyy-mm-dd
 	$.ajax({
