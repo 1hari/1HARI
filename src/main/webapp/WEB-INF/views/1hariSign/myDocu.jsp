@@ -113,7 +113,24 @@
 								+ "<td>"+sign.signFormFormName+"</td>"
 								+ "<td>"+sign.signTitle+"</td>"
 								+ "<td>"+sign.draftEmpName+" ("+sign.draftEmp+")</td>"
-								+ "<td>"+sign.signName+"</td>"
+								+ "<td>"+sign.empSign1Name+" ("+sign.empSign1+")</td>"
+								+ "<td>"+sign.empSign2Name+" ("+sign.empSign2+")</td>"
+								+ "<td>"
+									+ '<div class="d-flex no-block align-items-center m-t-15">'
+										+'<span>'+sign.signName+'</span>'
+                        			+ '</div>'
+									+ '<div class="progress">';
+										if(sign.signCode == "1") {
+											signList += '<div role="progressbar" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-striped bg-danger" style="width: 30%" aria-valuenow="30"></div>'; 
+										}else if(sign.signCode == "2"){
+											signList +='<div role="progressbar" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-striped" style="width: 70%" aria-valuenow="70"></div>';
+										}else if(sign.signCode == "3"){
+											signList +='<div role="progressbar" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-striped bg-success" style="width: 100%" aria-valuenow="100"></div>';
+										}else{
+											signList += '<div role="progressbar" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-striped bg-danger" style="width: 100%" aria-valuenow="100"></div>';
+										}
+									signList += '</div>'
+								+'</td>'
 							+ "</tr>";
 					//리스트 1줄
  	 			});//each 끝
@@ -194,6 +211,8 @@
 								<th scope="col">결재양식</th>
 								<th scope="col">제목</th>
 								<th scope="col">기안자 (사번)</th>
+								<th scope="col">중간결재자 (사번)</th>
+								<th scope="col">최종결재자 (사번)</th>
 								<th scope="col">결재상태</th>
 							</tr>
 						</thead>

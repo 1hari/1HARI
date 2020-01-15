@@ -47,6 +47,8 @@
 									<th scope="col">결재양식</th>
 									<th scope="col">제목</th>
 									<th scope="col">기안자 (사번)</th>
+									<th scope="col">중간결재자 (사번)</th>
+									<th scope="col">최종결재자 (사번)</th>
 									<th scope="col">결재상태</th>
 								</tr>
 							</thead>
@@ -57,8 +59,10 @@
 										<td>${waiting.signDate}</td>
 										<td>${waiting.signNum}</td>
 										<td>${waiting.signFormFormName}</td>
-										<td><a href="?signNum=${waiting.signNum}">${waiting.signTitle}</a></td>
+										<td class="signDocu" signNum="${waiting.signNum}"">${waiting.signTitle}</td>
 										<td>${waiting.draftEmpName} (${waiting.draftEmp})</td>
+										<td>${waiting.empSign1Name} (${waiting.empSign1})</td>
+										<td>${waiting.empSign2Name} (${waiting.empSign2})</td>
 										<td>
 											<div class="d-flex no-block align-items-center m-t-15">
                                         		<span>${waiting.signName}</span>
@@ -96,7 +100,9 @@
 									<th scope="col">문서번호</th>
 									<th scope="col">결재양식</th>
 									<th scope="col">제목</th>
-									<th scope="col">기안자  (사번)</th>
+									<th scope="col">기안자 (사번)</th>
+									<th scope="col">중간결재자 (사번)</th>
+									<th scope="col">최종결재자 (사번)</th>
 									<th scope="col">결재상태</th>
 								</tr>
 							</thead>
@@ -107,8 +113,10 @@
 										<td>${draft.signDate}</td>
 										<td>${draft.signNum}</td>
 										<td>${draft.signFormFormName}</td>
-										<td><a href="?signNum=${draft.signNum}">${draft.signTitle}</a></td>
+										<td class="signDocu" signNum="${draft.signNum}">${draft.signTitle}</td>
 										<td>${draft.draftEmpName} (${draft.draftEmp})</td>
+										<td>${draft.empSign1Name} (${draft.empSign1})</td>
+										<td>${draft.empSign2Name} (${draft.empSign2})</td>
 										<td>
 											<div class="d-flex no-block align-items-center m-t-15">
                                         		<span>${draft.signName}</span>
@@ -146,7 +154,9 @@
 									<th scope="col">문서번호</th>
 									<th scope="col">결재양식</th>
 									<th scope="col">제목</th>
-									<th scope="col">기안자  (사번)</th>
+									<th scope="col">기안자 (사번)</th>
+									<th scope="col">중간결재자 (사번)</th>
+									<th scope="col">최종결재자 (사번)</th>
 									<th scope="col">결재상태</th>
 								</tr>
 							</thead>
@@ -157,8 +167,10 @@
 										<td>${completet.signDate}</td>
 										<td>${completet.signNum}</td>
 										<td>${completet.signFormFormName}</td>
-										<td><a href="?signNum=${completet.signNum}">${completet.signTitle}</a></td>
+										<td class="signDocu" signNum="${completet.signNum}">${completet.signTitle}</td>
 										<td>${completet.draftEmpName} (${completet.draftEmp})</td>
+										<td>${completet.empSign1Name} (${completet.empSign1})</td>
+										<td>${completet.empSign2Name} (${completet.empSign2})</td>
 										<td>
 											<div class="d-flex no-block align-items-center m-t-15">
                                         		<span>${completet.signName}</span>
@@ -189,7 +201,9 @@
 									<th scope="col">문서번호</th>
 									<th scope="col">결재양식</th>
 									<th scope="col">제목</th>
-									<th scope="col">기안자  (사번)</th>
+									<th scope="col">기안자 (사번)</th>
+									<th scope="col">중간결재자 (사번)</th>
+									<th scope="col">최종결재자 (사번)</th>
 									<th scope="col">결재상태</th>
 								</tr>
 							</thead>
@@ -200,7 +214,9 @@
 										<td>${signReturn.signDate}</td>
 										<td>${signReturn.signNum}</td>
 										<td>${signReturn.signFormFormName}</td>
-										<td><a href="?signNum=${signReturn.signNum}">${signReturn.signTitle}</a></td>
+										<td>${signReturn.empSign1Name} (${signReturn.empSign1})</td>
+										<td>${signReturn.empSign2Name} (${signReturn.empSign2})</td>
+										<td class="signDocu" signNum="${signReturn.signNum}">${signReturn.signTitle}</td>
 										<td>${signReturn.draftEmpName} (${signReturn.draftEmp})</td>
 										<td>
 											<div class="d-flex no-block align-items-center m-t-15">

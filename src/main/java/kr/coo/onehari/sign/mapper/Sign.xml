@@ -63,6 +63,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 						ON s.SIGNCODE = t.SIGNCODE
 					JOIN emp e
 						ON s.DRAFTEMP = e.EMPNUM
+					JOIN emp e2
+						ON s.EMPSIGN1 = e2.EMPNUM
+					JOIN emp e3
+						ON s.EMPSIGN2 = e3.EMPNUM
 		<where>
 			<choose>
 				<when test="code.equalsIgnoreCase('0')"> <!-- 전체문서 -->
