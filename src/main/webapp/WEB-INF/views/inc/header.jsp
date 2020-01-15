@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script type="text/javascript">
 
 $(function(){
@@ -32,21 +30,20 @@ $(function(){
 	  }
 	  return zero + n;
 	}
+	//toastr 옵션설정
+	toastr.options.escapeHtml = true;	
+	toastr.options.closeButton = true;	
+	toastr.options.newestOnTop = true;	
+	toastr.options.progressBar = true;	
 
 	//현재시간 정수로 비교해 알람창 띄어주기
 	var timeCheck=setInterval(function(){
 		integerTime=parseInt(getTimeStamp());
-		if(integerTime ==1210){
-			 clearTimeout(timeCheck);
-			 if(isStart == false){
-				 alert('출근이 등록되지 않았습니다.');
-			}
-		}else if(integerTime >1250){
-			clearTimeout(timeCheck);
-		}else{
-			console.log(integerTime);
+		console.log(integerTime);
+		if(integerTime ==1328 && isStart == false){
+			clearInterval(timeCheck);
+			toastr.error('11시되기 10분 전입니다. 출근등록 여부를 확인해 주세요.', '출근알림', {timeOut: 5000});
 		}
-
 	},1000);
 
 	//총 근무일
@@ -69,7 +66,6 @@ $(function(){
 			isEnd=data;
 			if(isEnd==false){
 				//false 면 현재시간 - 출근시간
-				console.log('getWorkTime ' + ': ' + isEnd);
 				$.ajax({
 					url: "${pageContext.request.contextPath}/ajax/getWorkTime.hari",
 					type: "post",
@@ -79,9 +75,40 @@ $(function(){
 							$('#getWorkTime').text('');
 							$('#getWorkTime').append(getWorkTime);
 						} else{
-							console.log('getWorkTime==null');
 							$('#getWorkTime').text('');
 							$('#getWorkTime').append('00:00');
+						}
+					}
+				});
+
+				//이번주 현재까지 근무시간
+				$.ajax({
+					url: "${pageContext.request.contextPath}/ajax/getWeekTotalTime.hari",
+					type: "post",
+					dataType: "text",
+					success: function(getWeekTotalTime) {
+						if(getWeekTotalTime != "empty" ){
+							$('#getWeekTotalTime').text('');
+							$('#getWeekTotalTime').append(getWeekTotalTime);
+						} else{
+							$('#getWeekTotalTime').text('');
+							$('#getWeekTotalTime').append('00:00');
+						}
+					}
+				});
+				
+				//총 현재까지 근무시간
+				$.ajax({
+					url: "${pageContext.request.contextPath}/ajax/getTotalTime.hari",
+					type: "post",
+					dataType: "text",
+					success: function(getTotalTime) {
+						if(getTotalTime != "empty" ){
+							$('#getTotalTime').text('');
+							$('#getTotalTime').append(getTotalTime);
+						} else{
+							$('#getTotalTime').text('');
+							$('#getTotalTime').append('00:00');
 						}
 					}
 				});
@@ -94,6 +121,37 @@ $(function(){
 					success: function(getTodayTotalTime) {
 						$('#getWorkTime').text('');
 						$('#getWorkTime').append(getTodayTotalTime);
+					}
+				});
+				//이번주 총 근무시간
+				$.ajax({
+					url: "${pageContext.request.contextPath}/ajax/getWeekWorkTime.hari",
+					type: "post",
+					dataType: "text",
+					success: function(getWeekWorkTime) {
+						if(getWeekWorkTime != "empty" ){
+							$('#getWeekTotalTime').text('');
+							$('#getWeekTotalTime').append(getWeekWorkTime);
+						} else{
+							$('#getWeekTotalTime').text('');
+							$('#getWeekTotalTime').append('00:00');
+						}
+					}
+				});
+				
+				//총 근무시간
+				$.ajax({
+					url: "${pageContext.request.contextPath}/ajax/getTotalWorkTime.hari",
+					type: "post",
+					dataType: "text",
+					success: function(getTotalWorkTime) {
+						if(getTotalWorkTime != "empty" ){
+							$('#getTotalTime').text('');
+							$('#getTotalTime').append(getTotalWorkTime);
+						} else{
+							$('#getTotalTime').text('');
+							$('#getTotalTime').append('00:00');
+						}
 					}
 				});
 			}
@@ -109,7 +167,9 @@ $(function(){
 			isStart=data;
 			if(isStart == false && isEnd==false){
 				$('#startWork').removeAttr('disabled');	
-				$('#endWork').attr('disabled', 'disabled');	
+				$('#endWork').attr('disabled', 'disabled');
+				//출근 미등록 알림 (페이지 이동마다 출근 안찍혀있으면 알림)
+				toastr.error('출근등록 여부를 확인해 주세요', '출근알림', {timeOut: 5000});
 			}else if(isStart == true && isEnd==false){
 				$('#startWork').attr('disabled', 'disabled');
 				$('#endWork').removeAttr('disabled');	
@@ -117,12 +177,12 @@ $(function(){
 				$('#endWork').attr('disabled', 'disabled');
 				$('#startWork').attr('disabled', 'disabled');
 			} else if(isStart == false && isEnd==true) {
-				$('#endWorkstartWork').removeAttr('disabled');
-				$('#endWork').attr('disabled', 'disabled');
+				alert('근퇴문제 오형남한테 문의해주세요');
 			} 
 		}
 	})
 	
+	//출근버튼
 	$('#startWork').click(function() {
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(function(position) {
@@ -159,7 +219,6 @@ $(function(){
 							type: "post",
 							dataType: "json",
 							success: function(totalTA) {
-								console.log(totalTA);
 								$('#totalTA').text('');
 								$('#totalTA').append(totalTA);
 							}
@@ -204,9 +263,7 @@ $(function(){
 			success: function(dataDate) {
 				var itemArray=document.querySelectorAll('.fc-day.fc-widget-content');
 				for(var i=0;i<itemArray.length;i++){
-					console.log($(itemArray[i]).attr('data-date'));
 					if($(itemArray[i]).attr('data-date') == dataDate.trim()){
-						console.log($(itemArray[i]).attr('data-date') + ' ==> 이 친구');
 						$(itemArray[i]).removeAttr("td");
 						$(itemArray[i]).append('<a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-success fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">퇴근</span></div><div class="fc-resizer fc-end-resizer"></div></a>');
 					}
@@ -216,37 +273,6 @@ $(function(){
 		});
 	})
 	
-	//이번주 총 근무
-	$.ajax({
-		url: "${pageContext.request.contextPath}/ajax/getWeekTotalTime.hari",
-		type: "post",
-		dataType: "text",
-		success: function(getWeekTotalTime) {
-			if(getWeekTotalTime.trim() != "empty" ){
-				$('#getWeekTotalTime').text('');
-				$('#getWeekTotalTime').append(getWeekTotalTime);
-			} else{
-				$('#getWeekTotalTime').text('');
-				$('#getWeekTotalTime').append('00:00');
-			}
-		}
-	});
-	
-	//총 근무
-	$.ajax({
-		url: "${pageContext.request.contextPath}/ajax/getTotalTime.hari",
-		type: "post",
-		dataType: "text",
-		success: function(getTotalTime) {
-			if(getTotalTime.trim() != "empty" ){
-				$('#getTotalTime').text('');
-				$('#getTotalTime').append(getTotalTime);
-			} else{
-				$('#getTotalTime').text('');
-				$('#getTotalTime').append('00:00');
-			}
-		}
-	});
 	
 	$('#test').click(function(){
 		if (navigator.geolocation) {
@@ -310,6 +336,42 @@ $(function(){
 			});
 		}
 	});
+
+	//보낼 parameter
+	var parameter_noti = {
+		title:"HARI",
+		icon:"m-r-10 mdi mdi-checkerboard",
+		body:"나는 하리"
+	};
+	// 브라우저가 Notification 기능을 지원하는지 체크
+	if (!"Notification" in window) {
+		alert("This browser does not support desktop notification");
+	  }
+	// 사용자가 Notification 사용을 허락했는지 체크
+	else if (Notification.permission === "granted") {
+		// 허락했다면 Notification을 생성
+		var notification = new Notification(parameter_noti.title,{
+	    	icon:parameter_noti.icon,
+	    	body:parameter_noti.body
+	    });
+	  }
+	  // 크롬 브라우저는 permission 속성이 구현되어 있지 않기 때문에
+	  // 사용자가 의도적으로 'denied' 한 경우를 체크
+	else if (Notification.permission !== 'denied') {
+		Notification.requestPermission(function (permission) {
+		// 사용자가 사용 여부를 체크했다면, 크롬 Notification 상태를 갱신
+		if(!('permission' in Notification)) {
+			Notification.permission = permission;
+		}
+	   // 사용자가 승낙했다면, Notification을 생성
+		if (permission === "granted") {
+			var notification = new Notification(parameter_noti.title,{
+				icon:parameter_noti.icon,
+	        	body:parameter_noti.body
+			});
+			}
+		});
+	}
 });
 </script>
 <!-- ============================================================== -->

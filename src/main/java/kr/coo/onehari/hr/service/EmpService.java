@@ -139,11 +139,6 @@ public class EmpService {
 		int empNum=Integer.parseInt(empNumStr);
 		try {
 			result=dao.insertStartWorkTA(empNum);
-			if(result >0) {
-				System.out.println("출근 등록 성공");
-			}else {
-				System.out.println("출근 등록 실패");
-			}
 		} catch (ClassNotFoundException | SQLException e) {
 			log.debug("insertStartWorkTA : " + e.getMessage());
 		}
@@ -157,11 +152,6 @@ public class EmpService {
 		int empNum=Integer.parseInt(empNumStr);
 		try {
 			result=dao.insertEndWorkTA(empNum);
-			if(result >0) {
-				System.out.println("퇴근 등록 성공");
-			}else {
-				System.out.println("퇴근 등록 실패");
-			}
 		} catch (ClassNotFoundException | SQLException e) {
 			log.debug("insertStartWorkTA : " + e.getMessage());
 		}
@@ -175,11 +165,6 @@ public class EmpService {
 		int empNum=Integer.parseInt(empNumStr);
 		try {
 			result=dao.todayEndWorkCheck(empNum);
-			if(result >0) {
-				System.out.println("퇴근기록 있음");
-			}else {
-				System.out.println("퇴근기록 없음");
-			}
 		} catch (ClassNotFoundException | SQLException e) {
 			log.debug("todayEndWorkCheck : " + e.getMessage());
 		}
@@ -193,11 +178,6 @@ public class EmpService {
 		int empNum=Integer.parseInt(empNumStr);
 		try {
 			result=dao.todayStartWorkCheck(empNum);
-			if(result >0) {
-				System.out.println("출근기록 있음");
-			}else {
-				System.out.println("출근기록 없음");
-			}
 		} catch (ClassNotFoundException | SQLException e) {
 			log.debug("todayStartWorkCheck : " + e.getMessage());
 		}
@@ -211,11 +191,6 @@ public class EmpService {
 		int empNum=Integer.parseInt(empNumStr);
 		try {
 			result=dao.getTotalTA(empNum);
-			if(result >0) {
-				System.out.println("출근기록: " + result);
-			}else {
-				System.out.println("출근기록 없음");
-			}
 		} catch (ClassNotFoundException | SQLException e) {
 			log.debug("getTotalTA : " + e.getMessage());
 		}
@@ -229,11 +204,6 @@ public class EmpService {
         int empNum=Integer.parseInt(empNumStr);
         try {
             startTime=dao.getStartWorkTime(empNum);
-            if(startTime !=null) {
-                System.out.println("출근시간: " + startTime);
-            }else {
-                System.out.println("출근시간 못가져옴");
-            }
         } catch (ClassNotFoundException | SQLException e) {
             log.debug("getStartWorkTime : " + e.getMessage());
         }
@@ -247,11 +217,6 @@ public class EmpService {
     	int empNum=Integer.parseInt(empNumStr);
     	try {
     		totalTime=dao.getWorkTime(empNum);
-    		if(totalTime !=null) {
-    			System.out.println("현재까지 근무시간: " + totalTime);
-    		}else {
-    			System.out.println("현재까지 근무시간 못가져옴");
-    		}
     	} catch (ClassNotFoundException | SQLException e) {
     		log.debug("getWorkTime : " + e.getMessage());
     	}
@@ -265,49 +230,60 @@ public class EmpService {
     	int empNum=Integer.parseInt(empNumStr);
     	try {
     		totalTime=dao.getTodayTotalTime(empNum);
-    		if(totalTime !=null) {
-    			System.out.println("오늘 총 근무시간: " + totalTime);
-    		}else {
-    			System.out.println("오늘 총 근무시간 못가져옴");
-    		}
     	} catch (ClassNotFoundException | SQLException e) {
     		log.debug("getTodayTotalTime : " + e.getMessage());
     	}
     	return totalTime;
     }
     
-    //형남 0113 이번주 총 근무시간
+    //형남 0113 이번주 현재까지 총 근무시간
     public String getWeekTotalTime(String empNumStr) {
     	EmpDao dao = sqlsession.getMapper(EmpDao.class);
     	String totalTime = null;
     	int empNum=Integer.parseInt(empNumStr);
     	try {
     		totalTime=dao.getWeekTotalTime(empNum);
-    		if(totalTime !=null) {
-    			System.out.println("이번주 총 근무시간: " + totalTime);
-    		}else {
-    			System.out.println("이번주 총 근무시간 못가져옴");
-    		}
     	} catch (ClassNotFoundException | SQLException e) {
     		log.debug("getWeekTotalTime : " + e.getMessage());
     	}
     	return totalTime;
     }
     
-    //형남 0113 총 근무시간
+    //형남 0113 현재까지 총 근무시간
     public String getTotalTime(String empNumStr) {
     	EmpDao dao = sqlsession.getMapper(EmpDao.class);
     	String totalTime = null;
     	int empNum=Integer.parseInt(empNumStr);
     	try {
     		totalTime=dao.getTotalTime(empNum);
-    		if(totalTime !=null) {
-    			System.out.println(" 총 근무시간: " + totalTime);
-    		}else {
-    			System.out.println("총 근무시간 못가져옴");
-    		}
     	} catch (ClassNotFoundException | SQLException e) {
     		log.debug("getTotalTime : " + e.getMessage());
+    	}
+    	return totalTime;
+    }
+    
+    //형남 0115 이번주 총 근무시간
+    public String getWeekWorkTime(String empNumStr) {
+    	EmpDao dao = sqlsession.getMapper(EmpDao.class);
+    	String totalTime = null;
+    	int empNum=Integer.parseInt(empNumStr);
+    	try {
+    		totalTime=dao.getWeekWorkTime(empNum);
+    	} catch (ClassNotFoundException | SQLException e) {
+    		log.debug("getWeekWorkTime : " + e.getMessage());
+    	}
+    	return totalTime;
+    }
+    
+    //형남 0115 총 근무시간
+    public String getTotalWorkTime(String empNumStr) {
+    	EmpDao dao = sqlsession.getMapper(EmpDao.class);
+    	String totalTime = null;
+    	int empNum=Integer.parseInt(empNumStr);
+    	try {
+    		totalTime=dao.getTotalWorkTime(empNum);
+    	} catch (ClassNotFoundException | SQLException e) {
+    		log.debug("getTotalWorkTime : " + e.getMessage());
     	}
     	return totalTime;
     }
@@ -319,11 +295,6 @@ public class EmpService {
     	int empNum=Integer.parseInt(empNumStr);
     	try {
     		totalTime=dao.getDataDate(empNum);
-    		if(totalTime !=null) {
-    			System.out.println("dataDate: " + totalTime);
-    		}else {
-    			System.out.println("dataDate 못가져옴");
-    		}
     	} catch (ClassNotFoundException | SQLException e) {
     		log.debug("getDataDate : " + e.getMessage());
     	}
@@ -337,11 +308,6 @@ public class EmpService {
     	int empNum=Integer.parseInt(empNumStr);
     	try {
     		totalTime=dao.getStartList(empNum);
-    		if(totalTime !=null) {
-    			System.out.println("getStartList: " + totalTime);
-    		}else {
-    			System.out.println("getStartList 못가져옴");
-    		}
     	} catch (ClassNotFoundException | SQLException e) {
     		log.debug("getStartList : " + e.getMessage());
     	}
@@ -355,17 +321,9 @@ public class EmpService {
         int empNum=Integer.parseInt(empNumStr);
         try {
             totalTime=dao.getEndList(empNum);
-            if(totalTime !=null) {
-                System.out.println("getEndList: " + totalTime);
-            }else {
-                System.out.println("getEndList 못가져옴");
-            }
         } catch (ClassNotFoundException | SQLException e) {
             log.debug("getEndList : " + e.getMessage());
         }
         return totalTime;
     }
-    
-    
-
 }

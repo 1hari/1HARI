@@ -11,14 +11,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="kr.coo.onehari.util.dao.ExcelDao">
 
 	<!-- Excel 파일 Upload 사원등록 -->
-	<insert id="insertExcelEmp" parameterType="kr.coo.onehari.hr.dto.EmpDto">
-		INSERT INTO emp(TEAMCODE, RANKCODE, POSITIONCODE, EMPLOYMENTCODE, EMPNAME, PASSWORD)
-		VALUES(#{teamCode}, #{rankCode}, #{positionCode}, #{employmentCode}, #{empName}, #{password})
+	<insert id="insertExcelEmp" parameterType="hashmap">
+		INSERT INTO emp
+			(EMPNAME)
+		VALUES 
+		<foreach collection="list" item="item" separator=" , ">
+			 (#{item.empName})
+		</foreach>
 	</insert>
+	
+	
 	<!-- 사원등록 subemp Transaction -->
-	<insert id="insertExcelSubEmp" parameterType="kr.coo.onehari.hr.dto.EmpDto">
-		INSERT INTO subemp(empnum, birth, resnum, phonenum, email, hiredate)
-		VALUES(LAST_INSERT_ID(), #{birth}, #{resNum}, #{phoneNum}, #{email}, #{hireDate})
+	<insert id="insertExcelSubEmp" parameterType="kr.coo.onehari.util.dto.ExcelEmpDto">
+		INSERT INTO subemp
+			(empnum, birth, resnum, phonenum, email, hiredate)
+		VALUES
+		<foreach collection="insertEmplist" item="excelsubemp">
+			(LAST_INSERT_ID(), #{excelsubemp.birth}, #{excelsubemp.resNum}, #{excelsubemp.phoneNum}, #{excelsubemp.email}, #{excelsubemp.hireDate})
+		</foreach>
 	</insert>
 
 </mapper>

@@ -107,12 +107,10 @@ public class HrRestController {
 	//형남 0110 비밀번호 변경 시 이메일과 사번 일치여부 확인
 	@RequestMapping(value = "empNumEmail.hari", method = RequestMethod.POST)
 	public boolean empNumEmail(EmpDto emp) {
-		System.out.println("empNumEmail EmpDto: " + emp.toString());
 		boolean isExist = false;
 		try {
 			isExist = myService.empNumEmail(emp);
 		} catch (Exception e) {
-			System.out.println("empNumEmail 예외발생: " + e.getMessage());
 			log.debug("empNumEmail 예외발생: " + e.getMessage());
 		}
 		return isExist;
@@ -121,12 +119,10 @@ public class HrRestController {
 	//형남 0112 출근하기
 	@RequestMapping(value = "startWork.hari", method = RequestMethod.POST)
 	public boolean startWork(Principal pri) {
-		System.out.println("pri.toString(): " + pri.toString());
 		int result = 0;
 		try {
 			result = empSercive.insertStartWorkTA(pri.getName());
 		} catch (Exception e) {
-			System.out.println("startWork 예외발생: " + e.getMessage());
 			log.debug("startWork 예외발생: " + e.getMessage());
 		}
 		return result > 0 ? true : false;
@@ -135,12 +131,10 @@ public class HrRestController {
 	//형남 0112 퇴근하기
 	@RequestMapping(value = "endWork.hari", method = RequestMethod.POST)
 	public boolean endWork(Principal pri) {
-		System.out.println("pri.toString(): " + pri.toString());
 		int result = 0;
 		try {
 			result = empSercive.insertEndWorkTA(pri.getName());
 		} catch (Exception e) {
-			System.out.println("endWork 예외발생: " + e.getMessage());
 			log.debug("endWork 예외발생: " + e.getMessage());
 		}
 		return result > 0 ? true : false;
@@ -149,12 +143,10 @@ public class HrRestController {
 	//형남 0112 퇴근조회
 	@RequestMapping(value = "todayEndWorkCheck.hari", method = RequestMethod.POST)
 	public boolean todayEndWorkCheck(Principal pri) {
-		System.out.println("pri.toString(): " + pri.toString());
 		int result = 0;
 		try {
 			result = empSercive.todayEndWorkCheck(pri.getName());
 		} catch (Exception e) {
-			System.out.println("todayEndWorkCheck 예외발생: " + e.getMessage());
 			log.debug("todayEndWorkCheck 예외발생: " + e.getMessage());
 		}
 		return result > 0 ? true : false;
@@ -163,12 +155,10 @@ public class HrRestController {
 	//형남 0112 출근조회
 	@RequestMapping(value = "todayStartWorkCheck.hari", method = RequestMethod.POST)
 	public boolean todayStartWorkCheck(Principal pri) {
-		System.out.println("pri.toString(): " + pri.toString());
 		int result = 0;
 		try {
 			result = empSercive.todayStartWorkCheck(pri.getName());
 		} catch (Exception e) {
-			System.out.println("todayStartWorkCheck 예외발생: " + e.getMessage());
 			log.debug("todayStartWorkCheck 예외발생: " + e.getMessage());
 		}
 		return result > 0 ? true : false;
@@ -177,12 +167,10 @@ public class HrRestController {
 	//형남 0113 총 근무일조회
 	@RequestMapping(value = "getTotalTA.hari", method = RequestMethod.POST)
 	public int getTotalTA(Principal pri) {
-		System.out.println("pri.toString(): " + pri.toString());
 		int result = 0;
 		try {
 			result = empSercive.getTotalTA(pri.getName());
 		} catch (Exception e) {
-			System.out.println("getTotalTA 예외발생: " + e.getMessage());
 			log.debug("getTotalTA 예외발생: " + e.getMessage());
 		}
 		return result;
@@ -191,7 +179,6 @@ public class HrRestController {
 	//형남 0113 현재까지 근무시간
 	@RequestMapping(value = "getWorkTime.hari", method = RequestMethod.POST)
 	public String getWorkTime(Principal pri) {
-		System.out.println("pri.toString(): " + pri.toString());
 		String totalTime = null;
 		try {
 			totalTime = empSercive.getWorkTime(pri.getName());
@@ -199,7 +186,6 @@ public class HrRestController {
 				totalTime="empty";
 			}
 		} catch (Exception e) {
-			System.out.println("getWorkTime 예외발생: " + e.getMessage());
 			log.debug("getWorkTime 예외발생: " + e.getMessage());
 		}
 		return totalTime;
@@ -208,7 +194,6 @@ public class HrRestController {
 	//형남 0113 퇴근시간 가져오기
 	@RequestMapping(value = "getTodayTotalTime.hari", method = RequestMethod.POST)
 	public String getTodayTotalTime(Principal pri) {
-		System.out.println("pri.toString(): " + pri.toString());
 		String totalTime = null;
 		try {
 			totalTime = empSercive.getTodayTotalTime(pri.getName());
@@ -216,13 +201,12 @@ public class HrRestController {
 				totalTime="empty";
 			}
 		} catch (Exception e) {
-			System.out.println("getTodayTotalTime 예외발생: " + e.getMessage());
 			log.debug("getTodayTotalTime 예외발생: " + e.getMessage());
 		}
 		return totalTime;
 	}
 	
-	//형남 0113 이번주 총 근무시간
+	//형남 0113 이번주 현재까지 총 근무시간
 	@RequestMapping(value = "getWeekTotalTime.hari", method = RequestMethod.POST)
 	public String getWeekTotalTime(Principal pri) {
 		System.out.println("pri.toString(): " + pri.toString());
@@ -233,16 +217,14 @@ public class HrRestController {
 				totalTime="empty";
 			}
 		} catch (Exception e) {
-			System.out.println("getWeekTotalTime 예외발생: " + e.getMessage());
 			log.debug("getWeekTotalTime 예외발생: " + e.getMessage());
 		}
 		return totalTime;
 	}
 	
-	//형남 0113 총 근무시간
+	//형남 0113 현재까지 총 근무시간
 	@RequestMapping(value = "getTotalTime.hari", method = RequestMethod.POST)
 	public String getTotalTime(Principal pri) {
-		System.out.println("pri.toString(): " + pri.toString());
 		String totalTime = null;
 		try {
 			totalTime = empSercive.getTotalTime(pri.getName());
@@ -250,8 +232,37 @@ public class HrRestController {
 				totalTime="empty";
 			}
 		} catch (Exception e) {
-			System.out.println("getTotalTime 예외발생: " + e.getMessage());
 			log.debug("getTotalTime 예외발생: " + e.getMessage());
+		}
+		return totalTime;
+	}
+	
+	//형남 0115 이번주 총 근무시간
+	@RequestMapping(value = "getWeekWorkTime.hari", method = RequestMethod.POST)
+	public String getWeekWorkTime(Principal pri) {
+		String totalTime = null;
+		try {
+			totalTime = empSercive.getWeekWorkTime(pri.getName());
+			if(totalTime==null) {
+				totalTime="empty";
+			}
+		} catch (Exception e) {
+			log.debug("getWeekWorkTime 예외발생: " + e.getMessage());
+		}
+		return totalTime;
+	}
+	
+	//형남 0115 총 근무시간
+	@RequestMapping(value = "getTotalWorkTime.hari", method = RequestMethod.POST)
+	public String getTotalWorkTime(Principal pri) {
+		String totalTime = null;
+		try {
+			totalTime = empSercive.getTotalWorkTime(pri.getName());
+			if(totalTime==null) {
+				totalTime="empty";
+			}
+		} catch (Exception e) {
+			log.debug("getTotalWorkTime 예외발생: " + e.getMessage());
 		}
 		return totalTime;
 	}
@@ -259,7 +270,6 @@ public class HrRestController {
 	//형남 0114 dataDate 형식으로 가져오기
 	@RequestMapping(value = "getDataDate.hari", method = RequestMethod.POST)
 	public String getDataDate(Principal pri) {
-		System.out.println("pri.toString(): " + pri.toString());
 		String totalTime = null;
 		try {
 			totalTime = empSercive.getDataDate(pri.getName());
@@ -267,7 +277,6 @@ public class HrRestController {
 				totalTime="empty";
 			}
 		} catch (Exception e) {
-			System.out.println("getDataDate 예외발생: " + e.getMessage());
 			log.debug("getDataDate 예외발생: " + e.getMessage());
 		}
 		return totalTime;
@@ -280,30 +289,18 @@ public class HrRestController {
 		List<String> totalTime = null;
 		try {
 			totalTime = empSercive.getStartList(pri.getName());
-			if(totalTime==null) {
-				totalTime=null;
-			}else {
-				System.out.println(totalTime.toString());
-			}
 		} catch (Exception e) {
-			System.out.println("getStartList 예외발생: " + e.getMessage());
 			log.debug("getStartList 예외발생: " + e.getMessage());
 		}
 		return totalTime;
 	}
 	
-	//형남 0114 이번달 출근기록 yyyy-mm-dd
+	//형남 0114 이번달 퇴근기록 yyyy-mm-dd
 	@RequestMapping(value = "getEndList.hari", method = RequestMethod.POST)
 	public List<String> getEndList(Principal pri) {
-		System.out.println("pri.toString(): " + pri.toString());
 		List<String> totalTime = null;
 		try {
 			totalTime = empSercive.getEndList(pri.getName());
-			if(totalTime==null) {
-				totalTime=null;
-			}else {
-				System.out.println(totalTime.toString());
-			}
 		} catch (Exception e) {
 			System.out.println("getEndList 예외발생: " + e.getMessage());
 			log.debug("getEndList 예외발생: " + e.getMessage());

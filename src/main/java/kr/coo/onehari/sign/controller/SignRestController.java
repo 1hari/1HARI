@@ -46,9 +46,9 @@ public class SignRestController {
 		}
 		
 		map.put("draftEmp", draftEmp); //현재 로그인한 사번
-		map.put("pg", "3"); //page 에 보여줄 갯수
+		map.put("pg", pg); //page 에 보여줄 갯수
 		map.put("cp", Integer.toString(offset)); //보여줄 페이지
-		map.put("code", code); //결재분류 : 0.전체 / 1.기안 / 2.완료 / 3.반려 / 4.결재대기
+		map.put("code", code); //결재분류 : 0.전체 / 1.기안 / 2.완료 / 3.반려 / 4.결재할 문서
 		List<SignDto> signList = signService.selectSignList(map);
 		
 		return signList;
@@ -62,8 +62,9 @@ public class SignRestController {
 		System.out.println(code);
 		
 		String draftEmp = principal.getName();
+		
 		map.put("draftEmp", draftEmp); //현재 로그인한 사번
-		map.put("code", code); //결재분류 : 0.전체 / 1.기안 / 2.완료 / 3.반려 / 4.결재대기
+		map.put("code", code); //결재분류 : 0.전체 / 1.기안 / 2.완료 / 3.반려 / 4.결재할 문서
 		int count = signService.signPage(map);
 		return count;
 	}
