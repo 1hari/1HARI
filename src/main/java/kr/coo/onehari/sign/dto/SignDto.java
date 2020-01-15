@@ -12,6 +12,7 @@ import lombok.ToString;
 //전자결재 테이블
 public class SignDto {
 	private int signNum; //전자결재 시퀀스
+	
 	//DB는 int / form 태그 값 받기위해 String 으로 변경
 	private String draftEmp; //작성자 사번
 	private String draftEmpName; //작성자 이름 김정하 / 2020. 1. 14
@@ -20,8 +21,9 @@ public class SignDto {
 	private String empSign2; //결재자2 사번
 	private String empSign2Name; //결재자2 이름 김정하 / 2020. 1. 14
 	private String signFormCode; //문서양식 코드
-	//----------------------------------------------
 	private String signFormFormName; //문서양식명 김정하 / 2020. 1.13
+	//----------------------------------------------
+	
 	private int signCode; //결재 구분번호
 	private String signName; //결재구분명 김정하 / 2020. 1.13
 	private String signTitle; //전자결재 제목

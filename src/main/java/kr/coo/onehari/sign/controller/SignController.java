@@ -57,6 +57,7 @@ public class SignController {
 		
 		map.put("draftEmp", draftEmp);
 		map.put("pg", "3");
+		map.put("cp", "0");
 		
 		//전자결재 기안 리스트
 		map.put("code","1");
