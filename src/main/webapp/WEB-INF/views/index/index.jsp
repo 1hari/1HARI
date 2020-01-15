@@ -6,12 +6,24 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
    
    <script type="text/javascript">
+
+   //로그인 시 체크
+   
+//   function login(){
+//        if($('#username').val() ==null || $('#username').trim().val()==""){
+//            alert('아이디를 입력해 주세요');
+//            return;
+//        } else{
+//      	  form.submit();
+//        }
+//    }
+   
    //형남 0110 비밀번호 변경
    $(function(){
       //정규표현식
       let pw_pattern = /^[a-z0-9_]{4,10}$/;
       let email_pattern = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
-   
+      var form = $('loginform');
         let pw_check = false;
         let pwck_check = false;
         let email_check = false;
@@ -109,13 +121,13 @@
                </div>
                <div class="col-lg-2 col"></div>
 
-               <!--로그인 화면 시작-->
+			<!--로그인 화면 시작-->
          <c:url value="/login" var="loginURL"/>   
           <div class="col-lg-4 col-md-6 mt-0 mt-md-5">
-             <form action="${loginURL}" class="request-form ftco-animate" method="post">
+             <form action="${loginURL}" class="request-form ftco-animate" method="post" name="loginform" id="loginform">
                 <h2>로그인</h2>
                    <div class="form-group">
-                      <input type="text" id="username" name="username" class="form-control" placeholder="사번 번호 입력">
+                      <input type="text" id="username" name="username" class="form-control" placeholder="사번 번호 입력" >
                    </div>
                    <div class="form-group">
                       <input type="password" id="password" name="password" class="form-control" placeholder="비밀 번호 입력">
@@ -124,13 +136,13 @@
                         <div class="checkbox">
                            <label><input type="checkbox" value="" class="mr-2">사번 번호 기억하기</label>
                         </div>
-                     </div>
-               <div class="form-group">
-                 <input type="submit" value="로그인" class="btn btn-primary py-3 px-4">
+                   </div>
+				<div class="form-group">
+                 <input type="submit" value="로그인"  class="btn btn-primary py-3 px-4">
                  <br>
                  <span data-toggle="modal" data-target="#add-new-event" style="cursor:pointer;">이메일 인증하기</span>
                </div>
-                </form>
+		</form>
                </div>
                <!--로그인 화면 끝 -->
                
