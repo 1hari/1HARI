@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script type="text/javascript">
 
 $(function(){
@@ -9,7 +7,7 @@ $(function(){
 	var isEnd=false;//오늘 퇴근했는지
 	var currYear;
 	var currMonth;
-	var fixLatitude=parseFloat(38.4995124);
+	var fixLatitude=parseFloat(37.4995124);
 	var fixLongitude=parseFloat(127.0292657);
 	var myLatitude; //사용자 위도
 	var myLongitude;////사용자 경도
@@ -32,21 +30,20 @@ $(function(){
 	  }
 	  return zero + n;
 	}
+	//toastr 옵션설정
+	toastr.options.escapeHtml = true;	
+	toastr.options.closeButton = true;	
+	toastr.options.newestOnTop = true;	
+	toastr.options.progressBar = true;	
 
 	//현재시간 정수로 비교해 알람창 띄어주기
 	var timeCheck=setInterval(function(){
 		integerTime=parseInt(getTimeStamp());
-		if(integerTime ==1210){
-			 clearTimeout(timeCheck);
-			 if(isStart == false){
-				 alert('출근이 등록되지 않았습니다.');
-			}
-		}else if(integerTime >1250){
-			clearTimeout(timeCheck);
-		}else{
-			console.log(integerTime);
+		console.log(integerTime);
+		if(integerTime ==1328 && isStart == false){
+			clearInterval(timeCheck);
+			toastr.error('11시되기 10분 전입니다. 출근등록 여부를 확인해 주세요.', '출근알림', {timeOut: 5000});
 		}
-
 	},1000);
 
 	//총 근무일
@@ -69,7 +66,6 @@ $(function(){
 			isEnd=data;
 			if(isEnd==false){
 				//false 면 현재시간 - 출근시간
-				console.log('getWorkTime ' + ': ' + isEnd);
 				$.ajax({
 					url: "${pageContext.request.contextPath}/ajax/getWorkTime.hari",
 					type: "post",
@@ -79,7 +75,6 @@ $(function(){
 							$('#getWorkTime').text('');
 							$('#getWorkTime').append(getWorkTime);
 						} else{
-							console.log('getWorkTime==null');
 							$('#getWorkTime').text('');
 							$('#getWorkTime').append('00:00');
 						}
@@ -109,7 +104,9 @@ $(function(){
 			isStart=data;
 			if(isStart == false && isEnd==false){
 				$('#startWork').removeAttr('disabled');	
-				$('#endWork').attr('disabled', 'disabled');	
+				$('#endWork').attr('disabled', 'disabled');
+				//출근 미등록 알림 (페이지 이동마다 출근 안찍혀있으면 알림)
+				toastr.error('출근등록 여부를 확인해 주세요', '출근알림', {timeOut: 5000});
 			}else if(isStart == true && isEnd==false){
 				$('#startWork').attr('disabled', 'disabled');
 				$('#endWork').removeAttr('disabled');	
@@ -117,8 +114,7 @@ $(function(){
 				$('#endWork').attr('disabled', 'disabled');
 				$('#startWork').attr('disabled', 'disabled');
 			} else if(isStart == false && isEnd==true) {
-				$('#endWorkstartWork').removeAttr('disabled');
-				$('#endWork').attr('disabled', 'disabled');
+				alert('');
 			} 
 		}
 	})
@@ -159,7 +155,6 @@ $(function(){
 							type: "post",
 							dataType: "json",
 							success: function(totalTA) {
-								console.log(totalTA);
 								$('#totalTA').text('');
 								$('#totalTA').append(totalTA);
 							}
@@ -204,9 +199,7 @@ $(function(){
 			success: function(dataDate) {
 				var itemArray=document.querySelectorAll('.fc-day.fc-widget-content');
 				for(var i=0;i<itemArray.length;i++){
-					console.log($(itemArray[i]).attr('data-date'));
 					if($(itemArray[i]).attr('data-date') == dataDate.trim()){
-						console.log($(itemArray[i]).attr('data-date') + ' ==> 이 친구');
 						$(itemArray[i]).removeAttr("td");
 						$(itemArray[i]).append('<a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-success fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">퇴근</span></div><div class="fc-resizer fc-end-resizer"></div></a>');
 					}

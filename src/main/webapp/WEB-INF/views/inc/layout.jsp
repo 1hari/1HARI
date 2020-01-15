@@ -20,11 +20,13 @@
     
 	<!-- css 설정 영역 -->
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/hari/dist/css/style.min.css">
+	<!--toaster (웹 페이지 내 알람) -->
+	<link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
 	
 	<!-- All Jquery -->
     <!-- dashboard.html에서 필요한 제이쿼리 부분 -->
     <script src="${pageContext.request.contextPath}/resources/hari/assets/libs/jquery/dist/jquery.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/hari/assets/dist/jquery-ui.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/hari/assets/dist/jquery-ui.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->
     <script src="${pageContext.request.contextPath}/resources/hari/assets/libs/popper.js/dist/umd/popper.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/hari/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -36,14 +38,15 @@
     <!-- Menu sidebar -->
     <script src="${pageContext.request.contextPath}/resources/hari/dist/js/sidebarmenu.js"></script>
     <!-- Custom JavaScript -->
-    <script src="${pageContext.request.contextPath}/resources/hari/dist/js/custom.js"></script>
-       <!-- Custom JavaScript -->
     <script src="${pageContext.request.contextPath}/resources/hari/dist/js/custom.min.js"></script>
-        <!-- Custom JavaScript -->
+	<script src="${pageContext.request.contextPath}/resources/hari/dist/js/custom.js"></script>
+  	<!-- Custom JavaScript -->
     <script src="${pageContext.request.contextPath}/resources/hari/dist/js/app-style-switcher.js"></script>
      <!-- dashboard.html에서 필요한 제이쿼리 부분 끝 -->
-     
-    
+     <!-- jquery -->
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+     <!--toaster (웹 페이지 내 알람) -->
+	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
      <script type="text/javascript">
 	
      </script>
