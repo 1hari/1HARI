@@ -37,18 +37,10 @@
     <script src="${pageContext.request.contextPath}/resources/hari/dist/js/custom.min.js"></script>
     <!--This page JavaScript -->
     <!-- <script src="${pageContext.request.contextPath}/resources/hari/dist/js/pages/dashboards/dashboard1.js"></script> -->
+    
 </head>
 <body>
-	<!-- header 영역 -->
-	<tiles:insertAttribute name="header" />
-	
-	<!-- aside 영역 -->
-	<tiles:insertAttribute name="aside" />
-	
 	<!-- content 영역 -->
 	<tiles:insertAttribute name="content" />
-	
-	<!-- footer 영역 -->
-	<tiles:insertAttribute name="footer" />
 </body>
 </html>

@@ -10,10 +10,16 @@
 		<put-attribute name="content" value="/WEB-INF/views/index/{1}.jsp" /> 
 	</definition>
 	
-   	<!-- 이메일 인증페이지 등 -->
+   	<!--index 이메일 인증페이지 -->
 	<definition name="etc.*" template="/WEB-INF/views/etc/inc/layout.jsp"> 
 		<put-attribute name="title"  value="1HARI" />
 		<put-attribute name="content" value="/WEB-INF/views/etc/{1}.jsp" />
+	</definition>
+	
+	<!--1hari PopUP 페이지 -->
+	<definition name="1hariPopUp.*" template="/WEB-INF/views/1hariPopUp/inc/layout.jsp"> 
+		<put-attribute name="title"  value="1HARI" />
+		<put-attribute name="content" value="/WEB-INF/views/1hariPopUp/{1}.jsp" />
 	</definition>
 	
 	<!-- "1hari.main" -->
@@ -24,8 +30,5 @@
 		<put-attribute name="aside"   value="/WEB-INF/views/inc/aside.jsp" />
 		<put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" />
 	</definition>
-	
-	
-
 
  </tiles-definitions>

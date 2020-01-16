@@ -84,6 +84,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				<when test='code == "4"'> <!-- 결재할 문서-->
 					s.SIGNCODE IN(1,2) AND if(s.ISSIGN1 = 0, s.EMPSIGN1 = #{draftEmp}, s.EMPSIGN2 = #{draftEmp})
 				</when>
+				<when test='code == "5"'> <!-- 문서보기 -->
+					s.SIGNNUM = #{signNum}
+				</when>
 			</choose>
 		</where>				
 		ORDER BY s.SIGNDATE DESC
