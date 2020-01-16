@@ -326,4 +326,30 @@ public class EmpService {
         }
         return totalTime;
     }
+    
+    //사원 테마색 가져오기 오형남 / 2020. 1. 16
+    public String getThemeColor(String empNumStr) {
+        EmpDao dao = sqlsession.getMapper(EmpDao.class);
+        String themeColor = null;
+        int empNum=Integer.parseInt(empNumStr);
+        try {
+        	themeColor=dao.getThemeColor(empNum);
+        } catch (ClassNotFoundException | SQLException e) {
+            log.debug("getThemeColor : " + e.getMessage());
+        }
+        return themeColor;
+    }
+    
+    //사원 테마색 가져오기 오형남 / 2020. 1. 16
+    public int setThemeColor(String empNumStr, String color) {
+    	EmpDao dao = sqlsession.getMapper(EmpDao.class);
+    	int themeColor = 0;
+    	int empNum=Integer.parseInt(empNumStr);
+    	try {
+    		themeColor=dao.setThemeColor(empNum, color);
+    	} catch (ClassNotFoundException | SQLException e) {
+    		log.debug("setThemeColor : " + e.getMessage());
+    	}
+    	return themeColor;
+    }
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
   <script type="text/javascript">
 
 $(function(){
@@ -277,34 +278,40 @@ $(function(){
 	})
 	
 	
-	$('#test').click(function(){
-		if (navigator.geolocation) {
-			navigator.geolocation.getCurrentPosition(function(position) {
-				myLatitude=position.coords.latitude; //위도
-				myLongitude=position.coords.longitude;//경도
-				
-				if(Math.abs(fixLatitude - myLatitude) >0.001 || Math.abs(fixLongitude - myLongitude) > 0.001){
-					alert('위치정보가 다릅니다. 로그인 실패');
-					return;
-				}
-				$.ajax({
-					url: "${pageContext.request.contextPath}/ajax/getDataDate.hari",
-					type: "post",
-					dataType: "text",
-					success: function(dataDate) {
-						var itemArray=document.querySelectorAll('.fc-day.fc-widget-content');
-						for(var i=0;i<itemArray.length;i++){
-							if($(itemArray[i]).attr('data-date') == dataDate.trim()){
-								$(itemArray[i]).removeAttr("td");
-								$(itemArray[i]).append('<br><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-warning fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">Event Four</span></div><div class="fc-resizer fc-end-resizer"></div></a></td>');
-							}
-				        }
-					}
-				});
-			});
-		}else { 
-			alert('현재 브라우저에서 지원하지 않는 기능입니다.');
+	//페이지 이동시마다 사용자 설정 테마색으로 변경
+	$.ajax({
+		url: "${pageContext.request.contextPath}/ajax/getThemeColor.hari",
+		type: "post",
+		dataType: "text",
+		success: function(getThemeColor) {
+			var itemArray=document.querySelectorAll('#theme');
+			for(var i=0;i<itemArray.length;i++){
+				$(itemArray[i]).attr('style', 'background:' + getThemeColor);
+				$('#navbarSupportedContent').attr('style', 'background:' + getThemeColor);
+				$('#sidebarnav').attr('style', 'background:' + getThemeColor);
+				$('.minicolors-swatch-color').attr('style', 'background-color:' + getThemeColor);
+	        }
 		}
+	});
+
+	
+	$('#test').click(function(){
+		$('#theme').css('background', 'red');
+// 		$.ajax({
+// 			url: "${pageContext.request.contextPath}/ajax/getThemeColor.hari",
+// 			type: "post",
+// 			dataType: "text",
+// 			success: function(getThemeColor) {
+// 				console.log(getThemeColor);
+// 				var itemArray=document.querySelectorAll('#theme');
+// 				for(var i=0;i<itemArray.length;i++){
+// 					console.log(itemArray[i]);
+// 					$(itemArray[i]).attr('style', 'background:' + getThemeColor);
+// 					$('#navbarSupportedContent').attr('style', 'background:' + getThemeColor);
+// 					$('#sidebarnav').attr('style', 'background:' + getThemeColor);
+// 		        }
+// 			}
+// 		});
 	})
 	
 	//이번달 출근기록 yyyy-mm-dd
@@ -345,10 +352,6 @@ $(function(){
         Notification.requestPermission();
     }
 
-// 	setTimeout(function () {
-// 	    notify();
-// 	}, 1);
-
     function notify() {
         if (Notification.permission !== 'granted') {
             alert('notification is disabled');
@@ -365,59 +368,116 @@ $(function(){
         }
     }
 
+//     $(".select2").select2();
+//     var newValue;
+//     /*colorpicker*/
+//     $('.demo').each(function() {
+//     $(this).minicolors({
+//             control: $(this).attr('data-control') || 'hue',
+//             position: $(this).attr('data-position') || 'bottom left',
 
+//             change: function(value, opacity) {
+//                 if (!value) return;
+//                 if (opacity) value += ', ' + opacity;
+//                 if (typeof console === 'object') {
+//                     console.log('minicolors');
+//                     newValue=value;
+//                 }
+//             },
+//             theme: 'bootstrap'
+//         });
 
+//     });
 
+//     $('#hue-demo').change(function() {
+//     	console.log('newValue: ' + newValue);
+//     	$.ajax({
+//     		url: "${pageContext.request.contextPath}/ajax/setThemeColor.hari",
+//     		type: "post",
+//     		data: {"color": newValue},
+//     		dataType: "text",
+//     		success: function(setThemeColor) {
+//     			if(setThemeColor >0){
+//     				var itemArray=document.querySelectorAll('#theme');
+//     				console.log(itemArray[0]);
+//     				for(var i=0;i<itemArray.length;i++){
+//     					 console.log('itemArray');
+//     					$(itemArray[i]).css('background', newValue);
+//     					$('#navbarSupportedContent').css('background', newValue);
+//     					$('#sidebarnav').css('background', newValue);
+// //     					$(itemArray[i]).removeAttr('style');
+// //     					$('#navbarSupportedContent').removeAttr('style');
+// //     					$('#sidebarnav').removeAttr('style');
+// //     					$(itemArray[i]).attr('style', 'background:' + value);
+// //     					$('#navbarSupportedContent').attr('style', 'background:' + value);
+// //     					$('#sidebarnav').attr('style', 'background:' + value);
+//            			}
+//     		        }
+//     			}
+//     		});
+//     });
+	var itemArray=document.querySelectorAll('#theme');
+    $('.demo').each(function() {
+    $(this).minicolors({
+            control: $(this).attr('data-control') || 'hue',
 
+            change: function(value, opacity) {
+                if (!value) return;
+                if (opacity) value += ', ' + opacity;
+                if (typeof console === 'object') {
+                    //console.log(value);
+					$.ajax({
+			    		url: "${pageContext.request.contextPath}/ajax/setThemeColor.hari",
+			    		type: "post",
+			    		data: {"color": value},
+			    		dataType: "text",
+			    		success: function(setThemeColor) {
+			    			if(setThemeColor >0){
+			    		 		$.ajax({
+			    	 			url: "${pageContext.request.contextPath}/ajax/getThemeColor.hari",
+			    	 			type: "post",
+			    	 			dataType: "text",
+			    	 			success: function(getThemeColor) {
+			    	 				console.log(getThemeColor);
+			    	 				var itemArray=document.querySelectorAll('#theme');
+			    	 				for(var i=0;i<itemArray.length;i++){
+// 			    	 					console.log(itemArray[i]);
+// 			    	 					$(itemArray[i]).attr('style', 'background:' + getThemeColor);
+// 			    	 					$('#navbarSupportedContent').attr('style', 'background:' + getThemeColor);
+// 			    	 					$('#sidebarnav').attr('style', 'background:' + getThemeColor);
+	 			    					$(itemArray[i]).css('background', getThemeColor);
+	 			    					$('#navbarSupportedContent').css('background', getThemeColor);
+	 			    					$('#sidebarnav').css('background', getThemeColor);
+			    	 		        }
+			    	 			}
+			    	 		});
+				    			
+// 			    				console.log('ajax2');
+// 			    				for(var i=0;i<itemArray.length;i++){
+// 			    					console.log('ajax3');
+// 			    					$(itemArray[i]).css('background', value);
+// 			    					$('#navbarSupportedContent').css('background', value);
+// 			    					$('#sidebarnav').css('background', value);
+// 			    					$(itemArray[i]).removeAttr('style');
+// 			    					$('#navbarSupportedContent').removeAttr('style');
+// 			    					$('#sidebarnav').removeAttr('style');
+// 			    					$(itemArray[i]).attr('style', 'background:' + value);
+// 			    					$('#navbarSupportedContent').attr('style', 'background:' + value);
+// 			    					$('#sidebarnav').attr('style', 'background:' + value);
+			    					
+// 			           			}
+			    				
+    		        		}
+    					}
+    				});
+                }
+            },
+            theme: 'bootstrap'
+        });
 
-
-
-
-	
-// 	//요청을 거절하면,
-// 	if (result === 'denied') {
-// 	    return;
-// 	}
-// 	//보낼 parameter
-// 	var parameter_noti = {
-// 		title:"HARI",
-// 		icon:"${pageContext.request.contextPath}/resources/hari/assets/images/favicon.png",
-// 		body:"출근 미등록 상태입니다. 확인해주세요."
-// 	};
-// 	// 브라우저가 Notification 기능을 지원하는지 체크
-// 	if (!"Notification" in window) {
-// 		alert("This browser does not support desktop notification");
-// 	  }
-// 	// 사용자가 Notification 사용을 허락했는지 체크
-// 	else if (Notification.permission === "granted") {
-// 		// 허락했다면 Notification을 생성
-// 		var notification = new Notification(parameter_noti.title,{
-// 	    	icon:parameter_noti.icon,
-// 	    	body:parameter_noti.body
-// 	    });
-// 	  }
-// 	  // 크롬 브라우저는 permission 속성이 구현되어 있지 않기 때문에
-// 	  // 사용자가 의도적으로 'denied' 한 경우를 체크
-// 	else if (Notification.permission !== 'denied') {
-// 		Notification.requestPermission(function (permission) {
-// 		// 사용자가 사용 여부를 체크했다면, 크롬 Notification 상태를 갱신
-// 		if(!('permission' in Notification)) {
-// 			Notification.permission = permission;
-// 		}
-// 	   // 사용자가 승낙했다면, Notification을 생성
-// 		if (permission === "granted") {
-// 			var notification = new Notification(parameter_noti.title,{
-// 					icon:parameter_noti.icon,
-// 		        	body:parameter_noti.body
-// 				});
-				 
-//                 notification.onclick = function () {
-//                     window.open('http://google.com');
-//           	   };
-// 			}
-// 		});
-// 	}
+    });
 });
+
 </script>
 <!-- ============================================================== -->
 <!-- Preloader - style you can find in spinners.css -->
@@ -440,8 +500,8 @@ $(function(){
 	<!--상단 topnavbar 시작 -->
 	    <header class="topbar" data-navbarbg="skin5"> 
 
-		<nav class="navbar top-navbar navbar-expand-md navbar-dark">
-              <div class="navbar-header" data-logobg="skin5">  
+		<nav class="navbar top-navbar navbar-expand-md navbar-dark" >
+              <div class="navbar-header" id="theme" data-logobg="skin5" style="background: white;">  
 				<!-- 모바일용 토글러-->
 				<a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)">
 					<i class="ti-menu ti-close"></i>
@@ -455,7 +515,7 @@ $(function(){
 						<img src="${pageContext.request.contextPath}/resources/hari/assets/images/logo-img-final.png" alt="homepage" class="light-logo" style="width: 30%; height: 20%; color:#2ab2aa;" />
 					</b><!--로고 아이콘 끝  -->
 					<!-- 로고 글씨 시작 -->
-					<span class="logo-text">
+					<span class="logo-text" >
 						<!-- 로고 글씨 png-->
 						<img src="${pageContext.request.contextPath}/resources/hari/assets/images/logo-152.png" alt="homepage" class="light-logo" style="width: 200%; height: 20%; margin-left: -120%;" />
 					</span> <!-- Logo icon --> <!-- <b class="logo-icon"> --> <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
@@ -473,7 +533,7 @@ $(function(){
 
 
 			<!--top navbar 더보기 & 검색 -->
-				<div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5"> 
+				<div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5" style="background: white"> 
 				<!-- ============================================================== -->
 				<!-- toggle and nav items -->
 				<!-- ============================================================== -->
@@ -497,18 +557,22 @@ $(function(){
 								<a class="srh-btn"><i class="ti-close"></i></a>
 						</form>
 					</li>
+					
 				</ul>
 				<!--top navbar 더보기 & 검색  끝 -->
 
 				<!--top navbar 에서 오른쪽 기능 담당 (출/퇴근과 프로필)-->
+				<div>
+					<input type="text" id="hue-demo" class="form-control demo" data-control="hue" value="#ff6161">
+				</div>
 				<ul class="navbar-nav float-right">
 					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle waves-effect waves-dark" style = "color:#2ab2aa;" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<a class="nav-link dropdown-toggle waves-effect waves-dark" id="theme" style = "color:white;" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<i class="mdi mdi-bell font-24"></i>
 						</a>
-						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<button class="dropdown-item" id="startWork" disabled="disabled">출근하기</button>
-							<button class="dropdown-item" id="endWork" disabled="disabled">퇴근하기</button>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown" >
+							<button class="dropdown-item" id="startWork" disabled="disabled" >출근하기</button>
+							<button class="dropdown-item" id="endWork" disabled="disabled" >퇴근하기</button>
 							<button class="dropdown-item" id="test" >퇴근하기</button>
 						</div>
 					</li>

@@ -33,7 +33,7 @@
 
 	<!-- 사원목록 김진호 2020. 1. 7 -->
 	<select id="empList" resultType="kr.coo.onehari.hr.dto.EmpDto">
-		SELECT E.EMPNUM, E.EMPNAME, T.TEAMCODE, T.TEAMNAME, R.RANKCODE, R.RANKNAME, P.POSITIONCODE, P.POSITIONNAME, EM.EMPLOYMENTCODE, EM.EMPLOYMENTNAME, S.BIRTH, S.RESNUM, S.PHONENUM, S.EMAIL, S.HIREDATE
+	        SELECT E.EMPNUM, E.EMPNAME, T.TEAMCODE, T.TEAMNAME, R.RANKCODE, R.RANKNAME, P.POSITIONCODE, P.POSITIONNAME, EM.EMPLOYMENTCODE, EM.EMPLOYMENTNAME, S.BIRTH, S.RESNUM, S.PHONENUM, S.EMAIL, S.HIREDATE
 		FROM emp AS E 
 		JOIN subemp AS S ON E.EMPNUM = S.EMPNUM
 		JOIN team AS T ON E.TEAMCODE = T.TEAMCODE
@@ -158,10 +158,6 @@
 		- TIME_TO_SEC((SELECT tadate FROM talist AS temp WHERE EMPNUM=#{empNum} AND tacode=1 AND DATE(tadate) = DATE(NOW())))),"%H:%i")
     </select>
     
-    
-    
-    
-    
     <!-- 이번주 총 근무시간-->
     <select id="getWeekWorkTime" resultType="String">
       SELECT DATE_FORMAT(SEC_TO_TIME((SELECT SUM(TODAYWORK) FROM TALIST
@@ -172,11 +168,6 @@
    <select id="getTotalWorkTime" resultType="String">
       SELECT DATE_FORMAT(SEC_TO_TIME((SELECT SUM(TODAYWORK) FROM TALIST WHERE EMPNUM=#{empNum})),"%H:%i")
     </select>
-    
-    
-    
-    
-    
     
     <!-- dataDate 캘린더에 필요-->
 	<select id="getDataDate" resultType="String">
@@ -192,6 +183,15 @@
 	<select id="getEndList" resultType="String">
 		SELECT DATE_FORMAT(TADATE,"%Y-%m-%d") FROM TALIST WHERE MONTH(TADATE) = MONTH(NOW()) AND TACODE=2 AND EMPNUM=#{empNum}
     </select>
+    
+	<!-- 사원 색 가져오기-->
+    <select id="getThemeColor" resultType="String">
+        SELECT THEMECOLOR FROM THEME WHERE EMPNUM=#{empNum};
+    </select>
+    
+	<update id="setThemeColor">
+		UPDATE THEME SET THEMECOLOR = #{param2} WHERE EMPNUM=#{param1}
+	</update>
 </mapper>
 
 

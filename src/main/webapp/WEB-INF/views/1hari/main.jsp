@@ -1,7 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script type="text/javascript">
+$(function(){
 
+});
+</script>
 <body>
 	
 <!-- 페이지 내 컨텐츠 제목 란 시작  -->
@@ -20,6 +24,32 @@
 	</div>
 	<!-- 페이지 내 컨텐츠 제목 란 끝  -->
 	
+<!-- <div class="form-group"> -->
+<!-- <label for="position-top-right">Top right</label> -->
+<!-- <div class="minicolors minicolors-theme-bootstrap minicolors-position-top minicolors-position-right minicolors-focus"> -->
+<!-- <input type="text" id="position-top-right" class="form-control demo minicolors-input" data-position="top right" value="#0088cc" size="7"> -->
+<!-- <span class="minicolors-swatch minicolors-sprite minicolors-input-swatch"> -->
+<!-- <span class="minicolors-swatch-color" style="opacity: 1;"></span> -->
+<!-- </span> -->
+<!-- <div class="minicolors-panel minicolors-slider-hue" style="display: block;"> -->
+<!-- <div class="minicolors-slider minicolors-sprite"> -->
+<!-- <div class="minicolors-picker" style="top: 0px;"> -->
+<!-- </div></div><div class="minicolors-opacity-slider minicolors-sprite"> -->
+<!-- <div class="minicolors-picker"> -->
+<!-- </div> -->
+<!-- </div> -->
+<!-- <div class="minicolors-grid minicolors-sprite" style="background-color: rgb(255, 0, 0);"> -->
+<!-- <div class="minicolors-grid-inner"> -->
+<!-- </div> -->
+<!-- <div class="minicolors-picker" style="top: 150px; left: 0px;"> -->
+<!-- <div> -->
+<!-- </div> -->
+<!-- </div> -->
+<!-- </div> -->
+<!-- </div> -->
+<!-- </div> -->
+<!-- </div> -->
+
 	<!-- 페이지내 컨텐츠 컨테이너 시작  -->
 	<!-- ============================================================== -->
 	<div class="container-fluid">

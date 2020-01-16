@@ -73,23 +73,22 @@
 </style>
 
 <!--left sidebar시작 !!  css는 sidebar.css 파일 참고 -->
-<aside class="left-sidebar" data-sidebarbg="skin5">
+<aside class="left-sidebar" id="theme" data-sidebarbg="skin5" style="background: white;">
 
 	<!-- 사이드바 스크롤-->
-	<div class="scroll-sidebar">
+	<div class="scroll-sidebar" id="theme" style="background: white;">
 	
 		<!-- Sidebar 네비게이션-->
-		<nav class="sidebar-nav">
-			<ul id="sidebarnav" class="p-t-30">
-			
+		<nav class="sidebar-nav" >
+			<ul id="sidebarnav" class="p-t-30" style="background: white;">
 				<!--인사관리-->
-				<li class="sidebar-item">
-					<a class="sidebar-link has-arrow waves-effect waves-dark" href="hr_attendance.html" aria-expanded="false">
+				<li class="sidebar-item" >
+					<a class="sidebar-link has-arrow waves-effect waves-dark" href="hr_attendance.html" aria-expanded="false" id="theme" style="background: white;">
 						<i class="mdi mdi-view-dashboard"></i>
 						<span class="hide-menu">인사 관리</span>
 					</a>
 					
-					<ul aria-expanded="false" class="collapse first-level">
+					<ul aria-expanded="false" class="collapse first-level" id="theme" style="background: white;">
 						<li class="sidebar-item">
 							<a href="${pageContext.request.contextPath}/1hariHr/attendance.hari" class="sidebar-link">
 								<i class="mdi mdi-calendar-check"></i>
@@ -135,7 +134,7 @@
 						<i class="mdi mdi-receipt"></i>
 						<span class="hide-menu">급여 관리 </span>
 					</a>
-					<ul aria-expanded="false" class="collapse  first-level">
+					<ul aria-expanded="false" class="collapse  first-level" id="theme" style="background: white;">
 						<li class="sidebar-item">
 							<a href="${pageContext.request.contextPath}/1hariPay/payList.hari" class="sidebar-link">
 								<i class="mdi mdi-note-outline"></i>
@@ -145,16 +144,16 @@
 					</ul>
 				</li>
 
-				<li class="sidebar-item">
-					<a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+				<li class="sidebar-item" id="theme" style="background: white;">
+					<a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false" id="theme" style="background: white;">
 						<i class="mdi mdi-receipt"></i>
 						<span class="hide-menu">전자 결재 </span>
 					</a>
 					
-					<ul aria-expanded="false" class="collapse  first-level">
+					<ul aria-expanded="false" class="collapse  first-level"  id="theme" style="background: white;">
 						
-						<li class="sidebar-item">
-							<a href="${pageContext.request.contextPath}/1hariSign/signForm.hari" class="sidebar-link">
+						<li class="sidebar-item" >
+							<a href="${pageContext.request.contextPath}/1hariSign/signForm.hari" class="sidebar-link" >
 								<i class="mdi mdi-note-plus"></i>
 								<span class="hide-menu">전자 결재</span>
 							</a>
@@ -190,7 +189,7 @@
 						<i class="mdi mdi-receipt"></i>
 						<span class="hide-menu">커뮤 니티 </span>
 					</a>
-					<ul aria-expanded="false" class="collapse  first-level">
+					<ul aria-expanded="false" class="collapse  first-level" id="theme" style="background: white;">
 						<li class="sidebar-item">
 							<a href="${pageContext.request.contextPath}/1hariBoard/boardList.hari" class="sidebar-link">
 								<i class="mdi mdi-note-outline"></i>
@@ -211,7 +210,7 @@
 						<i class="mdi mdi-receipt"></i>
 						<span class="hide-menu">사내 메일 </span>
 					</a>
-					<ul aria-expanded="false" class="collapse  first-level">
+					<ul aria-expanded="false" class="collapse  first-level" id="theme" style="background: white;">
 						<li class="sidebar-item">
 							<a href="#" class="sidebar-link">
 								<i class="mdi mdi-note-outline"></i>

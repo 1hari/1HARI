@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import kr.coo.onehari.hr.dto.EmpDto;
@@ -306,4 +307,31 @@ public class HrRestController {
 		return totalTime;
 	}
 	
+	//사원 테마색 가져오기 오형남 / 2020. 1. 16
+	@RequestMapping(value = "getThemeColor.hari", method = RequestMethod.POST)
+	public String getThemeColor(Principal pri) {
+		String themeColor = null;
+		try {
+			themeColor = empSercive.getThemeColor(pri.getName());
+			if(themeColor==null) {
+				themeColor="empty";
+			}
+		} catch (Exception e) {
+			log.debug("getThemeColor 예외발생: " + e.getMessage());
+		}
+		return themeColor;
+	}
+	
+	//사원 테마색 가져오기 오형남 / 2020. 1. 16
+	@RequestMapping(value = "setThemeColor.hari", method = RequestMethod.POST)
+	public int setThemeColor(Principal pri, @RequestParam("color") String value) {
+		int themeColor = 0;
+		String[] color=value.split(",");
+		try {
+			themeColor = empSercive.setThemeColor(pri.getName(), color[0].trim());
+		} catch (Exception e) {
+			log.debug("setThemeColor 예외발생: " + e.getMessage());
+		}
+		return themeColor;
+	}
 }

@@ -1,4 +1,4 @@
-/* @import url('https://fonts.googleapis.com/css?family=Poor+Story&display=swap&subset=korean'); */
+@import url('https://fonts.googleapis.com/css?family=Poor+Story&display=swap&subset=korean');
 @import url("https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800");
 @import url("https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800");
 @import url("https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800");
@@ -6,15 +6,8 @@
 @import url(icons/themify-icons/themify-icons.css);
 @import url(icons/material-design-iconic-font/css/materialdesignicons.min.css);
 
-@import url('https://fonts.googleapis.com/css?family=Noto+Serif+KR&display=swap');
 
-/* @font-face { 
-	font-family: 'Cafe24Oneprettynight';
-	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Oneprettynight.woff') format('woff');
-	font-weight: normal;
-	font-style: normal;
-}
- */
+
 .search-box .app-search .form-control {
 	border-radius: 0px
 }
@@ -12039,7 +12032,7 @@ ul.list-style-none li a:hover {
 }
 
 #navbarSupportedContent {
-	background: #20B2AA !important
+	background: #20B2AA
 }
 
 .search-box .app-search {
@@ -24692,7 +24685,7 @@ ul.list-style-none li a:hover {
 }
 
 #navbarSupportedContent {
-	background: #20B2AA !important
+	background: #20B2AA 
 }
 
 .search-box .app-search {
@@ -37346,7 +37339,7 @@ ul.list-style-none li a:hover {
 }
 
 #navbarSupportedContent {
-	background: #20B2AA !important
+	background: #20B2AA 
 }
 
 .search-box .app-search {
@@ -54448,7 +54441,7 @@ ul.list-style-none li a:hover {
 }
 
 #navbarSupportedContent {
-	background: #20B2AA !important
+	background: #20B2AA
 }
 
 .search-box .app-search {
@@ -67101,7 +67094,7 @@ ul.list-style-none li a:hover {
 }
 
 #navbarSupportedContent {
-	background: #20B2AA !important
+	background: #20B2AA 
 }
 
 .search-box .app-search {
@@ -67829,7 +67822,7 @@ section {
 
 body {
 	margin: 0;
-	font-family: 'Noto Serif KR', cursive;
+	font-family: 'Poor Story', cursive;
 	font-size: 0.875rem;
 	font-weight: 400;
 	line-height: 1.5;
@@ -79755,7 +79748,7 @@ ul.list-style-none li a:hover {
 }
 
 #navbarSupportedContent {
-	background: #20B2AA !important
+	background: #20B2AA 
 }
 
 .search-box .app-search {
