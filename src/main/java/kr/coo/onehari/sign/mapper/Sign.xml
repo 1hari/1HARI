@@ -55,7 +55,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT s.SIGNNUM,f.SIGNFORMFORMNAME, s.SIGNCODE, t.SIGNNAME, s.SIGNTITLE, s.SIGNDATE,
 				
 				<!-- 기안자,결재자1, 결재자2 -->
-				s.DRAFTEMP, e.EMPNAME AS draftEmpName, r.RANKNAME AS draftEmpRankName,
+				s.DRAFTEMP, e.EMPNAME AS draftEmpName, r.RANKNAME AS draftEmpRankName, te.TEAMNAME AS draftEmpTeamName,
 				s.EMPSIGN1, e2.EMPNAME AS empSign1Name, r2.RANKNAME AS empSign1RankName,
 				s.EMPSIGN2, e3.EMPNAME AS empSign2Name, r3.RANKNAME AS empSign2RankName,
 			
@@ -77,6 +77,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 						ON e2.RANKCODE = r2.RANKCODE
 					JOIN ranks r3 <!-- 결재자2 직급 테이블 -->
 						ON e3.RANKCODE = r3.RANKCODE
+					JOIN team te <!-- 기안자 부서 테이블 -->
+						ON e.TEAMCODE = te.TEAMCODE
 		<where>
 			<choose>
 				<when test="code.equalsIgnoreCase('0')"> <!-- 전체문서 -->

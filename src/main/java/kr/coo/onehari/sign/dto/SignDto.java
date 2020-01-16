@@ -17,6 +17,7 @@ public class SignDto {
 	private String draftEmp; //작성자 사번
 	private String draftEmpName; //작성자 이름 김정하 / 2020. 1. 14
 	private String draftEmpRankName; //작성자 직급 김정하 / 2020. 1. 16
+	private String draftEmpTeamName; //작성자 부서 김정하 / 2020. 1. 16
 	
 	private String empSign1; //결재자1 사번
 	private String empSign1Name; //결재자1 이름 김정하 / 2020. 1. 14
