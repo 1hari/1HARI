@@ -171,7 +171,7 @@ public class SignController {
 	@RequestMapping("signDocuView.hari")
 	public String docuView(String signNum, Model model) {
 		HashMap<String, String> map = new HashMap<String, String>(); 
-		
+		map.put("signNum", signNum);
 		map.put("pg", "3");
 		map.put("cp", "0");
 		map.put("code", "5"); //문서보기

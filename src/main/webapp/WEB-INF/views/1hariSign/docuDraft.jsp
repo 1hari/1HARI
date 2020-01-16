@@ -68,7 +68,7 @@
 										</td>
 									</tr>
 									<tr class="draft" style="height:40px; vertical-align:middle;">
-										<!-- 빈칸 : 승인일 -->
+										<!-- 빈칸 : 승인도장 -->
 										<td></td>
 										<td></td>
 										<td></td>

@@ -16,10 +16,16 @@ public class SignDto {
 	//DB는 int / form 태그 값 받기위해 String 으로 변경
 	private String draftEmp; //작성자 사번
 	private String draftEmpName; //작성자 이름 김정하 / 2020. 1. 14
+	private String draftEmpRankName; //작성자 직급 김정하 / 2020. 1. 16
+	
 	private String empSign1; //결재자1 사번
 	private String empSign1Name; //결재자1 이름 김정하 / 2020. 1. 14
+	private String empSign1RankName; //결재자1 직급 김정하 / 2020. 1. 16
+	
 	private String empSign2; //결재자2 사번
 	private String empSign2Name; //결재자2 이름 김정하 / 2020. 1. 14
+	private String empSign2RankName; //결재자2 이름 김정하 / 2020. 1. 16
+	
 	private String signFormCode; //문서양식 코드
 	private String signFormFormName; //문서양식명 김정하 / 2020. 1.13
 	//----------------------------------------------
