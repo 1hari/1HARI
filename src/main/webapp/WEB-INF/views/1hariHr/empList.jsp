@@ -208,36 +208,4 @@
 		form.action = "${pageContext.request.contextPath}/util/personnel/excelDownload.hari";
 		form.submit();
 	}
-// 		var file = $("#excelFile").val();
-// 		if (file == "" || file == null) {
-// 			swal({
-// 				text: "파일을 선택해주세요.",
-// 				icon: "warning",
-// 				button: "닫기"
-// 			});
-// 			return false;
-// 		} else if (!checkFileType(file)) {
-// 			swal({
-// 				text: "Excel 파일만 업로드 가능합니다.",
-// 				icon: "warning",
-// 				button: "닫기"
-// 			});
-// 			return false;
-// 		}
-	
-// 		if (swal("업로드 하시겠습니까?")) {
-// 			var options = 
-// 				{
-// 					url: "${pageContext.request.contextPath}/util/excelUpload.hari",
-// 					type : "POST",
-// 					success : function(data) {
-// 						swal({
-// 							text: "모든 데이터가 업로드 되었습니다.",
-// 							icon: "success",
-// 							button: "확인"
-// 						});
-// 					}
-// 				};
-// 			$("#excelUploadForm").ajaxSubmit(options);
-// 		}
 </script>

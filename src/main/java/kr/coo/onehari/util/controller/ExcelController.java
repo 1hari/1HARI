@@ -32,7 +32,7 @@ public class ExcelController {
 
 	@RequestMapping(value = "personnel/excelUpload.hari", method = RequestMethod.GET)
 	public String excelForm() {
-		return "etc.excelForm";
+		return "1hariPopUp.excelUploadForm";
 	}
 
 	@RequestMapping(value = "personnel/uploadExcelFile.hari", method = RequestMethod.POST)
@@ -76,29 +76,29 @@ public class ExcelController {
 	
 	@RequestMapping(value = "personnel/excelDownload.hari", method = RequestMethod.POST)
 	public String downloadExcelFile(Model model) {
-		ExcelEmpDto exceldto = new ExcelEmpDto();
 		List<EmpDto> list = excelService.excelEmpList();
 		
 		SXSSFWorkbook workbook = excelService.excelFileDownloadProcess(list);
-		
-		for (int i = 0; i < exceldto.getEmpdto().size(); i++) {
-			exceldto.getEmpdto().get(i).getEmpNum();
-			exceldto.getEmpdto().get(i).getEmpName();
-			exceldto.getEmpdto().get(i).getTeamCode();
-			exceldto.getEmpdto().get(i).getRankCode();
-			exceldto.getEmpdto().get(i).getPositionCode();
-			exceldto.getEmpdto().get(i).getEmploymentCode();
-			exceldto.getEmpdto().get(i).getBirth();
-			exceldto.getEmpdto().get(i).getResNum();
-			exceldto.getEmpdto().get(i).getPhoneNum();
-			exceldto.getEmpdto().get(i).getEmail();
-			exceldto.getEmpdto().get(i).getHireDate();
-			exceldto.getEmpdto().get(i).getLeaveDate();
+		for (int i = 0; i < list.size(); i++) {
+			list.get(i).getEmpNum();
+			list.get(i).getEmpName();
+			list.get(i).getTeamCode();
+			list.get(i).getRankCode();
+			list.get(i).getPositionCode();
+			list.get(i).getEmploymentCode();
+			list.get(i).getBirth();
+			list.get(i).getResNum();
+			list.get(i).getPhoneNum();
+			list.get(i).getEmail();
+			list.get(i).getHireDate();
+			list.get(i).getLeaveDate();
 		}
 		
 		model.addAttribute("locale", Locale.KOREA);
 		model.addAttribute("workbook", workbook);
 		model.addAttribute("workbookName", "사원목록");
+		
+		// return "redirect:../../1hariHr/personnel/empList.hari";
 		return "excelDownloadView";
 	}
 }

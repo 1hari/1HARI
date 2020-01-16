@@ -11,11 +11,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.view.AbstractView;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
+@Component
 public class ExcelDownloadView extends AbstractView {
 
 	@Override
@@ -63,7 +65,7 @@ public class ExcelDownloadView extends AbstractView {
 		response.setContentType("application/download;charset=utf-8");
 		response.setHeader("Content-Disposition", "attachment; filename=\"" + fileName + "\";");
 		response.setHeader("Content-Transfer-Encoding", "binary");
-
+		
 		OutputStream os = null;
 		SXSSFWorkbook workbook = null;
 

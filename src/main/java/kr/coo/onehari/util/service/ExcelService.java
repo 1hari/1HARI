@@ -55,13 +55,12 @@ public class ExcelService {
 	public List<EmpDto> excelEmpList() {
 		EmpDao empdao = sqlsession.getMapper(EmpDao.class);
 		List<EmpDto> emplist = null;
-		ExcelEmpDto excelempdto = new ExcelEmpDto();
 		
 		try {
 			emplist = empdao.empList();
-			System.out.println("emplist: " + emplist);
 		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
+			System.out.println("ExcelService excelEmpList 예외발생: " + e.getMessage());
+			log.debug("ExcelService excelEmpList 예외발생: " + e.getMessage());
 		}
 		return emplist;
 	}
