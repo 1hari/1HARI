@@ -6,7 +6,7 @@
 <link rel="stylesheet" type="text/css"href="${pageContext.request.contextPath}/resources/hari/assets/extra-libs/multicheck/multicheck.css">
 <link href="${pageContext.request.contextPath}/resources/hari/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet">
 <!-- 초기페이지 설정 -->
-
+<c:forEach var="docu" items="${requestScope.signDocu}">
 <div id="main-wrapper">
 	<!-- Page wrapper  -->
 	<!-- ============================================================== -->
@@ -32,7 +32,7 @@
 					<tr class="draft" style="height: 40px; vertical-align: middle;">
 						<td rowspan="3">결<br>재<br>선</td>
 						<!-- 직급 -->
-						<td id="rankName0">${emp.rankName}</td>
+						<td id="rankName0">${docu.rankName}</td>
 						<td id="rankName1"></td>
 						<td id="rankName2"></td>
 					</tr>
@@ -56,5 +56,5 @@
 	</div>
 	<!-- ============================================================== -->
 	<!-- End Container fluid  -->
-
 </div>
+</c:forEach>
