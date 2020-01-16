@@ -71,7 +71,9 @@ module.exports = {
       server_data:{}
     }
   },
-  created() {
+  created() {//스크립트로 보자면, window.onload 와 비슷한 느낌 인스턴스가 작성된 후 동기적으로 호출됩니다.
+  // 이 단계에서 인스턴스는 데이터 처리, 계산된 속성, 메서드, 감시/이벤트 콜백 등과 같은 옵션 처리를 완료합니다. 그러나 마운트가 시작되지 않았으므로 $el 속성을 아직 사용할 수 없습니다.
+
     var params = new URLSearchParams();
     params.append('content_idx', this.$route.params.content_idx)
     console.log(this.$route.params.content_idx)

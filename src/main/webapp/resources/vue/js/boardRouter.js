@@ -14,11 +14,11 @@ var router = new VueRouter({
 	routes : [
 		{
 			path : '/',
-			component : httpVueLoader(contextPath+'/resources/vue/components/board/boardMain.vue')
+			component : httpVueLoader(contextPath+'/resources/vue/components/main/main.vue')
 		},
 		{
-			path : '/boardMain/:boardCode/:page',
-			component : httpVueLoader(contextPath+'/resources/vue/components/board/boardMain.vue')
+			path : '/board_main/:boardCode/:page', // 파라미터 경로들, 부모자식간의 관계 절대 결로지정이 아니고 상대 경로 
+			component : httpVueLoader(contextPath+'/resources/vue/components/board/board_main.vue')
 		},
 		{
 			path : '/board_read/:board_idx/:page/:content_idx',
@@ -42,7 +42,7 @@ var router = new VueRouter({
 			}
 		},
 		{
-			path : '/board_write/:boardCode',
+			path : '/board_write/:boardCode/:page/:content_idx',
 			component : httpVueLoader(contextPath+'/resources/vue/components/board/board_write.vue')
 		},
 		{

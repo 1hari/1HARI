@@ -11,6 +11,15 @@
 		VALUES(#{boardTitle}, #{boardContent}, #{writer}, #{boardWriteDate}) 
 	</insert>
 	
+	<!-- 게시판 정보 가져오기(탑바) -->
+	<select id="getBoardInfo" resultType="kr.coo.onehari.board.dto.BoardType">
+		SELECT BOARDCODE, BOARDNAME FROM BOARDTYPE ORDER BY BOARDCODE
+	</select>
+	
+	
+	
+	
+	
 </mapper>
 
 

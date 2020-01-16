@@ -9,7 +9,7 @@
 				<div class="col-lg-9" style="margin-top:10%; margin-left:10%; margin-right: 10%; text-align: center;">
 					<div class="card shadow">
 						<div class="card-body">
-							<h4 class="card-title">{{server_data.board_info_name}}</h4>
+							<h4 class="card-title">{{server_data.board_info_name}}</h4> <!--service단에서 // 해당 게시판 정보 가져오기 가세요 -->
 							<table class="table table-hover" id='board_list'>
 								<thead>
 									<tr>

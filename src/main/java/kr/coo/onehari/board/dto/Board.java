@@ -18,13 +18,14 @@ import lombok.ToString;
 public class Board { //vuemavenproject에서 content.java dto
 	
 	private int empNum; //사번
+	//private int boardCode; //게시판 구분 번호  board_info_idx; 원래는 boardtype.java에 있다 
 	
-	private int boardNum; //글번호 
-	private int boardCode; //게시판 구분 번호  board_info_idx; 원래는 boardtype.java에 있다 
+	private int boardNum; //글번호  content_idx
 	private String boardTitle; //게시글 제목 content_subject;
 	private String boardContent; //게시글 내용 content_text;
 	private String writer; //작성자  content_writer_name;
 	private Timestamp boardWriteDate; //작성일 content_date; //작성일 timestamp 는 보이게만 하고, crud안해도 됨 
+	
 	private int views; //조회수 
 	private String boardFileName; //첨부파일명
 	private String boardFileRoot; //첨부파일 경로
