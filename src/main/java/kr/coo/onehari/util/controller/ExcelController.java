@@ -2,7 +2,9 @@ package kr.coo.onehari.util.controller;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,10 +25,10 @@ import lombok.extern.slf4j.Slf4j;
 public class ExcelController {
 	
 	@Autowired
-	private ExcelService excelservice;
+	private EmpService empService;
 	
 	@Autowired
-	private EmpService empService;
+	private ExcelService excelService;
 
 	@RequestMapping(value = "personnel/excelUpload.hari", method = RequestMethod.GET)
 	public String excelForm() {
@@ -40,7 +42,7 @@ public class ExcelController {
 		if (iterator.hasNext()) {
 			file = request.getFile(iterator.next());
 		}
-		List<EmpDto> list = excelservice.uploadExcelFile(file);
+		List<EmpDto> list = excelService.uploadExcelFile(file);
 
 		model.addAttribute("list", list);
 		
@@ -70,5 +72,33 @@ public class ExcelController {
 			model.addAttribute("result", result);
 		}
 		return view;
+	}
+	
+	@RequestMapping(value = "personnel/excelDownload.hari", method = RequestMethod.POST)
+	public String downloadExcelFile(Model model) {
+		ExcelEmpDto exceldto = new ExcelEmpDto();
+		List<EmpDto> list = excelService.excelEmpList();
+		
+		SXSSFWorkbook workbook = excelService.excelFileDownloadProcess(list);
+		
+		for (int i = 0; i < exceldto.getEmpdto().size(); i++) {
+			exceldto.getEmpdto().get(i).getEmpNum();
+			exceldto.getEmpdto().get(i).getEmpName();
+			exceldto.getEmpdto().get(i).getTeamCode();
+			exceldto.getEmpdto().get(i).getRankCode();
+			exceldto.getEmpdto().get(i).getPositionCode();
+			exceldto.getEmpdto().get(i).getEmploymentCode();
+			exceldto.getEmpdto().get(i).getBirth();
+			exceldto.getEmpdto().get(i).getResNum();
+			exceldto.getEmpdto().get(i).getPhoneNum();
+			exceldto.getEmpdto().get(i).getEmail();
+			exceldto.getEmpdto().get(i).getHireDate();
+			exceldto.getEmpdto().get(i).getLeaveDate();
+		}
+		
+		model.addAttribute("locale", Locale.KOREA);
+		model.addAttribute("workbook", workbook);
+		model.addAttribute("workbookName", "사원목록");
+		return "excelDownloadView";
 	}
 }

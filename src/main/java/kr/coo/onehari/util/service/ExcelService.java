@@ -1,5 +1,6 @@
 package kr.coo.onehari.util.service;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -7,6 +8,10 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.poi.openxml4j.opc.OPCPackage;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.streaming.SXSSFSheet;
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -17,7 +22,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.coo.onehari.hr.dao.EmpDao;
 import kr.coo.onehari.hr.dto.EmpDto;
+import kr.coo.onehari.util.dto.ExcelEmpDto;
 import lombok.extern.slf4j.Slf4j;
 
 /*
@@ -38,20 +45,25 @@ public class ExcelService {
 	
 	/**
 	 * 엑셀파일로 만들 리스트 생성
+	 * @param exceldto 
 	 * 
 	 * @param names
 	 * @param prices
 	 * @param quantities
 	 * @return 엑셀파일 리스트
 	 */
-	public List<EmpDto> makeFruitList(int[] empNum, String[] empName, int[] teamCode, int[] rankCode, int[] positionCode, int[] employmentCode, 
-			String[] birth, String[] resNum, String[] phoneNum, String[] email, Date[] hireDate, Date[] leaveDate) {
-		List<EmpDto> list = new ArrayList<EmpDto>();
-		for (int i = 0; i < empNum.length; i++) {
-			EmpDto empdto = new EmpDto();
-			list.add(empdto);
+	public List<EmpDto> excelEmpList() {
+		EmpDao empdao = sqlsession.getMapper(EmpDao.class);
+		List<EmpDto> emplist = null;
+		ExcelEmpDto excelempdto = new ExcelEmpDto();
+		
+		try {
+			emplist = empdao.empList();
+			System.out.println("emplist: " + emplist);
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
 		}
-		return list;
+		return emplist;
 	}
 
 	/**
@@ -60,57 +72,106 @@ public class ExcelService {
 	 * @param list
 	 * @return 생성된 워크북
 	 */
-//	public SXSSFWorkbook makeSimpleEmpExcelWorkbook(List<EmpDto> list) {
-//		SXSSFWorkbook workbook = new SXSSFWorkbook();
-//
-//		// 시트 생성
-//		SXSSFSheet sheet = workbook.createSheet("과일표");
-//
-//		// 시트 열 너비 설정
+	public SXSSFWorkbook makeSimpleEmpExcelWorkbook(List<EmpDto> list) {
+		SXSSFWorkbook workbook = new SXSSFWorkbook();
+
+		// 시트 생성
+		SXSSFSheet sheet = workbook.createSheet("사원목록");
+
+		// 시트 열 너비 설정
 //		sheet.setColumnWidth(0, 1500);
 //		sheet.setColumnWidth(0, 3000);
 //		sheet.setColumnWidth(0, 3000);
 //		sheet.setColumnWidth(0, 1500);
-//
-//		// 헤더 행 생
-//		Row headerRow = sheet.createRow(0);
-//		// 해당 행의 첫번째 열 셀 생성
-//		Cell headerCell = headerRow.createCell(0);
-//		headerCell.setCellValue("번호");
-//		// 해당 행의 두번째 열 셀 생성
-//		headerCell = headerRow.createCell(1);
-//		headerCell.setCellValue("과일이름");
-//		// 해당 행의 세번째 열 셀 생성
-//		headerCell = headerRow.createCell(2);
-//		headerCell.setCellValue("가격");
-//		// 해당 행의 네번째 열 셀 생성
-//		headerCell = headerRow.createCell(3);
-//		headerCell.setCellValue("수량");
-//
-//		// 과일표 내용 행 및 셀 생성
-//		Row bodyRow = null;
-//		Cell bodyCell = null;
-//		for (int i = 0; i < list.size(); i++) {
-//			EmpDto empdto = list.get(i);
-//
-//			// 행 생성
-//			bodyRow = sheet.createRow(i + 1);
-//			// 데이터 번호 표시
-//			bodyCell = bodyRow.createCell(0);
-//			bodyCell.setCellValue(i + 1);
-//			// 데이터 이름 표시
-//			bodyCell = bodyRow.createCell(1);
-//			bodyCell.setCellValue(empdto.getName());
-//			// 데이터 가격 표시
-//			bodyCell = bodyRow.createCell(2);
-//			bodyCell.setCellValue(empdto.getPrice());
-//			// 데이터 수량 표시
-//			bodyCell = bodyRow.createCell(3);
-//			bodyCell.setCellValue(empdto.getQuantity());
-//		}
-//
-//		return workbook;
-//	}
+
+		// 헤더 행 생
+		Row headerRow = sheet.createRow(0);
+		// 해당 행의 첫번째 열 셀 생성
+		Cell headerCell = headerRow.createCell(0);
+		headerCell.setCellValue("사번");
+		// 해당 행의 두번째 열 셀 생성
+		headerCell = headerRow.createCell(1);
+		headerCell.setCellValue("사원이름");
+		// 해당 행의 세번째 열 셀 생성
+		headerCell = headerRow.createCell(2);
+		headerCell.setCellValue("소속");
+		// 해당 행의 네번째 열 셀 생성
+		headerCell = headerRow.createCell(3);
+		headerCell.setCellValue("직급");
+		// 해당 행의 네번째 열 셀 생성
+		headerCell = headerRow.createCell(4);
+		headerCell.setCellValue("직책");
+		// 해당 행의 네번째 열 셀 생성
+		headerCell = headerRow.createCell(5);
+		headerCell.setCellValue("재직구분");
+		// 해당 행의 네번째 열 셀 생성
+		headerCell = headerRow.createCell(6);
+		headerCell.setCellValue("생년월일");
+		// 해당 행의 네번째 열 셀 생성
+		headerCell = headerRow.createCell(7);
+		headerCell.setCellValue("주민등록번호");
+		// 해당 행의 네번째 열 셀 생성
+		headerCell = headerRow.createCell(8);
+		headerCell.setCellValue("핸드폰번호");
+		// 해당 행의 네번째 열 셀 생성
+		headerCell = headerRow.createCell(9);
+		headerCell.setCellValue("이메일");
+		// 해당 행의 네번째 열 셀 생성
+		headerCell = headerRow.createCell(10);
+		headerCell.setCellValue("입사일");
+		// 해당 행의 네번째 열 셀 생성
+		headerCell = headerRow.createCell(11);
+		headerCell.setCellValue("퇴사일");
+
+		// 내용 행 및 셀 생성
+		Row bodyRow = null;
+		Cell bodyCell = null;
+		
+		for (int i = 0; i < list.size(); i++) {
+			EmpDto empdto = list.get(i);
+
+			// 행 생성
+			bodyRow = sheet.createRow(i + 1);
+			// 사번 입력
+			bodyCell = bodyRow.createCell(0);
+			bodyCell.setCellValue(empdto.getEmpNum());
+			// 사원이름 입력
+			bodyCell = bodyRow.createCell(1);
+			bodyCell.setCellValue(empdto.getEmpName());
+			// 소속 입력
+			bodyCell = bodyRow.createCell(2);
+			bodyCell.setCellValue(empdto.getTeamCode());
+			// 직급
+			bodyCell = bodyRow.createCell(3);
+			bodyCell.setCellValue(empdto.getRankCode());
+			// 직책
+			bodyCell = bodyRow.createCell(4);
+			bodyCell.setCellValue(empdto.getPositionCode());
+			// 재직구분
+			bodyCell = bodyRow.createCell(5);
+			bodyCell.setCellValue(empdto.getEmploymentCode());
+			// 생년월일
+			bodyCell = bodyRow.createCell(6);
+			bodyCell.setCellValue(empdto.getBirth());
+			// 주민등록번호
+			bodyCell = bodyRow.createCell(7);
+			bodyCell.setCellValue(empdto.getResNum());
+			// 핸드폰번호
+			bodyCell = bodyRow.createCell(8);
+			bodyCell.setCellValue(empdto.getPhoneNum());
+			// 이메일
+			bodyCell = bodyRow.createCell(9);
+			bodyCell.setCellValue(empdto.getEmail());
+			// 입사일
+			bodyCell = bodyRow.createCell(10);
+			bodyCell.setCellValue(empdto.getHireDate());
+			// 퇴사일
+			bodyCell = bodyRow.createCell(11);
+			bodyCell.setCellValue(empdto.getLeaveDate());
+		}
+
+		return workbook;
+	}
 
 	/**
 	 * 생성한 엑셀 워크북을 컨트롤레에서 받게해줄 메소
@@ -118,9 +179,9 @@ public class ExcelService {
 	 * @param list
 	 * @return
 	 */
-//	public SXSSFWorkbook excelFileDownloadProcess(List<EmpDto> list) {
-//		return this.makeSimpleEmpExcelWorkbook(list);
-//	}
+	public SXSSFWorkbook excelFileDownloadProcess(List<EmpDto> list) {
+		return this.makeSimpleEmpExcelWorkbook(list);
+	}
 
 	/**
 	 * 업로드한 엑셀파일을 과일 리스트로 만들기

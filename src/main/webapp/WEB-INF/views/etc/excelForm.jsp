@@ -151,12 +151,6 @@
 		})
 	}
 	    
-	function doExcelDownloadProcess(){
-		var f = document.excelUploadForm;
-		f.action = "downloadExcelFile";
-		f.submit();
-	}
-	
 </script>
 
 
