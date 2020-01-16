@@ -47,7 +47,7 @@
 										사원등록
 									</button>
 								</a>
-								<a href="excelDownload.hari" style="color: white;">
+								<a href="javascript:excelDownload()" style="color: white;">
 									<button type="button" class="btn m-t-5 btn-info btn-block waves-effect waves-light" 
 											style="width: 20%; background-color: #20B2AA; margin-right: 1%;">
 										Excel 다운로드
@@ -72,78 +72,78 @@
 <!-- 										id="uploadExcel" style="width: 20%; background-color: #20B2AA; margin-right: 1%;" onclick="excelUpload()">Excel 업로드 -->
 <!-- 								</button> -->
 <!-- 							</div> -->
-							
-							<table id="zero_config" class="table table-striped table-bordered">
-								<thead>
-									<tr>
-<!-- 										<th> -->
-<!-- 											<label class="customcheckbox m-b-20"> -->
-<!-- 												<input type="checkbox" class="listCheckbox"> -->
-<!-- 												<span class="checkmark"></span> -->
-<!-- 											</label> -->
-<!-- 										</th> -->
-										<th>사번</th>
-										<th>이름</th>
-										<th>소속</th>
-										<th>직급</th>
-										<th>직책</th>
-										<th>재직구분</th>
-<!-- 										<th>권한</th> -->
-										<th>입사일</th>
-										<th>퇴사일</th>
-										<th>정보수정</th>
-									</tr>
-								</thead>
-								<tbody>
-									<c:forEach var="emp" items="${requestScope.emplist}">
+							<form id="empTable" name="empTable" method="post" enctype="multipart/form-data">
+								<table id="zero_config" class="table table-striped table-bordered">
+									<thead>
 										<tr>
-<!-- 											<th> -->
-<!-- 												<label class="customcheckbox m-b-20"> -->
-<!-- 													<input type="checkbox" class="listCheckbox"> -->
-<!-- 													<span class="checkmark"></span> -->
-<!-- 												</label> -->
-<!-- 											</th> -->
-											<td>${emp.empNum}</td>
-											<td>${emp.empName}</td>
-											<td>${emp.teamName}</td>
-											<td>${emp.rankName}</td>
-											<td>${emp.positionName}</td>
-											<td>${emp.employmentName}</td>
-<%-- 											<td>${emp.roleDSCR}</td> --%>
-											<td>${emp.hireDate}</td>
-											<td>${emp.leaveDate}</td>
-											<td style="text-align: center;">
-												<a href="empModify.hari?empNum=${emp.empNum}" style="color: white;">
-													<button type="button" class="btn m-t-5 btn-info btn-block waves-effect waves-light" 
-															style="width: 80%; background-color: #20B2AA">
-														수정
-													</button>
-												</a>
-											</td>
-											<!-- <td>
-												<button type="button" class="btn m-t-5 btn-info btn-block waves-effect waves-light" style="width: 80%; background-color: #20B2AA">
-													<a href="#" style="color: white;">삭제</a>
-												</button>
-											</td> -->
+	<!-- 										<th> -->
+	<!-- 											<label class="customcheckbox m-b-20"> -->
+	<!-- 												<input type="checkbox" class="listCheckbox"> -->
+	<!-- 												<span class="checkmark"></span> -->
+	<!-- 											</label> -->
+	<!-- 										</th> -->
+											<th>사번</th>
+											<th>이름</th>
+											<th>소속</th>
+											<th>직급</th>
+											<th>직책</th>
+											<th>재직구분</th>
+	<!-- 										<th>권한</th> -->
+											<th>입사일</th>
+											<th>퇴사일</th>
+											<th>정보수정</th>
 										</tr>
-									</c:forEach>
-								</tbody>
-								
-								<tfoot>
-									<tr>
-										<th>사번</th>
-										<th>이름</th>
-										<th>소속</th>
-										<th>직급</th>
-										<th>직책</th>
-										<th>재직구분</th>
-<!-- 										<th>권한</th> -->
-										<th>입사일</th>
-										<th>퇴사일</th>
-										<th>정보수정</th>
-									</tr>
-								</tfoot>
-							</table>
+									</thead>
+									<tbody>
+										<c:forEach var="emp" items="${requestScope.emplist}">
+											<tr>
+	<!-- 											<th> -->
+	<!-- 												<label class="customcheckbox m-b-20"> -->
+	<!-- 													<input type="checkbox" class="listCheckbox"> -->
+	<!-- 													<span class="checkmark"></span> -->
+	<!-- 												</label> -->
+	<!-- 											</th> -->
+												<td>${emp.empNum}</td>
+												<td>${emp.empName}</td>
+												<td>${emp.teamName}</td>
+												<td>${emp.rankName}</td>
+												<td>${emp.positionName}</td>
+												<td>${emp.employmentName}</td>
+	<%-- 											<td>${emp.roleDSCR}</td> --%>
+												<td>${emp.hireDate}</td>
+												<td>${emp.leaveDate}</td>
+												<td style="text-align: center;">
+													<a href="empModify.hari?empNum=${emp.empNum}" style="color: white;">
+														<button type="button" class="btn m-t-5 btn-info btn-block waves-effect waves-light" 
+																style="width: 80%; background-color: #20B2AA">
+															수정
+														</button>
+													</a>
+												</td>
+												<!-- <td>
+													<button type="button" class="btn m-t-5 btn-info btn-block waves-effect waves-light" style="width: 80%; background-color: #20B2AA">
+														<a href="#" style="color: white;">삭제</a>
+													</button>
+												</td> -->
+											</tr>
+										</c:forEach>
+									</tbody>
+									<tfoot>
+										<tr>
+											<th>사번</th>
+											<th>이름</th>
+											<th>소속</th>
+											<th>직급</th>
+											<th>직책</th>
+											<th>재직구분</th>
+	<!-- 										<th>권한</th> -->
+											<th>입사일</th>
+											<th>퇴사일</th>
+											<th>정보수정</th>
+										</tr>
+									</tfoot>
+								</table>
+							</form>
 						</div>
 
 					</div>
@@ -201,6 +201,13 @@
 		var popupOption = "statusber=no, scrollbar=no, menuber=no, width=900, height=500 top=270 left=530";
 		
 		window.open(popupUrl, popupName, popupOption);
+	}
+	
+	function excelDownload() {
+		var form = document.empTable;
+		form.action = "${pageContext.request.contextPath}/util/personnel/excelDownload.hari";
+		form.submit();
+	}
 // 		var file = $("#excelFile").val();
 // 		if (file == "" || file == null) {
 // 			swal({
@@ -233,5 +240,4 @@
 // 				};
 // 			$("#excelUploadForm").ajaxSubmit(options);
 // 		}
-	}
 </script>

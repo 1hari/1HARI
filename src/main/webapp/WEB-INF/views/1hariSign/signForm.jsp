@@ -55,14 +55,14 @@
 							<tbody class="customtable">
 								<!-- 결재대기 리스트 1줄 -->
 								<c:forEach var="waiting" items="${requestScope.signWaitingList}">
-									<tr>
+									<tr class="signDocu" signNum="${waiting.signNum}">
 										<td>${waiting.signDate}</td>
 										<td>${waiting.signNum}</td>
 										<td>${waiting.signFormFormName}</td>
-										<td class="signDocu" signNum="${waiting.signNum}"">${waiting.signTitle}</td>
-										<td>${waiting.draftEmpName} (${waiting.draftEmp})</td>
-										<td>${waiting.empSign1Name} (${waiting.empSign1})</td>
-										<td>${waiting.empSign2Name} (${waiting.empSign2})</td>
+										<td>${waiting.signTitle}</td>
+										<td>${waiting.draftEmpName} ${waiting.draftEmpRankName} (${waiting.draftEmp})</td>
+										<td>${waiting.empSign1Name} ${waiting.empSign1RankName} (${waiting.empSign1})</td>
+										<td>${waiting.empSign2Name} ${waiting.empSign2RankName} (${waiting.empSign2})</td>
 										<td>
 											<div class="d-flex no-block align-items-center m-t-15">
                                         		<span>${waiting.signName}</span>
@@ -109,14 +109,14 @@
 							<tbody class="customtable">
 								<!-- 기안 리스트 1줄 -->
 								<c:forEach var="draft" items="${requestScope.signDraftList}">
-									<tr>
+									<tr class="signDocu" signNum="${draft.signNum}">
 										<td>${draft.signDate}</td>
 										<td>${draft.signNum}</td>
 										<td>${draft.signFormFormName}</td>
-										<td class="signDocu" signNum="${draft.signNum}">${draft.signTitle}</td>
-										<td>${draft.draftEmpName} (${draft.draftEmp})</td>
-										<td>${draft.empSign1Name} (${draft.empSign1})</td>
-										<td>${draft.empSign2Name} (${draft.empSign2})</td>
+										<td>${draft.signTitle}</td>
+										<td>${draft.draftEmpName} ${draft.draftEmpRankName} (${draft.draftEmp})</td>
+										<td>${draft.empSign1Name} ${draft.empSign1RankName} (${draft.empSign1})</td>
+										<td>${draft.empSign2Name} ${draft.empSign2RankName} (${draft.empSign2})</td>
 										<td>
 											<div class="d-flex no-block align-items-center m-t-15">
                                         		<span>${draft.signName}</span>
@@ -163,14 +163,14 @@
 							<tbody class="customtable">
 								<!-- 완료리스트 1줄 -->
 								<c:forEach var="completet" items="${requestScope.signCompletetList}">
-									<tr>
+									<tr class="signDocu" signNum="${completet.signNum}">
 										<td>${completet.signDate}</td>
 										<td>${completet.signNum}</td>
 										<td>${completet.signFormFormName}</td>
-										<td class="signDocu" signNum="${completet.signNum}">${completet.signTitle}</td>
-										<td>${completet.draftEmpName} (${completet.draftEmp})</td>
-										<td>${completet.empSign1Name} (${completet.empSign1})</td>
-										<td>${completet.empSign2Name} (${completet.empSign2})</td>
+										<td>${completet.signTitle}</td>
+										<td>${completet.draftEmpName} ${completet.draftEmpRankName} (${completet.draftEmp})</td>
+										<td>${completet.empSign1Name} ${completet.empSign1RankName} (${completet.empSign1})</td>
+										<td>${completet.empSign2Name} ${completet.empSign2RankName} (${completet.empSign2})</td>
 										<td>
 											<div class="d-flex no-block align-items-center m-t-15">
                                         		<span>${completet.signName}</span>
@@ -210,14 +210,14 @@
 							<tbody class="customtable">
 								<!-- 반려리스트 1줄 -->
 								<c:forEach var="signReturn" items="${requestScope.signReturnList}">
-									<tr>
+									<tr class="signDocu" signNum="${signReturn.signNum}">
 										<td>${signReturn.signDate}</td>
 										<td>${signReturn.signNum}</td>
 										<td>${signReturn.signFormFormName}</td>
-										<td>${signReturn.empSign1Name} (${signReturn.empSign1})</td>
-										<td>${signReturn.empSign2Name} (${signReturn.empSign2})</td>
-										<td class="signDocu" signNum="${signReturn.signNum}">${signReturn.signTitle}</td>
-										<td>${signReturn.draftEmpName} (${signReturn.draftEmp})</td>
+										<td>${signReturn.signTitle}</td>
+										<td>${signReturn.draftEmpName} ${signReturn.draftEmpRankName} (${signReturn.draftEmp})</td>
+										<td>${signReturn.empSign1Name} ${signReturn.empSign1RankName} (${signReturn.empSign1})</td>
+										<td>${signReturn.empSign2Name} ${signReturn.empSign2RankName} (${signReturn.empSign2})</td>
 										<td>
 											<div class="d-flex no-block align-items-center m-t-15">
                                         		<span>${signReturn.signName}</span>
@@ -271,8 +271,12 @@
 			button: "닫기"
 		});
 	}
-	/****************************************
-	*       Basic Table                   *
-	****************************************/
-	$('#zero_config').DataTable();
+
+	//문서 클릭
+	$(".signDocu").click(function(){
+		//console.log($(this).attr("signNum"));
+		let openUrl = "${pageContext.request.contextPath}/1hariSign/signDocuView.hari?signNum="+$(this).attr("signNum");
+		//console.log(openUrl);
+		open(openUrl,"전자결재","statusber=no,menuber=no, width=850, height=800, top=10");
+	});//문서 클릭
 </script>

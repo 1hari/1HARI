@@ -26,7 +26,6 @@ public class LoginService {
 	
 	//로그인 성공 시 로그인 횟수 초기화
 	public int loginCntInit(String str) {
-		System.out.println("str: " + str);
 		int result = 0;
 		
 		LoginDao dao = sqlsession.getMapper(LoginDao.class);
@@ -39,7 +38,6 @@ public class LoginService {
 		return result;
 	}
 	
-	
 	//로그인 실패, 로그인 시도횟수 증가
 	public void countFailure(String str) {
 		LoginDao dao = sqlsession.getMapper(LoginDao.class);
@@ -47,11 +45,6 @@ public class LoginService {
 		int empNum=Integer.parseInt(str);
 		try {
 			result = dao.updateFailureCount(empNum);
-			if(result >0) {
-				System.out.println("로그인 실패, 로그인 시도횟수 증가 업데이트 성공");
-			}else {
-				System.out.println("로그인 실패, 로그인 시도횟수 증가 업데이트 성공");
-			}
 		} catch (ClassNotFoundException | SQLException e) {
 			log.debug("countFailure : " + e.getMessage());
 		}
@@ -59,11 +52,14 @@ public class LoginService {
 	
 	//현재 로그인 시도 횟수
 	public int checkFailureCount(String str) {
-		int result = 0;
+		Integer result = 0;
 		int empNum=Integer.parseInt(str);
 		LoginDao dao = sqlsession.getMapper(LoginDao.class);
 		try {
 			result = dao.checkFailureCount(empNum);
+			if(result == null) {
+				result=0;
+			}
 		} catch (ClassNotFoundException | SQLException e) {
 			log.debug("loginCntInit : " + e.getMessage());
 		}
@@ -72,16 +68,10 @@ public class LoginService {
 	
 	//로그인 잠금처리
 	public void disabledUsername(String str) {
-		int result = 0;
 		int empNum=Integer.parseInt(str);
 		LoginDao dao = sqlsession.getMapper(LoginDao.class);
 		try {
-			result=dao.disabledUsername(empNum);
-			if(result >0) {
-				System.out.println("로그인 잠금처리 업데이트 성공");
-			}else {
-				System.out.println("로그인 잠금처리 업데이트 성공");
-			}
+			dao.disabledUsername(empNum);
 		} catch (ClassNotFoundException | SQLException e) {
 			log.debug("loginCntInit : " + e.getMessage());
 		}

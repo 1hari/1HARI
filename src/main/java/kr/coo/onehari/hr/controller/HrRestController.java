@@ -209,7 +209,6 @@ public class HrRestController {
 	//형남 0113 이번주 현재까지 총 근무시간
 	@RequestMapping(value = "getWeekTotalTime.hari", method = RequestMethod.POST)
 	public String getWeekTotalTime(Principal pri) {
-		System.out.println("pri.toString(): " + pri.toString());
 		String totalTime = null;
 		try {
 			totalTime = empSercive.getWeekTotalTime(pri.getName());
@@ -285,7 +284,6 @@ public class HrRestController {
 	//형남 0114 이번달 출근기록 yyyy-mm-dd
 	@RequestMapping(value = "getStartList.hari", method = RequestMethod.POST)
 	public List<String> getStartList(Principal pri) {
-		System.out.println("pri.toString(): " + pri.toString());
 		List<String> totalTime = null;
 		try {
 			totalTime = empSercive.getStartList(pri.getName());

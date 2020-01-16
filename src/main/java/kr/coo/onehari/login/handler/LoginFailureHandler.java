@@ -45,13 +45,14 @@ public class LoginFailureHandler implements AuthenticationFailureHandler{
             errormsg = "비밀번호 유효기간이 만료 되었습니다. 관리자에게 문의하세요.";
         }
         
+//        defaultFailureUrl=request.getContextPath() + "/index.hari?error=" + errormsg;
 
 		request.setAttribute(username, empNum);
 		request.setAttribute(userpassword, password);
 		//에러메세지 세팅
 		request.setAttribute(errormsgname, errormsg);
-
-		request.getRequestDispatcher(defaultFailureUrl).forward(request, response);
+		response.sendRedirect(request.getContextPath() + "/index.hari?error=" + errormsg);
+//		request.getRequestDispatcher(defaultFailureUrl).forward(request, response);
 	}
 	
 	protected int loginFailureCount(String username) {

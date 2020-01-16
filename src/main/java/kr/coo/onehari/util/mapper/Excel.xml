@@ -13,21 +13,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- Excel 파일 Upload 사원등록 -->
 	<insert id="insertExcelEmp" parameterType="hashmap">
 		INSERT INTO emp
-			(EMPNAME)
+			(TEAMCODE, RANKCODE, POSITIONCODE, EMPLOYMENTCODE, EMPNAME, PASSWORD)
 		VALUES 
-		<foreach collection="list" item="item" separator=" , ">
-			 (#{item.empName})
+		<foreach collection="list" item="item" separator=", ">
+			(#{item.teamCode}, #{item.rankCode}, #{item.positionCode}, #{item.employmentCode}, #{item.empName}, #{item.password})
 		</foreach>
 	</insert>
-	
-	
 	<!-- 사원등록 subemp Transaction -->
-	<insert id="insertExcelSubEmp" parameterType="kr.coo.onehari.util.dto.ExcelEmpDto">
+	<insert id="insertExcelSubEmp" parameterType="hashmap">
 		INSERT INTO subemp
 			(empnum, birth, resnum, phonenum, email, hiredate)
 		VALUES
-		<foreach collection="insertEmplist" item="excelsubemp">
-			(LAST_INSERT_ID(), #{excelsubemp.birth}, #{excelsubemp.resNum}, #{excelsubemp.phoneNum}, #{excelsubemp.email}, #{excelsubemp.hireDate})
+		<foreach collection="list" item="item" separator=", ">
+			(LAST_INSERT_ID(), #{item.birth}, #{item.resNum}, #{item.phoneNum}, #{item.email}, #{item.hireDate})
 		</foreach>
 	</insert>
 

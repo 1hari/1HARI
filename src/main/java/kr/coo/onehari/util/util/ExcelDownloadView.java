@@ -25,7 +25,7 @@ public class ExcelDownloadView extends AbstractView {
 		Locale locale = (Locale) model.get("locale");
 		String workbookName = (String) model.get("workbookName");
 
-		// 겹치는 파일 이름 중복을 피하기 위해 시간을 이용해서 파일 이름에 추가
+		// 파일이름 중복방지를 위해 파일이름에 시간을 추가
 		Date date = new Date();
 		SimpleDateFormat dayformat = new SimpleDateFormat("yyyyMMdd", locale);
 		SimpleDateFormat hourformat = new SimpleDateFormat("hhmmss", locale);

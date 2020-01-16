@@ -9,14 +9,10 @@
 
 <!--datepicker link 필수 !!! -->
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/hari/assets/libs/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/hari/assets/libs/quill/dist/quill.snow.css">
-
-<!--datepicker link 필수 end-->
-<link href="${pageContext.request.contextPath}/resources/hari/dist/css/style.min.css" rel="stylesheet">
-
 <!-- datepicker script -->
 <script src="${pageContext.request.contextPath}/resources/hari/assets/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/hari/assets/libs/quill/dist/quill.min.js"></script>
+<!--datepicker link 필수 end-->
+<link href="${pageContext.request.contextPath}/resources/hari/dist/css/style.min.css" rel="stylesheet">
 
 <div class="page-wrapper">
 	<!-- ============================================================== -->
@@ -110,71 +106,8 @@
 </div>
 
 <script type="text/javascript">
+
 	/* Excel Upload / Download를 위한 script */
-// 	function checkFileType(filePath) {
-// 		var fileFormat = filePath.split(".");
-// 		if (fileFormat.indexOf("xlsx") > -1) {
-// 			return true;
-// 		} else {
-// 			return false;
-// 		}
-// 	}
-
-// 	function excelUpload() {
-// 		var file = $("#excelFile").val();
-// 		if (file == "" || file == null) {
-// 			swal({
-// 				text: "파일을 선택해주세요.",
-// 				icon: "warning",
-// 				button: "닫기"
-// 			});
-// 			return false;
-// 		} else if (!checkFileType(file)) {
-// 			swal({
-// 				text: "Excel 파일만 업로드 가능합니다.",
-// 				icon: "warning",
-// 				button: "닫기"
-// 			});
-// 			return false;
-// 		}
-	
-// 		if (swal("업로드 하시겠습니까?")) {
-// 			var options = 
-// 				{
-// 					url: "${pageContext.request.contextPath}/util/excelUpload.hari",
-// 					type : "POST",
-// 					success : function(data) {
-// 						swal({
-// 							text: "모든 데이터가 업로드 되었습니다.",
-// 							icon: "success",
-// 							button: "확인"
-// 						});
-// 					}
-// 				};
-// 			$("#excelUploadForm").ajaxSubmit(options);
-// 		}
-// 	}
-
-//     function doExcelUploadProcess(){
-//         var f = new FormData(document.getElementById('form1'));
-//         $.ajax({
-//             url: "uploadExcelFile",
-//             data: f,
-//             processData: false,
-//             contentType: false,
-//             type: "POST",
-//             success: function(data){
-//                 console.log(data);
-//                 document.getElementById('result').innerHTML = JSON.stringify(data);
-//             }
-//         })
-//     }
-    
-//     function doExcelDownloadProcess(){
-//         var f = document.form1;
-//         f.action = "downloadExcelFile";
-//         f.submit();
-//     }    function doExcelUploadProcess(){
 	function doExcelUploadProcess(){
 		var f = new FormData(document.getElementById('excelUploadForm'));
 		$.ajax({
@@ -192,49 +125,32 @@
 					$.each(data, function(index, element){
 						
 					/* document.getElementById('excelForm').innerHTML = JSON.stringify(emp.empNum); */
-					formdata += '<tr><td><input type="text" name="empName[' + index + ']" value="' + element.empName + '"></td>'
-								+ '<td><input type="text" name="teamCode[' + index + ']" value="' + element.teamCode + '"></td>'
-								+ '<td><input type="text" name="rankCode[' + index + ']" value="' + element.rankCode + '"></td>'
-								+ '<td><input type="text" name="positionCode[' + index + ']" value="' + element.positionCode + '"></td>'
-								+ '<td><input type="text" name="employmentCode[' + index + ']" value="' + element.employmentCode + '"></td>'
-								+ '<td><input type="text" name="birth[' + index + ']" class="datepicker-autoclose" value="' + element.birth + '"></td>'
-								+ '<td><input type="text" name="resNum[' + index + ']" value="' + element.resNum + '"></td>'
-								+ '<td><input type="text" name="phoneNum[' + index + ']" value="' + element.phoneNum + '"></td>'
-								+ '<td><input type="text" name="email[' + index + ']" value="' + element.email + '"></td>'
-								+ '<td><input type="text" name="hireDate[' + index + ']" value="' + element.hireDate + '"></td>'
-								+ '<td><input type="text" name="leaveDate[' + index + ']" value="' + element.leaveDate + '"></td>'
+					formdata += '<tr><td><input type="text" name="empdto[' + index + '].empName" value="' + element.empName + '"></td>'
+								+ '<td><input type="text" name="empdto[' + index + '].teamCode" value="' + element.teamCode + '"></td>'
+								+ '<td><input type="text" name="empdto[' + index + '].rankCode" value="' + element.rankCode + '"></td>'
+								+ '<td><input type="text" name="empdto[' + index + '].positionCode" value="' + element.positionCode + '"></td>'
+								+ '<td><input type="text" name="empdto[' + index + '].employmentCode" value="' + element.employmentCode + '"></td>'
+								+ '<td><input type="text" name="empdto[' + index + '].birth" class="datepicker-autoclose" value="' + element.birth + '"></td>'
+								+ '<td><input type="text" name="empdto[' + index + '].resNum" value="' + element.resNum + '"></td>'
+								+ '<td><input type="text" name="empdto[' + index + '].phoneNum" value="' + element.phoneNum + '"></td>'
+								+ '<td><input type="text" name="empdto[' + index + '].email" value="' + element.email + '"></td>'
+								+ '<td><input type="text" name="empdto[' + index + '].hireDate" value="' + element.hireDate + '"></td>'
+								+ '<td><input type="text" name="empdto[' + index + '].leaveDate" value="' + element.leaveDate + '"></td>'
 					})
 				})
 				$('#excelForm').append(formdata);
+				$('.datepicker-autoclose').datepicker(
+					{
+						format: "yymmdd", // 생년월일 Date 형식
+						autoclose: true,
+						todayHighlight: true
+					}
+				);
 				/* document.getElementById('excelForm').innerHTML = JSON.stringify(data); */
 			}
 		})
 	}
 	    
-	function doExcelDownloadProcess(){
-		var f = document.excelUploadForm;
-		f.action = "downloadExcelFile";
-		f.submit();
-	}
-	
-	$(function() {
-		$('.mydatepicker').datepicker(
-			{
-				format: "yyyy-mm-dd", // 입사일 Date 형식
-				autoclose: true,
-				todayHighlight: true
-			}
-		);
-		
-		$('.datepicker-autoclose').datepicker(
-			{
-				format: "yymmdd", // 생년월일 Date 형식
-				autoclose: true,
-				todayHighlight: true
-			}
-		);
-	})
-
 </script>
 
 

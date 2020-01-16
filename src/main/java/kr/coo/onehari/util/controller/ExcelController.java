@@ -1,10 +1,10 @@
 package kr.coo.onehari.util.controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import kr.coo.onehari.hr.dto.EmpDto;
+import kr.coo.onehari.hr.service.EmpService;
 import kr.coo.onehari.util.dto.ExcelEmpDto;
 import kr.coo.onehari.util.service.ExcelService;
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +25,10 @@ import lombok.extern.slf4j.Slf4j;
 public class ExcelController {
 	
 	@Autowired
-	private ExcelService excelservice;
+	private EmpService empService;
+	
+	@Autowired
+	private ExcelService excelService;
 
 	@RequestMapping(value = "personnel/excelUpload.hari", method = RequestMethod.GET)
 	public String excelForm() {
@@ -38,7 +42,7 @@ public class ExcelController {
 		if (iterator.hasNext()) {
 			file = request.getFile(iterator.next());
 		}
-		List<EmpDto> list = excelservice.uploadExcelFile(file);
+		List<EmpDto> list = excelService.uploadExcelFile(file);
 
 		model.addAttribute("list", list);
 		
@@ -48,36 +52,53 @@ public class ExcelController {
 	@RequestMapping(value = "personnel/insertExcelEmp.hari", method = RequestMethod.POST)
 	public String insertExcelEmp(ExcelEmpDto excelemp, Model model) {
 		String view = "";
-		
-		List<EmpDto> empList = new ArrayList<EmpDto>();
-		
-		for(int i = 0; i < excelemp.getEmpName().size(); i++) {
-			EmpDto emp = new EmpDto();
-			emp.setEmpName(excelemp.getEmpName().get(i));
-			empList.add(emp);
-		}
-		
 		int result = 0;
+		EmpDto emp = new EmpDto();
 		
-		HashMap<String, List<EmpDto>> map = new HashMap<>();
-		map.put("list", empList);
-		
-		System.out.println(map.get("list"));
-		
-		try {
-			 result = excelservice.insertExcelEmp(map);
+		for(int i = 0; i < excelemp.getEmpdto().size(); i++) {
+			emp = excelemp.getEmpdto().get(i);
+			emp.setPassword("1004");
 			
-		} catch (Exception e) {
-			System.out.println("ExcelController insertExcelEmp 예외발생: " + e.getMessage());
-			log.debug("ExcelController insertExcelEmp 예외발생: " + e.getMessage());
+			try {
+				result = empService.empJoin(emp);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		
-		/*
-		 * if (excelEmplist != null) { view = "redirect:etc.excelForm";
-		 * model.addAttribute("Excel 사원등록 실패"); } else { view =
-		 * "redirect:1hariHr.empList"; model.addAttribute("excelEmplist", excelEmplist);
-		 * }
-		 */
+		if (result > 0) {
+			model.addAttribute("result", result);
+		} else {
+			model.addAttribute("result", result);
+		}
 		return view;
+	}
+	
+	@RequestMapping(value = "personnel/excelDownload.hari", method = RequestMethod.POST)
+	public String downloadExcelFile(Model model) {
+		ExcelEmpDto exceldto = new ExcelEmpDto();
+		List<EmpDto> list = excelService.excelEmpList();
+		
+		SXSSFWorkbook workbook = excelService.excelFileDownloadProcess(list);
+		
+		for (int i = 0; i < exceldto.getEmpdto().size(); i++) {
+			exceldto.getEmpdto().get(i).getEmpNum();
+			exceldto.getEmpdto().get(i).getEmpName();
+			exceldto.getEmpdto().get(i).getTeamCode();
+			exceldto.getEmpdto().get(i).getRankCode();
+			exceldto.getEmpdto().get(i).getPositionCode();
+			exceldto.getEmpdto().get(i).getEmploymentCode();
+			exceldto.getEmpdto().get(i).getBirth();
+			exceldto.getEmpdto().get(i).getResNum();
+			exceldto.getEmpdto().get(i).getPhoneNum();
+			exceldto.getEmpdto().get(i).getEmail();
+			exceldto.getEmpdto().get(i).getHireDate();
+			exceldto.getEmpdto().get(i).getLeaveDate();
+		}
+		
+		model.addAttribute("locale", Locale.KOREA);
+		model.addAttribute("workbook", workbook);
+		model.addAttribute("workbookName", "사원목록");
+		return "excelDownloadView";
 	}
 }

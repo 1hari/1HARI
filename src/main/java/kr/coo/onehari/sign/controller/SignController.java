@@ -164,7 +164,22 @@ public class SignController {
 	//내 문서함 화면 김정하 / 2020. 1. 7~
 	@RequestMapping("myDocu.hari")
 	public String myDocu() {
-		
 		return "1hariSign.myDocu";
 	}
+
+	//전자결재 문서보기 김정하 / 2020. 1. 15~
+	@RequestMapping("signDocuView.hari")
+	public String docuView(String signNum, Model model) {
+		HashMap<String, String> map = new HashMap<String, String>(); 
+		map.put("signNum", signNum);
+		map.put("pg", "3");
+		map.put("cp", "0");
+		map.put("code", "5"); //문서보기
+		List<SignDto> signDocu = signService.selectSignList(map);
+		
+		model.addAttribute("signDocu", signDocu);
+		
+		return "1hariPopUp.signDocuView";
+	}
+	
 }

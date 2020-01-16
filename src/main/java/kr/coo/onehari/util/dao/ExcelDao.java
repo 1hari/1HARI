@@ -12,11 +12,11 @@ import kr.coo.onehari.util.dto.ExcelEmpDto;
  * 시작: 2020. 1. 15
  * 내용: Excel Upload/Download
  */
-public interface ExcelDao {
-
-	// Upload Excel 파일 내용을 DB에 넣기
-	public int insertExcelEmp(HashMap<String, List<EmpDto>> map) throws ClassNotFoundException, SQLException;
-
-	// Upload Excel 파일 내용을 DB에 넣기
-	public int insertExcelSubEmp(HashMap<String, List<EmpDto>> map) throws ClassNotFoundException, SQLException;
-}
+//public interface ExcelDao {
+//
+//	// Upload Excel 파일 내용을 DB에 넣기
+//	public int insertExcelEmp(HashMap<String, List<EmpDto>> map) throws ClassNotFoundException, SQLException;
+//
+//	// Upload Excel 파일 내용을 DB에 넣기
+//	public int insertExcelSubEmp(HashMap<String, List<EmpDto>> map) throws ClassNotFoundException, SQLException;
+//}
