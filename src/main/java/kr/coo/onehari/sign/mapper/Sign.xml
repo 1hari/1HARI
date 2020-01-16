@@ -108,4 +108,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 	</select>
 	
+	<!-- 결재하기 김정하 / 2020. 1. 16~ -->
+	<update id="signApproval" parameterType="hashmap">
+		UPDATE sign SET
+			<choose>
+				<when test="isSign1.equalsIgnoreCase('0')">
+					ISSIGN1='1'
+				</when>
+				<otherwise>
+					ISSIGN2='1'
+				</otherwise>
+			</choose>
+		 WHERE SIGNNUM = #{signNum}
+	</update>
+	
 </mapper>

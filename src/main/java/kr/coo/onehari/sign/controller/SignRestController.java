@@ -1,8 +1,10 @@
 package kr.coo.onehari.sign.controller;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -54,7 +56,7 @@ public class SignRestController {
 		return signList;
 	}
 	
-	//내문서함 페이징 김정하 / 2020. 1. 15~
+	//내문서함 페이징 김정하 / 2020. 1. 15
 	@RequestMapping("signPage.hari")
 	public int signPage(String code, Principal principal) {
 		HashMap<String, String> map = new HashMap<String, String>();
@@ -69,4 +71,43 @@ public class SignRestController {
 		return count;
 	}
 	
+	//결재하기 김정하 / 2020. 1. 16
+	@RequestMapping("approval.hari")
+	public Map<String, String> signApproval(String isSign1, String empSign1, String isSign2, String empSign2, String signNum, Principal principal) {
+		System.out.println(signNum);
+		System.out.println(isSign1);
+		System.out.println(isSign2);
+		
+		HashMap<String, String> resultMap = new HashMap<String, String>();
+		
+		String isOk = "false";
+		String msg = "";
+		String empNum = principal.getName();
+		
+		if((isSign1.equals("0") && empSign1.equals(empNum)) || (isSign2.equals("0") && empSign2.equals(empNum))) {
+			int result = 0;
+			
+			HashMap<String, String> map = new HashMap<String, String>();
+			
+			map.put("isSign1", isSign1);
+			map.put("isSign2", isSign2);
+			map.put("signNum", signNum);
+			
+			result = signService.signApproval(map);
+			
+			if(result > 0 ) {
+				isOk = "true";
+				msg = "결재되었습니다.";
+			}else {
+				msg = "결재처리되지 않았습니다. 다시 확인 바랍니다.";
+			}
+		}else {
+			msg = "결재정보가 일치하지 않습니다. 다시 확인 바랍니다.";
+		}
+		
+		resultMap.put("isOk", isOk);
+		resultMap.put("msg", msg);
+		
+		return resultMap;
+	}
 }

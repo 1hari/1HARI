@@ -15,7 +15,7 @@
 	<div class="page-breadcrumb">
 		<div class="row">
 			<div class="col-12 d-flex no-block align-items-center">
-				<h4 class="page-title"><a href="${pageContext.request.contextPath}/1hariSign/color.hari">전자 결재 홈</a></h4>
+				<h4 class="page-title">전자 결재 홈</h4>
 				<div class="ml-auto text-right"></div>
 			</div>
 		</div>

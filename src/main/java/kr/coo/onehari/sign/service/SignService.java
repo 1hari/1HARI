@@ -64,4 +64,17 @@ public class SignService {
 		return count;
 	}
 	
+	//결재하기 김정하 / 2020. 1. 16
+	public int signApproval(Map<String, String> map) {
+		int count = 0;
+		SignDao dao = sqlsession.getMapper(SignDao.class);
+		
+		try {
+			count = dao.signApproval(map);
+		} catch (ClassNotFoundException | SQLException e) {
+			log.debug("signApproval : " + e.getMessage());
+		}
+		return count;
+	}
+	
 }

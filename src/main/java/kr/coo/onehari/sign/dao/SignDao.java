@@ -23,4 +23,7 @@ public interface SignDao {
 	
 	//내 문서함 페이징 김정하 / 2020. 1 15
 	public int signPage (Map<String, String> map) throws ClassNotFoundException, SQLException;
+	
+	//결재하기 김정하 / 2020. 1. 16~
+	public int signApproval (Map<String, String> map) throws ClassNotFoundException, SQLException;
 }
