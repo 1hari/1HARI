@@ -7,18 +7,20 @@ $(function(){
 	var isEnd=false;//오늘 퇴근했는지
 	var currYear;
 	var currMonth;
-	var fixLatitude=parseFloat(38.4995124);
+	var fixLatitude=parseFloat(37.4995124);
 	var fixLongitude=parseFloat(127.0292657);
 	var myLatitude; //사용자 위도
 	var myLongitude;////사용자 경도
 	var currTime;
 	var integerTime;
+	
 	//현재시간 예쁘게 출력
 	function getTimeStamp() {
 	  var d = new Date();
 	  var s =
 	    leadingZeros(d.getHours(), 2) +
-	    leadingZeros(d.getMinutes(), 2);
+	    leadingZeros(d.getMinutes(), 2) +
+		leadingZeros(d.getSeconds(), 2);
 	  return s;
 	}
 	function leadingZeros(n, digits) {
@@ -40,9 +42,11 @@ $(function(){
 	var timeCheck=setInterval(function(){
 		integerTime=parseInt(getTimeStamp());
 		console.log(integerTime);
-		if(integerTime ==1328 && isStart == false){
+		if(integerTime == 85600 && isStart == false){
 			clearInterval(timeCheck);
-			toastr.error('11시되기 10분 전입니다. 출근등록 여부를 확인해 주세요.', '출근알림', {timeOut: 5000});
+			notify();
+		}else if(integerTime > 85600 || isStart == true){
+			clearInterval(timeCheck);
 		}
 	},1000);
 
@@ -337,41 +341,83 @@ $(function(){
 		}
 	});
 
-	//보낼 parameter
-	var parameter_noti = {
-		title:"HARI",
-		icon:"m-r-10 mdi mdi-checkerboard",
-		body:"나는 하리"
-	};
-	// 브라우저가 Notification 기능을 지원하는지 체크
-	if (!"Notification" in window) {
-		alert("This browser does not support desktop notification");
-	  }
-	// 사용자가 Notification 사용을 허락했는지 체크
-	else if (Notification.permission === "granted") {
-		// 허락했다면 Notification을 생성
-		var notification = new Notification(parameter_noti.title,{
-	    	icon:parameter_noti.icon,
-	    	body:parameter_noti.body
-	    });
-	  }
-	  // 크롬 브라우저는 permission 속성이 구현되어 있지 않기 때문에
-	  // 사용자가 의도적으로 'denied' 한 경우를 체크
-	else if (Notification.permission !== 'denied') {
-		Notification.requestPermission(function (permission) {
-		// 사용자가 사용 여부를 체크했다면, 크롬 Notification 상태를 갱신
-		if(!('permission' in Notification)) {
-			Notification.permission = permission;
-		}
-	   // 사용자가 승낙했다면, Notification을 생성
-		if (permission === "granted") {
-			var notification = new Notification(parameter_noti.title,{
-				icon:parameter_noti.icon,
-	        	body:parameter_noti.body
-			});
-			}
-		});
-	}
+
+    if (window.Notification) {
+        Notification.requestPermission();
+    }
+
+// 	setTimeout(function () {
+// 	    notify();
+// 	}, 1);
+
+    function notify() {
+        if (Notification.permission !== 'granted') {
+            alert('notification is disabled');
+        }
+        else {
+            var notification = new Notification('Notification title', {
+                icon: '${pageContext.request.contextPath}/resources/hari/assets/images/favicon.png',
+                body: '출근 미등록 상태입니다. 확인해주세요.',
+            });
+
+            notification.onclick = function () {
+                location.href='${pageContext.request.contextPath}/1hariHr/attendance.hari';
+            };
+        }
+    }
+
+
+
+
+
+
+
+
+
+	
+// 	//요청을 거절하면,
+// 	if (result === 'denied') {
+// 	    return;
+// 	}
+// 	//보낼 parameter
+// 	var parameter_noti = {
+// 		title:"HARI",
+// 		icon:"${pageContext.request.contextPath}/resources/hari/assets/images/favicon.png",
+// 		body:"출근 미등록 상태입니다. 확인해주세요."
+// 	};
+// 	// 브라우저가 Notification 기능을 지원하는지 체크
+// 	if (!"Notification" in window) {
+// 		alert("This browser does not support desktop notification");
+// 	  }
+// 	// 사용자가 Notification 사용을 허락했는지 체크
+// 	else if (Notification.permission === "granted") {
+// 		// 허락했다면 Notification을 생성
+// 		var notification = new Notification(parameter_noti.title,{
+// 	    	icon:parameter_noti.icon,
+// 	    	body:parameter_noti.body
+// 	    });
+// 	  }
+// 	  // 크롬 브라우저는 permission 속성이 구현되어 있지 않기 때문에
+// 	  // 사용자가 의도적으로 'denied' 한 경우를 체크
+// 	else if (Notification.permission !== 'denied') {
+// 		Notification.requestPermission(function (permission) {
+// 		// 사용자가 사용 여부를 체크했다면, 크롬 Notification 상태를 갱신
+// 		if(!('permission' in Notification)) {
+// 			Notification.permission = permission;
+// 		}
+// 	   // 사용자가 승낙했다면, Notification을 생성
+// 		if (permission === "granted") {
+// 			var notification = new Notification(parameter_noti.title,{
+// 					icon:parameter_noti.icon,
+// 		        	body:parameter_noti.body
+// 				});
+				 
+//                 notification.onclick = function () {
+//                     window.open('http://google.com');
+//           	   };
+// 			}
+// 		});
+// 	}
 });
 </script>
 <!-- ============================================================== -->
