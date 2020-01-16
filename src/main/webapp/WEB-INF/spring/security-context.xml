@@ -65,7 +65,6 @@
    		<property name="loginidname" value="username"/>
     	<property name="defaultUrl" value="/main.hari"/>
 	</bean>
-
 	<bean id="loginFailureHandler" class="kr.coo.onehari.login.handler.LoginFailureHandler">
 	    <property name="username" value="username"/>
 	    <property name="userpassword" value="password"/>

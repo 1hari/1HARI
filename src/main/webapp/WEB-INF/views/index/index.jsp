@@ -19,7 +19,7 @@
 //    }
    
    //형남 0110 비밀번호 변경
-   $(function(){
+	$(function(){
       //정규표현식
       let pw_pattern = /^[a-z0-9_]{4,10}$/;
       let email_pattern = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
@@ -100,6 +100,21 @@
          $('#chagePassword').removeAttr('disabled');   
       }
    });
+	   
+	function login(){
+		if($('#username').val().trim() == '' || $('#username').val() ==null){
+			alert('사번을 입력해 주세요.');
+			$('#username').focus();
+			return;
+		}
+		if($('#password').val().trim() == '' || $('#password').val() ==null){
+			alert('비밀번호를 입력해 주세요.');
+			$('#username').focus();
+			return;
+		}
+       $('#loginform').submit();
+   }
+
 </script>
 
    <!--컨텐츠 시작 -->
@@ -134,13 +149,13 @@
                    </div>
                    <div class="form-group">
                         <div class="checkbox">
-                           <label><input type="checkbox" value="" class="mr-2">사번 번호 기억하기</label>
+                           <label><input type="checkbox" value="" class="mr-2">사원 번호 기억하기</label>
                         </div>
                    </div>
 				<div class="form-group">
-                 <input type="submit" value="로그인"  class="btn btn-primary py-3 px-4">
-                 <br>
-                 <span data-toggle="modal" data-target="#add-new-event" style="cursor:pointer;">이메일 인증하기</span>
+	                 <input type="button" value="로그인"  onclick="login();" class="btn btn-primary py-3 px-4">
+	                 <br>
+	                 <span data-toggle="modal" data-target="#add-new-event" style="cursor:pointer;">이메일 인증하기</span>
                </div>
 		</form>
                </div>

@@ -10,7 +10,7 @@ public interface LoginDao {
 	//로그인 시도 횟수 증가
 	public int updateFailureCount(int username) throws ClassNotFoundException, SQLException;
 	//로그인 실패 횟수 가져오기
-	public int checkFailureCount(int username) throws ClassNotFoundException, SQLException;
+	public Integer checkFailureCount(int username) throws ClassNotFoundException, SQLException;
 	//유저 잠금처리
 	public int disabledUsername(int str) throws ClassNotFoundException, SQLException;
 

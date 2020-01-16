@@ -41,7 +41,6 @@ $(function(){
 	//현재시간 정수로 비교해 알람창 띄어주기
 	var timeCheck=setInterval(function(){
 		integerTime=parseInt(getTimeStamp());
-		console.log(integerTime);
 		if(integerTime == 85600 && isStart == false){
 			clearInterval(timeCheck);
 			notify();
