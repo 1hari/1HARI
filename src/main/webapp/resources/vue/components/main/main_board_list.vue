@@ -13,11 +13,10 @@
 							<table class="table table-hover" id='board_list'>
 								<thead>
 									<tr>
-										<th class="text-center w-20">글번호</th>
-										<th class="text-center w-15 d-none d-xl-table-cell">제목</th>
-										<th class="text-center w-15 d-none d-xl-table-cell">작성날짜</th>
-										<th class="text-center w-15 d-none d-xl-table-cell">작성날짜</th>
-										<th class="text-center w-15 d-none d-xl-table-cell">작성날짜</th>
+											<th class="text-center w-25">글번호</th>
+											<th>제목</th>
+											<th class="text-center w-25 d-none d-xl-table-cell">작성날짜</th>
+										
 									</tr>
 								</thead>
 								<tbody>
@@ -29,7 +28,7 @@
 								</tbody>
 							</table>
 							
-							<router-link :to="'/board_main/' + board_idx +'/1'" class="btn m-t-5 btn-info btn-block waves-effect waves-light" style = "width: 20%;">더보기</router-link>
+							<router-link :to="'/board_main/' + board_idx +'/1'" class="btn m-t-5 btn-info btn-block waves-effect waves-light">더보기</router-link>
 						</div>
 					</div>
 				</div>
@@ -59,7 +58,7 @@ module.exports={
 	  var params = new URLSearchParams()
 	  params.append('board_idx', this.board_idx)
 
-	  axios.post('get_top5_list.do', params).then((response)=>{
+	  axios.post('get_top5_list.hari', params).then((response)=>{
 		  this.server_data=response.data
 	  })
 

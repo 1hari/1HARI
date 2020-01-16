@@ -4,7 +4,7 @@
     <div class="card shadow" style=" height: 500%;">
       <div class="card-body" style="height:700px;">
 
-        <h4 class="card-title">{{server_data.boardName}}</h4> <!--게시판 이름 위에 서비스에서 지정한 이름으로 서버 데이타   가져오기 -->
+        <h4 class="card-title">{{server_data.board_info_name}}</h4> <!--게시판 이름 위에 서비스에서 지정한 이름으로 서버 데이타   가져오기 -->
         <table class="table table-hover" id="board_list" >
           <thead>
             <tr>

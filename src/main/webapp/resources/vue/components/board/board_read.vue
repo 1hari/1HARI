@@ -78,7 +78,7 @@ module.exports = {
     params.append('content_idx', this.$route.params.content_idx)
     console.log(this.$route.params.content_idx)
 	
-    axios.post('get_content.do', params).then((response)=>{
+    axios.post('get_content.hari', params).then((response)=>{
       this.server_data=response.data
       console.log(response.data.content_date)
     })

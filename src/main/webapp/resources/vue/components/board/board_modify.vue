@@ -94,7 +94,7 @@ module.exports = {
         params.append('content_file', $('#board_file')[0].files[0])
       }
 
-      axios.post('modify_content.do', params).then((response)=>{
+      axios.post('modify_content.hari', params).then((response)=>{
         if(response.data.result == true){
           alert('수정되었습니다.')
           this.$router.push('/board_read/' + this.$route.params.board_idx + '/' + this.$route.params.page + '/' + this.$route.params.content_idx)
@@ -105,7 +105,7 @@ module.exports = {
   created() {
     var params=new URLSearchParams();
     params.append('content_idx', this.$route.params.content_idx)
-    axios.post('get_content.do', params).then((response)=>{
+    axios.post('get_content.hari', params).then((response)=>{
       this.server_data = response.data
     })
   },
