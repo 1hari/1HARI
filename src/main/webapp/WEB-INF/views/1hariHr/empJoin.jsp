@@ -103,8 +103,7 @@
 							</div>
 							<div>
 								<label for="birthFull" style="margin-top: 10px; margin-bottom: 0px;">생년월일</label> 
-								<input type="text" id="birth" name="birth" class="required form-control datepicker-autoclose" placeholder="yymmdd">
-								<div class="input-group-append"></div>
+								<input type="text" id="birth" name="birth" class="required form-control birthdatepicker" placeholder="yymmdd">
 							</div>
 							<div>
 								<label for="resNum" style="margin-top: 10px; margin-bottom: 0px;">주민등록번호</label>
@@ -145,7 +144,7 @@
 							</select>
 							<div>
 								<label for="hireDate" style="margin-top: 10px; margin-bottom: 0px;">입사일</label>
-								<input type="text" id="hireDate" name="hireDate" class="form-control mydatepicker" placeholder="yyyy-mm-dd">
+								<input type="text" id="hireDate" name="hireDate" class="form-control hiredatepicker" placeholder="yyyy-mm-dd">
 							</div>
 						</section>
 
@@ -201,7 +200,7 @@
 ****************************************/
 /*datepicker*/
 	$(function() {
-		$('.mydatepicker').datepicker(
+		$('.hiredatepicker').datepicker(
 			{
 				format: "yyyy-mm-dd", // 입사일 Date 형식
 				autoclose: true,
@@ -209,7 +208,7 @@
 			}
 		);
 		
-		$('.datepicker-autoclose').datepicker(
+		$('.birthdatepicker').datepicker(
 			{
 				format: "yymmdd", // 생년월일 Date 형식
 				autoclose: true,
@@ -273,7 +272,44 @@
 				$("#employmentSelect").append(employment);
 			}
 		});
-	});
+
+		let phoneNum = /^\d{3}-\d{3,4}-\d{4}$/; // 핸드폰번호 정규표현식
+		
+		<!-- 휴대폰번호 입력 -->
+		$('#phoneNum').keyup(function() {
+			if (phoneNum.test($('#userPhone').val())) { //정규표현식에 맞으면
+				$('.tdphone').text("");
+			} else {
+				$('.tdphone').text("휴대폰번호 형식이 잘못되었습니다.");
+			}
+		});
+
+		function inputPhoneNumber(obj) {
+			var number = obj.value.replace(/[^0-9]/g, "");
+			var phone = "";
+
+			if(number.length < 4) {
+				return number;
+			} else if(number.length < 7) {
+				phone += number.substr(0, 3);
+				phone += "-";
+				phone += number.substr(3);
+			} else if(number.length < 11) {
+				phone += number.substr(0, 3);
+				phone += "-";
+				phone += number.substr(3, 3);
+				phone += "-";
+				phone += number.substr(6);
+			} else {
+				phone += number.substr(0, 3);
+				phone += "-";
+				phone += number.substr(3, 4);
+				phone += "-";
+				phone += number.substr(7);
+			}
+			obj.value = phone;
+		}
+	})
 </script>
 <!-- this page js , 1단계 2단계 3단계 제출 구성 쿼리 필수! 지우지 마세요 -->
 <script src="${pageContext.request.contextPath}/resources/hari/assets/libs/jquery-steps/build/jquery.steps.min.js"></script>
