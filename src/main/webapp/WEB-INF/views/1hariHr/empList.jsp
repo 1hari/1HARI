@@ -185,6 +185,10 @@
 	****************************************/
 	$('#zero_config').DataTable();
 
+	$('#excelUpload').on('click', function(e) {
+		var popUp = excelUpload();
+	})
+	
 	/* Excel Upload / Download를 위한 script */
 	function checkFileType(filePath) {
 		var fileFormat = filePath.split(".");
@@ -207,5 +211,9 @@
 		var form = document.empTable;
 		form.action = "${pageContext.request.contextPath}/util/personnel/excelDownload.hari";
 		form.submit();
+	}
+
+	function reload() {
+		window.location.reload();
 	}
 </script>
