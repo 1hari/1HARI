@@ -200,6 +200,8 @@ public class HrRestController {
 			totalTime = empSercive.getTodayTotalTime(pri.getName());
 			if(totalTime==null) {
 				totalTime="empty";
+			}else {
+				System.out.println("totalTime: " + totalTime);
 			}
 		} catch (Exception e) {
 			log.debug("getTodayTotalTime 예외발생: " + e.getMessage());

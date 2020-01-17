@@ -138,12 +138,12 @@
     <select id="getWorkTime" resultType="String">
 		SELECT DATE_FORMAT(SEC_TO_TIME((SELECT TIME_TO_SEC(NOW()) - (SELECT TIME_TO_SEC((SELECT tadate FROM talist AS temp WHERE EMPNUM=#{empNum} AND tacode=1 AND DATE(tadate) = DATE(NOW())))))),"%H:%i")
     </select>
-    <!-- 오늘총 근무시간-->
+    <!-- 퇴근 후 오늘 근무시간-->
     <select id="getTodayTotalTime" resultType="String">
 		SELECT DATE_FORMAT(SEC_TO_TIME((SELECT TODAYWORK FROM TALIST WHERE EMPNUM=#{empNum} AND TACODE=2 AND DATE(TADATE)=DATE(NOW()))),"%H:%i")
     </select>
     
-    <!-- 이번주 총 근무시간-->
+    <!--퇴근 전 현재까지 이번주 총 근무시간-->
     <select id="getWeekTotalTime" resultType="String">
 		SELECT DATE_FORMAT(SEC_TO_TIME((SELECT SUM(TODAYWORK) FROM TALIST
 		WHERE YEARWEEK(TADATE) = YEARWEEK(NOW()) AND EMPNUM=#{empNum}) 
@@ -151,14 +151,13 @@
 		- TIME_TO_SEC((SELECT tadate FROM talist AS temp WHERE EMPNUM=#{empNum} AND tacode=1 AND DATE(tadate) = DATE(NOW())))),"%H:%i")
     </select>
     
-    <!-- 총 근무시간-->
+    <!-- 현재까지 총 근무시간-->
 	<select id="getTotalTime" resultType="String">
-		SELECT DATE_FORMAT(SEC_TO_TIME((SELECT SUM(TODAYWORK) FROM TALIST WHERE EMPNUM=#{empNum})
-		+ TIME_TO_SEC(NOW()) 
-		- TIME_TO_SEC((SELECT tadate FROM talist AS temp WHERE EMPNUM=#{empNum} AND tacode=1 AND DATE(tadate) = DATE(NOW())))),"%H:%i")
+		SELECT SEC_TO_TIME((SELECT SUM(TODAYWORK) FROM TALIST WHERE EMPNUM=#{empNum}) + TIME_TO_SEC(NOW()) 
+		- TIME_TO_SEC((SELECT TADATE FROM TALIST AS TEMP WHERE EMPNUM=#{empNum} AND TACODE=1 AND DATE(TADATE) = DATE(NOW()))));
     </select>
     
-    <!-- 이번주 총 근무시간-->
+    <!-- 퇴근 후 이번주 총 근무시간-->
     <select id="getWeekWorkTime" resultType="String">
       SELECT DATE_FORMAT(SEC_TO_TIME((SELECT SUM(TODAYWORK) FROM TALIST
       WHERE YEARWEEK(TADATE) = YEARWEEK(NOW()) AND EMPNUM=#{empNum})),"%H:%i")
@@ -166,7 +165,8 @@
     
     <!-- 총 근무시간-->
    <select id="getTotalWorkTime" resultType="String">
-      SELECT DATE_FORMAT(SEC_TO_TIME((SELECT SUM(TODAYWORK) FROM TALIST WHERE EMPNUM=#{empNum})),"%H:%i")
+		SELECT SEC_TO_TIME((SELECT SUM(TODAYWORK) FROM TALIST
+		WHERE EMPNUM=#{empNum} AND tacode=2))
     </select>
     
     <!-- dataDate 캘린더에 필요-->
