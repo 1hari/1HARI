@@ -186,7 +186,7 @@ $(function(){
 		}
 	})
 	
-	//출근버튼
+	//출근버튼 + 캘린더
 	$('#startWork').click(function() {
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(function(position) {
@@ -197,6 +197,7 @@ $(function(){
 					alert('위치정보가 다릅니다. 로그인 실패');
 					return;
 				}
+				//캘린더
 				$.ajax({
 					url: "${pageContext.request.contextPath}/ajax/getDataDate.hari",
 					type: "post",
@@ -205,8 +206,9 @@ $(function(){
 						var itemArray=document.querySelectorAll('.fc-day.fc-widget-content');
 						for(var i=0;i<itemArray.length;i++){
 							if($(itemArray[i]).attr('data-date') == dataDate.trim()){
+								console.log($(itemArray[i]).attr('data-date'));
 								$(itemArray[i]).removeAttr("td");
-								$(itemArray[i]).append('<br><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-warning fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">Event Four</span></div><div class="fc-resizer fc-end-resizer"></div></a></td>');
+								$(itemArray[i]).append('<br><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-warning fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">출근</span></div><div class="fc-resizer fc-end-resizer"></div></a></td>');
 							}
 				        }
 					}
@@ -321,14 +323,16 @@ $(function(){
 		dataType: "json",
 		success: function(getStartList) {
 			var itemArray=document.querySelectorAll('.fc-day.fc-widget-content');
+// 			console.log(getStartList);
 			for(var i=0; i<itemArray.length; i++){
 				for(var j=0; j<getStartList.length; j++){
+					console.log(getStartList[i]);
 					if($(itemArray[i]).attr('data-date') == getStartList[j]){
 						$(itemArray[i]).append('<br><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-warning fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">출근</span></div><div class="fc-resizer fc-end-resizer"></div></a></td>');
 					}
 				}
 			}
-			//이번달 출근기록 yyyy-mm-dd
+			//이번달 퇴근기록 yyyy-mm-dd
 			$.ajax({
 				url: "${pageContext.request.contextPath}/ajax/getEndList.hari",
 				type: "post",
@@ -416,7 +420,7 @@ $(function(){
 //     			}
 //     		});
 //     });
-	var itemArray=document.querySelectorAll('#theme');
+	
     $('.demo').each(function() {
     $(this).minicolors({
             control: $(this).attr('data-control') || 'hue',
@@ -432,6 +436,7 @@ $(function(){
 			    		data: {"color": value},
 			    		dataType: "text",
 			    		success: function(setThemeColor) {
+			    			var itemArray3=document.querySelectorAll('#theme');
 			    			if(setThemeColor >0){
 			    		 		$.ajax({
 			    	 			url: "${pageContext.request.contextPath}/ajax/getThemeColor.hari",
