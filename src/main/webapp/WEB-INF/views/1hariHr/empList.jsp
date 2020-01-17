@@ -208,4 +208,8 @@
 		form.action = "${pageContext.request.contextPath}/util/personnel/excelDownload.hari";
 		form.submit();
 	}
+
+	function reload() {
+		window.location.reload();
+	}
 </script>

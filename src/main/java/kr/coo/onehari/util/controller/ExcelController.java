@@ -31,7 +31,10 @@ public class ExcelController {
 	private ExcelService excelService;
 
 	@RequestMapping(value = "personnel/excelUpload.hari", method = RequestMethod.GET)
-	public String excelForm() {
+	public String excelForm(String isOk, String msg, Model model) {
+		model.addAttribute("isOk", isOk);
+		model.addAttribute("msg", msg);
+		
 		return "1hariPopUp.excelUploadForm";
 	}
 
@@ -51,7 +54,9 @@ public class ExcelController {
 	
 	@RequestMapping(value = "personnel/insertExcelEmp.hari", method = RequestMethod.POST)
 	public String insertExcelEmp(ExcelEmpDto excelemp, Model model) {
-		String view = "";
+		String isOk = "";
+		String msg = "";
+		
 		int result = 0;
 		EmpDto emp = new EmpDto();
 		
@@ -67,11 +72,17 @@ public class ExcelController {
 		}
 		
 		if (result > 0) {
-			model.addAttribute("result", result);
+			isOk = "true";
+			msg = "입력성공";
 		} else {
-			model.addAttribute("result", result);
+			isOk = "false";
+			msg = "입력실패";
 		}
-		return view;
+		
+		model.addAttribute("isOk", isOk);
+		model.addAttribute("msg", msg);
+		
+		return "1hariPopUp.excelUploadForm";
 	}
 	
 	@RequestMapping(value = "personnel/excelDownload.hari", method = RequestMethod.POST)
