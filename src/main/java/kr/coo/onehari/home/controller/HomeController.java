@@ -147,7 +147,7 @@ public class HomeController {
 			System.out.println("updatePassword 예외발생: " + e.getMessage());
 			log.debug("updatePassword 예외발생: " + e.getMessage());
 		}
-		return "redirect:../index.hari";
+		return "redirect: index.hari";
 	}
 	
 	//형남 0117 비밀번호 초기화, 변경
@@ -163,7 +163,5 @@ public class HomeController {
 		}
 		return result;
 	}
-	
-	
 }
 

@@ -57,7 +57,7 @@
                data:{
                    			"empNum": $('#empNum').val(),
                    			"email": $('#email').val()
-                			},
+               			},
                dataType: "text",
                success: function(data) {
                //있으면 true, 없으면 false
@@ -106,11 +106,22 @@
          }
       });
       
-      if(pwck_check && pw_check && email_check){
-         $('#updatePassword').removeAttr('disabled');   
-      }
+
+      
+
+  	$('#updatePassword').click(function(){
+        if(pwck_check && pw_check && email_check){
+    		$('#add-new-event').modal("hide");
+    		$('#update').submit();
+    		alert("비밀번호가 변경되었습니다.");
+         } else{
+       	  alert("비밀번호가 일치하지 않습니다.");
+         }
+
+	})
    });
 
+	
 
 	//로그인
 	function login(){
@@ -126,6 +137,8 @@
 		}
        $('#loginform').submit();
    }
+
+
 
 </script>
 
@@ -170,9 +183,8 @@
 	                 <span data-toggle="modal" data-target="#add-new-event" style="cursor:pointer;">이메일 인증하기</span>
                </div>
 		</form>
-               </div>
+           </div>
                <!--로그인 화면 끝 -->
-               
                
                <!--이메일 인증 모달 -->
          <div id="add-new-event" class="modal modal-wide fade">
@@ -183,7 +195,7 @@
                      <button type="button" class="close" id="closeModal"data-dismiss="modal" aria-hidden="true">×</button>
                   </div>
                   <div class="modal-body">
-                     <form action="${pageContext.request.contextPath}/1hariMy/updatePassword.hari" method="post">
+                     <form action="${pageContext.request.contextPath}/updatePassword.hari" method="post" id="update">
                         <div class="input-group">
                            <span class="input-group-addon" style="color:#20B2AA"><small>&nbsp;</small><i class="fa fa-user fa-3x"></i></span>
                            <small>&nbsp;&nbsp;</small>
@@ -205,7 +217,7 @@
                         <br>
                         <br>
                         <div style="text-align:center;">
-                           <button type="submit" id="updatePassword" class="btn btn-primary py-3 px-4" disabled="disabled">변경하기</button>
+                           <button type="button" id="updatePassword" class="btn btn-primary py-3 px-4" disabled="disabled">변경하기</button>
                         </div>
                      </form>
                   </div>

@@ -9,7 +9,8 @@
 	<update id="updatePassword">
 		 <![CDATA[
 			UPDATE EMP
-			SET PASSWORD = #{param2}
+			SET PASSWORD = #{param2},
+			ISLOCK=1
 			WHERE EMPNUM =#{param1}
 		]]>
 	</update>

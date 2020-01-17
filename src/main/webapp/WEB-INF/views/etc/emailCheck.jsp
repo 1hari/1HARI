@@ -25,6 +25,7 @@
 					$('#newPassword', parent.opener.document).removeAttr('disabled');
 					$('#newPassword2', parent.opener.document).removeAttr('disabled');
 					$('#chagePassword', parent.opener.document).removeAttr('disabled');
+					$('#updatePassword', parent.opener.document).removeAttr('disabled');
 					$('#emailSend', parent.opener.document).attr('disabled', 'disabled');
 					$('#email', parent.opener.document).attr("readonly", "readonly");
 					$('#emailcheck', parent.opener.document).text("이메일 인증이 완료되었습니다.");
