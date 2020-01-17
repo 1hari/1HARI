@@ -17,7 +17,7 @@ var router = new VueRouter({
 			component : httpVueLoader(contextPath+'/resources/vue/components/main/main.vue')
 		},
 		{
-			path : '/board_main/:boardCode/:page', // 파라미터 경로들, 부모자식간의 관계 절대 결로지정이 아니고 상대 경로 
+			path : '/board_main/:board_idx/:page',
 			component : httpVueLoader(contextPath+'/resources/vue/components/board/board_main.vue')
 		},
 		{
@@ -35,14 +35,14 @@ var router = new VueRouter({
 				var params = new URLSearchParams()
 				params.append('content_idx', to.params.content_idx)
 
-				axios.post('delete_content.do', params).then((response) =>{
+				axios.post('delete_content.hari', params).then((response) =>{
 					alert('삭제되었습니다.')
 					next('/board_main/' + to.params.board_idx+'/'+to.params.page)
 				})
 			}
 		},
 		{
-			path : '/board_write/:boardCode/:page/:content_idx',
+			path : '/board_write/:board_idx',
 			component : httpVueLoader(contextPath+'/resources/vue/components/board/board_write.vue')
 		},
 		{

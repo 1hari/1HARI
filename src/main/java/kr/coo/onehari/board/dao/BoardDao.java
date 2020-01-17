@@ -27,29 +27,29 @@ public interface BoardDao {
 	
 	// 0116 목 김수연 시작 
 	//보드 정보 불러오기
-	public List<BoardType> getBoardInfo();
+	//public List<BoardType> getBoardInfo();
 	//컨텐츠 리스트 가져오기
-	public List<Board> getBoardList(int boardIdx,int idxMin, int idxMax);
+	//public List<Board> getBoardList(int boardIdx,int idxMin, int idxMax);
 	//게시판 번호로 게시판 정보 가져오기(컨텐츠 리스트 가져오기에 포함)
-	public BoardType getBoardInfoByIdx(int boardIdx);
+	//public BoardType getBoardInfoByIdx(int boardIdx);
 	//게시판 페이지 하단부분
-	public int getContentCount(int boardIdx);
+	//public int getContentCount(int boardIdx);
 	//컨텐츠 리스트 가져오기 TOP5
-	public List<Board> getTop5List(int boardIdx);
+	//public List<Board> getTop5List(int boardIdx);
 	
 	//컨텐츠 추가 (Create1)
 	public int addContent(Board content);
 	//추가한 컨텐츠 번호 가져오기 (Create2)
-	public int getContentIdx();
+	//public int getContentIdx();
 	
 	//컨텐츠 가져오기(Read)
-	public Board getContent(int contentIdx);
+	//public Board getContent(int contentIdx);
 	//컨텐츠 수정하기 (Modify)
-	public int modifyContent(Board content);
+	//public int modifyContent(Board content);
 	//이미 파일이 있던 컨텐츠 수정하기 (Modify)
-	public int modifyContentFile(Board content);
+	//public int modifyContentFile(Board content);
 	//컨텐츠 삭제하기 (Delete)
-	public int deleteContent(int contentIdx);
+	//public int deleteContent(int contentIdx);
 
 }
 	

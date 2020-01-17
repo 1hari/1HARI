@@ -5,18 +5,59 @@
  
 <mapper namespace="kr.coo.onehari.board.dao.BoardDao">
 
-	<!-- 글쓰기 등록 (공지사항 게시판 ) 김수연 2020. 1. 14  화-->
-	<insert id="addContent" parameterType="kr.coo.onehari.board.dto.Board">
-		INSERT INTO BOARD (BOARDTITLE, BOARDCONTENT, WRITER, BOARDWRITEDATE)
-		VALUES(#{boardTitle}, #{boardContent}, #{writer}, #{boardWriteDate}) 
-	</insert>
 	
 	<!-- 게시판 정보 가져오기(탑바) -->
-	<select id="getBoardInfo" resultType="kr.coo.onehari.board.dto.BoardType">
+<!-- 	<select id="getBoardInfo" resultType="kr.coo.onehari.board.dto.BoardType">
 		SELECT BOARDCODE, BOARDNAME FROM BOARDTYPE ORDER BY BOARDCODE
 	</select>
+	 -->
+	<!-- 컨텐츠 리스트 가져오기 -->
+<!-- 	<select id="getBoardList" resultType="kr.coo.onehari.board.dto.Board">
+		<![CDATA[select p2.* from 
+						(select rownum as num, p1.* from 
+						(select a1.content_idx, a1.content_subject, to_char(a1.content_date, 'YYYY-MM-DD') as content_date, a2.user_name 
+						from content_table a1, user_table a2 
+						where a1.content_writer_idx= a2.user_idx and a1.content_board_idx=#{param1} 
+						order by a1.content_idx desc) p1) p2 
+						where p2.num >=#{param2} and p2.num <=#{param3}]]>
+	</select> -->
 	
+	<!-- 게시판 번호로 게시판 가져오기 -->
+<!-- 	<select id="getBoardInfoByIdx" resultType="kr.coo.onehari.board.dto.BoardType">
+		SELECT BOARDNAME FROM BOARDTYPE WHERE BOARDCODE=#{board_idx}
+	</select> -->
 	
+	<!-- 해당 게시판의 총 갯수 가져오기 -->
+	<!-- <select id="getContentCount" resultType="Integer">
+		SELECT COUNT(*) AS CNT FROM BOARD WHERE CONTENT_BOARD_IDX=#{board_idx}
+	</select> -->
+	
+		<!-- 컨텐츠 리스트 TOP5 가져오기 -->
+<!-- 	<select id="getTop5List" resultType="dto.Content">
+		<![CDATA[select p2.* from 
+						(select rownum as num, p1.* from 
+						(select a1.content_idx, a1.content_subject, to_char(a1.content_date, 'YYYY-MM-DD') as content_date, a2.user_name 
+						from content_table a1, user_table a2 
+						where a1.content_writer_idx= a2.user_idx and a1.content_board_idx=#{board_idx} 
+						order by a1.content_idx desc) p1) p2 
+						where p2.num >=1 and p2.num <=5]]>
+	</select> -->
+	
+	<!-- 아래부터 수정중...  -->
+	<!-- 컨텐츠 추가-->
+	<insert id="addContent" parameterType="kr.coo.onehari.board.dto.Board">
+		INSERT INTO BOARD (BOARDNUM, WRITER, BOARDCODE, BOARDTITLE, BOARDCONTENT, ISBDEL)
+		VALUES(#{boardNum},#{writer}, #{boardCode}, #{boardTitle}, #{boardContent}, #{isBDel})
+	</insert>
+
+	
+	<!-- 컨텐츠 가져오기(Read) -->
+<!-- 	<select id="getContent" resultType="kr.coo.onehari.board.dto.Board">
+		SELECT A1.CONTENT_IDX, A1.CONTENT_SUBJECT, A1.CONTENT_TEXT, A1.CONTENT_FILE, A1.CONTENT_WRITER_IDX, A2.USER_NAME, TO_CHAR(A1.CONTENT_DATE, 'YYYY-MM-DD') AS CONTENT_DATE 
+		FROM CONTENT_TABLE A1, USER_TABLE A2 
+		WHERE A1.CONTENT_WRITER_IDX=A2.USER_IDX 
+		AND A1.CONTENT_IDX=#{contentIdx}
+	</select> -->
 	
 	
 	

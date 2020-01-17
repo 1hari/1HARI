@@ -6,34 +6,29 @@
         <div class="card shadow">
           <div class="card-body">
             <div class="form-group">
-              <label for="boardTitle">제목</label>
-              <input type="text" id="boardTitle" v-model="boardTitle" class="form-control" />
+              <label for="board_subject">제목</label>
+              <input type="text" id="board_subject" v-model="board_subject" class="form-control" />
             </div>
-            
             <div class="form-group">
-              <label for="boardContent">내용</label>
+              <label for="board_content">내용</label>
               <textarea
-                id="boardContent"
-                v-model="boardContent"
+                id="board_content"
+                v-model="board_content"
                 class="form-control"
                 rows="10"
                 style="resize:none"
               ></textarea>
             </div>
-             <div class="form-group">
-              <label for="boardWriter">작성자</label>
-              <input type="text" id="boardWriter" class="form-control" /><!--v-model="board_subject" -->
-            </div>
-             <div class="form-group">
-              <label for="bWriteDate">작성일</label>
-              <input type="text" id="bWriteDate"  class="form-control" /><!--v-model="board_subject" -->
+              <div class="form-group">
+              <label for="content_writer_name">작성자</label>
+              <input type="text" id="content_writer_name" v-model="content_writer_name" class="form-control" />
             </div>
             <div class="form-group">
-              <label for="boardFileName">첨부 이미지</label>
+              <label for="board_file">첨부 이미지</label>
               <input
                 type="file"
-                id="boardFileName"
-                name="boardFileName"
+                id="board_file"
+                name="board_file"
                 class="form-control"
                 accept="image/*"
               />
@@ -54,40 +49,40 @@
 module.exports = {
   data: function() {
     return {
-      boardTitle: "",
-      boardContent: ""
+      board_subject: "",
+      board_content: "",
+      content_writer_name: ""
     };
   },
 
   methods: {
     check_input: function() {
-      if (this.boardTitle.length == 0) {
+      if (this.board_subject.length == 0) {
         alert("제목을 입력해주세요");
-        $("#boardTitle").focus();
+        $("#board_subject").focus();
         return;
       }
-      if (this.boardContent.length == 0) {
+      if (this.board_content.length == 0) {
         alert("내용을 입력해주세요");
-        $("#boardContent").focus();
+        $("#board_content").focus();
         return;
       }
 
       var params = new FormData(); //파일까지 보낼 땐 formdata, 문자열만 보낼땐 urlsearchparams 사용
       //params.append('content_writer_idx', this.$store.state.user_idx)
-      params.append('boardTitle', this.boardTitle)
-      params.append('boardContent', this.boardContent)
-      params.append('boardWriter', this.boardWriter)
-      params.append('bWriteDate', this.bWriteDate)
-      params.append('boardFileName', $('#boardFileName')[0].files[0])
-      params.append('boardNum', this.$route.params.boardNum)
+      params.append('boardTitle', this.board_subject)
+      params.append('boardContent', this.content_text)
+      params.append('writer', parseInt(this.content_writer_name))
+    //  params.append('boardFileName', $('#board_file')[0].files[0])
+    //  params.append('content_board_idx', this.$route.params.board_idx)
 
-      axios.post('boardList.hari', params).then((response) =>{ //컨트롤러로 보냄 
+      axios.post('add_content.hari', params).then((response) =>{
         if(response.data.result==true){
           alert('저장되었습니다.')
-            this.$router.push('/board_read/' + this.$route.params.boardCode + '/1/' + response.data.boardNum) //넘어가는 view단.. 보내는 곳 
-        }else{                                                //게시판 번호                                                             //글번호 
+          this.$router.push('/board_read/' + this.$route.params.board_idx + '/1/' + response.data.content_idx)
+        }else{
           alert('작성실패' + response.data.result)
-        } 
+        }
       })
     }
   }
