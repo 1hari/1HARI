@@ -10,16 +10,9 @@
 
 <!--datepicker link 필수 !!! -->
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/hari/assets/libs/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/hari/assets/libs/quill/dist/quill.snow.css">
-
-<!--datepicker link 필수 end-->
-<link href="${pageContext.request.contextPath}/resources/hari/dist/css/style.min.css" rel="stylesheet">
 
 <!--아래 사원 등록에서 필요한 js -->
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<!--필수 js 지우지 말기 -->
+<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
 
 <!-- this page js , 1단계 2단계 3단계 제출 구성 쿼리 필수! 지우지 마세요 -->
 <script src="${pageContext.request.contextPath}/resources/hari/assets/libs/jquery-steps/build/jquery.steps.min.js"></script>
@@ -91,88 +84,85 @@
 
 	<!-- ============================================================== -->
 	<div class="container-fluid">
-		<!-- ============================================================== -->
-		<!-- Start Page Content -->
-		<!-- ============================================================== -->
-		<div class="card">
-			<div class="card-body wizard-content">
-				<h6 class="card-subtitle"></h6>
-				<form id="example-form" action="" class="m-t-40" name="joinform" method="post">
-					<div>
-						<h3>사원 정보</h3>
-						<section>
+		<div class="row">
+			<div class="col-12">
+				<!-- ============================================================== -->
+				<!-- Start Page Content -->
+				<!-- ============================================================== -->
+				<div class="card">
+					<div class="card-body wizard-content">
+						<h6 class="card-subtitle"></h6>
+						<form id="example-form" action="" class="m-t-40" name="joinform" method="post">
 							<div>
-								<label for="empName" style="margin-top: 10px; margin-bottom: 0px;">이름</label> 
-								<input id="empName" name="empName" type="text" class="required form-control"> 
+								<h3>사원 정보</h3>
+								<section>
+									<div>
+										<label for="empName" style="margin-top: 10px; margin-bottom: 0px;">이름</label> 
+										<input id="empName" name="empName" type="text" class="required form-control"> 
+									</div>
+									<div>
+										<label for="birthFull" style="margin-top: 10px; margin-bottom: 0px;">생년월일</label> 
+										<input type="text" id="birth" name="birth" class="required form-control birthdatepicker" placeholder="yymmdd">
+									</div>
+									<div>
+										<label for="resNum" style="margin-top: 10px; margin-bottom: 0px;">주민등록번호</label>
+										<button type="button" class="btn btn-outline-success" style="padding-top: 0px; padding-bottom: 0px;" onclick="CheckForm()">확인</button><br>
+										<input type="password" id="resNum" name="resNum" class="required form-control" maxlength="7" placeholder="주민등록번호 뒷자리">
+									</div>
+									<div>
+										<label for="phoneNum" style="margin-top: 10px; margin-bottom: 0px;">핸드폰번호</label> 
+										<span class="checkPhoneNum" style="color: red;"></span>
+										<input id="phoneNum" name="phoneNum" type="text" class="required form-control" maxlength="13" 
+												placeholder="(-) 없이 숫자만 입력하세요">
+									</div>
+									<div>
+										<label for="email" style="margin-top: 10px; margin-bottom: 0px;">이메일</label>
+										<br><input id="email" name="email" type="text" class="required form-control" style="width: 50%; display: inline;">
+										<input type="text" class="form-control" style="width: 49%; display: inline;" value="@gmail.com" readonly="readonly">
+									</div>
+								</section>
+		
+								<h3>재직 정보</h3>
+								<section>
+									<label for="teamCode">소속</label> 
+									<select class="required form-control" id="teamSelect" name="teamCode" style="height: 300%; margin-bottom: 1%;">
+										<option hidden>소속을 선택하세요</option>
+									</select> 
+									
+									<label for="positionCode">직책</label> 
+									<select class="required form-control" id="positionSelect" name="positionCode" style="height: 300%; margin-bottom: 1%;">
+										<option hidden>직책을 선택하세요</option>
+									</select> 
+									
+									<label for="rankcode">직급</label> 
+									<select class="required form-control" id="rankSelect" name="rankCode" style="height: 300%; margin-bottom: 1%;">
+										<option hidden>직급을 선택하세요</option>
+									</select> 
+									
+									<label for="employmentcode">재직구분</label> 
+									<select class="required form-control" id="employmentSelect" name="employmentCode" style="height: 300%; margin-bottom: 1%;">
+										<option hidden>재직 유형을 선택하세요</option>
+									</select>
+									<div>
+										<label for="hireDate" style="margin-top: 10px; margin-bottom: 0px;">입사일</label>
+										<input type="text" id="hireDate" name="hireDate" class="form-control hiredatepicker" placeholder="yyyy-mm-dd">
+									</div>
+								</section>
+		
+								<h3>Finish</h3>
+								<section>
+									<input id="acceptTerms" name="acceptTerms" type="checkbox" class="required">
+									<label for="acceptTerms">모든 입력정보를 확인하였으며, 사원등록을 완료하겠습니다.</label>
+								</section>
 							</div>
-							<div>
-								<label for="birthFull" style="margin-top: 10px; margin-bottom: 0px;">생년월일</label> 
-								<input type="text" id="birth" name="birth" class="required form-control birthdatepicker" placeholder="yymmdd">
-							</div>
-							<div>
-								<label for="resNum" style="margin-top: 10px; margin-bottom: 0px;">주민등록번호</label>
-								<button type="button" class="btn btn-outline-success" style="padding-top: 0px; padding-bottom: 0px;" onclick="CheckForm()">확인</button><br>
-								<input type="password" id="resNum" name="resNum" class="required form-control" maxlength="7" placeholder="주민등록번호 뒷자리">
-							</div>
-							<div>
-								<label for="phoneNum" style="margin-top: 10px; margin-bottom: 0px;">핸드폰번호</label> 
-								<span class="checkPhoneNum" style="color: red;"></span>
-								<input id="phoneNum" name="phoneNum" type="text" class="required form-control" maxlength="13" 
-										placeholder="(-) 없이 숫자만 입력하세요">
-							</div>
-							<div>
-								<label for="email" style="margin-top: 10px; margin-bottom: 0px;">이메일</label>
-								<br><input id="email" name="email" type="text" class="required form-control" style="width: 50%; display: inline;">
-								<input type="text" class="form-control" style="width: 49%; display: inline;" value="@gmail.com" readonly="readonly">
-							</div>
-						</section>
-
-						<h3>재직 정보</h3>
-						<section>
-							<label for="teamCode">소속</label> 
-							<select class="required form-control" id="teamSelect" name="teamCode" style="height: 300%; margin-bottom: 1%;">
-								<option hidden>소속을 선택하세요</option>
-							</select> 
-							
-							<label for="positionCode">직책</label> 
-							<select class="required form-control" id="positionSelect" name="positionCode" style="height: 300%; margin-bottom: 1%;">
-								<option hidden>직책을 선택하세요</option>
-							</select> 
-							
-							<label for="rankcode">직급</label> 
-							<select class="required form-control" id="rankSelect" name="rankCode" style="height: 300%; margin-bottom: 1%;">
-								<option hidden>직급을 선택하세요</option>
-							</select> 
-							
-							<label for="employmentcode">재직구분</label> 
-							<select class="required form-control" id="employmentSelect" name="employmentCode" style="height: 300%; margin-bottom: 1%;">
-								<option hidden>재직 유형을 선택하세요</option>
-							</select>
-							<div>
-								<label for="hireDate" style="margin-top: 10px; margin-bottom: 0px;">입사일</label>
-								<input type="text" id="hireDate" name="hireDate" class="form-control hiredatepicker" placeholder="yyyy-mm-dd">
-							</div>
-						</section>
-
-						<h3>Finish</h3>
-						<section>
-							<input id="acceptTerms" name="acceptTerms" type="checkbox" class="required">
-							<label for="acceptTerms">모든 입력정보를 확인하였으며, 사원등록을 완료하겠습니다.</label>
-						</section>
+						</form>
 					</div>
-				</form>
+				</div>
+				<!-- ============================================================== -->
+				<!-- End PAge Content -->
+				<!-- ============================================================== -->
 			</div>
 		</div>
-		<!-- ============================================================== -->
-		<!-- End PAge Content -->
-		<!-- ============================================================== -->
-		<!-- ============================================================== -->
-		<!-- Right sidebar -->
-		<!-- ============================================================== -->
-		<!-- .right-sidebar -->
-		<!-- ============================================================== -->
-		<!-- End Right sidebar -->
-		<!-- ============================================================== -->
 	</div>
 	<!-- ============================================================== -->
             <!-- End Container fluid  -->
@@ -185,17 +175,13 @@
 <!-- 이 페이지에서 꼭 필요한  js -->
 <script src="${pageContext.request.contextPath}/resources/hari/assets/extra-libs/multicheck/datatable-checkbox-init.js"></script>
 <script src="${pageContext.request.contextPath}/resources/hari/assets/extra-libs/multicheck/jquery.multicheck.js"></script>
-<script src="${pageContext.request.contextPath}/resources/hari/assets/extra-libs/DataTables/datatables.min.js"></script>
+
 <script src="${pageContext.request.contextPath}/resources/hari/assets/libs/inputmask/dist/min/jquery.inputmask.bundle.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/hari/dist/js/pages/mask/mask.init.js"></script>
 <script src="${pageContext.request.contextPath}/resources/hari/assets/libs/select2/dist/js/select2.full.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/hari/assets/libs/select2/dist/js/select2.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/hari/assets/libs/jquery-asColor/dist/jquery-asColor.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/hari/assets/libs/jquery-asGradient/dist/jquery-asGradient.js"></script>
-<script src="${pageContext.request.contextPath}/resources/hari/assets/libs/jquery-asColorPicker/dist/jquery-asColorPicker.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/hari/assets/libs/jquery-minicolors/jquery.minicolors.min.js"></script>
+
 <script src="${pageContext.request.contextPath}/resources/hari/assets/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/hari/assets/libs/quill/dist/quill.min.js"></script>
 
 <!-- SweetAlert -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

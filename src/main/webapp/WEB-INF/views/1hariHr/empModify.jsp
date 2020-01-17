@@ -8,17 +8,10 @@
 
 <!--datepicker link 필수 !!! -->
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/hari/assets/libs/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/hari/assets/libs/quill/dist/quill.snow.css">
-
-<!--datepicker link 필수 end-->
-<link href="${pageContext.request.contextPath}/resources/hari/dist/css/style.min.css" rel="stylesheet">
 
 <!--아래 3개는 사원 등록에서 필요한 js -->
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
 <script src="${pageContext.request.contextPath}/resources/hari/assets/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/hari/assets/libs/quill/dist/quill.min.js"></script>
 <!--필수 js 지우지 말기 -->
 
 <style>
@@ -94,89 +87,74 @@
 				<!-- 사원 등록 input div 시작 -->
 				<div class="container" style="background-color: #ffffff;">
 					<div class="row setup-content" id="step-1">
-						<div class="col-xs-12">
-							<div class="col-md-12">
-								<div class="container">
-									<div class="row">
-										<!--form 태그 시작 -->
-										<form action="" method="post">
-											<c:set var="emp" value="${requestScope.emp}" />
-											<!--왼쪽 input 태그들 -->
-											<div class="col-xs-12" style="margin-top: 3%;">
-												<div class="form-group">
-													<label for="empName">이름</label> 
-													<input type="text" id="empName" name="empName" class="form-control" value="${emp.empName}" readonly>
-												</div>
-												<div class="form-group">
-													<label for="empNum">사번</label> 
-													<input  type="text" id="empNum" name="empNum" class="form-control" value="${emp.empNum}" readonly>
-												</div>
-												<div class="form-group">
-													<label for="birth">생년월일</label>
-													<input type="text" id="birth" name="birth" class="form-control" value="${emp.birth}" readonly>
-												</div>
-												<div class="form-group">
-													<label for="email">이메일</label>
-													<input type="text" id="email" name="email" class="form-control" value="${emp.email}@gmail.com" readonly>
-												</div>
-												<div class="form-group">
-													<label for="phoneNum">핸드폰번호</label>
-													<input type="text" id="phoneNum" name="phoneNum" class="form-control" value="${emp.phoneNum}" placeholder="010-0000-0000" required>
-												</div>
-												<div class="form-group">
-													<label for="hireDate">입사일</label>
-													<input type="text" id="hireDate" name="hireDate" class="form-control" value="${emp.hireDate}" readonly>
-												</div>
-											</div>
-											<!--왼쪽 input 태그들 끝-->
-											<!--오른쪽 input 태그들 시작 -->
-											<div class="col-xs-12" style="margin-top: 3%;">
-												<div class="form-group">
-													<label for="teamCode">소속</label>
-													<select id="teamSelect" name="teamCode" class="form-control" style="height: 100%;" required>
-													</select>
-												</div>
-												<div class="form-group">
-													<label for="positionCode">직책</label>
-													<select id="positionSelect" name="positionCode" class="form-control" style="height: 100%;" required>
-													</select>
-												</div>
-												<div class="form-group">
-													<label for="rankCode">직급</label>
-													<select id="rankSelect" name="rankCode" class="form-control" style="height: 100%;" required>
-													</select>
-												</div>
-												<div class="form-group">
-													<label for="employmentCode">재직구분</label>
-													<select id="employmentSelect" name="employmentCode" class="form-control" style="height: 100%;" required>
-													</select>
-												</div>
- 												<se:authorize access="hasRole('ROLE_ADMIN')">
- 													<div class="form-group">
- 														<label for="roleName">권한</label>
- 														<select id="roleSelect" name="roleName" class="form-control" style="height: 100%;" required>
- 														</select>
- 													</div>
-												</se:authorize>
-												<div class="form-group">
-													<label>퇴사일</label>
-													<input type="text" class="form-control mydatepicker" placeholder="yyyy-mm-dd">
-												</div>
-											</div>
-											<!--오른쪽 input 태그들 끝-->
-											<input type="submit" class="form-control" value="수정">									
-										</form>
-											<!--폼 action 태그 끝 -->
+						<div class="col-md-12">
+							<!--form 태그 시작 -->
+							<form action="" method="post">
+								<c:set var="emp" value="${requestScope.emp}" />
+								<div class="col-md-12" style="margin-top: 3%;">
+									<div class="form-group">
+										<label for="empName">이름</label> 
+										<input type="text" id="empName" name="empName" class="form-control" value="${emp.empName}" readonly>
 									</div>
-									<!--div= "row" 끝 -->
-								</div>
-								<!--컨테이너 디브태그 끝 -->
-
-								<!--   <button href="#step-2" class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Next</button> -->
-							</div>
-							<!--   <div class="col-md-12"> 끝 -->
+									<div class="form-group">
+										<label for="empNum">사번</label> 
+										<input  type="text" id="empNum" name="empNum" class="form-control" value="${emp.empNum}" readonly>
+									</div>
+									<div class="form-group">
+										<label for="birth">생년월일</label>
+										<input type="text" id="birth" name="birth" class="form-control" value="${emp.birth}" readonly>
+									</div>
+									<div class="form-group">
+										<label for="email">이메일</label>
+										<input type="text" id="email" name="email" class="form-control" value="${emp.email}@gmail.com" readonly>
+									</div>
+									<div class="form-group">
+										<label for="phoneNum">핸드폰번호</label>
+										<input type="text" id="phoneNum" name="phoneNum" class="form-control" value="${emp.phoneNum}" placeholder="010-0000-0000" required>
+									</div>
+									<div class="form-group">
+										<label for="hireDate">입사일</label>
+										<input type="text" id="hireDate" name="hireDate" class="form-control" value="${emp.hireDate}" readonly>
+									</div>
+									<div class="form-group">
+										<label for="teamCode">소속</label>
+										<select id="teamSelect" name="teamCode" class="form-control" style="height: 100%;" required>
+										</select>
+									</div>
+									<div class="form-group">
+										<label for="positionCode">직책</label>
+										<select id="positionSelect" name="positionCode" class="form-control" style="height: 100%;" required>
+										</select>
+									</div>
+									<div class="form-group">
+										<label for="rankCode">직급</label>
+										<select id="rankSelect" name="rankCode" class="form-control" style="height: 100%;" required>
+										</select>
+									</div>
+									<div class="form-group">
+										<label for="employmentCode">재직구분</label>
+										<select id="employmentSelect" name="employmentCode" class="form-control" style="height: 100%;" required>
+										</select>
+									</div>
+									<se:authorize access="hasRole('ROLE_ADMIN')">
+	 									<div class="form-group">
+	 										<label for="roleName">권한</label>
+	 										<select id="roleSelect" name="roleName" class="form-control" style="height: 100%;" required>
+	 										</select>
+	 									</div>
+									</se:authorize>
+									<div class="form-group">
+										<label>퇴사일</label>
+										<input type="text" class="form-control mydatepicker" placeholder="yyyy-mm-dd">
+									</div>
+									
+									<input type="submit" class="form-control" value="수정">
+								</div>									
+							</form>
+							<!--폼 action 태그 끝 -->
 						</div>
-						<!--     <div class="col-xs-12"> 끝-->
+						<!--div= "row" 끝 -->
+						<!--   <button href="#step-2" class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Next</button> -->
 					</div>
 					<!-- <div class="row setup-content" id="step-1">끝 -->
 				</div>
@@ -196,19 +174,12 @@
 </div>
 <!--page-wrapper-->
 <!-- 이 페이지에서 꼭 필요한  js -->
-<script src="${pageContext.request.contextPath}/resources/hari/assets/extra-libs/multicheck/datatable-checkbox-init.js"></script>
 <script src="${pageContext.request.contextPath}/resources/hari/assets/extra-libs/multicheck/jquery.multicheck.js"></script>
-<script src="${pageContext.request.contextPath}/resources/hari/assets/extra-libs/DataTables/datatables.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/hari/assets/libs/inputmask/dist/min/jquery.inputmask.bundle.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/hari/dist/js/pages/mask/mask.init.js"></script>
 <script src="${pageContext.request.contextPath}/resources/hari/assets/libs/select2/dist/js/select2.full.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/hari/assets/libs/select2/dist/js/select2.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/hari/assets/libs/jquery-asColor/dist/jquery-asColor.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/hari/assets/libs/jquery-asGradient/dist/jquery-asGradient.js"></script>
-<script src="${pageContext.request.contextPath}/resources/hari/assets/libs/jquery-asColorPicker/dist/jquery-asColorPicker.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/hari/assets/libs/jquery-minicolors/jquery.minicolors.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/hari/assets/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/hari/assets/libs/quill/dist/quill.min.js"></script>
 
 <script>
 	/****************************************
