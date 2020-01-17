@@ -20,7 +20,11 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <!--필수 js 지우지 말기 -->
-	
+
+<!-- this page js , 1단계 2단계 3단계 제출 구성 쿼리 필수! 지우지 마세요 -->
+<script src="${pageContext.request.contextPath}/resources/hari/assets/libs/jquery-steps/build/jquery.steps.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/hari/assets/libs/jquery-validation/dist/jquery.validate.min.js"></script>
+
 <style>
 	.stepwizard-step p {
 		margin-top: 10px;
@@ -112,7 +116,9 @@
 							</div>
 							<div>
 								<label for="phoneNum" style="margin-top: 10px; margin-bottom: 0px;">핸드폰번호</label> 
-								<input id="phoneNum" name="phoneNum" type="text" class="required form-control" maxlength="13" placeholder="010-0000-0000">
+								<span class="checkPhoneNum" style="color: red;"></span>
+								<input id="phoneNum" name="phoneNum" type="text" class="required form-control" maxlength="13" 
+										placeholder="(-) 없이 숫자만 입력하세요">
 							</div>
 							<div>
 								<label for="email" style="margin-top: 10px; margin-bottom: 0px;">이메일</label>
@@ -194,7 +200,7 @@
 <!-- SweetAlert -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-<script>
+<script type="text/javascript">
 /****************************************
 *      필수 테이블 1. 데이터 테이블 , 2. datepicker 제이쿼리 스크립트 *
 ****************************************/
@@ -225,7 +231,6 @@
 				let team = "";
 				$.each(teamCodes, function(index, element) {
 					team += '<option value="' + element.teamCode + '">' + element.teamName + '</option>';
-					console.log(team);
 				})
 				$("#teamSelect").append(team);
 			}
@@ -239,7 +244,6 @@
 				let position = "";
 				$.each(positionCodes, function(index, element) {
 					position += '<option value="' + element.positionCode + '">' + element.positionName + '</option>';
-					console.log(position);
 				})
 				$("#positionSelect").append(position);
 			}
@@ -253,7 +257,6 @@
 				let rank = "";
 				$.each(rankCodes, function(index, element) {
 					rank += '<option value="' + element.rankCode + '">' + element.rankName + '</option>';
-					console.log(rank);
 				})
 				$("#rankSelect").append(rank);
 			}
@@ -267,28 +270,20 @@
 				let employment = "";
 				$.each(employmentCodes, function(index, element) {
 					employment += '<option value="' + element.employmentCode + '">' + element.employmentName + '</option>';
-					console.log(employment);
 				})
 				$("#employmentSelect").append(employment);
 			}
 		});
 
-		let phoneNum = /^\d{3}-\d{3,4}-\d{4}$/; // 핸드폰번호 정규표현식
-		
-		<!-- 휴대폰번호 입력 -->
-		$('#phoneNum').keyup(function() {
-			if (phoneNum.test($('#userPhone').val())) { //정규표현식에 맞으면
-				$('.tdphone').text("");
-			} else {
-				$('.tdphone').text("휴대폰번호 형식이 잘못되었습니다.");
-			}
-		});
+		/* 핸드폰번호 입력 유효성 검사 */
+		let phoneReg = /^\d{3}-\d{3,4}-\d{4}$/; // 핸드폰번호 정규표현식
 
-		function inputPhoneNumber(obj) {
-			var number = obj.value.replace(/[^0-9]/g, "");
+		/* 핸드폰번호 입력 시 자동 (-) 삽입  */
+		$('#phoneNum').keyup(function() {
+			var number = this.value.replace(/[^0-9]/g, "");
 			var phone = "";
 
-			if(number.length < 4) {
+			if (number.length < 4) {
 				return number;
 			} else if(number.length < 7) {
 				phone += number.substr(0, 3);
@@ -307,17 +302,16 @@
 				phone += "-";
 				phone += number.substr(7);
 			}
-			obj.value = phone;
-		}
+			this.value = phone;
+			
+			if (phoneReg.test($('#phoneNum').val())) { // 정규표현식 유효성 검사
+				$('.checkPhoneNum').text("");
+			} else {
+				$('.checkPhoneNum').text("핸드폰번호 형식이 잘못되었습니다.");
+			}
+		})
 	})
-</script>
-<!-- this page js , 1단계 2단계 3단계 제출 구성 쿼리 필수! 지우지 마세요 -->
-<script src="${pageContext.request.contextPath}/resources/hari/assets/libs/jquery-steps/build/jquery.steps.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/hari/assets/libs/jquery-validation/dist/jquery.validate.min.js"></script>
 
-    
-    
-<script>
     // Basic Example with form
 	var form = $("#example-form");
 	form.validate({
@@ -353,11 +347,7 @@
 		}
 	});
 
-	
-</script>
-
-<!-- 주민등록번호 유효성 체크 -->
-<script>
+	<!-- 주민등록번호 유효성 체크 -->
 	function CheckForm() {
 	
 		var birthday = joinform.birth.value;
