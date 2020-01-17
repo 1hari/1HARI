@@ -50,6 +50,45 @@ $(function(){
 		}
 	},1000);
 
+	//테마 색 바꾸기 ** 함수위치 고정!! 바꾸면 안됨**
+    $('.demo').each(function() {
+        $(this).minicolors({
+                control: $(this).attr('data-control') || 'hue',
+                change: function(value, opacity) {
+                    if (!value) return;
+                    if (opacity) value += ', ' + opacity;
+                    if (typeof console === 'object') {
+                        //console.log(value);
+						var itemArray5=document.querySelectorAll('#theme');
+    					$.ajax({
+    			    		url: "${pageContext.request.contextPath}/ajax/setThemeColor.hari",
+    			    		type: "post",
+    			    		data: {"color": value},
+    			    		dataType: "text",
+    			    		success: function(setThemeColor) {
+    			    			if(setThemeColor >0){
+    			    		 		$.ajax({
+	    			    	 			url: "${pageContext.request.contextPath}/ajax/getThemeColor.hari",
+	    			    	 			type: "post",
+	    			    	 			dataType: "text",
+	    			    	 			success: function(getThemeColor) {
+	    			    	 				console.log(getThemeColor);
+	    			    	 				for(var i=0;i<itemArray5.length;i++){
+	    	 			    					$(itemArray5[i]).css('background', getThemeColor);
+	    	 			    					$('#navbarSupportedContent').css('background', getThemeColor);
+	    	 			    					$('#sidebarnav').css('background', getThemeColor);
+    			    	 		     	   }
+    			    	 				}
+    			    	 			});
+        		        		}
+							}
+						});
+                    }
+                },
+			theme: 'bootstrap'
+         });
+	});
+	
 	//총 근무일
 	$.ajax({
 		url: "${pageContext.request.contextPath}/ajax/getTotalTA.hari",
@@ -59,6 +98,8 @@ $(function(){
 			$('#totalTA').append(totalTA);
 		}
 	});
+
+
 	
 	//오늘 퇴근기록 체크
 	$.ajax({
@@ -188,27 +229,28 @@ $(function(){
 	
 	//출근버튼 + 캘린더
 	$('#startWork').click(function() {
-		if (navigator.geolocation) {
-			navigator.geolocation.getCurrentPosition(function(position) {
-				myLatitude=position.coords.latitude; //위도
-				myLongitude=position.coords.longitude;//경도
+		//테스트 주석
+// 		if (navigator.geolocation) {
+// 			navigator.geolocation.getCurrentPosition(function(position) {
+// 				myLatitude=position.coords.latitude; //위도
+// 				myLongitude=position.coords.longitude;//경도
 				
-				if(Math.abs(fixLatitude - myLatitude) >0.001 || Math.abs(fixLongitude - myLongitude) > 0.001){
-					alert('위치정보가 다릅니다. 로그인 실패');
-					return;
-				}
+// 				if(Math.abs(fixLatitude - myLatitude) >0.001 || Math.abs(fixLongitude - myLongitude) > 0.001){
+// 					alert('위치정보가 다릅니다. 로그인 실패');
+// 					return;
+// 				}
 				//캘린더
 				$.ajax({
 					url: "${pageContext.request.contextPath}/ajax/getDataDate.hari",
 					type: "post",
 					dataType: "text",
 					success: function(dataDate) {
-						var itemArray=document.querySelectorAll('.fc-day.fc-widget-content');
-						for(var i=0;i<itemArray.length;i++){
-							if($(itemArray[i]).attr('data-date') == dataDate.trim()){
-								console.log($(itemArray[i]).attr('data-date'));
-								$(itemArray[i]).removeAttr("td");
-								$(itemArray[i]).append('<br><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-warning fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">출근</span></div><div class="fc-resizer fc-end-resizer"></div></a></td>');
+						var itemArray2=document.querySelectorAll('.fc-day.fc-widget-content');
+						for(var i=0;i<itemArray2.length;i++){
+							if($(itemArray2[i]).attr('data-date') == dataDate.trim()){
+								console.log($(itemArray2[i]).attr('data-date'));
+								$(itemArray2[i]).removeAttr("td");
+								$(itemArray2[i]).append('<br><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-warning fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">출근</span></div><div class="fc-resizer fc-end-resizer"></div></a></td>');
 							}
 				        }
 					}
@@ -239,11 +281,11 @@ $(function(){
 						}
 					}
 				})
-			});
-		}else { 
-			alert('현재 브라우저에서 지원하지 않는 기능입니다.');
-			return;
-		}
+// 			});
+// 		}else { 
+// 			alert('현재 브라우저에서 지원하지 않는 기능입니다.');
+// 			return;
+// 		}
 	})
 	$('#endWork').click(function() {
 		   //형남 0112 퇴근기능
@@ -279,7 +321,6 @@ $(function(){
 		});
 	})
 	
-	
 	//페이지 이동시마다 사용자 설정 테마색으로 변경
 	$.ajax({
 		url: "${pageContext.request.contextPath}/ajax/getThemeColor.hari",
@@ -299,58 +340,9 @@ $(function(){
 	
 	$('#test').click(function(){
 		$('#theme').css('background', 'red');
-// 		$.ajax({
-// 			url: "${pageContext.request.contextPath}/ajax/getThemeColor.hari",
-// 			type: "post",
-// 			dataType: "text",
-// 			success: function(getThemeColor) {
-// 				console.log(getThemeColor);
-// 				var itemArray=document.querySelectorAll('#theme');
-// 				for(var i=0;i<itemArray.length;i++){
-// 					console.log(itemArray[i]);
-// 					$(itemArray[i]).attr('style', 'background:' + getThemeColor);
-// 					$('#navbarSupportedContent').attr('style', 'background:' + getThemeColor);
-// 					$('#sidebarnav').attr('style', 'background:' + getThemeColor);
-// 		        }
-// 			}
-// 		});
 	})
 	
-	//이번달 출근기록 yyyy-mm-dd
-	$.ajax({
-		url: "${pageContext.request.contextPath}/ajax/getStartList.hari",
-		type: "post",
-		dataType: "json",
-		success: function(getStartList) {
-			var itemArray=document.querySelectorAll('.fc-day.fc-widget-content');
-// 			console.log(getStartList);
-			for(var i=0; i<itemArray.length; i++){
-				for(var j=0; j<getStartList.length; j++){
-					console.log(getStartList[i]);
-					if($(itemArray[i]).attr('data-date') == getStartList[j]){
-						$(itemArray[i]).append('<br><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-warning fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">출근</span></div><div class="fc-resizer fc-end-resizer"></div></a></td>');
-					}
-				}
-			}
-			//이번달 퇴근기록 yyyy-mm-dd
-			$.ajax({
-				url: "${pageContext.request.contextPath}/ajax/getEndList.hari",
-				type: "post",
-				dataType: "json",
-				success: function(getEndList) {
-					var itemArray2=document.querySelectorAll('.fc-day.fc-widget-content');
-					for(var i=0; i<itemArray2.length; i++){
-						for(var j=0; j<getEndList.length; j++){
-							if($(itemArray2[i]).attr('data-date') == getEndList[j]){
-								$(itemArray2[i]).append('<a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-success fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">퇴근</span></div><div class="fc-resizer fc-end-resizer"></div></a>');
-							}
-						}
-					}
-				}
-			});
-		}
-	});
-
+	
 
     if (window.Notification) {
         Notification.requestPermission();
@@ -371,116 +363,45 @@ $(function(){
             };
         }
     }
-
-//     $(".select2").select2();
-//     var newValue;
-//     /*colorpicker*/
-//     $('.demo').each(function() {
-//     $(this).minicolors({
-//             control: $(this).attr('data-control') || 'hue',
-//             position: $(this).attr('data-position') || 'bottom left',
-
-//             change: function(value, opacity) {
-//                 if (!value) return;
-//                 if (opacity) value += ', ' + opacity;
-//                 if (typeof console === 'object') {
-//                     console.log('minicolors');
-//                     newValue=value;
-//                 }
-//             },
-//             theme: 'bootstrap'
-//         });
-
-//     });
-
-//     $('#hue-demo').change(function() {
-//     	console.log('newValue: ' + newValue);
-//     	$.ajax({
-//     		url: "${pageContext.request.contextPath}/ajax/setThemeColor.hari",
-//     		type: "post",
-//     		data: {"color": newValue},
-//     		dataType: "text",
-//     		success: function(setThemeColor) {
-//     			if(setThemeColor >0){
-//     				var itemArray=document.querySelectorAll('#theme');
-//     				console.log(itemArray[0]);
-//     				for(var i=0;i<itemArray.length;i++){
-//     					 console.log('itemArray');
-//     					$(itemArray[i]).css('background', newValue);
-//     					$('#navbarSupportedContent').css('background', newValue);
-//     					$('#sidebarnav').css('background', newValue);
-// //     					$(itemArray[i]).removeAttr('style');
-// //     					$('#navbarSupportedContent').removeAttr('style');
-// //     					$('#sidebarnav').removeAttr('style');
-// //     					$(itemArray[i]).attr('style', 'background:' + value);
-// //     					$('#navbarSupportedContent').attr('style', 'background:' + value);
-// //     					$('#sidebarnav').attr('style', 'background:' + value);
-//            			}
-//     		        }
-//     			}
-//     		});
-//     });
 	
-    $('.demo').each(function() {
-    $(this).minicolors({
-            control: $(this).attr('data-control') || 'hue',
 
-            change: function(value, opacity) {
-                if (!value) return;
-                if (opacity) value += ', ' + opacity;
-                if (typeof console === 'object') {
-                    //console.log(value);
-					$.ajax({
-			    		url: "${pageContext.request.contextPath}/ajax/setThemeColor.hari",
-			    		type: "post",
-			    		data: {"color": value},
-			    		dataType: "text",
-			    		success: function(setThemeColor) {
-			    			var itemArray3=document.querySelectorAll('#theme');
-			    			if(setThemeColor >0){
-			    		 		$.ajax({
-			    	 			url: "${pageContext.request.contextPath}/ajax/getThemeColor.hari",
-			    	 			type: "post",
-			    	 			dataType: "text",
-			    	 			success: function(getThemeColor) {
-			    	 				console.log(getThemeColor);
-			    	 				var itemArray=document.querySelectorAll('#theme');
-			    	 				for(var i=0;i<itemArray.length;i++){
-// 			    	 					console.log(itemArray[i]);
-// 			    	 					$(itemArray[i]).attr('style', 'background:' + getThemeColor);
-// 			    	 					$('#navbarSupportedContent').attr('style', 'background:' + getThemeColor);
-// 			    	 					$('#sidebarnav').attr('style', 'background:' + getThemeColor);
-	 			    					$(itemArray[i]).css('background', getThemeColor);
-	 			    					$('#navbarSupportedContent').css('background', getThemeColor);
-	 			    					$('#sidebarnav').css('background', getThemeColor);
-			    	 		        }
-			    	 			}
-			    	 		});
-				    			
-// 			    				console.log('ajax2');
-// 			    				for(var i=0;i<itemArray.length;i++){
-// 			    					console.log('ajax3');
-// 			    					$(itemArray[i]).css('background', value);
-// 			    					$('#navbarSupportedContent').css('background', value);
-// 			    					$('#sidebarnav').css('background', value);
-// 			    					$(itemArray[i]).removeAttr('style');
-// 			    					$('#navbarSupportedContent').removeAttr('style');
-// 			    					$('#sidebarnav').removeAttr('style');
-// 			    					$(itemArray[i]).attr('style', 'background:' + value);
-// 			    					$('#navbarSupportedContent').attr('style', 'background:' + value);
-// 			    					$('#sidebarnav').attr('style', 'background:' + value);
-			    					
-// 			           			}
-			    				
-    		        		}
-    					}
-    				});
-                }
-            },
-            theme: 'bootstrap'
-        });
 
-    });
+	//이번달 출근기록 yyyy-mm-dd
+	$.ajax({
+		url: "${pageContext.request.contextPath}/ajax/getStartList.hari",
+		type: "post",
+		dataType: "json",
+		success: function(getStartList) {
+			var itemArray=document.querySelectorAll('.fc-day.fc-widget-content');
+			console.log('매 페이지 마다 로드');
+			console.log(itemArray);
+			for(var i=0; i<itemArray.length; i++){
+				for(var j=0; j<getStartList.length; j++){
+					if($(itemArray[i]).attr('data-date') == getStartList[j]){
+						$(itemArray[i]).append('<br><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-warning fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">출근</span></div><div class="fc-resizer fc-end-resizer"></div></a></td>');
+					}
+				}
+			}
+			//이번달 출근기록 yyyy-mm-dd
+			$.ajax({
+				url: "${pageContext.request.contextPath}/ajax/getEndList.hari",
+				type: "post",
+				dataType: "json",
+				success: function(getEndList) {
+					var itemArray2=document.querySelectorAll('.fc-day.fc-widget-content');
+					for(var i=0; i<itemArray2.length; i++){
+						for(var j=0; j<getEndList.length; j++){
+							if($(itemArray2[i]).attr('data-date') == getEndList[j]){
+								$(itemArray2[i]).append('<a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-success fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">퇴근</span></div><div class="fc-resizer fc-end-resizer"></div></a>');
+							}
+						}
+					}
+				}
+			});
+		}
+	});
+
+
 });
 
 </script>
