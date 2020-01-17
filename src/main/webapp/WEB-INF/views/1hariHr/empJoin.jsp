@@ -182,6 +182,7 @@
 <script src="${pageContext.request.contextPath}/resources/hari/assets/libs/select2/dist/js/select2.min.js"></script>
 
 <script src="${pageContext.request.contextPath}/resources/hari/assets/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/hari/assets/libs/bootstrap-datepicker/dist/locales/bootstrap-datepicker.ko.min.js"></script>
 
 <!-- SweetAlert -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -196,7 +197,9 @@
 			{
 				format: "yyyy-mm-dd", // 입사일 Date 형식
 				autoclose: true,
-				todayHighlight: true
+				todayHighlight: true,
+				language: "ko",
+				defaultViewDate: "1990-01-01"
 			}
 		);
 		
@@ -204,9 +207,16 @@
 			{
 				format: "yymmdd", // 생년월일 Date 형식
 				autoclose: true,
-				todayHighlight: true
+				todayHighlight: true,
+				language: "ko",
+				defaultViewDate: "1990-01-01"
 			}
 		);
+		$('.birthdatepicker').datepicker.setDefaults({
+			changeYear: true,
+			changeMonth: true,
+			defaultDate: "900101"
+		});
 	
 		<!-- 소속코드, 직책코드, 직급코드, 재직구분 Select Box -->
 		$.ajax({ // 소속코드 비동기 가져오기
