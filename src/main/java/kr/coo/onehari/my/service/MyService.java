@@ -124,6 +124,24 @@ public class MyService {
 		return result;
 	}
 	
+	//형남 0110 비밀번호 초기화, 변경
+	public int empNumEmail(String empNumStr, String password) {
+		MyDao dao = sqlsession.getMapper(MyDao.class);
+		int result = 0;
+		int empNum=Integer.parseInt(empNumStr);
+		try {
+			result=dao.empNumEmail(empNum, password);
+			if(result >0) {
+				System.out.println("일치하는 사원 있음");
+			}else {
+				System.out.println("일치하는 사원 없음");
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			log.debug("empNumEmail : " + e.getMessage());
+		}
+		return result;
+	}
+	
 
 	
 }

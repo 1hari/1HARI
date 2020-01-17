@@ -11,16 +11,25 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeUtility;
 
+import kr.coo.onehari.my.controller.MyController;
+import kr.coo.onehari.my.service.MyService;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Controller
 public class HomeController {
+	
+	@Autowired
+	private MyService myService;
 	
 	@RequestMapping("/index.hari")
 	public String index() {
@@ -127,6 +136,32 @@ public class HomeController {
 	@RequestMapping("/accessDenied.hari")
 	public String accessDenied() {
 		return "1hari.accessDenied";
+	}
+	
+	//형남 0110 비밀번호 초기화, 변경
+	@RequestMapping("/updatePassword.hari")
+	public String updatePassword(@RequestParam("empNum") String empNum, @RequestParam("newPassword") String password) {
+		try {
+			myService.updatePassword(empNum, password);
+		} catch (Exception e) {
+			System.out.println("updatePassword 예외발생: " + e.getMessage());
+			log.debug("updatePassword 예외발생: " + e.getMessage());
+		}
+		return "redirect:../index.hari";
+	}
+	
+	//형남 0117 비밀번호 초기화, 변경
+	@ResponseBody
+	@RequestMapping("/empNumEmail.hari")
+	public int empNumEmail(@RequestParam("empNum") String empNum, @RequestParam("email") String email) {
+		int result=0;
+		try {
+			result =myService.empNumEmail(empNum, email);
+			System.out.println("컨트롤러 종료시점: " + result);
+		} catch (Exception e) {
+			log.debug("empNumEmail 예외발생: " + e.getMessage());
+		}
+		return result;
 	}
 	
 	

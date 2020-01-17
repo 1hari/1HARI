@@ -4,14 +4,6 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 <mapper namespace="kr.coo.onehari.my.dao.MyDao">
-	<!--형남 0110  로그인 -->
-	<select id="empNumEmail" resultType="Integer">
-	 <![CDATA[
-		SELECT COUNT(*) 
-		FROM EMP E JOIN SUBEMP SE ON E.EMPNUM = SE.EMPNUM 
-		WHERE E.EMPNUM= ${param1} AND SE.EMAIL=#{param2};
-	 ]]> 
-	</select>
 	
 	<!--형남 0110  로그인 시도횟수 초기화 -->
 	<update id="updatePassword">
@@ -21,4 +13,11 @@
 			WHERE EMPNUM =#{param1}
 		]]>
 	</update>
+	
+	<!--형남 0117 이메일, 사원번호 일치갑 여부 확인 -->
+	<select id="empNumEmail" resultType="Integer">
+		 <![CDATA[
+			SELECT empnum FROM subemp WHERE empnum=#{param1} AND email=#{param2}
+		]]>
+	</select>
 </mapper>

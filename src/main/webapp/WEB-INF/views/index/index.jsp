@@ -38,7 +38,11 @@
                 email_check=true;
             }
         });
-        
+
+
+      var empNum=$('#empNum').val();
+      var email=$('#email').val();
+      console.log(empNum + email);
        //인증번호 전송버튼 클릭
       $('#emailSend').click(function() {
          //이메일 형식체크
@@ -48,23 +52,28 @@
          }else {
             //이메일 형식이 맞으면 사번과 이메일이 일치하는 계정이 있는지 확인
             $.ajax({
-               url: "${pageContext.request.contextPath}/1hariMy/empNumEmail.hari",
+               url: "${pageContext.request.contextPath}/empNumEmail.hari",
                type: "post",
-               data:"empNum="+$('#empNum').val() + "&email=" + $('#email').val() ,
-               dataType: "json",
+               data:{
+                   			"empNum": $('#empNum').val(),
+                   			"email": $('#email').val()
+                			},
+               dataType: "text",
                success: function(data) {
                //있으면 true, 없으면 false
+               console.log(data);
                isExist=data;
+             
+				if(isExist==false){
+					swal("warning", "해당하는 이메일이 없습니다.", "warning")
+					return;
+ 				}else{
+					//인증번호 입력 창 오픈
+					var url = "emailSubmit.hari?email="+$('#email').val();
+					open(url,"Email Check","statusber=no, scrollbar=no, menuber=no, width=560, height=240 top=270 left=530");
+				}
                }
             });
-            if(isExist!=false){
-               alert("해당하는 계정이 없습니다.");
-               return;
-            }else{
-               //인증번호 입력 창 오픈
-               var url = "emailSubmit.hari?email="+$('#email').val();
-               open(url,"Email Check","statusber=no, scrollbar=no, menuber=no, width=560, height=240 top=270 left=530");
-            }
          }
       });
 
@@ -72,6 +81,7 @@
       $('#closeModal').click(function(){
          console.log('cliack');
          $('#email').val('');
+         $('#empNum').val('');
          $('#newPassword').val('');
          $('#newPassword2').val('');
       })
@@ -97,10 +107,12 @@
       });
       
       if(pwck_check && pw_check && email_check){
-         $('#chagePassword').removeAttr('disabled');   
+         $('#updatePassword').removeAttr('disabled');   
       }
    });
-	   
+
+
+	//로그인
 	function login(){
 		if($('#username').val().trim() == '' || $('#username').val() ==null){
 			alert('사번을 입력해 주세요.');
@@ -145,7 +157,7 @@
                       <input type="text" id="username" name="username" class="form-control" placeholder="사번 번호 입력" >
                    </div>
                    <div class="form-group">
-                      <input type="password" id="password" name="password" class="form-control" placeholder="비밀 번호 입력">
+                      <input type="password" id="password" name="password" class="form-control" placeholder="비밀 번호 입력" >
                    </div>
                    <div class="form-group">
                         <div class="checkbox">
@@ -171,7 +183,7 @@
                      <button type="button" class="close" id="closeModal"data-dismiss="modal" aria-hidden="true">×</button>
                   </div>
                   <div class="modal-body">
-                     <form action="1hariMy/chagePassword.hari" method="post">
+                     <form action="${pageContext.request.contextPath}/1hariMy/updatePassword.hari" method="post">
                         <div class="input-group">
                            <span class="input-group-addon" style="color:#20B2AA"><small>&nbsp;</small><i class="fa fa-user fa-3x"></i></span>
                            <small>&nbsp;&nbsp;</small>
@@ -186,14 +198,14 @@
                         <small id="emailcheck">이메일을 입력해주세요.</small><br>
                         <button type="button" class="btn btn-default" id=emailSend style="color:#20B2AA"><strong> <i class="fa fa-paper-plane fa-1x" style="color:#20B2AA"></i>&nbsp;인증번호 전송</strong></button>
                
-                        <input type="password" id="newPassword" name="newPassword"class="form-control">
+                        <input type="password" id="newPassword" name="newPassword"class="form-control" disabled="disabled">
                         <small id="pwcheck">비밀번호는 4자~10자 입니다.</small>
-                        <input type="password" id="newPassword2" name="newPassword2"class="form-control">
+                        <input type="password" id="newPassword2" name="newPassword2"class="form-control" disabled="disabled">
                         <small id="pwckcheck">비밀번호를 다시 한 번 입력해주세요.</small>
                         <br>
                         <br>
                         <div style="text-align:center;">
-                           <button type="submit" id="chagePassword" class="btn btn-primary py-3 px-4">변경하기</button>
+                           <button type="submit" id="updatePassword" class="btn btn-primary py-3 px-4" disabled="disabled">변경하기</button>
                         </div>
                      </form>
                   </div>

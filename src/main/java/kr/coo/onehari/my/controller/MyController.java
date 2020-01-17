@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-@RequestMapping("1hariMy/")
+@RequestMapping("/1hariMy")
 public class MyController {	
 	/*
 	작성자: 김수연
@@ -30,16 +30,5 @@ public class MyController {
 		return "1hariMy.myInfo";
 	}
 	
-	//형남 0110 비밀번호 초기화, 변경
-	@RequestMapping("chagePassword.hari")
-	public String updatePassword(@RequestParam("empNum") String empNum, @RequestParam("newPassword") String password) {
-		try {
-			myService.updatePassword(empNum, password);
-		} catch (Exception e) {
-			System.out.println("empNumEmail 예외발생: " + e.getMessage());
-			log.debug("empNumEmail 예외발생: " + e.getMessage());
-		}
-		return "redirect:../index.hari";
-	}
 
 }
