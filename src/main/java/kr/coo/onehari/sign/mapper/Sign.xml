@@ -113,10 +113,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		UPDATE sign SET
 			<choose>
 				<when test="isSign1.equalsIgnoreCase('0')">
-					ISSIGN1='1'
+					ISSIGN1='1', SIGNCODE='2'
 				</when>
 				<otherwise>
-					ISSIGN2='1'
+					ISSIGN2='1', SIGNCODE='3'
 				</otherwise>
 			</choose>
 		 WHERE SIGNNUM = #{signNum}

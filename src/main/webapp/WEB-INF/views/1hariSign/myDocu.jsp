@@ -111,7 +111,7 @@
  	 				//console.log(sign);
  	 				//console.log(sign.signNum);
  	 				//리스트 1줄
- 	 				signList += "<tr>"
+ 	 				signList += '<tr class="signDocu" signNum="'+sign.signNum+'">'
 								+ "<td>"+sign.signDate+"</td>"
 								+ "<td>"+sign.signNum+"</td>"
 								+ "<td>"+sign.signFormFormName+"</td>"

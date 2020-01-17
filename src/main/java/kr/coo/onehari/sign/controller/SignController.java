@@ -182,10 +182,4 @@ public class SignController {
 		return "1hariPopUp.signDocuView";
 	}
 	
-	
-	@RequestMapping("color.hari")
-	public String colorView() {
-		return "1hariPopUp.color";
-	}
-	
 }

@@ -29,7 +29,7 @@
 		<div class="page-breadcrumb">
 			<div class="row">
 				<div class="col-12 d-flex no-block align-items-center" style="margin-bottom: 15px;">
-					<h4 class="page-title">전자결재 문서보기</h4>
+					<h4 class="page-title">결재문서</h4>
 					<div class="ml-auto text-right">
 						<c:if test='${(docu.isSign1 == "0" && docu.empSign1 == loginuser) || (docu.isSign2 == "0" && docu.empSign2 == loginuser)}'>
 							<button type="button" id="approval" class="btn btn-outline-success">결재하기</button>
@@ -160,9 +160,10 @@
 	 						text: resultMap.msg,
 	 						icon: icon,
 	 						button: "닫기"
-	 					});
+	 					}).then((value) => {
+	 						window.location.reload();		
+		 				})
 	 				}
-	 				window.location.reload();
 				},
 				error: function(xhr){
 					console.log(xhr.status);
