@@ -185,10 +185,6 @@
 	****************************************/
 	$('#zero_config').DataTable();
 
-	$('#excelUpload').on('click', function(e) {
-		var popUp = excelUpload();
-	})
-	
 	/* Excel Upload / Download를 위한 script */
 	function checkFileType(filePath) {
 		var fileFormat = filePath.split(".");

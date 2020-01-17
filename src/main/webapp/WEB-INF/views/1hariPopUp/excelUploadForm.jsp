@@ -12,24 +12,33 @@
 <!-- datepicker script -->
 <script src="${pageContext.request.contextPath}/resources/hari/assets/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 
+<!-- SweetAlert -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 <script type="text/javascript">
 	/* Excel Upload / Download를 위한 script */
 	$(function() {
 		$('#excelInsert').click(function() {
-			/* var 변수 담아서 데이터 넘기기 */
-			$.ajax({
-				url: "${pageContext.request.contextPath}/util/personnel/insertExcelEmp.hari",
-				type: "post",
-				dataType: "json",
-				success: function() {
-					
-				}
-			})
-			
-			// form data submit
 			$('#excelUploadForm').submit();
-			window.close();
 		})
+		
+		var icon;
+		if ('${requestScope.isOk}' == 'true') {
+			icon = 'success';
+		} else {
+			icon = 'warning';
+		}
+		
+		if('${requestScope.msg}' != ''){
+			swal({
+				text: "${requestScope.msg}",
+				icon: icon,
+				button: "닫기"
+			}).then((value) => {
+				window.opener.reload();		
+				window.close();		
+			});
+		}
 	})
 	
 	function doExcelUploadProcess() {
@@ -98,11 +107,6 @@
 		<div class="row">
 			<div class="col-12">
 				<h5 class="card-title" style="float: left;">Excel Upload</h5>
-		    	<button type="button" class="btn m-t-5 btn-info btn-block waves-effect waves-light" 
-		    			style="width: 12%; background-color: #20B2AA; float: right; margin-bottom: 1%;" 
-		    			onclick="doExcelUploadProcess()">올리기</button>
-	    		<button type="button" id="excelInsert" class="btn m-t-5 btn-info btn-block waves-effect waves-light" 
-					    style="width: 12%; background-color: #20B2AA; float: right; margin-bottom: 1%;">저장하기</button>
 				<div class="table-responsive">
 					<form id="excelUploadForm" name="insertExcelEmp" method="post" enctype="multipart/form-data"
 							action="${pageContext.request.contextPath}/util/personnel/insertExcelEmp.hari">
@@ -114,6 +118,12 @@
 								</div>
 							</div>
 						</div>
+						<button type="button" class="btn m-t-5 btn-info btn-block waves-effect waves-light" style="width: 12%; background-color: #20B2AA; float: right; margin-bottom: 1%;" onclick="doExcelUploadProcess()">
+							올리기
+						</button>
+	    				<button type="button" id="excelInsert" class="btn m-t-5 btn-info btn-block waves-effect waves-light" style="width: 12%; background-color: #20B2AA; float: right; margin-bottom: 1%;">
+	    					저장하기
+	    				</button>
 						<table id="zero_config" class="table table-striped table-bordered">
 							<thead>
 								<tr>

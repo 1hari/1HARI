@@ -53,10 +53,9 @@ public class ExcelController {
 	}
 	
 	@RequestMapping(value = "personnel/insertExcelEmp.hari", method = RequestMethod.POST)
-	public int insertExcelEmp(ExcelEmpDto excelemp, Model model) {
+	public String insertExcelEmp(ExcelEmpDto excelemp, Model model) {
 		String isOk = "";
 		String msg = "";
-		
 		int result = 0;
 		EmpDto emp = new EmpDto();
 		
@@ -78,7 +77,11 @@ public class ExcelController {
 			isOk = "false";
 			msg = "입력실패";
 		}
-		return result;
+		
+		model.addAttribute("isOk", isOk);
+		model.addAttribute("msg", msg);
+		
+		return "1hariPopUp.excelUploadForm";
 	}
 	
 	@RequestMapping(value = "personnel/excelDownload.hari", method = RequestMethod.POST)
