@@ -33,7 +33,7 @@
 
 	<!-- 사원목록 김진호 2020. 1. 7 -->
 	<select id="empList" resultType="kr.coo.onehari.hr.dto.EmpDto">
-	        SELECT E.EMPNUM, E.EMPNAME, T.TEAMCODE, T.TEAMNAME, R.RANKCODE, R.RANKNAME, P.POSITIONCODE, P.POSITIONNAME, EM.EMPLOYMENTCODE, EM.EMPLOYMENTNAME, S.BIRTH, S.RESNUM, S.PHONENUM, S.EMAIL, S.HIREDATE
+	        SELECT E.EMPNUM, E.EMPNAME, T.TEAMCODE, T.TEAMNAME, R.RANKCODE, R.RANKNAME, P.POSITIONCODE, P.POSITIONNAME, EM.EMPLOYMENTCODE, EM.EMPLOYMENTNAME, S.BIRTH, S.RESNUM, S.PHONENUM, S.EMAIL, S.HIREDATE, S.LEAVEDATE
 		FROM emp AS E 
 		JOIN subemp AS S ON E.EMPNUM = S.EMPNUM
 		JOIN team AS T ON E.TEAMCODE = T.TEAMCODE
@@ -71,15 +71,22 @@
   	<update id="empUpdate" parameterType="kr.coo.onehari.hr.dto.EmpDto">
 		UPDATE EMP
 		SET TEAMCODE=#{teamCode},
-		POSITIONCODE=#{positionCode},
-		RANKCODE=#{rankCode},
-		EMPLOYMENTCODE=#{employmentCode}
+			POSITIONCODE=#{positionCode},
+			RANKCODE=#{rankCode},
+			EMPLOYMENTCODE=#{employmentCode}
 		WHERE EMPNUM=#{empNum}
 	</update>
   	<update id="subempUpdate" parameterType="kr.coo.onehari.hr.dto.EmpDto">
 		UPDATE SUBEMP
 		SET PHONENUM=#{phoneNum},
-		LEAVEDATE=#{leaveDate}
+		<choose>
+			<when test="employmentCode != '5003'">
+				LEAVEDATE=NULL
+			</when>
+			<otherwise>
+				LEAVEDATE=#{leaveDate}
+			</otherwise>
+		</choose>
 		WHERE EMPNUM=#{empNum}
 	</update>
 	<insert id="insertRoleaAdmin" parameterType="kr.coo.onehari.hr.dto.Role">

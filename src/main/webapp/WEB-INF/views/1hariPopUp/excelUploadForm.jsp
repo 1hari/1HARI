@@ -29,7 +29,7 @@
 			icon = 'warning';
 		}
 		
-		if('${requestScope.msg}' != ''){
+		if('${requestScope.msg}' != '') {
 			swal({
 				text: "${requestScope.msg}",
 				icon: icon,
@@ -55,7 +55,8 @@
 					$.each(data, function(index, element){
 						
 					/* document.getElementById('excelForm').innerHTML = JSON.stringify(emp.empNum); */
-					formdata += '<tr><td><input type="text" name="empdto[' + index + '].empName" value="' + element.empName + '"></td>'
+					formdata += '<tr>'
+								+ '<td><input type="text" name="empdto[' + index + '].empName" value="' + element.empName + '"></td>'
 								+ '<td><input type="text" name="empdto[' + index + '].teamCode" value="' + element.teamCode + '"></td>'
 								+ '<td><input type="text" name="empdto[' + index + '].rankCode" value="' + element.rankCode + '"></td>'
 								+ '<td><input type="text" name="empdto[' + index + '].positionCode" value="' + element.positionCode + '"></td>'
@@ -66,6 +67,7 @@
 								+ '<td><input type="text" name="empdto[' + index + '].email" value="' + element.email + '"></td>'
 								+ '<td><input type="text" name="empdto[' + index + '].hireDate" value="' + element.hireDate + '"></td>'
 								+ '<td><input type="text" name="empdto[' + index + '].leaveDate" value="' + element.leaveDate + '"></td>'
+								+ '</tr>'
 					})
 				})
 				$('#excelForm').append(formdata);

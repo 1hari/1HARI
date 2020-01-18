@@ -199,7 +199,7 @@
 				autoclose: true,
 				todayHighlight: true,
 				language: "ko",
-				defaultViewDate: "1990-01-01"
+				defaultViewDate: "2020-01-01"
 			}
 		);
 		
@@ -212,11 +212,6 @@
 				defaultViewDate: "1990-01-01"
 			}
 		);
-		$('.birthdatepicker').datepicker.setDefaults({
-			changeYear: true,
-			changeMonth: true,
-			defaultDate: "900101"
-		});
 	
 		<!-- 소속코드, 직책코드, 직급코드, 재직구분 Select Box -->
 		$.ajax({ // 소속코드 비동기 가져오기
@@ -272,8 +267,8 @@
 		});
 
 		/* 핸드폰번호 입력 유효성 검사 */
-		let phoneReg = /^\d{3}-\d{3,4}-\d{4}$/; // 핸드폰번호 정규표현식
-
+		var phoneReg = /^01[016789]-\d{3,4}-\d{4}$/; // 핸드폰번호 정규표현식
+		
 		/* 핸드폰번호 입력 시 자동 (-) 삽입  */
 		$('#phoneNum').keyup(function() {
 			var number = this.value.replace(/[^0-9]/g, "");
@@ -321,6 +316,10 @@
 		}
 	});
 
+	/* 핸드폰번호 입력 유효성 검사 */
+	var phoneReg = /^01[016789]-\d{3,4}-\d{4}$/; // 핸드폰번호 정규표현식
+	var phoneNumCheck = false;
+	
 	form.children("div").steps({
 		headerTag : "h3",
 		bodyTag : "section",
@@ -334,12 +333,27 @@
 			return form.valid();
 		},
 		onFinished : function(event, currentIndex) {
-			$('#example-form').submit();
-			/* swal({
-				text: "사원등록이 정상적으로 완료되었습니다.",
-				icon: "success",
-				button: "확인"
-			}); */
+			if (phoneReg.test($('#phoneNum').val())) {
+				phoneNumCheck = true;
+			} else {
+				phoneNumeCheck = false;
+			}
+			
+			if (phoneNumCheck != false) {
+				swal({
+					text: "사원등록이 정상적으로 완료되었습니다.",
+					icon: "success",
+					button: "확인"
+				}).then((value) => {
+					$('#example-form').submit();
+				});
+			} else {
+				swal({
+					text: "핸드폰번호 형식이 잘못되었습니다.",
+					icon: "warning",
+					button: "닫기"
+				});
+			}
 		}
 	});
 

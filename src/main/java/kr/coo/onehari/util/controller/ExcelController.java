@@ -66,16 +66,16 @@ public class ExcelController {
 			try {
 				result = empService.empJoin(emp);
 			} catch (Exception e) {
-				e.printStackTrace();
+				log.debug("Excel Controller insertExcelEmp 예외발생: " + e.getMessage());
 			}
 		}
 		
 		if (result > 0) {
 			isOk = "true";
-			msg = "입력성공";
+			msg = "Excel 저장하기 완료!";
 		} else {
 			isOk = "false";
-			msg = "입력실패";
+			msg = "Excel 저장하기 오류!";
 		}
 		
 		model.addAttribute("isOk", isOk);
