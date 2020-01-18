@@ -129,18 +129,6 @@
 										</c:forEach>
 									</tbody>
 									<tfoot>
-										<tr>
-											<th>사번</th>
-											<th>이름</th>
-											<th>소속</th>
-											<th>직급</th>
-											<th>직책</th>
-											<th>재직구분</th>
-	<!-- 										<th>권한</th> -->
-											<th>입사일</th>
-											<th>퇴사일</th>
-											<th>정보수정</th>
-										</tr>
 									</tfoot>
 								</table>
 							</form>
