@@ -6,9 +6,6 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/hari/assets/extra-libs/multicheck/multicheck.css">
 <link href="${pageContext.request.contextPath}/resources/hari/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet">
 
-<!-- SweetAlert -->
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
 <!-- 초기페이지 설정 -->
 
 <script>
@@ -116,9 +113,9 @@
 								+ "<td>"+sign.signNum+"</td>"
 								+ "<td>"+sign.signFormFormName+"</td>"
 								+ "<td>"+sign.signTitle+"</td>"
-								+ "<td>"+sign.draftEmpName+" ("+sign.draftEmp+")</td>"
-								+ "<td>"+sign.empSign1Name+" ("+sign.empSign1+")</td>"
-								+ "<td>"+sign.empSign2Name+" ("+sign.empSign2+")</td>"
+								+ "<td>"+sign.draftEmpName + " " + sign.draftEmpRankName + " ("+sign.draftEmp+")</td>"
+								+ "<td>"+sign.empSign1Name + " " + sign.empSign1RankName + " ("+sign.empSign1+")</td>"
+								+ "<td>"+sign.empSign2Name + " " + sign.empSign2RankName + " ("+sign.empSign2+")</td>"
 								+ "<td>"
 									+ '<div class="d-flex no-block align-items-center m-t-15">'
 										+'<span>'+sign.signName+'</span>'

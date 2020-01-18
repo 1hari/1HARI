@@ -80,9 +80,9 @@
 											</tr>
 											<tr class="draft" style="height: 40px; vertical-align: middle;">
 												<!-- 사원명 -->
-												<td>${docu.draftEmpName} (${docu.draftEmp})</td>
-												<td>${docu.empSign1Name} (${docu.empSign1})</td>
-												<td>${docu.empSign2Name} (${docu.empSign2})</td>
+												<td>${docu.draftEmpName}<br>(${docu.draftEmp})</td>
+												<td>${docu.empSign1Name}<br>(${docu.empSign1})</td>
+												<td>${docu.empSign2Name}<br> (${docu.empSign2})</td>
 											</tr>
 											<tr class="draft" style="height: 40px; vertical-align: middle;">
 												<!-- 빈칸 : 승인도장 -->
@@ -117,6 +117,10 @@
 						<tr class="draft" style="height: 40px; vertical-align: middle;">
 							<td style="width:15px">첨부파일</td>
 							<td><a href="${pageContext.request.contextPath}/1hariSign/download.hari?path=/WEB-INF/views/1hariSign/upload&file=${docu.signFileName}">${docu.signFileName}</a></td>
+						</tr>
+						<tr style="height: 20px;">
+							<td></td>
+							<td></td>
 						</tr>
 					</table>
 				</div>

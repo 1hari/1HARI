@@ -25,7 +25,7 @@ public class SignDto {
 	
 	private String empSign2; //결재자2 사번
 	private String empSign2Name; //결재자2 이름 김정하 / 2020. 1. 14
-	private String empSign2RankName; //결재자2 이름 김정하 / 2020. 1. 16
+	private String empSign2RankName; //결재자2 직급 김정하 / 2020. 1. 16
 	
 	private String signFormCode; //문서양식 코드
 	private String signFormFormName; //문서양식명 김정하 / 2020. 1.13
