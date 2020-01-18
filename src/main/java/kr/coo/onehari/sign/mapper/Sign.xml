@@ -31,7 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<where>
 			<choose>
 				<when test="code.equalsIgnoreCase('0')"> <!-- 전체문서 -->
-					if(ISSIGN1 = 0, EMPSIGN1 = #{draftEmp}, EMPSIGN2 = #{draftEmp}) OR DRAFTEMP = #{draftEmp}
+					EMPSIGN1 = #{draftEmp} OR (ISSIGN1 = 1 AND EMPSIGN2 = #{draftEmp}) OR DRAFTEMP = #{draftEmp}
 				</when>
 				<when test="code.equalsIgnoreCase('1')"> <!-- 기안문서 -->
 					SIGNCODE IN(1,2) AND DRAFTEMP = #{draftEmp}
@@ -44,6 +44,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				</when>
 				<when test='code == "4"'> <!-- 결재할 문서-->
 					SIGNCODE IN(1,2) AND if(ISSIGN1 = 0, EMPSIGN1 = #{draftEmp}, EMPSIGN2 = #{draftEmp})
+				</when>
+				<when test='code == "5"'> <!-- 결재한 문서-->
+					(ISSIGN1 = 1 AND EMPSIGN1 = #{draftEmp}) OR (ISSIGN2 = 1 AND EMPSIGN2 = #{draftEmp})
 				</when>
 			</choose>
 		</where>
@@ -82,7 +85,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<where>
 			<choose>
 				<when test="code.equalsIgnoreCase('0')"> <!-- 전체문서 -->
-					s.DRAFTEMP = #{draftEmp} OR if(s.ISSIGN1 = 0, s.EMPSIGN1 = #{draftEmp}, s.EMPSIGN2 = #{draftEmp})
+					s.DRAFTEMP = #{draftEmp} OR s.EMPSIGN1 = #{draftEmp} OR (s.ISSIGN1 = 1 AND s.EMPSIGN2 = #{draftEmp}) 
 				</when>
 				<when test="code.equalsIgnoreCase('1')"> <!-- 기안문서 -->
 					s.SIGNCODE IN(1,2) AND s.DRAFTEMP = #{draftEmp}
@@ -96,7 +99,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				<when test='code == "4"'> <!-- 결재할 문서-->
 					s.SIGNCODE IN(1,2) AND if(s.ISSIGN1 = 0, s.EMPSIGN1 = #{draftEmp}, s.EMPSIGN2 = #{draftEmp})
 				</when>
-				<when test='code == "5"'> <!-- 문서보기 -->
+				<when test='code == "5"'> <!-- 결재한 문서-->
+					(s.ISSIGN1 = 1 AND s.EMPSIGN1 = #{draftEmp}) OR (s.ISSIGN2 = 1 AND s.EMPSIGN2 = #{draftEmp})
+				</when>
+				<when test='code == "6"'> <!-- 문서보기 -->
 					s.SIGNNUM = #{signNum}
 				</when>
 			</choose>

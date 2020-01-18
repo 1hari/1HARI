@@ -1,12 +1,14 @@
 package kr.coo.onehari.sign.controller;
 
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
-import kr.coo.onehari.hr.dao.CorpDao;
 import kr.coo.onehari.hr.dto.EmpDto;
 import kr.coo.onehari.hr.dto.Team;
 import kr.coo.onehari.hr.service.CorpService;
@@ -24,7 +25,6 @@ import kr.coo.onehari.sign.dto.SignDto;
 import kr.coo.onehari.sign.dto.SignFormDto;
 import kr.coo.onehari.sign.service.SignFormService;
 import kr.coo.onehari.sign.service.SignService;
-import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -136,7 +136,6 @@ public class SignController {
 					fs.close();
 					
 				} catch (Exception e) {
-					System.out.println("filewrite : " + e.getMessage()); //syso 나중에 지워야지
 					log.debug("filewrite : " + e.getMessage());
 				}
 			}
@@ -174,12 +173,56 @@ public class SignController {
 		map.put("signNum", signNum);
 		map.put("pg", "3");
 		map.put("cp", "0");
-		map.put("code", "5"); //문서보기
+		map.put("code", "6"); //문서보기
 		List<SignDto> signDocu = signService.selectSignList(map);
 		
 		model.addAttribute("signDocu", signDocu);
 		
 		return "1hariPopUp.signDocuView";
+	}
+	
+	//첨부파일 다운로드
+	@RequestMapping("download.hari")
+	public void download(String path, String file, HttpServletRequest request, HttpServletResponse response) {
+		
+		//한글 처리 형식 지정 String sEncoding = new String(filename.getBytes("euc-kr"),"8859_1");
+		//response.setHeader("Content-Disposition","attachment;filename= " + sEncoding);
+		//response.setHeader("Content-Disposition","attachment;filename= " + filename +";");
+		//한글 파일명 처리 (Filtter 처리 확인) -> 경우 ...
+		//한글 파일 깨짐 현상 해결하기
+	        
+	     // String fname = new String(f.getBytes("ISO8859_1"),"UTF-8");
+		try {
+			String fname = new String(file.getBytes("euc-kr"), "8859_1");
+			//System.out.println(fname);
+	     
+		     // 다운로드 기본 설정 (브라우져가 read 하지 않고 ... 다운 )
+		     // 요청 - 응답 간에 헤더정보에 설정을 강제 다운로드
+		     // response.setHeader("Content-Disposition", "attachment;filename=" +
+		     // new String(fname.getBytes(),"ISO8859_1"));
+		     
+		     response.setHeader("Content-Disposition", "attachment;filename=" + fname + ";"); //한글 처리
+		     
+		     // 파일명 전송
+		     // 파일 내용전송
+		     String fullpath = request.getServletContext().getRealPath(path + "/" + file);
+		     //System.out.println(fullpath);
+		     
+		     FileInputStream fin = new FileInputStream(fullpath);
+			// 출력 도구 얻기 :response.getOutputStream()
+		     ServletOutputStream sout = response.getOutputStream();
+		     byte[] buf = new byte[1024]; // 전체를 다읽지 않고 1204byte씩 읽어서
+		     int size = 0;
+		     
+		     while ((size = fin.read(buf, 0, buf.length)) != -1) { // buffer 에 1024byte 담고
+		    	 // 마지막 남아있는 byte 담고 그다음 없으면 탈출
+		    	 sout.write(buf, 0, size); // 1kbyte씩 출력
+		     }
+		     fin.close();
+		     sout.close();
+		} catch (Exception e) {
+			log.debug("filewrite : " + e.getMessage());
+		}
 	}
 	
 }

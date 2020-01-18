@@ -31,9 +31,10 @@
 				<div class="col-12 d-flex no-block align-items-center" style="margin-bottom: 15px;">
 					<h4 class="page-title">결재문서</h4>
 					<div class="ml-auto text-right">
-						<c:if test='${(docu.isSign1 == "0" && docu.empSign1 == loginuser) || (docu.isSign2 == "0" && docu.empSign2 == loginuser)}'>
+						<c:if test='${(docu.isSign1 == "0" && docu.empSign1 == loginuser) || (docu.isSign1 == "1" && docu.isSign2 == "0" && docu.empSign2 == loginuser)}'>
 							<button type="button" id="approval" class="btn btn-outline-success">결재하기</button>
 						</c:if>
+						<button type="button" id="print" class="btn btn-outline-success">출력하기</button>
 					</div>
 				</div>
 			</div>
@@ -113,6 +114,10 @@
 							<td></td>
 							<td></td>
 						</tr>
+						<tr class="draft" style="height: 40px; vertical-align: middle;">
+							<td style="width:15px">첨부파일</td>
+							<td><a href="${pageContext.request.contextPath}/1hariSign/download.hari?path=/WEB-INF/views/1hariSign/upload&file=${docu.signFileName}">${docu.signFileName}</a></td>
+						</tr>
 					</table>
 				</div>
 			</div>
@@ -123,8 +128,7 @@
 		<!-- End Container fluid  -->
 	</div>
 	
-	<script>
-		
+	<script>		
 		//결재하기
 		$('#approval').click(function(){
 			let isSign1 = ${docu.isSign1};
@@ -161,7 +165,8 @@
 	 						icon: icon,
 	 						button: "닫기"
 	 					}).then((value) => {
-	 						window.location.reload();		
+	 						window.location.reload();
+	 						window.opener.reload();			
 		 				})
 	 				}
 				},
@@ -176,5 +181,9 @@
 	// 			}
 			});//ajax 끝
 		}); //결재하기 끝
+
+		$('#print').click(function(){
+			window.print();
+		});
 	</script>
 </c:forEach>

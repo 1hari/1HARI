@@ -258,7 +258,7 @@
 
 <script>
 	var icon;
-	if('${reqiestScope.isOk}' == 'true'){
+	if('${requestScope.isOk}' == 'true'){
 		icon = 'success';
 	}else {
 		icon = 'warning';
@@ -269,7 +269,7 @@
 			text: "${requestScope.msg}",
 			icon: icon,
 			button: "닫기"
-		});
+		})
 	}
 
 	//문서 클릭
@@ -279,4 +279,8 @@
 		//console.log(openUrl);
 		open(openUrl,"전자결재","statusber=no,menuber=no, width=850, height=800, top=10");
 	});//문서 클릭
+
+	function reload() {
+		window.location.reload();
+	}
 </script>

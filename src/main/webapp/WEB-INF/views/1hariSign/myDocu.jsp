@@ -140,6 +140,14 @@
  	 			});//each 끝
  	 			//console.log(signList);
 				$('#signListTable').append(signList);
+
+				//문서 클릭
+				$(".signDocu").click(function(){
+					//console.log($(this).attr("signNum"));
+					let openUrl = "${pageContext.request.contextPath}/1hariSign/signDocuView.hari?signNum="+$(this).attr("signNum");
+					//console.log(openUrl);
+					open(openUrl,"전자결재","statusber=no,menuber=no, width=850, height=800, top=10");
+				});//문서 클릭
 			},
 			error: function(xhr){
 				console.log(xhr.status);
@@ -152,6 +160,10 @@
 // 			}
 		});//ajax 끝
 	}//전자결재 가져오기 끝
+
+	function reload() {
+		window.location.reload();
+	}
 </script>
 <style>
 	.wrap-loading{ /*화면 전체를 어둡게 합니다.*/
@@ -203,6 +215,7 @@
 						<button type="button" class="btn btn-success btn-sm signType" code="0">전체문서</button>
 						<button type="button" class="btn btn-success btn-sm signType" code="1">기안문서</button>
 						<button type="button" class="btn btn-success btn-sm signType" code="4">결재 할 문서</button>
+						<button type="button" class="btn btn-success btn-sm signType" code="5">결재 한 문서</button>
 						<button type="button" class="btn btn-success btn-sm signType" code="2">완료문서</button>
 						<button type="button" class="btn btn-success btn-sm signType" code="3">반려문서</button>
 						

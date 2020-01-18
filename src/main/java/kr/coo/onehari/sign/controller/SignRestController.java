@@ -61,7 +61,7 @@ public class SignRestController {
 	public int signPage(String code, Principal principal) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		
-		System.out.println(code);
+		//System.out.println(code);
 		
 		String draftEmp = principal.getName();
 		
@@ -74,9 +74,9 @@ public class SignRestController {
 	//결재하기 김정하 / 2020. 1. 16
 	@RequestMapping("approval.hari")
 	public Map<String, String> signApproval(String isSign1, String empSign1, String isSign2, String empSign2, String signNum, Principal principal) {
-		System.out.println(signNum);
-		System.out.println(isSign1);
-		System.out.println(isSign2);
+		//System.out.println(signNum);
+		//System.out.println(isSign1);
+		//System.out.println(isSign2);
 		
 		HashMap<String, String> resultMap = new HashMap<String, String>();
 		
