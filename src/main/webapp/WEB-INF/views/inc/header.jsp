@@ -8,8 +8,8 @@ $(function(){
 	var isEnd=false;//오늘 퇴근했는지
 	var currYear;
 	var currMonth;
-	var fixLatitude=parseFloat(37.4995124);
-	var fixLongitude=parseFloat(127.0292657);
+	var fixLatitude=parseFloat(37.5239969);
+	var fixLongitude=parseFloat(126.83421299999999);
 	var myLatitude; //사용자 위도
 	var myLongitude;////사용자 경도
 	var currTime;
@@ -158,6 +158,15 @@ $(function(){
 // 		}
 	})
 	$('#endWork').click(function() {
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(function(position) {
+				myLatitude=position.coords.latitude; //위도
+				myLongitude=position.coords.longitude;//경도
+			
+				if(Math.abs(fixLatitude - myLatitude) >0.001 || Math.abs(fixLongitude - myLongitude) > 0.001){
+					alert('위치정보가 다릅니다. 퇴근 실패');
+					return;
+				}
 		   //형남 0112 퇴근기능
 		$.ajax({
 			url: "${pageContext.request.contextPath}/ajax/endWork.hari",
@@ -189,6 +198,11 @@ $(function(){
 		        }
 			}
 		});
+			});
+		}else { 
+			alert('현재 브라우저에서 지원하지 않는 기능입니다.');
+			return;
+		}
 	})
 
 
