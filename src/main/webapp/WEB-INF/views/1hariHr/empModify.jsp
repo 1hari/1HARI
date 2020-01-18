@@ -15,51 +15,51 @@
 <!--필수 js 지우지 말기 -->
 
 <style>
-.stepwizard-step p {
-	margin-top: 10px;
-}
-
-.stepwizard-row {
-	display: table-row;
-}
-
-.stepwizard {
-	display: table;
-	width: 100%;
-	position: relative;
-}
-
-.stepwizard-step button[disabled] {
-	opacity: 1 !important;
-	filter: alpha(opacity = 100) !important;
-}
-
-.stepwizard-row:before {
-	top: 14px;
-	bottom: 0;
-	position: absolute;
-	content: " ";
-	width: 100%;
-	height: 1px;
-	background-color: #ccc;
-	z-order: 0;
-}
-
-.stepwizard-step {
-	display: table-cell;
-	text-align: center;
-	position: relative;
-}
-
-.btn-circle {
-	width: 30px;
-	height: 30px;
-	text-align: center;
-	padding: 6px 0;
-	font-size: 12px;
-	line-height: 1.428571429;
-	border-radius: 0px;
-}
+	.stepwizard-step p {
+		margin-top: 10px;
+	}
+	
+	.stepwizard-row {
+		display: table-row;
+	}
+	
+	.stepwizard {
+		display: table;
+		width: 100%;
+		position: relative;
+	}
+	
+	.stepwizard-step button[disabled] {
+		opacity: 1 !important;
+		filter: alpha(opacity = 100) !important;
+	}
+	
+	.stepwizard-row:before {
+		top: 14px;
+		bottom: 0;
+		position: absolute;
+		content: " ";
+		width: 100%;
+		height: 1px;
+		background-color: #ccc;
+		z-order: 0;
+	}
+	
+	.stepwizard-step {
+		display: table-cell;
+		text-align: center;
+		position: relative;
+	}
+	
+	.btn-circle {
+		width: 30px;
+		height: 30px;
+		text-align: center;
+		padding: 6px 0;
+		font-size: 12px;
+		line-height: 1.428571429;
+		border-radius: 0px;
+	}
 </style>
 <!-- 컨텐츠 제목 -->
 <!-- ============================================================== -->
@@ -143,12 +143,13 @@
 	 										</select>
 	 									</div>
 									</se:authorize>
-									<div class="form-group">
+									<div class="form-group" id="leaveDateDiv" style="display: none;">
 										<label>퇴사일</label>
-										<input type="text" class="form-control mydatepicker" placeholder="yyyy-mm-dd">
+										<input type="text" id="leaveDate" name="leaveDate" class="form-control leavedatepicker" value="${emp.leaveDate}" placeholder="yyyy-mm-dd">
 									</div>
-									
-									<input type="submit" class="form-control" value="수정">
+									<div class="form-group">
+										<input type="submit" class="form-control" value="수정">
+									</div>
 								</div>									
 							</form>
 							<!--폼 action 태그 끝 -->
@@ -180,20 +181,31 @@
 <script src="${pageContext.request.contextPath}/resources/hari/assets/libs/select2/dist/js/select2.full.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/hari/assets/libs/select2/dist/js/select2.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/hari/assets/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/hari/assets/libs/bootstrap-datepicker/dist/locales/bootstrap-datepicker.ko.min.js"></script>
 
 <script>
 	/****************************************
 	*      필수 테이블 1. 데이터 테이블 , 2. datepicker 제이쿼리 스크립트 *
 	****************************************/
-	$('.mydatepicker').datepicker(
+	$('.leavedatepicker').datepicker(
 		{
 			format: "yyyy-mm-dd", // 입사일 Date 형식
 			autoclose: true,
-			todayHighlight: true
+			todayHighlight: true,
+			language: "ko"
 		}
 	);
 	
 	$(function() {
+		$('#employmentSelect').change(function(){
+			var employmentValue = $('#employmentSelect').val();
+			
+			if (employmentValue != 5003) {
+				$('#leaveDateDiv').attr("style", "display: none")
+			} else {
+				$('#leaveDateDiv').attr("style", "display: block")
+			}
+		});
 		<!-- 소속코드, 직책코드, 직급코드, 재직구분 Select Box -->
 		$.ajax({ // 소속코드 비동기 가져오기
 			url: "${pageContext.request.contextPath}/ajax/getTeamCode.hari",
@@ -246,7 +258,7 @@
 			}
 		});
 	
-		$.ajax({ // 직책코드 비동기 가져오기
+		$.ajax({ // 재직구분코드 비동기 가져오기
 			url: "${pageContext.request.contextPath}/ajax/getEmploymentCode.hari",
 			type: "post",
 			dataType: "json",
@@ -260,6 +272,11 @@
 					}
 				})
 				$("#employmentSelect").append(employment);
+
+				if ($('#employmentSelect').val() == 5003) { // 재직구분이 퇴직인 사원정보수정으로 들어오면
+					$('#leaveDateDiv').attr("style", "display: block")
+				}
+
 			}
 		});
 	
@@ -280,6 +297,8 @@
 			}
 		});
 	});
+
+	
 </script>
 
 
