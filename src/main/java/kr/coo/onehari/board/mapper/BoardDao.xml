@@ -6,31 +6,25 @@
 <mapper namespace="kr.coo.onehari.board.dao.BoardDao">
 
 	
-	<!-- 게시판 정보 가져오기(탑바) -->
-<!-- 	<select id="getBoardInfo" resultType="kr.coo.onehari.board.dto.BoardType">
+	<!-- 게시판 정보 가져오기 , 공지사항 1인지 타임라인 2 게시판 인지 번호 나눠서 가져오기 -->
+	<select id="getBoardInfo" resultType="kr.coo.onehari.board.dto.BoardType">
 		SELECT BOARDCODE, BOARDNAME FROM BOARDTYPE ORDER BY BOARDCODE
 	</select>
-	 -->
+	
 	<!-- 컨텐츠 리스트 가져오기 -->
-<!-- 	<select id="getBoardList" resultType="kr.coo.onehari.board.dto.Board">
-		<![CDATA[select p2.* from 
-						(select rownum as num, p1.* from 
-						(select a1.content_idx, a1.content_subject, to_char(a1.content_date, 'YYYY-MM-DD') as content_date, a2.user_name 
-						from content_table a1, user_table a2 
-						where a1.content_writer_idx= a2.user_idx and a1.content_board_idx=#{param1} 
-						order by a1.content_idx desc) p1) p2 
-						where p2.num >=#{param2} and p2.num <=#{param3}]]>
-	</select> -->
+<!-- 	<select id="getBoardList" resultType="kr.coo.onehari.board.dto.Board"> -->
+	
+<!-- 	</select>  -->
 	
 	<!-- 게시판 번호로 게시판 가져오기 -->
-<!-- 	<select id="getBoardInfoByIdx" resultType="kr.coo.onehari.board.dto.BoardType">
-		SELECT BOARDNAME FROM BOARDTYPE WHERE BOARDCODE=#{board_idx}
-	</select> -->
+ 	<select id="getBoardInfoByIdx" resultType="kr.coo.onehari.board.dto.BoardType">
+		SELECT BOARDNAME FROM BOARDTYPE WHERE BOARDCODE=#{boardNum}
+	</select> 
 	
 	<!-- 해당 게시판의 총 갯수 가져오기 -->
-	<!-- <select id="getContentCount" resultType="Integer">
-		SELECT COUNT(*) AS CNT FROM BOARD WHERE CONTENT_BOARD_IDX=#{board_idx}
-	</select> -->
+	<select id="getContentCount" resultType="Integer">
+		SELECT COUNT(*) AS CNT FROM BOARD WHERE BOARDCODE=#{boardNum}
+	</select> 
 	
 		<!-- 컨텐츠 리스트 TOP5 가져오기 -->
 <!-- 	<select id="getTop5List" resultType="dto.Content">

@@ -7,47 +7,47 @@
           <div class="card-body">
             <div class="form-group">
               <!--새로운 폼을 요청하는게 아니라 비동기 통신으로 서버와 통신을 한 후 보고자 하는 페이지를 교체하는 방식이므로 폼태그와 전송버튼이 필요없음-->
-              <label for="board_writer_name">작성자</label>
+              <label for="writer">작성자</label>
               <input
                 type="text"
-                id="board_writer_name"
-                v-model="server_data.content_writer_name"
+                id="writer"
+                v-model="server_data.writer"
                 class="form-control"
                 disabled="disabled"
               />
             </div>
             <div class="form-group">
-              <label for="board_date">작성날짜</label>
+              <label for="boardWriteDate">작성날짜</label>
               <input
                 type="text"
-                id="board_date"
-                v-model="server_data.content_date"
+                id="boardWriteDate"
+                v-model="server_data.boardWriteDate"
                 class="form-control"
                 disabled="disabled"
               />
             </div>
             <div class="form-group">
-              <label for="board_subject">제목</label>
-              <input type="text" id="board_subject" v-model="server_data.content_subject" class="form-control" />
+              <label for="boardTitle">제목</label>
+              <input type="text" id="boardTitle" v-model="server_data.boardTitle" class="form-control" />
             </div>
             <div class="form-group">
-              <label for="board_content">내용</label>
+              <label for="boardContent">내용</label>
               <textarea
-                id="board_content"
-                v-model="server_data.content_text"
+                id="boardContent"
+                v-model="server_data.boardContent"
                 class="form-control"
                 rows="10"
                 style="resize:none"
               ></textarea>
             </div>
             <div class="form-group">
-              <label for="board_file">첨부 이미지</label>
-              <img :src="'upload/' + server_data.content_file" width="100%" v-if='server_data.content_file != null'/>
+              <label for="boardFileName">첨부 이미지</label>
+              <img :src="'upload/' + server_data.boardFileName" width="100%" v-if='server_data.boardFileName != null'/>
               <!--인풋타입 file같은 경우엔 파일데이터를 고르는 아이이기 때문에 일반요소랑 같게 처리하면 안됨      -->
               <input
                 type="file"
                 name="board_image"
-                id="board_file"
+                id="boardFileName"
                 class="form-control"
                 accept="image/*"
               />
@@ -74,37 +74,37 @@ module.exports = {
   },
   methods: {
     check_input: function() {
-      if (this.server_data.content_subject.length == 0) { //this로 받아와야 값을 가져올 수 있음
+      if (this.server_data.boardTitle.length == 0) { //this로 받아와야 값을 가져올 수 있음
        
         alert("제목을 입력해주세요");
-        $("#board_subject").focus();
+        $("#boardTitle").focus();
         return;
       }
-      if (this.server_data.content_text.length == 0) {
+      if (this.server_data.boardContent.length == 0) {
         alert("내용을 입력해주세요");
-        $("#board_content").focus();
+        $("#boardContent").focus();
         return;
       }
       var params=new FormData()
-      params.append('content_subject', this.server_data.content_subject)
-      params.append('content_text', this.server_data.content_text)
-      params.append('content_idx', this.$route.params.content_idx)
+      params.append('boardTitle', this.server_data.boardTitle)
+      params.append('boardContent', this.server_data.boardContent)
+      params.append('boardNum', this.$route.params.boardNum)
 
-      if($('#board_file')[0].files[0] != undefined){
-        params.append('content_file', $('#board_file')[0].files[0])
+      if($('#boardFileName')[0].files[0] != undefined){
+        params.append('boardFileName', $('#boardFileName')[0].files[0])
       }
 
       axios.post('modify_content.hari', params).then((response)=>{
         if(response.data.result == true){
           alert('수정되었습니다.')
-          this.$router.push('/board_read/' + this.$route.params.board_idx + '/' + this.$route.params.page + '/' + this.$route.params.content_idx)
+          this.$router.push('/board_read/' + this.$route.params.board_idx + '/' + this.$route.params.page + '/' + this.$route.params.boardNum)
         }
       })
     }
   },
   created() {
     var params=new URLSearchParams();
-    params.append('content_idx', this.$route.params.content_idx)
+    params.append('boardNum', this.$route.params.boardNum)
     axios.post('get_content.hari', params).then((response)=>{
       this.server_data = response.data
     })

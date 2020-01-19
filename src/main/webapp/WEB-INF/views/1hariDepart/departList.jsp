@@ -19,7 +19,7 @@
 		cursor: pointer;
 	}
 </style>
-<!-- 공지사항 게시판 -->
+<!--  부서별 게시판-->
 <!-- vue.js 코드 contents (webapp/vue folder 안에서 이루어짐) -->
 <div class="page-wrapper">
 	<div class="container-fluid">
@@ -29,7 +29,7 @@
 		<div class="row">
 			<div class="col-12">
 				<div id='app'>
-					<router-view></router-view> <!-- 공지사항 게시판 -->
+					<router-view></router-view> <!-- 부서별 게시판 -->
 				</div>
 			</div>
 		</div>

@@ -3,7 +3,7 @@
   <div class="container" style="margin-top:100px">
     <div class="card shadow">
       <div class="card-body">
-        <h4 class="card-title">{{server_data.board_info_name}}</h4>
+        <h4 class="card-title">{{server_data.boardName}}</h4>
         <table class="table table-hover" id="board_list">
           <thead>
             <tr>
@@ -15,10 +15,10 @@
           </thead>
           <tbody>
             <tr v-for="a1 in server_data.board_list" :key="a1">
-              <td class="text-center d-none d-md-table-cell">{{a1.content_idx}}</td>
-              <td @click="go_board_read(a1.content_idx)">{{a1.content_subject}}</td>
-              <td class="text-center d-none d-md-table-cell">{{a1.content_writer_name}}</td>
-              <td class="text-center d-none d-md-table-cell">{{a1.content_date}}</td>
+              <td class="text-center d-none d-md-table-cell">{{a1.boardNum}}</td> <!--글번호 -->
+              <td @click="go_board_read(a1.boardNum)">{{a1.boardTitle}}</td>
+              <td class="text-center d-none d-md-table-cell">{{a1.writer}}</td>
+              <td class="text-center d-none d-md-table-cell">{{a1.boardWriteDate}}</td>
             </tr>
           </tbody>
         </table>
@@ -62,14 +62,14 @@ module.exports = {
     };
   },
   methods: {
-    go_board_read: function(content_idx) {
-      alert(content_idx)	
+    go_board_read: function(boardNum) {
+      alert(boardNum)	
       //this.$router router 객체 불러오기
-      this.$router.push('/board_read/' + this.$route.params.board_idx + '/' + this.$route.params.page + '/' + content_idx) //.push에 파라미터값에 알맞는 컴포넌트를 찾아 그 컴포넌트 주소로 이동시켜줌
+      this.$router.push('/board_read/' + this.$route.params.board_idx + '/' + this.$route.params.page + '/' + boardNum) //.push에 파라미터값에 알맞는 컴포넌트를 찾아 그 컴포넌트 주소로 이동시켜줌
     },
     get_board_data: function() {
       var params = new URLSearchParams();
-      params.append("board_idx", this.$route.params.board_idx);
+      params.append("board_idx", this.$route.params.board_idx); //get_board_list(int board_idx, int page) 파라미터라서 안 바꿔도 됌 
       params.append("page", this.$route.params.page)
       axios.post("get_board_list.hari", params).then((response)=>{
       console.log(response.data)

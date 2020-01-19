@@ -9,7 +9,7 @@
 				<div class="col-lg-9" style="margin-top:10%; margin-left:10%; margin-right: 10%; text-align: center;">
 					<div class="card shadow">
 						<div class="card-body">
-							<h4 class="card-title">{{server_data.board_info_name}}</h4> <!--service단에서 // 해당 게시판 정보 가져오기 가세요 -->
+							<h4 class="card-title">{{server_data.boardName}}</h4> <!--service단에서 // 해당 게시판 정보 가져오기 가세요 -->
 							<table class="table table-hover" id='board_list'>
 								<thead>
 									<tr>
@@ -21,9 +21,9 @@
 								</thead>
 								<tbody>
 									<tr v-for="a1 in server_data.board_list" :key="a1"> 
-										<td class="text-center">{{a1.content_idx}}</td>
-										<td @click="go_board_read(a1.content_idx)">{{a1.content_subject}}</td>
-										<td class="text-center d-none d-xl-table-cell">{{a1.content_data}}</td>
+										<td class="text-center">{{a1.boardNum}}</td>
+										<td @click="go_board_read(a1.boardNum)">{{a1.boardTitle}}</td>
+										<td class="text-center d-none d-xl-table-cell">{{a1.boardWriteDate}}</td>
 									</tr>
 								</tbody>
 							</table>
@@ -50,8 +50,8 @@ module.exports={
   },
   props:['board_idx'],
   methods: {
-    go_board_read:function(content_idx){
-      this.$router.push('/board_read/' + this.board_idx + '/1/' + content_idx)
+    go_board_read:function(boardNum){
+      this.$router.push('/board_read/' + this.board_idx + '/1/' + boardNum)
 	}
   },
   created() {
