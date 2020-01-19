@@ -129,7 +129,7 @@
 		}else {
 			swal({
 				text: "양식명이 입력되지 않았습니다.",
-				icon: warning,
+				icon: "warning",
 				button: "닫기"
 			})
 		}

@@ -6,34 +6,101 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/hari/assets/extra-libs/multicheck/multicheck.css">
 <link href="${pageContext.request.contextPath}/resources/hari/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet">
 
-<!-- 초기페이지 설정 -->
+<!-- SweetAlert -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script>
 	var code = 0 //결재분류 : 0.전체 / 1.기안 / 2.완료 / 3.반려 / 4.결재할 문서
 	var cp = 1; //보여줄 페이지
 	var pg = 3; //한 페이지에 보여줄 갯수
+	var signDate = "false";
+	var signNum = "false";
+	var signTitle = "false";
+	var draftEmp = "false";
+	var searchKey;
 	
 	$(function(){
-		list(code, cp, pg);
-		page(code,pg);
+		list(code, cp, pg, signDate, signNum, signTitle, draftEmp, searchKey);
+		page(code,pg,signDate, signNum, signTitle, draftEmp, searchKey);
 
 		//내문서함 문서구분 클릭
 		$('.signType').click(function(){
 			//console.log($(this).attr("code"));
 			code = $(this).attr("code");
 			cp = 1;
-			list(code, cp, pg);
-			page(code,pg);
+
+ 			signDate = "false";
+			signNum = "false";
+			signTitle = "false";
+			draftEmp = "false";
+			
+			list(code, cp, pg, signDate, signNum, signTitle, draftEmp, searchKey)
+			page(code,pg); //,signDate, signNum, signTitle, draftEmp, searchKey
 		});//내문서함 문서구분 클릭 끝
+
+		//검색어 입력
+		$('#searchKey').keyup(function(){
+			//console.log($('.searchCheck:checked').length);
+			
+			signDate = "false";
+			signNum = "false";
+			signTitle = "false";
+			draftEmp = "false";
+			
+			if($('.searchCheck:checked').length == 0){
+				swal({
+					text: "검색구분이 선택되지 않았습니다.",
+					icon: "warning",
+					button: "닫기"
+				})
+			}else {
+				//체크박스 each
+				$('.searchCheck:checked').each(function(index){
+					//console.log($(this).val());
+					
+					var searchCheck = $(this).val();
+					//console.log(searchCheck);
+					
+					if(searchCheck == "signDate"){
+						signDate = "true";
+						
+					}else if(searchCheck == "signNum"){
+						signNum = "true";
+						
+					}else if(searchCheck == "signTitle"){
+						signTitle = "true";
+						
+					}else if(searchCheck == "draftEmp"){
+						draftEmp = "true";
+					}
+				}); //체크박스 each 끝
+				
+				//console.log($('#searchKey').val());
+				searchKey = $('#searchKey').val();
+				cp = 1; //보여줄 페이지
+				pg = 3; //한 페이지에 보여줄 갯수
+				
+				list(code, cp, pg, signDate, signNum, signTitle, draftEmp, searchKey);
+				page(code,pg,signDate, signNum, signTitle, draftEmp, searchKey);
+			}
+			
+		});//검색어 입력 끝
 		
 	});//onload 끝
 
 	//페이징처리
-	function page(code,pg){
+	function page(code,pg,signDate, signNum, signTitle, draftEmp, searchKey){
 		$.ajax({
 			url:"${pageContext.request.contextPath}/ajax/signPage.hari",
 			type:"post",
-			data :{"code" : code},
+			data :{
+				"code" : code,
+				"signDate" : signDate,
+				"signNum" : signNum,
+				"signTitle" : signTitle,
+				"draftEmp" : draftEmp,
+				"searchKey" : searchKey
+			},
 			success: function(count){
  				//console.log(count);
  				//count = count.trim();
@@ -74,7 +141,7 @@
 						cp = cur;
 					}
 					
-					list(code, cp, pg);
+					list(code, cp, pg, signDate, signNum, signTitle, draftEmp, searchKey);
 				});//페이지 클릭 이벤트 끝
 
 			},
@@ -91,7 +158,7 @@
 	}//페이징처리 끝
 	
 	//전자결재 가져오기
-	function list(code, cp, pg){
+	function list(code, cp, pg, signDate, signNum, signTitle, draftEmp, searchKey){
 		//console.log(code);
 		//console.log(cp);
 		//console.log(pg);
@@ -99,7 +166,16 @@
 		$.ajax({
 			url:"${pageContext.request.contextPath}/ajax/selectSign.hari",
 			type:"post",
-			data :{"code" : code, "cp" : cp, "pg" : pg},
+			data :{
+					"code" : code,
+					"cp" : cp,
+					"pg" : pg,
+					"signDate" : signDate,
+					"signNum" : signNum,
+					"signTitle" : signTitle,
+					"draftEmp" : draftEmp,
+					"searchKey" : searchKey
+			},
 			success: function(list){
 				$('#signListTable').empty();
  				//console.log(list);
@@ -209,12 +285,54 @@
 				<!--내 문서함 테이블 -->
 				<div class="card">
 					<div class="card-body">
-						<button type="button" class="btn btn-success btn-sm signType" code="0">전체문서</button>
-						<button type="button" class="btn btn-success btn-sm signType" code="1">기안문서</button>
-						<button type="button" class="btn btn-success btn-sm signType" code="4">결재 할 문서</button>
-						<button type="button" class="btn btn-success btn-sm signType" code="5">결재 한 문서</button>
-						<button type="button" class="btn btn-success btn-sm signType" code="2">완료문서</button>
-						<button type="button" class="btn btn-success btn-sm signType" code="3">반려문서</button>
+						<div class="row">
+							<!-- 문서구분 버튼 -->
+							<div class="col-md-6">
+								<button type="button" class="btn btn-success btn-sm signType" code="0">전체문서</button>
+								<button type="button" class="btn btn-success btn-sm signType" code="1">기안문서</button>
+								<button type="button" class="btn btn-success btn-sm signType" code="4">결재 할 문서</button>
+								<button type="button" class="btn btn-success btn-sm signType" code="5">결재 한 문서</button>
+								<button type="button" class="btn btn-success btn-sm signType" code="2">완료문서</button>
+								<button type="button" class="btn btn-success btn-sm signType" code="3">반려문서</button>
+							</div>
+							<!-- 문서구분 버튼끝 -->
+							
+							<div class="col-md-6">
+								<div class="row">
+									<div class="col-md-8">
+										<div class="row">
+										
+	                                        <div class="custom-control custom-checkbox col-md-3">
+	                                            <input type="checkbox" class="custom-control-input searchCheck" id="customControlAutosizing1" value="signDate">
+	                                            <label class="custom-control-label" for="customControlAutosizing1">기안일</label>
+	                                        </div>
+	                                        
+	                                        <div class="custom-control custom-checkbox col-md-3">
+	                                            <input type="checkbox" class="custom-control-input searchCheck" id="customControlAutosizing2" value="signNum">
+	                                            <label class="custom-control-label" for="customControlAutosizing2">문서번호</label>
+	                                        </div>
+	                                        
+	                                        <div class="custom-control custom-checkbox col-md-3">
+	                                            <input type="checkbox" class="custom-control-input searchCheck" id="customControlAutosizing3" value="signTitle">
+	                                            <label class="custom-control-label" for="customControlAutosizing3">제목</label>
+	                                        </div>
+	                                        
+	                                        <div class="custom-control custom-checkbox col-md-3">
+	                                            <input type="checkbox" class="custom-control-input searchCheck" id="customControlAutosizing4" value="draftEmp">
+	                                            <label class="custom-control-label" for="customControlAutosizing4">기안자</label>
+	                                        </div>
+	                                        
+                                        </div>
+									</div>
+									
+									<div class="col-md-4">
+										<input type="search" class="form-control form-control-sm" placeholder="검색어를 입력하세요." id="searchKey">
+									</div>
+									
+								</div>
+							</div>
+							
+						</div>
 						
 					</div>
 					<table class="table">
@@ -282,7 +400,6 @@
 	</div>
 	<!-- ============================================================== -->
 	<!-- End Container fluid  -->
-
 </div>
 <!-- ============================================================== -->
 <!-- End Page wrapper  -->

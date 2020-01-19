@@ -36,9 +36,12 @@ public class SignRestController {
 	
 	//내문서함 리스트 김정하 / 2020. 1. 14~
 	@RequestMapping("selectSign.hari")
-	public List<SignDto> selectSign(String code, String cp, String pg, Principal principal){
+	public List<SignDto> selectSign(String signDate, String signNum, String signTitle, String draftEmp, String searchKey, String code, String cp, String pg, Principal principal){
 		HashMap<String, String> map = new HashMap<String, String>();
-		String draftEmp = principal.getName();
+		String loginUser = principal.getName();
+		
+		System.out.println(signNum);
+		
 		int offset = Integer.parseInt(cp);
 		
 		if(offset == 1) {
@@ -47,10 +50,17 @@ public class SignRestController {
 			offset = (offset-1)*Integer.parseInt(pg);
 		}
 		
-		map.put("draftEmp", draftEmp); //현재 로그인한 사번
+		map.put("loginUser", loginUser); //현재 로그인한 사번
 		map.put("pg", pg); //page 에 보여줄 갯수
 		map.put("cp", Integer.toString(offset)); //보여줄 페이지
-		map.put("code", code); //결재분류 : 0.전체 / 1.기안 / 2.완료 / 3.반려 / 4.결재할 문서
+		map.put("code", code); //결재분류 : 0.전체 / 1.기안 / 2.완료 / 3.반려 / 4.결재할 문서 / 5. 결재한 문서
+		
+		map.put("signDate", signDate);
+		map.put("signNum", signNum);
+		map.put("signTitle", signTitle);
+		map.put("draftEmp", draftEmp);
+		map.put("searchKey", searchKey);
+		
 		List<SignDto> signList = signService.selectSignList(map);
 		
 		return signList;
@@ -58,15 +68,22 @@ public class SignRestController {
 	
 	//내문서함 페이징 김정하 / 2020. 1. 15
 	@RequestMapping("signPage.hari")
-	public int signPage(String code, Principal principal) {
+	public int signPage(String signDate, String signNum, String signTitle, String draftEmp, String searchKey, String code, Principal principal) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		
 		//System.out.println(code);
 		
-		String draftEmp = principal.getName();
+		String loginUser = principal.getName();
 		
-		map.put("draftEmp", draftEmp); //현재 로그인한 사번
-		map.put("code", code); //결재분류 : 0.전체 / 1.기안 / 2.완료 / 3.반려 / 4.결재할 문서
+		map.put("loginUser", loginUser); //현재 로그인한 사번
+		map.put("code", code); //결재분류 : 0.전체 / 1.기안 / 2.완료 / 3.반려 / 4.결재할 문서 / 5. 결재한 문서
+		
+		map.put("signDate", signDate);
+		map.put("signNum", signNum);
+		map.put("signTitle", signTitle);
+		map.put("draftEmp", draftEmp);
+		map.put("searchKey", searchKey);
+		
 		int count = signService.signPage(map);
 		return count;
 	}
@@ -110,4 +127,5 @@ public class SignRestController {
 		
 		return resultMap;
 	}
+
 }

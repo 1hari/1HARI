@@ -29,24 +29,38 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="signPage" parameterType="hashmap" resultType="int">
 		SELECT COUNT(SIGNNUM) FROM sign
 		<where>
+			<!-- 검색구분 -->
+			<if test='signDate == "true"'>
+				OR SIGNDATE like concat('%',#{searchKey},'%') 
+			</if>
+			<if test='signNum == "true"'>
+				OR SIGNNUM like concat('%',#{searchKey},'%')
+			</if>
+			<if test='signTitle == "true"'>
+				OR SIGNTITLE like concat('%',#{searchKey},'%')
+			</if>		
+			<if test='draftEmp == "true"'>
+				OR DRAFTEMP like concat('%',#{searchKey},'%')
+			</if>
+			
 			<choose>
-				<when test="code.equalsIgnoreCase('0')"> <!-- 전체문서 -->
-					EMPSIGN1 = #{draftEmp} OR (ISSIGN1 = 1 AND EMPSIGN2 = #{draftEmp}) OR DRAFTEMP = #{draftEmp}
+				<when test="code.equalsIgnoreCase('0')"> <!-- 전체문서 : 결재자1 OR (결재1완료 AND 결재자2) OR 기안자 -->
+					AND (EMPSIGN1 = #{loginUser} OR (ISSIGN1 = 1 AND EMPSIGN2 = #{loginUser}) OR DRAFTEMP = #{loginUser})
 				</when>
-				<when test="code.equalsIgnoreCase('1')"> <!-- 기안문서 -->
-					SIGNCODE IN(1,2) AND DRAFTEMP = #{draftEmp}
+				<when test="code.equalsIgnoreCase('1')"> <!-- 기안문서 : 결재코드 (1(기안) OR 2(진행)) AND 기안자 -->
+					AND (SIGNCODE IN(1,2) AND DRAFTEMP = #{loginUser})
 				</when>
-				<when test='code == "2"'> <!-- 완료문서 -->
-					SIGNCODE = 3 AND DRAFTEMP = #{draftEmp}
+				<when test='code == "2"'> <!-- 완료문서 : 결재코드 3(승인) AND 기안자 -->
+					AND (SIGNCODE = 3 AND DRAFTEMP = #{loginUser})
 				</when>
-				<when test='code == "3"'> <!-- 반려문서 -->
-					SIGNCODE = 4 AND DRAFTEMP = #{draftEmp}
+				<when test='code == "3"'> <!-- 반려문서 : 결재코드 4(반려) AND 기안자 -->
+					AND (SIGNCODE = 4 AND DRAFTEMP = #{loginUser})
 				</when>
-				<when test='code == "4"'> <!-- 결재할 문서-->
-					SIGNCODE IN(1,2) AND if(ISSIGN1 = 0, EMPSIGN1 = #{draftEmp}, EMPSIGN2 = #{draftEmp})
+				<when test='code == "4"'> <!-- 결재할 문서 : 결재코드 (1(기안) OR 2(진행)) AND ((결재1미완료 AND 결재자1) OR (결재1완료 AND 결재자2) -->
+					AND (SIGNCODE IN(1,2) AND if(ISSIGN1 = 0, EMPSIGN1 = #{loginUser}, EMPSIGN2 = #{loginUser}))
 				</when>
-				<when test='code == "5"'> <!-- 결재한 문서-->
-					(ISSIGN1 = 1 AND EMPSIGN1 = #{draftEmp}) OR (ISSIGN2 = 1 AND EMPSIGN2 = #{draftEmp})
+				<when test='code == "5"'> <!-- 결재한 문서 : (결재1완료 AND 결재자1) OR (결재2완료 AND 결재자2) -->
+					AND ((ISSIGN1 = 1 AND EMPSIGN1 = #{loginUser}) OR (ISSIGN2 = 1 AND EMPSIGN2 = #{loginUser}))
 				</when>
 			</choose>
 		</where>
@@ -83,30 +97,59 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					JOIN team te <!-- 기안자 부서 테이블 -->
 						ON e.TEAMCODE = te.TEAMCODE
 		<where>
+			<!-- 검색구분 -->
+			<if test='signDate == "true"'>
+				OR s.SIGNDATE like concat('%',#{searchKey},'%') 
+			</if>
+			<if test='signNum == "true"'>
+				OR s.SIGNNUM like concat('%',#{searchKey},'%')
+			</if>
+			<if test='signTitle == "true"'>
+				OR s.SIGNTITLE like concat('%',#{searchKey},'%')
+			</if>		
+			<if test='draftEmp == "true"'>
+				OR s.DRAFTEMP like concat('%',#{searchKey},'%')
+			</if>
+		
 			<choose>
-				<when test="code.equalsIgnoreCase('0')"> <!-- 전체문서 -->
-					s.DRAFTEMP = #{draftEmp} OR s.EMPSIGN1 = #{draftEmp} OR (s.ISSIGN1 = 1 AND s.EMPSIGN2 = #{draftEmp}) 
+				<!-- 문서구분 -->
+				<!-- 전체문서 : 결재자1 OR (결재1완료 AND 결재자2) OR 기안자 -->
+				<when test="code.equalsIgnoreCase('0')">
+					AND (s.DRAFTEMP = #{loginUser} OR s.EMPSIGN1 = #{loginUser} OR (s.ISSIGN1 = 1 AND s.EMPSIGN2 = #{loginUser})) 
 				</when>
-				<when test="code.equalsIgnoreCase('1')"> <!-- 기안문서 -->
-					s.SIGNCODE IN(1,2) AND s.DRAFTEMP = #{draftEmp}
+				
+				<!-- 기안문서 : 결재코드 (1(기안) OR 2(진행)) AND 기안자 -->
+				<when test="code.equalsIgnoreCase('1')"> 
+					AND (s.SIGNCODE IN(1,2) AND s.DRAFTEMP = #{loginUser})
 				</when>
-				<when test='code == "2"'> <!-- 완료문서 -->
-					s.SIGNCODE = 3 AND s.DRAFTEMP = #{draftEmp}
+				
+				<!-- 완료문서 : 결재코드 3(승인) AND 기안자 -->
+				<when test='code == "2"'> 
+					AND (s.SIGNCODE = 3 AND s.DRAFTEMP = #{loginUser})
 				</when>
-				<when test='code == "3"'> <!-- 반려문서 -->
-					s.SIGNCODE = 4 AND s.DRAFTEMP = #{draftEmp}
+				
+				<!-- 반려문서 : 결재코드 4(반려) AND 기안자 -->
+				<when test='code == "3"'> 
+					AND (s.SIGNCODE = 4 AND s.DRAFTEMP = #{loginUser})
 				</when>
-				<when test='code == "4"'> <!-- 결재할 문서-->
-					s.SIGNCODE IN(1,2) AND if(s.ISSIGN1 = 0, s.EMPSIGN1 = #{draftEmp}, s.EMPSIGN2 = #{draftEmp})
+				
+				<!-- 결재할 문서 : 결재코드 (1(기안) OR 2(진행)) AND ((결재1미완료 AND 결재자1) OR (결재1완료 AND 결재자2) -->
+				<when test='code == "4"'> 
+					AND (s.SIGNCODE IN(1,2) AND if(s.ISSIGN1 = 0, s.EMPSIGN1 = #{loginUser}, s.EMPSIGN2 = #{loginUser}))
 				</when>
-				<when test='code == "5"'> <!-- 결재한 문서-->
-					(s.ISSIGN1 = 1 AND s.EMPSIGN1 = #{draftEmp}) OR (s.ISSIGN2 = 1 AND s.EMPSIGN2 = #{draftEmp})
+				
+				<!-- 결재한 문서 : (결재1완료 AND 결재자1) OR (결재2완료 AND 결재자2)-->
+				<when test='code == "5"'>
+					AND ((s.ISSIGN1 = 1 AND s.EMPSIGN1 = #{loginUser}) OR (s.ISSIGN2 = 1 AND s.EMPSIGN2 = #{loginUser}))
 				</when>
-				<when test='code == "6"'> <!-- 문서보기 -->
+				
+				<!-- 문서보기 -->
+				<when test='code == "6"'> 
 					s.SIGNNUM = #{signNum}
 				</when>
 			</choose>
-		</where>				
+		</where>
+
 		ORDER BY s.SIGNDATE DESC
 		LIMIT ${pg}
 		<if test="cp != '0'">
@@ -118,10 +161,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="signApproval" parameterType="hashmap">
 		UPDATE sign SET
 			<choose>
-				<when test="isSign1.equalsIgnoreCase('0')">
+				<when test="isSign1.equalsIgnoreCase('0')"><!-- 결재1 미완료이면 -->
 					ISSIGN1='1', SIGNCODE='2'
 				</when>
-				<otherwise>
+				<otherwise><!-- 결재1 완료이면 -->
 					ISSIGN2='1', SIGNCODE='3'
 				</otherwise>
 			</choose>

@@ -61,6 +61,7 @@
 										<!-- 사원명 -->
 										<td id="empName0">
 											${emp.empName}
+											<br>(${emp.empNum})
 										</td>
 										<td id="empName1">
 										</td>
@@ -203,7 +204,7 @@
 // 			console.log($(this).html());
 			
 			//체크된 줄의 부모 요소 중 tr을 찾음
-			let check = $('.listCheckbox:checked').closest('tr');
+			let check = $('.empChoice:checked').closest('tr');
 			let empName = $(this).html().split('[')[0];
 			
 			//찾은 tr의 자식 중 class가 일치하는 것을 찾아서 값 대입
@@ -213,39 +214,36 @@
 			check.children('.empName').html(empName); //이름
 
 			//선택된 곳이 결재자 1인지, 2인지 구분하기 위해 id값을 가져온다.
-			let checkNum = $('.listCheckbox:checked').attr('id');
+			let checkNum = $('.empChoice:checked').attr('id');
 
 			//선택된 결재자에 따라 값 대입
-			if(checkNum == 'sign1'){
+			if(checkNum == 'customControlValidation1'){
 				$('#rankName1').html($(this).attr('rankName'));
-				$('#empName1').html(empName + '<input type="hidden" id="empSign1" name="empSign1" value="'+$(this).val()+'">');
-			}else {
+				$('#empName1').html(empName + "<br>(" + $(this).val() + ")" + '<input type="hidden" id="empSign1" name="empSign1" value="'+$(this).val()+'">');
+				
+			}else if(checkNum == 'customControlValidation2'){
 				$('#rankName2').html($(this).attr('rankName'));
-				$('#empName2').html(empName + '<input type="hidden" id="empSign2" name="empSign2" value="'+$(this).val()+'">');
+				$('#empName2').html(empName + "<br>(" + $(this).val() + ")" + '<input type="hidden" id="empSign2" name="empSign2" value="'+$(this).val()+'">');
 			}
 			
 		});//결재자 클릭 끝
 
 		//기안submit 클릭
 		$('#draftSubmit').click(function(){
-			let submit = false;
 			let signEmp = false;
 			//console.log($('#empName1').html().trim() == "");
 			//console.log($('#empName2').html());
-			
+						
 			//결재선 확인
-			if( $('#empName1').html().trim() == "" || $('#empName1').html().trim() == "" ){
+			if( $('#empName1').html().trim() == "" || $('#empName2').html().trim() == "" || $('#signTitle').val() == "" ){
 				swal({
-					text: "결재선 확인바랍니다.",
+					text: "결재선 또는 제목 확인바랍니다.",
 					icon: "warning",
 					button: "닫기"
-				});
+				})
 			}else {
 				signEmp = true;
 			}
-			
-			
-			//if($('#'))
 
 			if(signEmp){
 				draftForm.submit();
@@ -306,10 +304,10 @@
 							<thead class="thead-light">
 								<tr>
 									<th>
-										<label class="customcheckbox m-b-20">
+										<!-- <label class="customcheckbox m-b-20">
 											<input type="checkbox" id="mainCheckbox" />
 											<span class="checkmark"></span>
-										</label>
+										</label> -->
 									</th>
 									<th scope="col">
 										부서
@@ -328,10 +326,10 @@
 							<tbody class="customtable">
 								<tr>
 									<th>
-										<label class="customcheckbox">
-											<input type="checkbox" class="listCheckbox" id="sign1"/>
-											<span class="checkmark"></span>
-										</label>
+										<div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input empChoice" id="customControlValidation1" name="radio-stacked" required>
+                                            <label class="custom-control-label" for="customControlValidation1"></label>
+                                        </div>
 									</th>
 									<!-- 부서 -->
 									<td class="empTeam"></td>
@@ -347,10 +345,10 @@
 								</tr>
 								<tr>
 									<th>
-										<label class="customcheckbox">
-											<input type="checkbox" class="listCheckbox" id="sign2"/>
-											<span class="checkmark"></span>
-										</label>
+										<div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input empChoice" id="customControlValidation2" name="radio-stacked" required>
+                                            <label class="custom-control-label" for="customControlValidation2"></label>
+                                        </div>
 									</th>
 									<!-- 부서 -->
 									<td class="empTeam"></td>
