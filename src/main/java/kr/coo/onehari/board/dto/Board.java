@@ -23,7 +23,7 @@ public class Board { //vuemavenproject에서 content.java dto
 	private int boardNum; //글번호  content_idx
 	private String boardTitle; //게시글 제목 content_subject;
 	private String boardContent; //게시글 내용 content_text;
-	private int writer; //작성자  content_writer_name;
+	private String writer; //작성자  content_writer_name;
 	private Timestamp boardWriteDate; //작성일 content_date; //작성일 timestamp 는 보이게만 하고, crud안해도 됨 
 	
 	private int views; //조회수 

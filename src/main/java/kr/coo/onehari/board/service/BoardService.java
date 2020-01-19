@@ -126,9 +126,9 @@ public class BoardService {
 //		}
 //		root.put("board_list", board_list);
 //
-//		return root;
-//	}
-	
+//	return root;
+//}
+//	
 	//컨텐츠 추가
 	public JSONObject add_content(Board content) {
 		JSONObject root = new JSONObject();
@@ -162,20 +162,20 @@ public class BoardService {
 	}
 	
 	// 컨텐츠 가져오기(Read)
-//	public JSONObject get_content(int contentIdx) {
-//		BoardDao boarddao = sqlsession.getMapper(BoardDao.class);
-//		Board board = boarddao.getContent(contentIdx);
-//		JSONObject root = new JSONObject();
-//		root.put("content_idx", contentIdx);
-//		root.put("content_subject", board.getBoardTitle());
-//		root.put("content_text", board.getBoardContent());
-//		root.put("content_file", board.getBoardFileName());
-//		//root.put("content_writer_idx", board.getContent_writer_idx()); 우리 디비 테이블에 없음 
-//		root.put("content_writer_name", board.getWriter());
-//		root.put("content_date", board.getBoardWriteDate());
-//		return root;
-//	}
-//	
+	public JSONObject get_content(int contentIdx) {
+		BoardDao boarddao = sqlsession.getMapper(BoardDao.class);
+		Board board = boarddao.getContent(contentIdx);
+		JSONObject root = new JSONObject();
+		root.put("content_idx", contentIdx);
+		root.put("content_subject", board.getBoardTitle());
+		root.put("content_text", board.getBoardContent());
+		root.put("content_file", board.getBoardFileName());
+		//root.put("content_writer_idx", board.getContent_writer_idx()); 우리 디비 테이블에 없음 
+		root.put("content_writer_name", board.getWriter());
+		root.put("content_date", board.getBoardWriteDate());
+		return root;
+	}
+	
 	//컨텐츠 수정
 //	public JSONObject modify_content(Board board) {
 //		JSONObject root = new JSONObject();

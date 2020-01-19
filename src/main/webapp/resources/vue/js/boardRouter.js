@@ -42,7 +42,7 @@ var router = new VueRouter({
 			}
 		},
 		{
-			path : '/board_write/:board_idx',
+			path : '/board_write/:board_idx/:page/:content_idx',
 			component : httpVueLoader(contextPath+'/resources/vue/components/board/board_write.vue')
 		},
 		{

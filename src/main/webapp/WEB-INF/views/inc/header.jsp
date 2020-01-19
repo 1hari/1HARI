@@ -462,12 +462,12 @@ $(function(){
 				<a class="navbar-brand" href="${pageContext.request.contextPath}/main.hari"> <!-- 로고 아이콘 시작 -->
 					<b class="logo-icon p-l-10"> <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
 						<!-- 로고 아이콘 png-->
-						<img src="${pageContext.request.contextPath}/resources/hari/assets/images/logo-img-final.png" alt="homepage" class="light-logo" style="width: 30%; height: 20%; color:#2ab2aa;" />
+						<img src="${pageContext.request.contextPath}/resources/hari/assets/images/logo-text-30-23.png" alt="homepage" class="light-logo" /><!-- style="width: 30%; height: 20%; color:#2ab2aa;" -->
 					</b><!--로고 아이콘 끝  -->
 					<!-- 로고 글씨 시작 -->
 					<span class="logo-text" >
 						<!-- 로고 글씨 png-->
-						<img src="${pageContext.request.contextPath}/resources/hari/assets/images/logo-152.png" alt="homepage" class="light-logo" style="width: 200%; height: 20%; margin-left: -120%;" />
+						<img src="${pageContext.request.contextPath}/resources/hari/assets/images/logo-text-152-28.png" alt="homepage" class="light-logo" />
 					</span> <!-- Logo icon --> <!-- <b class="logo-icon"> --> <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
 					<!-- Dark Logo icon --> <!-- <img src="assets/images/logo-text.png" alt="homepage" class="light-logo" /> -->
 					<!-- </b> --> <!--End Logo icon -->

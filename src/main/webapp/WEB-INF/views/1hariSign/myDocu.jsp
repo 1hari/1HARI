@@ -247,9 +247,9 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-4"></div>
+			<div class="col-md-5"></div>
 			<!-- 페이징처리 -->
-			<div class="col-md-4">
+			<div class="col-md-2">
 				<nav aria-label="Page navigation">
 					<ul class="pagination" id="pagination">
 						<!-- 페이지 -->

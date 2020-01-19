@@ -52,13 +52,9 @@
 
 	
 	<!-- 컨텐츠 가져오기(Read) -->
-<!-- 	<select id="getContent" resultType="kr.coo.onehari.board.dto.Board">
-		SELECT A1.CONTENT_IDX, A1.CONTENT_SUBJECT, A1.CONTENT_TEXT, A1.CONTENT_FILE, A1.CONTENT_WRITER_IDX, A2.USER_NAME, TO_CHAR(A1.CONTENT_DATE, 'YYYY-MM-DD') AS CONTENT_DATE 
-		FROM CONTENT_TABLE A1, USER_TABLE A2 
-		WHERE A1.CONTENT_WRITER_IDX=A2.USER_IDX 
-		AND A1.CONTENT_IDX=#{contentIdx}
-	</select> -->
-	
+	<select id="getContent" resultType="kr.coo.onehari.board.dto.Board">
+		SELECT BOARDNUM, BOARDTITLE, BOARDCONTENT FROM BOARD
+	</select>
 	
 	
 </mapper>

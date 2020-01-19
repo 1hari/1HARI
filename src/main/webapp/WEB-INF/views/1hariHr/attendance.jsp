@@ -32,30 +32,10 @@ $(function(){
 	<!-- ============================================================== -->
 	<!-- 컨텐츠 제목 끝 -->
 
-	<div class="container">
+	<div class="container" style ="margin-top: 3%;">
 		<div class="row">
 			<div class="col-md-12">
-				<!-- <div class="card">
-					<table style="text-align: center;">
-						<th>
-							<tr>
-								<th>총 근무일수</th>
-								<th>총 근무 시간</th>
-								<th>총 근무 시간</th>
-								<th>총 근무 시간</th>
-	
-							</tr>
-							<tr>
-								<td>dd</td>
-								<td>dd</td>
-								<td>dd</td>
-								<td>dd</td>
-							</tr>
-						</th>
-					</table>
-				</div>
-	 -->
-				<div class="row row-card-no-pd">
+					<div class="row row-card-no-pd">
 						<div class="col-sm-6 col-md-3">
 							<div class="card card-stats card-round">
 								<div class="card-body ">
@@ -142,14 +122,14 @@ $(function(){
 
 	<!--컨텐츠 내용 시작  -->
 	<!-- ============================================================== -->
-	<div class="container-fluid">
+	<div class="container-fluid" style ="width:83%; height: 83%; marign-left:10%;">
 
 		<!-- ============================================================== -->
 		<!-- 컨텐츠 로우 -->
 		<!-- ============================================================== -->
 
-		<div class="row">
-			<div class="col-md-11">
+		<div class="row" style ="width:100%; height:100%;">
+			<div class="col-md-12">
 				<div class="card">
 
 
@@ -158,7 +138,7 @@ $(function(){
 
 							<!--캘린더 -->
 							<div class="col-lg-12">
-								<div class="card-body b-l calender-sidebar" style="width: 100%; height: 50%;">
+								<div class="card-body b-l calender-sidebar">
 									<div id="calendar"></div>
 								</div>
 							</div>

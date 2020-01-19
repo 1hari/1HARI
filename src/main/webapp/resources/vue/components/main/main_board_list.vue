@@ -58,7 +58,7 @@ module.exports={
 	  var params = new URLSearchParams()
 	  params.append('board_idx', this.board_idx)
 
-	  axios.post('get_top5_list.hari', params).then((response)=>{
+	  axios.post('add_content.hari', params).then((response)=>{
 		  this.server_data=response.data
 	  })
 

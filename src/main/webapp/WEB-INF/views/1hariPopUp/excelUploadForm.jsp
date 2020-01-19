@@ -120,12 +120,13 @@
 								</div>
 							</div>
 						</div>
-						<button type="button" class="btn m-t-5 btn-info btn-block waves-effect waves-light" style="width: 12%; background-color: #20B2AA; float: right; margin-bottom: 1%;" onclick="doExcelUploadProcess()">
-							올리기
-						</button>
-	    				<button type="button" id="excelInsert" class="btn m-t-5 btn-info btn-block waves-effect waves-light" style="width: 12%; background-color: #20B2AA; float: right; margin-bottom: 1%;">
+						<button type="button" id="excelInsert" class="btn btn-success" style= "width: 12%; background-color: #20B2AA; margin-left: 75%;">
 	    					저장하기
 	    				</button>
+						<button type="button" class="btn btn-success" style="width: 12%; background-color: #20B2AA; " onclick="doExcelUploadProcess()">
+							올리기
+						</button> <!-- "btn m-t-5 btn-info btn-block waves-effect waves-light -->
+	    			
 						<table id="zero_config" class="table table-striped table-bordered">
 							<thead>
 								<tr>

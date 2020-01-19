@@ -40,10 +40,10 @@ public interface BoardDao {
 	//컨텐츠 추가 (Create1)
 	public int addContent(Board content);
 	//추가한 컨텐츠 번호 가져오기 (Create2)
-	//public int getContentIdx();
+	public int getContentIdx();
 	
 	//컨텐츠 가져오기(Read)
-	//public Board getContent(int contentIdx);
+	public Board getContent(int contentIdx);
 	//컨텐츠 수정하기 (Modify)
 	//public int modifyContent(Board content);
 	//이미 파일이 있던 컨텐츠 수정하기 (Modify)
