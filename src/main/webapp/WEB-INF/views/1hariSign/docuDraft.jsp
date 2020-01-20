@@ -253,7 +253,7 @@
 				console.log(empSign1);
 				
  				send(draftEmp,empSign1);
-// 				draftForm.submit();
+ 				draftForm.submit();
 			}
 			
 		}) //기안 클릭 끝

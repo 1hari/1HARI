@@ -68,8 +68,7 @@
 	<beans:bean id="signHandler" class="kr.coo.onehari.sign.websocket.SignWebSocketHandler" />
 	
 	<websocket:handlers>
-		<websocket:mapping handler="signHandler" path="/sign.sockjs" />
-		<websocket:sockjs />
+		<websocket:mapping handler="signHandler" path="/sign.hari" />
 	</websocket:handlers>
 	
 	<default-servlet-handler />

@@ -142,6 +142,8 @@
 			let empSign2 = ${docu.empSign2};
 
 			let signNum = ${docu.signNum};
+
+			let draftEmp = ${docu.draftEmp};
 			
 			$.ajax({
 				url:"${pageContext.request.contextPath}/ajax/approval.hari",
@@ -169,6 +171,7 @@
 	 						icon: icon,
 	 						button: "닫기"
 	 					}).then((value) => {
+	 						window.opener.send(draftEmp,empSign2);
 	 						window.location.reload();
 	 						window.opener.reload();			
 		 				})

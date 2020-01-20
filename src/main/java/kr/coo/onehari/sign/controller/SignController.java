@@ -52,10 +52,10 @@ public class SignController {
 	//홈 화면 김정하 / 2020. 1. 7
 	@RequestMapping("signForm.hari")
 	public String signForm(Model model, String msg, String isOk, Principal principal) {
-		String draftEmp = principal.getName();
+		String loginUser = principal.getName();
 		HashMap<String, String> map = new HashMap<String, String>(); 
 		
-		map.put("draftEmp", draftEmp);
+		map.put("loginUser", loginUser);
 		map.put("pg", "3");
 		map.put("cp", "0");
 		
@@ -82,7 +82,7 @@ public class SignController {
 		model.addAttribute("msg", msg);
 		model.addAttribute("isOk", isOk);
 		
-		return "1hariSign.signForm";
+		return "1hariSign.signHome";
 	}	
 	
 	//문서기안 화면 김정하 / 2020. 1. 8~

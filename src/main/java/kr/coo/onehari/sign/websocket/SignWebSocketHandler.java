@@ -54,8 +54,16 @@ public class SignWebSocketHandler extends TextWebSocketHandler{
 		if(loginUsers.containsKey(empSign1)) {
 			TextMessage msg = new TextMessage("결재할 문서가 도착했습니다.");
 			loginUsers.get(empSign1).sendMessage(msg);
-			log("기안자 : "+draftEmp + "결재자1 : " + empSign1);
+			log("기안자 : "+draftEmp + " / 결재자 : " + empSign1);
 		}
+		
+		if(loginUsers.containsKey(draftEmp)) {
+			TextMessage msg = new TextMessage("문서가 결재되었습니다.");
+			loginUsers.get(draftEmp).sendMessage(msg);
+			log("기안자 : "+draftEmp + " / 결재자 : " + empSign1);
+		}
+		
+		
 	}
 	
 	//연결에 문제 발생시

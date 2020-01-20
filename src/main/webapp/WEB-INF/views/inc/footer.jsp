@@ -24,12 +24,21 @@
 	var wsocket;
 	//웹소켓 연결
 	function connect() {
-		wsocket = new WebSocket(
-				"http://192.168.6.10:8090/signAlert/sign.sockjs");
-	
+		wsocket =new WebSocket("ws://192.168.6.10:8090/1HARI/sign.hari"); 
+
+		wsocket.onopen = onOpen;
 		wsocket.onmessage = onMessage;
+		wsocket.onclose = onClose;
 	}
 
+	function onOpen(evt) {
+		console.log("websocket 연결");
+	}
+
+	function onClose(evt) {
+		console.log("websocket 연결해제");
+	}
+	
 	//로그아웃에서 호출할 함수 (연결해제)
 	function disconnect() {
 		wsocket.close();
@@ -42,8 +51,8 @@
 	}
 	
 	//websocket에 메시지 전달(기안시, 결재시 호출할 함수)
-	function send(draftEmp,empSign1) {
-		wsocket.send(draftEmp + "," + empSign1);
+	function send(draftEmp,empSign) {
+		wsocket.send(draftEmp + "," + empSign);
 	}
 
 	//websocket에서 전송된 메시지 뿌려주는 함수
