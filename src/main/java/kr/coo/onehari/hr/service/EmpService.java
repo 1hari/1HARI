@@ -144,6 +144,18 @@ public class EmpService {
 		}
 		return result;
 	}
+	//형남 0112 출근(지각)
+	public int insertStartWorkTardyTA(String empNumStr) {
+		EmpDao dao = sqlsession.getMapper(EmpDao.class);
+		int result = 0;
+		int empNum=Integer.parseInt(empNumStr);
+		try {
+			result=dao.insertStartWorkTardyTA(empNum);
+		} catch (ClassNotFoundException | SQLException e) {
+			log.debug("insertStartWorkTardyTA : " + e.getMessage());
+		}
+		return result;
+	}
 	
 	//형남 0112 퇴근
 	public int insertEndWorkTA(String empNumStr) {

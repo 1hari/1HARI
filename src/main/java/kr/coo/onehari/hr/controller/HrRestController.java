@@ -1,8 +1,10 @@
 package kr.coo.onehari.hr.controller;
 
 import java.security.Principal;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -123,10 +125,27 @@ public class HrRestController {
 	@RequestMapping(value = "startWork.hari", method = RequestMethod.POST)
 	public boolean startWork(Principal pri) {
 		int result = 0;
+		//요청시간 String
+		String tardyDateStr = "110000";
+		//현재시간 Date
+		Date curDate = new Date();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("HHmmss");
+		//요청시간을 Date로 parsing 후 time가져오기
+
 		try {
-			result = empSercive.insertStartWorkTA(pri.getName());
+			Date tardyDate = dateFormat.parse(tardyDateStr);
+			long tardyDateTime = tardyDate.getTime();
+			//현재시간을 요청시간의 형태로 format 후 time 가져오기
+			curDate = dateFormat.parse(dateFormat.format(curDate));
+			long curDateTime = curDate.getTime();
+			//현재시간이 지각시간보다 크면(지각)
+			if(curDateTime >tardyDateTime) {
+				result = empSercive.insertStartWorkTardyTA(pri.getName());
+			}else {
+				result = empSercive.insertStartWorkTA(pri.getName());
+			}
 		} catch (Exception e) {
-			log.debug("startWork 예외발생: " + e.getMessage());
+			log.debug("empNumEmail 예외발생: " + e.getMessage());
 		}
 		return result > 0 ? true : false;
 	}
@@ -214,8 +233,6 @@ public class HrRestController {
 			totalTime = empSercive.getTodayTotalTime(pri.getName());
 			if(totalTime==null) {
 				totalTime="empty";
-			}else {
-				System.out.println("totalTime: " + totalTime);
 			}
 		} catch (Exception e) {
 			log.debug("getTodayTotalTime 예외발생: " + e.getMessage());
@@ -323,7 +340,6 @@ public class HrRestController {
 			jsonObject.put("endList", endList);
 			jsonObject.put("absentList", absentList);
 		} catch (Exception e) {
-			System.out.println("getEndList 예외발생: " + e.getMessage());
 			log.debug("getEndList 예외발생: " + e.getMessage());
 		}
 		return jsonObject.toJSONString();

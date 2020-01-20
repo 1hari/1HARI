@@ -121,19 +121,21 @@
 	
    	<!-- 사원 출근기능 형남 0112 -->
 	<update id="insertStartWorkTA" parameterType="Integer">
-<!-- 		INSERT INTO TALIST(EMPNUM, TACODE, TADATE) VALUES(#{empNum}, 1, SYSDATE()) -->
 		UPDATE TALIST
 		SET TADATE=NOW()
 		WHERE EMPNUM=#{empNum} AND TACODE=1 AND TADATE IS NULL
 	</update>
 	
+   	<!-- 사원 출근기능(지각) 형남 0120 -->
+	<update id="insertStartWorkTardyTA" parameterType="Integer">
+		UPDATE TALIST
+		SET TADATE=NOW(), TACODE=3 
+		WHERE EMPNUM=#{empNum} AND TACODE=1 AND TADATE IS NULL
+	</update>
+	
 	<!-- 사원 퇴근기능 형남 0112 -->
 	<update id="insertEndWorkTA" parameterType="Integer">
-<!-- 		INSERT INTO TALIST(EMPNUM, TACODE, TADATE, TODAYWORK) VALUES(#{empNum}, 2, NOW(), -->
-<!-- 		 ( -->
-<!-- 		SELECT TIME_TO_SEC(NOW()) - (SELECT TIME_TO_SEC((SELECT tadate FROM talist AS temp WHERE EMPNUM=#{empNum} AND (tacode=1 OR tacode=3) AND DATE(tadate) = DATE(NOW()))))) -->
-<!-- 		) -->
-		UPDATE TALIST SET TODAYWORK = (SELECT TIME_TO_SEC(NOW()) - (SELECT TIME_TO_SEC((SELECT TADATE FROM (SELECT TADATE FROM TALIST WHERE DATE(TADATE) = DATE(NOW()) and EMPNUM=#{empNum} AND TACODE=1) TL2)))), TADATE= NOW()WHERE EMPNUM=#{empNum} AND TACODE=2;
+		UPDATE TALIST SET TODAYWORK = (SELECT TIME_TO_SEC(NOW()) - (SELECT TIME_TO_SEC((SELECT TADATE FROM (SELECT TADATE FROM TALIST WHERE DATE(TADATE) = DATE(NOW()) AND EMPNUM=#{empNum}  AND TACODE=1) TL2)))), TADATE= NOW()WHERE EMPNUM=#{empNum} AND TACODE=2 AND TADATE IS NULL;
 	</update>
 	
 	<!-- 오늘 퇴근기록이 있는지 조회 형남 0112-->
