@@ -155,6 +155,18 @@ public class HrRestController {
 		return result > 0 ? true : false;
 	}
 	
+	//형남 0112 결근조회
+	@RequestMapping(value = "todayAbsentCheck.hari", method = RequestMethod.POST)
+	public boolean todayAbsentCheck(Principal pri) {
+		int result = 0;
+		try {
+			result = empSercive.todayAbsentCheck(pri.getName());
+		} catch (Exception e) {
+			log.debug("todayAbsentCheck 예외발생: " + e.getMessage());
+		}
+		return result > 0 ? true : false;
+	}
+	
 	//형남 0112 출근조회
 	@RequestMapping(value = "todayStartWorkCheck.hari", method = RequestMethod.POST)
 	public boolean todayStartWorkCheck(Principal pri) {
