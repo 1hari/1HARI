@@ -33,7 +33,7 @@
 
 	<!-- 사원목록 김진호 2020. 1. 7 -->
 	<select id="empList" resultType="kr.coo.onehari.hr.dto.EmpDto">
-	        SELECT E.EMPNUM, E.EMPNAME, T.TEAMCODE, T.TEAMNAME, R.RANKCODE, R.RANKNAME, P.POSITIONCODE, P.POSITIONNAME, EM.EMPLOYMENTCODE, EM.EMPLOYMENTNAME, S.BIRTH, S.RESNUM, S.PHONENUM, S.EMAIL, S.HIREDATE, S.LEAVEDATE
+	                   SELECT E.EMPNUM, E.EMPNAME, T.TEAMCODE, T.TEAMNAME, R.RANKCODE, R.RANKNAME, P.POSITIONCODE, P.POSITIONNAME, EM.EMPLOYMENTCODE, EM.EMPLOYMENTNAME, S.BIRTH, S.RESNUM, S.PHONENUM, S.EMAIL, S.HIREDATE, S.LEAVEDATE
 		FROM emp AS E 
 		JOIN subemp AS S ON E.EMPNUM = S.EMPNUM
 		JOIN team AS T ON E.TEAMCODE = T.TEAMCODE
@@ -71,22 +71,22 @@
   	<update id="empUpdate" parameterType="kr.coo.onehari.hr.dto.EmpDto">
 		UPDATE EMP
 		SET TEAMCODE=#{teamCode},
-			POSITIONCODE=#{positionCode},
-			RANKCODE=#{rankCode},
-			EMPLOYMENTCODE=#{employmentCode}
+		POSITIONCODE=#{positionCode},
+		RANKCODE=#{rankCode},
+		EMPLOYMENTCODE=#{employmentCode}
 		WHERE EMPNUM=#{empNum}
 	</update>
   	<update id="subempUpdate" parameterType="kr.coo.onehari.hr.dto.EmpDto">
 		UPDATE SUBEMP
 		SET PHONENUM=#{phoneNum},
-		<choose>
-			<when test="employmentCode != '5003'">
-				LEAVEDATE=NULL
-			</when>
-			<otherwise>
-				LEAVEDATE=#{leaveDate}
-			</otherwise>
-		</choose>
+		        <choose>
+            <when test="employmentCode != '5003'">
+                LEAVEDATE=NULL
+            </when>
+            <otherwise>
+                LEAVEDATE=#{leaveDate}
+            </otherwise>
+        </choose>
 		WHERE EMPNUM=#{empNum}
 	</update>
 	<insert id="insertRoleaAdmin" parameterType="kr.coo.onehari.hr.dto.Role">
@@ -108,42 +108,57 @@
 		WHERE empnum = #{empNum} AND rolename = 'ROLE_PERSONNEL'
 	</delete>
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
    	<!-- 사원 출근기능 형남 0112 -->
-	<insert id="insertStartWorkTA" parameterType="Integer">
-		INSERT INTO TALIST(EMPNUM, TACODE, TADATE) VALUES(#{empNum}, 1, SYSDATE())
-	</insert>
+	<update id="insertStartWorkTA" parameterType="Integer">
+<!-- 		INSERT INTO TALIST(EMPNUM, TACODE, TADATE) VALUES(#{empNum}, 1, SYSDATE()) -->
+		UPDATE TALIST
+		SET TADATE=NOW()
+		WHERE EMPNUM=#{empNum} AND TACODE=1 AND TADATE IS NULL
+	</update>
 	
 	<!-- 사원 퇴근기능 형남 0112 -->
-	<insert id="insertEndWorkTA" parameterType="Integer">
-		INSERT INTO TALIST(EMPNUM, TACODE, TADATE, TODAYWORK) VALUES(#{empNum}, 2, NOW(),
-		 (
-		SELECT TIME_TO_SEC(NOW()) - (SELECT TIME_TO_SEC((SELECT tadate FROM talist AS temp WHERE EMPNUM=#{empNum} AND tacode=1 AND DATE(tadate) = DATE(NOW())))))
-		)
-	</insert>
+	<update id="insertEndWorkTA" parameterType="Integer">
+<!-- 		INSERT INTO TALIST(EMPNUM, TACODE, TADATE, TODAYWORK) VALUES(#{empNum}, 2, NOW(), -->
+<!-- 		 ( -->
+<!-- 		SELECT TIME_TO_SEC(NOW()) - (SELECT TIME_TO_SEC((SELECT tadate FROM talist AS temp WHERE EMPNUM=#{empNum} AND (tacode=1 OR tacode=3) AND DATE(tadate) = DATE(NOW()))))) -->
+<!-- 		) -->
+		UPDATE TALIST SET TODAYWORK = (SELECT TIME_TO_SEC(NOW()) - (SELECT TIME_TO_SEC((SELECT TADATE FROM (SELECT TADATE FROM TALIST WHERE DATE(TADATE) = DATE(NOW()) and EMPNUM=#{empNum} AND TACODE=1) TL2)))), TADATE= NOW()WHERE EMPNUM=#{empNum} AND TACODE=2;
+	</update>
 	
 	<!-- 오늘 퇴근기록이 있는지 조회 형남 0112-->
 	<select id="todayEndWorkCheck" resultType="Integer">
-		SELECT COUNT(*) FROM TALIST WHERE DATE(TADATE) = DATE(NOW()) and EMPNUM=#{empNum} AND tacode = 2
+		SELECT COUNT(*) FROM TALIST WHERE DATE(TADATE) = DATE(NOW()) and EMPNUM=#{empNum} AND (TACODE = 2 OR TACODE=6)
 	</select>
 	
 	<!-- 오늘 출근기록이 있는지 조회 형남 0112-->
 	<select id="todayStartWorkCheck" resultType="Integer">
-		SELECT COUNT(*) FROM TALIST WHERE DATE(TADATE) = DATE(NOW()) and EMPNUM=#{empNum} AND tacode = 1
+		SELECT COUNT(*) FROM TALIST WHERE DATE(TADATE) = DATE(NOW()) and EMPNUM=#{empNum} AND (tacode = 1 OR tacode=3)
 	</select>
 	
-	<!-- 오늘 출근기록이 있는지 조회 형남 0112-->
+	<!-- 총 근무일  형남 0112-->
 	<select id="getTotalTA" resultType="Integer">
-		SELECT COUNT(*) FROM TALIST WHERE EMPNUM = #{empNum} AND TACODE=1
+		SELECT COUNT(*) FROM TALIST WHERE EMPNUM = 1001 AND (TACODE=1 OR TACODE=3)
 	</select>
 	
     <!-- 오늘 출근시간 구하기-->
-    <select id="getStartWorkTime" resultType="Date">
-        SELECT TADATE FROM TALIST WHERE EMPNUM=#{empNum} AND DATE(TADATE) = DATE(NOW())
-    </select>
+<!--     <select id="getStartWorkTime" resultType="Date"> -->
+<!--         SELECT TADATE FROM TALIST WHERE EMPNUM=#{empNum} AND DATE(TADATE) = DATE(NOW()) -->
+<!--     </select> -->
     
     <!-- 현재까지 근무시간-->
     <select id="getWorkTime" resultType="String">
-		SELECT DATE_FORMAT(SEC_TO_TIME((SELECT TIME_TO_SEC(NOW()) - (SELECT TIME_TO_SEC((SELECT tadate FROM talist AS temp WHERE EMPNUM=#{empNum} AND tacode=1 AND DATE(tadate) = DATE(NOW())))))),"%H:%i")
+		SELECT DATE_FORMAT(SEC_TO_TIME((SELECT TIME_TO_SEC(NOW()) - (SELECT TIME_TO_SEC((SELECT TADATE FROM TALIST AS TEMP WHERE EMPNUM=#{empNum} AND (TACODE=1 OR TACODE=3) AND DATE(tadate) = DATE(NOW())))))),"%H:%i")
     </select>
     <!-- 퇴근 후 오늘 근무시간-->
     <select id="getTodayTotalTime" resultType="String">
@@ -155,13 +170,13 @@
 		SELECT DATE_FORMAT(SEC_TO_TIME((SELECT SUM(TODAYWORK) FROM TALIST
 		WHERE YEARWEEK(TADATE) = YEARWEEK(NOW()) AND EMPNUM=#{empNum}) 
 		+ TIME_TO_SEC(NOW()) 
-		- TIME_TO_SEC((SELECT tadate FROM talist AS temp WHERE EMPNUM=#{empNum} AND tacode=1 AND DATE(tadate) = DATE(NOW())))),"%H:%i")
+		- TIME_TO_SEC((SELECT tadate FROM talist AS temp WHERE EMPNUM=#{empNum} AND (TACODE=1 OR TACODE=3) AND DATE(tadate) = DATE(NOW())))),"%H:%i")
     </select>
     
     <!-- 현재까지 총 근무시간-->
 	<select id="getTotalTime" resultType="String">
 		SELECT SEC_TO_TIME((SELECT SUM(TODAYWORK) FROM TALIST WHERE EMPNUM=#{empNum}) + TIME_TO_SEC(NOW()) 
-		- TIME_TO_SEC((SELECT TADATE FROM TALIST AS TEMP WHERE EMPNUM=#{empNum} AND TACODE=1 AND DATE(TADATE) = DATE(NOW()))));
+		- TIME_TO_SEC((SELECT TADATE FROM TALIST AS TEMP WHERE EMPNUM=#{empNum} AND (TACODE=1 or tacode=3) AND DATE(TADATE) = DATE(NOW()))));
     </select>
     
     <!-- 퇴근 후 이번주 총 근무시간-->
@@ -183,12 +198,17 @@
     
     <!-- 이번달 출근기록 yyyy-mm-dd-->
 	<select id="getStartList" resultType="String">
-		SELECT DATE_FORMAT(TADATE,"%Y-%m-%d") FROM TALIST WHERE MONTH(TADATE) = MONTH(NOW()) AND TACODE=1 AND EMPNUM=#{empNum}
+		SELECT DATE_FORMAT(TADATE,"%Y-%m-%d") FROM TALIST WHERE MONTH(TADATE) = MONTH(NOW()) AND (TACODE=1 OR TACODE=3) AND EMPNUM=#{empNum}
     </select>
     
     <!-- 이번달 퇴근기록 yyyy-mm-dd-->
 	<select id="getEndList" resultType="String">
 		SELECT DATE_FORMAT(TADATE,"%Y-%m-%d") FROM TALIST WHERE MONTH(TADATE) = MONTH(NOW()) AND TACODE=2 AND EMPNUM=#{empNum}
+    </select>
+    
+    <!-- 이번달 결근기록 yyyy-mm-dd-->
+	<select id="getAbsentList" resultType="String">
+		SELECT DATE_FORMAT(TADATE,"%Y-%m-%d") FROM TALIST WHERE MONTH(TADATE) = MONTH(NOW()) AND TACODE=6 AND EMPNUM=#{empNum}
     </select>
     
 	<!-- 사원 색 가져오기-->

@@ -4,6 +4,8 @@ import java.security.Principal;
 import java.util.Date;
 import java.util.List;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -296,17 +298,23 @@ public class HrRestController {
 		return totalTime;
 	}
 	
-	//형남 0114 이번달 퇴근기록 yyyy-mm-dd
+	//형남 0114 이번달 퇴근, 결근 기록 yyyy-mm-dd
 	@RequestMapping(value = "getEndList.hari", method = RequestMethod.POST)
-	public List<String> getEndList(Principal pri) {
-		List<String> totalTime = null;
+	public String getEndList(Principal pri) {
+		JSONObject jsonObject = new JSONObject();
+		List<String> endList = null;
+		List<String> absentList = null;
+		
 		try {
-			totalTime = empSercive.getEndList(pri.getName());
+			endList = empSercive.getEndList(pri.getName());
+			absentList = empSercive.getAbsentList(pri.getName());
+			jsonObject.put("endList", endList);
+			jsonObject.put("absentList", absentList);
 		} catch (Exception e) {
 			System.out.println("getEndList 예외발생: " + e.getMessage());
 			log.debug("getEndList 예외발생: " + e.getMessage());
 		}
-		return totalTime;
+		return jsonObject.toJSONString();
 	}
 	
 	//사원 테마색 가져오기 오형남 / 2020. 1. 16

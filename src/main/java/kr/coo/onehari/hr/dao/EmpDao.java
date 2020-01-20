@@ -92,8 +92,11 @@ public interface EmpDao {
     //이번달 출근기록 yyyy-mm-dd 오형남 / 2020. 1. 14
     public List<String> getStartList(int empNum) throws ClassNotFoundException, SQLException;
     
-    //이번달 출근기록 yyyy-mm-dd 오형남 / 2020. 1. 14
+    //이번달 퇴근기록 yyyy-mm-dd 오형남 / 2020. 1. 14
     public List<String> getEndList(int empNum) throws ClassNotFoundException, SQLException;
+    
+    //이번달 결근기록 yyyy-mm-dd 오형남 / 2020. 1. 14
+    public List<String> getAbsentList(int empNum) throws ClassNotFoundException, SQLException;
     
     //사용자 테마 색 가져오기
     public String getThemeColor(int empNum) throws ClassNotFoundException, SQLException;

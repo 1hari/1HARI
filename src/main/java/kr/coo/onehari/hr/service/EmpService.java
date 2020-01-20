@@ -327,6 +327,19 @@ public class EmpService {
         return totalTime;
     }
     
+    //형남 0119 이번달 결근기록 yyyy-mm-dd
+    public List<String> getAbsentList(String empNumStr) {
+    	EmpDao dao = sqlsession.getMapper(EmpDao.class);
+    	List<String> totalTime = null;
+    	int empNum=Integer.parseInt(empNumStr);
+    	try {
+    		totalTime=dao.getAbsentList(empNum);
+    	} catch (ClassNotFoundException | SQLException e) {
+    		log.debug("getAbsentList : " + e.getMessage());
+    	}
+    	return totalTime;
+    }
+    
     //사원 테마색 가져오기 오형남 / 2020. 1. 16
     public String getThemeColor(String empNumStr) {
         EmpDao dao = sqlsession.getMapper(EmpDao.class);

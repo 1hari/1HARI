@@ -8,8 +8,8 @@ $(function(){
 	var isEnd=false;//오늘 퇴근했는지
 	var currYear;
 	var currMonth;
-	var fixLatitude=parseFloat(37.5239969);
-	var fixLongitude=parseFloat(126.83421299999999);
+	var fixLatitude=parseFloat(37.525913599999996);
+	var fixLongitude=parseFloat(126.83591679999999);
 	var myLatitude; //사용자 위도
 	var myLongitude;////사용자 경도
 	var currTime;
@@ -111,20 +111,6 @@ $(function(){
 // 					return;
 // 				}
 				//캘린더
-				$.ajax({
-					url: "${pageContext.request.contextPath}/ajax/getDataDate.hari",
-					type: "post",
-					dataType: "text",
-					success: function(dataDate) {
-						var itemArray2=document.querySelectorAll('.fc-day.fc-widget-content');
-						for(var i=0;i<itemArray2.length;i++){
-							if($(itemArray2[i]).attr('data-date') == dataDate.trim()){
-								$(itemArray2[i]).removeAttr("td");
-								$(itemArray2[i]).append('<br><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-warning fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">출근</span></div><div class="fc-resizer fc-end-resizer"></div></a></td>');
-							}
-				        }
-					}
-				});
 				   //형남 0112 출근기능
 				$.ajax({
 					url: "${pageContext.request.contextPath}/ajax/startWork.hari",
@@ -146,6 +132,20 @@ $(function(){
 							alert('출근 등록되었습니다.');	
 							$('#endWork').removeAttr('disabled');	
 							$('#startWork').attr('disabled', 'disabled');
+							$.ajax({
+								url: "${pageContext.request.contextPath}/ajax/getDataDate.hari",
+								type: "post",
+								dataType: "text",
+								success: function(dataDate) {
+									var itemArray2=document.querySelectorAll('.fc-day.fc-widget-content');
+									for(var i=0;i<itemArray2.length;i++){
+										if($(itemArray2[i]).attr('data-date') == dataDate.trim()){
+											$(itemArray2[i]).removeAttr("td");
+											$(itemArray2[i]).append('<br><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-warning fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">출근</span></div><div class="fc-resizer fc-end-resizer"></div></a></td>');
+										}
+							        }
+								}
+							});
 						}else{
 							alert('출근 등록에 실패하였습니다.');
 						}
@@ -158,15 +158,15 @@ $(function(){
 // 		}
 	})
 	$('#endWork').click(function() {
-		if (navigator.geolocation) {
-			navigator.geolocation.getCurrentPosition(function(position) {
-				myLatitude=position.coords.latitude; //위도
-				myLongitude=position.coords.longitude;//경도
+// 		if (navigator.geolocation) {
+// 			navigator.geolocation.getCurrentPosition(function(position) {
+// 				myLatitude=position.coords.latitude; //위도
+// 				myLongitude=position.coords.longitude;//경도
 			
-				if(Math.abs(fixLatitude - myLatitude) >0.001 || Math.abs(fixLongitude - myLongitude) > 0.001){
-					alert('위치정보가 다릅니다. 퇴근 실패');
-					return;
-				}
+// 				if(Math.abs(fixLatitude - myLatitude) >0.001 || Math.abs(fixLongitude - myLongitude) > 0.001){
+// 					alert('위치정보가 다릅니다. 퇴근 실패');
+// 					return;
+// 				}
 		   //형남 0112 퇴근기능
 		$.ajax({
 			url: "${pageContext.request.contextPath}/ajax/endWork.hari",
@@ -178,31 +178,33 @@ $(function(){
 					alert('퇴근 등록되었습니다.');
 					$('#endWork').attr('disabled', 'disabled');
 					$('#startWork').attr('disabled', 'disabled');
+					$.ajax({
+						url: "${pageContext.request.contextPath}/ajax/getDataDate.hari",
+						type: "post",
+						dataType: "text",
+						success: function(dataDate) {
+							var itemArray=document.querySelectorAll('.fc-day.fc-widget-content');
+							for(var i=0;i<itemArray.length;i++){
+								if($(itemArray[i]).attr('data-date') == dataDate.trim()){
+									$(itemArray[i]).removeAttr("td");
+									$(itemArray[i]).append('<a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-success fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">퇴근</span></div><div class="fc-resizer fc-end-resizer"></div></a>');
+								}
+								
+					        }
+						}
+					});
 				}else{
 					alert('퇴근 등록에 실패하였습니다.');
+					return;
 				}
 			}
 		})
-		$.ajax({
-			url: "${pageContext.request.contextPath}/ajax/getDataDate.hari",
-			type: "post",
-			dataType: "text",
-			success: function(dataDate) {
-				var itemArray=document.querySelectorAll('.fc-day.fc-widget-content');
-				for(var i=0;i<itemArray.length;i++){
-					if($(itemArray[i]).attr('data-date') == dataDate.trim()){
-						$(itemArray[i]).removeAttr("td");
-						$(itemArray[i]).append('<a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-success fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">퇴근</span></div><div class="fc-resizer fc-end-resizer"></div></a>');
-					}
-					
-		        }
-			}
-		});
-			});
-		}else { 
-			alert('현재 브라우저에서 지원하지 않는 기능입니다.');
-			return;
-		}
+
+// 			});
+// 		}else { 
+// 			alert('현재 브라우저에서 지원하지 않는 기능입니다.');
+// 			return;
+// 		}
 	})
 
 
@@ -239,9 +241,7 @@ $(function(){
 		success: function(data) {
 			//퇴근근기록이 있으면 true, 없으면 false
 			isEnd=data;
-			console.log(isEnd);
-			console.log(isStart);
-			
+
 			if(isEnd==false && isStart==true){
 				//false 면 현재시간 - 출근시간
 				$.ajax({
@@ -249,7 +249,6 @@ $(function(){
 					type: "post",
 					dataType: "text",
 					success: function(getWorkTime) {
-						console.log(getWorkTime + "getWorkTime");
 						if($.trim(getWorkTime) != "empty" ){
 							$('#getWorkTime').text('');
 							$('#getWorkTime').append(getWorkTime);
@@ -298,9 +297,7 @@ $(function(){
 					type: "post",
 					dataType: "text",
 					success: function(getTodayTotalTime) {
-						console.log(getTodayTotalTime)
 						if($.trim(getTodayTotalTime) != "empty" ){
-							console.log(getTodayTotalTime);
 							$('#getWorkTime').text('');
 							$('#getWorkTime').append(getTodayTotalTime);
 						} else{
@@ -333,7 +330,6 @@ $(function(){
 					dataType: "text",
 					success: function(getTotalWorkTime) {
 						var splitTime=getTotalWorkTime.split(':');
-						console.log(splitTime);
 						if(getTotalWorkTime != "empty" ){
 							$('#getTotalTime').text('');
 							$('#getTotalTime').append(splitTime[0] + ':' + splitTime[1]);
@@ -400,15 +396,17 @@ $(function(){
 		type: "post",
 		dataType: "json",
 		success: function(getStartList) {
+			console.log(getStartList);
 			var itemArray=document.querySelectorAll('.fc-day.fc-widget-content');
-			for(var i=0; i<itemArray.length; i++){
-				for(var j=0; j<getStartList.length; j++){
-					if($(itemArray[i]).attr('data-date') == getStartList[j]){
-						$(itemArray[i]).append('<br><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-warning fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">출근</span></div><div class="fc-resizer fc-end-resizer"></div></a></td>');
-					}
-				}
-			}
-			//이번달 출근기록 yyyy-mm-dd
+	         for(var i=0; i<itemArray.length; i++){
+	            for(var j=0; j<getStartList.length; j++){
+	               if($(itemArray[i]).attr('data-date') == getStartList[j]){
+	                  $(itemArray[i]).append('<br><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-warning fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">출근</span></div><div class="fc-resizer fc-end-resizer"></div></a></td>');
+	               }
+	            }
+	         }
+	         
+			//이번달 퇴근기록 yyyy-mm-dd
 			$.ajax({
 				url: "${pageContext.request.contextPath}/ajax/getEndList.hari",
 				type: "post",
@@ -416,9 +414,16 @@ $(function(){
 				success: function(getEndList) {
 					var itemArray2=document.querySelectorAll('.fc-day.fc-widget-content');
 					for(var i=0; i<itemArray2.length; i++){
-						for(var j=0; j<getEndList.length; j++){
-							if($(itemArray2[i]).attr('data-date') == getEndList[j]){
+						for(var j=0; j<getEndList.endList.length; j++){
+							if($(itemArray2[i]).attr('data-date') == getEndList.endList[j]){
 								$(itemArray2[i]).append('<a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-success fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">퇴근</span></div><div class="fc-resizer fc-end-resizer"></div></a>');
+							}
+						}
+						for(var j=0; j<getEndList.absentList.length; j++){
+							if($(itemArray2[i]).attr('data-date') == getEndList.absentList[j]){
+								$(itemArray2[i]).empty();
+								$(itemArray2[i]).append('<br><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-danger fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">결근</span></div><div class="fc-resizer fc-end-resizer"></div></a></td>');
+								
 							}
 						}
 					}
@@ -462,12 +467,12 @@ $(function(){
 				<a class="navbar-brand" href="${pageContext.request.contextPath}/main.hari"> <!-- 로고 아이콘 시작 -->
 					<b class="logo-icon p-l-10"> <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
 						<!-- 로고 아이콘 png-->
-						<img src="${pageContext.request.contextPath}/resources/hari/assets/images/logo-text-30-23.png" alt="homepage" class="light-logo" /><!-- style="width: 30%; height: 20%; color:#2ab2aa;" -->
+						                        <img src="${pageContext.request.contextPath}/resources/hari/assets/images/logo-text-30-23.png" alt="homepage" class="light-logo" /><!-- style="width: 30%; height: 20%; color:#2ab2aa;" -->
 					</b><!--로고 아이콘 끝  -->
 					<!-- 로고 글씨 시작 -->
 					<span class="logo-text" >
 						<!-- 로고 글씨 png-->
-						<img src="${pageContext.request.contextPath}/resources/hari/assets/images/logo-text-152-28.png" alt="homepage" class="light-logo" />
+						                        <img src="${pageContext.request.contextPath}/resources/hari/assets/images/logo-text-152-28.png" alt="homepage" class="light-logo" />
 					</span> <!-- Logo icon --> <!-- <b class="logo-icon"> --> <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
 					<!-- Dark Logo icon --> <!-- <img src="assets/images/logo-text.png" alt="homepage" class="light-logo" /> -->
 					<!-- </b> --> <!--End Logo icon -->
