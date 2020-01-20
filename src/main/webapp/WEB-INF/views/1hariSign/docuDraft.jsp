@@ -59,7 +59,7 @@
 									</tr>
 									<tr class="draft" style="height:63px; vertical-align:middle;">
 										<!-- 사원명 -->
-										<td id="empName0">
+										<td id="empName0" draftEmp="${emp.empNum}">
 											${emp.empName}
 											<br>(${emp.empNum})
 										</td>
@@ -246,7 +246,14 @@
 			}
 
 			if(signEmp){
-				draftForm.submit();
+				var draftEmp = $('#empName0').attr('draftEmp');
+				var empSign1 = $('#empSign1').val();
+				
+				console.log(draftEmp);
+				console.log(empSign1);
+				
+ 				send(draftEmp,empSign1);
+// 				draftForm.submit();
 			}
 			
 		}) //기안 클릭 끝

@@ -9,7 +9,45 @@
 </footer>
 <!--bottom 끝-->
 
-
 <!-- jsTree -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+
+<!-- websocket sockjs -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.3.0/sockjs.min.js"></script>
+
+<script>
+	$(document).ready(function() {
+		connect();
+	})
+	
+	var wsocket;
+	//웹소켓 연결
+	function connect() {
+		wsocket = new WebSocket(
+				"http://192.168.6.10:8090/signAlert/sign.sockjs");
+	
+		wsocket.onmessage = onMessage;
+	}
+
+	//로그아웃에서 호출할 함수 (연결해제)
+	function disconnect() {
+		wsocket.close();
+	}
+
+	//websocket 에서 전송된 메시지 받는 함수
+	function onMessage(evt) {
+		var data = evt.data;
+		appendMessage(data);
+	}
+	
+	//websocket에 메시지 전달(기안시, 결재시 호출할 함수)
+	function send(draftEmp,empSign1) {
+		wsocket.send(draftEmp + "," + empSign1);
+	}
+
+	//websocket에서 전송된 메시지 뿌려주는 함수
+	function appendMessage(msg) {
+		toastr.info(msg, '전자결재 알림', {timeOut: 5000});
+	}
+</script>
