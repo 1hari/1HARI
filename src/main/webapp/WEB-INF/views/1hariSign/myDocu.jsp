@@ -20,6 +20,7 @@
 	var searchKey;
 	
 	$(function(){
+				
 		list(code, cp, pg, signDate, signNum, signTitle, draftEmp, searchKey);
 		page(code,pg,signDate, signNum, signTitle, draftEmp, searchKey);
 
@@ -28,7 +29,12 @@
 			//console.log($(this).attr("code"));
 			code = $(this).attr("code");
 			cp = 1;
-
+			
+// 			$('.searchCheck:checked').each(function(index){
+// 				console.log($(this));
+// 				$(this).attr("checked",false);
+// 			});
+			
  			signDate = "false";
 			signNum = "false";
 			signTitle = "false";
@@ -303,22 +309,22 @@
 										<div class="row">
 										
 	                                        <div class="custom-control custom-checkbox col-md-3">
-	                                            <input type="checkbox" class="custom-control-input searchCheck" id="customControlAutosizing1" value="signDate">
+	                                            <input type="checkbox" class="custom-control-input searchCheck" id="customControlAutosizing1" value="signDate" checked="checked">
 	                                            <label class="custom-control-label" for="customControlAutosizing1">기안일</label>
 	                                        </div>
 	                                        
 	                                        <div class="custom-control custom-checkbox col-md-3">
-	                                            <input type="checkbox" class="custom-control-input searchCheck" id="customControlAutosizing2" value="signNum">
+	                                            <input type="checkbox" class="custom-control-input searchCheck" id="customControlAutosizing2" value="signNum" checked="checked">
 	                                            <label class="custom-control-label" for="customControlAutosizing2">문서번호</label>
 	                                        </div>
 	                                        
 	                                        <div class="custom-control custom-checkbox col-md-3">
-	                                            <input type="checkbox" class="custom-control-input searchCheck" id="customControlAutosizing3" value="signTitle">
+	                                            <input type="checkbox" class="custom-control-input searchCheck" id="customControlAutosizing3" value="signTitle" checked="checked">
 	                                            <label class="custom-control-label" for="customControlAutosizing3">제목</label>
 	                                        </div>
 	                                        
 	                                        <div class="custom-control custom-checkbox col-md-3">
-	                                            <input type="checkbox" class="custom-control-input searchCheck" id="customControlAutosizing4" value="draftEmp">
+	                                            <input type="checkbox" class="custom-control-input searchCheck" id="customControlAutosizing4" value="draftEmp" checked="checked">
 	                                            <label class="custom-control-label" for="customControlAutosizing4">기안자</label>
 	                                        </div>
 	                                        
