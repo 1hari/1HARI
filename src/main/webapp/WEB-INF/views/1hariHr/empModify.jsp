@@ -84,14 +84,13 @@
 		<!-- ============================================================== -->
 		<div class="row">
 			<div class="col-12">
-				<!-- 사원 등록 input div 시작 -->
 				<div class="container" style="background-color: #ffffff;">
 					<div class="row setup-content" id="step-1">
 						<div class="col-md-12">
 							<!--form 태그 시작 -->
 							<form action="" method="post">
 								<c:set var="emp" value="${requestScope.emp}" />
-								<div class="col-md-12" style="margin-top: 3%;">
+								<div class="col-sm-12" style="margin-top: 3%;">
 									<div class="form-group">
 										<label for="empName">이름</label> 
 										<input type="text" id="empName" name="empName" class="form-control" value="${emp.empName}" readonly>
@@ -136,6 +135,10 @@
 										<select id="employmentSelect" name="employmentCode" class="form-control" style="height: 100%;" required>
 										</select>
 									</div>
+									<div class="form-group" id="leaveDateDiv" style="display: none;">
+										<label>퇴사일</label>
+										<input type="text" id="leaveDate" name="leaveDate" class="form-control leavedatepicker" value="${emp.leaveDate}" placeholder="yyyy-mm-dd">
+									</div>
 									<se:authorize access="hasRole('ROLE_ADMIN')">
 	 									<div class="form-group">
 	 										<label for="roleName">권한</label>
@@ -143,12 +146,8 @@
 	 										</select>
 	 									</div>
 									</se:authorize>
-									<div class="form-group" id="leaveDateDiv" style="display: none;">
-										<label>퇴사일</label>
-										<input type="text" id="leaveDate" name="leaveDate" class="form-control leavedatepicker" value="${emp.leaveDate}" placeholder="yyyy-mm-dd">
-									</div>
-									<div class="form-group">
-										<input type="submit" class="form-control" value="수정">
+									<div class="form-group" align="right">
+										<button type="submit" style ="color: #fff; background-color: #20B2AA; border-color: #20B2AA;" class="btn btn-success">수정하기</button>
 									</div>
 								</div>									
 							</form>

@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="se" uri="http://www.springframework.org/security/tags" %>
+    
 <!-- Custom CSS -->
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/hari/assets/extra-libs/multicheck/multicheck.css">
 <link href="${pageContext.request.contextPath}/resources/hari/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet">
@@ -174,7 +177,7 @@
 	<div class="page-breadcrumb">
 		<div class="row">
 			<div class="col-12 d-flex no-block align-items-center">
-				<h4 class="page-title">개인 정보</h4>
+				<h4 class="page-title">개인 정보 프로필</h4>
 				<div class="ml-auto text-right"></div>
 			</div>
 		</div>
@@ -187,107 +190,84 @@
 		<!-- Start Page Content -->
 		<!-- ============================================================== -->
 		<div class="row">
-			<div class="col-12" >
-				<!-- 사원 등록 input div 시작 -->
-	            <div class="card" style = "position:relative;width:100%;">
-					<form class="form-horizontal">
-						<div class="card-body">
-							<h4 class="card-title">개인 정보 프로필</h4>
-							
-							<div class="form-group row">
-								<label for="file" class="col-sm-3 text-right control-label col-form-label">프로필 사진</label>
-								<div class="col-sm-6" >
-									<div class="filebox bs3-primary preview-image">
-										<input class="upload-name" value="파일선택" disabled="disabled" style="width: 200px;">
-										<label for="input_file">업로드</label> 
-										<input type="file" id="input_file" class="upload-hidden"> 
-									</div> 
+			<div class="col-12">
+				<div class="container" style="background-color: #ffffff;">
+					<div class="row setup-content" id="step-1">
+						<div class="col-md-12">
+							<!--form 태그 시작 -->
+							<form action="" method="post">
+								<c:set var="emp" value="${requestScope.emp}" />
+								<div class="form-group row">
+									<label for="file" class="col-sm-3 text-right control-label col-form-label">프로필 사진</label>
+									<div class="col-sm-6" >
+										<div class="filebox bs3-primary preview-image">
+											<input class="upload-name" value="파일선택" disabled="disabled" style="width: 200px;">
+											<label for="input_file">업로드</label> 
+											<input type="file" id="input_file" class="upload-hidden"> 
+										</div> 
+									</div>
 								</div>
-							</div>
-							
-							<div class="form-group row">
-								<label for="teamcode" class="col-sm-3 text-right control-label col-form-label">소속 번호</label>
-								<div class="col-sm-9">
-									<input type="text" class="form-control" id="teamcode" name="teamcode" placeholder="소속 번호" readonly>
-								</div>
-							</div>
-							
-							<div class="form-group row">
-								<label for="positioncode" class="col-sm-3 text-right control-label col-form-label">직책 번호 </label>
-								<div class="col-sm-9">
-									<input type="text" class="form-control" id="positioncode" name = "positioncode" placeholder="직책번호" readonly>
-								</div>
-							</div>
-							
-							<div class="form-group row">
-								<label for="rankcode" class="col-sm-3 text-right control-label col-form-label">직급 번호</label>
-								<div class="col-sm-9">
-									<input type="text" class="form-control" id="rankcode" name = "rankcode" placeholder="직급 번호" readonly>
-								</div>
-							</div>
-						
-							<div class="form-group row">
-								<label for="employmentcode" class="col-sm-3 text-right control-label col-form-label">재직구분 번호</label>
-								<div class="col-sm-9">
-									<input type="text" class="form-control" id="employmentcode" name ="employmentcode" placeholder="재직구분 번호" readonly>
-								</div>
-							</div>
-							
-							<div class="form-group row">
-								<label for="ename" class="col-sm-3 text-right control-label col-form-label">이름</label>
-								<div class="col-sm-9">
-									<input type="text" class="form-control" id="ename" name="ename" placeholder="이름" readonly>
-								</div>
-							</div>
-							
-							<div class="form-group row">
-								<label for="birth" class="col-sm-3 text-right control-label col-form-label">생년월일</label>
-								<div class="col-sm-9">
-									<input type="text" class="form-control mydatepicker"  placeholder="yyyy/mm/dd" readonly>
-								</div>
-							</div>
-							
-							<div class="form-group row">
-								<label for="phonenum" class="col-sm-3 text-right control-label col-form-label">핸드폰 번호</label>
-								<div class="col-sm-9">
-									<input type="text" class="form-control" id="phonenum" name="phonenum" placeholder="핸드폰 번호">
-								</div>
-							</div>
-		                                    
-							<div class="form-group row">
-								<label for="email" class="col-sm-3 text-right control-label col-form-label">이메일</label>
-								<div class="col-sm-9">
-									<input type="text" style = "width:49%; display:inline;" class="form-control" id="email" name="email" placeholder="이메일">
-									<span type="text"   style = "width:49%;  display:inline-block;"  id="zip" placeholder="@gmail.com" required="">@gmail.com</span>
-								</div>
-							</div>
-							
-							<div class="form-group row">
-								<label for="hiredate" class="col-sm-3 text-right control-label col-form-label">입사일</label>
-								<div class="col-sm-9">
-									<input type="text" id="hiredate" name ="hiredate" class="form-control mydatepicker"  placeholder="yyyy/mm/dd" readonly>
-								</div>
-							</div>
-						
-							<!-- <div class="form-group row">
-								<label for="leavedate" class="col-sm-3 text-right control-label col-form-label">퇴사일</label>
-								<div class="col-sm-9">
-									<input type="text" id="leavedate" name="leavedate" class="form-control mydatepicker"  placeholder="yyyy/mm/dd">
-								</div>
-							</div> -->
+								<div class="col-sm-12" style="margin-top: 3%;">
+									<div class="form-group">
+										<label for="empName">이름</label> 
+										<input type="text" id="empName" name="empName" class="form-control" value="${emp.empName}" readonly>
+									</div>
+									<div class="form-group">
+										<label for="empNum">사번</label> 
+										<input  type="text" id="empNum" name="empNum" class="form-control" value="${emp.empNum}" readonly>
+									</div>
+									<div class="form-group">
+										<label for="birth">생년월일</label>
+										<input type="text" id="birth" name="birth" class="form-control" value="${emp.birth}" readonly>
+									</div>
+									<div class="form-group">
+										<label for="email">이메일</label>
+										<input type="text" id="email" name="email" class="form-control" value="${emp.email}@gmail.com">
+									</div>
+									<div class="form-group">
+										<label for="phoneNum">핸드폰번호</label>
+										<input type="text" id="phoneNum" name="phoneNum" class="form-control" value="${emp.phoneNum}" placeholder="010-0000-0000" required>
+									</div>
+									<div class="form-group">
+										<label for="hireDate">입사일</label>
+										<input type="text" id="hireDate" name="hireDate" class="form-control" value="${emp.hireDate}" readonly>
+									</div>
+									<div class="form-group">
+										<label for="teamCode">소속</label>
+										<input type="text" id="teamCode" name="teamCode" class="form-control" value="${emp.teamName}" readonly>
+									</div>
+									<div class="form-group">
+										<label for="positionCode">직책</label>
+										<input type="text" id="positionCode" name="positionCode" class="form-control" value="${emp.positionName}" readonly>
+									</div>
+									<div class="form-group">
+										<label for="rankCode">직급</label>
+										<input type="text" id="rankCode" name="rankCode" class="form-control" value="${emp.rankName}" readonly>
+									</div>
+									<div class="form-group">
+										<label for="employmentCode">재직구분</label>
+										<input type="text" id="employmentCode" name="employmentCode" class="form-control" value="${emp.employmentName}" readonly>
+									</div>
+									<div class="form-group" id="leaveDateDiv" style="display: none;">
+										<label>퇴사일</label>
+										<input type="text" id="leaveDate" name="leaveDate" class="form-control leavedatepicker" value="${emp.leaveDate}" placeholder="yyyy-mm-dd">
+									</div>
+									<div class="form-group" align="right">
+										<button type="submit" style ="color: #fff; background-color: #20B2AA; border-color: #20B2AA;" class="btn btn-success">수정하기</button>
+									</div>
+								</div>									
+							</form>
+							<!--폼 action 태그 끝 -->
 						</div>
-	                                 
-						<div class="border-top">
-							<div class="card-body">
-								<button type="button" style ="color: #fff; background-color: #20B2AA; border-color: #20B2AA;" class="btn btn-success">변경하기</button>
-							</div>
-						</div>
-					</form>
+						<!--div= "row" 끝 -->
+						<!--   <button href="#step-2" class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Next</button> -->
+					</div>
+					<!-- <div class="row setup-content" id="step-1">끝 -->
 				</div>
-				<!--card 디브태그 끝 -->
-				<!--   <button href="#step-2" class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Next</button> -->
+				<!--입사/퇴사 관리 end-->
 			</div>
-			<!--   <div class="col-12"> 끝 -->
+			<!--      <div class="col-12"> 끝-->
+
 		</div>
 		<!-- row 끝 -->
 	</div>

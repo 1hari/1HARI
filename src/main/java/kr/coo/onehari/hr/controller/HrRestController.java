@@ -303,28 +303,33 @@ public class HrRestController {
 	//형남 0114 dataDate 형식으로 가져오기
 	@RequestMapping(value = "getDataDate.hari", method = RequestMethod.POST)
 	public String getDataDate(Principal pri) {
-		String totalTime = null;
+		String dataDate = null;
 		try {
-			totalTime = empSercive.getDataDate(pri.getName());
-			if(totalTime==null) {
-				totalTime="empty";
+			dataDate = empSercive.getDataDate(pri.getName());
+			if(dataDate==null) {
+				dataDate="empty";
 			}
 		} catch (Exception e) {
 			log.debug("getDataDate 예외발생: " + e.getMessage());
 		}
-		return totalTime;
+		return dataDate;
 	}
 	
 	//형남 0114 이번달 출근기록 yyyy-mm-dd
 	@RequestMapping(value = "getStartList.hari", method = RequestMethod.POST)
-	public List<String> getStartList(Principal pri) {
-		List<String> totalTime = null;
+	public String getStartList(Principal pri) {
+		List<String> startList = null;
+		List<String> tardyList = null;
+		JSONObject jsonObject = new JSONObject();
 		try {
-			totalTime = empSercive.getStartList(pri.getName());
+			startList = empSercive.getStartList(pri.getName());
+			tardyList = empSercive.getTardyList(pri.getName());
+			jsonObject.put("startList", startList);
+			jsonObject.put("tardyList", tardyList);
 		} catch (Exception e) {
 			log.debug("getStartList 예외발생: " + e.getMessage());
 		}
-		return totalTime;
+		return jsonObject.toJSONString();
 	}
 	
 	//형남 0114 이번달 퇴근, 결근 기록 yyyy-mm-dd
