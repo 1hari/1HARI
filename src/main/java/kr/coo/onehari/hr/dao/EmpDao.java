@@ -53,6 +53,9 @@ public interface EmpDao {
 	//사원 출근 오형남 / 2020. 1. 12
 	public int insertStartWorkTA(int empNum) throws ClassNotFoundException, SQLException;
 	
+	//사원 출근 오형남 / 2020. 1. 12
+	public int insertStartWorkTardyTA(int empNum) throws ClassNotFoundException, SQLException;
+	
 	//사원 퇴근 오형남 / 2020. 1. 12
 	public int insertEndWorkTA(int empNum) throws ClassNotFoundException, SQLException;
 	
