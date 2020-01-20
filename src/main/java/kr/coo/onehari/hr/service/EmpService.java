@@ -339,6 +339,19 @@ public class EmpService {
     	return totalTime;
     }
     
+    //형남 0114 이번달 출근기록 yyyy-mm-dd
+    public List<String> getTardyList(String empNumStr) {
+    	EmpDao dao = sqlsession.getMapper(EmpDao.class);
+    	List<String> totalTime = null;
+    	int empNum=Integer.parseInt(empNumStr);
+    	try {
+    		totalTime=dao.getTardyList(empNum);
+    	} catch (ClassNotFoundException | SQLException e) {
+    		log.debug("getTardyList : " + e.getMessage());
+    	}
+    	return totalTime;
+    }
+    
     //형남 0114 이번달 퇴근기록 yyyy-mm-dd
     public List<String> getEndList(String empNumStr) {
         EmpDao dao = sqlsession.getMapper(EmpDao.class);

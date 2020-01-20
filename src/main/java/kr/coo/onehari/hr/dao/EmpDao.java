@@ -98,6 +98,9 @@ public interface EmpDao {
     //이번달 출근기록 yyyy-mm-dd 오형남 / 2020. 1. 14
     public List<String> getStartList(int empNum) throws ClassNotFoundException, SQLException;
     
+    //이번달 출근기록 yyyy-mm-dd 오형남 / 2020. 1. 14
+    public List<String> getTardyList(int empNum) throws ClassNotFoundException, SQLException;
+    
     //이번달 퇴근기록 yyyy-mm-dd 오형남 / 2020. 1. 14
     public List<String> getEndList(int empNum) throws ClassNotFoundException, SQLException;
     

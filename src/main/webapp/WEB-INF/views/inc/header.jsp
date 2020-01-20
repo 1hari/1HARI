@@ -113,45 +113,59 @@ $(function(){
 // 				}
 				//캘린더
 				   //형남 0112 출근기능
-				$.ajax({
-					url: "${pageContext.request.contextPath}/ajax/startWork.hari",
-					type: "post",
-					dataType: "json",
-					success: function(data) {
-					//총 근무일 갱신
-						$.ajax({
-							url: "${pageContext.request.contextPath}/ajax/getTotalTA.hari",
-							type: "post",
-							dataType: "json",
-							success: function(totalTA) {
-								$('#totalTA').text('');
-								$('#totalTA').append(totalTA);
-							}
-						});
-						//있으면 true, 없으면 false
-						if(data==true){
-							swal("success", "출근 등록되었습니다.", "success")
-							$('#endWork').removeAttr('disabled');	
-							$('#startWork').attr('disabled', 'disabled');
-							$.ajax({
-								url: "${pageContext.request.contextPath}/ajax/getDataDate.hari",
-								type: "post",
-								dataType: "text",
-								success: function(dataDate) {
-									var itemArray2=document.querySelectorAll('.fc-day.fc-widget-content');
-									for(var i=0;i<itemArray2.length;i++){
-										if($(itemArray2[i]).attr('data-date') == dataDate.trim()){
-											$(itemArray2[i]).removeAttr("td");
-											$(itemArray2[i]).append('<br><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-warning fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">출근</span></div><div class="fc-resizer fc-end-resizer"></div></a></td>');
-										}
-							        }
+			$.ajax({
+               url: "${pageContext.request.contextPath}/ajax/startWork.hari",
+               type: "post",
+               dataType: "json",
+               success: function(data) {
+               //총 근무일 갱신
+                  $.ajax({
+                     url: "${pageContext.request.contextPath}/ajax/getTotalTA.hari",
+                     type: "post",
+                     dataType: "json",
+                     success: function(totalTA) {
+                        $('#totalTA').text('');
+                        $('#totalTA').append(totalTA);
+                     }
+                  });
+                  //있으면 true, 없으면 false
+                  if(data==true){
+                	 var integerDate= parseInt(getTimeStamp());
+                	 
+                     swal("success", "출근 등록되었습니다.", "success")
+                     $('#endWork').removeAttr('disabled');   
+                     $('#startWork').attr('disabled', 'disabled');
+                     $.ajax({
+                        url: "${pageContext.request.contextPath}/ajax/getDataDate.hari",
+                        type: "post",
+                        dataType: "text",
+                        success: function(dataDate) {
+                           var itemArray2=document.querySelectorAll('.fc-day.fc-widget-content');
+                           if(integerDate < 110000){
+                        	   console.log(integerDate + '1');
+                               for(var i=0;i<itemArray2.length;i++){
+                                   if($(itemArray2[i]).attr('data-date') == dataDate.trim()){
+                                      $(itemArray2[i]).removeAttr("td");
+                                      $(itemArray2[i]).append('<br><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-warning fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">출근</span></div><div class="fc-resizer fc-end-resizer"></div></a></td>');
+                                   }
 								}
-							});
-						}else{
-							swal("warning", "출근등록 실패, 관리자에게 문의해주세요.", "warning")
-						}
-					}
-				})
+							}else{
+								console.log(integerDate + '2');
+                               for(var i=0;i<itemArray2.length;i++){
+                                   if($(itemArray2[i]).attr('data-date') == dataDate.trim()){
+                                      $(itemArray2[i]).removeAttr("td");
+                                      $(itemArray2[i]).append('<br><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-warning fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">지각</span></div><div class="fc-resizer fc-end-resizer"></div></a></td>');
+                                   }
+								}
+							}
+
+                        }
+                     });
+                  }else{
+                     swal("warning", "출근등록 실패, 관리자에게 문의해주세요.", "warning")
+                  }
+               }
+            })
 // 			});
 // 		}else { 
 // 			alert('현재 브라우저에서 지원하지 않는 기능입니다.');
@@ -422,13 +436,18 @@ $(function(){
 	         
    		     setTimeout(function(){
    		    	for(var i=0; i<itemArray.length; i++){
-   		            for(var j=0; j<getStartList.length; j++){
-   		               if($(itemArray[i]).attr('data-date') == getStartList[j]){
+   		            for(var j=0; j<getStartList.startList.length; j++){
+   		               if($(itemArray[i]).attr('data-date') == getStartList.startList[j]){
    		                  $(itemArray[i]).append('<br><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-warning fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">출근</span></div><div class="fc-resizer fc-end-resizer"></div></a></td>');
    		               }
    		            }
+   					for(var j=0; j<getStartList.tardyList.length; j++){
+   		               if($(itemArray[i]).attr('data-date') == getStartList.tardyList[j]){
+   	   		                  $(itemArray[i]).append('<br><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-warning fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">지각</span></div><div class="fc-resizer fc-end-resizer"></div></a></td>');
+						}
+   					}
    		         }
-   		 	 },1);
+   		 	 },100);
    		     setTimeout(function(){
    				//이번달 퇴근기록 yyyy-mm-dd
    				$.ajax({
@@ -452,7 +471,7 @@ $(function(){
    						}
    					}
    				});
-   		 	 },2);
+   		 	 },200);
 		}
 	});
 });
