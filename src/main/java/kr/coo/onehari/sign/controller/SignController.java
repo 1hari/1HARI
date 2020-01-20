@@ -50,7 +50,7 @@ public class SignController {
 	private SignService signService;
 
 	//홈 화면 김정하 / 2020. 1. 7
-	@RequestMapping("signForm.hari")
+	@RequestMapping("signHome.hari")
 	public String signForm(Model model, String msg, String isOk, Principal principal) {
 		String loginUser = principal.getName();
 		HashMap<String, String> map = new HashMap<String, String>(); 
@@ -147,7 +147,7 @@ public class SignController {
 		String view = "";
 			
 		if(result > 0 ) { //DB insert 성공시
-			view = "redirect:signForm.hari";
+			view = "redirect:signHome.hari";
 			model.addAttribute("msg", "기안완료되었습니다.");
 			model.addAttribute("isOk", "true");
 			

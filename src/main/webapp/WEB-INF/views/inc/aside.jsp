@@ -153,7 +153,7 @@
 					<ul aria-expanded="false" class="collapse  first-level"  id="theme" style="background: white;">
 						
 						<li class="sidebar-item" >
-							<a href="${pageContext.request.contextPath}/1hariSign/signForm.hari" class="sidebar-link" >
+							<a href="${pageContext.request.contextPath}/1hariSign/signHome.hari" class="sidebar-link" >
 								<i class="mdi mdi-note-plus"></i>
 								<span class="hide-menu">전자 결재</span>
 							</a>

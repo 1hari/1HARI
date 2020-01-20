@@ -19,6 +19,15 @@
 <script>
 	$(document).ready(function() {
 		connect();
+// 		var Notification = window.Notification || window.mozNotification || window.webkitNotification;
+
+// 		 Notification.requestPermission(function (permission) {
+// 			console.log(permission);
+// 	    });
+		// notifications 알림 권한확인 
+// 		if (window.Notification) {
+// 	        Notification.requestPermission(); //사용자 권한을 받아오는 함수
+// 	    }
 	})
 	
 	var wsocket;
@@ -58,5 +67,23 @@
 	//websocket에서 전송된 메시지 뿌려주는 함수
 	function appendMessage(msg) {
 		toastr.info(msg, '전자결재 알림', {timeOut: 5000});
+// 		signNotify(msg);
 	}
+
+	//notifications
+    function signNotify(msg) {
+        //알림 권한이 없으면 경고창
+        if (Notification.permission !== 'granted') {
+            swal("warning", "notification is disabled", "warning")
+        }else {
+            var instance = new Notification('Notification title', {
+                icon: '${pageContext.request.contextPath}/resources/hari/assets/images/favicon.png',
+                body: msg,
+            });
+
+            instance.onclick = function () {
+                location.href='${pageContext.request.contextPath}/1hariSign/signHome.hari';
+            };
+        }
+    }
 </script>
