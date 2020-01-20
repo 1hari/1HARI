@@ -29,19 +29,19 @@
               <router-link :to="'/board_main/' + $route.params.board_idx + '/' + server_data.pre" class="page-link">이전</router-link>
             </li>
             <li class="page-item" v-for="page in server_data.page_array"  :key="page">
-              <router-link :to="'/board_main/' + $route.params.board_idx + '/' + page" class="page-link">{{page}}</router-link>
+              <router-link :to="'/board_main/' + $route.params.boardNum + '/' + page" class="page-link">{{page}}</router-link>
               <!--여러개의 파라미터를 전달할 때 :to 사용-->
             </li>
 
             <li class="page-item">
-              <router-link :to="'/board_main/' + $route.params.board_idx + '/' + server_data.next" class="page-link">다음</router-link>
+              <router-link :to="'/board_main/' + $route.params.boardNum + '/' + server_data.next" class="page-link">다음</router-link>
             </li>
           </ul>
         </div>
 
         <!--글쓰기--> 
         <div class="text-right"><!-- v-if='$store.state.user_login_chk == true'-->
-          <router-link :to="'/board_write/' + $route.params.board_idx" class="btn btn-primary">글쓰기</router-link>
+          <router-link :to="'/board_write/' + $route.params.boardNum" class="btn btn-primary">글쓰기</router-link>
         </div>
       </div>
     </div>
@@ -65,11 +65,11 @@ module.exports = {
     go_board_read: function(boardNum) {
       alert(boardNum)	
       //this.$router router 객체 불러오기
-      this.$router.push('/board_read/' + this.$route.params.board_idx + '/' + this.$route.params.page + '/' + boardNum) //.push에 파라미터값에 알맞는 컴포넌트를 찾아 그 컴포넌트 주소로 이동시켜줌
+      this.$router.push('/board_read/' + this.$route.params.boardNum + '/' + this.$route.params.page + '/' + boardNum) //.push에 파라미터값에 알맞는 컴포넌트를 찾아 그 컴포넌트 주소로 이동시켜줌
     },
     get_board_data: function() {
       var params = new URLSearchParams();
-      params.append("board_idx", this.$route.params.board_idx); //get_board_list(int board_idx, int page) 파라미터라서 안 바꿔도 됌 
+      params.append("boardNum", this.$route.params.boardNum); //get_board_list(int board_idx, int page) 파라미터라서 안 바꿔도 됌 
       params.append("page", this.$route.params.page)
       axios.post("get_board_list.hari", params).then((response)=>{
       console.log(response.data)

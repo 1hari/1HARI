@@ -29,13 +29,13 @@ public interface BoardDao {
 	//보드 정보 불러오기
 	public List<BoardType> getBoardInfo();
 	//컨텐츠 리스트 가져오기
-	public List<Board> getBoardList(int boardIdx,int idxMin, int idxMax);
+	public List<Board> getBoardList(int boardNum, int idxMin, int idxMax);
 	//게시판 번호로 게시판 정보 가져오기(컨텐츠 리스트 가져오기에 포함)
-	public BoardType getBoardInfoByIdx(int boardIdx);
+	public BoardType getBoardInfoByIdx(int boardNum);
 	//게시판 페이지 하단부분
-	public int getContentCount(int boardIdx);
+	public int getContentCount(int boardNum);
 	//컨텐츠 리스트 가져오기 TOP5
-	public List<Board> getTop5List(int boardIdx);
+	public List<Board> getTop5List(int boardNum);
 	
 	//컨텐츠 추가 (Create1)
 	public int addContent(Board content);

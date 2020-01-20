@@ -31,7 +31,7 @@ public class BoardService {
 	}
 
 	// 게시판 별 컨텐츠 리스트 가져오기
-	public JSONObject get_board_list(int board_idx, int page) {
+	public JSONObject get_board_list(int boardNum, int page) {
 		JSONObject root = new JSONObject();
 		BoardDao boarddao = sqlsession.getMapper(BoardDao.class);
 
@@ -40,13 +40,13 @@ public class BoardService {
 		int idx_max = idx_min + 9;
 
 		// 해당 게시판 정보 가져오기
-		BoardType boardtype = boarddao.getBoardInfoByIdx(board_idx); 
-		System.out.println(boardtype);
+		BoardType boardtype = boarddao.getBoardInfoByIdx(boardNum); 
+		System.out.println(boardtype + "BOARDTYPE 이 나오나요?");
 		String board_name = boardtype.getBoardName();
 		root.put("boardName", board_name);
 
 		// 해당 게시판 컨텐츠 리스트 가져오기
-		List<Board> list = boarddao.getBoardList(board_idx, idx_min, idx_max);//* 변경함 
+		List<Board> list = boarddao.getBoardList(boardNum, idx_min, idx_max);//* 변경함 
 
 		JSONArray board_list = new JSONArray();
 		for (Board board : list) {
@@ -60,7 +60,7 @@ public class BoardService {
 		root.put("board_list", board_list);
 
 		// 하단 페이징
-		int contentCount = boarddao.getContentCount(board_idx);
+		int contentCount = boarddao.getContentCount(boardNum);
 		System.out.println(contentCount);
 		int page_cnt = contentCount / 10;
 		if (page_cnt % 10 > 0) {
@@ -102,18 +102,18 @@ public class BoardService {
 	}
 
 	// 게시판 별 TOP5
-	public JSONObject get_top5_list(int board_idx) {
+	public JSONObject get_top5_list(int boardNum) {
 		JSONObject root = new JSONObject();
 		BoardDao boarddao = sqlsession.getMapper(BoardDao.class);
 
 		// 해당 게시판 정보 가져오기
-		BoardType boardtype = boarddao.getBoardInfoByIdx(board_idx);
+		BoardType boardtype = boarddao.getBoardInfoByIdx(boardNum);
 		System.out.println(boardtype);
 		String board_name = boardtype.getBoardName();
 		root.put("boardName", board_name);
 
 		// 해당 게시판 컨텐츠 리스트 가져오기
-		List<Board> list = boarddao.getTop5List(board_idx);
+		List<Board> list = boarddao.getTop5List(boardNum);
 
 		JSONArray board_list = new JSONArray();
 		for (Board board : list) {

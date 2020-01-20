@@ -79,7 +79,7 @@ module.exports = {
       axios.post('add_content.hari', params).then((response) =>{
         if(response.data.result==true){
           alert('저장되었습니다.')
-          this.$router.push('/board_read/' + this.$route.params.board_idx + '/1/' + response.data.boardNum)
+          this.$router.push('/board_read/' + this.$route.params.boardNum + '/1/' + response.data.boardNum)
         }else{
           alert('작성실패' + response.data.result)
         }

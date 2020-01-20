@@ -31,12 +31,10 @@ public class BoardController {
 	public String boardList() {
 		return "1hariBoard.boardList";
 	}
-	
 
-	
 
 	// 보드 정보 가져오기(탑바)
-	@RequestMapping(value = "/get_board_info.hari", method = RequestMethod.POST)
+	@RequestMapping(value = "/get_board_info.hari", method = RequestMethod.GET)
 	public @ResponseBody String get_board_info() {
 		List<BoardType> list = board_service.get_board_info();
 		
@@ -57,16 +55,16 @@ public class BoardController {
 	
 	// 게시판 리스트 가져오기  // vue.js board_main.vue 에서 params.append axios.post 
 	@RequestMapping(value = "/get_board_list.hari", method = RequestMethod.POST)
-	public @ResponseBody String get_board_list(int board_idx, int page) {
-		JSONObject root = board_service.get_board_list(board_idx, page);
+	public @ResponseBody String get_board_list(int boardNum, int page) { //, int page
+		JSONObject root = board_service.get_board_list(boardNum, page);
 		System.out.println(root.toString());
 		return root.toJSONString();
 	}
 	
 	// 게시판 리스트 TOP5 가져오기
 	@RequestMapping(value = "/get_top5_list.hari", method = RequestMethod.POST)
-	public @ResponseBody String get_top5_list(int board_idx) {
-		JSONObject root = board_service.get_top5_list(board_idx);
+	public @ResponseBody String get_top5_list(int boardNum) {
+		JSONObject root = board_service.get_top5_list(boardNum);
 		System.out.println(root.toString());
 		return root.toJSONString();
 	}

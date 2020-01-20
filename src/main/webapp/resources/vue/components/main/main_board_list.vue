@@ -28,7 +28,7 @@
 								</tbody>
 							</table>
 							
-							<router-link :to="'/board_main/' + board_idx +'/1'" class="btn m-t-5 btn-info btn-block waves-effect waves-light">더보기</router-link>
+							<router-link :to="'/board_main/' + boardNum +'/1'" class="btn m-t-5 btn-info btn-block waves-effect waves-light">더보기</router-link>
 						</div>
 					</div>
 				</div>
@@ -48,15 +48,15 @@ module.exports={
 			server_data:{}
 		}
   },
-  props:['board_idx'],
+  props:['boardNum'],
   methods: {
     go_board_read:function(boardNum){
-      this.$router.push('/board_read/' + this.board_idx + '/1/' + boardNum)
+      this.$router.push('/board_read/' + this.boardNum + '/1/' + boardNum)
 	}
   },
   created() {
 	  var params = new URLSearchParams()
-	  params.append('board_idx', this.board_idx)
+	  params.append('boardNum', this.boardNum)
 
 	  axios.post('add_content.hari', params).then((response)=>{
 		  this.server_data=response.data

@@ -52,9 +52,9 @@
             </div>
             <div class="form-group">
               <div class="text-right">
-                <router-link :to="'/board_main/' + $route.params.board_idx + '/' + $route.params.page" class="btn btn-primary">목록보기</router-link>
-                <router-link :to="'/board_modify/' + $route.params.board_idx + '/' + $route.params.page + '/' + $route.params.boardNum" class="btn btn-info">수정하기</router-link><!--v-if='server_data.content_writer_idx == $store.state.user_idx'-->
-                <router-link :to="'/board_delete/' + $route.params.board_idx + '/' + $route.params.page + '/' + $route.params.boardNum" class="btn btn-danger">삭제하기</router-link>
+                <router-link :to="'/board_main/' + $route.params.boardNum + '/' + $route.params.page" class="btn btn-primary">목록보기</router-link>
+                <router-link :to="'/board_modify/' + $route.params.boardNum + '/' + $route.params.page + '/' + $route.params.boardNum" class="btn btn-info">수정하기</router-link><!--v-if='server_data.content_writer_idx == $store.state.user_idx'-->
+                <router-link :to="'/board_delete/' + $route.params.boardNum + '/' + $route.params.page + '/' + $route.params.boardNum" class="btn btn-danger">삭제하기</router-link>
               </div>
             </div>
           </div>
