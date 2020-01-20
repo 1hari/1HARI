@@ -54,7 +54,6 @@
 <!-- 		JOIN employment AS EM ON E.EMPLOYMENTCODE = EM.EMPLOYMENTCODE -->
 <!-- 		JOIN emprolelist AS ER ON E.EMPNUM = ER.EMPNUM -->
 <!-- 		WHERE E.EMPNUM=#{empNum} -->
-		
  		
 		SELECT @rownum := @rownum + 1 AS ROWNUM, E.EMPNUM, E.EMPNAME, E.TEAMCODE, T.TEAMNAME, E.RANKCODE, R.RANKNAME, E.POSITIONCODE, P.POSITIONNAME, EM.EMPLOYMENTCODE, EM.EMPLOYMENTNAME, S.BIRTH, S.PHONENUM, S.EMAIL, S.HIREDATE, S.LEAVEDATE, ER.ROLENAME, RO.ROLEDSCR 
 		FROM EMP AS E
@@ -72,9 +71,9 @@
   	<update id="empUpdate" parameterType="kr.coo.onehari.hr.dto.EmpDto">
 		UPDATE EMP
 		SET TEAMCODE=#{teamCode},
-		POSITIONCODE=#{positionCode},
-		RANKCODE=#{rankCode},
-		EMPLOYMENTCODE=#{employmentCode}
+			POSITIONCODE=#{positionCode},
+			RANKCODE=#{rankCode},
+			EMPLOYMENTCODE=#{employmentCode}
 		WHERE EMPNUM=#{empNum}
 	</update>
   	<update id="subempUpdate" parameterType="kr.coo.onehari.hr.dto.EmpDto">

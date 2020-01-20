@@ -21,4 +21,13 @@
 			SELECT empnum FROM subemp WHERE empnum=#{param1} AND email=#{param2}
 		]]>
 	</select>
+	
+	<!-- 사원정보수정 변경 김진호 2020. 1. 10 -->
+  	<update id="myinfoUpdate" parameterType="kr.coo.onehari.hr.dto.EmpDto">
+		UPDATE SUBEMP
+		SET PHONENUM=#{phoneNum},
+			EMAIL=#{email}
+		WHERE EMPNUM=#{empNum}
+	</update>
+	
 </mapper>

@@ -586,7 +586,7 @@ $(function(){
 						</a>
 						<div class="dropdown-menu dropdown-menu-right user-dd animated">
 							<se:authentication property="name" var="empNum" />
-							<a class="dropdown-item" href="${pageContext.request.contextPath}/1hariMy/myInfo.hari?empNum=${pageContext.request.userPrincipal.name}">
+							<a class="dropdown-item" href="${pageContext.request.contextPath}/1hariMy/myInfo.hari">
 								<i class="ti-user m-r-5 m-l-5"></i>내 프로필</a> <!--경로 1hariMy 폴더안에 myInfo.jsp (controller myInfo.hari를) -->
 								<a class="dropdown-item" href="javascript:void(0)">
 									<i class="ti-wallet m-r-5 m-l-5"></i>내 업무

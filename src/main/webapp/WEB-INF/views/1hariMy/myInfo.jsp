@@ -15,158 +15,6 @@
 
 <script src="${pageContext.request.contextPath}/resources/hari/assets/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <!--필수 js 지우지 말기 -->
-	
-<style>
-	.where {
-	  display: block;
-	  margin: 25px 15px;
-	  font-size: 11px;
-	  color: #000;
-	  text-decoration: none;
-	  font-family: verdana;
-	  font-style: italic;
-	} 
-	
-	.filebox input[type="file"] {
-	    position: absolute;
-	    width: 1px;
-	    height: 1px;
-	    padding: 0;
-	    margin: -1px;
-	    overflow: hidden;
-	    clip:rect(0,0,0,0);
-	    border: 0;
-	}
-	
-	.filebox label {
-	    display: inline-block;
-	    padding: .5em .75em;
-	    color: #999;
-	    font-size: inherit;
-	    line-height: normal;
-	    vertical-align: middle;
-	    background-color: #fdfdfd;
-	    cursor: pointer;
-	    border: 1px solid #ebebeb;
-	    border-bottom-color: #e2e2e2;
-	    border-radius: .25em;
-	}
-	
-	/* named upload */
-	.filebox .upload-name {
-	    display: inline-block;
-	    padding: .5em .75em;
-	    font-size: inherit;
-	    font-family: inherit;
-	    line-height: normal;
-	    vertical-align: middle;
-	    background-color: #f5f5f5;
-	  border: 1px solid #ebebeb;
-	  border-bottom-color: #e2e2e2;
-	  border-radius: .25em;
-	  -webkit-appearance: none; /* 네이티브 외형 감추기 */
-	  -moz-appearance: none;
-	  appearance: none;
-	}
-	
-	/* imaged preview */
-	.filebox .upload-display {
-	    margin-bottom: 5px;
-	}
-	
-	@media(min-width: 768px) {
-	    .filebox .upload-display {
-	        display: inline-block;
-	        margin-right: 5px;
-	        margin-bottom: 0;
-	    }
-	}
-	
-	.filebox .upload-thumb-wrap {
-	    display: inline-block;
-	    width: 54px;
-	    padding: 2px;
-	    vertical-align: middle;
-	    border: 1px solid #ddd;
-	    border-radius: 5px;
-	    background-color: #fff;
-	}
-	
-	.filebox .upload-display img {
-	    display: block;
-	    max-width: 100%;
-	    width: 100% \9;
-	    height: auto;
-	}
-	
-	.filebox.bs3-primary label {
-	  color: #fff;
-	  background-color: #2ab2aa;
-	  border-color: #2ab2aa;
-	}
-	
-	.stepwizard-step p {
-		margin-top: 10px;
-	}
-	
-	.stepwizard-row {
-		display: table-row;
-	}
-	
-	.stepwizard {
-		display: table;
-		width: 100%;
-		position: relative;
-	}
-	
-	.stepwizard-step button[disabled] {
-		opacity: 1 !important;
-		filter: alpha(opacity = 100) !important;
-	}
-	
-	.stepwizard-row:before {
-		top: 14px;
-		bottom: 0;
-		position: absolute;
-		content: " ";
-		width: 100%;
-		height: 1px;
-		background-color: #ccc;
-		z-order: 0;
-	}
-	
-	.stepwizard-step {
-		display: table-cell;
-		text-align: center;
-		position: relative;
-	}
-	
-	.btn-circle {
-		width: 30px;
-		height: 30px;
-		text-align: center;
-		padding: 6px 0;
-		font-size: 12px;
-		line-height: 1.428571429;
-		border-radius: 0px;
-	}
-	
-	#profile_pt input[type="file"] { 
-	
-		position: absolute; 
-		width: 10px; 
-		height: 10px;
-		padding: 0; 
-		margin: -1px;
-		overflow: hidden; 
-		clip:rect(0,0,0,0);
-		border: 0; 
-		background-color:#20B2AA;
-	}
-
-
-
-</style>
 
 <!-- 컨텐츠 제목 -->
 <!-- ============================================================== -->
@@ -195,67 +43,60 @@
 					<div class="row setup-content" id="step-1">
 						<div class="col-md-12">
 							<!--form 태그 시작 -->
-							<form action="" method="post">
+							<form action="" method="post" enctype="multipart/form-data">
 								<c:set var="emp" value="${requestScope.emp}" />
-								<div class="form-group row">
-									<label for="file" class="col-sm-3 text-right control-label col-form-label">프로필 사진</label>
-									<div class="col-sm-6" >
-										<div class="filebox bs3-primary preview-image">
-											<input class="upload-name" value="파일선택" disabled="disabled" style="width: 200px;">
-											<label for="input_file">업로드</label> 
-											<input type="file" id="input_file" class="upload-hidden"> 
-										</div> 
+								<div class="row" style="margin-top: 2%;">
+									<div class="col-sm-6">
+										<div class="form-group">
+											<label for="empName">이름</label> 
+											<input type="text" id="empName" name="empName" class="form-control" value="${emp.empName}" readonly>
+										</div>
+										<div class="form-group">
+											<label for="empNum">사번</label> 
+											<input type="text" id="empNum" name="empNum" class="form-control" value="${emp.empNum}" readonly>
+										</div>
+										<div class="form-group">
+											<label for="birth">생년월일</label>
+											<input type="text" id="birth" name="birth" class="form-control" value="${emp.birth}" readonly>
+										</div>
+										<div class="form-group">
+											<label for="phoneNum">핸드폰번호</label>
+											<span class="checkPhoneNum" style="color: red;"></span>
+											<input type="text" id="phoneNum" name="phoneNum" class="form-control" value="${emp.phoneNum}" placeholder="(-) 없이 숫자만 입력하세요." maxlength="13" required>
+										</div>
+										<div class="form-group">
+											<label for="email">이메일</label>
+											<div>
+												<input id="email" name="email" type="text" class="form-control" value="${emp.email}">
+											</div>
+										</div>
 									</div>
+									<div class="col-sm-6">
+										<div class="form-group">
+											<label for="hireDate">입사일</label>
+											<input type="text" id="hireDate" name="hireDate" class="form-control" value="${emp.hireDate}" readonly>
+										</div>
+										<div class="form-group">
+											<label for="teamCode">소속</label>
+											<input type="text" id="teamCode" name="teamCode" class="form-control" value="${emp.teamName}" readonly>
+										</div>
+										<div class="form-group">
+											<label for="positionCode">직책</label>
+											<input type="text" id="positionCode" name="positionCode" class="form-control" value="${emp.positionName}" readonly>
+										</div>
+										<div class="form-group">
+											<label for="rankCode">직급</label>
+											<input type="text" id="rankCode" name="rankCode" class="form-control" value="${emp.rankName}" readonly>
+										</div>
+										<div class="form-group">
+											<label for="employmentCode">재직구분</label>
+											<input type="text" id="employmentCode" name="employmentCode" class="form-control" value="${emp.employmentName}" readonly>
+										</div>
+									</div>									
 								</div>
-								<div class="col-sm-12" style="margin-top: 3%;">
-									<div class="form-group">
-										<label for="empName">이름</label> 
-										<input type="text" id="empName" name="empName" class="form-control" value="${emp.empName}" readonly>
-									</div>
-									<div class="form-group">
-										<label for="empNum">사번</label> 
-										<input  type="text" id="empNum" name="empNum" class="form-control" value="${emp.empNum}" readonly>
-									</div>
-									<div class="form-group">
-										<label for="birth">생년월일</label>
-										<input type="text" id="birth" name="birth" class="form-control" value="${emp.birth}" readonly>
-									</div>
-									<div class="form-group">
-										<label for="email">이메일</label>
-										<input type="text" id="email" name="email" class="form-control" value="${emp.email}@gmail.com">
-									</div>
-									<div class="form-group">
-										<label for="phoneNum">핸드폰번호</label>
-										<input type="text" id="phoneNum" name="phoneNum" class="form-control" value="${emp.phoneNum}" placeholder="010-0000-0000" required>
-									</div>
-									<div class="form-group">
-										<label for="hireDate">입사일</label>
-										<input type="text" id="hireDate" name="hireDate" class="form-control" value="${emp.hireDate}" readonly>
-									</div>
-									<div class="form-group">
-										<label for="teamCode">소속</label>
-										<input type="text" id="teamCode" name="teamCode" class="form-control" value="${emp.teamName}" readonly>
-									</div>
-									<div class="form-group">
-										<label for="positionCode">직책</label>
-										<input type="text" id="positionCode" name="positionCode" class="form-control" value="${emp.positionName}" readonly>
-									</div>
-									<div class="form-group">
-										<label for="rankCode">직급</label>
-										<input type="text" id="rankCode" name="rankCode" class="form-control" value="${emp.rankName}" readonly>
-									</div>
-									<div class="form-group">
-										<label for="employmentCode">재직구분</label>
-										<input type="text" id="employmentCode" name="employmentCode" class="form-control" value="${emp.employmentName}" readonly>
-									</div>
-									<div class="form-group" id="leaveDateDiv" style="display: none;">
-										<label>퇴사일</label>
-										<input type="text" id="leaveDate" name="leaveDate" class="form-control leavedatepicker" value="${emp.leaveDate}" placeholder="yyyy-mm-dd">
-									</div>
-									<div class="form-group" align="right">
-										<button type="submit" style ="color: #fff; background-color: #20B2AA; border-color: #20B2AA;" class="btn btn-success">수정하기</button>
-									</div>
-								</div>									
+								<div class="form-group" align="right">
+									<button type="submit" style ="color: #fff; background-color: #20B2AA; border-color: #20B2AA;" class="btn btn-success">수정하기</button>
+								</div>
 							</form>
 							<!--폼 action 태그 끝 -->
 						</div>
@@ -286,144 +127,87 @@
 
 <script src="${pageContext.request.contextPath}/resources/hari/assets/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 
-    
-    
-<script>
-	/****************************************
-	*      필수 테이블 1. 데이터 테이블 , 2. datepicker 제이쿼리 스크립트 *
-	****************************************/
-		/*2.datepicker*/
-		jQuery('.mydatepicker').datepicker();
+<script type="text/javascript">
+	$(function() {
+		/* 핸드폰번호 입력 유효성 검사 */
+		var phoneReg = /^01[016789]-\d{3,4}-\d{4}$/; // 핸드폰번호 정규표현식
+		var email_pattern = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+        //0부터9a부터zA부터Z까지 (-, _, . 가 있어도 되고 없어도 되고, 0부터9a부터zA부터Z까지)반복횟수 상관없이가능
+        //@기호포함  (-, _, . 가 있어도 되고 없어도 되고, 0부터9a부터zA부터Z까지)반복횟수 상관없이가능 .기호포함 2자~3자 이내 대소문자 구분안함
+        
+        var email_check = false;
+        var phoneNumCheck = false;
 		
-		jQuery('#datepicker-autoclose').datepicker({
-			autoclose: true,
-			todayHighlight: true
-		});
+		/* 핸드폰번호 입력 시 자동 (-) 삽입  */
+		$('#phoneNum').keyup(function() {
+			var number = this.value.replace(/[^0-9]/g, "");
+			var phone = "";
 
-		$('.mydatepicker').setDefaults({
-		    dateFormat: 'yyyy-mm-dd' //Input Display Format 변경
-		});
-
-
-
-
-
-		// 3. 파일 업로드 , 파일 미리보기 
-		$(document).ready(function(){
-			   var fileTarget = $('.filebox .upload-hidden');
-
-			    fileTarget.on('change', function(){
-			        if(window.FileReader){
-			            // 파일명 추출
-			            var filename = $(this)[0].files[0].name;
-			        } 
-
-			        else {
-			            // Old IE 파일명 추출
-			            var filename = $(this).val().split('/').pop().split('\\').pop();
-			        };
-
-			        $(this).siblings('.upload-name').val(filename);
-			    });
-
-			    //preview image 
-			    var imgTarget = $('.preview-image .upload-hidden');
-
-			    imgTarget.on('change', function(){
-			        var parent = $(this).parent();
-			        parent.children('.upload-display').remove();
-
-			        if(window.FileReader){
-			            //image 파일만
-			            if (!$(this)[0].files[0].type.match(/image\//)) return;
-			            
-			            var reader = new FileReader();
-			            reader.onload = function(e){
-			                var src = e.target.result;
-			                parent.prepend('<div class="upload-display"><div class="upload-thumb-wrap"><img src="'+src+'" class="upload-thumb"></div></div>');
-			            }
-			            reader.readAsDataURL($(this)[0].files[0]);
-			        }
-
-			        else {
-			            $(this)[0].select();
-			            $(this)[0].blur();
-			            var imgSrc = document.selection.createRange().text;
-			            parent.prepend('<div class="upload-display"><div class="upload-thumb-wrap"><img class="upload-thumb"></div></div>');
-
-			            var img = $(this).siblings('.upload-display').find('img');
-			            img[0].style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(enable='true',sizingMethod='scale',src=\""+imgSrc+"\")";        
-			        }
-			    });
-			});
-
-		//3. 파일 첨부, 파일 미리보기 스크립트 
-		/* function previewImage(targetObj, View_area) {
-			var preview = document.getElementById(View_area); //div id
-			var ua = window.navigator.userAgent;
-
-		  //ie일때(IE8 이하에서만 작동)
-			if (ua.indexOf("MSIE") > -1) {
-				targetObj.select();
-				try {
-					var src = document.selection.createRange().text; // get file full path(IE9, IE10에서 사용 불가)
-					var ie_preview_error = document.getElementById("ie_preview_error_" + View_area);
-
-
-					if (ie_preview_error) {
-						preview.removeChild(ie_preview_error); //error가 있으면 delete
-					}
-
-					var img = document.getElementById(View_area); //이미지가 뿌려질 곳
-
-					//이미지 로딩, sizingMethod는 div에 맞춰서 사이즈를 자동조절 하는 역할
-					img.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"+src+"', sizingMethod='scale')";
-				} catch (e) {
-					if (!document.getElementById("ie_preview_error_" + View_area)) {
-						var info = document.createElement("<p>");
-						info.id = "ie_preview_error_" + View_area;
-						info.innerHTML = e.name;
-						preview.insertBefore(info, null);
-					}
-				}
-		  ie가 아닐때(크롬, 사파리, FF)
+			if (number.length < 4) {
+				return number;
+			} else if(number.length < 7) {
+				phone += number.substr(0, 3);
+				phone += "-";
+				phone += number.substr(3);
+			} else if(number.length < 11) {
+				phone += number.substr(0, 3);
+				phone += "-";
+				phone += number.substr(3, 3);
+				phone += "-";
+				phone += number.substr(6);
 			} else {
-				var files = targetObj.files;
-				for ( var i = 0; i < files.length; i++) {
-					var file = files[i];
-					var imageType = /image.; //이미지 파일일경우만.. 뿌려준다.
-					if (!file.type.match(imageType))
-						continue;
-					var prevImg = document.getElementById("prev_" + View_area); //이전에 미리보기가 있다면 삭제
-					if (prevImg) {
-						preview.removeChild(prevImg);
-					}
-					var img = document.createElement("img"); 
-					img.id = "prev_" + View_area;
-					img.classList.add("obj");
-					img.file = file;
-					img.style.width = '100px'; 
-					img.style.height = '100px';
-					preview.appendChild(img);
-					if (window.FileReader) { // FireFox, Chrome, Opera 확인.
-						var reader = new FileReader();
-						reader.onloadend = (function(aImg) {
-							return function(e) {
-								aImg.src = e.target.result;
-							};
-						})(img);
-						reader.readAsDataURL(file);
-					} else { // safari is not supported FileReader
-						//alert('not supported FileReader');
-						if (!document.getElementById("sfr_preview_error_"
-								+ View_area)) {
-							var info = document.createElement("p");
-							info.id = "sfr_preview_error_" + View_area;
-							info.innerHTML = "not supported FileReader";
-							preview.insertBefore(info, null);
-						}
-					}
-				}
+				phone += number.substr(0, 3);
+				phone += "-";
+				phone += number.substr(3, 4);
+				phone += "-";
+				phone += number.substr(7);
 			}
-		} */
-    </script>
+			this.value = phone;
+			
+			if (phoneReg.test($('#phoneNum').val())) { // 정규표현식 유효성 검사
+				$('.checkPhoneNum').text("");
+			} else {
+				$('.checkPhoneNum').text("핸드폰번호 형식이 잘못되었습니다.");
+			}
+		})
+
+		//email 유효성체크 
+        $('#email').keyup(function() {
+            if (email_pattern.test($(this).val()) != true) {
+                $('#emailcheck').text("이메일 형식에 맞지 않습니다.");
+            } else {
+                $('#emailcheck').text("이메일 형식에 맞습니다.");
+                $('#emailCheck').removeAttr('disabled');
+            }
+        });
+		
+		//이메일 인증
+		$('#emailCheck').click(function() {
+			//이메일이 입력되면 새창으로 이동
+			if ($('#emailCheck').val() != null) {
+				var url = "emailCheck.do?email="+$('#email').val();
+				//console.log(url);
+				open(url,"Email Check","statusber=no, scrollbar=no, menuber=no, width=400, height=130");
+			} else {
+				alert("이메일이 입력되지 않았습니다.");
+			}
+		});//이벤트 끝
+		
+		//전송
+		$('#submit').click(function() {
+			//console.log($('#emailCheckReturn').val());
+			
+			if ($('#emailCheckReturn').val() == "true") {
+				email_check = true;
+			}
+			let issubmit = id_check && pw_check && pwck_check && email_check;
+			console.log(issubmit);
+			
+			return issubmit;
+		});//이벤트 끝
+	})
+
+</script>
+    
+    
+    
