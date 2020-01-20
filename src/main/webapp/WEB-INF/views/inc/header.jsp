@@ -6,6 +6,7 @@
 $(function(){
 	var isStart=false; //오늘 출근했는지
 	var isEnd=false;//오늘 퇴근했는지
+	var isAbsent=false;//오늘 결근인지
 	var currYear;
 	var currMonth;
 	var fixLatitude=parseFloat(37.525913599999996);
@@ -213,23 +214,48 @@ $(function(){
 		url: "${pageContext.request.contextPath}/ajax/todayStartWorkCheck.hari",
 		type: "post",
 		dataType: "json",
-		success: function(data) {
-			//퇴근근기록이 있으면 true, 없으면 false
-			isStart=data;
-			if(isStart == false && isEnd==false){
-				$('#startWork').removeAttr('disabled');	
-				$('#endWork').attr('disabled', 'disabled');
-				//출근 미등록 알림 (페이지 이동마다 출근 안찍혀있으면 알림)
-				toastr.error('출근등록 여부를 확인해 주세요', '출근알림', {timeOut: 5000});
-			}else if(isStart == true && isEnd==false){
-				$('#startWork').attr('disabled', 'disabled');
-				$('#endWork').removeAttr('disabled');	
-			} else if(isStart == true && isEnd==true) {
-				$('#endWork').attr('disabled', 'disabled');
-				$('#startWork').attr('disabled', 'disabled');
-			} else if(isStart == false && isEnd==true) {
-				alert('근퇴문제 오형남한테 문의해주세요');
-			} 
+		success: function(todayStartWorkCheck) {
+			isStart=todayStartWorkCheck;
+			$.ajax({
+				url: "${pageContext.request.contextPath}/ajax/todayAbsentCheck.hari",
+				type: "post",
+				dataType: "json",
+				success: function(todayAbsentCheck) {
+					//퇴근근기록이 있으면 true, 없으면 false
+					isAbsent=todayAbsentCheck;
+					
+					console.log(isStart);
+					console.log(isEnd);
+					console.log(isAbsent);
+// 					console.log(typeof(isStart));
+// 					console.log(typeof(isAbsent));
+// 					console.log(typeof(isEnd));
+					if(isStart == false && isEnd==false && isAbsent==false){
+						$('#startWork').removeAttr('disabled');	
+						$('#endWork').attr('disabled', 'disabled');
+						//출근 미등록 알림 (페이지 이동마다 출근 안찍혀있으면 알림)
+						toastr.error('출근등록 여부를 확인해 주세요', '출근알림', {timeOut: 5000});
+					}else if(isStart == true && isEnd==false && isAbsent==false){
+						$('#startWork').attr('disabled', 'disabled');
+						$('#endWork').removeAttr('disabled');	
+					} else if((isStart == true && isEnd==true && isAbsent==false) || (isStart == true && isEnd==true && isAbsent==true) || (isStart == false && isEnd==false && isAbsent==true) || (isStart == true && isEnd==true && isAbsent==true) || (isStart == true && isEnd==false && isAbsent==true)) {
+						$('#endWork').attr('disabled', 'disabled');
+						$('#startWork').attr('disabled', 'disabled');
+// 					} else if(isStart == true && isEnd==true && isAbsent==true) {
+						
+// 					} else if(isStart == false && isEnd==false && isAbsent==true) {
+// 						$('#endWork').attr('disabled', 'disabled');
+// 						$('#startWork').attr('disabled', 'disabled');
+// 					} else if(isStart == true && isEnd==true && isAbsent==true) {
+// 						$('#endWork').attr('disabled', 'disabled');
+// 						$('#startWork').attr('disabled', 'disabled');
+					} else if(isStart == false && isEnd==true) {
+						alert('근퇴오류 오형남한테 문의해주세요');
+					} else{
+						console.log('아무것도 못탐');
+					}
+				}
+			});
 		}
 	})
 	
@@ -396,7 +422,6 @@ $(function(){
 		type: "post",
 		dataType: "json",
 		success: function(getStartList) {
-			console.log(getStartList);
 			var itemArray=document.querySelectorAll('.fc-day.fc-widget-content');
 	         for(var i=0; i<itemArray.length; i++){
 	            for(var j=0; j<getStartList.length; j++){

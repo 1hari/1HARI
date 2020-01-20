@@ -184,6 +184,19 @@ public class EmpService {
 		return result;
 	}
 	
+	//형남 0112 오늘 결근인지
+	public int todayAbsentCheck(String empNumStr) {
+		EmpDao dao = sqlsession.getMapper(EmpDao.class);
+		int result = 0;
+		int empNum=Integer.parseInt(empNumStr);
+		try {
+			result=dao.todayAbsentCheck(empNum);
+		} catch (ClassNotFoundException | SQLException e) {
+			log.debug("todayAbsentCheck : " + e.getMessage());
+		}
+		return result;
+	}
+	
 	//형남 0112 오늘 출근이 있는지
 	public int getTotalTA(String empNumStr) {
 		EmpDao dao = sqlsession.getMapper(EmpDao.class);

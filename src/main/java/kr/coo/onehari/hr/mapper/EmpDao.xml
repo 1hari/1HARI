@@ -138,12 +138,17 @@
 	
 	<!-- 오늘 퇴근기록이 있는지 조회 형남 0112-->
 	<select id="todayEndWorkCheck" resultType="Integer">
-		SELECT COUNT(*) FROM TALIST WHERE DATE(TADATE) = DATE(NOW()) and EMPNUM=#{empNum} AND (TACODE = 2 OR TACODE=6)
+		SELECT COUNT(*) FROM TALIST WHERE DATE(TADATE) = DATE(NOW()) and EMPNUM=#{empNum} AND TACODE = 2
 	</select>
 	
 	<!-- 오늘 출근기록이 있는지 조회 형남 0112-->
 	<select id="todayStartWorkCheck" resultType="Integer">
-		SELECT COUNT(*) FROM TALIST WHERE DATE(TADATE) = DATE(NOW()) and EMPNUM=#{empNum} AND (tacode = 1 OR tacode=3)
+		SELECT COUNT(*) FROM TALIST WHERE DATE(TADATE) = DATE(NOW()) and EMPNUM=#{empNum} AND (TACODE = 1 OR TACODE=3)
+	</select>
+	
+	<!-- 오늘 결근이 있는지 조회 형남 0112-->
+	<select id="todayAbsentCheck" resultType="Integer">
+		SELECT COUNT(*) FROM TALIST WHERE DATE(TADATE) = DATE(NOW()) and EMPNUM=#{empNum} AND TACODE=6
 	</select>
 	
 	<!-- 총 근무일  형남 0112-->
