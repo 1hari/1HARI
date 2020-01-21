@@ -352,17 +352,20 @@
 			} else {
 				phoneNumeCheck = false;
 			}
+
+			if (emailPattern.test($('#email').val())) {
+				emailCheck = true;
+			} else {
+				emailCheck = false;
+			}
 			
-			if (phoneNumCheck != false) {
+			if (phoneNumCheck != false && emailCheck != false) {
 				swal({
 					text: "사원등록이 정상적으로 완료되었습니다.",
 					icon: "success",
 					button: "확인"
 				}).then((value) => {
-					sendMail().then(function () {
-						console.log('sendMail()');
-						$('#example-form').submit();
-					})
+					sendMail();
 				});
 			} else {
 				swal({
@@ -487,7 +490,7 @@
 	<!-- Velocity 메일 보내기 -->
 	function sendMail() {
 		$.ajax({
-			url: "${pageContext.request.contextPath}/1hariHr/personnel/sendMail.hari",
+			url: "${pageContext.request.contextPath}/ajax/personnel/sendMail.hari",
 			data: 
 				{"mail" : $('#email').val(),
 				"name" : $('#empName').val()
@@ -495,7 +498,7 @@
 			dataType: "text",
 			method: "post",
 			success: function() {
-				console.log('sendmail');
+				$('#example-form').submit();
 			}
 		})
 	}

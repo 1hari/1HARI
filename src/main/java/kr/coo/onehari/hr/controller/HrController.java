@@ -1,20 +1,10 @@
 package kr.coo.onehari.hr.controller;
 
-import java.security.Principal;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import javax.mail.internet.MimeMessage;
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.velocity.VelocityEngineFactoryBean;
-import org.springframework.ui.velocity.VelocityEngineUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -29,12 +19,6 @@ public class HrController {
 	
 	@Autowired
 	private EmpService empservice;
-	
-	@Autowired
-	private JavaMailSender javaMailSender;
-	
-	@Autowired
-	private VelocityEngineFactoryBean velocityEngineFactoryBean;
 	
 	//근태관리 화면
 	@RequestMapping("attendance.hari")
@@ -129,39 +113,5 @@ public class HrController {
 	public String teamList() {
 		return "1hariHr.teamList";
 	}
-	
-	@RequestMapping(value = "personnel/sendMail.hari", method = RequestMethod.POST)
-	public void sendMail(HttpServletRequest req, Principal principal) {
-		System.out.println("ajaxControllerAdmin sendMail() in!!!!!");
-		MimeMessage message = javaMailSender.createMimeMessage();
-		MimeMessageHelper messageHelper = null;
-		String mail = req.getParameter("mail");
-		String name = req.getParameter("name");
-		StringBuilder path = new StringBuilder();
-		path.append(req.getLocalAddr());
-		path.append(":");
-		path.append(req.getLocalPort());
-		path.append(req.getContextPath());
-		
-		try {
-			messageHelper = new MimeMessageHelper(message, true, "UTF-8");
-			Map model = new HashMap();
-			model.put("mail", mail);
-			model.put("name", name);
-			model.put("path", path.toString());
-			
-			String mailBody = VelocityEngineUtils.mergeTemplateIntoString(velocityEngineFactoryBean.createVelocityEngine(), "emailTemplate.vm","UTF-8", model);
-			messageHelper.setFrom("admin@dobee.com");
-			messageHelper.setTo(mail);
-			StringBuilder subject = new StringBuilder();
-			subject.append(name);
-			subject.append("님 DOBEE에 사원등록이 되었습니다.");
-			messageHelper.setSubject(subject.toString());
-			messageHelper.setText(mailBody,true);
-			System.out.println("req.getContextPath()" + req.getContextPath());
-			javaMailSender.send(message);
-		} catch (Exception e) {
-			log.debug("HrController sendMail 예외발생: " + e.getMessage());
-		}
-	}
+
 }

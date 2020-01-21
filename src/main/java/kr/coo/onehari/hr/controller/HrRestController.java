@@ -3,12 +3,21 @@ package kr.coo.onehari.hr.controller;
 import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+
+import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.ui.velocity.VelocityEngineFactoryBean;
+import org.springframework.ui.velocity.VelocityEngineUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,6 +47,12 @@ public class HrRestController {
 	
 	@Autowired
 	private EmpService empSercive;
+	
+	@Autowired
+	private JavaMailSender javaMailSender;
+	
+	@Autowired
+	private VelocityEngineFactoryBean velocityEngineFactoryBean;
 
 	// 사원등록 시 소속 SELECT BOX 김진호 200108
 	@RequestMapping(value = "getTeamCode.hari", method = RequestMethod.POST)
@@ -376,5 +391,41 @@ public class HrRestController {
 			log.debug("setThemeColor 예외발생: " + e.getMessage());
 		}
 		return themeColor;
+	}
+	
+	@RequestMapping(value = "personnel/sendMail.hari", method = RequestMethod.POST)
+	public String sendMail(HttpServletRequest req, Principal principal) {
+		MimeMessage message = javaMailSender.createMimeMessage();
+		MimeMessageHelper messageHelper = null;
+		String mail = req.getParameter("mail");
+		String name = req.getParameter("name");
+		StringBuilder path = new StringBuilder();
+		path.append(req.getLocalAddr());
+		path.append(":");
+		path.append(req.getLocalPort());
+		path.append(req.getContextPath());
+		
+		try {
+			messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+			Map model = new HashMap();
+			model.put("mail", mail);
+			model.put("name", name);
+			model.put("path", path.toString());
+			String mailBody = VelocityEngineUtils.mergeTemplateIntoString(velocityEngineFactoryBean.createVelocityEngine(), "emailTemplate.vm", "UTF-8", model);
+			System.out.println("1" + mailBody);
+			messageHelper.setFrom("2020.1hari@gmail.com");
+			messageHelper.setTo(mail);
+			StringBuilder subject = new StringBuilder();
+			subject.append(name);
+			subject.append("님 DOBEE에 사원등록이 되었습니다.");
+			messageHelper.setSubject(subject.toString());
+			messageHelper.setText(mailBody, true);
+			System.out.println("req.getContextPath()" + req.getContextPath());
+			javaMailSender.send(message);
+		} catch (Exception e) {
+			log.debug("HrRestController sendMail 예외발생: " + e.getMessage());
+		}
+		
+		return "redirect:empList.hari";
 	}
 }
