@@ -30,4 +30,12 @@
 		WHERE EMPNUM=#{empNum}
 	</update>
 	
+	<!-- 개인설정 변경 김정하 2020. 1. 21 -->
+	<update id="myTheme">
+		UPDATE theme
+		SET THEMECOLOR = #{themeColor},
+			PROFILEFILENAME = #{profileFileName},
+			PROFILEFILEROOT = #{profileFileRoot}
+		WHERE EMPNUM=#{empNum}
+	</update>
 </mapper>

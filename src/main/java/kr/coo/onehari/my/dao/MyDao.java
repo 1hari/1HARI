@@ -3,6 +3,7 @@ package kr.coo.onehari.my.dao;
 import java.sql.SQLException;
 
 import kr.coo.onehari.hr.dto.EmpDto;
+import kr.coo.onehari.hr.dto.Theme;
 
 /*
 작성자: 오형남
@@ -18,4 +19,7 @@ public interface MyDao {
 
 	// 김진호 2020. 1. 20 개인정보 프로필 정보수정
 	public int myInfo(EmpDto empdto) throws ClassNotFoundException, SQLException;
+	
+	// 김정하 2020. 1. 21 개인설정 수정
+	public int myTheme(Theme theme) throws ClassNotFoundException, SQLException;
 }

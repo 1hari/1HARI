@@ -8,6 +8,7 @@ import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.stereotype.Service;
 
 import kr.coo.onehari.hr.dto.EmpDto;
+import kr.coo.onehari.hr.dto.Theme;
 import kr.coo.onehari.login.dao.LoginDao;
 import kr.coo.onehari.my.dao.MyDao;
 import lombok.extern.slf4j.Slf4j;
@@ -150,5 +151,17 @@ public class MyService {
 		} catch (ClassNotFoundException | SQLException e) {
 			log.debug("MyService myInfo 예외발생: " + e.getMessage());
 		}
+	}
+	
+	// 김정하 2020. 1. 21 개인설정 변경
+	public int myTheme(Theme theme) {
+		MyDao mydao = sqlsession.getMapper(MyDao.class);
+		int result = 0;
+		try {
+			result = mydao.myTheme(theme);
+		} catch (ClassNotFoundException | SQLException e) {
+			log.debug("MyService myTheme 예외발생: " + e.getMessage());
+		}
+		return result;
 	}
 }

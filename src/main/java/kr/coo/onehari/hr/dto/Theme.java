@@ -15,4 +15,6 @@ public class Theme {
 	private String themeFileRoot; //배경사진 경로
 	private String profileFileName; //프로필사진명
 	private String profileFileRoot; //프로필사진 경로
+	
+	private String[] files;
 }
