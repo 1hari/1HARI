@@ -1,17 +1,13 @@
 package kr.coo.onehari.my.controller;
 
 import java.security.Principal;
-import java.sql.SQLException;
 
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import kr.coo.onehari.hr.dao.EmpDao;
 import kr.coo.onehari.hr.dto.EmpDto;
 import kr.coo.onehari.hr.service.EmpService;
 import kr.coo.onehari.my.service.MyService;
@@ -34,12 +30,9 @@ public class MyController {
 	@Autowired
 	private EmpService empServcie;
 	
-	@Autowired
-	private SqlSession sqlsession;
-	
-	//내 정보  화면
+	// 개인정보 프로필 수정(화면) 김진호 2020. 1. 21
 	@RequestMapping(value = "myInfo.hari", method = RequestMethod.GET)
-	public String Myinfo(Model model, Principal principal) {
+	public String myInfo(Model model, Principal principal) {
 		EmpDto emp = null;
 		
 		try {
@@ -51,9 +44,14 @@ public class MyController {
 		return "1hariMy.myInfo";
 	}
 	
+	// 개인정보 프로필 수정(변경) 김진호 2020. 1. 21
 	@RequestMapping(value = "myInfo.hari", method = RequestMethod.POST)
-	public EmpDto Myinfo(EmpDto empdto, Principal principal) {
-		
-		return null;
+	public String myInfo(EmpDto empdto) {
+		try {
+			myService.myInfo(empdto);
+		} catch (Exception e) {
+			log.debug("MyController myInfo 예외발생: " + e.getMessage());
+		}
+		return "redirect:myInfo.hari";
 	}
 }

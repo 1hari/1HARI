@@ -141,7 +141,14 @@ public class MyService {
 		}
 		return result;
 	}
-	
 
-	
+	// 김진호 2020. 1. 21 개인정보 프로필 수정(변경)
+	public void myInfo(EmpDto empdto) {
+		MyDao mydao = sqlsession.getMapper(MyDao.class);
+		try {
+			mydao.myInfo(empdto);
+		} catch (ClassNotFoundException | SQLException e) {
+			log.debug("MyService myInfo 예외발생: " + e.getMessage());
+		}
+	}
 }

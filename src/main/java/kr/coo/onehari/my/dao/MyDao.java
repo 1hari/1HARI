@@ -17,5 +17,5 @@ public interface MyDao {
 	public int updatePassword(int empNum, String password) throws ClassNotFoundException, SQLException;
 
 	// 김진호 2020. 1. 20 개인정보 프로필 정보수정
-	public int myinfoUpdate(EmpDto empdto) throws ClassNotFoundException, SQLException;
+	public int myInfo(EmpDto empdto) throws ClassNotFoundException, SQLException;
 }

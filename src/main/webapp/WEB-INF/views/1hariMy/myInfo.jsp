@@ -40,10 +40,10 @@
 		<div class="row">
 			<div class="col-12">
 				<div class="container" style="background-color: #ffffff;">
-					<div class="row setup-content" id="step-1">
+					<div class="row">
 						<div class="col-md-12">
 							<!--form 태그 시작 -->
-							<form action="" method="post" enctype="multipart/form-data">
+							<form action="" method="post">
 								<c:set var="emp" value="${requestScope.emp}" />
 								<div class="row" style="margin-top: 2%;">
 									<div class="col-sm-6">
@@ -66,9 +66,7 @@
 										</div>
 										<div class="form-group">
 											<label for="email">이메일</label>
-											<div>
-												<input id="email" name="email" type="text" class="form-control" value="${emp.email}">
-											</div>
+											<input id="email" name="email" type="text" class="form-control" value="${emp.email}" required>
 										</div>
 									</div>
 									<div class="col-sm-6">
@@ -78,19 +76,19 @@
 										</div>
 										<div class="form-group">
 											<label for="teamCode">소속</label>
-											<input type="text" id="teamCode" name="teamCode" class="form-control" value="${emp.teamName}" readonly>
+											<input type="text" class="form-control" value="${emp.teamName}" readonly>
 										</div>
 										<div class="form-group">
 											<label for="positionCode">직책</label>
-											<input type="text" id="positionCode" name="positionCode" class="form-control" value="${emp.positionName}" readonly>
+											<input type="text" class="form-control" value="${emp.positionName}" readonly>
 										</div>
 										<div class="form-group">
 											<label for="rankCode">직급</label>
-											<input type="text" id="rankCode" name="rankCode" class="form-control" value="${emp.rankName}" readonly>
+											<input type="text" class="form-control" value="${emp.rankName}" readonly>
 										</div>
 										<div class="form-group">
 											<label for="employmentCode">재직구분</label>
-											<input type="text" id="employmentCode" name="employmentCode" class="form-control" value="${emp.employmentName}" readonly>
+											<input type="text" class="form-control" value="${emp.employmentName}" readonly>
 										</div>
 									</div>									
 								</div>
@@ -180,18 +178,6 @@
                 $('#emailCheck').removeAttr('disabled');
             }
         });
-		
-		//이메일 인증
-		$('#emailCheck').click(function() {
-			//이메일이 입력되면 새창으로 이동
-			if ($('#emailCheck').val() != null) {
-				var url = "emailCheck.do?email="+$('#email').val();
-				//console.log(url);
-				open(url,"Email Check","statusber=no, scrollbar=no, menuber=no, width=400, height=130");
-			} else {
-				alert("이메일이 입력되지 않았습니다.");
-			}
-		});//이벤트 끝
 		
 		//전송
 		$('#submit').click(function() {
