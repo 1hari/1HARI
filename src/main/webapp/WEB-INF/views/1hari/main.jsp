@@ -6,114 +6,432 @@
 <%-- <script src="${pageContext.request.contextPath}/resources/hari/assets/libs/flot/jquery.flot.pie.js"></script> --%>
 <%-- <script src="${pageContext.request.contextPath}/resources/hari/assets/libs/chart/jquery.flot.pie.min.js"></script> --%>
 <script async="" src="//www.google-analytics.com/analytics.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+<script src="https://www.chartjs.org/dist/2.9.3/Chart.min.js"></script>
 
 <script type="text/javascript">
+'use strict';
 
-
-
-
-Chart.defaults.global.tooltips.custom = function(tooltip) {
-	// Tooltip Element
-	var tooltipEl = document.getElementById('chartjs-tooltip');
-
-	// Hide if no tooltip
-	if (tooltip.opacity === 0) {
-		tooltipEl.style.opacity = 0;
-		return;
-	}
-
-	// Set caret Position
-	tooltipEl.classList.remove('above', 'below', 'no-transform');
-	if (tooltip.yAlign) {
-		tooltipEl.classList.add(tooltip.yAlign);
-	} else {
-		tooltipEl.classList.add('no-transform');
-	}
-
-	function getBody(bodyItem) {
-		return bodyItem.lines;
-	}
-
-	// Set Text
-	if (tooltip.body) {
-		var titleLines = tooltip.title || [];
-		var bodyLines = tooltip.body.map(getBody);
-
-		var innerHtml = '<thead>';
-
-		titleLines.forEach(function(title) {
-			innerHtml += '<tr><th>' + title + '</th></tr>';
-		});
-		innerHtml += '</thead><tbody>';
-
-		bodyLines.forEach(function(body, i) {
-			var colors = tooltip.labelColors[i];
-			var style = 'background:' + colors.backgroundColor;
-			style += '; border-color:' + colors.borderColor;
-			style += '; border-width: 2px';
-			var span = '<span class="chartjs-tooltip-key" style="' + style + '"></span>';
-			innerHtml += '<tr><td>' + span + body + '</td></tr>';
-		});
-		innerHtml += '</tbody>';
-
-		var tableRoot = tooltipEl.querySelector('table');
-		tableRoot.innerHTML = innerHtml;
-	}
-
-	var positionY = this._chart.canvas.offsetTop;
-	var positionX = this._chart.canvas.offsetLeft;
-
-	// Display, position, and set styles for font
-	tooltipEl.style.opacity = 1;
-	tooltipEl.style.left = positionX + tooltip.caretX + 'px';
-	tooltipEl.style.top = positionY + tooltip.caretY + 'px';
-	tooltipEl.style.fontFamily = tooltip._bodyFontFamily;
-	tooltipEl.style.fontSize = tooltip.bodyFontSize;
-	tooltipEl.style.fontStyle = tooltip._bodyFontStyle;
-	tooltipEl.style.padding = tooltip.yPadding + 'px ' + tooltip.xPadding + 'px';
-	
+window.chartColors = {
+	red: 'rgb(255, 99, 132)',
+	orange: 'rgb(255, 159, 64)',
+	yellow: 'rgb(255, 205, 86)',
+	green: 'rgb(75, 192, 192)',
+	blue: 'rgb(54, 162, 235)',
+	purple: 'rgb(153, 102, 255)',
+	grey: 'rgb(201, 203, 207)'
 };
 
-var config = {
-	type: 'pie',
-	data: {
-		datasets: [{
-			data: [300, 50, 100, 40, 10],
-			backgroundColor: [
-				'rgba(255, 99, 132, 0.6)',
-				'rgba(54, 162, 235, 0.6)',
-				'rgba(255, 206, 86, 0.6)',
-				'rgba(75, 192, 192, 0.6)',
-				'rgba(153, 102, 255, 0.6)'
-			],
-		}],
-		labels: [
-			'Red',
-			'Orange',
-			'Yellow',
-			'Green',
-			'Blue'
-		]
-	},
-	options: {
-		responsive: true,
-		legend: {
-			display: false
+(function(global) {
+	var MONTHS = [
+		'January',
+		'February',
+		'March',
+		'April',
+		'May',
+		'June',
+		'July',
+		'August',
+		'September',
+		'October',
+		'November',
+		'December'
+	];
+
+	var COLORS = [
+		'#4dc9f6',
+		'#f67019',
+		'#f53794',
+		'#537bc4',
+		'#acc236',
+		'#166a8f',
+		'#00a950',
+		'#58595b',
+		'#8549ba'
+	];
+
+	var Samples = global.Samples || (global.Samples = {});
+	var Color = global.Color;
+
+	Samples.utils = {
+		// Adapted from http://indiegamr.com/generate-repeatable-random-numbers-in-js/
+		srand: function(seed) {
+			this._seed = seed;
 		},
-		tooltips: {
-			enabled: false,
+
+		rand: function(min, max) {
+			var seed = this._seed;
+			min = min === undefined ? 0 : min;
+			max = max === undefined ? 1 : max;
+			this._seed = (seed * 9301 + 49297) % 233280;
+			return min + (this._seed / 233280) * (max - min);
+		},
+
+		numbers: function(config) {
+			var cfg = config || {};
+			var min = cfg.min || 0;
+			var max = cfg.max || 1;
+			var from = cfg.from || [];
+			var count = cfg.count || 8;
+			var decimals = cfg.decimals || 8;
+			var continuity = cfg.continuity || 1;
+			var dfactor = Math.pow(10, decimals) || 0;
+			var data = [];
+			var i, value;
+
+			for (i = 0; i < count; ++i) {
+				value = (from[i] || 0) + this.rand(min, max);
+				if (this.rand() <= continuity) {
+					data.push(Math.round(dfactor * value) / dfactor);
+				} else {
+					data.push(null);
+				}
+			}
+
+			return data;
+		},
+
+		labels: function(config) {
+			var cfg = config || {};
+			var min = cfg.min || 0;
+			var max = cfg.max || 100;
+			var count = cfg.count || 8;
+			var step = (max - min) / count;
+			var decimals = cfg.decimals || 8;
+			var dfactor = Math.pow(10, decimals) || 0;
+			var prefix = cfg.prefix || '';
+			var values = [];
+			var i;
+
+			for (i = min; i < max; i += step) {
+				values.push(prefix + Math.round(dfactor * i) / dfactor);
+			}
+
+			return values;
+		},
+
+		months: function(config) {
+			var cfg = config || {};
+			var count = cfg.count || 12;
+			var section = cfg.section;
+			var values = [];
+			var i, value;
+
+			for (i = 0; i < count; ++i) {
+				value = MONTHS[Math.ceil(i) % 12];
+				values.push(value.substring(0, section));
+			}
+
+			return values;
+		},
+
+		color: function(index) {
+			return COLORS[index % COLORS.length];
+		},
+
+		transparentize: function(color, opacity) {
+			var alpha = opacity === undefined ? 0.5 : 1 - opacity;
+			return Color(color).alpha(alpha).rgbString();
 		}
+	};
+
+	// DEPRECATED
+	window.randomScalingFactor = function() {
+		return Math.round(Samples.utils.rand(-100, 100));
+	};
+
+	// INITIALIZATION
+
+	Samples.utils.srand(Date.now());
+
+	// Google Analytics
+	/* eslint-disable */
+	if (document.location.hostname.match(/^(www\.)?chartjs\.org$/)) {
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		ga('create', 'UA-28909194-3', 'auto');
+		ga('send', 'pageview');
 	}
+	/* eslint-enable */
+
+}(this));
+'use strict';
+
+window.chartColors = {
+	red: 'rgb(255, 99, 132)',
+	orange: 'rgb(255, 159, 64)',
+	yellow: 'rgb(255, 205, 86)',
+	green: 'rgb(75, 192, 192)',
+	blue: 'rgb(54, 162, 235)',
+	purple: 'rgb(153, 102, 255)',
+	grey: 'rgb(201, 203, 207)'
 };
+
+(function(global) {
+	var MONTHS = [
+		'January',
+		'February',
+		'March',
+		'April',
+		'May',
+		'June',
+		'July',
+		'August',
+		'September',
+		'October',
+		'November',
+		'December'
+	];
+
+	var COLORS = [
+		'#4dc9f6',
+		'#f67019',
+		'#f53794',
+		'#537bc4',
+		'#acc236',
+		'#166a8f',
+		'#00a950',
+		'#58595b',
+		'#8549ba'
+	];
+
+	var Samples = global.Samples || (global.Samples = {});
+	var Color = global.Color;
+
+	Samples.utils = {
+		// Adapted from http://indiegamr.com/generate-repeatable-random-numbers-in-js/
+		srand: function(seed) {
+			this._seed = seed;
+		},
+
+		rand: function(min, max) {
+			var seed = this._seed;
+			min = min === undefined ? 0 : min;
+			max = max === undefined ? 1 : max;
+			this._seed = (seed * 9301 + 49297) % 233280;
+			return min + (this._seed / 233280) * (max - min);
+		},
+
+		numbers: function(config) {
+			var cfg = config || {};
+			var min = cfg.min || 0;
+			var max = cfg.max || 1;
+			var from = cfg.from || [];
+			var count = cfg.count || 8;
+			var decimals = cfg.decimals || 8;
+			var continuity = cfg.continuity || 1;
+			var dfactor = Math.pow(10, decimals) || 0;
+			var data = [];
+			var i, value;
+
+			for (i = 0; i < count; ++i) {
+				value = (from[i] || 0) + this.rand(min, max);
+				if (this.rand() <= continuity) {
+					data.push(Math.round(dfactor * value) / dfactor);
+				} else {
+					data.push(null);
+				}
+			}
+
+			return data;
+		},
+
+		labels: function(config) {
+			var cfg = config || {};
+			var min = cfg.min || 0;
+			var max = cfg.max || 100;
+			var count = cfg.count || 8;
+			var step = (max - min) / count;
+			var decimals = cfg.decimals || 8;
+			var dfactor = Math.pow(10, decimals) || 0;
+			var prefix = cfg.prefix || '';
+			var values = [];
+			var i;
+
+			for (i = min; i < max; i += step) {
+				values.push(prefix + Math.round(dfactor * i) / dfactor);
+			}
+
+			return values;
+		},
+
+		months: function(config) {
+			var cfg = config || {};
+			var count = cfg.count || 12;
+			var section = cfg.section;
+			var values = [];
+			var i, value;
+
+			for (i = 0; i < count; ++i) {
+				value = MONTHS[Math.ceil(i) % 12];
+				values.push(value.substring(0, section));
+			}
+
+			return values;
+		},
+
+		color: function(index) {
+			return COLORS[index % COLORS.length];
+		},
+
+		transparentize: function(color, opacity) {
+			var alpha = opacity === undefined ? 0.5 : 1 - opacity;
+			return Color(color).alpha(alpha).rgbString();
+		}
+	};
+
+	// DEPRECATED
+	window.randomScalingFactor = function() {
+		return Math.round(Samples.utils.rand(-100, 100));
+	};
+
+	// INITIALIZATION
+
+	Samples.utils.srand(Date.now());
+
+	// Google Analytics
+	/* eslint-disable */
+	if (document.location.hostname.match(/^(www\.)?chartjs\.org$/)) {
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		ga('create', 'UA-28909194-3', 'auto');
+		ga('send', 'pageview');
+	}
+	/* eslint-enable */
+
+}(this));
 
 $(function(){
-	var ctx = document.getElementById('chart-area').getContext('2d');
-	window.myPie = new Chart(ctx, config);
-	console.log(tooltipEl.style.padding);
-});
+	Chart.defaults.global.tooltips.custom = function(tooltip) {
+		// Tooltip Element
+		var tooltipEl = document.getElementById('chartjs-tooltip');
+
+		// Hide if no tooltip
+		if (tooltip.opacity === 0) {
+			tooltipEl.style.opacity = 0;
+			return;
+		}
+
+		// Set caret Position
+		tooltipEl.classList.remove('above', 'below', 'no-transform');
+		if (tooltip.yAlign) {
+			tooltipEl.classList.add(tooltip.yAlign);
+		} else {
+			tooltipEl.classList.add('no-transform');
+		}
+
+		function getBody(bodyItem) {
+			return bodyItem.lines;
+		}
+
+		// Set Text
+		if (tooltip.body) {
+			var titleLines = tooltip.title || [];
+			var bodyLines = tooltip.body.map(getBody);
+
+			var innerHtml = '<thead>';
+
+			titleLines.forEach(function(title) {
+				innerHtml += '<tr><th>' + title + '</th></tr>';
+			});
+			innerHtml += '</thead><tbody>';
+
+			bodyLines.forEach(function(body, i) {
+				var colors = tooltip.labelColors[i];
+				var style = 'background:' + colors.backgroundColor;
+				style += '; border-color:' + colors.borderColor;
+				style += '; border-width: 2px';
+				var span = '<span class="chartjs-tooltip-key" style="' + style + '"></span>';
+				innerHtml += '<tr><td>' + span + body + '</td></tr>';
+			});
+			innerHtml += '</tbody>';
+
+			var tableRoot = tooltipEl.querySelector('table');
+			tableRoot.innerHTML = innerHtml;
+		}
+
+		var positionY = this._chart.canvas.offsetTop;
+		var positionX = this._chart.canvas.offsetLeft;
+
+		// Display, position, and set styles for font
+		tooltipEl.style.opacity = 1;
+		tooltipEl.style.left = positionX + tooltip.caretX + 'px';
+		tooltipEl.style.top = positionY + tooltip.caretY + 'px';
+		tooltipEl.style.fontFamily = tooltip._bodyFontFamily;
+		tooltipEl.style.fontSize = tooltip.bodyFontSize;
+		tooltipEl.style.fontStyle = tooltip._bodyFontStyle;
+		tooltipEl.style.padding = tooltip.yPadding + 'px ' + tooltip.xPadding + 'px';
+	};
+
+	var config = {
+		type: 'pie',
+		data: {
+			datasets: [{
+				data: [300, 50, 100, 40],
+				backgroundColor: [
+					window.chartColors.red,
+					window.chartColors.orange,
+					window.chartColors.yellow,
+					window.chartColors.green,
+					window.chartColors.blue,
+				],
+			}],
+			labels: [
+				'출근',
+				'지각',
+				'결근',
+				'연차'
+			]
+		},
+		options: {
+			responsive: true,
+			legend: {
+				display: false
+			},
+			tooltips: {
+				enabled: false,
+			}
+		}
+	};
+
+	window.onload = function() {
+		var ctx = document.getElementById('chart-area').getContext('2d');
+		window.myPie = new Chart(ctx, config);
+	};
+})
 </script>
+
+	<style>
+		#canvas-holder {
+			width: 100%;
+			margin-top: 50px;
+			text-align: center;
+		}
+		#chartjs-tooltip {
+			opacity: 1;
+			position: absolute;
+			background: rgba(0, 0, 0, .7);
+			color: white;
+			border-radius: 3px;
+			-webkit-transition: all .1s ease;
+			transition: all .1s ease;
+			pointer-events: none;
+			-webkit-transform: translate(-50%, 0);
+			transform: translate(-50%, 0);
+		}
+
+		.chartjs-tooltip-key {
+			display: inline-block;
+			width: 10px;
+			height: 10px;
+			margin-right: 10px;
+		}
+	</style>
+<style type="text/css">/* Chart.js */
+@keyframes chartjs-render-animation{from{opacity:.99}to{opacity:1}}.chartjs-render-monitor{animation:chartjs-render-animation 1ms}.chartjs-size-monitor,.chartjs-size-monitor-expand,.chartjs-size-monitor-shrink{position:absolute;direction:ltr;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1}.chartjs-size-monitor-expand>div{position:absolute;width:1000000px;height:1000000px;left:0;top:0}.chartjs-size-monitor-shrink>div{position:absolute;width:200%;height:200%;left:0;top:0}</style></head>
 <body>
 	
 <!-- 페이지 내 컨텐츠 제목 란 시작  -->
@@ -168,31 +486,40 @@ $(function(){
 			<div class="col-md-6">
 				<div class="card">
 					<div class="card-body">
-						<div id="canvas-holder" style="height: 350px; padding: 0px; position: relative;">
+						<div id="canvas-holder" style="width: 300px;">
 							<div class="chartjs-size-monitor">
 								<div class="chartjs-size-monitor-expand">
 									<div class="">
-									</div>
-								</div>
-								<div class="chartjs-size-monitor-shrink">
-									<div class="">
-									</div>
 								</div>
 							</div>
-							<canvas id="chart-area"  style="display: block; width: 100%; height: 100%;"  class="chartjs-render-monitor"></canvas>
-<%-- 							<canvas id="chart-area" width="300" height="300" style="display: block; width: 100%; height: 100%;" class="chartjs-render-monitor"></canvas> --%>
-							<div id="chartjs-tooltip" class="center" style="opacity: 0;  font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-style: normal; padding: 6px;">
-								<table>
-									<thead>
-									</thead>
-									<tbody>
-										<tr>
-											<td>
-												<span class="chartjs-tooltip-key" style="background:rgb(255, 99, 132); border-color:#fff; border-width: 2px"></span>
-												Red: 300
-											</td>
-										</tr>
-									</tbody>
+							<div class="chartjs-size-monitor-shrink">
+								<div class="">
+								</div>
+							</div>
+						</div>
+						<div class="chartjs-size-monitor">
+							<div class="chartjs-size-monitor-expand">
+								<div class="">
+								</div>
+							</div>
+							<div class="chartjs-size-monitor-shrink">
+								<div class="">
+								</div>
+							</div>
+						</div>
+						<canvas id="chart-area" width="300" height="300" style="display: block; margin-left: 50%;" class="chartjs-render-monitor"></canvas>
+						<div id="chartjs-tooltip" class="center" style="opacity: 0; left: 228.854px; top: 223.022px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-style: normal; padding: 6px; font-size: 12px;">
+							<table>
+								<thead>
+								</thead>
+								<tbody>
+									<tr>
+										<td>
+											<span class="chartjs-tooltip-key" style="background:rgb(255, 99, 132); border-color:#fff; border-width: 2px">
+											</span>
+										</td>
+									</tr>
+								</tbody>
 								</table>
 							</div>
 						</div>
