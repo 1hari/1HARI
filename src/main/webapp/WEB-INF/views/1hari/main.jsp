@@ -2,23 +2,116 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- this page js -->
-<script src="${pageContext.request.contextPath}/resources/hari/assets/libs/chart/matrix.interface.js"></script>
-<script src="${pageContext.request.contextPath}/resources/hari/assets/libs/chart/excanvas.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/hari/assets/libs/flot/jquery.flot.js"></script>
-<script src="${pageContext.request.contextPath}/resources/hari/assets/libs/flot/jquery.flot.pie.js"></script>
-<script src="${pageContext.request.contextPath}/resources/hari/assets/libs/flot/jquery.flot.time.js"></script>
-<script src="${pageContext.request.contextPath}/resources/hari/assets/libs/flot/jquery.flot.stack.js"></script>
-<script src="${pageContext.request.contextPath}/resources/hari/assets/libs/flot/jquery.flot.crosshair.js"></script>
-<script src="${pageContext.request.contextPath}/resources/hari/assets/libs/chart/jquery.peity.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/hari/assets/libs/chart/matrix.charts.js"></script>
-<script src="${pageContext.request.contextPath}/resources/hari/assets/libs/chart/jquery.flot.pie.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/hari/assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/hari/assets/libs/chart/turning-series.js"></script>
-<script src="${pageContext.request.contextPath}/resources/hari/dist/js/pages/chart/chart-page-init.js"></script>
+<%-- <script src="${pageContext.request.contextPath}/resources/hari/assets/libs/flot/jquery.flot.js"></script> --%>
+<%-- <script src="${pageContext.request.contextPath}/resources/hari/assets/libs/flot/jquery.flot.pie.js"></script> --%>
+<%-- <script src="${pageContext.request.contextPath}/resources/hari/assets/libs/chart/jquery.flot.pie.min.js"></script> --%>
+<script async="" src="//www.google-analytics.com/analytics.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+
 <script type="text/javascript">
 
-$(function(){
 
+
+
+Chart.defaults.global.tooltips.custom = function(tooltip) {
+	// Tooltip Element
+	var tooltipEl = document.getElementById('chartjs-tooltip');
+
+	// Hide if no tooltip
+	if (tooltip.opacity === 0) {
+		tooltipEl.style.opacity = 0;
+		return;
+	}
+
+	// Set caret Position
+	tooltipEl.classList.remove('above', 'below', 'no-transform');
+	if (tooltip.yAlign) {
+		tooltipEl.classList.add(tooltip.yAlign);
+	} else {
+		tooltipEl.classList.add('no-transform');
+	}
+
+	function getBody(bodyItem) {
+		return bodyItem.lines;
+	}
+
+	// Set Text
+	if (tooltip.body) {
+		var titleLines = tooltip.title || [];
+		var bodyLines = tooltip.body.map(getBody);
+
+		var innerHtml = '<thead>';
+
+		titleLines.forEach(function(title) {
+			innerHtml += '<tr><th>' + title + '</th></tr>';
+		});
+		innerHtml += '</thead><tbody>';
+
+		bodyLines.forEach(function(body, i) {
+			var colors = tooltip.labelColors[i];
+			var style = 'background:' + colors.backgroundColor;
+			style += '; border-color:' + colors.borderColor;
+			style += '; border-width: 2px';
+			var span = '<span class="chartjs-tooltip-key" style="' + style + '"></span>';
+			innerHtml += '<tr><td>' + span + body + '</td></tr>';
+		});
+		innerHtml += '</tbody>';
+
+		var tableRoot = tooltipEl.querySelector('table');
+		tableRoot.innerHTML = innerHtml;
+	}
+
+	var positionY = this._chart.canvas.offsetTop;
+	var positionX = this._chart.canvas.offsetLeft;
+
+	// Display, position, and set styles for font
+	tooltipEl.style.opacity = 1;
+	tooltipEl.style.left = positionX + tooltip.caretX + 'px';
+	tooltipEl.style.top = positionY + tooltip.caretY + 'px';
+	tooltipEl.style.fontFamily = tooltip._bodyFontFamily;
+	tooltipEl.style.fontSize = tooltip.bodyFontSize;
+	tooltipEl.style.fontStyle = tooltip._bodyFontStyle;
+	tooltipEl.style.padding = tooltip.yPadding + 'px ' + tooltip.xPadding + 'px';
+	
+};
+
+var config = {
+	type: 'pie',
+	data: {
+		datasets: [{
+			data: [300, 50, 100, 40, 10],
+			backgroundColor: [
+				'rgba(255, 99, 132, 0.6)',
+				'rgba(54, 162, 235, 0.6)',
+				'rgba(255, 206, 86, 0.6)',
+				'rgba(75, 192, 192, 0.6)',
+				'rgba(153, 102, 255, 0.6)'
+			],
+		}],
+		labels: [
+			'Red',
+			'Orange',
+			'Yellow',
+			'Green',
+			'Blue'
+		]
+	},
+	options: {
+		responsive: true,
+		legend: {
+			display: false
+		},
+		tooltips: {
+			enabled: false,
+		}
+	}
+};
+
+$(function(){
+	var ctx = document.getElementById('chart-area').getContext('2d');
+	window.myPie = new Chart(ctx, config);
+	console.log(tooltipEl.style.padding);
 });
 </script>
 <body>
@@ -75,10 +168,36 @@ $(function(){
 			<div class="col-md-6">
 				<div class="card">
 					<div class="card-body">
-						<h5 class="card-title"></h5>
-							<div class="pie" style="height: 400px; padding: 0px; position: relative;"><canvas class="flot-base" width="596" height="400" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 596.5px; height: 400px;"></canvas><canvas class="flot-overlay" width="596" height="400" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 596.5px; height: 400px;"></canvas><div class="legend"><div style="position: absolute; width: 57px; height: 38px; top: 5px; right: 5px; background-color: rgb(255, 255, 255); opacity: 0.85;"> </div><table style="position:absolute;top:5px;right:5px;;font-size:smaller;color:#545454"><tbody><tr><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;border:5px solid rgb(72,140,19);overflow:hidden"></div></div></td><td class="legendLabel">Series1</td></tr><tr><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;border:5px solid rgb(27,85,192);overflow:hidden"></div></div></td><td class="legendLabel">Series2</td></tr></tbody></table></div><div class="pieLabelBackground" style="position: absolute; width: 39.5625px; height: 36px; top: 86px; left: 364.719px; background-color: rgb(0, 0, 0); opacity: 0.5;"> </div><span class="pieLabel" id="pieLabel0" style="position: absolute; top: 86px; left: 364.719px;"><div style="font-size:8pt;text-align:center;padding:2px;color:white;">Series1<br>28%</div></span><div class="pieLabelBackground" style="position: absolute; width: 39.5625px; height: 36px; top: 278px; left: 134.719px; background-color: rgb(0, 0, 0); opacity: 0.5;"> </div><span class="pieLabel" id="pieLabel1" style="position: absolute; top: 278px; left: 134.719px;"><div style="font-size:8pt;text-align:center;padding:2px;color:white;">Series2<br>72%</div></span></div>
+						<div id="canvas-holder" style="height: 350px; padding: 0px; position: relative;">
+							<div class="chartjs-size-monitor">
+								<div class="chartjs-size-monitor-expand">
+									<div class="">
+									</div>
+								</div>
+								<div class="chartjs-size-monitor-shrink">
+									<div class="">
+									</div>
+								</div>
+							</div>
+							<canvas id="chart-area"  style="display: block; width: 100%; height: 100%;"  class="chartjs-render-monitor"></canvas>
+<%-- 							<canvas id="chart-area" width="300" height="300" style="display: block; width: 100%; height: 100%;" class="chartjs-render-monitor"></canvas> --%>
+							<div id="chartjs-tooltip" class="center" style="opacity: 0;  font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-style: normal; padding: 6px;">
+								<table>
+									<thead>
+									</thead>
+									<tbody>
+										<tr>
+											<td>
+												<span class="chartjs-tooltip-key" style="background:rgb(255, 99, 132); border-color:#fff; border-width: 2px"></span>
+												Red: 300
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
 						</div>
 					</div>
+				</div>
 				<!--time line 시작 -->
 				<div class="card">
 					<div class="card-body">
