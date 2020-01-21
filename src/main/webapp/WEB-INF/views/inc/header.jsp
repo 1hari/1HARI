@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="se" uri="http://www.springframework.org/security/tags" %>
-	
 <script type="text/javascript">
 
 $(function(){
@@ -44,10 +43,10 @@ $(function(){
 	//현재시간 정수로 비교해 알람창 띄어주기
 	var timeCheck=setInterval(function(){
 		integerTime=parseInt(getTimeStamp());
-		if(integerTime == 85600 && isStart == false){
+		if(integerTime == 105000 && isStart == false){
 			clearInterval(timeCheck);
 			notify();
-		}else if(integerTime > 85600 || isStart == true){
+		}else if(integerTime > 105000 || isStart == true){
 			clearInterval(timeCheck);
 		}
 	},1000);
@@ -426,7 +425,7 @@ $(function(){
             };
         }
     }
-    
+
 	//이번달 출근기록 yyyy-mm-dd
 	$.ajax({
 		url: "${pageContext.request.contextPath}/ajax/getStartList.hari",
@@ -585,8 +584,8 @@ $(function(){
 							<img src="${pageContext.request.contextPath}/resources/hari/assets/images/users/profile-02.png" alt="user" class="rounded-circle" width="31">
 						</a>
 						<div class="dropdown-menu dropdown-menu-right user-dd animated">
-							<se:authentication property="name" var="empNum" />
-							<a class="dropdown-item" href="${pageContext.request.contextPath}/1hariMy/myInfo.hari">
+						<se:authentication property="name" var="empNum" />
+                            <a class="dropdown-item" href="${pageContext.request.contextPath}/1hariMy/myInfo.hari">
 								<i class="ti-user m-r-5 m-l-5"></i>내 프로필</a> <!--경로 1hariMy 폴더안에 myInfo.jsp (controller myInfo.hari를) -->
 								<a class="dropdown-item" href="javascript:void(0)">
 									<i class="ti-wallet m-r-5 m-l-5"></i>내 업무

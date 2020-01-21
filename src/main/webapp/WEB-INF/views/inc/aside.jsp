@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="se" uri="http://www.springframework.org/security/tags" %>
 
 <script>
 	$(function(){
@@ -82,12 +83,17 @@
 		<nav class="sidebar-nav" >
 			<ul id="sidebarnav" class="p-t-30" style="background: white;">
 				<!--인사관리-->
+
 				<li class="sidebar-item" >
+<%-- 				<se:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_PERSONNEL', 'ROLE_USER')"> --%>
+				
 					<a class="sidebar-link has-arrow waves-effect waves-dark" href="hr_attendance.html" aria-expanded="false" id="theme" style="background: white;">
 						<i class="mdi mdi-view-dashboard"></i>
 						<span class="hide-menu">인사 관리</span>
 					</a>
-					
+
+
+
 					<ul aria-expanded="false" class="collapse first-level" id="theme" style="background: white;">
 						<li class="sidebar-item">
 							<a href="${pageContext.request.contextPath}/1hariHr/attendance.hari" class="sidebar-link">
@@ -109,14 +115,14 @@
 								<span class="hide-menu"> 재직 증명 </span>
 							</a>
 						</li>
-						
+					<se:authorize access="hasAnyRole('ROLE_PERSONNEL', 'ROLE_ADMIN')">
 						<li class="sidebar-item">
 							<a href="${pageContext.request.contextPath}/1hariHr/teamList.hari" class="sidebar-link">
 								<i class="mdi mdi-emoticon-cool"></i>
 								<span class="hide-menu">사원 조회</span>
 							</a>
 						</li>
-						
+
 						<!-- 권한처리 메뉴 : ROLE_ADMIN & ROLE_PERSONNEL-->
 						<li class="sidebar-item">
 							<a href="${pageContext.request.contextPath}/1hariHr/personnel/empList.hari" class="sidebar-link">
@@ -124,7 +130,7 @@
 								<span class="hide-menu"> 입사 & 퇴사관리 </span>
 							</a>
 						</li>
-
+					</se:authorize>
 					</ul>
 				</li>
 				<!--인사관리 끝 -->
@@ -153,20 +159,20 @@
 					<ul aria-expanded="false" class="collapse  first-level"  id="theme" style="background: white;">
 						
 						<li class="sidebar-item" >
-							<a href="${pageContext.request.contextPath}/1hariSign/signHome.hari" class="sidebar-link" >
+                            <a href="${pageContext.request.contextPath}/1hariSign/signHome.hari" class="sidebar-link" >
 								<i class="mdi mdi-note-plus"></i>
 								<span class="hide-menu">전자 결재</span>
 							</a>
 						</li>
 						
-						<!-- ROLE_ADMIN -->
+						<se:authorize access="hasAnyRole('ROLE_ADMIN')">
 						<li class="sidebar-item">
 							<a href="${pageContext.request.contextPath}/1hariSign/admin/formList.hari" class="sidebar-link">
 								<i class="mdi mdi-note-outline"></i>
 								<span class="hide-menu">양식 관리</span>
 							</a>
 						</li>
-						
+						</se:authorize>
 						<li class="sidebar-item">
 							<a href="#" class="sidebar-link" data-toggle="modal" data-target="#draftModal">
 							<i class="mdi mdi-note-plus"></i>
