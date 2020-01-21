@@ -542,36 +542,32 @@ $(function(){
 							<i class="mdi mdi-menu font-24"></i>
 						</a>
 					</li>
-
-					<!-- ============================================================== -->
-					<!-- 검색 기능  -->
-					<!-- ============================================================== -->
-					<li class="nav-item search-box">
-						<a class="nav-link waves-effect waves-dark" href="javascript:void(0)">
-							<i class="ti-search"></i>
-						</a>
-						<form class="app-search position-absolute">
-							<input type="text" class="form-control" placeholder="Search &amp; enter">
-								<a class="srh-btn"><i class="ti-close"></i></a>
-						</form>
-					</li>
-					
 				</ul>
 				<!--top navbar 더보기 & 검색  끝 -->
 
 				<!--top navbar 에서 오른쪽 기능 담당 (출/퇴근과 프로필)-->
-				<div>
-					<input type="text" id="hue-demo" class="form-control demo" data-control="hue" value="#ff6161">
-				</div>
+<!-- 				<div> -->
+<!-- 					<input type="text" id="hue-demo" class="form-control demo" data-control="hue" value="#ff6161"> -->
+<!-- 				</div> -->
+				<script src="./path/to/dropzone.js"></script>
 				<ul class="navbar-nav float-right">
+					
+					<!-- 개인셋팅 -->
+					<li class="nav-item" >
+						<a class="nav-link waves-effect waves-dark" id="theme" style = "color:white;" href="" data-toggle="modal" data-target="#themeModal" aria-haspopup="true" aria-expanded="false">
+							<i class="fas fa-cog font-24"  style="padding-top: 20px;"></i>
+						</a>
+					</li>
+					
+					<!-- 출퇴근 -->
 					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle waves-effect waves-dark" id="theme" style = "color:white;" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							<i class="mdi mdi-bell font-24"></i>
+						<a class="nav-link dropdown-toggle waves-effect waves-dark" id="work" style = "color:white;" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<i class="fas fa-calendar-check font-24" style="padding-top: 20px;"></i>
 						</a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown" >
 							<button class="dropdown-item" id="startWork" disabled="disabled" >출근하기</button>
 							<button class="dropdown-item" id="endWork" disabled="disabled" >퇴근하기</button>
-							<button class="dropdown-item" id="test" >퇴근하기</button>
+							<button class="dropdown-item" id="test" >test</button>
 						</div>
 					</li>
 					<!--top navbar 에서 오른쪽 기능 담당 (출/퇴근과 프로필) 끝 -->
@@ -583,20 +579,17 @@ $(function(){
 						<a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<img src="${pageContext.request.contextPath}/resources/hari/assets/images/users/profile-02.png" alt="user" class="rounded-circle" width="31">
 						</a>
-						<div class="dropdown-menu dropdown-menu-right user-dd animated">
-						<se:authentication property="name" var="empNum" />
+						<div class="dropdown-menu dropdown-menu-right animated">
                             <a class="dropdown-item" href="${pageContext.request.contextPath}/1hariMy/myInfo.hari">
-								<i class="ti-user m-r-5 m-l-5"></i>내 프로필</a> <!--경로 1hariMy 폴더안에 myInfo.jsp (controller myInfo.hari를) -->
-								<a class="dropdown-item" href="javascript:void(0)">
-									<i class="ti-wallet m-r-5 m-l-5"></i>내 업무
-								</a>
+								<i class="ti-user m-r-5 m-l-5"></i> 내 프로필
+							</a> <!--경로 1hariMy 폴더안에 myInfo.jsp (controller myInfo.hari를) -->
+								
 							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="javascript:void(0)">
-								<i class="ti-settings m-r-5 m-l-5"></i>계정관리
-							</a>
-							<div class="dropdown-divider"></div>
+							
 							<!-- 로그아웃 -->
-							<a href="#" onclick="document.getElementById('logout-form').submit();"><i class="fa fa-power-off m-r-5 m-l-5"></i>로그아웃</a>
+							<a href="#" class="dropdown-item" onclick="document.getElementById('logout-form').submit();">
+								<i class="fa fa-power-off m-r-5 m-l-5"></i> 로그아웃
+							</a>
 							<form id="logout-form" action="${pageContext.request.contextPath}/logout" method="POST">
 							   <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
 							</form>
@@ -610,3 +603,29 @@ $(function(){
 	</header>
 	<!-- ============================================================== -->
 	<!-- top navbar 전체 끝 !! -->
+	
+<!-- DRAFT Modal -->
+<div class="modal fade" id="themeModal" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content" style="width: 250px;">
+			<form action="">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">개인설정</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div><!-- modal-header 끝 -->
+			
+				<div class="modal-body" style="height: 250px;">
+					<input type="text" id="hue-demo" class="form-control demo" data-control="hue" value="#ff6161">
+				</div><!-- modal-body 끝 -->
+			
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+					<button type="submit" class="btn btn-primary" id="themeChoice">선택완료</button>
+				</div><!-- modal-footer 끝 -->
+				<input type="hidden" value="" id="signFormCode" name="signFormCode">
+			</form>
+		</div><!-- modal-content 끝 -->
+	</div><!-- modal-dialog 끝 -->
+</div><!--  draftModal 끝 -->
