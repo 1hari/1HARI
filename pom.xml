@@ -246,7 +246,37 @@
 			<artifactId>javax.mail</artifactId>
 			<version>1.5.4</version>
 		</dependency>
-		</dependencies>
+		
+		<!-- velocity -->
+		<dependency>
+		    <groupId>org.apache.velocity</groupId>
+		    <artifactId>velocity</artifactId>
+		    <version>1.7</version>
+		</dependency>
+		
+		<!-- velocity-tools -->
+		<dependency>
+		    <groupId>org.apache.velocity</groupId>
+		    <artifactId>velocity-tools</artifactId>
+		    <version>2.0</version>
+		</dependency>
+		
+		<!-- javax.mail/javax.mail-api -->
+		<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+		<dependency>
+		    <groupId>javax.mail</groupId>
+		    <artifactId>mail</artifactId>
+		    <version>1.4.7</version>
+		</dependency>
+		
+		<!-- 아무도 설명하지 않았지만 여기 다 있음 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+	
+	</dependencies>
 	<build>
 		<plugins>
 			<plugin>

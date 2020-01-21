@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>${mail}</title>
+</head>
+<body>
+<h1 style = "font-size : 26">안녕하세요 ${name} 님</h1><br>
+<div style = "border : 3px solid lightgray; padding : 5em;">
+	<p style = "color : green"><b>일하리일하리</b></p><br>
+	<p>-------------------------------------------------------------</p><br>
+	<p> 등록일 :</p><br>
+	${path}<br>
+	<form action="http://${path}" target="_blank" method="POST" >
+		<input type="hidden" name="mail" id="mail" value="${mail}">
+	</form>
+</div>
+</body>
+</html>

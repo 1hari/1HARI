@@ -117,8 +117,8 @@
 									</div>
 									<div>
 										<label for="email" style="margin-top: 10px; margin-bottom: 0px;">이메일</label>
-										<br><input id="email" name="email" type="text" class="required form-control" style="width: 50%; display: inline;">
-										<input type="text" class="form-control" style="width: 49%; display: inline;" value="@gmail.com" readonly="readonly">
+										<span id="emailCheck" style="color: red;"></span>
+										<input id="email" name="email" type="text" class="required form-control">
 									</div>
 								</section>
 		
@@ -268,6 +268,9 @@
 
 		/* 핸드폰번호 입력 유효성 검사 */
 		var phoneReg = /^01[016789]-\d{3,4}-\d{4}$/; // 핸드폰번호 정규표현식
+		var emailPattern = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+        //0부터9a부터zA부터Z까지 (-, _, . 가 있어도 되고 없어도 되고, 0부터9a부터zA부터Z까지)반복횟수 상관없이가능
+        //@기호포함  (-, _, . 가 있어도 되고 없어도 되고, 0부터9a부터zA부터Z까지)반복횟수 상관없이가능 .기호포함 2자~3자 이내 대소문자 구분안함
 		
 		/* 핸드폰번호 입력 시 자동 (-) 삽입  */
 		$('#phoneNum').keyup(function() {
@@ -301,6 +304,15 @@
 				$('.checkPhoneNum').text("핸드폰번호 형식이 잘못되었습니다.");
 			}
 		})
+
+		//email 유효성체크 
+        $('#email').keyup(function() {
+            if (emailPattern.test($('#email').val()) != true) { // 정규표현식 유효성 검사
+                $('#emailCheck').text("이메일 형식이 잘못되었습니다.");
+            } else {
+                $('#emailCheck').text("");
+            }
+        });
 	})
 
     // Basic Example with form
@@ -318,7 +330,9 @@
 
 	/* 핸드폰번호 입력 유효성 검사 */
 	var phoneReg = /^01[016789]-\d{3,4}-\d{4}$/; // 핸드폰번호 정규표현식
+	var emailPattern = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 	var phoneNumCheck = false;
+	var emailCheck = false;
 	
 	form.children("div").steps({
 		headerTag : "h3",
@@ -345,7 +359,10 @@
 					icon: "success",
 					button: "확인"
 				}).then((value) => {
-					$('#example-form').submit();
+					sendMail().then(function () {
+						console.log('sendMail()');
+						$('#example-form').submit();
+					})
 				});
 			} else {
 				swal({
@@ -465,6 +482,24 @@
 			return true;
 		}
 	}
+	<!-- 주민등록번호 유효성 체크 끝-->
+
+	<!-- Velocity 메일 보내기 -->
+	function sendMail() {
+		$.ajax({
+			url: "${pageContext.request.contextPath}/1hariHr/personnel/sendMail.hari",
+			data: 
+				{"mail" : $('#email').val(),
+				"name" : $('#empName').val()
+				},
+			dataType: "text",
+			method: "post",
+			success: function() {
+				console.log('sendmail');
+			}
+		})
+	}
+	
 </script>
 
 
