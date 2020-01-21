@@ -1,7 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!-- this page js -->
+<script src="${pageContext.request.contextPath}/resources/hari/assets/libs/chart/matrix.interface.js"></script>
+<script src="${pageContext.request.contextPath}/resources/hari/assets/libs/chart/excanvas.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/hari/assets/libs/flot/jquery.flot.js"></script>
+<script src="${pageContext.request.contextPath}/resources/hari/assets/libs/flot/jquery.flot.pie.js"></script>
+<script src="${pageContext.request.contextPath}/resources/hari/assets/libs/flot/jquery.flot.time.js"></script>
+<script src="${pageContext.request.contextPath}/resources/hari/assets/libs/flot/jquery.flot.stack.js"></script>
+<script src="${pageContext.request.contextPath}/resources/hari/assets/libs/flot/jquery.flot.crosshair.js"></script>
+<script src="${pageContext.request.contextPath}/resources/hari/assets/libs/chart/jquery.peity.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/hari/assets/libs/chart/matrix.charts.js"></script>
+<script src="${pageContext.request.contextPath}/resources/hari/assets/libs/chart/jquery.flot.pie.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/hari/assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/hari/assets/libs/chart/turning-series.js"></script>
+<script src="${pageContext.request.contextPath}/resources/hari/dist/js/pages/chart/chart-page-init.js"></script>
 <script type="text/javascript">
+
 $(function(){
 
 });
@@ -58,74 +73,12 @@ $(function(){
 		<!-- ============================================================== -->
 		<div class="row">
 			<div class="col-md-6">
-
-				<!-- 공지사항 시작  -->
 				<div class="card">
 					<div class="card-body">
-						<h4 class="card-title m-b-0">공지사항</h4>
+						<h5 class="card-title"></h5>
+							<div class="pie" style="height: 400px; padding: 0px; position: relative;"><canvas class="flot-base" width="596" height="400" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 596.5px; height: 400px;"></canvas><canvas class="flot-overlay" width="596" height="400" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 596.5px; height: 400px;"></canvas><div class="legend"><div style="position: absolute; width: 57px; height: 38px; top: 5px; right: 5px; background-color: rgb(255, 255, 255); opacity: 0.85;"> </div><table style="position:absolute;top:5px;right:5px;;font-size:smaller;color:#545454"><tbody><tr><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;border:5px solid rgb(72,140,19);overflow:hidden"></div></div></td><td class="legendLabel">Series1</td></tr><tr><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;border:5px solid rgb(27,85,192);overflow:hidden"></div></div></td><td class="legendLabel">Series2</td></tr></tbody></table></div><div class="pieLabelBackground" style="position: absolute; width: 39.5625px; height: 36px; top: 86px; left: 364.719px; background-color: rgb(0, 0, 0); opacity: 0.5;"> </div><span class="pieLabel" id="pieLabel0" style="position: absolute; top: 86px; left: 364.719px;"><div style="font-size:8pt;text-align:center;padding:2px;color:white;">Series1<br>28%</div></span><div class="pieLabelBackground" style="position: absolute; width: 39.5625px; height: 36px; top: 278px; left: 134.719px; background-color: rgb(0, 0, 0); opacity: 0.5;"> </div><span class="pieLabel" id="pieLabel1" style="position: absolute; top: 278px; left: 134.719px;"><div style="font-size:8pt;text-align:center;padding:2px;color:white;">Series2<br>72%</div></span></div>
+						</div>
 					</div>
-					<ul class="list-style-none">
-
-						<li class="d-flex no-block card-body border-top">
-							<i class="fa fa-plus w-30px m-t-5"></i>
-							<div>
-								<a href="#" class="m-b-0 font-medium p-0">Maruti is a Responsive Admin theme</a>
-								<span class="text-muted">But already everything was solved. It will ...</span>
-							</div>
-							<div class="ml-auto">
-								<div class="tetx-right">
-									<h5 class="text-muted m-b-0">19</h5>
-									<span class="text-muted font-16">Jan</span>
-								</div>
-							</div>
-						</li>
-						
-						<li class="d-flex no-block card-body border-top">
-							<i class="fa fa-leaf w-30px m-t-5"></i>
-							<div>
-								<a href="#" class="m-b-0 font-medium p-0">Envato approved Maruti Admin template</a>
-								<span class="text-muted">i am very happy to approved by TF</span>
-							</div>
-							<div class="ml-auto">
-								<div class="tetx-right">
-									<h5 class="text-muted m-b-0">20</h5>
-									<span class="text-muted font-16">Jan</span>
-								</div>
-							</div>
-						</li>
-						
-						<li class="d-flex no-block card-body border-top">
-							<i class="fa fa-question-circle w-30px m-t-5"></i>
-							<div>
-								<a href="#" class="m-b-0 font-medium p-0"> I am alwayse here if you have any question</a>
-								<span class="text-muted">we glad that you choose our template</span>
-							</div>
-							<div class="ml-auto">
-								<div class="tetx-right">
-									<h5 class="text-muted m-b-0">15</h5>
-									<span class="text-muted font-16">Jan</span>
-								</div>
-							</div>
-						</li>
-						
-						<li class="d-flex no-block card-body border-top">
-							<i class="fa fa-plus w-30px m-t-5"></i>
-							<div>
-								<a href="#" class="m-b-0 font-medium p-0">Maruti is a Responsive Admin theme</a>
-								<span class="text-muted">But already everything was solved. It will ...</span>
-							</div>
-							<div class="ml-auto">
-								<div class="tetx-right">
-									<h5 class="text-muted m-b-0">19</h5>
-									<span class="text-muted font-16">Jan</span>
-								</div>
-							</div>
-						</li>
-						
-					</ul>
-				</div>
-				<!--공지사항 끝 -->
-
 				<!--time line 시작 -->
 				<div class="card">
 					<div class="card-body">
