@@ -43,7 +43,7 @@
 					<div class="row">
 						<div class="col-md-12">
 							<!--form 태그 시작 -->
-							<form action="" method="post">
+							<form action="" id="example-form" method="post">
 								<c:set var="emp" value="${requestScope.emp}" />
 								<div class="row" style="margin-top: 2%;">
 									<div class="col-sm-6">
@@ -61,11 +61,12 @@
 										</div>
 										<div class="form-group">
 											<label for="phoneNum">핸드폰번호</label>
-											<span class="checkPhoneNum" style="color: red;"></span>
+											<span id="phoneNumCheck" style="color: red;"></span>
 											<input type="text" id="phoneNum" name="phoneNum" class="form-control" value="${emp.phoneNum}" placeholder="(-) 없이 숫자만 입력하세요." maxlength="13" required>
 										</div>
 										<div class="form-group">
 											<label for="email">이메일</label>
+											<span id="emailCheck" style="color: red;"></span>
 											<input id="email" name="email" type="text" class="form-control" value="${emp.email}" required>
 										</div>
 									</div>
@@ -93,7 +94,7 @@
 									</div>									
 								</div>
 								<div class="form-group" align="right">
-									<button type="submit" style ="color: #fff; background-color: #20B2AA; border-color: #20B2AA;" class="btn btn-success">수정하기</button>
+									<button type="button" id="submitButton" style ="color: #fff; background-color: #20B2AA; border-color: #20B2AA;" class="btn btn-success">수정하기</button>
 								</div>
 							</form>
 							<!--폼 action 태그 끝 -->
@@ -129,13 +130,10 @@
 	$(function() {
 		/* 핸드폰번호 입력 유효성 검사 */
 		var phoneReg = /^01[016789]-\d{3,4}-\d{4}$/; // 핸드폰번호 정규표현식
-		var email_pattern = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+		var emailPattern = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
         //0부터9a부터zA부터Z까지 (-, _, . 가 있어도 되고 없어도 되고, 0부터9a부터zA부터Z까지)반복횟수 상관없이가능
         //@기호포함  (-, _, . 가 있어도 되고 없어도 되고, 0부터9a부터zA부터Z까지)반복횟수 상관없이가능 .기호포함 2자~3자 이내 대소문자 구분안함
         
-        var email_check = false;
-        var phoneNumCheck = false;
-		
 		/* 핸드폰번호 입력 시 자동 (-) 삽입  */
 		$('#phoneNum').keyup(function() {
 			var number = this.value.replace(/[^0-9]/g, "");
@@ -163,33 +161,34 @@
 			this.value = phone;
 			
 			if (phoneReg.test($('#phoneNum').val())) { // 정규표현식 유효성 검사
-				$('.checkPhoneNum').text("");
+				$('#phoneNumCheck').text("");
 			} else {
-				$('.checkPhoneNum').text("핸드폰번호 형식이 잘못되었습니다.");
+				$('#phoneNumCheck').text("핸드폰번호 형식이 잘못되었습니다.");
 			}
 		})
 
 		//email 유효성체크 
         $('#email').keyup(function() {
-            if (email_pattern.test($(this).val()) != true) {
-                $('#emailcheck').text("이메일 형식에 맞지 않습니다.");
+            if (emailPattern.test($('#email').val()) != true) { // 정규표현식 유효성 검사
+                $('#emailCheck').text("이메일 형식이 잘못되었습니다.");
             } else {
-                $('#emailcheck').text("이메일 형식에 맞습니다.");
-                $('#emailCheck').removeAttr('disabled');
+                $('#emailCheck').text("");
             }
         });
-		
+
 		//전송
-		$('#submit').click(function() {
-			//console.log($('#emailCheckReturn').val());
-			
-			if ($('#emailCheckReturn').val() == "true") {
-				email_check = true;
+		$('#submitButton').click(function() {
+			if (phoneReg.test($('#phoneNum').val()) != false && emailPattern.test($('#email').val()) != false) {
+				$('#example-form').submit();
+			} else {
+				swal({
+					text: "핸드폰번호나 이메일을 다시 확인해주세요.",
+					icon: "warning",
+					button: "닫기"
+				}).then((value) => {
+					window.location.reload();
+				});
 			}
-			let issubmit = id_check && pw_check && pwck_check && email_check;
-			console.log(issubmit);
-			
-			return issubmit;
 		});//이벤트 끝
 	})
 
