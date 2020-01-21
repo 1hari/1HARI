@@ -412,12 +412,11 @@ public class HrRestController {
 			model.put("name", name);
 			model.put("path", path.toString());
 			String mailBody = VelocityEngineUtils.mergeTemplateIntoString(velocityEngineFactoryBean.createVelocityEngine(), "emailTemplate.vm", "UTF-8", model);
-			System.out.println("1" + mailBody);
 			messageHelper.setFrom("2020.1hari@gmail.com");
 			messageHelper.setTo(mail);
 			StringBuilder subject = new StringBuilder();
 			subject.append(name);
-			subject.append("님 DOBEE에 사원등록이 되었습니다.");
+			subject.append(" 님 DOBEE에 사원등록이 되었습니다.");
 			messageHelper.setSubject(subject.toString());
 			messageHelper.setText(mailBody, true);
 			System.out.println("req.getContextPath()" + req.getContextPath());
