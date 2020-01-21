@@ -88,10 +88,12 @@ public class SignController {
 	//문서기안 화면 김정하 / 2020. 1. 8~
 	@RequestMapping(value="docuDraft.hari", method = RequestMethod.GET)
 	public String formDraft(String signFormCode, String signNum, Model model, Principal principal,String msg, String isOk) {
-		if(signFormCode == null) {
+		
+		if(signFormCode != null) {
 			//폼가져오기
 			SignFormDto form = signFormService.selectForm(signFormCode);
 			model.addAttribute("form", form);
+			
 		}else {
 			//반려문서 가져오기
 			HashMap<String, String> map = new HashMap<String, String>(); 

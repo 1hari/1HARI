@@ -81,7 +81,9 @@
 						<div class="row">
 							<!-- input 태그 -->
 							<div class="col-md-12">
-								<input type="text" class="form-control" id="signTitle" name="signTitle" placeholder="제목" style="width:93%; display: inline;">
+								<input type="text" class="form-control" id="signTitle" name="signTitle" placeholder="제목" <c:forEach var="docu" items="${requestScope.signDocu}">
+										value="${docu.signTitle}"
+									</c:forEach>style="width:93%; display: inline;">
 								<button type="button" id="draftSubmit" class="btn btn-success" style="display: inline-block;">기안</button>
 							</div>
 						</div><!-- row 끝 -->
@@ -89,11 +91,11 @@
 						<!-- ck 에디터 form -->
 						<textarea name="signContent" id="signContent" rows="10" cols="80">
 							<c:choose>
-								<c:when test="${form.signFormFormContent != null}">
+								<c:when test="${requestScope.signDocu == null}">
 									${form.signFormFormContent}
 								</c:when>
 								<c:otherwise>
-									<c:forEach var="docu" items="${requestScopr.signDocu}">
+									<c:forEach var="docu" items="${requestScope.signDocu}">
 										${docu.signContent}
 									</c:forEach>
 								</c:otherwise>
@@ -110,7 +112,7 @@
 							</div>
 						</div>
 						<input type="hidden" id="draftEmp" name="draftEmp" value="${emp.empNum}">
-<%-- 						<input type="hidden" value="${requestScope.signFormCode}" id="signFormCode" name="signFormCode" > --%>
+<%-- 					<input type="hidden" value="${requestScope.signFormCode}" id="signFormCode" name="signFormCode" > --%>
 					</form>
 				</div><!-- container -->
 			</div><!-- col-12 끝 -->
