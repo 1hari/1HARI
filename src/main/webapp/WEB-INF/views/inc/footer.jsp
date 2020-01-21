@@ -67,7 +67,7 @@
 	//websocket에서 전송된 메시지 뿌려주는 함수
 	function appendMessage(msg) {
 		toastr.info(msg, '전자결재 알림', {timeOut: 5000});
-// 		signNotify(msg);
+ 		//signNotify(msg);
 	}
 
 	//notifications

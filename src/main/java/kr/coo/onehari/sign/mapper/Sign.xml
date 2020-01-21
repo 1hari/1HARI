@@ -161,12 +161,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="signApproval" parameterType="hashmap">
 		UPDATE sign SET
 			<choose>
-				<when test="isSign1.equalsIgnoreCase('0')"><!-- 결재1 미완료이면 -->
-					ISSIGN1='1', SIGNCODE='2'
+				<when test="signCode.equalsIgnoreCase('4')">
+					SIGNCODE=#{signCode}, SIGNCOMMENT=#{signComment}
 				</when>
-				<otherwise><!-- 결재1 완료이면 -->
-					ISSIGN2='1', SIGNCODE='3'
-				</otherwise>
+				
+				<when test="isSign1.equalsIgnoreCase('0')"><!-- 결재1 미완료이면 -->
+					ISSIGN1='1', SIGNCODE='2', SIGNCOMMENT=#{signComment}
+				</when>
+				<when test="isSign1.equalsIgnoreCase('1')"><!-- 결재1 완료이면 -->
+					ISSIGN2='1', SIGNCODE='3', SIGNCOMMENT=#{signComment}
+				</when>
 			</choose>
 		 WHERE SIGNNUM = #{signNum}
 	</update>

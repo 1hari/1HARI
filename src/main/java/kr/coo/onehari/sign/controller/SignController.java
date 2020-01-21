@@ -87,11 +87,22 @@ public class SignController {
 	
 	//문서기안 화면 김정하 / 2020. 1. 8~
 	@RequestMapping(value="docuDraft.hari", method = RequestMethod.GET)
-	public String formDraft(String signFormCode, Model model, Principal principal,String msg, String isOk) {
-		
-		//폼가져오기
-		SignFormDto form = signFormService.selectForm(signFormCode);
-		model.addAttribute("form", form);
+	public String formDraft(String signFormCode, String signNum, Model model, Principal principal,String msg, String isOk) {
+		if(signFormCode == null) {
+			//폼가져오기
+			SignFormDto form = signFormService.selectForm(signFormCode);
+			model.addAttribute("form", form);
+		}else {
+			//반려문서 가져오기
+			HashMap<String, String> map = new HashMap<String, String>(); 
+			map.put("signNum", signNum);
+			map.put("pg", "3");
+			map.put("cp", "0");
+			map.put("code", "6"); //문서보기
+			List<SignDto> signDocu = signService.selectSignList(map);
+			
+			model.addAttribute("signDocu", signDocu);
+		}
 		
 		//기안자 정보 가져오기
 		EmpDto emp = empService.empDefault(principal.getName());

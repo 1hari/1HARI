@@ -88,7 +88,16 @@
 						
 						<!-- ck 에디터 form -->
 						<textarea name="signContent" id="signContent" rows="10" cols="80">
-							${form.signFormFormContent}
+							<c:choose>
+								<c:when test="${form.signFormFormContent != null}">
+									${form.signFormFormContent}
+								</c:when>
+								<c:otherwise>
+									<c:forEach var="docu" items="${requestScopr.signDocu}">
+										${docu.signContent}
+									</c:forEach>
+								</c:otherwise>
+							</c:choose>							
 						</textarea>
 						<!-- ck 에디터 form 끝 -->
 						

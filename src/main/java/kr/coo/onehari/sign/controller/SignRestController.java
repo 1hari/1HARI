@@ -90,7 +90,7 @@ public class SignRestController {
 	
 	//결재하기 김정하 / 2020. 1. 16
 	@RequestMapping("approval.hari")
-	public Map<String, String> signApproval(String isSign1, String empSign1, String isSign2, String empSign2, String signNum, Principal principal) {
+	public Map<String, String> signApproval(String isSign1, String empSign1, String isSign2, String empSign2, String signNum, String signComment, String signCode, Principal principal) {
 		//System.out.println(signNum);
 		//System.out.println(isSign1);
 		//System.out.println(isSign2);
@@ -101,25 +101,32 @@ public class SignRestController {
 		String msg = "";
 		String empNum = principal.getName();
 		
+		//결재1이 0이면서 결재자1이 로그인한 사람 또는 결재2가 0이면서 결재자2가 로그인한 사람
 		if((isSign1.equals("0") && empSign1.equals(empNum)) || (isSign2.equals("0") && empSign2.equals(empNum))) {
 			int result = 0;
 			
 			HashMap<String, String> map = new HashMap<String, String>();
 			
-			map.put("isSign1", isSign1);
-			map.put("isSign2", isSign2);
+			if(!signCode.equals("4")) {
+				map.put("isSign1", isSign1);
+				map.put("isSign2", isSign2);
+				map.put("signCode", "3");
+			}
+			
 			map.put("signNum", signNum);
+			map.put("signComment", signComment);
+			map.put("signCode", signCode);
 			
 			result = signService.signApproval(map);
 			
 			if(result > 0 ) {
 				isOk = "true";
-				msg = "결재되었습니다.";
+				msg = "처리되었습니다.";
 			}else {
-				msg = "결재처리되지 않았습니다. 다시 확인 바랍니다.";
+				msg = "처리되지 않았습니다. 다시 확인 바랍니다.";
 			}
 		}else {
-			msg = "결재정보가 일치하지 않습니다. 다시 확인 바랍니다.";
+			msg = "정보가 일치하지 않습니다. 다시 확인 바랍니다.";
 		}
 		
 		resultMap.put("isOk", isOk);

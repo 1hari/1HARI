@@ -31,11 +31,18 @@
 				<div class="col-12 d-flex no-block align-items-center" style="margin-bottom: 15px;">
 					<h4 class="page-title">결재문서</h4>
 					<div class="ml-auto text-right">
-						<c:if test='${(docu.isSign1 == "0" && docu.empSign1 == loginuser) || (docu.isSign1 == "1" && docu.isSign2 == "0" && docu.empSign2 == loginuser)}'>
-							<button type="button" id="approval" class="btn btn-outline-success">결재하기</button>
+						<c:if test='${docu.signCode !="4" && ((docu.isSign1 == "0" && docu.empSign1 == loginuser) || (docu.isSign1 == "1" && docu.isSign2 == "0" && docu.empSign2 == loginuser))}'>
+							<button type="button" signCode="3" class="btn btn-outline-success approval">결재</button>
+							<button type="button" signCode="4" class="btn btn-outline-danger approval">반려</button>
 						</c:if>
-						<button type="button" id="print" class="btn btn-outline-success">출력하기</button>
+						<c:if test='${docu.signCode=="4"}'>
+							<button type="button" class="btn btn-outline-dark" id="draft">재기안</button>
+						</c:if>
+						<button type="button" id="print" class="btn btn-outline-secondary">출력하기</button>
 					</div>
+				</div>
+				<div class = "col-md-12 d-flex no-block align-items-center" style="margin-bottom: 15px;">
+					<input type="text" class="form-control" id="signComment" placeholder="Comment" value="${docu.signComment}" <c:if test='${docu.signCode =="4" || !((docu.isSign1 == "0" && docu.empSign1 == loginuser) || (docu.isSign1 == "1" && docu.isSign2 == "0" && docu.empSign2 == loginuser))}'>readonly</c:if>>
 				</div>
 			</div>
 		</div>
@@ -87,8 +94,26 @@
 											<tr class="draft" style="height: 40px; vertical-align: middle;">
 												<!-- 빈칸 : 승인도장 -->
 												<td><img src="${pageContext.request.contextPath}/resources/hari/assets/images/stamp_approved.png"></td>
-												<td><c:if test='${docu.isSign1 == "1" }'><img src="${pageContext.request.contextPath}/resources/hari/assets/images/stamp_approved.png"></c:if></td>
-												<td><c:if test='${docu.isSign2 == "1" }'><img src="${pageContext.request.contextPath}/resources/hari/assets/images/stamp_approved.png"></c:if></td>
+												<td>
+													<c:choose>
+														<c:when test='${docu.isSign1 == "1" }'>
+															<img src="${pageContext.request.contextPath}/resources/hari/assets/images/stamp_approved.png">
+														</c:when>
+														<c:when test='${docu.isSign1 == "0" && docu.signCode == "4" }'>
+															반려
+														</c:when>
+													</c:choose>
+												</td>
+												<td>
+													<c:choose>
+														<c:when test='${docu.isSign2 == "1" }'>
+															<img src="${pageContext.request.contextPath}/resources/hari/assets/images/stamp_approved.png">
+														</c:when>
+														<c:when test='${docu.isSign2 == "0" && docu.signCode == "4" }'>
+															반려
+														</c:when>
+													</c:choose>
+												</td>
 											</tr>
 										</table>
 									</div>
@@ -134,7 +159,8 @@
 	
 	<script>		
 		//결재하기
-		$('#approval').click(function(){
+		$('.approval').click(function(){
+
 			let isSign1 = ${docu.isSign1};
 			let empSign1 = ${docu.empSign1};
 			
@@ -144,16 +170,26 @@
 			let signNum = ${docu.signNum};
 
 			let draftEmp = ${docu.draftEmp};
+
+			let	signComment = $('#signComment').val(); //comment 담을 변수
+			
+			let signCode;
+			//반려 클릭 시
+			if($(this).attr('signCode') == "4"){
+				signCode = "4"
+			}
 			
 			$.ajax({
 				url:"${pageContext.request.contextPath}/ajax/approval.hari",
 				type:"post",
-				data :{
-						"isSign1" : isSign1,
-						"empSign1" : empSign1,
-						"isSign2" : isSign2,
-						"empSign2" : empSign2,
-						"signNum" : signNum
+				data : {
+					"isSign1" : isSign1,
+					"empSign1" : empSign1,
+					"isSign2" : isSign2,
+					"empSign2" : empSign2,
+					"signNum" : signNum,
+					"signComment" : signComment,
+					"signCode" : signCode
 				},
 				success: function(resultMap){
 	 				console.log(resultMap);
@@ -189,8 +225,15 @@
 			});//ajax 끝
 		}); //결재하기 끝
 
+		//출력버튼
 		$('#print').click(function(){
 			window.print();
+		});
+
+		//재기안 버튼
+		$('#draft').click(function(){
+			window.opener.location.href ='${pageContext.request.contextPath}/1hariSign/docuDraft.hari?signNum=${docu.signNum}';
+			self.close();
 		});
 	</script>
 </c:forEach>
