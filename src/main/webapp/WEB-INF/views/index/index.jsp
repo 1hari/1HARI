@@ -27,7 +27,13 @@
         let pwck_check = false;
         let email_check = false;
         let isExist = false;
-        
+
+    	$("#password").keydown(function(key) {
+			if (key.keyCode == 13) {
+				login();
+   		}
+	});
+       
       //이메일 유효성검사
       $('#email').keyup(function(){
             if(email_pattern.test($(this).val()) != true){
@@ -136,7 +142,6 @@
 		}
        $('#loginform').submit();
    }
-
 
 
 </script>

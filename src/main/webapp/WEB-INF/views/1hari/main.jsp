@@ -24,66 +24,7 @@ window.chartColors = {
 
 
 $(function(){
-	Chart.defaults.global.tooltips.custom = function(tooltip) {
-		// Tooltip Element
-		var tooltipEl2 = document.getElementById('chartjs-tooltip2');
 
-		// Hide if no tooltip
-		if (tooltip.opacity === 0) {
-			tooltipEl2.style.opacity = 0;
-			return;
-		}
-
-		// Set caret Position
-		tooltipEl2.classList.remove('above', 'below', 'no-transform');
-		if (tooltip.yAlign) {
-			tooltipEl2.classList.add(tooltip.yAlign);
-		} else {
-			tooltipEl2.classList.add('no-transform');
-		}
-
-		function getBody(bodyItem) {
-			return bodyItem.lines;
-		}
-
-		// Set Text
-		if (tooltip.body) {
-			var titleLines = tooltip.title || [];
-			var bodyLines = tooltip.body.map(getBody);
-
-			var innerHtml = '<thead>';
-
-			titleLines.forEach(function(title) {
-				innerHtml += '<tr><th>' + title + '</th></tr>';
-			});
-			innerHtml += '</thead><tbody>';
-
-			bodyLines.forEach(function(body, i) {
-				var colors = tooltip.labelColors[i];
-				var style = 'background:' + colors.backgroundColor;
-				style += '; border-color:' + colors.borderColor;
-				style += '; border-width: 2px';
-				var span = '<span class="chartjs-tooltip-key" style="' + style + '"></span>';
-				innerHtml += '<tr><td>' + span + body + '</td></tr>';
-			});
-			innerHtml += '</tbody>';
-
-			var tableRoot = tooltipEl2.querySelector('table');
-			tableRoot.innerHTML = innerHtml;
-		}
-
-		var positionY = this._chart.canvas.offsetTop;
-		var positionX = this._chart.canvas.offsetLeft;
-
-		// Display, position, and set styles for font
-		tooltipEl2.style.opacity = 1;
-		tooltipEl2.style.left = positionX + tooltip.caretX + 'px';
-		tooltipEl2.style.top = positionY + tooltip.caretY + 'px';
-		tooltipEl2.style.fontFamily = tooltip._bodyFontFamily;
-		tooltipEl2.style.fontSize = tooltip.bodyFontSize;
-		tooltipEl2.style.fontStyle = tooltip._bodyFontStyle;
-		tooltipEl2.style.padding = tooltip.yPadding + 'px ' + tooltip.xPadding + 'px';
-	};
 
 
 
@@ -92,6 +33,67 @@ $(function(){
 		type: "post",
 		dataType: "json",
 		success: function(getTA) {
+			Chart.defaults.global.tooltips.custom = function(tooltip) {
+				// Tooltip Element
+				var tooltipEl2 = document.getElementById('chartjs-tooltip2');
+				// Hide if no tooltip
+				if (tooltip.opacity === 0) {
+					tooltipEl2.style.opacity = 0;
+					return;
+				}
+
+				// Set caret Position
+				tooltipEl2.classList.remove('above', 'below', 'no-transform');
+				if (tooltip.yAlign) {
+					tooltipEl2.classList.add(tooltip.yAlign);
+				} else {
+					tooltipEl2.classList.add('no-transform');
+				}
+
+				function getBody(bodyItem) {
+//		 			console.log(bodyItem.lines);
+					return bodyItem.lines;
+				}
+
+				// Set Text
+				if (tooltip.body) {
+					var titleLines = tooltip.title || [];
+//		 			console.log('titleLines' + titleLines);
+					var bodyLines = tooltip.body.map(getBody);
+//		 			console.log('bodyLines' + bodyLines);
+					var innerHtml = '<thead>';
+
+					titleLines.forEach(function(title) {
+						innerHtml += '<tr><th>' + title + '</th></tr>';
+					});
+					innerHtml += '</thead><tbody>';
+
+					bodyLines.forEach(function(body, i) {
+						var colors = tooltip.labelColors[i];
+						var style = 'background:' + colors.backgroundColor;
+						style += '; border-color:' + colors.borderColor;
+						style += '; border-width: 2px';
+						var span = '<span class="chartjs-tooltip-key" style="' + style + '"></span>';
+						innerHtml += '<tr><td>' + span + body + '</td></tr>';
+					});
+					innerHtml += '</tbody>';
+
+					var tableRoot = tooltipEl2.querySelector('table');
+					tableRoot.innerHTML = innerHtml;
+				}
+
+				var positionY = this._chart.canvas.offsetTop;
+				var positionX = this._chart.canvas.offsetLeft;
+
+				// Display, position, and set styles for font
+				tooltipEl2.style.opacity = 1;
+				tooltipEl2.style.left = positionX + tooltip.caretX + 'px';
+				tooltipEl2.style.top = positionY + tooltip.caretY + 'px';
+				tooltipEl2.style.fontFamily = tooltip._bodyFontFamily;
+				tooltipEl2.style.fontSize = tooltip.bodyFontSize;
+				tooltipEl2.style.fontStyle = tooltip._bodyFontStyle;
+				tooltipEl2.style.padding = tooltip.yPadding + 'px ' + tooltip.xPadding + 'px';
+			};
 			console.log(getTA);
 			var config = {
 				type: 'pie',
@@ -122,6 +124,7 @@ $(function(){
 					},
 					tooltips: {
 						enabled: false,
+						mode: 'index'
 					}
 				}
 			}
@@ -136,7 +139,7 @@ $(function(){
 
 
 
-
+	
 
 
 
@@ -144,8 +147,24 @@ $(function(){
 
 
 	
-	//관리자 차트 부서별 근무시간
-		var MONTHS = ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'];
+	//관리자 차트 부서별 근무시간***********************
+	$.ajax({
+		url: "${pageContext.request.contextPath}/ajax/getAllEmpTA.hari",
+		type: "post",
+		dataType: "json",
+		success: function(getAllEmpTA) {
+			var splitTime2=getTotalTime.split(':');
+			if($.trim(getTotalTime) != "empty" ){
+				$('#getTotalTime').text('');
+				$('#getTotalTime').append(splitTime2[0] + ":"+splitTime2[1]);
+			} else{
+				$('#getTotalTime').text('');
+				$('#getTotalTime').append('00:00');
+			}
+		}
+	});
+	
+	var MONTHS = ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'];
 	var color = Chart.helpers.color;
 	
 	var horizontalBarChartData = {
@@ -177,7 +196,7 @@ $(function(){
 	};
 
 	
-	var ctx = document.getElementById('canvas').getContext('2d');
+	var ctx = document.getElementById('adminCanvas').getContext('2d');
 	window.myHorizontalBar = new Chart(ctx, {
 		type: 'horizontalBar',
 		data: horizontalBarChartData,
@@ -255,6 +274,9 @@ $(function(){
 						title: {
 							display: true,
 							text: 'Chart.js Horizontal Bar Chart'
+						},
+						tooltips:{
+							enabled: false,
 						}
 					}
 				});
@@ -396,23 +418,23 @@ $(function(){
 						<h4 class="card-title m-b-0" style="margin-bottom:0;" >타임라인</h4>
                                         <select class="select2 form-control custom-select select2-hidden-accessible" id="month" style="width: 13%; height:10%; margin-left: 88%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
                                             <option data-select2-id="3">Select</option>
-                                            <option >1월</option>
-											<option >2월</option>
-											<option >3월</option>
-											<option >4월</option>
-											<option >5월</option>
-											<option >6월</option>
-											<option >7월</option>
-											<option >8월</option>
-											<option >9월</option>
-											<option >10월</option>
-											<option >11월</option>
-											<option >12월</option>
+                                            <option value="1">1월</option>
+											<option value="2">2월</option>
+											<option value="3">3월</option>
+											<option value="4">4월</option>
+											<option value="5">5월</option>
+											<option value="6">6월</option>
+											<option value="7">7월</option>
+											<option value="8">8월</option>
+											<option value="9">9월</option>
+											<option value="10">10월</option>
+											<option value="11">11월</option>
+											<option value="12">12월</option>
                                         </select>
 						</div>
 					<div id="container" style="width: 100%; height: 100%; margin-bottom: 40px;">
 
-						<canvas id="canvas"></canvas>
+						<canvas id="adminCanvas"></canvas>
 					</div>
 				</div>
 				<!--타임 라인 끝-->

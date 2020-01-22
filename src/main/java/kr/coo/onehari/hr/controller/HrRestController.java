@@ -419,16 +419,29 @@ public class HrRestController {
 			TAList.add(absent);
 			TAList.add(annual);
 			TAList.add(early);
-//			TAList.add(work+"일");
-//			TAList.add(tardy+"일");
-//			TAList.add(absent+"일");
-//			TAList.add(annual+"일");
-//			TAList.add(early+"일");
-//				System.out.println("TAList: " + TAList.toString());
 			jsonObject.put("TAList", TAList);
 		} catch (Exception e) {
 			log.debug("getTA 예외발생: " + e.getMessage());
 		}
 		return jsonObject.toJSONString();
 	}
+	
+	//형남 0122 이번달 퇴근, 결근 기록 yyyy-mm-dd
+	@RequestMapping(value = "getAllEmpTA.hari", method = RequestMethod.POST)
+	public String getAllEmpTA(Principal pri) {
+		JSONObject jsonObject = new JSONObject();
+		List<String> endList = null;
+		List<String> absentList = null;
+		
+		try {
+			endList = empSercive.getEndList(pri.getName());
+			absentList = empSercive.getAbsentList(pri.getName());
+			jsonObject.put("endList", endList);
+			jsonObject.put("absentList", absentList);
+		} catch (Exception e) {
+			log.debug("getEndList 예외발생: " + e.getMessage());
+		}
+		return jsonObject.toJSONString();
+	}
+	
 }
