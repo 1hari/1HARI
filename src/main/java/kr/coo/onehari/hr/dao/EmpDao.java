@@ -128,5 +128,6 @@ public interface EmpDao {
     //형남 0121 연차 횟수 가져오기(사원 대시보드 차트)
     public Integer getEarly(int empNum) throws ClassNotFoundException, SQLException;
 
-
+    //현재 존재하는 팀 목록 가져오기
+    public List<Integer> getTeamList(int empNum) throws ClassNotFoundException, SQLException;
 }

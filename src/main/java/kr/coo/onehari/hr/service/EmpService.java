@@ -386,7 +386,6 @@ public class EmpService {
         int empNum=Integer.parseInt(empNumStr);
         try {
             work=dao.getWork(empNum);
-            System.out.println(work);
         } catch (ClassNotFoundException | SQLException e) {
             log.debug("getWork : " + e.getMessage());
         }
@@ -400,7 +399,6 @@ public class EmpService {
         int empNum=Integer.parseInt(empNumStr);
         try {
             tardy=dao.getTardy(empNum);
-            System.out.println(tardy);
         } catch (ClassNotFoundException | SQLException e) {
             log.debug("getTardy : " + e.getMessage());
         }
@@ -414,7 +412,6 @@ public class EmpService {
         int empNum=Integer.parseInt(empNumStr);
         try {
             absent=dao.getAbsent(empNum);
-            System.out.println(absent);
         } catch (ClassNotFoundException | SQLException e) {
             log.debug("getAbsent : " + e.getMessage());
         }
@@ -428,7 +425,6 @@ public class EmpService {
         int empNum=Integer.parseInt(empNumStr);
         try {
             annual=dao.getAnnual(empNum);
-            System.out.println(annual);
         } catch (ClassNotFoundException | SQLException e) {
             log.debug("getAnnual : " + e.getMessage());
         }
@@ -447,6 +443,19 @@ public class EmpService {
             log.debug("getEarly : " + e.getMessage());
         }
         return early;
+    }
+    
+    //형남 0119 이번달 결근기록 yyyy-mm-dd
+    public List<Integer> getTeamList(String empNumStr) {
+    	EmpDao dao = sqlsession.getMapper(EmpDao.class);
+    	List<Integer> teamList = null;
+    	int empNum=Integer.parseInt(empNumStr);
+    	try {
+    		teamList=dao.getTeamList(empNum);
+    	} catch (ClassNotFoundException | SQLException e) {
+    		log.debug("getTeamList : " + e.getMessage());
+    	}
+    	return teamList;
     }
 }
 

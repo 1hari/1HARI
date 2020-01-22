@@ -409,11 +409,6 @@ public class HrRestController {
 			int absent= empSercive.getAbsent(pri.getName());
 			int annual= empSercive.getAnnual(pri.getName());
 			int early= empSercive.getEarly(pri.getName());
-			System.out.println(work);
-			System.out.println(tardy);
-			System.out.println(absent);
-			System.out.println(annual);
-			System.out.println(early);
 			TAList.add(work);
 			TAList.add(tardy);
 			TAList.add(absent);
@@ -430,16 +425,16 @@ public class HrRestController {
 	@RequestMapping(value = "getAllEmpTA.hari", method = RequestMethod.POST)
 	public String getAllEmpTA(Principal pri) {
 		JSONObject jsonObject = new JSONObject();
-		List<String> endList = null;
+		List<Integer> teamList = null;
 		List<String> absentList = null;
 		
 		try {
-			endList = empSercive.getEndList(pri.getName());
-			absentList = empSercive.getAbsentList(pri.getName());
-			jsonObject.put("endList", endList);
-			jsonObject.put("absentList", absentList);
+			teamList = empSercive.getTeamList(pri.getName());
+//			absentList = empSercive.getAbsentList(pri.getName());
+//			jsonObject.put("endList", endList);
+//			jsonObject.put("absentList", absentList);
 		} catch (Exception e) {
-			log.debug("getEndList 예외발생: " + e.getMessage());
+			log.debug("getAllEmpTA 예외발생: " + e.getMessage());
 		}
 		return jsonObject.toJSONString();
 	}
