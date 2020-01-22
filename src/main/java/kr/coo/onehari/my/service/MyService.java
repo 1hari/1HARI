@@ -1,14 +1,17 @@
 package kr.coo.onehari.my.service;
 
+import java.security.Principal;
 import java.sql.SQLException;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.web.savedrequest.RequestCache;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.coo.onehari.hr.dto.EmpDto;
 import kr.coo.onehari.hr.dto.Theme;
+import kr.coo.onehari.hr.service.EmpService;
 import kr.coo.onehari.login.dao.LoginDao;
 import kr.coo.onehari.my.dao.MyDao;
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +29,12 @@ public class MyService {
 	
 	@Autowired
 	private SqlSession sqlsession;
+	
+	@Autowired
+	private EmpService empService;
+	
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder; // 비밀번호 암호화
 	
 	//형남 0110 로그인 성공 시 로그인 횟수 초기화
 	public int loginCntInit(String str) {
@@ -144,13 +153,18 @@ public class MyService {
 	}
 
 	// 김진호 2020. 1. 21 개인정보 프로필 수정(변경)
-	public void myInfo(EmpDto empdto) {
+	@Transactional
+	public int updateEmpMyInfo(EmpDto empdto) {
 		MyDao mydao = sqlsession.getMapper(MyDao.class);
+		int result = 0;
+		
 		try {
-			mydao.myInfo(empdto);
+			result = mydao.updateEmpMyInfo(empdto);
+			result = mydao.updateSubempMyInfo(empdto);
 		} catch (ClassNotFoundException | SQLException e) {
 			log.debug("MyService myInfo 예외발생: " + e.getMessage());
 		}
+		return result;
 	}
 	
 	// 김정하 2020. 1. 21 개인설정 변경

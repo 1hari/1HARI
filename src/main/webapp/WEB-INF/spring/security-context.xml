@@ -47,17 +47,17 @@
 	    <property name="defaultFailureUrl" value="/index.hari?error"/>
 	</bean>
 	<bean id="logoutSuccessHandler" class="kr.coo.onehari.login.handler.HariLogoutSuccessHandler"></bean>
-	<bean id="login" class="kr.coo.onehari.login.service.LoginService">
-	</bean>
+	<bean id="login" class="kr.coo.onehari.login.service.LoginService"></bean>
 
 	<security:authentication-manager>
 		<security:authentication-provider>
 			<security:jdbc-user-service data-source-ref="driverManagerDataSource"
-			 users-by-username-query="SELECT EMPNUM as username, password, islock as enabled FROM emp where EMPNUM=?"
-			 authorities-by-username-query="	select e.EMPNUM, r.ROLENAME    
- 													           from EMP e join EMPROLELIST r  
-													           on e.EMPNUM = r.EMPNUM
-													           where e.EMPNUM=?"/>  
+										users-by-username-query="SELECT EMPNUM as username, password, islock as enabled FROM emp where EMPNUM=?"
+										authorities-by-username-query="select e.EMPNUM, r.ROLENAME
+							 											from EMP e join EMPROLELIST r
+																		on e.EMPNUM = r.EMPNUM
+																		where e.EMPNUM=?" />
+			<security:password-encoder ref="bCryptPasswordEncoder" />
 		</security:authentication-provider>
 	</security:authentication-manager>
 </beans>

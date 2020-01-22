@@ -37,7 +37,6 @@ public class EmpService {
 			emplist = empdao.empList();
 		} catch (Exception e) {
 			log.debug("EmpService empList 예외발생: " + e.getMessage());
-			System.out.println("EmpService emplist 예외발생: " + e.getMessage());
 		}
 		return emplist;
 	}
@@ -49,16 +48,14 @@ public class EmpService {
 		EmpDao empdao = sqlsession.getMapper(EmpDao.class);
 		
 		try {
-//			empdto.setPassword(this.bCryptPasswordEncoder.encode(empdto.getPassword())); // 비밀번호 암호화
-			empdto.setPassword("1004");
+			empdto.setPassword(bCryptPasswordEncoder.encode(empdto.getBirth())); // 비밀번호 암호화
+//			empdto.setPassword("1004");
 			result = empdao.empJoin(empdto);
 			result = empdao.subempJoin(empdto);
 		} catch (Exception e) {
-			System.out.println("EmpService empJoin 예외발생: " + e.getMessage());
 			log.debug("EmpService empJoin 예외발생: " + e.getMessage());
 			throw e;
 		}
-		System.out.println("empJoin result: " + result);
 		return result;
 	}
 	
@@ -70,7 +67,6 @@ public class EmpService {
 		try {
 			emp = empdao.empModify(empNum);
 		} catch (Exception e) {
-			System.out.println("EmpService empModify 예외발생: " + e.getMessage());
 			log.debug("EmpService empModify 예외발생: " + e.getMessage());
 		}
 		return emp;
@@ -99,7 +95,6 @@ public class EmpService {
 				empdao.insertRoleaAdmin(empdto);
 			}
 		} catch (Exception e) {
-			System.out.println("EmpService empUpdate 예외발생: " + e.getMessage());
 			log.debug("EmpService empUpdate 예외발생: " + e.getMessage());
 			throw e;
 		}

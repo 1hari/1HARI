@@ -60,21 +60,21 @@
 											<input type="text" id="birth" name="birth" class="form-control" value="${emp.birth}" readonly>
 										</div>
 										<div class="form-group">
-											<label for="phoneNum">핸드폰번호</label>
-											<span id="phoneNumCheck" style="color: red;"></span>
-											<input type="text" id="phoneNum" name="phoneNum" class="form-control" value="${emp.phoneNum}" placeholder="(-) 없이 숫자만 입력하세요." maxlength="13" required>
-										</div>
-										<div class="form-group">
-											<label for="email">이메일</label>
-											<span id="emailCheck" style="color: red;"></span>
-											<input id="email" name="email" type="text" class="form-control" value="${emp.email}" required>
-										</div>
-									</div>
-									<div class="col-sm-6">
-										<div class="form-group">
 											<label for="hireDate">입사일</label>
 											<input type="text" id="hireDate" name="hireDate" class="form-control" value="${emp.hireDate}" readonly>
 										</div>
+										<div class="form-group">
+											<label for="empNum">비밀번호</label>
+											<span id="pwdCheck" style="color: red;"></span>
+											<input type="password" id="password" name="password" class="form-control" required="required">
+										</div>
+										<div class="form-group">
+											<label for="birth">비밀번호 확인</label>
+											<span id="pwdReCheck" style="color: red;"></span>
+											<input type="password" id="passwordCheck" class="form-control" required="required">
+										</div>
+									</div>
+									<div class="col-sm-6">
 										<div class="form-group">
 											<label for="teamCode">소속</label>
 											<input type="text" class="form-control" value="${emp.teamName}" readonly>
@@ -90,6 +90,16 @@
 										<div class="form-group">
 											<label for="employmentCode">재직구분</label>
 											<input type="text" class="form-control" value="${emp.employmentName}" readonly>
+										</div>
+										<div class="form-group">
+											<label for="phoneNum">핸드폰번호</label>
+											<span id="phoneNumCheck" style="color: red;"></span>
+											<input type="text" id="phoneNum" name="phoneNum" class="form-control" value="${emp.phoneNum}" placeholder="(-) 없이 숫자만 입력하세요." maxlength="13" required>
+										</div>
+										<div class="form-group">
+											<label for="email">이메일</label>
+											<span id="emailCheck" style="color: red;"></span>
+											<input id="email" name="email" type="text" class="form-control" value="${emp.email}" required>
 										</div>
 									</div>									
 								</div>
@@ -128,11 +138,35 @@
 
 <script type="text/javascript">
 	$(function() {
-		/* 핸드폰번호 입력 유효성 검사 */
-		var phoneReg = /^01[016789]-\d{3,4}-\d{4}$/; // 핸드폰번호 정규표현식
-		var emailPattern = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-        //0부터9a부터zA부터Z까지 (-, _, . 가 있어도 되고 없어도 되고, 0부터9a부터zA부터Z까지)반복횟수 상관없이가능
-        //@기호포함  (-, _, . 가 있어도 되고 없어도 되고, 0부터9a부터zA부터Z까지)반복횟수 상관없이가능 .기호포함 2자~3자 이내 대소문자 구분안함
+		let pwdReg = /^[A-Za-z0-9]{4,16}$/; // 4~16자리의 영문+숫자 조합의 비밀번호 정규표현식
+		let phoneReg = /^01[016789]-\d{3,4}-\d{4}$/; // 핸드폰번호 정규표현식
+		let emailPattern = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+		//0부터9a부터zA부터Z까지 (-, _, . 가 있어도 되고 없어도 되고, 0부터9a부터zA부터Z까지)반복횟수 상관없이가능
+		//@기호포함  (-, _, . 가 있어도 되고 없어도 되고, 0부터9a부터zA부터Z까지)반복횟수 상관없이가능 .기호포함 2자~3자 이내 대소문자 구분안함
+
+		let pwdValidation = true;
+
+		// 비밀번호 입력 유효성 검사
+		$('#password').keyup(function() {
+			if (!pwdReg.test($('#password').val())) {
+				$('#pwdCheck').text("4~16자리의 영문 + 숫자 조합의 비밀번호를 입력해주세요.");
+				pwdValidation = false;
+			} else {
+				$('#pwdCheck').text("");
+				pwdValidation = true;
+			}
+		})
+		
+		// 비밀번호 확인 입력 유효성 검사
+		$('#passwordCheck').keyup(function() {
+			if ($('#password').val() != $('#passwordCheck').val()) {
+				$('#pwdReCheck').text("비밀번호가 일치하지 않습니다.");
+				pwdValidation = false;
+			} else {
+				$('#pwdReCheck').text("비밀번호가 확인되었습니다.");
+				pwdValidation = true;
+			}
+		})
         
 		/* 핸드폰번호 입력 시 자동 (-) 삽입  */
 		$('#phoneNum').keyup(function() {
@@ -178,7 +212,7 @@
 
 		//전송
 		$('#submitButton').click(function() {
-			if (phoneReg.test($('#phoneNum').val()) != false && emailPattern.test($('#email').val()) != false) {
+			if (phoneReg.test($('#phoneNum').val()) != false && emailPattern.test($('#email').val()) != false && pwdValidation != false) {
 				$('#example-form').submit();
 			} else {
 				swal({
@@ -186,7 +220,7 @@
 					icon: "warning",
 					button: "닫기"
 				}).then((value) => {
-					window.location.reload();
+					$('#phoneNum').focus();
 				});
 			}
 		});//이벤트 끝

@@ -12,6 +12,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +31,9 @@ public class HomeController {
 	
 	@Autowired
 	private MyService myService;
+	
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	@RequestMapping("/index.hari")
 	public String index() {
@@ -142,6 +146,7 @@ public class HomeController {
 	@RequestMapping("/updatePassword.hari")
 	public String updatePassword(@RequestParam("empNum") String empNum, @RequestParam("newPassword") String password) {
 		try {
+			password = bCryptPasswordEncoder.encode(password);
 			myService.updatePassword(empNum, password);
 		} catch (Exception e) {
 			System.out.println("updatePassword 예외발생: " + e.getMessage());

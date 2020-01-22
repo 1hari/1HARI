@@ -3,6 +3,7 @@ package kr.coo.onehari.hr.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -66,8 +67,6 @@ public class HrController {
 			e.printStackTrace();
 		}
 		
-//		empdto.setEmail(empdto.getEmail()+"@gmail.com"); // 이메일 형식붙여서 DB에 넣을 때
-		
 		if (result > 0) {
 			view = "redirect:empList.hari";
 			model.addAttribute("empdto", empdto);
@@ -87,7 +86,6 @@ public class HrController {
 			emp = empservice.empModify(empNum);
 			model.addAttribute("emp", emp);
 		} catch (Exception e) {
-			System.out.println("HrController empModify 예외발생: " + e.getMessage());
 			log.debug("HrController empModify 예외발생: " + e.getMessage());
 		}
 		return "1hariHr.empModify";
@@ -100,7 +98,6 @@ public class HrController {
 		try {
 			empservice.empUpdate(emp);
 		} catch (Exception e) {
-			System.out.println("HrController empUpdate 예외발생: " + e.getMessage());
 			log.debug("HrController empUpdate 예외발생: " + e.getMessage());
 		}
 		return "redirect:empList.hari";
