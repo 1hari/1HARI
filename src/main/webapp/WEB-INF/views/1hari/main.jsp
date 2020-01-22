@@ -26,20 +26,20 @@ window.chartColors = {
 $(function(){
 	Chart.defaults.global.tooltips.custom = function(tooltip) {
 		// Tooltip Element
-		var tooltipEl = document.getElementById('chartjs-tooltip');
+		var tooltipEl2 = document.getElementById('chartjs-tooltip2');
 
 		// Hide if no tooltip
 		if (tooltip.opacity === 0) {
-			tooltipEl.style.opacity = 0;
+			tooltipEl2.style.opacity = 0;
 			return;
 		}
 
 		// Set caret Position
-		tooltipEl.classList.remove('above', 'below', 'no-transform');
+		tooltipEl2.classList.remove('above', 'below', 'no-transform');
 		if (tooltip.yAlign) {
-			tooltipEl.classList.add(tooltip.yAlign);
+			tooltipEl2.classList.add(tooltip.yAlign);
 		} else {
-			tooltipEl.classList.add('no-transform');
+			tooltipEl2.classList.add('no-transform');
 		}
 
 		function getBody(bodyItem) {
@@ -68,7 +68,7 @@ $(function(){
 			});
 			innerHtml += '</tbody>';
 
-			var tableRoot = tooltipEl.querySelector('table');
+			var tableRoot = tooltipEl2.querySelector('table');
 			tableRoot.innerHTML = innerHtml;
 		}
 
@@ -76,13 +76,13 @@ $(function(){
 		var positionX = this._chart.canvas.offsetLeft;
 
 		// Display, position, and set styles for font
-		tooltipEl.style.opacity = 1;
-		tooltipEl.style.left = positionX + tooltip.caretX + 'px';
-		tooltipEl.style.top = positionY + tooltip.caretY + 'px';
-		tooltipEl.style.fontFamily = tooltip._bodyFontFamily;
-		tooltipEl.style.fontSize = tooltip.bodyFontSize;
-		tooltipEl.style.fontStyle = tooltip._bodyFontStyle;
-		tooltipEl.style.padding = tooltip.yPadding + 'px ' + tooltip.xPadding + 'px';
+		tooltipEl2.style.opacity = 1;
+		tooltipEl2.style.left = positionX + tooltip.caretX + 'px';
+		tooltipEl2.style.top = positionY + tooltip.caretY + 'px';
+		tooltipEl2.style.fontFamily = tooltip._bodyFontFamily;
+		tooltipEl2.style.fontSize = tooltip.bodyFontSize;
+		tooltipEl2.style.fontStyle = tooltip._bodyFontStyle;
+		tooltipEl2.style.padding = tooltip.yPadding + 'px ' + tooltip.xPadding + 'px';
 	};
 
 
@@ -129,6 +129,137 @@ $(function(){
 			window.myPie = new Chart(ctx, config);
 		}
 	});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	//관리자 차트 부서별 근무시간
+		var MONTHS = ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'];
+	var color = Chart.helpers.color;
+	
+	var horizontalBarChartData = {
+		labels: MONTHS,
+		datasets: [{
+			label: 'Dataset 1',
+			backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
+			borderColor: window.chartColors.red,
+			borderWidth: 1,
+			data: [
+				101,
+			]
+		}, {
+			label: 'Dataset 2',
+			backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
+			borderColor: window.chartColors.blue,
+			data: [
+				13,
+			]
+		}, {
+			label: 'Dataset 3',
+			backgroundColor: color(window.chartColors.yellow).alpha(0.5).rgbString(),
+			borderColor: window.chartColors.yellow,
+			data: [
+				55,
+			]
+		}]
+
+	};
+
+	
+	var ctx = document.getElementById('canvas').getContext('2d');
+	window.myHorizontalBar = new Chart(ctx, {
+		type: 'horizontalBar',
+		data: horizontalBarChartData,
+		options: {
+			// Elements options apply to all of the options unless overridden in a dataset
+			// In this case, we are setting the border of each horizontal bar to be 2px wide
+			elements: {
+				rectangle: {
+					borderWidth: 2,
+				}
+			},
+			responsive: true,
+			legend: {
+				position: 'right',
+			},
+			title: {
+				display: true,
+				text: 'Chart.js Horizontal Bar Chart'
+			}
+		}
+	});
+	
+	$('#month').change(function(){
+	      if (window.myHorizontalBar) {
+				MONTHS=[];
+				MONTHS.push($('#month').val());
+// 				window.myHorizontalBar.update();
+				window.myHorizontalBar.destroy();
+				
+				var color = Chart.helpers.color;
+				
+				var horizontalBarChartData = {
+					labels: MONTHS,
+					datasets: [{
+						label: 'Dataset 1',
+						backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
+						borderColor: window.chartColors.red,
+						borderWidth: 1,
+						data: [
+							101,
+						]
+					}, {
+						label: 'Dataset 2',
+						backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
+						borderColor: window.chartColors.blue,
+						data: [
+							13,
+						]
+					}, {
+						label: 'Dataset 3',
+						backgroundColor: color(window.chartColors.yellow).alpha(0.5).rgbString(),
+						borderColor: window.chartColors.yellow,
+						data: [
+							55,
+						]
+					}]
+
+				};
+				
+				window.myHorizontalBar = new Chart(ctx, {
+					type: 'horizontalBar',
+					data: horizontalBarChartData,
+					options: {
+						// Elements options apply to all of the options unless overridden in a dataset
+						// In this case, we are setting the border of each horizontal bar to be 2px wide
+						elements: {
+							rectangle: {
+								borderWidth: 2,
+							}
+						},
+						responsive: true,
+						legend: {
+							position: 'right',
+						},
+						title: {
+							display: true,
+							text: 'Chart.js Horizontal Bar Chart'
+						}
+					}
+				});
+	        } 
+	})
 });
 </script>
 
@@ -138,7 +269,7 @@ $(function(){
 			margin-top: 50px;
 			text-align: center;
 		}
-		#chartjs-tooltip {
+		#chartjs-tooltip2 {
 			opacity: 1;
 			position: absolute;
 			background: rgba(0, 0, 0, .7);
@@ -157,6 +288,11 @@ $(function(){
 			height: 10px;
 			margin-right: 10px;
 		}
+	canvas {
+		-moz-user-select: none;
+		-webkit-user-select: none;
+		-ms-user-select: none;
+	}
 	</style>
 <style type="text/css">/* Chart.js */
 @keyframes chartjs-render-animation{from{opacity:.99}to{opacity:1}}.chartjs-render-monitor{animation:chartjs-render-animation 1ms}.chartjs-size-monitor,.chartjs-size-monitor-expand,.chartjs-size-monitor-shrink{position:absolute;direction:ltr;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1}.chartjs-size-monitor-expand>div{position:absolute;width:1000000px;height:1000000px;left:0;top:0}.chartjs-size-monitor-shrink>div{position:absolute;width:200%;height:200%;left:0;top:0}</style></head>
@@ -237,7 +373,7 @@ $(function(){
 							</div>
 						</div>
 						<canvas id="chart-area" width="300" height="300" style="display: block; margin-left: 50%;" class="chartjs-render-monitor"></canvas>
-						<div id="chartjs-tooltip" class="center" style="opacity: 0; left: 228.854px; top: 223.022px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-style: normal; padding: 6px; font-size: 12px;">
+						<div id="chartjs-tooltip2" class="center" style="opacity: 0; left: 228.854px; top: 223.022px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-style: normal; padding: 6px; font-size: 12px;">
 							<table>
 								<thead>
 								</thead>
@@ -256,49 +392,30 @@ $(function(){
 				</div>
 				<!--time line 시작 -->
 				<div class="card">
-					<div class="card-body">
-						<h4 class="card-title m-b-0">타임라인</h4>
-					</div>
-					
-					<div class="comment-widgets scrollable">
-						<!-- Comment Row -->
-						<div class="d-flex flex-row comment-row m-t-0">
-							<div class="p-2">
-								<img src="resources/hari/assets/images/users/1.jpg" alt="user" width="50" class="rounded-circle">
-							</div>
-							<div class="comment-text w-100">
-								<h6 class="font-medium">James Anderson</h6>
-								<span class="m-b-15 d-block">Lorem Ipsum is simply dummy text of the printing and type setting industry. </span>
-								<div class="comment-footer">
-									<span class="text-muted float-right">April 14, 2016</span>
-									<button type="button" class="btn btn-cyan btn-sm">Edit</button>
-									<button type="button" class="btn btn-success btn-sm">Publish</button>
-									<button type="button" class="btn btn-danger btn-sm">Delete</button>
-								</div>
-							</div>
+					<div class="card-body" style="padding-bottom: 0">
+						<h4 class="card-title m-b-0" style="margin-bottom:0;" >타임라인</h4>
+                                        <select class="select2 form-control custom-select select2-hidden-accessible" id="month" style="width: 13%; height:10%; margin-left: 88%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                            <option data-select2-id="3">Select</option>
+                                            <option >1월</option>
+											<option >2월</option>
+											<option >3월</option>
+											<option >4월</option>
+											<option >5월</option>
+											<option >6월</option>
+											<option >7월</option>
+											<option >8월</option>
+											<option >9월</option>
+											<option >10월</option>
+											<option >11월</option>
+											<option >12월</option>
+                                        </select>
 						</div>
+					<div id="container" style="width: 100%; height: 100%; margin-bottom: 40px;">
 
-						<!-- Comment Row -->
-						<div class="d-flex flex-row comment-row">
-							<div class="p-2">
-								<img src="resources/hari/assets/images/users/3.jpg" alt="user" width="50" class="rounded-circle">
-							</div>
-							<div class="comment-text w-100">
-								<h6 class="font-medium">Johnathan Doeting</h6>
-								<span class="m-b-15 d-block">Lorem Ipsum is simply dummy text of the printing and type setting industry. </span>
-								<div class="comment-footer">
-									<span class="text-muted float-right">August 1, 2016</span>
-									<button type="button" class="btn btn-cyan btn-sm">Edit</button>
-									<button type="button" class="btn btn-success btn-sm">Publish</button>
-									<button type="button" class="btn btn-danger btn-sm">Delete</button>
-								</div>
-							</div>
-						</div>
-
+						<canvas id="canvas"></canvas>
 					</div>
 				</div>
 				<!--타임 라인 끝-->
-
 			</div>
 			<!--col-md-6 컨텐츠 컨테이너 내에서 왼쪽 부분 (공지사항 + 타임라인 합친 부분) 끝 -->
 
