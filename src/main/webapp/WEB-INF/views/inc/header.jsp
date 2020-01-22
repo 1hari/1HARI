@@ -152,47 +152,6 @@ $(function(){
 			clearInterval(timeCheck);
 		}
 	},1000);
-<<<<<<< HEAD
-=======
-
-	//테마 색 바꾸기 ** 함수위치 고정!! 바꾸면 안됨**
-    $('.demo').each(function() {
-        $(this).minicolors({
-                control: $(this).attr('data-control') || 'hue',
-                change: function(value, opacity) {
-                    if (!value) return;
-                    if (opacity) value += ', ' + opacity;
-                    if (typeof console === 'object') {
-                        //console.log(value);
-						var itemArray5=document.querySelectorAll('#theme');
-    					$.ajax({
-    			    		url: "${pageContext.request.contextPath}/ajax/setThemeColor.hari",
-    			    		type: "post",
-    			    		data: {"color": value},
-    			    		dataType: "text",
-    			    		success: function(setThemeColor) {
-    			    			if(setThemeColor >0){
-    			    		 		$.ajax({
-	    			    	 			url: "${pageContext.request.contextPath}/ajax/getThemeColor.hari",
-	    			    	 			type: "post",
-	    			    	 			dataType: "text",
-	    			    	 			success: function(getThemeColor) {
-	    			    	 				for(var i=0;i<itemArray5.length;i++){
-	    	 			    					$(itemArray5[i]).css('background', getThemeColor);
-	    	 			    					$('#navbarSupportedContent').css('background', getThemeColor);
-	    	 			    					$('#sidebarnav').css('background', getThemeColor);
-											}
- 			    	 					}
-    			    	 			});
-        		        		}
-							}
-						});
-                    }
-                },
-			theme: 'bootstrap'
-         });
-	});
->>>>>>> branch 'master' of https://github.com/1hari/1HARI.git
 	
 	//총 근무일
 	$.ajax({
