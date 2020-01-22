@@ -24,7 +24,7 @@ public class SignWebSocketHandler extends TextWebSocketHandler{
 		SimpleDateFormat simple = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String date = simple.format(new Date());
 		log.info(date + " : " + msg);
-		System.out.println(date + " : " + msg);
+		//System.out.println(date + " : " + msg);
 	}
 	
 	//연결
@@ -50,6 +50,7 @@ public class SignWebSocketHandler extends TextWebSocketHandler{
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception{
 		String draftEmp = message.getPayload().split(",")[0];
 		String empSign1 = message.getPayload().split(",")[1];
+		String signCode = message.getPayload().split(",")[2];
 				
 		if(loginUsers.containsKey(empSign1)) {
 			TextMessage msg = new TextMessage("결재할 문서가 도착했습니다.");
@@ -58,7 +59,17 @@ public class SignWebSocketHandler extends TextWebSocketHandler{
 		}
 		
 		if(loginUsers.containsKey(draftEmp)) {
-			TextMessage msg = new TextMessage("문서가 결재되었습니다.");
+			TextMessage msg = null;
+			if(signCode.equals("2")) {
+				msg = new TextMessage("기안하신 문서가 1차결재되었습니다.");
+				
+			}else if(signCode.equals("3")) {
+				msg = new TextMessage("기안하신 문서가 승인되었습니다.");
+				
+			}else if(signCode.equals("4")) {
+				msg = new TextMessage("기안하신 문서가 반려되었습니다.");
+			}
+			
 			loginUsers.get(draftEmp).sendMessage(msg);
 			log("기안자 : "+draftEmp + " / 결재자 : " + empSign1);
 		}

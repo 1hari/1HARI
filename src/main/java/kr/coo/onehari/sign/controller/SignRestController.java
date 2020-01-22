@@ -40,7 +40,7 @@ public class SignRestController {
 		HashMap<String, String> map = new HashMap<String, String>();
 		String loginUser = principal.getName();
 		
-		System.out.println(signNum);
+		//System.out.println(signNum);
 		
 		int offset = Integer.parseInt(cp);
 		
@@ -106,11 +106,10 @@ public class SignRestController {
 			int result = 0;
 			
 			HashMap<String, String> map = new HashMap<String, String>();
-			
-			if(!signCode.equals("4")) {
+			System.out.println(signCode);
+			if(signCode == null || signCode == "" || !signCode.equals("4")) {
 				map.put("isSign1", isSign1);
 				map.put("isSign2", isSign2);
-				map.put("signCode", "3");
 			}
 			
 			map.put("signNum", signNum);
@@ -134,5 +133,50 @@ public class SignRestController {
 		
 		return resultMap;
 	}
-
+	//관리자 전자결제 문서함 리스트 김정하 / 2020. 1. 22~
+	@RequestMapping("selectSignAdmin.hari")
+	public List<SignDto> selectSignAdmin(String signDate, String signNum, String signTitle, String draftEmp, String searchKey, String code, String cp, String pg){
+		HashMap<String, String> map = new HashMap<String, String>();
+						
+		int offset = Integer.parseInt(cp);
+			
+		if(offset == 1) {
+			offset = 0;
+		}else {
+			offset = (offset-1)*Integer.parseInt(pg);
+		}
+				
+		map.put("pg", pg); //page 에 보여줄 갯수
+		map.put("cp", Integer.toString(offset)); //보여줄 페이지
+		map.put("code", code); //결재분류 : 0.전체 / 1.기안 / 2.완료 / 3.반려
+		
+		map.put("signDate", signDate);
+		map.put("signNum", signNum);
+		map.put("signTitle", signTitle);
+		map.put("draftEmp", draftEmp);
+		map.put("searchKey", searchKey);
+		
+		List<SignDto> signList = signService.selectSignAdminList(map);
+			
+		return signList;
+	}
+		
+	//관리자 전자결재 문서함 페이징 김정하 / 2020. 1. 15
+	@RequestMapping("signAdminPage.hari")
+	public int signAdminPage(String signDate, String signNum, String signTitle, String draftEmp, String searchKey, String code) {
+		HashMap<String, String> map = new HashMap<String, String>();
+			
+		//System.out.println(code);
+		
+		map.put("code", code); //결재분류 : 0.전체 / 1.기안 / 2.완료 / 3.반려
+			
+		map.put("signDate", signDate);
+		map.put("signNum", signNum);
+		map.put("signTitle", signTitle);
+		map.put("draftEmp", draftEmp);
+		map.put("searchKey", searchKey);
+			
+		int count = signService.signAdminPage(map);
+		return count;
+	}
 }

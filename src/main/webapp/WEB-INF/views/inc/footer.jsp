@@ -60,8 +60,8 @@
 	}
 	
 	//websocket에 메시지 전달(기안시, 결재시 호출할 함수)
-	function send(draftEmp,empSign) {
-		wsocket.send(draftEmp + "," + empSign);
+	function send(draftEmp,empSign,signCode) {
+		wsocket.send(draftEmp + "," + empSign + "," + signCode);
 	}
 
 	//websocket에서 전송된 메시지 뿌려주는 함수
@@ -70,7 +70,7 @@
  		//signNotify(msg);
 	}
 
-	//notifications
+	//notifications : http 적용불가
     function signNotify(msg) {
         //알림 권한이 없으면 경고창
         if (Notification.permission !== 'granted') {

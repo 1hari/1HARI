@@ -186,6 +186,14 @@
 								<span class="hide-menu">내 문서함</span>
 							</a>
 						</li>
+						<se:authorize access="hasAnyRole('ROLE_ADMIN')">
+							<li class="sidebar-item">
+								<a href="${pageContext.request.contextPath}/1hariSign/admin/adminDocu.hari" class="sidebar-link">
+									<i class="mdi mdi-note-plus"></i>
+									<span class="hide-menu">전체 문서함</span>
+								</a>
+							</li>
+						</se:authorize>
 						
 					</ul>
 				</li>

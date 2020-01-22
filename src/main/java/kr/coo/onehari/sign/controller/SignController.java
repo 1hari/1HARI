@@ -178,6 +178,13 @@ public class SignController {
 	public String myDocu() {
 		return "1hariSign.myDocu";
 	}
+	
+	//전체 문서함 화면 김정하 / 2020. 1. 22~
+	@RequestMapping("admin/adminDocu.hari")
+	public String adminDocu() {
+		return "1hariSign.adminDocu";
+	}
+	
 
 	//전자결재 문서보기 김정하 / 2020. 1. 15~
 	@RequestMapping("signDocuView.hari")

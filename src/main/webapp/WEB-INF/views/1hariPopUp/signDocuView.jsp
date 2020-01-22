@@ -173,12 +173,8 @@
 
 			let	signComment = $('#signComment').val(); //comment 담을 변수
 			
-			let signCode;
-			//반려 클릭 시
-			if($(this).attr('signCode') == "4"){
-				signCode = "4"
-			}
-			
+			let signCode = $(this).attr('signCode');
+						
 			$.ajax({
 				url:"${pageContext.request.contextPath}/ajax/approval.hari",
 				type:"post",
@@ -207,7 +203,7 @@
 	 						icon: icon,
 	 						button: "닫기"
 	 					}).then((value) => {
-	 						window.opener.send(draftEmp,empSign2);
+	 						window.opener.send(draftEmp,empSign2,signCode);
 	 						window.location.reload();
 	 						window.opener.reload();			
 		 				})

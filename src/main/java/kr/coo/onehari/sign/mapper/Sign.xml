@@ -175,4 +175,110 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 WHERE SIGNNUM = #{signNum}
 	</update>
 	
+	<!-- 관리자 전자결제 문서함 페이징 다이나믹쿼리 김정하 / 2020. 1 15 -->
+	<select id="signAdminPage" parameterType="hashmap" resultType="int">
+		SELECT COUNT(SIGNNUM) FROM sign
+		<where>
+			<!-- 검색구분 -->
+			<if test='signDate == "true"'>
+				OR SIGNDATE like concat('%',#{searchKey},'%') 
+			</if>
+			<if test='signNum == "true"'>
+				OR SIGNNUM like concat('%',#{searchKey},'%')
+			</if>
+			<if test='signTitle == "true"'>
+				OR SIGNTITLE like concat('%',#{searchKey},'%')
+			</if>		
+			<if test='draftEmp == "true"'>
+				OR DRAFTEMP like concat('%',#{searchKey},'%')
+			</if>
+			
+			<choose>
+				<!-- 진행중 문서 : 결재코드 (1(기안) OR 2(진행)) -->
+				<when test="code.equalsIgnoreCase('1')">
+					AND (SIGNCODE IN(1,2))
+				</when>
+				<!-- 완료문서 : 결재코드 3(승인) -->
+				<when test='code == "2"'>
+					AND (SIGNCODE = 3)
+				</when>
+				<!-- 반려문서 : 결재코드 4(반려)-->
+				<when test='code == "3"'>
+					AND (SIGNCODE = 4)
+				</when>
+			</choose>
+		</where>
+	</select>
+	
+	<!-- 관리자 전자결재 리스트 다이나믹 쿼리 김정하 / 2020. 1.22 -->
+	<select id="selectSignAdminList" parameterType="hashmap" resultType="kr.coo.onehari.sign.dto.SignDto">
+		<!-- 문서번호, 문서양식명, 결재구분코드, 결재구분명 , 제목,  작성일 -->
+		SELECT s.SIGNNUM,f.SIGNFORMFORMNAME, s.SIGNCODE, t.SIGNNAME, s.SIGNTITLE, s.SIGNDATE,
+				
+				<!-- 기안자,결재자1, 결재자2 -->
+				s.DRAFTEMP, e.EMPNAME AS draftEmpName, r.RANKNAME AS draftEmpRankName, te.TEAMNAME AS draftEmpTeamName,
+				s.EMPSIGN1, e2.EMPNAME AS empSign1Name, r2.RANKNAME AS empSign1RankName,
+				s.EMPSIGN2, e3.EMPNAME AS empSign2Name, r3.RANKNAME AS empSign2RankName,
+			
+				<!-- 내용, 첨부파일명, 경로, 결재여부1, 결재여부2, 코멘트 -->
+				s.SIGNCONTENT, s.SIGNFILENAME, s.SIGNFILEROOT, s.ISSIGN1, s.ISSIGN2, s.SIGNCOMMENT
+		FROM sign s JOIN signform f <!-- 양식 테이블 -->
+						ON s.SIGNFORMCODE = f.SIGNFORMCODE
+					JOIN signtype t <!-- 결재코드 테이블 -->
+						ON s.SIGNCODE = t.SIGNCODE
+					JOIN emp e <!-- 기안자 사원 테이블 -->
+						ON s.DRAFTEMP = e.EMPNUM
+					JOIN emp e2 <!-- 결재자1 사원 테이블 -->
+						ON s.EMPSIGN1 = e2.EMPNUM
+					JOIN emp e3 <!-- 결재자2 사원 테이블 -->
+						ON s.EMPSIGN2 = e3.EMPNUM
+					JOIN ranks r <!-- 기안자 직급 테이블 -->
+						ON e.RANKCODE = r.RANKCODE
+					JOIN ranks r2 <!--  결재자1 직급 테이블 -->
+						ON e2.RANKCODE = r2.RANKCODE
+					JOIN ranks r3 <!-- 결재자2 직급 테이블 -->
+						ON e3.RANKCODE = r3.RANKCODE
+					JOIN team te <!-- 기안자 부서 테이블 -->
+						ON e.TEAMCODE = te.TEAMCODE
+		<where>
+			<!-- 검색구분 -->
+			<if test='signDate == "true"'>
+				OR s.SIGNDATE like concat('%',#{searchKey},'%') 
+			</if>
+			<if test='signNum == "true"'>
+				OR s.SIGNNUM like concat('%',#{searchKey},'%')
+			</if>
+			<if test='signTitle == "true"'>
+				OR s.SIGNTITLE like concat('%',#{searchKey},'%')
+			</if>		
+			<if test='draftEmp == "true"'>
+				OR s.DRAFTEMP like concat('%',#{searchKey},'%')
+			</if>
+		
+			<choose>
+				<!-- 문서구분 -->
+				<!-- 진행중 문서 : 결재코드 (1(기안) OR 2(진행)) -->
+				<when test="code.equalsIgnoreCase('1')"> 
+					AND (s.SIGNCODE IN(1,2))
+				</when>
+				
+				<!-- 완료문서 : 결재코드 3(승인) -->
+				<when test='code == "2"'> 
+					AND (s.SIGNCODE = 3)
+				</when>
+				
+				<!-- 반려문서 : 결재코드 4(반려) -->
+				<when test='code == "3"'> 
+					AND (s.SIGNCODE = 4)
+				</when>
+			</choose>
+		</where>
+
+		ORDER BY s.SIGNDATE DESC
+		LIMIT ${pg}
+		<if test="cp != '0'">
+			OFFSET ${cp}
+		</if>
+	</select>
+	
 </mapper>
