@@ -223,6 +223,23 @@
 		SELECT DATE_FORMAT(TADATE,"%Y-%m-%d") FROM TALIST WHERE MONTH(TADATE) = MONTH(NOW()) AND TACODE=6 AND EMPNUM=#{empNum}
     </select>
 
+	
+	    <!-- 사원 색 가져오기 출근, 지각, 결근 연차, 조퇴-->
+    <select id="getWork" resultType="Integer">
+       SELECT COUNT(TADATE) FROM TALIST WHERE TACODE=1 AND MONTH(TADATE) = MONTH(NOW()) AND EMPNUM=#{empNum}
+    </select>
+    <select id="getTardy" resultType="Integer">
+       SELECT COUNT(TADATE) FROM TALIST WHERE TACODE=3 AND MONTH(TADATE) = MONTH(NOW()) AND EMPNUM=#{empNum}
+    </select>
+    <select id="getAbsent" resultType="Integer">
+       SELECT COUNT(TADATE) FROM TALIST WHERE TACODE=6 AND MONTH(TADATE) = MONTH(NOW()) AND EMPNUM=#{empNum}
+    </select>
+    <select id="getAnnual" resultType="Integer">
+       SELECT COUNT(TADATE) FROM TALIST WHERE TACODE=4 AND MONTH(TADATE) = MONTH(NOW()) AND EMPNUM=#{empNum}
+    </select>
+    <select id="getEarly" resultType="Integer">
+       SELECT COUNT(TADATE) FROM TALIST WHERE TACODE=5 AND MONTH(TADATE) = MONTH(NOW()) AND EMPNUM=#{empNum}
+    </select>
 </mapper>
 
 

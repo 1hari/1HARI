@@ -376,5 +376,77 @@ public class EmpService {
     		log.debug("getAbsentList : " + e.getMessage());
     	}
     	return totalTime;
-    }    
+    }
+
+    
+    //형남 0121 출근 횟수 가져오기(사원 대시보드 차트)
+    public int getWork(String empNumStr) {
+        EmpDao dao = sqlsession.getMapper(EmpDao.class);
+        int work = 0;
+        int empNum=Integer.parseInt(empNumStr);
+        try {
+            work=dao.getWork(empNum);
+            System.out.println(work);
+        } catch (ClassNotFoundException | SQLException e) {
+            log.debug("getWork : " + e.getMessage());
+        }
+        return work;
+    }
+
+    //형남 0121 출근 횟수 가져오기(사원 대시보드 차트)
+    public int getTardy(String empNumStr) {
+        EmpDao dao = sqlsession.getMapper(EmpDao.class);
+        int tardy = 0;
+        int empNum=Integer.parseInt(empNumStr);
+        try {
+            tardy=dao.getTardy(empNum);
+            System.out.println(tardy);
+        } catch (ClassNotFoundException | SQLException e) {
+            log.debug("getTardy : " + e.getMessage());
+        }
+        return tardy;
+    }
+    
+    //형남 0121 출근 횟수 가져오기(사원 대시보드 차트)
+    public int getAbsent(String empNumStr) {
+        EmpDao dao = sqlsession.getMapper(EmpDao.class);
+        int absent = 0;
+        int empNum=Integer.parseInt(empNumStr);
+        try {
+            absent=dao.getAbsent(empNum);
+            System.out.println(absent);
+        } catch (ClassNotFoundException | SQLException e) {
+            log.debug("getAbsent : " + e.getMessage());
+        }
+        return absent;
+    }
+    
+    //형남 0121 출근 횟수 가져오기(사원 대시보드 차트)
+    public int getAnnual(String empNumStr) {
+        EmpDao dao = sqlsession.getMapper(EmpDao.class);
+        int annual = 0;
+        int empNum=Integer.parseInt(empNumStr);
+        try {
+            annual=dao.getAnnual(empNum);
+            System.out.println(annual);
+        } catch (ClassNotFoundException | SQLException e) {
+            log.debug("getAnnual : " + e.getMessage());
+        }
+        return annual;
+    }
+
+    //형남 0121 출근 횟수 가져오기(사원 대시보드 차트)
+    public int getEarly(String empNumStr) {
+        EmpDao dao = sqlsession.getMapper(EmpDao.class);
+        int early = 0;
+        int empNum=Integer.parseInt(empNumStr);
+        try {
+            dao.getEarly(empNum);
+            early=dao.getEarly(empNum);
+        } catch (ClassNotFoundException | SQLException e) {
+            log.debug("getEarly : " + e.getMessage());
+        }
+        return early;
+    }
 }
+
