@@ -4,6 +4,108 @@
 <script type="text/javascript">
 
 $(function(){
+	getMyTheme();
+	var formData; //첨부파일 담기 위한 변수
+	
+	//색상 선택시 테마색 변경 적용
+	$('.demo').each(function() {
+        $(this).minicolors({
+			control: $(this).attr('data-control') || 'hue',
+			change: function(value, opacity) {
+				if (!value) return;
+				if (opacity) value += ', ' + opacity;
+				if (typeof console === 'object') {
+					//console.log(value.split(",")[0]);
+					var itemArray5=document.querySelectorAll('#theme');
+						
+					for(var i=0;i<itemArray5.length;i++){
+						$(itemArray5[i]).css('background', value.split(",")[0]);
+						$('#navbarSupportedContent').css('background', value.split(",")[0]);
+						$('#sidebarnav').css('background', value.split(",")[0]);
+					}
+				}
+			},
+			theme: 'bootstrap'
+         });
+	});
+	
+	//이미지 파일 여부 판단
+	function checkImageType(fileName){
+	    var pattern = /jpg|gif|png|jpeg/gi;
+	    //console.log(fileName.match(pattern));
+	    return fileName.match(pattern);
+	}
+	
+	//파일 업로드 영역에서 기본효과를 제한
+	$(".fileDrop").on("dragenter dragover", function(e){
+	    e.preventDefault(); // 기본효과 제한
+	});
+	
+	// 드래그해서 드롭한 파일명 가져오기
+	$(".fileDrop").on("drop", function(e){
+	    e.preventDefault(); // 기본효과 제한
+	    
+	    var files = e.originalEvent.dataTransfer.files; // 드래그한 파일들
+	    var file = files[0]; // 첫번째 첨부파일
+	    formData = new FormData(); // 폼데이터 객체    
+	    formData.append("file", file); // 첨부파일 추가
+	    
+	    $.ajax({
+	        url: "${pageContext.request.contextPath}/ajax/filename.hari",
+	        type: "post",
+	        data: formData,
+	        dataType: "json",
+	        processData: false, // processType: false - header가 아닌 body로 전달
+	        contentType: false,
+	        // ajax 업로드 요청이 성공적으로 처리되면
+	        success: function(filenamejson){
+	            //console.log(filenamejson);
+	            if(checkImageType(filenamejson.fileName)){
+	            	$('#filename').val(filenamejson.fileName);
+		        }else {
+		        	swal({
+						text: "이미지 파일만 등록 가능합니다.",
+						icon: "warning",
+						button: "닫기"
+					});
+				}
+	        }
+	    });
+	});
+
+	//선택완료 클릭
+	$('#themeChoice').click(function(){
+		formData.append("themeColor", $('#hue-demo').val()); //선택한 색상 추가
+		$.ajax({
+	        url: "${pageContext.request.contextPath}/ajax/setMyTheme.hari",
+	        type: "post",
+	        data: formData,
+	        dataType: "text",
+	        processData: false, // processType: false - header가 아닌 body로 전달
+	        contentType: false,
+	        // ajax 업로드 요청이 성공적으로 처리되면
+	        success: function(resultString){
+	           // console.log(resultString.trim());
+	            if(resultString.trim() == "true"){
+	            	swal({
+						text: "변경이 완료되었습니다.",
+						icon: "success",
+						button: "닫기"
+					}).then((value) => {
+						getMyTheme();
+						
+						$('#themeModal').modal('toggle');	
+	 				})
+		        }else {
+		        	swal({
+						text: "변경되지 않았습니다. 다시 확인 바랍니다.",
+						icon: "warning",
+						button: "닫기"
+					});
+				}
+	        }
+	    });
+	});
 	var isStart=false; //오늘 출근했는지
 	var isEnd=false;//오늘 퇴근했는지
 	var isAbsent=false;//오늘 결근인지
@@ -50,44 +152,6 @@ $(function(){
 			clearInterval(timeCheck);
 		}
 	},1000);
-
-	//테마 색 바꾸기 ** 함수위치 고정!! 바꾸면 안됨**
-    $('.demo').each(function() {
-        $(this).minicolors({
-                control: $(this).attr('data-control') || 'hue',
-                change: function(value, opacity) {
-                    if (!value) return;
-                    if (opacity) value += ', ' + opacity;
-                    if (typeof console === 'object') {
-                        //console.log(value);
-						var itemArray5=document.querySelectorAll('#theme');
-    					$.ajax({
-    			    		url: "${pageContext.request.contextPath}/ajax/setThemeColor.hari",
-    			    		type: "post",
-    			    		data: {"color": value},
-    			    		dataType: "text",
-    			    		success: function(setThemeColor) {
-    			    			if(setThemeColor >0){
-    			    		 		$.ajax({
-	    			    	 			url: "${pageContext.request.contextPath}/ajax/getThemeColor.hari",
-	    			    	 			type: "post",
-	    			    	 			dataType: "text",
-	    			    	 			success: function(getThemeColor) {
-	    			    	 				for(var i=0;i<itemArray5.length;i++){
-	    	 			    					$(itemArray5[i]).css('background', getThemeColor);
-	    	 			    					$('#navbarSupportedContent').css('background', getThemeColor);
-	    	 			    					$('#sidebarnav').css('background', getThemeColor);
-    			    	 		     	   }
-    			    	 				}
-    			    	 			});
-        		        		}
-							}
-						});
-                    }
-                },
-			theme: 'bootstrap'
-         });
-	});
 	
 	//총 근무일
 	$.ajax({
@@ -383,25 +447,6 @@ $(function(){
 		}
 	})
 
-	
-
-	//페이지 이동시마다 사용자 설정 테마색으로 변경
-	$.ajax({
-		url: "${pageContext.request.contextPath}/ajax/getThemeColor.hari",
-		type: "post",
-		dataType: "text",
-		success: function(getThemeColor) {
-			var itemArray=document.querySelectorAll('#theme');
-			for(var i=0;i<itemArray.length;i++){
-				$(itemArray[i]).attr('style', 'background:' + getThemeColor);
-				$('#navbarSupportedContent').attr('style', 'background:' + getThemeColor);
-				$('#sidebarnav').attr('style', 'background:' + getThemeColor);
-				$('.minicolors-swatch-color').attr('style', 'background-color:' + getThemeColor);
-	        }
-		}
-	});
-
-	
 	$('#test').click(function(){
 		$('#theme').css('background', 'red');
 	})
@@ -475,7 +520,29 @@ $(function(){
 		}
 	});
 });
+//페이지 이동시마다 사용자 설정 테마색으로 변경
+function getMyTheme(){
+	$.ajax({
+		url: "${pageContext.request.contextPath}/ajax/getMyTheme.hari",
+		type: "post",
+		dataType: "json",
+		success: function(theme) {
+			console.log(theme);
+			//테마색 변경
+			var itemArray=document.querySelectorAll('#theme');
+			
+			for(var i=0;i<itemArray.length;i++){
+				$(itemArray[i]).attr('style', 'background:' + theme.themeColor);
+				$('#navbarSupportedContent').attr('style', 'background:' + theme.themeColor);
+				$('#sidebarnav').attr('style', 'background:' + theme.themeColor);
+				$('.minicolors-swatch-color').attr('style', 'background-color:' + theme.themeColor);
+	        }
 
+	        //프로필사진 변경
+	        $('#profileFileName').attr("src","${pageContext.request.contextPath}/resources/hari/profileFileUpload/"+theme.profileFileName);
+		}
+	});
+}
 </script>
 <!-- ============================================================== -->
 <!-- Preloader - style you can find in spinners.css -->
@@ -577,7 +644,7 @@ $(function(){
 					<!--내 프로필 시작-->
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							<img src="${pageContext.request.contextPath}/resources/hari/assets/images/users/profile-02.png" alt="user" class="rounded-circle" width="31">
+							<img src="" alt="user" class="rounded-circle" width="31" id="profileFileName">
 						</a>
 						<div class="dropdown-menu dropdown-menu-right animated">
                             <a class="dropdown-item" href="${pageContext.request.contextPath}/1hariMy/myInfo.hari">
@@ -605,7 +672,7 @@ $(function(){
 	<!-- top navbar 전체 끝 !! -->
 	
 <!-- DRAFT Modal -->
-<div class="modal fade" id="themeModal" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="themeModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="false">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content" style="width: 250px;">
 			<form action="/"  enctype="multipart/form-data" method="post">			
@@ -624,8 +691,10 @@ $(function(){
 					</div>
 					<div class="form-group row">
 						<div class="col-md-12">
-							<div class="fileDrop"></div>
-							<div id="uploadedList"></div>
+							<div class="fileDrop">
+								이미지 파일을 Drag & Drop 하세요.
+								<input type="text" id="filename" class="form-control" value="" readonly>
+							</div>
 						</div>
 					</div>
 				</div><!-- modal-body 끝 -->
@@ -638,74 +707,3 @@ $(function(){
 		</div><!-- modal-content 끝 -->
 	</div><!-- modal-dialog 끝 -->
 </div><!--  draftModal 끝 -->
-
-<script type="text/javascript">
-// //이미지 파일 여부 판단
-// function checkImageType(fileName){
-//     var pattern = /jpg|gif|png|jpeg/i;
-//     return fileName.match(pattern);
-// }
-
-// // 업로드 파일 정보
-// function getFileInfo(fullName){
-//     var fileName, imgsrc, getLink, fileLink;
-//     // 이미지 파일일 경우
-//     if(checkImageType(fullName)){
-//         // 이미지 파일 경로(썸네일)
-//         imgsrc = "/WEB-INF/views/1hariMy/upload/displayFile?fileName="+fullName;
-//         console.log(imgsrc);
-//         // 업로드 파일명
-//         fileLink = fullName.substr(14);
-//         console.log(fileLink);
-//         // 날짜별 디렉토리 추출
-// //         var front = fullName.substr(0, 12);
-// //         console.log(front);
-//         // s_를 제거한 업로드이미지파일명
-//         var end = fullName.substr(14);
-//         console.log(end);
-//         // 원본이미지 파일 디렉토리
-//         getLink = "/WEB-INF/views/1hariMy/upload/displayFile?fileName="+front+end;
-//         console.log(getLink);
-//     // 이미지 파일이 아닐경우
-//     } else {
-//         alert("이미지 파일만 업로드 가능합니다.");
-//     }
-//     // 목록에 출력할 원본파일명
-//     fileName = fileLink.substr(fileLink.indexOf("_")+1);
-//     console.log(fileName);
-//     // { 변수:값 } json 객체 리턴
-//     return {fileName:fileName, imgsrc:imgsrc, getLink:getLink, fullName:fullName};
-// }
-
-// //파일 업로드 영역에서 기본효과를 제한
-// $(".fileDrop").on("dragenter dragover", function(e){
-//     e.preventDefault(); // 기본효과 제한
-// });
-// // 드래그해서 드롭한 파일들 ajax 업로드 요청
-// $(".fileDrop").on("drop", function(e){
-//     e.preventDefault(); // 기본효과 제한
-//     var files = e.originalEvent.dataTransfer.files; // 드래그한 파일들
-//     var file = files[0]; // 첫번째 첨부파일
-//     var formData = new FormData(); // 폼데이터 객체
-//     formData.append("file", file); // 첨부파일 추가
-//     $.ajax({
-//         url: "${path}/upload/uploadAjax",
-//         type: "post",
-//         data: formData,
-//         dataType: "text",
-//         processData: false, // processType: false - header가 아닌 body로 전달
-//         contentType: false,
-//         // ajax 업로드 요청이 성공적으로 처리되면
-//         success: function(data){
-//             console.log(data);
-//             // 첨부 파일의 정보
-//             var fileInfo = getFileInfo(data);
-//             // 하이퍼링크
-//             var html = "<a href='"+fileInfo.getLink+"'>"+fileInfo.fileName+"</a><br>";
-//             // hidden 태그 추가
-//             html += "<input type='hidden' class='file' value='"+fileInfo.fullName+"'>";
-//             // div에 추가
-//             $("#uploadedList").append(html);
-//     }
-// });
-</script>

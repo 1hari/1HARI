@@ -5,13 +5,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -20,7 +18,6 @@ import org.springframework.ui.velocity.VelocityEngineFactoryBean;
 import org.springframework.ui.velocity.VelocityEngineUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import kr.coo.onehari.hr.dto.EmpDto;
@@ -364,35 +361,7 @@ public class HrRestController {
 		}
 		return jsonObject.toJSONString();
 	}
-	
-	//사원 테마색 가져오기 오형남 / 2020. 1. 16
-	@RequestMapping(value = "getThemeColor.hari", method = RequestMethod.POST)
-	public String getThemeColor(Principal pri) {
-		String themeColor = null;
-		try {
-			themeColor = empSercive.getThemeColor(pri.getName());
-			if(themeColor==null) {
-				themeColor="empty";
-			}
-		} catch (Exception e) {
-			log.debug("getThemeColor 예외발생: " + e.getMessage());
-		}
-		return themeColor;
-	}
-	
-	//사원 테마색 가져오기 오형남 / 2020. 1. 16
-	@RequestMapping(value = "setThemeColor.hari", method = RequestMethod.POST)
-	public int setThemeColor(Principal pri, @RequestParam("color") String value) {
-		int themeColor = 0;
-		String[] color=value.split(",");
-		try {
-			themeColor = empSercive.setThemeColor(pri.getName(), color[0].trim());
-		} catch (Exception e) {
-			log.debug("setThemeColor 예외발생: " + e.getMessage());
-		}
-		return themeColor;
-	}
-	
+
 	@RequestMapping(value = "personnel/sendMail.hari", method = RequestMethod.POST)
 	public String sendMail(HttpServletRequest req, Principal principal) {
 		MimeMessage message = javaMailSender.createMimeMessage();

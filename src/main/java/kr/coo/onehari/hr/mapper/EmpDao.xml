@@ -222,15 +222,7 @@
 	<select id="getAbsentList" resultType="String">
 		SELECT DATE_FORMAT(TADATE,"%Y-%m-%d") FROM TALIST WHERE MONTH(TADATE) = MONTH(NOW()) AND TACODE=6 AND EMPNUM=#{empNum}
     </select>
-    
-	<!-- 사원 색 가져오기-->
-    <select id="getThemeColor" resultType="String">
-        SELECT THEMECOLOR FROM THEME WHERE EMPNUM=#{empNum};
-    </select>
-    
-	<update id="setThemeColor">
-		UPDATE THEME SET THEMECOLOR = #{param2} WHERE EMPNUM=#{param1}
-	</update>
+
 </mapper>
 
 
