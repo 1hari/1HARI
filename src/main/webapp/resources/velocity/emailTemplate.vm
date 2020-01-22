@@ -5,16 +5,18 @@
 <title>${mail}</title>
 </head>
 <body>
-<h1 style = "font-size : 26">안녕하세요 ${name} 님</h1><br>
+<h1 style = "font-size : 26">안녕하세요. ${name} 님</h1><br>
 <div style = "border : 3px solid lightgray; padding : 5em;">
 	<p style = "color : green"><b>DOBEE에 회원등록이 되었습니다.</b></p><br>
-	<p>-------------------------------------------------------------</p><br>
+	
 	<p> 등록일 : </p><br>
 	${path}<br>
 	<form action="http://${path}" target="_blank" method="POST" >
 		<input type="hidden" name="mail" id="mail" value="${mail}">
 		<input type="submit" value="비밀번호 설정하기">
 	</form>
+	<img src="https://i.imgur.com/o9TMF5u.png" title="logo-img-final.png" alt="logoImage"/>
+	<img src="https://i.imgur.com/64x6EKZ.png" title="logo-text-152-28.png" alt="logoText"/>
 </div>
 </body>
 </html>
