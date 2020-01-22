@@ -527,7 +527,7 @@ function getMyTheme(){
 		type: "post",
 		dataType: "json",
 		success: function(theme) {
-			console.log(theme);
+			//console.log(theme);
 			//테마색 변경
 			var itemArray=document.querySelectorAll('#theme');
 			
