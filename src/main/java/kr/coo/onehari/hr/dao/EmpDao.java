@@ -129,5 +129,8 @@ public interface EmpDao {
     public Integer getEarly(int empNum) throws ClassNotFoundException, SQLException;
 
     //현재 존재하는 팀 목록 가져오기
-    public List<Integer> getTeamList(int empNum) throws ClassNotFoundException, SQLException;
+    public List<Integer> getTeamList() throws ClassNotFoundException, SQLException;
+    
+    //형남 0122 팀 별 근무시간(월)
+    public String getTeamMonthWorkTime(int teamCode, int month) throws ClassNotFoundException, SQLException;
 }

@@ -11,6 +11,7 @@ import java.util.Map;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -421,22 +422,34 @@ public class HrRestController {
 		return jsonObject.toJSONString();
 	}
 	
-	//형남 0122 이번달 퇴근, 결근 기록 yyyy-mm-dd
+	//형남 0122 팀 별 근무시간 가져오기(월)
 	@RequestMapping(value = "getAllEmpTA.hari", method = RequestMethod.POST)
 	public String getAllEmpTA(Principal pri) {
-		JSONObject jsonObject = new JSONObject();
-		List<Integer> teamList = null;
-		List<String> absentList = null;
-		
+		JSONArray jsonArray = new JSONArray();
+		List<Integer> teamList = new ArrayList<Integer>();
+		List<String> teamWorkTimeList = null;
+		String teamWorkTime=null;
+		int count=0;
 		try {
-			teamList = empSercive.getTeamList(pri.getName());
-//			absentList = empSercive.getAbsentList(pri.getName());
-//			jsonObject.put("endList", endList);
-//			jsonObject.put("absentList", absentList);
+			teamList = empSercive.getTeamList();
+			for (int teamCode : teamList) {
+				teamWorkTimeList = new ArrayList<String>();
+				for(int i=1; i<13; i++) {
+					teamWorkTime=empSercive.getTeamMonthWorkTime(teamCode,i);//2001/1,2,3,4,5..
+					if(teamWorkTime ==null) {
+						teamWorkTime="0";
+					}
+					String[] timeSplit=teamWorkTime.split(":");
+					
+					teamWorkTimeList.add(timeSplit[0]);
+				}
+				count++;
+				jsonArray.add(teamWorkTimeList);
+			}
 		} catch (Exception e) {
 			log.debug("getAllEmpTA 예외발생: " + e.getMessage());
 		}
-		return jsonObject.toJSONString();
+		return jsonArray.toJSONString();
 	}
 	
 }

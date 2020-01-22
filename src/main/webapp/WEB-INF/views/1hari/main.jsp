@@ -21,12 +21,10 @@ window.chartColors = {
 	purple: 'rgb(153, 102, 255)',
 	grey: 'rgb(201, 203, 207)'
 };
+var colorArray=[window.chartColors.red, window.chartColors.orange, window.chartColors.yellow, window.chartColors.green, window.chartColors.blue, window.chartColors.purple, window.chartColors.grey];
 
 
 $(function(){
-
-
-
 
 	$.ajax({
 		url: "${pageContext.request.contextPath}/ajax/getTA.hari",
@@ -51,16 +49,13 @@ $(function(){
 				}
 
 				function getBody(bodyItem) {
-//		 			console.log(bodyItem.lines);
 					return bodyItem.lines;
 				}
 
 				// Set Text
 				if (tooltip.body) {
 					var titleLines = tooltip.title || [];
-//		 			console.log('titleLines' + titleLines);
 					var bodyLines = tooltip.body.map(getBody);
-//		 			console.log('bodyLines' + bodyLines);
 					var innerHtml = '<thead>';
 
 					titleLines.forEach(function(title) {
@@ -153,23 +148,40 @@ $(function(){
 		type: "post",
 		dataType: "json",
 		success: function(getAllEmpTA) {
-			var splitTime2=getTotalTime.split(':');
-			if($.trim(getTotalTime) != "empty" ){
-				$('#getTotalTime').text('');
-				$('#getTotalTime').append(splitTime2[0] + ":"+splitTime2[1]);
-			} else{
-				$('#getTotalTime').text('');
-				$('#getTotalTime').append('00:00');
-			}
+			console.log(typeof(getAllEmpTA));
+			console.log(Object.keys(getAllEmpTA));
+			console.log(getAllEmpTA[0]);
+			console.log(getAllEmpTA.length);
+// 			for(var i=0; i<10; i++){
+// 				console.log(i);
+// 			}
+// 			var dataset=[];
+// 			for(var i=0; i<Object.keys(getAllEmpTA).length; i++){
+// 				console.log('{label: 부서이름,backgroundColor:' + color(colorArray[i]).alpha(0.5).rgbString() + ', borderColor:' +  colorArray[i] + ',	borderWidth: 1, 	data:' + [getAllEmpTA[i]] + '},');
+// 			}
+// 			for(var i=0; i<Object.keys(getAllEmpTA).length; i++){
+// 				dataset.push('{label: 부서이름,backgroundColor: + color(colorArray[i]).alpha(0.5).rgbString(), borderColor:colorArray[i],	borderWidth: 1, 	data:[getAllEmpTA[i]] },');
+// 			}
+// 			console.log(dataset);
 		}
+
+
+	
 	});
 	
 	var MONTHS = ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'];
 	var color = Chart.helpers.color;
+
+	
+
 	
 	var horizontalBarChartData = {
 		labels: MONTHS,
-		datasets: [{
+		datasets: [
+
+
+
+			{
 			label: 'Dataset 1',
 			backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
 			borderColor: window.chartColors.red,
@@ -191,7 +203,8 @@ $(function(){
 			data: [
 				55,
 			]
-		}]
+		}
+		]
 
 	};
 
@@ -223,7 +236,6 @@ $(function(){
 	      if (window.myHorizontalBar) {
 				MONTHS=[];
 				MONTHS.push($('#month').val());
-// 				window.myHorizontalBar.update();
 				window.myHorizontalBar.destroy();
 				
 				var color = Chart.helpers.color;
@@ -253,7 +265,6 @@ $(function(){
 							55,
 						]
 					}]
-
 				};
 				
 				window.myHorizontalBar = new Chart(ctx, {
@@ -417,7 +428,7 @@ $(function(){
 					<div class="card-body" style="padding-bottom: 0">
 						<h4 class="card-title m-b-0" style="margin-bottom:0;" >타임라인</h4>
                                         <select class="select2 form-control custom-select select2-hidden-accessible" id="month" style="width: 13%; height:10%; margin-left: 88%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                                            <option data-select2-id="3">Select</option>
+                                            <option data-select2-id="3" value="0">Select</option>
                                             <option value="1">1월</option>
 											<option value="2">2월</option>
 											<option value="3">3월</option>
