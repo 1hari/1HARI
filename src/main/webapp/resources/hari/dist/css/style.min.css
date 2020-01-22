@@ -7,7 +7,12 @@
 @import url(icons/themify-icons/themify-icons.css);
 @import url(icons/material-design-iconic-font/css/materialdesignicons.min.css);
 
-
+/* 첨부파일을 드래그할 영역의 스타일 */
+.fileDrop {
+    width: 100%;
+    height: 70px;
+    border: 2px dotted gray;
+}
 
 .search-box .app-search .form-control {
 	border-radius: 0px
@@ -74414,7 +74419,7 @@ button.close {
 
 @media (min-width:576px) {
 	.modal-dialog {
-		max-width: 500px;
+		max-width: 250px;
 		margin: 1.75rem auto
 	}
 

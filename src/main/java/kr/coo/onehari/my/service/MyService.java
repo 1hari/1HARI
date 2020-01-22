@@ -4,13 +4,12 @@ import java.sql.SQLException;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.stereotype.Service;
 
 import kr.coo.onehari.hr.dto.EmpDto;
-import kr.coo.onehari.hr.dto.Theme;
 import kr.coo.onehari.login.dao.LoginDao;
 import kr.coo.onehari.my.dao.MyDao;
+import kr.coo.onehari.my.dto.Theme;
 import lombok.extern.slf4j.Slf4j;
 
 /*
@@ -153,12 +152,24 @@ public class MyService {
 		}
 	}
 	
-	// 김정하 2020. 1. 21 개인설정 변경
-	public int myTheme(Theme theme) {
+	// 오형남 2020. 1. 16 (color) / 김정하 2020. 1. 21 (file) 개인테마 가져오기
+	public Theme getMyTheme(String empNum) {
+		MyDao mydao = sqlsession.getMapper(MyDao.class);
+		Theme theme = null;
+		try {
+			theme = mydao.getMyTheme(empNum);
+		} catch (ClassNotFoundException | SQLException e) {
+			log.debug("MyService getMyTheme 예외발생: " + e.getMessage());
+		}
+		return theme;
+	}
+	
+	// 오형남 2020. 1. 16 (color) / 김정하 2020. 1. 21 (file) 개인테마 설정
+	public int setMyTheme(Theme theme) {
 		MyDao mydao = sqlsession.getMapper(MyDao.class);
 		int result = 0;
 		try {
-			result = mydao.myTheme(theme);
+			result = mydao.setMyTheme(theme);
 		} catch (ClassNotFoundException | SQLException e) {
 			log.debug("MyService myTheme 예외발생: " + e.getMessage());
 		}
