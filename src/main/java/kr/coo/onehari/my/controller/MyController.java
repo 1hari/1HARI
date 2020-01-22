@@ -1,11 +1,8 @@
 package kr.coo.onehari.my.controller;
 
 import java.security.Principal;
-import java.security.Security;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -54,8 +51,6 @@ public class MyController {
 	// 개인정보 프로필 수정(변경) 김진호 2020. 1. 21
 	@RequestMapping(value = "myInfo.hari", method = RequestMethod.POST)
 	public String myInfo(EmpDto empdto, Principal principal) {
-		System.out.println(empdto.getPassword());
-		
 		if (!empdto.getPassword().trim().equals("")) { // 비밀번호 입력
 			// 비밀번호 암호화
 			empdto.setPassword(bCryptPasswordEncoder.encode(empdto.getPassword()));

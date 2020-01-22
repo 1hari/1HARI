@@ -1,16 +1,13 @@
 package kr.coo.onehari.my.service;
 
-import java.security.Principal;
 import java.sql.SQLException;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.coo.onehari.hr.dto.EmpDto;
-import kr.coo.onehari.hr.service.EmpService;
 import kr.coo.onehari.login.dao.LoginDao;
 import kr.coo.onehari.my.dao.MyDao;
 import kr.coo.onehari.my.dto.Theme;
@@ -29,12 +26,6 @@ public class MyService {
 	
 	@Autowired
 	private SqlSession sqlsession;
-	
-	@Autowired
-	private EmpService empService;
-	
-	@Autowired
-	private BCryptPasswordEncoder bCryptPasswordEncoder; // 비밀번호 암호화
 	
 	//형남 0110 로그인 성공 시 로그인 횟수 초기화
 	public int loginCntInit(String str) {
