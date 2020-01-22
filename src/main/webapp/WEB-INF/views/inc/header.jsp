@@ -77,8 +77,8 @@ $(function(){
 	    	 			    					$(itemArray5[i]).css('background', getThemeColor);
 	    	 			    					$('#navbarSupportedContent').css('background', getThemeColor);
 	    	 			    					$('#sidebarnav').css('background', getThemeColor);
-    			    	 		     	   }
-    			    	 				}
+											}
+ 			    	 					}
     			    	 			});
         		        		}
 							}

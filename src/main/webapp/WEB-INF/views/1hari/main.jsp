@@ -84,43 +84,52 @@ $(function(){
 		tooltipEl.style.fontStyle = tooltip._bodyFontStyle;
 		tooltipEl.style.padding = tooltip.yPadding + 'px ' + tooltip.xPadding + 'px';
 	};
-	var data2=[30, 50, 100, 40]
-	var config = {
-		type: 'pie',
-		data: {
-			datasets: [{
-				data: data2,
-				backgroundColor: [
-					window.chartColors.red,
-					window.chartColors.orange,
-					window.chartColors.yellow,
-					window.chartColors.green,
-					window.chartColors.blue,
-				],
-			}],
-			labels: [
-				'출근',
-				'지각',
-				'결근',
-				'연차'
-			]
-		},
-		options: {
-			responsive: true,
-			legend: {
-				display: false
-			},
-			tooltips: {
-				enabled: false,
-			}
-		}
-	};
 
-	window.onload = function() {
-		var ctx = document.getElementById('chart-area').getContext('2d');
-		window.myPie = new Chart(ctx, config);
-	};
-})
+
+
+	$.ajax({
+		url: "${pageContext.request.contextPath}/ajax/getTA.hari",
+		type: "post",
+		dataType: "json",
+		success: function(getTA) {
+			console.log(getTA);
+			var config = {
+				type: 'pie',
+				data: {
+					datasets: [{
+						data: getTA.TAList,
+						backgroundColor: [
+							window.chartColors.red,
+							window.chartColors.orange,
+							window.chartColors.yellow,
+							window.chartColors.green,
+							window.chartColors.blue,
+						],
+					}],
+					labels: [
+						'출근',
+						'지각',
+						'결근',
+						'연차',
+						'조퇴'
+					]
+				},
+				options: {
+					responsive: true,
+					legend: {
+						display: true,
+						position: 'bottom'
+					},
+					tooltips: {
+						enabled: false,
+					}
+				}
+			}
+			var ctx = document.getElementById('chart-area').getContext('2d');
+			window.myPie = new Chart(ctx, config);
+		}
+	});
+});
 </script>
 
 	<style>
@@ -205,6 +214,7 @@ $(function(){
 			<div class="col-md-6">
 				<div class="card">
 					<div class="card-body">
+						<h4 class="card-title m-b-0">당월 근태통계</h4>
 						<div id="canvas-holder" style="width: 300px;">
 							<div class="chartjs-size-monitor">
 								<div class="chartjs-size-monitor-expand">

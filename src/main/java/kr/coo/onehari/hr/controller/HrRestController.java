@@ -2,6 +2,7 @@ package kr.coo.onehari.hr.controller;
 
 import java.security.Principal;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -426,5 +427,39 @@ public class HrRestController {
 		}
 		
 		return "redirect:empList.hari";
+	}
+	
+	//형남 0121 출근, 지각, 결근 연차, 조퇴 횟수 가져오기(사원 대시보드 차트)
+	@RequestMapping(value = "getTA.hari", method = RequestMethod.POST)
+	public String getTA(Principal pri) {
+		List<Integer> TAList = new ArrayList<Integer>();
+		JSONObject jsonObject = new JSONObject();
+		try {
+			int work= empSercive.getWork(pri.getName());
+			int tardy= empSercive.getTardy(pri.getName());
+			int absent= empSercive.getAbsent(pri.getName());
+			int annual= empSercive.getAnnual(pri.getName());
+			int early= empSercive.getEarly(pri.getName());
+			System.out.println(work);
+			System.out.println(tardy);
+			System.out.println(absent);
+			System.out.println(annual);
+			System.out.println(early);
+			TAList.add(work);
+			TAList.add(tardy);
+			TAList.add(absent);
+			TAList.add(annual);
+			TAList.add(early);
+//			TAList.add(work+"일");
+//			TAList.add(tardy+"일");
+//			TAList.add(absent+"일");
+//			TAList.add(annual+"일");
+//			TAList.add(early+"일");
+//				System.out.println("TAList: " + TAList.toString());
+			jsonObject.put("TAList", TAList);
+		} catch (Exception e) {
+			log.debug("getTA 예외발생: " + e.getMessage());
+		}
+		return jsonObject.toJSONString();
 	}
 }
