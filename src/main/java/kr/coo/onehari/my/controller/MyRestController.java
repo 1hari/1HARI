@@ -45,7 +45,7 @@ public class MyRestController {
 		//System.out.println(theme);
 		theme.setEmpNum(Integer.parseInt(principal.getName()));
 		MultipartFile file = theme.getFile(); //view에서 DTO에 저장된 파일받아오기
-		String filename = "";
+		String filename = "defaultprofile.png";
 		String path = request.getServletContext().getRealPath("/resources/hari/profileFileUpload"); //서버의 실 경로
 		
 		if(file != null) { //파일이 있으면

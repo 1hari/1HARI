@@ -75,6 +75,10 @@ $(function(){
 
 	//선택완료 클릭
 	$('#themeChoice').click(function(){
+		if(formData == null ){
+			formData = new FormData();
+		}
+		
 		formData.append("themeColor", $('#hue-demo').val()); //선택한 색상 추가
 		$.ajax({
 	        url: "${pageContext.request.contextPath}/ajax/setMyTheme.hari",
