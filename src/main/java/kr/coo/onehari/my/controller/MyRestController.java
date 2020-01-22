@@ -26,7 +26,7 @@ public class MyRestController {
 	//개인설정 파일 drop 시 파일명 반환 김정하 / 2020. 1. 22
 	@RequestMapping("filename.hari")
 	public Map<String, String> filename(MultipartFile file) {
-		System.out.println(file.getOriginalFilename());
+		//System.out.println(file.getOriginalFilename());
 		Map<String, String> fileNameJson = new HashMap<String, String>();
 		fileNameJson.put("fileName", file.getOriginalFilename());
 		return fileNameJson;
@@ -42,7 +42,7 @@ public class MyRestController {
 	
 	@RequestMapping("setMyTheme.hari")
 	public String setMyTheme(Theme theme, HttpServletRequest request, Principal principal) {
-		System.out.println(theme);
+		//System.out.println(theme);
 		theme.setEmpNum(Integer.parseInt(principal.getName()));
 		MultipartFile file = theme.getFile(); //view에서 DTO에 저장된 파일받아오기
 		String filename = "";
@@ -50,7 +50,7 @@ public class MyRestController {
 		
 		if(file != null) { //파일이 있으면
 			filename = file.getOriginalFilename(); //파일명
-			System.out.println("폴더경로 : " + path);
+			//System.out.println("폴더경로 : " + path);
 			
 			String fpath = path + "\\" + filename;
 			

@@ -136,7 +136,7 @@ public class SignController {
 		if(file != null) { //파일이 있으면
 			filename = file.getOriginalFilename(); //파일명
 			String path = request.getServletContext().getRealPath("/WEB-INF/views/1hariSign/upload"); //서버의 실 경로
-			System.out.println("폴더경로 : " + path);
+			//System.out.println("폴더경로 : " + path);
 			
 			String fpath = path + "\\" + filename;
 			
