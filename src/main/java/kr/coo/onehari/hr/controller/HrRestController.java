@@ -2,16 +2,15 @@ package kr.coo.onehari.hr.controller;
 
 import java.security.Principal;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -20,7 +19,6 @@ import org.springframework.ui.velocity.VelocityEngineFactoryBean;
 import org.springframework.ui.velocity.VelocityEngineUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import kr.coo.onehari.hr.dto.EmpDto;
@@ -364,35 +362,7 @@ public class HrRestController {
 		}
 		return jsonObject.toJSONString();
 	}
-	
-	//사원 테마색 가져오기 오형남 / 2020. 1. 16
-	@RequestMapping(value = "getThemeColor.hari", method = RequestMethod.POST)
-	public String getThemeColor(Principal pri) {
-		String themeColor = null;
-		try {
-			themeColor = empSercive.getThemeColor(pri.getName());
-			if(themeColor==null) {
-				themeColor="empty";
-			}
-		} catch (Exception e) {
-			log.debug("getThemeColor 예외발생: " + e.getMessage());
-		}
-		return themeColor;
-	}
-	
-	//사원 테마색 가져오기 오형남 / 2020. 1. 16
-	@RequestMapping(value = "setThemeColor.hari", method = RequestMethod.POST)
-	public int setThemeColor(Principal pri, @RequestParam("color") String value) {
-		int themeColor = 0;
-		String[] color=value.split(",");
-		try {
-			themeColor = empSercive.setThemeColor(pri.getName(), color[0].trim());
-		} catch (Exception e) {
-			log.debug("setThemeColor 예외발생: " + e.getMessage());
-		}
-		return themeColor;
-	}
-	
+
 	@RequestMapping(value = "personnel/sendMail.hari", method = RequestMethod.POST)
 	public String sendMail(HttpServletRequest req, Principal principal) {
 		MimeMessage message = javaMailSender.createMimeMessage();
@@ -427,4 +397,46 @@ public class HrRestController {
 		
 		return "redirect:empList.hari";
 	}
+	
+	//형남 0121 출근, 지각, 결근 연차, 조퇴 횟수 가져오기(사원 대시보드 차트)
+	@RequestMapping(value = "getTA.hari", method = RequestMethod.POST)
+	public String getTA(Principal pri) {
+		List<Integer> TAList = new ArrayList<Integer>();
+		JSONObject jsonObject = new JSONObject();
+		try {
+			int work= empSercive.getWork(pri.getName());
+			int tardy= empSercive.getTardy(pri.getName());
+			int absent= empSercive.getAbsent(pri.getName());
+			int annual= empSercive.getAnnual(pri.getName());
+			int early= empSercive.getEarly(pri.getName());
+			TAList.add(work);
+			TAList.add(tardy);
+			TAList.add(absent);
+			TAList.add(annual);
+			TAList.add(early);
+			jsonObject.put("TAList", TAList);
+		} catch (Exception e) {
+			log.debug("getTA 예외발생: " + e.getMessage());
+		}
+		return jsonObject.toJSONString();
+	}
+	
+	//형남 0122 이번달 퇴근, 결근 기록 yyyy-mm-dd
+	@RequestMapping(value = "getAllEmpTA.hari", method = RequestMethod.POST)
+	public String getAllEmpTA(Principal pri) {
+		JSONObject jsonObject = new JSONObject();
+		List<Integer> teamList = null;
+		List<String> absentList = null;
+		
+		try {
+			teamList = empSercive.getTeamList(pri.getName());
+//			absentList = empSercive.getAbsentList(pri.getName());
+//			jsonObject.put("endList", endList);
+//			jsonObject.put("absentList", absentList);
+		} catch (Exception e) {
+			log.debug("getAllEmpTA 예외발생: " + e.getMessage());
+		}
+		return jsonObject.toJSONString();
+	}
+	
 }

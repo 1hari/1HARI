@@ -35,9 +35,14 @@
 		WHERE EMPNUM=#{empNum}
 	</update>
 	
-	<!-- 개인설정 변경 김정하 2020. 1. 21 -->
-	<update id="myTheme">
-		UPDATE theme
+	<!-- 개인테마 가져오기 오형남 2020. 1 16 / 김정하 2020. 1 22 -->
+	<select id="getMyTheme" resultType="kr.coo.onehari.my.dto.Theme">
+		SELECT THEMECOLOR, PROFILEFILENAME FROM THEME WHERE EMPNUM = #{empNum};
+	</select>
+	
+	<!-- 개인설정 변경 오형남 2020. 1 16 / 김정하 2020. 1. 21 -->
+	<update id="setMyTheme">
+		UPDATE THEME
 		SET THEMECOLOR = #{themeColor},
 			PROFILEFILENAME = #{profileFileName},
 			PROFILEFILEROOT = #{profileFileRoot}

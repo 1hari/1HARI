@@ -112,5 +112,22 @@ public interface EmpDao {
     
     //사용자 테마 색 세팅하기
     public int setThemeColor(int empNum, String color) throws ClassNotFoundException, SQLException;
+    
+    //형남 0121 출근 횟수 가져오기(사원 대시보드 차트)
+    public Integer getWork(int empNum) throws ClassNotFoundException, SQLException;
+    
+    //형남 0121 지각 횟수 가져오기(사원 대시보드 차트)
+    public Integer getTardy(int empNum) throws ClassNotFoundException, SQLException;
+    
+    //형남 0121 결근 횟수 가져오기(사원 대시보드 차트)
+    public Integer getAbsent(int empNum) throws ClassNotFoundException, SQLException;
+    
+    //형남 0121 조퇴 횟수 가져오기(사원 대시보드 차트)
+    public Integer getAnnual(int empNum) throws ClassNotFoundException, SQLException;
+    
+    //형남 0121 연차 횟수 가져오기(사원 대시보드 차트)
+    public Integer getEarly(int empNum) throws ClassNotFoundException, SQLException;
 
+    //현재 존재하는 팀 목록 가져오기
+    public List<Integer> getTeamList(int empNum) throws ClassNotFoundException, SQLException;
 }
