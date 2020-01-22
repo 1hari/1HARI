@@ -148,20 +148,20 @@
 
    <!--컨텐츠 시작 -->
     <!--메인 백그라운드 이미지-->
-    <div class="hero-wrap" style="background-image: url(resources/index/images/bg_2.jpg);" data-stellar-background-ratio="0.5">
+    <div class="hero-wrap" style="background-image: url(resources/index/images/bg_4.jpg);" data-stellar-background-ratio="0.5">
       
       <div class="overlay"></div>
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-start" data-scrollax-parent="true">
           <div class="col-lg-6 col-md-6 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
             <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">1HARI<br><span>HR system</span></h1>
-            <p class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="icon-calendar mr-2"></span>2020-01-10 SOUTH KOREA</p>
-            <div id="timer" class="d-flex">
-                    <div class="time" id="days"></div>
-                    <div class="time pl-3" id="hours"></div>
-                    <div class="time pl-3" id="minutes"></div>
-                    <div class="time pl-3" id="seconds"></div>
-                  </div>
+            <p class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"></p>
+<!--             <div id="timer" class="d-flex"> -->
+<!--                     <div class="time" id="days"></div> -->
+<!--                     <div class="time pl-3" id="hours"></div> -->
+<!--                     <div class="time pl-3" id="minutes"></div> -->
+<!--                     <div class="time pl-3" id="seconds"></div> -->
+<!--              </div> -->
                </div>
                <div class="col-lg-2 col"></div>
 
@@ -176,11 +176,11 @@
                    <div class="form-group">
                       <input type="password" id="password" name="password" class="form-control" placeholder="비밀 번호 입력" >
                    </div>
-                   <div class="form-group">
+                  <!--  <div class="form-group">
                         <div class="checkbox">
                            <label><input type="checkbox" value="" class="mr-2">사원 번호 기억하기</label>
                         </div>
-                   </div>
+                   </div> -->
 				<div class="form-group">
 	                 <input type="button" value="로그인"  onclick="login();" class="btn btn-primary py-3 px-4">
 	                 <br>
@@ -201,18 +201,18 @@
                   <div class="modal-body">
                      <form action="${pageContext.request.contextPath}/updatePassword.hari" method="post" id="update">
                         <div class="input-group">
-                           <span class="input-group-addon" style="color:#20B2AA"><small>&nbsp;</small><i class="fa fa-user fa-3x"></i></span>
+                           <span class="input-group-addon" ><small>&nbsp;</small><i class="fa fa-user fa-2x" style = ""></i></span>
                            <small>&nbsp;&nbsp;</small>
                            <input type="text" class="form-control" id="empNum" name="empNum" placeholder="사번 입력">
                         </div>
                         <small>&nbsp;</small>
                         <div class="input-group">
-                           <span class="input-group-addon" style="color:#20B2AA"><i class="fa fa-envelope fa-3x"></i></span>
+                           <span class="input-group-addon"><i class="fa fa-envelope fa-2x"></i></span>
                            <small>&nbsp;</small>
                            <input type="text" class="form-control" id="email" name="email" placeholder="이메일 주소 입력">
                         </div>
                         <small id="emailcheck">이메일을 입력해주세요.</small><br>
-                        <button type="button" class="btn btn-default" id=emailSend style="color:#20B2AA"><strong> <i class="fa fa-paper-plane fa-1x" style="color:#20B2AA"></i>&nbsp;인증번호 전송</strong></button>
+                        <button type="button" class="btn btn-default" id=emailSend><strong> <i class="fa fa-paper-plane fa-1x"></i>&nbsp;인증번호 전송</strong></button>
                
                         <input type="password" id="newPassword" name="newPassword"class="form-control" disabled="disabled">
                         <small id="pwcheck">비밀번호는 4자~10자 입니다.</small>

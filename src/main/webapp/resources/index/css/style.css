@@ -2031,7 +2031,7 @@ textarea.form-control {
 .btn {
   display: inline-block;
   font-weight: 400;
-  color: #212529;
+  color: #ff6161;
   text-align: center;
   vertical-align: middle;
   -webkit-user-select: none;
@@ -2048,7 +2048,8 @@ textarea.form-control {
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
   -o-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out; }
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+  }
   @media screen and (prefers-reduced-motion: reduce) {
     .btn {
       -webkit-transition: none;
@@ -2857,7 +2858,8 @@ input[type="button"].btn-block {
     -ms-flex: 1 1 auto;
     flex: 1 1 auto;
     width: 1%;
-    margin-bottom: 0; }
+    margin-bottom: 0;
+    }
     .input-group > .form-control + .form-control,
     .input-group > .form-control + .custom-select,
     .input-group > .form-control + .custom-file,
@@ -8002,7 +8004,8 @@ body {
   font-size: 16px;
   line-height: 1.8;
   font-weight: 400;
-  color: #666666; }
+  color: #666666;
+  }
   body.menu-show {
     overflow: hidden;
     position: fixed;
@@ -8037,9 +8040,10 @@ h1, h2, h3, h4, h5,
   z-index: 3; }
   @media (max-width: 991.98px) {
     .ftco-navbar-light {
-      background: #000000 !important;
+      background: #666666 !important;
       position: relative;
-      top: 0; } }
+      top: 0;
+      } }
   .ftco-navbar-light .navbar-brand {
     color: #000000; }
     @media (max-width: 991.98px) {
@@ -8236,8 +8240,9 @@ h1, h2, h3, h4, h5,
     .slider-text h1 span {
       font-size: 54px;
       font-weight: 800;
-      color: #2ab2aa;
-      text-transform: uppercase; }
+      color: #ff6161;
+      text-transform: uppercase;
+      }
     @media (max-width: 767.98px) {
       .slider-text h1 {
         font-size: 20px; }
@@ -8288,7 +8293,8 @@ h1, h2, h3, h4, h5,
     font-size: 40px;
     font-weight: 500;
     border-left: 1px solid rgba(0, 0, 0, 0.05);
-    color: #2ab2aa; }
+    color: #ff6161;
+    }
     @media (max-width: 991.98px) {
       #timer .time {
         font-size: 30px; } }
@@ -8464,8 +8470,8 @@ h1, h2, h3, h4, h5,
   .btn:hover, .btn:active, .btn:focus {
     outline: none; }
   .btn.btn-primary {
-    background: #2ab2aa !important;
-    border: 1px solid #2ab2aa !important;
+    background: #ff6161 !important;
+    border: 1px solid #ff6161 !important;
     color: #fff !important; }
     .btn.btn-primary:hover {
       border: 1px solid #1162fb;
@@ -8840,13 +8846,14 @@ h1, h2, h3, h4, h5,
         display: none; } }
 
 .form-control {
-  height: 52px !important;
+  height: 40px !important;
   background: #fff !important;
   color: #000000 !important;
   font-size: 18px;
-  border-radius: 5px;
+  border-radius: 10px;
   -webkit-box-shadow: none !important;
-  box-shadow: none !important; }
+  box-shadow: none !important;
+  }
   .form-control:focus, .form-control:active {
     border-color: #000000; }
 
@@ -8866,7 +8873,7 @@ textarea.form-control {
   visibility: hidden; }
 
 .bg-primary {
-  background: #2ab2aa !important; }
+  background: #ff6161 !important; }
 
 .media-custom {
   background: #fff; }
@@ -8883,8 +8890,9 @@ textarea.form-control {
   font-size: 24px; }
 
 .ftco-section {
-  padding: 7em 0;
-  position: relative; }
+  padding: 4em 0;
+  position: relative;
+  }
   @media (max-width: 767.98px) {
     .ftco-section {
       padding: 6em 0; } }
@@ -8921,8 +8929,9 @@ textarea.form-control {
 
 .ftco-footer {
   font-size: 16px;
-  background: #000;
-  padding: 7em 0; }
+  background: #666666;
+  /* padding: 7em 0; */
+  }
   .ftco-footer .ftco-footer-logo {
     text-transform: uppercase;
     letter-spacing: .1em; }
