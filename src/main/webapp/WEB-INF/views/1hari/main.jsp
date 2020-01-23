@@ -240,106 +240,106 @@ $(function(){
 
 	
 
-	$.ajax({
-		url: "${pageContext.request.contextPath}/ajax/getTA.hari",
-		type: "post",
-		dataType: "json",
-		success: function(getTA) {
-			Chart.defaults.global.tooltips.custom = function(tooltip) {
-				// Tooltip Element
-				var tooltipEl2 = document.getElementById('chartjs-tooltip2');
-				// Hide if no tooltip
-				if (tooltip.opacity === 0) {
-					tooltipEl2.style.opacity = 0;
-					return;
-				}
+// 	$.ajax({
+// 		url: "${pageContext.request.contextPath}/ajax/getTA.hari",
+// 		type: "post",
+// 		dataType: "json",
+// 		success: function(getTA) {
+// 			Chart.defaults.global.tooltips.custom = function(tooltip) {
+// 				// Tooltip Element
+// 				var tooltipEl2 = document.getElementById('chartjs-tooltip2');
+// 				// Hide if no tooltip
+// 				if (tooltip.opacity === 0) {
+// 					tooltipEl2.style.opacity = 0;
+// 					return;
+// 				}
 
-				// Set caret Position
-				tooltipEl2.classList.remove('above', 'below', 'no-transform');
-				if (tooltip.yAlign) {
-					tooltipEl2.classList.add(tooltip.yAlign);
-				} else {
-					tooltipEl2.classList.add('no-transform');
-				}
+// 				// Set caret Position
+// 				tooltipEl2.classList.remove('above', 'below', 'no-transform');
+// 				if (tooltip.yAlign) {
+// 					tooltipEl2.classList.add(tooltip.yAlign);
+// 				} else {
+// 					tooltipEl2.classList.add('no-transform');
+// 				}
 
-				function getBody(bodyItem) {
-					return bodyItem.lines;
-				}
+// 				function getBody(bodyItem) {
+// 					return bodyItem.lines;
+// 				}
 
-				// Set Text
-				if (tooltip.body) {
-					var titleLines = tooltip.title || [];
-					var bodyLines = tooltip.body.map(getBody);
-					var innerHtml = '<thead>';
+// 				// Set Text
+// 				if (tooltip.body) {
+// 					var titleLines = tooltip.title || [];
+// 					var bodyLines = tooltip.body.map(getBody);
+// 					var innerHtml = '<thead>';
 
-					titleLines.forEach(function(title) {
-						innerHtml += '<tr><th>' + title + '</th></tr>';
-					});
-					innerHtml += '</thead><tbody>';
+// 					titleLines.forEach(function(title) {
+// 						innerHtml += '<tr><th>' + title + '</th></tr>';
+// 					});
+// 					innerHtml += '</thead><tbody>';
 
-					bodyLines.forEach(function(body, i) {
-						var colors = tooltip.labelColors[i];
-						var style = 'background:' + colors.backgroundColor;
-						style += '; border-color:' + colors.borderColor;
-						style += '; border-width: 2px';
-						var span = '<span class="chartjs-tooltip-key" style="' + style + '"></span>';
-						innerHtml += '<tr><td>' + span + body + '</td></tr>';
-					});
-					innerHtml += '</tbody>';
+// 					bodyLines.forEach(function(body, i) {
+// 						var colors = tooltip.labelColors[i];
+// 						var style = 'background:' + colors.backgroundColor;
+// 						style += '; border-color:' + colors.borderColor;
+// 						style += '; border-width: 2px';
+// 						var span = '<span class="chartjs-tooltip-key" style="' + style + '"></span>';
+// 						innerHtml += '<tr><td>' + span + body + '</td></tr>';
+// 					});
+// 					innerHtml += '</tbody>';
 
-					var tableRoot = tooltipEl2.querySelector('table');
-					tableRoot.innerHTML = innerHtml;
-				}
+// 					var tableRoot = tooltipEl2.querySelector('table');
+// 					tableRoot.innerHTML = innerHtml;
+// 				}
 
-				var positionY = this._chart.canvas.offsetTop;
-				var positionX = this._chart.canvas.offsetLeft;
+// 				var positionY = this._chart.canvas.offsetTop;
+// 				var positionX = this._chart.canvas.offsetLeft;
 
-				// Display, position, and set styles for font
-				tooltipEl2.style.opacity = 1;
-				tooltipEl2.style.left = positionX + tooltip.caretX + 'px';
-				tooltipEl2.style.top = positionY + tooltip.caretY + 'px';
-				tooltipEl2.style.fontFamily = tooltip._bodyFontFamily;
-				tooltipEl2.style.fontSize = tooltip.bodyFontSize;
-				tooltipEl2.style.fontStyle = tooltip._bodyFontStyle;
-				tooltipEl2.style.padding = tooltip.yPadding + 'px ' + tooltip.xPadding + 'px';
-			};
-			var config = {
-				type: 'pie',
-				data: {
-					datasets: [{
-						data: getTA.TAList,
-						backgroundColor: [
-							window.chartColors.red,
-							window.chartColors.orange,
-							window.chartColors.yellow,
-							window.chartColors.green,
-							window.chartColors.blue,
-						],
-					}],
-					labels: [
-						'출근',
-						'지각',
-						'결근',
-						'연차',
-						'조퇴'
-					]
-				},
-				options: {
-					responsive: true,
-					legend: {
-						display: true,
-						position: 'bottom'
-					},
-					tooltips: {
-						enabled: false,
-						mode: 'index'
-					}
-				}
-			}
-			var ctx = document.getElementById('chart-area').getContext('2d');
-			window.myPie = new Chart(ctx, config);
-		}
-	});
+// 				// Display, position, and set styles for font
+// 				tooltipEl2.style.opacity = 1;
+// 				tooltipEl2.style.left = positionX + tooltip.caretX + 'px';
+// 				tooltipEl2.style.top = positionY + tooltip.caretY + 'px';
+// 				tooltipEl2.style.fontFamily = tooltip._bodyFontFamily;
+// 				tooltipEl2.style.fontSize = tooltip.bodyFontSize;
+// 				tooltipEl2.style.fontStyle = tooltip._bodyFontStyle;
+// 				tooltipEl2.style.padding = tooltip.yPadding + 'px ' + tooltip.xPadding + 'px';
+// 			};
+// 			var config = {
+// 				type: 'pie',
+// 				data: {
+// 					datasets: [{
+// 						data: getTA.TAList,
+// 						backgroundColor: [
+// 							window.chartColors.red,
+// 							window.chartColors.orange,
+// 							window.chartColors.yellow,
+// 							window.chartColors.green,
+// 							window.chartColors.blue,
+// 						],
+// 					}],
+// 					labels: [
+// 						'출근',
+// 						'지각',
+// 						'결근',
+// 						'연차',
+// 						'조퇴'
+// 					]
+// 				},
+// 				options: {
+// 					responsive: true,
+// 					legend: {
+// 						display: true,
+// 						position: 'bottom'
+// 					},
+// 					tooltips: {
+// 						enabled: false,
+// 						mode: 'index'
+// 					}
+// 				}
+// 			}
+// 			var ctx = document.getElementById('chart-area').getContext('2d');
+// 			window.myPie = new Chart(ctx, config);
+// 		}
+// 	});
 
 
 

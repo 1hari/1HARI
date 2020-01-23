@@ -495,18 +495,17 @@ public class HrRestController {
 					teamWorkTimeList = new ArrayList<String>();
 					jsonArray = new JSONArray();
 					teamWorkTime = empSercive.getTeamMonthWorkTime(teamCode, month);// 2001/1,2,3,4,5..
-					if (teamWorkTime == null) {
+					if (teamWorkTime == null ) {
 						teamWorkTime = "0";
 					}
 					//split 함수로 잘라서 시간만 가져옴
 					String[] timeSplit = teamWorkTime.split(":");
-
 					teamWorkTimeList.add(timeSplit[0]);
-					count++;
 					jsonObject.put("data", teamWorkTimeList);
 					root.add(jsonObject);
 					
 				}
+				System.out.println(root.toString());
 			} catch (Exception e) {
 				log.debug("getEmpTAMonth 예외발생: " + e.getMessage());
 			}
