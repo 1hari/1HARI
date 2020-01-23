@@ -155,7 +155,7 @@
 	
 	<!-- 총 근무일  형남 0112-->
 	<select id="getTotalTA" resultType="Integer">
-		SELECT COUNT(*) FROM TALIST WHERE EMPNUM = 1001 AND (TACODE=1 OR TACODE=3)
+		SELECT COUNT(*) FROM TALIST WHERE EMPNUM = #{empNum} AND (TACODE=1 OR TACODE=3)
 	</select>
 	
     <!-- 오늘 출근시간 구하기-->
