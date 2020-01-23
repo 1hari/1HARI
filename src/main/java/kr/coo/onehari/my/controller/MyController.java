@@ -54,17 +54,17 @@ public class MyController {
 		if (!empdto.getPassword().trim().equals("")) { // 비밀번호 입력
 			// 비밀번호 암호화
 			empdto.setPassword(bCryptPasswordEncoder.encode(empdto.getPassword()));
-			
 		} else {
+			// 비밀번호를 입력하지 않고 수정하기를 하는 경우 기존 비밀번호를 그대로 사용
 			EmpDto updateEmp = empService.empModify(Integer.parseInt(principal.getName()));
 			empdto.setPassword(updateEmp.getPassword());
 		}
-			System.out.println(empdto.getPassword());
+		
 		try {
 			myService.updateEmpMyInfo(empdto);
 		} catch (Exception e) {
 			log.debug("MyController myInfo 예외발생: " + e.getMessage());
 		}
-		return "redirect:myInfo.hari";
+		return "redirect:myInfo.hari"; // 변경된 정보를 확인하기 위해 redirect로 다시 개인정보 프로필 수정 화면으로 이동
 	}
 }

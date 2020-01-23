@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!-- Custom CSS -->
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/hari/assets/extra-libs/multicheck/multicheck.css">
 <link href="${pageContext.request.contextPath}/resources/hari/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet">
@@ -97,6 +99,7 @@
 								<h3>사원 정보</h3>
 								<section>
 									<div>
+										<input id="empNum" name="empNUm" type="text" class="required form-control" readonly="readonly">
 										<label for="empName" style="margin-top: 10px; margin-bottom: 0px;">이름</label> 
 										<input id="empName" name="empName" type="text" class="required form-control"> 
 									</div>
@@ -152,6 +155,7 @@
 								<h3>Finish</h3>
 								<section>
 									<input id="acceptTerms" name="acceptTerms" type="checkbox" class="required">
+									
 									<label for="acceptTerms">모든 입력정보를 확인하였으며, 사원등록을 완료하겠습니다.</label>
 								</section>
 							</div>
@@ -265,10 +269,19 @@
 				$("#employmentSelect").append(employment);
 			}
 		});
+	
+		$.ajax({ // 마지막 사번 가져오기
+			url: "${pageContext.request.contextPath}/ajax/getLastEmpNum.hari",
+			type: "post",
+			dataType: "text",
+			success: function(lastEmpNum) {
+				$('#empNum').val(lastEmpNum);
+			}
+		});
 
 		/* 핸드폰번호 입력 유효성 검사 */
 		var phoneReg = /^01[016789]-\d{3,4}-\d{4}$/; // 핸드폰번호 정규표현식
-		var emailPattern = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+		var emailPattern = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i; // 이메일 정규표현식
         //0부터9a부터zA부터Z까지 (-, _, . 가 있어도 되고 없어도 되고, 0부터9a부터zA부터Z까지)반복횟수 상관없이가능
         //@기호포함  (-, _, . 가 있어도 되고 없어도 되고, 0부터9a부터zA부터Z까지)반복횟수 상관없이가능 .기호포함 2자~3자 이내 대소문자 구분안함
 		
@@ -299,17 +312,17 @@
 			this.value = phone;
 			
 			if (phoneReg.test($('#phoneNum').val())) { // 정규표현식 유효성 검사
-				$('.checkPhoneNum').text("");
-			} else {
+				$('.checkPhoneNum').text(""); // 정규표현식과 일치하면 아무 text를 출력하지 않음
+			} else { // 정규표현식과 일치하지 않으면
 				$('.checkPhoneNum').text("핸드폰번호 형식이 잘못되었습니다.");
 			}
 		})
 
 		//email 유효성체크 
         $('#email').keyup(function() {
-            if (emailPattern.test($('#email').val()) != true) { // 정규표현식 유효성 검사
+            if (emailPattern.test($('#email').val()) != true) { // 이메일 정규표현식과 일치하지 않으면
                 $('#emailCheck').text("이메일 형식이 잘못되었습니다.");
-            } else {
+            } else { // 정규표현식과 일치하지 않으면
                 $('#emailCheck').text("");
             }
         });
@@ -492,12 +505,17 @@
 		$.ajax({
 			url: "${pageContext.request.contextPath}/ajax/personnel/sendMail.hari",
 			data: 
-				{"mail" : $('#email').val(),
-				"name" : $('#empName').val()
+				{
+					"email" : $('#email').val(), // 발송할 이메일
+					"empName" : $('#empName').val(), // 사원이름
+					"empNum" : $('#empNum').val(), // 사번(로그인 아이디)(DB에서 마지막 사번 가져와서 + 1 작업 해야함)
+					"password" : $('#birth').val() // 생일(로그인 비밀번호)
 				},
 			dataType: "text",
 			method: "post",
-			success: function() {
+			success: function(data) {
+				console.log(data);
+				console.log('여기보내니');
 				$('#example-form').submit();
 			}
 		})

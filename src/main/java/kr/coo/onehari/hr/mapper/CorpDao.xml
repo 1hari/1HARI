@@ -41,4 +41,9 @@
 		FROM role
 	</select>
 	
+	<!-- 입력된 마지막 사번 가져오기 -->
+	<select id="getLastEmpNum" resultType="int">
+		SELECT MAX(EMPNUM) FROM EMP
+	</select>
+	
 </mapper>
