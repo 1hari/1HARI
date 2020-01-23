@@ -49,7 +49,6 @@ public class EmpService {
 		
 		try {
 			empdto.setPassword(bCryptPasswordEncoder.encode(empdto.getBirth())); // 비밀번호 암호화
-//			empdto.setPassword("1004");
 			result = empdao.empJoin(empdto);
 			result = empdao.subempJoin(empdto);
 		} catch (Exception e) {
