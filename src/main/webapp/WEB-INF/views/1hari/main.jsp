@@ -214,7 +214,8 @@ $(function(){
 				
 				var horizontalBarChartData = {
 					labels: MONTHS,
-					datasets: [{
+					datasets: 
+						[{
 						label: 'Dataset 1',
 						backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
 						borderColor: window.chartColors.red,

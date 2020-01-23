@@ -365,13 +365,11 @@ public class HrRestController {
 	}
 
 	@RequestMapping(value = "personnel/sendMail.hari", method = RequestMethod.POST)
-	public String sendMail(HttpServletRequest req) {
+	public String sendMail(HttpServletRequest req, Principal principal) {
 		MimeMessage message = javaMailSender.createMimeMessage();
 		MimeMessageHelper messageHelper = null;
-		String email = req.getParameter("email");
-		String empName = req.getParameter("empName");
-		String empNum = req.getParameter("empNum");
-		String password = req.getParameter("password");
+		String mail = req.getParameter("mail");
+		String name = req.getParameter("name");
 		StringBuilder path = new StringBuilder();
 		path.append(req.getLocalAddr());
 		path.append(":");
@@ -381,17 +379,15 @@ public class HrRestController {
 		try {
 			messageHelper = new MimeMessageHelper(message, true, "UTF-8");
 			Map model = new HashMap();
-			model.put("email", email);
-			model.put("empName", empName);
-			model.put("empNum", empNum);
-			model.put("password", password);
-//			model.put("path", path.toString());
+			model.put("mail", mail);
+			model.put("name", name);
+			model.put("path", path.toString());
 			String mailBody = VelocityEngineUtils.mergeTemplateIntoString(velocityEngineFactoryBean.createVelocityEngine(), "emailTemplate.vm", "UTF-8", model);
 			messageHelper.setFrom("2020.1hari@gmail.com");
-			messageHelper.setTo(email);
+			messageHelper.setTo(mail);
 			StringBuilder subject = new StringBuilder();
-			subject.append(empName);
-			subject.append(" 님  1HARI 주식회사에 입사하신 것을 환영합니다.");
+			subject.append(name);
+			subject.append(" 님 DOBEE에 사원등록이 되었습니다.");
 			messageHelper.setSubject(subject.toString());
 			messageHelper.setText(mailBody, true);
 			System.out.println("req.getContextPath()" + req.getContextPath());
@@ -472,9 +468,9 @@ public class HrRestController {
 		return root.toJSONString();
 	}
 	
-	//형남 0122 팀 별 근무시간 가져오기(월별)
-	@RequestMapping(value = "getAllEmpTA.hari", method = RequestMethod.POST)
-	public String getAllEmpTA(Principal pri) {
+	//형남 0123 팀 별 근무시간 가져오기(월별)
+	@RequestMapping(value = "getEmpTAMonth.hari", method = RequestMethod.POST)
+	public String getEmpTAMonth(String monthStr) {
 		JSONArray root = new JSONArray();
 		JSONArray jsonArray = null;
 		List<Integer> teamCodeList = new ArrayList<Integer>();
@@ -483,6 +479,7 @@ public class HrRestController {
 		String teamWorkTime=null;
 		JSONObject jsonObject=null;
 		int count=0;
+		int month= Integer.parseInt(monthStr);
 		try {
 			//현재 존재하는 팀코드 가져오기
 			teamCodeList = empSercive.getTeamCodeList();
@@ -497,23 +494,21 @@ public class HrRestController {
 				jsonObject.put("borderWidth", 1);
 				//팀별 + 월별 근무시간 리스트
 				teamWorkTimeList = new ArrayList<String>();
-				for(int i=1; i<13; i++) {
-					jsonArray=new JSONArray();
-					teamWorkTime=empSercive.getTeamMonthWorkTime(teamCode,i);//2001/1,2,3,4,5..
-					if(teamWorkTime ==null) {
-						teamWorkTime="0";
-					}
-					String[] timeSplit=teamWorkTime.split(":");
-					
-					teamWorkTimeList.add(timeSplit[0]);
+				jsonArray=new JSONArray();
+				teamWorkTime=empSercive.getTeamMonthWorkTime(teamCode,month);//2001/1,2,3,4,5..
+				if(teamWorkTime ==null) {
+					teamWorkTime="0";
 				}
+				String[] timeSplit=teamWorkTime.split(":");
+				
+				teamWorkTimeList.add(timeSplit[0]);
 				count++;
 				jsonArray.add(teamWorkTimeList);
 				jsonObject.put("data", jsonArray);
 				root.add(jsonObject);
 			}
 		} catch (Exception e) {
-			log.debug("getAllEmpTA 예외발생: " + e.getMessage());
+			log.debug("getEmpTAMonth 예외발생: " + e.getMessage());
 		}
 		return root.toJSONString();
 	}
