@@ -26,51 +26,72 @@ var MONTHS = ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9
 var dataset;
 var color = Chart.helpers.color;
 $(function(){
-	$.ajax({
-		url: "${pageContext.request.contextPath}/ajax/getAllEmpTA.hari",
-		type: "post",
-		dataType: "json",
-		success: function(getAllEmpTA) {
-// 			console.log(getAllEmpTA);
-			//java에서 못넣은 색 추가.. 제일 윗쪽에 chart.js에서 준 컬러값 배열 만들어놨음
-			for(var i =0; i<getAllEmpTA.length; i++){
-				getAllEmpTA[i].backgroundColor=color(colorArray[i]).alpha(0.5).rgbString();
-				getAllEmpTA[i].borderColor=colorArray[i];
-				dataset=getAllEmpTA;
-			}
-
-
-			
-			var horizontalBarChartData = {
-				labels: MONTHS,
-				datasets: dataset
-			}
-
-			
-			var ctx = document.getElementById('adminCanvas').getContext('2d');
-			window.myHorizontalBar = new Chart(ctx, {
-				type: 'horizontalBar',
-				data: horizontalBarChartData,
-				options: {
-					// Elements options apply to all of the options unless overridden in a dataset
-					// In this case, we are setting the border of each horizontal bar to be 2px wide
-					elements: {
-						rectangle: {
-							borderWidth: 2,
+	var dataset;
+	function promise_function(){
+		  return new Promise(function(resolve, reject){ 
+				$.ajax({
+					url: "${pageContext.request.contextPath}/ajax/getAllEmpTA.hari",
+					type: "post",
+					dataType: "json",
+					success: function(getAllEmpTA) {
+//			 			console.log(getAllEmpTA);
+						//java에서 못넣은 색 추가.. 제일 윗쪽에 chart.js에서 준 컬러값 배열 만들어놨음
+						for(var i =0; i<getAllEmpTA.length; i++){
+							getAllEmpTA[i].backgroundColor=color(colorArray[i]).alpha(0.5).rgbString();
+							getAllEmpTA[i].borderColor=colorArray[i];
+							dataset=getAllEmpTA;
 						}
-					},
-					responsive: true,
-					legend: {
-						position: 'right',
-					},
-					title: {
-						display: true,
-						text: 'Chart.js Horizontal Bar Chart'
+						resolve(true);
 					}
-				}
-			})
+				})		
+		  });
 		}
-	})
+	
+	function successFunction(){
+		alert('성공');
+		return false;
+	}
+	function errorFunction(){
+		  alert('에러');
+		  return false;
+	}	
+				
+
+
+			function chart(){
+				var horizontalBarChartData = {
+					labels: MONTHS,
+					datasets: dataset
+				}
+				var ctx = document.getElementById('adminCanvas').getContext('2d');
+				window.myHorizontalBar = new Chart(ctx, {
+					type: 'horizontalBar',
+					data: horizontalBarChartData,
+					options: {
+						// Elements options apply to all of the options unless overridden in a dataset
+						// In this case, we are setting the border of each horizontal bar to be 2px wide
+						elements: {
+							rectangle: {
+								borderWidth: 2,
+							}
+						},
+						responsive: true,
+						legend: {
+							position: 'right',
+						},
+						title: {
+							display: true,
+							text: 'Chart.js Horizontal Bar Chart'
+						}
+					}
+				})
+			}
+	
+				
+	promise_function()
+	.then(chart())
+	.then(successFunction)
+	.catch(errorFunction);
 
 
 	$('#month').change(function(){
@@ -90,6 +111,7 @@ $(function(){
 						getEmpTAMonth[i].backgroundColor=color(colorArray[i]).alpha(0.5).rgbString();
 						getEmpTAMonth[i].borderColor=colorArray[i];
 					}
+					console.log(getEmpTAMonth);
 					
 					MONTHS=[];
 					MONTHS.push($('#month').val() + '월');
@@ -722,22 +744,22 @@ $(function(){
 			<div class="col-md-6">
 				<div class="card">
 					<div class="card-body" style="padding-bottom: 0">
-						<h4 class="card-title m-b-0" style="margin-bottom:0;" >타임라인</h4>
-                                        <select class="select2 form-control custom-select select2-hidden-accessible" id="month" style="width: 13%; height:10%; margin-left: 88%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                                            <option value="0">전체</option>
-                                            <option value="1">1월</option>
-											<option value="2">2월</option>
-											<option value="3">3월</option>
-											<option value="4">4월</option>
-											<option value="5">5월</option>
-											<option value="6">6월</option>
-											<option value="7">7월</option>
-											<option value="8">8월</option>
-											<option value="9">9월</option>
-											<option value="10">10월</option>
-											<option value="11">11월</option>
-											<option value="12">12월</option>
-                                        </select>
+						<h4 class="card-title m-b-0" style="margin-bottom:0;" >근무시간 통계</h4>
+							<select class="select2 form-control custom-select select2-hidden-accessible" id="month" style="width: 13%; height:10%; margin-left: 88%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+								<option value="0">전체</option>
+								<option value="1">1월</option>
+								<option value="2">2월</option>
+								<option value="3">3월</option>
+								<option value="4">4월</option>
+								<option value="5">5월</option>
+								<option value="6">6월</option>
+								<option value="7">7월</option>
+								<option value="8">8월</option>
+								<option value="9">9월</option>
+								<option value="10">10월</option>
+								<option value="11">11월</option>
+								<option value="12">12월</option>
+							</select>
 						</div>
 					<div id="container" style="width: 100%; height: 100%; margin-bottom: 40px;">
 
