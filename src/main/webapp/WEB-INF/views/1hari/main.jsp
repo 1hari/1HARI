@@ -23,158 +23,29 @@ window.chartColors = {
 };
 var colorArray=[window.chartColors.red, window.chartColors.orange, window.chartColors.yellow, window.chartColors.green, window.chartColors.blue, window.chartColors.purple, window.chartColors.grey];
 var MONTHS = ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'];
+var dataset;
 var color = Chart.helpers.color;
-
 $(function(){
-
-	$.ajax({
-		url: "${pageContext.request.contextPath}/ajax/getTA.hari",
-		type: "post",
-		dataType: "json",
-		success: function(getTA) {
-			Chart.defaults.global.tooltips.custom = function(tooltip) {
-				// Tooltip Element
-				var tooltipEl2 = document.getElementById('chartjs-tooltip2');
-				// Hide if no tooltip
-				if (tooltip.opacity === 0) {
-					tooltipEl2.style.opacity = 0;
-					return;
-				}
-
-				// Set caret Position
-				tooltipEl2.classList.remove('above', 'below', 'no-transform');
-				if (tooltip.yAlign) {
-					tooltipEl2.classList.add(tooltip.yAlign);
-				} else {
-					tooltipEl2.classList.add('no-transform');
-				}
-
-				function getBody(bodyItem) {
-					return bodyItem.lines;
-				}
-
-				// Set Text
-				if (tooltip.body) {
-					var titleLines = tooltip.title || [];
-					var bodyLines = tooltip.body.map(getBody);
-					var innerHtml = '<thead>';
-
-					titleLines.forEach(function(title) {
-						innerHtml += '<tr><th>' + title + '</th></tr>';
-					});
-					innerHtml += '</thead><tbody>';
-
-					bodyLines.forEach(function(body, i) {
-						var colors = tooltip.labelColors[i];
-						var style = 'background:' + colors.backgroundColor;
-						style += '; border-color:' + colors.borderColor;
-						style += '; border-width: 2px';
-						var span = '<span class="chartjs-tooltip-key" style="' + style + '"></span>';
-						innerHtml += '<tr><td>' + span + body + '</td></tr>';
-					});
-					innerHtml += '</tbody>';
-
-					var tableRoot = tooltipEl2.querySelector('table');
-					tableRoot.innerHTML = innerHtml;
-				}
-
-				var positionY = this._chart.canvas.offsetTop;
-				var positionX = this._chart.canvas.offsetLeft;
-
-				// Display, position, and set styles for font
-				tooltipEl2.style.opacity = 1;
-				tooltipEl2.style.left = positionX + tooltip.caretX + 'px';
-				tooltipEl2.style.top = positionY + tooltip.caretY + 'px';
-				tooltipEl2.style.fontFamily = tooltip._bodyFontFamily;
-				tooltipEl2.style.fontSize = tooltip.bodyFontSize;
-				tooltipEl2.style.fontStyle = tooltip._bodyFontStyle;
-				tooltipEl2.style.padding = tooltip.yPadding + 'px ' + tooltip.xPadding + 'px';
-			};
-			console.log(getTA);
-			var config = {
-				type: 'pie',
-				data: {
-					datasets: [{
-						data: getTA.TAList,
-						backgroundColor: [
-							window.chartColors.red,
-							window.chartColors.orange,
-							window.chartColors.yellow,
-							window.chartColors.green,
-							window.chartColors.blue,
-						],
-					}],
-					labels: [
-						'출근',
-						'지각',
-						'결근',
-						'연차',
-						'조퇴'
-					]
-				},
-				options: {
-					responsive: true,
-					legend: {
-						display: true,
-						position: 'bottom'
-					},
-					tooltips: {
-						enabled: false,
-						mode: 'index'
-					}
-				}
-			}
-			var ctx = document.getElementById('chart-area').getContext('2d');
-			window.myPie = new Chart(ctx, config);
-		}
-	});
-
-
-
-	
-	//관리자 차트 부서별 근무시간***********************
 	$.ajax({
 		url: "${pageContext.request.contextPath}/ajax/getAllEmpTA.hari",
 		type: "post",
 		dataType: "json",
 		success: function(getAllEmpTA) {
+// 			console.log(getAllEmpTA);
 			//java에서 못넣은 색 추가.. 제일 윗쪽에 chart.js에서 준 컬러값 배열 만들어놨음
 			for(var i =0; i<getAllEmpTA.length; i++){
 				getAllEmpTA[i].backgroundColor=color(colorArray[i]).alpha(0.5).rgbString();
 				getAllEmpTA[i].borderColor=colorArray[i];
+				dataset=getAllEmpTA;
 			}
-			console.log(getAllEmpTA);
+
+
 			
 			var horizontalBarChartData = {
 				labels: MONTHS,
-				datasets: getAllEmpTA
-//		 			[
-//		 			{
-//		 			label: 'Dataset 1',
-//		 			backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
-//		 			borderColor: window.chartColors.red,
-//		 			borderWidth: 1,
-//		 			data: [
-//		 				101,
-//		 			]
-//		 		}, {
-//		 			label: 'Dataset 2',
-//		 			backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
-//		 			borderColor: window.chartColors.blue,
-//		 			data: [
-//		 				13,
-//		 			]
-//		 		}, {
-//		 			label: 'Dataset 3',
-//		 			backgroundColor: color(window.chartColors.yellow).alpha(0.5).rgbString(),
-//		 			borderColor: window.chartColors.yellow,
-//		 			data: [
-//		 				55,
-//		 			]
-//		 		}
-//		 		]
+				datasets: dataset
+			}
 
-			};
 			
 			var ctx = document.getElementById('adminCanvas').getContext('2d');
 			window.myHorizontalBar = new Chart(ctx, {
@@ -197,37 +68,77 @@ $(function(){
 						text: 'Chart.js Horizontal Bar Chart'
 					}
 				}
-			});
+			})
 		}
-	});
-	
-	
+	})
 
-	
+
 	$('#month').change(function(){
-		if($('#month') != '0'){
-		$.ajax({
-			url: "${pageContext.request.contextPath}/ajax/getEmpTAMonth.hari",
-			type: "post",
-			data: 
-				{
-					monthStr:$('#month').val()
-				},
-			dataType: "json",
-			success: function(getEmpTAMonth) {
-				for(var i =0; i<getEmpTAMonth.length; i++){
-					getEmpTAMonth[i].backgroundColor=color(colorArray[i]).alpha(0.5).rgbString();
-					getEmpTAMonth[i].borderColor=colorArray[i];
+		window.myHorizontalBar.destroy();
+		if($('#month').val() != 0){
+			$.ajax({
+				url: "${pageContext.request.contextPath}/ajax/getEmpTAMonth.hari",
+				type: "post",
+				data: 
+					{
+						monthStr:$('#month').val()
+					},
+				dataType: "json",
+				success: function(getEmpTAMonth) {
+					console.log();
+					for(var i =0; i<getEmpTAMonth.length; i++){
+						getEmpTAMonth[i].backgroundColor=color(colorArray[i]).alpha(0.5).rgbString();
+						getEmpTAMonth[i].borderColor=colorArray[i];
+					}
+					console.log(getEmpTAMonth);
+					MONTHS=[];
+					MONTHS.push($('#month').val() + '월');
+					var horizontalBarChartData = {
+						labels: MONTHS,
+						datasets: getEmpTAMonth
+					};
+					var ctx = document.getElementById('adminCanvas').getContext('2d');
+					window.myHorizontalBar = new Chart(ctx, {
+						type: 'horizontalBar',
+						data: horizontalBarChartData,
+						options: {
+							// Elements options apply to all of the options unless overridden in a dataset
+							// In this case, we are setting the border of each horizontal bar to be 2px wide
+							elements: {
+								rectangle: {
+									borderWidth: 2,
+								}
+							},
+							responsive: true,
+							legend: {
+								position: 'right',
+							},
+							title: {
+								display: true,
+								text: '월간 근무시간'
+							},
+							tooltips:{
+								enabled: true,
+							}
+						}
+					});
 				}
-				console.log(getEmpTAMonth);
-
-			      if (window.myHorizontalBar) {
-						MONTHS=[];
-						MONTHS.push($('#month').val());
-						window.myHorizontalBar.destroy();
+			})
+		} else{
+				$.ajax({
+					url: "${pageContext.request.contextPath}/ajax/getAllEmpTA.hari",
+					type: "post",
+					dataType: "json",
+					success: function(getAllEmpTA) {
+						//java에서 못넣은 색 추가.. 제일 윗쪽에 chart.js에서 준 컬러값 배열 만들어놨음
+						for(var i =0; i<getAllEmpTA.length; i++){
+							getAllEmpTA[i].backgroundColor=color(colorArray[i]).alpha(0.5).rgbString();
+							getAllEmpTA[i].borderColor=colorArray[i];
+						}
+						MONTHS=['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'];
 						var horizontalBarChartData = {
 							labels: MONTHS,
-							datasets: getEmpTAMonth
+							datasets: getAllEmpTA
 						};
 						var ctx = document.getElementById('adminCanvas').getContext('2d');
 						window.myHorizontalBar = new Chart(ctx, {
@@ -247,66 +158,475 @@ $(function(){
 								},
 								title: {
 									display: true,
-									text: 'Chart.js Horizontal Bar Chart'
+									text: '월간 근무시간'
 								},
 								tooltips:{
-									enabled: false,
+									enabled: true,
 								}
 							}
 						});
-			        } 
-				}
-			})
-		} else{
-			$.ajax({
-				url: "${pageContext.request.contextPath}/ajax/getAllEmpTA.hari",
-				type: "post",
-				dataType: "json",
-				success: function(getAllEmpTA) {
-					for(var i =0; i<getAllEmpTA.length; i++){
-						getAllEmpTA[i].backgroundColor=color(colorArray[i]).alpha(0.5).rgbString();
-						getAllEmpTA[i].borderColor=colorArray[i];
 					}
-
-				      if (window.myHorizontalBar) {
-							MONTHS=['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'];
-							window.myHorizontalBar.destroy();
-							var horizontalBarChartData = {
-								labels: MONTHS,
-								datasets: getAllEmpTA
-							};
-							var ctx = document.getElementById('adminCanvas').getContext('2d');
-							window.myHorizontalBar = new Chart(ctx, {
-								type: 'horizontalBar',
-								data: horizontalBarChartData,
-								options: {
-									// Elements options apply to all of the options unless overridden in a dataset
-									// In this case, we are setting the border of each horizontal bar to be 2px wide
-									elements: {
-										rectangle: {
-											borderWidth: 2,
-										}
-									},
-									responsive: true,
-									legend: {
-										position: 'right',
-									},
-									title: {
-										display: true,
-										text: 'Chart.js Horizontal Bar Chart'
-									},
-									tooltips:{
-										enabled: false,
-									}
-								}
-							});
-				        } 
-					}
-				})
-		}
+				});
+			}
+		})
 	})
-});
+
+
+
+
+			
+// 			var ctx = document.getElementById('adminCanvas').getContext('2d');
+// 			window.myHorizontalBar = new Chart(ctx, {
+// 				type: 'horizontalBar',
+// 				data: horizontalBarChartData,
+// 				options: {
+// 					// Elements options apply to all of the options unless overridden in a dataset
+// 					// In this case, we are setting the border of each horizontal bar to be 2px wide
+// 					elements: {
+// 						rectangle: {
+// 							borderWidth: 2,
+// 						}
+// 					},
+// 					responsive: true,
+// 					legend: {
+// 						position: 'right',
+// 					},
+// 					title: {
+// 						display: true,
+// 						text: 'Chart.js Horizontal Bar Chart'
+// 					}
+// 				}
+// 			})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+// 	$.ajax({
+// 		url: "${pageContext.request.contextPath}/ajax/getTA.hari",
+// 		type: "post",
+// 		dataType: "json",
+// 		success: function(getTA) {
+// 			Chart.defaults.global.tooltips.custom = function(tooltip) {
+// 				// Tooltip Element
+// 				var tooltipEl2 = document.getElementById('chartjs-tooltip2');
+// 				// Hide if no tooltip
+// 				if (tooltip.opacity === 0) {
+// 					tooltipEl2.style.opacity = 0;
+// 					return;
+// 				}
+
+// 				// Set caret Position
+// 				tooltipEl2.classList.remove('above', 'below', 'no-transform');
+// 				if (tooltip.yAlign) {
+// 					tooltipEl2.classList.add(tooltip.yAlign);
+// 				} else {
+// 					tooltipEl2.classList.add('no-transform');
+// 				}
+
+// 				function getBody(bodyItem) {
+// 					return bodyItem.lines;
+// 				}
+
+// 				// Set Text
+// 				if (tooltip.body) {
+// 					var titleLines = tooltip.title || [];
+// 					var bodyLines = tooltip.body.map(getBody);
+// 					var innerHtml = '<thead>';
+
+// 					titleLines.forEach(function(title) {
+// 						innerHtml += '<tr><th>' + title + '</th></tr>';
+// 					});
+// 					innerHtml += '</thead><tbody>';
+
+// 					bodyLines.forEach(function(body, i) {
+// 						var colors = tooltip.labelColors[i];
+// 						var style = 'background:' + colors.backgroundColor;
+// 						style += '; border-color:' + colors.borderColor;
+// 						style += '; border-width: 2px';
+// 						var span = '<span class="chartjs-tooltip-key" style="' + style + '"></span>';
+// 						innerHtml += '<tr><td>' + span + body + '</td></tr>';
+// 					});
+// 					innerHtml += '</tbody>';
+
+// 					var tableRoot = tooltipEl2.querySelector('table');
+// 					tableRoot.innerHTML = innerHtml;
+// 				}
+
+// 				var positionY = this._chart.canvas.offsetTop;
+// 				var positionX = this._chart.canvas.offsetLeft;
+
+// 				// Display, position, and set styles for font
+// 				tooltipEl2.style.opacity = 1;
+// 				tooltipEl2.style.left = positionX + tooltip.caretX + 'px';
+// 				tooltipEl2.style.top = positionY + tooltip.caretY + 'px';
+// 				tooltipEl2.style.fontFamily = tooltip._bodyFontFamily;
+// 				tooltipEl2.style.fontSize = tooltip.bodyFontSize;
+// 				tooltipEl2.style.fontStyle = tooltip._bodyFontStyle;
+// 				tooltipEl2.style.padding = tooltip.yPadding + 'px ' + tooltip.xPadding + 'px';
+// 			};
+// 			var config = {
+// 				type: 'pie',
+// 				data: {
+// 					datasets: [{
+// 						data: getTA.TAList,
+// 						backgroundColor: [
+// 							window.chartColors.red,
+// 							window.chartColors.orange,
+// 							window.chartColors.yellow,
+// 							window.chartColors.green,
+// 							window.chartColors.blue,
+// 						],
+// 					}],
+// 					labels: [
+// 						'출근',
+// 						'지각',
+// 						'결근',
+// 						'연차',
+// 						'조퇴'
+// 					]
+// 				},
+// 				options: {
+// 					responsive: true,
+// 					legend: {
+// 						display: true,
+// 						position: 'bottom'
+// 					},
+// 					tooltips: {
+// 						enabled: false,
+// 						mode: 'index'
+// 					}
+// 				}
+// 			}
+// 			var ctx = document.getElementById('chart-area').getContext('2d');
+// 			window.myPie = new Chart(ctx, config);
+// 		}
+// 	});
+
+
+
+// 	var horizontalBarChartData;
+// 	//관리자 차트 부서별 근무시간***********************
+// 	$.ajax({
+// 		url: "${pageContext.request.contextPath}/ajax/getAllEmpTA.hari",
+// 		type: "post",
+// 		dataType: "json",
+// 		success: function(getAllEmpTA) {
+// 			console.log(getAllEmpTA);
+// 			//java에서 못넣은 색 추가.. 제일 윗쪽에 chart.js에서 준 컬러값 배열 만들어놨음
+// 			for(var i =0; i<getAllEmpTA.length; i++){
+// 				getAllEmpTA[i].backgroundColor=color(colorArray[i]).alpha(0.5).rgbString();
+// 				getAllEmpTA[i].borderColor=colorArray[i];
+// 			}
+
+			
+// 			horizontalBarChartData = {
+// 				labels: MONTHS,
+// 				datasets:  [{
+// 					label: 'Dataset 1',
+// 					backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
+// 					borderColor: window.chartColors.red,
+// 					borderWidth: 1,
+// 					data: [
+// 						11,12
+// 					]
+// 				}, {
+// 					label: 'Dataset 2',
+// 					backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
+// 					borderColor: window.chartColors.blue,
+// 					data: [
+// 						15,16
+// 					]
+// 				}]
+// 			};
+			
+			
+// 			var ctx = document.getElementById('adminCanvas').getContext('2d');
+// 			window.myHorizontalBar = new Chart(ctx, {
+// 				type: 'horizontalBar',
+// 				data: horizontalBarChartData,
+// 				options: {
+// 					// Elements options apply to all of the options unless overridden in a dataset
+// 					// In this case, we are setting the border of each horizontal bar to be 2px wide
+// 					elements: {
+// 						rectangle: {
+// 							borderWidth: 2,
+// 						}
+// 					},
+// 					responsive: true,
+// 					legend: {
+// 						position: 'right',
+// 					},
+// 					title: {
+// 						display: true,
+// 						text: 'Chart.js Horizontal Bar Chart'
+// 					}
+// 				}
+// 			});
+// 		}
+// 	});
+	
+	
+
+// 	$('#month').change(function(){
+// 		window.myHorizontalBar.destroy();
+// 		if($('#month').val() != 0){
+// 		$.ajax({
+// 			url: "${pageContext.request.contextPath}/ajax/getEmpTAMonth.hari",
+// 			type: "post",
+// 			data: 
+// 				{
+// 					monthStr:$('#month').val()
+// 				},
+// 			dataType: "json",
+// 			success: function(getEmpTAMonth) {
+// 				for(var i =0; i<getEmpTAMonth.length; i++){
+// 					getEmpTAMonth[i].backgroundColor=color(colorArray[i]).alpha(0.5).rgbString();
+// 					getEmpTAMonth[i].borderColor=colorArray[i];
+// 				}
+// 				console.log(getEmpTAMonth);
+// 				MONTHS=[];
+// 				MONTHS.push($('#month').val() + '월');
+// 				var horizontalBarChartData = {
+// 					labels: MONTHS,
+// 					datasets: getEmpTAMonth
+// 				};
+// 				var ctx = document.getElementById('adminCanvas').getContext('2d');
+// 				window.myHorizontalBar = new Chart(ctx, {
+// 					type: 'horizontalBar',
+// 					data: horizontalBarChartData,
+// 					options: {
+// 						// Elements options apply to all of the options unless overridden in a dataset
+// 						// In this case, we are setting the border of each horizontal bar to be 2px wide
+// 						elements: {
+// 							rectangle: {
+// 								borderWidth: 2,
+// 							}
+// 						},
+// 						responsive: true,
+// 						legend: {
+// 							position: 'right',
+// 						},
+// 						title: {
+// 							display: true,
+// 							text: '월간 근무시간'
+// 						},
+// 						tooltips:{
+// 							enabled: true,
+// 						}
+// 					}
+// 				});
+// 			}
+// 		})
+// 	} else{
+// 			$.ajax({
+// 				url: "${pageContext.request.contextPath}/ajax/getAllEmpTA.hari",
+// 				type: "post",
+// 				dataType: "json",
+// 				success: function(getAllEmpTA) {
+// 					//java에서 못넣은 색 추가.. 제일 윗쪽에 chart.js에서 준 컬러값 배열 만들어놨음
+// 					for(var i =0; i<getAllEmpTA.length; i++){
+// 						getAllEmpTA[i].backgroundColor=color(colorArray[i]).alpha(0.5).rgbString();
+// 						getAllEmpTA[i].borderColor=colorArray[i];
+// 					}
+// 					MONTHS=['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'];
+// 					var horizontalBarChartData = {
+// 						labels: MONTHS,
+// 						datasets: getAllEmpTA
+// 					};
+// 					var ctx = document.getElementById('adminCanvas').getContext('2d');
+// 					window.myHorizontalBar = new Chart(ctx, {
+// 						type: 'horizontalBar',
+// 						data: horizontalBarChartData,
+// 						options: {
+// 							// Elements options apply to all of the options unless overridden in a dataset
+// 							// In this case, we are setting the border of each horizontal bar to be 2px wide
+// 							elements: {
+// 								rectangle: {
+// 									borderWidth: 2,
+// 								}
+// 							},
+// 							responsive: true,
+// 							legend: {
+// 								position: 'right',
+// 							},
+// 							title: {
+// 								display: true,
+// 								text: '월간 근무시간'
+// 							},
+// 							tooltips:{
+// 								enabled: true,
+// 							}
+// 						}
+// 					});
+// 				}
+// 			});
+// 		}
+// 	})
+// });
+
+
+// var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+// var color = Chart.helpers.color;
+// var horizontalBarChartData = {
+// 	labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+// 	datasets: [{
+// 		label: 'Dataset 1',
+// 		backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
+// 		borderColor: window.chartColors.red,
+// 		borderWidth: 1,
+// 		data: [
+// 			randomScalingFactor(),
+// 			randomScalingFactor(),
+// 			randomScalingFactor(),
+// 			randomScalingFactor(),
+// 			randomScalingFactor(),
+// 			randomScalingFactor(),
+// 			randomScalingFactor()
+// 		]
+// 	}, {
+// 		label: 'Dataset 2',
+// 		backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
+// 		borderColor: window.chartColors.blue,
+// 		data: [
+// 			randomScalingFactor(),
+// 			randomScalingFactor(),
+// 			randomScalingFactor(),
+// 			randomScalingFactor(),
+// 			randomScalingFactor(),
+// 			randomScalingFactor(),
+// 			randomScalingFactor()
+// 		]
+// 	}]
+
+// };
+
+// window.onload = function() {
+// 	var ctx = document.getElementById('canvas').getContext('2d');
+// 	window.myHorizontalBar = new Chart(ctx, {
+// 		type: 'horizontalBar',
+// 		data: horizontalBarChartData,
+// 		options: {
+// 			// Elements options apply to all of the options unless overridden in a dataset
+// 			// In this case, we are setting the border of each horizontal bar to be 2px wide
+// 			elements: {
+// 				rectangle: {
+// 					borderWidth: 2,
+// 				}
+// 			},
+// 			responsive: true,
+// 			legend: {
+// 				position: 'right',
+// 			},
+// 			title: {
+// 				display: true,
+// 				text: 'Chart.js Horizontal Bar Chart'
+// 			}
+// 		}
+// 	});
+
+// };
+
+// document.getElementById('randomizeData').addEventListener('click', function() {
+// 	var zero = Math.random() < 0.2 ? true : false;
+// 	horizontalBarChartData.datasets.forEach(function(dataset) {
+// 		dataset.data = dataset.data.map(function() {
+// 			return zero ? 0.0 : randomScalingFactor();
+// 		});
+
+// 	});
+// 	window.myHorizontalBar.update();
+// });
+
+// var colorNames = Object.keys(window.chartColors);
+
+// document.getElementById('addDataset').addEventListener('click', function() {
+// 	var colorName = colorNames[horizontalBarChartData.datasets.length % colorNames.length];
+// 	var dsColor = window.chartColors[colorName];
+// 	var newDataset = {
+// 		label: 'Dataset ' + (horizontalBarChartData.datasets.length + 1),
+// 		backgroundColor: color(dsColor).alpha(0.5).rgbString(),
+// 		borderColor: dsColor,
+// 		data: []
+// 	};
+
+// 	for (var index = 0; index < horizontalBarChartData.labels.length; ++index) {
+// 		newDataset.data.push(randomScalingFactor());
+// 	}
+
+// 	horizontalBarChartData.datasets.push(newDataset);
+// 	window.myHorizontalBar.update();
+// });
+
+// document.getElementById('addData').addEventListener('click', function() {
+// 	if (horizontalBarChartData.datasets.length > 0) {
+// 		var month = MONTHS[horizontalBarChartData.labels.length % MONTHS.length];
+// 		horizontalBarChartData.labels.push(month);
+
+// 		for (var index = 0; index < horizontalBarChartData.datasets.length; ++index) {
+// 			horizontalBarChartData.datasets[index].data.push(randomScalingFactor());
+// 		}
+
+// 		window.myHorizontalBar.update();
+// 	}
+// });
+
+// document.getElementById('removeDataset').addEventListener('click', function() {
+// 	horizontalBarChartData.datasets.pop();
+// 	window.myHorizontalBar.update();
+// });
+
+// document.getElementById('removeData').addEventListener('click', function() {
+// 	horizontalBarChartData.labels.splice(-1, 1); // remove the label first
+
+// 	horizontalBarChartData.datasets.forEach(function(dataset) {
+// 		dataset.data.pop();
+// 	});
+
+// 	window.myHorizontalBar.update();
+// });
+
 </script>
+
+
 
 	<style>
 		#canvas-holder {
@@ -394,6 +714,31 @@ $(function(){
 		<div class="row">
 			<div class="col-md-6">
 				<div class="card">
+					<div class="card-body" style="padding-bottom: 0">
+						<h4 class="card-title m-b-0" style="margin-bottom:0;" >타임라인</h4>
+                                        <select class="select2 form-control custom-select select2-hidden-accessible" id="month" style="width: 13%; height:10%; margin-left: 88%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                            <option value="0">전체</option>
+                                            <option value="1">1월</option>
+											<option value="2">2월</option>
+											<option value="3">3월</option>
+											<option value="4">4월</option>
+											<option value="5">5월</option>
+											<option value="6">6월</option>
+											<option value="7">7월</option>
+											<option value="8">8월</option>
+											<option value="9">9월</option>
+											<option value="10">10월</option>
+											<option value="11">11월</option>
+											<option value="12">12월</option>
+                                        </select>
+						</div>
+					<div id="container" style="width: 100%; height: 100%; margin-bottom: 40px;">
+
+						<canvas id="adminCanvas"></canvas>
+					</div>
+				</div>
+				<!--time line 시작 -->
+				<div class="card">
 					<div class="card-body">
 						<h4 class="card-title m-b-0">당월 근태통계</h4>
 						<div id="canvas-holder" style="width: 300px;">
@@ -433,31 +778,6 @@ $(function(){
 								</table>
 							</div>
 						</div>
-					</div>
-				</div>
-				<!--time line 시작 -->
-				<div class="card">
-					<div class="card-body" style="padding-bottom: 0">
-						<h4 class="card-title m-b-0" style="margin-bottom:0;" >타임라인</h4>
-                                        <select class="select2 form-control custom-select select2-hidden-accessible" id="month" style="width: 13%; height:10%; margin-left: 88%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                                            <option data-select2-id="3" value="0">Select</option>
-                                            <option value="1">1월</option>
-											<option value="2">2월</option>
-											<option value="3">3월</option>
-											<option value="4">4월</option>
-											<option value="5">5월</option>
-											<option value="6">6월</option>
-											<option value="7">7월</option>
-											<option value="8">8월</option>
-											<option value="9">9월</option>
-											<option value="10">10월</option>
-											<option value="11">11월</option>
-											<option value="12">12월</option>
-                                        </select>
-						</div>
-					<div id="container" style="width: 100%; height: 100%; margin-bottom: 40px;">
-
-						<canvas id="adminCanvas"></canvas>
 					</div>
 				</div>
 				<!--타임 라인 끝-->

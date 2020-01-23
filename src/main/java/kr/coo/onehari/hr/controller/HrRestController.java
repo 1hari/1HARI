@@ -458,7 +458,6 @@ public class HrRestController {
 			teamCodeList = empSercive.getTeamCodeList();
 			// JSON Data에 넣을 label 값(팀 이름)
 			teamNameList = empSercive.getTeamNameList();
-			System.out.println(teamNameList.toString());
 			// 모든 팀에 전월 근무시간 가져오기
 			for (int teamCode : teamCodeList) {
 				// 차트에 들어갈 json 데이터 형식으로 추가
@@ -478,9 +477,9 @@ public class HrRestController {
 					teamWorkTimeList.add(timeSplit[0]);
 				}
 				count++;
-				jsonArray.add(teamWorkTimeList);
-				jsonObject.put("data", jsonArray);
+				jsonObject.put("data", teamWorkTimeList);
 				root.add(jsonObject);
+				System.out.println("root.toString(): " + root.toString());
 			}
 		} catch (Exception e) {
 			log.debug("getAllEmpTA 예외발생: " + e.getMessage());
@@ -505,7 +504,6 @@ public class HrRestController {
 				teamCodeList = empSercive.getTeamCodeList();
 				// JSON Data에 넣을 label 값(팀 이름)
 				teamNameList = empSercive.getTeamNameList();
-				System.out.println(teamNameList.toString());
 				// 모든 팀에 전월 근무시간 가져오기
 				for (int teamCode : teamCodeList) {
 					// 차트에 들어갈 json 데이터 형식으로 추가
@@ -516,16 +514,17 @@ public class HrRestController {
 					teamWorkTimeList = new ArrayList<String>();
 					jsonArray = new JSONArray();
 					teamWorkTime = empSercive.getTeamMonthWorkTime(teamCode, month);// 2001/1,2,3,4,5..
-					if (teamWorkTime == null) {
+					if (teamWorkTime == null ) {
 						teamWorkTime = "0";
 					}
 					//split 함수로 잘라서 시간만 가져옴
 					String[] timeSplit = teamWorkTime.split(":");
 					teamWorkTimeList.add(timeSplit[0]);
-					count++;
 					jsonObject.put("data", teamWorkTimeList);
 					root.add(jsonObject);
+					
 				}
+				System.out.println(root.toString());
 			} catch (Exception e) {
 				log.debug("getEmpTAMonth 예외발생: " + e.getMessage());
 			}
