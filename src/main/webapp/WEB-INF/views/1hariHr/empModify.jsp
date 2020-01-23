@@ -105,7 +105,7 @@
 									</div>
 									<div class="form-group">
 										<label for="email">이메일</label>
-										<input type="text" id="email" name="email" class="form-control" value="${emp.email}@gmail.com" readonly>
+										<input type="text" id="email" name="email" class="form-control" value="${emp.email}" readonly>
 									</div>
 									<div class="form-group">
 										<label for="phoneNum">핸드폰번호</label>

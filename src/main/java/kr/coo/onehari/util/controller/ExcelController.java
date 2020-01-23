@@ -6,6 +6,7 @@ import java.util.Locale;
 
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +30,9 @@ public class ExcelController {
 	
 	@Autowired
 	private ExcelService excelService;
+	
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder; // 비밀번호 암호화
 
 	@RequestMapping(value = "personnel/excelUpload.hari", method = RequestMethod.GET)
 	public String excelForm(String isOk, String msg, Model model) {
@@ -61,9 +65,9 @@ public class ExcelController {
 		
 		for(int i = 0; i < excelemp.getEmpdto().size(); i++) {
 			emp = excelemp.getEmpdto().get(i);
-			emp.setPassword("1004");
 			
 			try {
+				emp.setPassword(bCryptPasswordEncoder.encode(emp.getBirth()));
 				result = empService.empJoin(emp);
 			} catch (Exception e) {
 				log.debug("Excel Controller insertExcelEmp 예외발생: " + e.getMessage());
@@ -109,6 +113,17 @@ public class ExcelController {
 		model.addAttribute("workbookName", "사원목록");
 		
 		// return "redirect:../../1hariHr/personnel/empList.hari";
+		return "excelDownloadView";
+	}
+	
+	@RequestMapping(value = "personnel/excelFormDownload.hari", method = RequestMethod.POST)
+	public String excelFormDownload(Model model) {
+		SXSSFWorkbook workbook = excelService.excelFileDownloadProcess();
+		
+		model.addAttribute("locale", Locale.KOREA);
+		model.addAttribute("workbook", workbook);
+		model.addAttribute("workbookName", "사원목록양식");
+		
 		return "excelDownloadView";
 	}
 }

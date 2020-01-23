@@ -99,7 +99,10 @@
 								<h3>사원 정보</h3>
 								<section>
 									<div>
+										<label for="empNum" style="margin-top: 10px; margin-bottom: 0px;">등록할 사번</label> 
 										<input id="empNum" name="empNUm" type="text" class="required form-control" readonly="readonly">
+									</div>
+									<div>
 										<label for="empName" style="margin-top: 10px; margin-bottom: 0px;">이름</label> 
 										<input id="empName" name="empName" type="text" class="required form-control"> 
 									</div>
@@ -109,14 +112,13 @@
 									</div>
 									<div>
 										<label for="resNum" style="margin-top: 10px; margin-bottom: 0px;">주민등록번호</label>
-										<button type="button" class="btn btn-outline-success" style="padding-top: 0px; padding-bottom: 0px;" onclick="CheckForm()">확인</button><br>
+										<button type="button" class="btn btn-outline-success" style="padding-top: 0px; padding-bottom: 0px;" onclick="CheckForm()">확인</button>
 										<input type="password" id="resNum" name="resNum" class="required form-control" maxlength="7" placeholder="주민등록번호 뒷자리">
 									</div>
 									<div>
 										<label for="phoneNum" style="margin-top: 10px; margin-bottom: 0px;">핸드폰번호</label> 
 										<span class="checkPhoneNum" style="color: red;"></span>
-										<input id="phoneNum" name="phoneNum" type="text" class="required form-control" maxlength="13" 
-												placeholder="(-) 없이 숫자만 입력하세요">
+										<input id="phoneNum" name="phoneNum" type="text" class="required form-control" maxlength="13" placeholder="(-) 없이 숫자만 입력하세요">
 									</div>
 									<div>
 										<label for="email" style="margin-top: 10px; margin-bottom: 0px;">이메일</label>

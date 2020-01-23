@@ -59,14 +59,13 @@ public class ExcelService {
 		try {
 			emplist = empdao.empList();
 		} catch (ClassNotFoundException | SQLException e) {
-			System.out.println("ExcelService excelEmpList 예외발생: " + e.getMessage());
 			log.debug("ExcelService excelEmpList 예외발생: " + e.getMessage());
 		}
 		return emplist;
 	}
 
 	/**
-	 * 과일 리스트를 간단한 엑셀 워크북 객체로 생성
+	 * 사원목록을 간단한 엑셀 워크북 객체로 생성
 	 * 
 	 * @param list
 	 * @return 생성된 워크북
@@ -317,7 +316,205 @@ public class ExcelService {
 	}
 
 	/**
-	 * 생성한 엑셀 워크북을 컨트롤레에서 받게해줄 메소
+	 * 사원목록 입력을 위한 양식 엑셀 워크북 객체로 생성
+	 * 
+	 * @return 생성된 워크북
+	 */
+	public SXSSFWorkbook makeSimpleEmpExcelFormWorkbook() {
+		SXSSFWorkbook workbook = new SXSSFWorkbook();
+
+		// 시트 생성
+		SXSSFSheet sheet = workbook.createSheet("사원목록");
+		
+		// 셀 스타일 설정
+		CellStyle centerStyle = workbook.createCellStyle();
+		centerStyle.setAlignment(HorizontalAlignment.CENTER);
+		centerStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+		
+		CellStyle indentStyle = workbook.createCellStyle();
+		indentStyle.setIndention((short) 1);
+		indentStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+
+		// 입력 설명
+//		// 행 추적을 위한 변수
+//		int rowLocation = 0;
+		
+		Row mergeRow = null;
+		Cell mergeCell = null;
+		
+		// 병합 행
+		mergeRow = sheet.createRow(0);
+		mergeCell = mergeRow.createCell(0);
+		mergeCell.setCellValue("사번 입력금지");
+		mergeCell.setCellStyle(indentStyle);
+		sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 11));
+		
+		mergeRow = sheet.createRow(1);
+		mergeCell = mergeRow.createCell(0);
+		mergeCell.setCellValue("모든 셀 서식은 텍스트 형식으로 설정하세요.");
+		mergeCell.setCellStyle(indentStyle);
+		sheet.addMergedRegion(new CellRangeAddress(1, 1, 0, 11));
+		
+		mergeRow = sheet.createRow(2);
+		mergeCell = mergeRow.createCell(0);
+		mergeCell.setCellValue("소속코드");
+		mergeCell.setCellStyle(indentStyle);
+		sheet.addMergedRegion(new CellRangeAddress(2, 2, 0, 1));
+		mergeCell = mergeRow.createCell(2);
+		mergeCell.setCellValue("[ 2001 : 총무팀 ],  [ 2002 : 인사팀 ], [ 2003 : 영업팀 ]");
+		mergeCell.setCellStyle(indentStyle);
+		sheet.addMergedRegion(new CellRangeAddress(2, 2, 2, 11));
+		
+		mergeRow = sheet.createRow(3);
+		mergeCell = mergeRow.createCell(0);
+		mergeCell.setCellValue("직급코드");
+		mergeCell.setCellStyle(indentStyle);
+		sheet.addMergedRegion(new CellRangeAddress(3, 3, 0, 1));
+		mergeCell = mergeRow.createCell(2);
+		mergeCell.setCellValue("[ 3001 : 대표 ],  [ 3002 : 이사 ], [ 3003 : 부장 ], [ 3004 : 과장 ], [ 3005 : 대리 ], [ 3006 : 사원 ]");
+		mergeCell.setCellStyle(indentStyle);
+		sheet.addMergedRegion(new CellRangeAddress(3, 3, 2, 11));
+		
+		mergeRow = sheet.createRow(4);
+		mergeCell = mergeRow.createCell(0);
+		mergeCell.setCellValue("직책코드");
+		mergeCell.setCellStyle(indentStyle);
+		sheet.addMergedRegion(new CellRangeAddress(4, 4, 0, 1));
+		mergeCell = mergeRow.createCell(2);
+		mergeCell.setCellValue("[ 4001 : CEO ],  [ 4002 : 팀장 ], [ 4003 : 파트장 ], [ 4004 : 팀원 ]");
+		mergeCell.setCellStyle(indentStyle);
+		sheet.addMergedRegion(new CellRangeAddress(4, 4, 2, 11));
+		
+		mergeRow = sheet.createRow(5);
+		mergeCell = mergeRow.createCell(0);
+		mergeCell.setCellValue("재직구분코드");
+		mergeCell.setCellStyle(indentStyle);
+		sheet.addMergedRegion(new CellRangeAddress(5, 5, 0, 1));
+		mergeCell = mergeRow.createCell(2);
+		mergeCell.setCellValue("[ 5001 : 재직 ],  [ 5002 : 휴직 ], [ 5003 : 퇴직 ]");
+		mergeCell.setCellStyle(indentStyle);
+		sheet.addMergedRegion(new CellRangeAddress(5, 5, 2, 11));
+		
+		mergeRow = sheet.createRow(6);
+		mergeCell = mergeRow.createCell(0);
+		mergeCell.setCellValue("생년월일 형식은 6자리로 입력하세요.");
+		mergeCell.setCellStyle(indentStyle);
+		sheet.addMergedRegion(new CellRangeAddress(6, 6, 0, 11));
+		
+		mergeRow = sheet.createRow(7);
+		mergeCell = mergeRow.createCell(0);
+		mergeCell.setCellValue("핸드폰번호는 (-)를 포함하여 입력하세요.");
+		mergeCell.setCellStyle(indentStyle);
+		sheet.addMergedRegion(new CellRangeAddress(7, 7, 0, 11));
+		
+		mergeRow = sheet.createRow(8);
+		mergeCell = mergeRow.createCell(0);
+		mergeCell.setCellValue("이메일은 Gmail 아이디만 입력하세요.");
+		mergeCell.setCellStyle(indentStyle);
+		sheet.addMergedRegion(new CellRangeAddress(8, 8, 0, 11));
+		
+		mergeRow = sheet.createRow(9);
+		mergeCell = mergeRow.createCell(0);
+		mergeCell.setCellValue("입사일 / 퇴사일은 'yyyy-mm-dd' 형식으로 입력하세요. (주의) 셀 서식은 텍스트");
+		mergeCell.setCellStyle(indentStyle);
+		sheet.addMergedRegion(new CellRangeAddress(9, 9, 0, 11));
+		
+		// 헤더 행 생
+		Row headerRow = sheet.createRow(10);
+		// 해당 행의 첫번째 열 셀 생성
+		Cell headerCell = headerRow.createCell(0);
+		headerCell.setCellValue("사번");
+		sheet.setColumnWidth(0, 2400);
+		// 해당 행의 두번째 열 셀 생성
+		headerCell = headerRow.createCell(1);
+		headerCell.setCellValue("사원이름");
+		sheet.setColumnWidth(1, 2800);
+		// 해당 행의 세번째 열 셀 생성
+		headerCell = headerRow.createCell(2);
+		headerCell.setCellValue("소속");
+		sheet.setColumnWidth(2, 2400);
+		// 해당 행의 네번째 열 셀 생성
+		headerCell = headerRow.createCell(3);
+		headerCell.setCellValue("직급");
+		sheet.setColumnWidth(3, 2400);
+		// 해당 행의 네번째 열 셀 생성
+		headerCell = headerRow.createCell(4);
+		headerCell.setCellValue("직책");
+		sheet.setColumnWidth(4, 2400);
+		// 해당 행의 네번째 열 셀 생성
+		headerCell = headerRow.createCell(5);
+		headerCell.setCellValue("재직구분");
+		sheet.setColumnWidth(5, 2400);
+		// 해당 행의 네번째 열 셀 생성
+		headerCell = headerRow.createCell(6);
+		headerCell.setCellValue("생년월일");
+		sheet.setColumnWidth(6, 2400);
+		// 해당 행의 네번째 열 셀 생성
+		headerCell = headerRow.createCell(7);
+		headerCell.setCellValue("주민등록번호");
+		sheet.setColumnWidth(7, 3600);
+		// 해당 행의 네번째 열 셀 생성
+		headerCell = headerRow.createCell(8);
+		headerCell.setCellValue("핸드폰번호");
+		sheet.setColumnWidth(8, 4000);
+		// 해당 행의 네번째 열 셀 생성
+		headerCell = headerRow.createCell(9);
+		headerCell.setCellValue("이메일");
+		sheet.setColumnWidth(9, 4000);
+		// 해당 행의 네번째 열 셀 생성
+		headerCell = headerRow.createCell(10);
+		headerCell.setCellValue("입사일");
+		sheet.setColumnWidth(10, 3200);
+		// 해당 행의 네번째 열 셀 생성
+		headerCell = headerRow.createCell(11);
+		headerCell.setCellValue("퇴사일");
+		sheet.setColumnWidth(11, 3200);
+		
+		for (int i = 0; i < headerRow.getLastCellNum(); i++) {
+			headerRow.getCell(i).setCellStyle(centerStyle);
+		}
+		
+		// 입력예제 생성
+		Row exampleRow = null;
+		Cell exampleCell = null;
+		
+		// 행 생성
+		exampleRow = sheet.createRow(11);
+		
+		// 입력예제 내용 생성 및 입력
+		exampleCell = exampleRow.createCell(0);
+		exampleCell.setCellValue("입력예제");
+		exampleCell = exampleRow.createCell(1);
+		exampleCell.setCellValue("홍길동");
+		exampleCell = exampleRow.createCell(2);
+		exampleCell.setCellValue("2001");
+		exampleCell = exampleRow.createCell(3);
+		exampleCell.setCellValue("3001");
+		exampleCell = exampleRow.createCell(4);
+		exampleCell.setCellValue("4001");
+		exampleCell = exampleRow.createCell(5);
+		exampleCell.setCellValue("5001");
+		exampleCell = exampleRow.createCell(6);
+		exampleCell.setCellValue("900101");
+		exampleCell = exampleRow.createCell(7);
+		exampleCell.setCellValue("1231231");
+		exampleCell = exampleRow.createCell(8);
+		exampleCell.setCellValue("010-1234-1234");
+		exampleCell = exampleRow.createCell(9);
+		exampleCell.setCellValue("hong");
+		exampleCell = exampleRow.createCell(10);
+		exampleCell.setCellValue("2020-01-01");
+		exampleCell = exampleRow.createCell(11);
+		exampleCell.setCellValue("2020-01-10");
+		
+		for (int i = 0; i < exampleRow.getLastCellNum(); i++) {
+			exampleRow.getCell(i).setCellStyle(centerStyle);
+		}
+		return workbook;
+	}
+	
+	/**
+	 * 생성한 엑셀 워크북을 컨트롤러에서 다운로드 하게 해줄 메서드(사원목록)
 	 * 
 	 * @param list
 	 * @return
@@ -325,12 +522,21 @@ public class ExcelService {
 	public SXSSFWorkbook excelFileDownloadProcess(List<EmpDto> list) {
 		return this.makeSimpleEmpExcelWorkbook(list);
 	}
+	
+	/**
+	 * 생성한 엑셀 워크북을 컨트롤러에서 다운로드 하게 해줄 메서드(양식)
+	 * 
+	 * @return
+	 */
+	public SXSSFWorkbook excelFileDownloadProcess() {
+		return this.makeSimpleEmpExcelFormWorkbook();
+	}
 
 	/**
-	 * 업로드한 엑셀파일을 과일 리스트로 만들기
+	 * 업로드한 엑셀파일을 사원목록으로 만들기
 	 * 
 	 * @param excelFile
-	 * @return 생성한 과일 리스트
+	 * @return 생성한 사원목록
 	 */
 	public List<EmpDto> uploadExcelFile(MultipartFile excelFile) {
 		List<EmpDto> list = new ArrayList<EmpDto>();
@@ -409,7 +615,6 @@ public class ExcelService {
 				list.add(empdto);
 			}
 		} catch (Exception e) {
-			System.out.println("ExcelService uploadExcel 예외발생: " + e.getMessage());
 			log.debug("ExcelService uploadExcel 예외발생: " + e.getMessage());
 		}
 		return list;

@@ -59,7 +59,7 @@
 										Excel 업로드
 									</button>
 								</a>
-								<a href="" style="color: white;">
+								<a href="javascript:excelFormDownload()" style="color: white;">
 									<button type="button" class="btn m-t-5 btn-info btn-block waves-effect waves-light" 
 											style="width: 20%; background-color: #20B2AA; margin-right: 1%;">
 										양식 받기
@@ -194,6 +194,12 @@
 	function excelDownload() {
 		var form = document.empTable;
 		form.action = "${pageContext.request.contextPath}/util/personnel/excelDownload.hari";
+		form.submit();
+	}
+
+	function excelFormDownload() {
+		var form = document.empTable;
+		form.action = "${pageContext.request.contextPath}/util/personnel/excelFormDownload.hari";
 		form.submit();
 	}
 
