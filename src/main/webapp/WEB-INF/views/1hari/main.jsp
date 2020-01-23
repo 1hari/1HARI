@@ -205,66 +205,105 @@ $(function(){
 
 	
 	$('#month').change(function(){
-	      if (window.myHorizontalBar) {
-				MONTHS=[];
-				MONTHS.push($('#month').val());
-				window.myHorizontalBar.destroy();
-				
-				var color = Chart.helpers.color;
-				
-				var horizontalBarChartData = {
-					labels: MONTHS,
-					datasets: 
-						[{
-						label: 'Dataset 1',
-						backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
-						borderColor: window.chartColors.red,
-						borderWidth: 1,
-						data: [
-							101,
-						]
-					}, {
-						label: 'Dataset 2',
-						backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
-						borderColor: window.chartColors.blue,
-						data: [
-							13,
-						]
-					}, {
-						label: 'Dataset 3',
-						backgroundColor: color(window.chartColors.yellow).alpha(0.5).rgbString(),
-						borderColor: window.chartColors.yellow,
-						data: [
-							55,
-						]
-					}]
-				};
-				var ctx = document.getElementById('adminCanvas').getContext('2d');
-				window.myHorizontalBar = new Chart(ctx, {
-					type: 'horizontalBar',
-					data: horizontalBarChartData,
-					options: {
-						// Elements options apply to all of the options unless overridden in a dataset
-						// In this case, we are setting the border of each horizontal bar to be 2px wide
-						elements: {
-							rectangle: {
-								borderWidth: 2,
+		if($('#month') != '0'){
+		$.ajax({
+			url: "${pageContext.request.contextPath}/ajax/getEmpTAMonth.hari",
+			type: "post",
+			data: 
+				{
+					monthStr:$('#month').val()
+				},
+			dataType: "json",
+			success: function(getEmpTAMonth) {
+				for(var i =0; i<getEmpTAMonth.length; i++){
+					getEmpTAMonth[i].backgroundColor=color(colorArray[i]).alpha(0.5).rgbString();
+					getEmpTAMonth[i].borderColor=colorArray[i];
+				}
+				console.log(getEmpTAMonth);
+
+			      if (window.myHorizontalBar) {
+						MONTHS=[];
+						MONTHS.push($('#month').val());
+						window.myHorizontalBar.destroy();
+						var horizontalBarChartData = {
+							labels: MONTHS,
+							datasets: getEmpTAMonth
+						};
+						var ctx = document.getElementById('adminCanvas').getContext('2d');
+						window.myHorizontalBar = new Chart(ctx, {
+							type: 'horizontalBar',
+							data: horizontalBarChartData,
+							options: {
+								// Elements options apply to all of the options unless overridden in a dataset
+								// In this case, we are setting the border of each horizontal bar to be 2px wide
+								elements: {
+									rectangle: {
+										borderWidth: 2,
+									}
+								},
+								responsive: true,
+								legend: {
+									position: 'right',
+								},
+								title: {
+									display: true,
+									text: 'Chart.js Horizontal Bar Chart'
+								},
+								tooltips:{
+									enabled: false,
+								}
 							}
-						},
-						responsive: true,
-						legend: {
-							position: 'right',
-						},
-						title: {
-							display: true,
-							text: 'Chart.js Horizontal Bar Chart'
-						},
-						tooltips:{
-							enabled: false,
-						}
+						});
+			        } 
+				}
+			})
+		} else{
+			$.ajax({
+				url: "${pageContext.request.contextPath}/ajax/getAllEmpTA.hari",
+				type: "post",
+				dataType: "json",
+				success: function(getAllEmpTA) {
+					for(var i =0; i<getAllEmpTA.length; i++){
+						getAllEmpTA[i].backgroundColor=color(colorArray[i]).alpha(0.5).rgbString();
+						getAllEmpTA[i].borderColor=colorArray[i];
 					}
-				});
-	        } 
+
+				      if (window.myHorizontalBar) {
+							MONTHS=['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'];
+							window.myHorizontalBar.destroy();
+							var horizontalBarChartData = {
+								labels: MONTHS,
+								datasets: getAllEmpTA
+							};
+							var ctx = document.getElementById('adminCanvas').getContext('2d');
+							window.myHorizontalBar = new Chart(ctx, {
+								type: 'horizontalBar',
+								data: horizontalBarChartData,
+								options: {
+									// Elements options apply to all of the options unless overridden in a dataset
+									// In this case, we are setting the border of each horizontal bar to be 2px wide
+									elements: {
+										rectangle: {
+											borderWidth: 2,
+										}
+									},
+									responsive: true,
+									legend: {
+										position: 'right',
+									},
+									title: {
+										display: true,
+										text: 'Chart.js Horizontal Bar Chart'
+									},
+									tooltips:{
+										enabled: false,
+									}
+								}
+							});
+				        } 
+					}
+				})
+		}
 	})
 });
 </script>

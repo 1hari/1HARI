@@ -481,9 +481,11 @@ $(function(){
 		type: "post",
 		dataType: "json",
 		success: function(getStartList) {
-			var itemArray=document.querySelectorAll('.fc-day.fc-widget-content');
-	         
-   		     setTimeout(function(){
+			var itemArray;
+			setTimeout(function(){
+				itemArray=document.querySelectorAll('.fc-day.fc-widget-content');
+			},100);
+			setTimeout(function(){
    		    	for(var i=0; i<itemArray.length; i++){
    		            for(var j=0; j<getStartList.startList.length; j++){
    		               if($(itemArray[i]).attr('data-date') == getStartList.startList[j]){
@@ -496,7 +498,7 @@ $(function(){
 						}
    					}
    		         }
-   		 	 },100);
+   		 	 },200);
    		     setTimeout(function(){
    				//이번달 퇴근기록 yyyy-mm-dd
    				$.ajax({
@@ -520,7 +522,7 @@ $(function(){
    						}
    					}
    				});
-   		 	 },200);
+   		 	 },300);
 		}
 	});
 });

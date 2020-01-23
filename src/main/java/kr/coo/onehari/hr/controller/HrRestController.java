@@ -37,19 +37,19 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequestMapping("ajax/")
 public class HrRestController {
-	
+
 	@Autowired
 	private CorpService corpservice;
-	
+
 	@Autowired
 	private MyService myService;
-	
+
 	@Autowired
 	private EmpService empSercive;
-	
+
 	@Autowired
 	private JavaMailSender javaMailSender;
-	
+
 	@Autowired
 	private VelocityEngineFactoryBean velocityEngineFactoryBean;
 
@@ -57,7 +57,7 @@ public class HrRestController {
 	@RequestMapping(value = "getTeamCode.hari", method = RequestMethod.POST)
 	public List<Team> getTeamCodes() {
 		List<Team> teamlist = null;
-		
+
 		try {
 			teamlist = corpservice.getTeamCodes();
 		} catch (Exception e) {
@@ -66,12 +66,12 @@ public class HrRestController {
 		}
 		return teamlist;
 	}
-	
+
 	// 사원등록 시 직책 SELECT BOX 김진호 200108
 	@RequestMapping(value = "getPositionCode.hari", method = RequestMethod.POST)
 	public List<Position> getPositionCodes() {
 		List<Position> positionlist = null;
-		
+
 		try {
 			positionlist = corpservice.getPositionCodes();
 		} catch (Exception e) {
@@ -80,12 +80,12 @@ public class HrRestController {
 		}
 		return positionlist;
 	}
-	
+
 	// 사원등록 시 직급 SELECT BOX 김진호 200108
 	@RequestMapping(value = "getRankCode.hari", method = RequestMethod.POST)
 	public List<Rank> getRankCodes() {
 		List<Rank> ranklist = null;
-		
+
 		try {
 			ranklist = corpservice.getRankCodes();
 		} catch (Exception e) {
@@ -94,12 +94,12 @@ public class HrRestController {
 		}
 		return ranklist;
 	}
-	
+
 	// 사원등록 시 재직구분 SELECT BOX 김진호 200108
 	@RequestMapping(value = "getEmploymentCode.hari", method = RequestMethod.POST)
 	public List<Employment> getEmploymentCodes() {
 		List<Employment> employmentlist = null;
-		
+
 		try {
 			employmentlist = corpservice.getEmploymentCodes();
 		} catch (Exception e) {
@@ -108,12 +108,12 @@ public class HrRestController {
 		}
 		return employmentlist;
 	}
-	
+
 	// 사원정보수정 시 권한 SELECT BOX 김진호 200112
 	@RequestMapping(value = "getRole.hari", method = RequestMethod.POST)
 	public List<Role> getRoles() {
 		List<Role> rolelist = null;
-		
+
 		try {
 			rolelist = corpservice.getRoles();
 		} catch (Exception e) {
@@ -122,8 +122,8 @@ public class HrRestController {
 		}
 		return rolelist;
 	}
-	
-	//형남 0110 비밀번호 변경 시 이메일과 사번 일치여부 확인
+
+	// 형남 0110 비밀번호 변경 시 이메일과 사번 일치여부 확인
 	@RequestMapping(value = "empNumEmail.hari", method = RequestMethod.POST)
 	public boolean empNumEmail(EmpDto emp) {
 		boolean isExist = false;
@@ -134,28 +134,28 @@ public class HrRestController {
 		}
 		return isExist;
 	}
-	
-	//형남 0112 출근하기
+
+	// 형남 0112 출근하기
 	@RequestMapping(value = "startWork.hari", method = RequestMethod.POST)
 	public boolean startWork(Principal pri) {
 		int result = 0;
-		//요청시간 String
+		// 요청시간 String
 		String tardyDateStr = "110000";
-		//현재시간 Date
+		// 현재시간 Date
 		Date curDate = new Date();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("HHmmss");
-		//요청시간을 Date로 parsing 후 time가져오기
+		// 요청시간을 Date로 parsing 후 time가져오기
 
 		try {
 			Date tardyDate = dateFormat.parse(tardyDateStr);
 			long tardyDateTime = tardyDate.getTime();
-			//현재시간을 요청시간의 형태로 format 후 time 가져오기
+			// 현재시간을 요청시간의 형태로 format 후 time 가져오기
 			curDate = dateFormat.parse(dateFormat.format(curDate));
 			long curDateTime = curDate.getTime();
-			//현재시간이 지각시간보다 크면(지각)
-			if(curDateTime >tardyDateTime) {
+			// 현재시간이 지각시간보다 크면(지각)
+			if (curDateTime > tardyDateTime) {
 				result = empSercive.insertStartWorkTardyTA(pri.getName());
-			}else {
+			} else {
 				result = empSercive.insertStartWorkTA(pri.getName());
 			}
 		} catch (Exception e) {
@@ -163,8 +163,8 @@ public class HrRestController {
 		}
 		return result > 0 ? true : false;
 	}
-	
-	//형남 0112 퇴근하기
+
+	// 형남 0112 퇴근하기
 	@RequestMapping(value = "endWork.hari", method = RequestMethod.POST)
 	public boolean endWork(Principal pri) {
 		int result = 0;
@@ -175,8 +175,8 @@ public class HrRestController {
 		}
 		return result > 0 ? true : false;
 	}
-	
-	//형남 0112 퇴근조회
+
+	// 형남 0112 퇴근조회
 	@RequestMapping(value = "todayEndWorkCheck.hari", method = RequestMethod.POST)
 	public boolean todayEndWorkCheck(Principal pri) {
 		int result = 0;
@@ -187,8 +187,8 @@ public class HrRestController {
 		}
 		return result > 0 ? true : false;
 	}
-	
-	//형남 0112 결근조회
+
+	// 형남 0112 결근조회
 	@RequestMapping(value = "todayAbsentCheck.hari", method = RequestMethod.POST)
 	public boolean todayAbsentCheck(Principal pri) {
 		int result = 0;
@@ -199,8 +199,8 @@ public class HrRestController {
 		}
 		return result > 0 ? true : false;
 	}
-	
-	//형남 0112 출근조회
+
+	// 형남 0112 출근조회
 	@RequestMapping(value = "todayStartWorkCheck.hari", method = RequestMethod.POST)
 	public boolean todayStartWorkCheck(Principal pri) {
 		int result = 0;
@@ -211,8 +211,8 @@ public class HrRestController {
 		}
 		return result > 0 ? true : false;
 	}
-	
-	//형남 0113 총 근무일조회
+
+	// 형남 0113 총 근무일조회
 	@RequestMapping(value = "getTotalTA.hari", method = RequestMethod.POST)
 	public int getTotalTA(Principal pri) {
 		int result = 0;
@@ -223,113 +223,113 @@ public class HrRestController {
 		}
 		return result;
 	}
-	
-	//형남 0113 현재까지 근무시간
+
+	// 형남 0113 현재까지 근무시간
 	@RequestMapping(value = "getWorkTime.hari", method = RequestMethod.POST)
 	public String getWorkTime(Principal pri) {
 		String totalTime = null;
 		try {
 			totalTime = empSercive.getWorkTime(pri.getName());
-			if(totalTime==null) {
-				totalTime="empty";
+			if (totalTime == null) {
+				totalTime = "empty";
 			}
 		} catch (Exception e) {
 			log.debug("getWorkTime 예외발생: " + e.getMessage());
 		}
 		return totalTime;
 	}
-	
-	//형남 0113 퇴근시간 가져오기
+
+	// 형남 0113 퇴근시간 가져오기
 	@RequestMapping(value = "getTodayTotalTime.hari", method = RequestMethod.POST)
 	public String getTodayTotalTime(Principal pri) {
 		String totalTime = null;
 		try {
 			totalTime = empSercive.getTodayTotalTime(pri.getName());
-			if(totalTime==null) {
-				totalTime="empty";
+			if (totalTime == null) {
+				totalTime = "empty";
 			}
 		} catch (Exception e) {
 			log.debug("getTodayTotalTime 예외발생: " + e.getMessage());
 		}
 		return totalTime;
 	}
-	
-	//형남 0113 이번주 현재까지 총 근무시간
+
+	// 형남 0113 이번주 현재까지 총 근무시간
 	@RequestMapping(value = "getWeekTotalTime.hari", method = RequestMethod.POST)
 	public String getWeekTotalTime(Principal pri) {
 		String totalTime = null;
 		try {
 			totalTime = empSercive.getWeekTotalTime(pri.getName());
-			if(totalTime==null) {
-				totalTime="empty";
+			if (totalTime == null) {
+				totalTime = "empty";
 			}
 		} catch (Exception e) {
 			log.debug("getWeekTotalTime 예외발생: " + e.getMessage());
 		}
 		return totalTime;
 	}
-	
-	//형남 0113 현재까지 총 근무시간
+
+	// 형남 0113 현재까지 총 근무시간
 	@RequestMapping(value = "getTotalTime.hari", method = RequestMethod.POST)
 	public String getTotalTime(Principal pri) {
 		String totalTime = null;
 		try {
 			totalTime = empSercive.getTotalTime(pri.getName());
-			if(totalTime==null) {
-				totalTime="empty";
+			if (totalTime == null) {
+				totalTime = "empty";
 			}
 		} catch (Exception e) {
 			log.debug("getTotalTime 예외발생: " + e.getMessage());
 		}
 		return totalTime;
 	}
-	
-	//형남 0115 이번주 총 근무시간
+
+	// 형남 0115 이번주 총 근무시간
 	@RequestMapping(value = "getWeekWorkTime.hari", method = RequestMethod.POST)
 	public String getWeekWorkTime(Principal pri) {
 		String totalTime = null;
 		try {
 			totalTime = empSercive.getWeekWorkTime(pri.getName());
-			if(totalTime==null) {
-				totalTime="empty";
+			if (totalTime == null) {
+				totalTime = "empty";
 			}
 		} catch (Exception e) {
 			log.debug("getWeekWorkTime 예외발생: " + e.getMessage());
 		}
 		return totalTime;
 	}
-	
-	//형남 0115 총 근무시간
+
+	// 형남 0115 총 근무시간
 	@RequestMapping(value = "getTotalWorkTime.hari", method = RequestMethod.POST)
 	public String getTotalWorkTime(Principal pri) {
 		String totalTime = null;
 		try {
 			totalTime = empSercive.getTotalWorkTime(pri.getName());
-			if(totalTime==null) {
-				totalTime="empty";
+			if (totalTime == null) {
+				totalTime = "empty";
 			}
 		} catch (Exception e) {
 			log.debug("getTotalWorkTime 예외발생: " + e.getMessage());
 		}
 		return totalTime;
 	}
-	
-	//형남 0114 dataDate 형식으로 가져오기
+
+	// 형남 0114 dataDate 형식으로 가져오기
 	@RequestMapping(value = "getDataDate.hari", method = RequestMethod.POST)
 	public String getDataDate(Principal pri) {
 		String dataDate = null;
 		try {
 			dataDate = empSercive.getDataDate(pri.getName());
-			if(dataDate==null) {
-				dataDate="empty";
+			if (dataDate == null) {
+				dataDate = "empty";
 			}
 		} catch (Exception e) {
 			log.debug("getDataDate 예외발생: " + e.getMessage());
 		}
 		return dataDate;
 	}
-	
-	//형남 0114 이번달 출근기록 yyyy-mm-dd
+
+	// 형남 0114 이번달 출근기록 yyyy-mm-dd
 	@RequestMapping(value = "getStartList.hari", method = RequestMethod.POST)
 	public String getStartList(Principal pri) {
 		List<String> startList = null;
@@ -345,14 +345,14 @@ public class HrRestController {
 		}
 		return jsonObject.toJSONString();
 	}
-	
-	//형남 0114 이번달 퇴근, 결근 기록 yyyy-mm-dd
+
+	// 형남 0114 이번달 퇴근, 결근 기록 yyyy-mm-dd
 	@RequestMapping(value = "getEndList.hari", method = RequestMethod.POST)
 	public String getEndList(Principal pri) {
 		JSONObject jsonObject = new JSONObject();
 		List<String> endList = null;
 		List<String> absentList = null;
-		
+
 		try {
 			endList = empSercive.getEndList(pri.getName());
 			absentList = empSercive.getAbsentList(pri.getName());
@@ -375,14 +375,15 @@ public class HrRestController {
 		path.append(":");
 		path.append(req.getLocalPort());
 		path.append(req.getContextPath());
-		
+
 		try {
 			messageHelper = new MimeMessageHelper(message, true, "UTF-8");
 			Map model = new HashMap();
 			model.put("mail", mail);
 			model.put("name", name);
 			model.put("path", path.toString());
-			String mailBody = VelocityEngineUtils.mergeTemplateIntoString(velocityEngineFactoryBean.createVelocityEngine(), "emailTemplate.vm", "UTF-8", model);
+			String mailBody = VelocityEngineUtils.mergeTemplateIntoString(
+					velocityEngineFactoryBean.createVelocityEngine(), "emailTemplate.vm", "UTF-8", model);
 			messageHelper.setFrom("2020.1hari@gmail.com");
 			messageHelper.setTo(mail);
 			StringBuilder subject = new StringBuilder();
@@ -395,21 +396,21 @@ public class HrRestController {
 		} catch (Exception e) {
 			log.debug("HrRestController sendMail 예외발생: " + e.getMessage());
 		}
-		
+
 		return "redirect:empList.hari";
 	}
-	
-	//형남 0121 출근, 지각, 결근 연차, 조퇴 횟수 가져오기(사원 대시보드 차트)
+
+	// 형남 0121 출근, 지각, 결근 연차, 조퇴 횟수 가져오기(사원 대시보드 차트)
 	@RequestMapping(value = "getTA.hari", method = RequestMethod.POST)
 	public String getTA(Principal pri) {
 		List<Integer> TAList = new ArrayList<Integer>();
 		JSONObject jsonObject = new JSONObject();
 		try {
-			int work= empSercive.getWork(pri.getName());
-			int tardy= empSercive.getTardy(pri.getName());
-			int absent= empSercive.getAbsent(pri.getName());
-			int annual= empSercive.getAnnual(pri.getName());
-			int early= empSercive.getEarly(pri.getName());
+			int work = empSercive.getWork(pri.getName());
+			int tardy = empSercive.getTardy(pri.getName());
+			int absent = empSercive.getAbsent(pri.getName());
+			int annual = empSercive.getAnnual(pri.getName());
+			int early = empSercive.getEarly(pri.getName());
 			TAList.add(work);
 			TAList.add(tardy);
 			TAList.add(absent);
@@ -421,40 +422,40 @@ public class HrRestController {
 		}
 		return jsonObject.toJSONString();
 	}
-	
-	//형남 0122 팀 별 근무시간 가져오기(전월)
+
+	// 형남 0122 팀 별 근무시간 가져오기(전월)
 	@RequestMapping(value = "getAllEmpTA.hari", method = RequestMethod.POST)
-	public String getAllEmpTA(Principal pri) {
+	public String getAllEmpTA() {
 		JSONArray root = new JSONArray();
 		JSONArray jsonArray = null;
 		List<Integer> teamCodeList = new ArrayList<Integer>();
 		List<String> teamNameList = new ArrayList<String>();
 		List<String> teamWorkTimeList = null;
-		String teamWorkTime=null;
-		JSONObject jsonObject=null;
-		int count=0;
+		String teamWorkTime = null;
+		JSONObject jsonObject = null;
+		int count = 0;
 		try {
-			//현재 존재하는 팀코드 가져오기
+			// 현재 존재하는 팀코드 가져오기
 			teamCodeList = empSercive.getTeamCodeList();
-			//JSON Data에 넣을 label 값(팀 이름) 
+			// JSON Data에 넣을 label 값(팀 이름)
 			teamNameList = empSercive.getTeamNameList();
 			System.out.println(teamNameList.toString());
-			//모든 팀에 전월 근무시간 가져오기
+			// 모든 팀에 전월 근무시간 가져오기
 			for (int teamCode : teamCodeList) {
-				//차트에 들어갈 json 데이터 형식으로 추가
-				jsonObject=new JSONObject();
+				// 차트에 들어갈 json 데이터 형식으로 추가
+				jsonObject = new JSONObject();
 				jsonObject.put("label", teamNameList.get(count));
 				jsonObject.put("borderWidth", 1);
-				//팀별 + 월별 근무시간 리스트
+				// 팀별 + 월별 근무시간 리스트
 				teamWorkTimeList = new ArrayList<String>();
-				for(int i=1; i<13; i++) {
-					jsonArray=new JSONArray();
-					teamWorkTime=empSercive.getTeamMonthWorkTime(teamCode,i);//2001/1,2,3,4,5..
-					if(teamWorkTime ==null) {
-						teamWorkTime="0";
+				for (int i = 1; i < 13; i++) {
+					jsonArray = new JSONArray();
+					teamWorkTime = empSercive.getTeamMonthWorkTime(teamCode, i);// 2001/1,2,3,4,5..
+					if (teamWorkTime == null) {
+						teamWorkTime = "0";
 					}
-					String[] timeSplit=teamWorkTime.split(":");
-					
+					String[] timeSplit = teamWorkTime.split(":");
+
 					teamWorkTimeList.add(timeSplit[0]);
 				}
 				count++;
@@ -467,64 +468,48 @@ public class HrRestController {
 		}
 		return root.toJSONString();
 	}
-	
-	//형남 0123 팀 별 근무시간 가져오기(월별)
+
+	// 형남 0123 팀 별 근무시간 가져오기(월별)
 	@RequestMapping(value = "getEmpTAMonth.hari", method = RequestMethod.POST)
 	public String getEmpTAMonth(String monthStr) {
+		int month = Integer.parseInt(monthStr);
 		JSONArray root = new JSONArray();
 		JSONArray jsonArray = null;
 		List<Integer> teamCodeList = new ArrayList<Integer>();
 		List<String> teamNameList = new ArrayList<String>();
 		List<String> teamWorkTimeList = null;
-		String teamWorkTime=null;
-		JSONObject jsonObject=null;
-		int count=0;
-		int month= Integer.parseInt(monthStr);
-		try {
-			//현재 존재하는 팀코드 가져오기
-			teamCodeList = empSercive.getTeamCodeList();
-			//JSON Data에 넣을 label 값(팀 이름) 
-			teamNameList = empSercive.getTeamNameList();
-			System.out.println(teamNameList.toString());
-			//모든 팀에 전월 근무시간 가져오기
-			for (int teamCode : teamCodeList) {
-				//차트에 들어갈 json 데이터 형식으로 추가
-				jsonObject=new JSONObject();
-				jsonObject.put("label", teamNameList.get(count));
-				jsonObject.put("borderWidth", 1);
-				//팀별 + 월별 근무시간 리스트
-				teamWorkTimeList = new ArrayList<String>();
-				jsonArray=new JSONArray();
-				teamWorkTime=empSercive.getTeamMonthWorkTime(teamCode,month);//2001/1,2,3,4,5..
-				if(teamWorkTime ==null) {
-					teamWorkTime="0";
+		String teamWorkTime = null;
+		JSONObject jsonObject = null;
+		int count = 0;
+			try {
+				// 현재 존재하는 팀코드 가져오기
+				teamCodeList = empSercive.getTeamCodeList();
+				// JSON Data에 넣을 label 값(팀 이름)
+				teamNameList = empSercive.getTeamNameList();
+				System.out.println(teamNameList.toString());
+				// 모든 팀에 전월 근무시간 가져오기
+				for (int teamCode : teamCodeList) {
+					// 차트에 들어갈 json 데이터 형식으로 추가
+					jsonObject = new JSONObject();
+					jsonObject.put("label", teamNameList.get(count));
+					jsonObject.put("borderWidth", 1);
+					// 팀별 + 월별 근무시간 리스트
+					teamWorkTimeList = new ArrayList<String>();
+					jsonArray = new JSONArray();
+					teamWorkTime = empSercive.getTeamMonthWorkTime(teamCode, month);// 2001/1,2,3,4,5..
+					if (teamWorkTime == null) {
+						teamWorkTime = "0";
+					}
+					//split 함수로 잘라서 시간만 가져옴
+					String[] timeSplit = teamWorkTime.split(":");
+					teamWorkTimeList.add(timeSplit[0]);
+					count++;
+					jsonObject.put("data", teamWorkTimeList);
+					root.add(jsonObject);
 				}
-				String[] timeSplit=teamWorkTime.split(":");
-				
-				teamWorkTimeList.add(timeSplit[0]);
-				count++;
-				jsonArray.add(teamWorkTimeList);
-				jsonObject.put("data", jsonArray);
-				root.add(jsonObject);
+			} catch (Exception e) {
+				log.debug("getEmpTAMonth 예외발생: " + e.getMessage());
 			}
-		} catch (Exception e) {
-			log.debug("getEmpTAMonth 예외발생: " + e.getMessage());
-		}
 		return root.toJSONString();
 	}
-	
-//	datasets: [
-//
-//
-//
-//				{
-//				label: 'Dataset 1',
-//				backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
-//				borderColor: window.chartColors.red,
-//				borderWidth: 1,
-//				data: [
-//					101,
-//				]
-//			}
-//		]
 }
