@@ -364,11 +364,13 @@ public class HrRestController {
 	}
 
 	@RequestMapping(value = "personnel/sendMail.hari", method = RequestMethod.POST)
-	public String sendMail(HttpServletRequest req, Principal principal) {
+	public String sendMail(HttpServletRequest req) {
 		MimeMessage message = javaMailSender.createMimeMessage();
 		MimeMessageHelper messageHelper = null;
-		String mail = req.getParameter("mail");
-		String name = req.getParameter("name");
+		String email = req.getParameter("email");
+		String empName = req.getParameter("empName");
+		String empNum = req.getParameter("empNum");
+		String password = req.getParameter("password");
 		StringBuilder path = new StringBuilder();
 		path.append(req.getLocalAddr());
 		path.append(":");
@@ -378,15 +380,17 @@ public class HrRestController {
 		try {
 			messageHelper = new MimeMessageHelper(message, true, "UTF-8");
 			Map model = new HashMap();
-			model.put("mail", mail);
-			model.put("name", name);
-			model.put("path", path.toString());
+			model.put("email", email);
+			model.put("empName", empName);
+			model.put("empNum", empNum);
+			model.put("password", password);
+//			model.put("path", path.toString());
 			String mailBody = VelocityEngineUtils.mergeTemplateIntoString(velocityEngineFactoryBean.createVelocityEngine(), "emailTemplate.vm", "UTF-8", model);
 			messageHelper.setFrom("2020.1hari@gmail.com");
-			messageHelper.setTo(mail);
+			messageHelper.setTo(email);
 			StringBuilder subject = new StringBuilder();
-			subject.append(name);
-			subject.append(" 님 DOBEE에 사원등록이 되었습니다.");
+			subject.append(empName);
+			subject.append(" 님  1HARI 주식회사에 입사하신 것을 환영합니다.");
 			messageHelper.setSubject(subject.toString());
 			messageHelper.setText(mailBody, true);
 			System.out.println("req.getContextPath()" + req.getContextPath());
