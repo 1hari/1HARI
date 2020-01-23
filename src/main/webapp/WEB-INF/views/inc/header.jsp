@@ -5,8 +5,9 @@
 
 $(function(){
 	getMyTheme();
-	var formData; //첨부파일 담기 위한 변수
-	
+	var imgfile = null; //첨부파일
+	var formData; //DB 로보낼 첨부파일과 색상코드를 담기 위한 변수
+
 	//색상 선택시 테마색 변경 적용
 	$('.demo').each(function() {
         $(this).minicolors({
@@ -46,9 +47,11 @@ $(function(){
 	    e.preventDefault(); // 기본효과 제한
 	    
 	    var files = e.originalEvent.dataTransfer.files; // 드래그한 파일들
-	    var file = files[0]; // 첫번째 첨부파일
+	    imgfile = files[0]; // 첫번째 첨부파일
+	    console.log(imgfile);
+	    console.log("드래그앤드롭으로 파일을 담았지");
 	    formData = new FormData(); // 폼데이터 객체    
-	    formData.append("file", file); // 첨부파일 추가
+	    formData.append("file", imgfile); // 첨부파일 추가
 	    
 	    $.ajax({
 	        url: "${pageContext.request.contextPath}/ajax/filename.hari",
@@ -57,7 +60,7 @@ $(function(){
 	        dataType: "json",
 	        processData: false, // processType: false - header가 아닌 body로 전달
 	        contentType: false,
-	        // ajax 업로드 요청이 성공적으로 처리되면
+	        // ajax  요청이 성공적으로 처리되면
 	        success: function(filenamejson){
 	            //console.log(filenamejson);
 	            if(checkImageType(filenamejson.fileName)){
@@ -75,41 +78,35 @@ $(function(){
 
 	//선택완료 클릭
 	$('#themeChoice').click(function(){
-		if(formData == null ){
-			formData = new FormData();
+		formData = new FormData();
+		console.log(imgfile);
+		console.log("선택완료!!!!")
+		if(imgfile != null){
+			console.log("if문 탔다")
+			formData.append("file",imgfile);
 		}
-		
 		formData.append("themeColor", $('#hue-demo').val()); //선택한 색상 추가
-		$.ajax({
-	        url: "${pageContext.request.contextPath}/ajax/setMyTheme.hari",
-	        type: "post",
-	        data: formData,
-	        dataType: "text",
-	        processData: false, // processType: false - header가 아닌 body로 전달
-	        contentType: false,
-	        // ajax 업로드 요청이 성공적으로 처리되면
-	        success: function(resultString){
-	           // console.log(resultString.trim());
-	            if(resultString.trim() == "true"){
-	            	swal({
-						text: "변경이 완료되었습니다.",
-						icon: "success",
-						button: "닫기"
-					}).then((value) => {
-						getMyTheme();
-						
-						$('#themeModal').modal('toggle');	
-	 				})
-		        }else {
-		        	swal({
-						text: "변경되지 않았습니다. 다시 확인 바랍니다.",
-						icon: "warning",
-						button: "닫기"
-					});
-				}
-	        }
-	    });
+		themeChange(formData);
+		console.log(imgfile);
+		imgfile = null;
 	});
+
+	//개인테마설정 모달 close 클릭시
+	$('.modelClose').click(function(){
+		getMyTheme();
+		$('#filename').val("");
+        $('#themeModal').modal('toggle');
+	});//개인테마설정 모달 close 클릭시 끝
+
+	//개인테마설정 모달 초기화 클릭시
+	$('#themeSetup').click(function(){
+		formData = new FormData();
+		formData.append("profileFileName","defaultprofile.png");
+		formData.append("themeColor","20B2AA");
+		themeChange(formData)
+	});
+	
+	
 	var isStart=false; //오늘 출근했는지
 	var isEnd=false;//오늘 퇴근했는지
 	var isAbsent=false;//오늘 결근인지
@@ -524,7 +521,7 @@ $(function(){
 		}
 	});
 });
-//페이지 이동시마다 사용자 설정 테마색으로 변경
+//사용자 설정 테마색으로 변경
 function getMyTheme(){
 	$.ajax({
 		url: "${pageContext.request.contextPath}/ajax/getMyTheme.hari",
@@ -533,6 +530,7 @@ function getMyTheme(){
 		success: function(theme) {
 			//console.log(theme);
 			//테마색 변경
+			
 			var itemArray=document.querySelectorAll('#theme');
 			
 			for(var i=0;i<itemArray.length;i++){
@@ -546,6 +544,40 @@ function getMyTheme(){
 	        $('#profileFileName').attr("src","${pageContext.request.contextPath}/resources/hari/profileFileUpload/"+theme.profileFileName);
 		}
 	});
+}
+function themeChange(formData){
+	$.ajax({
+        url: "${pageContext.request.contextPath}/ajax/setMyTheme.hari",
+        type: "post",
+        data: formData,
+        dataType: "text",
+        processData: false, // processType: false - header가 아닌 body로 전달
+        contentType: false,
+        // ajax 업로드 요청이 성공적으로 처리되면
+        success: function(resultString){
+           // console.log(resultString.trim());
+            if(resultString.trim() == "true"){
+            	swal({
+					text: "변경이 완료되었습니다.",
+					icon: "success",
+					button: "닫기"
+				}).then((value) => {
+					getMyTheme();
+					console.log("get 끝");
+					formData.delete("file");
+					
+					$('#filename').val("");
+					$('#themeModal').modal('toggle');	
+ 				})
+	        }else {
+	        	swal({
+					text: "변경되지 않았습니다. 다시 확인 바랍니다.",
+					icon: "warning",
+					button: "닫기"
+				});
+			}
+        }
+    });
 }
 </script>
 <!-- ============================================================== -->
@@ -682,7 +714,7 @@ function getMyTheme(){
 			<form action="/"  enctype="multipart/form-data" method="post">			
 				<div class="modal-header">
 					<h5 class="modal-title" id="exampleModalLabel">개인설정</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<button type="button" class="modelClose" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div><!-- modal-header 끝 -->
@@ -704,8 +736,9 @@ function getMyTheme(){
 				</div><!-- modal-body 끝 -->
 			
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-					<button type=button class="btn btn-primary" id="themeChoice">선택완료</button>
+					<button type="button" class="btn btn-secondary modelClose">취소</button>
+					<button type=button class="btn btn-info" id="themeSetup">초기화</button>
+					<button type=button class="btn btn-success" id="themeChoice">선택완료</button>
 				</div><!-- modal-footer 끝 -->
 			</form>	
 		</div><!-- modal-content 끝 -->

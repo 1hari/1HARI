@@ -43,9 +43,11 @@
 	<!-- 개인설정 변경 오형남 2020. 1 16 / 김정하 2020. 1. 21 -->
 	<update id="setMyTheme">
 		UPDATE THEME
-		SET THEMECOLOR = #{themeColor},
-			PROFILEFILENAME = #{profileFileName},
-			PROFILEFILEROOT = #{profileFileRoot}
+		SET THEMECOLOR = #{themeColor}
+			<if test="profileFileName != ''">
+				,PROFILEFILENAME = #{profileFileName},
+				PROFILEFILEROOT = #{profileFileRoot}
+			</if>
 		WHERE EMPNUM=#{empNum}
 	</update>
 </mapper>

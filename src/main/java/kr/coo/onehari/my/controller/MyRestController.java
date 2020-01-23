@@ -42,10 +42,11 @@ public class MyRestController {
 	
 	@RequestMapping("setMyTheme.hari")
 	public String setMyTheme(Theme theme, HttpServletRequest request, Principal principal) {
-		//System.out.println(theme);
+		System.out.println(theme);
 		theme.setEmpNum(Integer.parseInt(principal.getName()));
+		
 		MultipartFile file = theme.getFile(); //view에서 DTO에 저장된 파일받아오기
-		String filename = "defaultprofile.png";
+		String filename = "";
 		String path = request.getServletContext().getRealPath("/resources/hari/profileFileUpload"); //서버의 실 경로
 		
 		if(file != null) { //파일이 있으면
@@ -66,9 +67,15 @@ public class MyRestController {
 					log.debug("filewrite : " + e.getMessage());
 				}
 			}
+		}else {
+			if(theme.getProfileFileName() != null) {
+				filename = theme.getProfileFileName();
+			}
 		}
+		
 		theme.setProfileFileRoot(path); //첨부파일경로 저장
 		theme.setProfileFileName(filename); //첨부파일 이름 저장
+		
 		
 		int result = myService.setMyTheme(theme);
 		String resultString = "false";
