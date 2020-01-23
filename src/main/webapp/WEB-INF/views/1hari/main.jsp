@@ -95,7 +95,7 @@ $(function(){
 					MONTHS.push($('#month').val() + '월');
 
 
-				setTimeout(function(){
+// 				setTimeout(function(){
 					var horizontalBarChartData = {
 							labels: MONTHS,
 							datasets: getEmpTAMonth
@@ -127,7 +127,7 @@ $(function(){
 						}
 
 					})
-				},1000);
+// 				},1000);
 				}
 			})
 		} 
