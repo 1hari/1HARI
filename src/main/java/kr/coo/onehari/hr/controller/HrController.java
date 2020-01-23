@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.coo.onehari.hr.dto.EmpDto;
+import kr.coo.onehari.hr.service.CorpService;
 import kr.coo.onehari.hr.service.EmpService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -19,7 +20,10 @@ import lombok.extern.slf4j.Slf4j;
 public class HrController {
 	
 	@Autowired
-	private EmpService empservice;
+	private EmpService empService;
+	
+	@Autowired
+	private CorpService corpService;
 	
 	//근태관리 화면
 	@RequestMapping("attendance.hari")
@@ -39,10 +43,9 @@ public class HrController {
 		List<EmpDto> emplist = null;
 		
 		try {
-			emplist = empservice.empList();
+			emplist = empService.empList();
 			model.addAttribute("emplist", emplist);
 		} catch (Exception e) {
-			System.out.println("사원목록 예외발생: " + e.getMessage());
 			log.debug("사원목록 예외발생: " + e.getMessage());
 		}
 		return "1hariHr.empList";
@@ -51,7 +54,6 @@ public class HrController {
 	// 사원등록 김진호 시작 2020. 1. 7 <> 완성 2020. 1. 10
 	@RequestMapping(value = "personnel/empJoin.hari", method = RequestMethod.GET)
 	public String empJoin() {
-		
 		return "1hariHr.empJoin";
 	}
 	
@@ -62,7 +64,7 @@ public class HrController {
 		int result =0;
 		
 		try {
-			result = empservice.empJoin(empdto);
+			result = empService.empJoin(empdto);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -80,10 +82,8 @@ public class HrController {
 	// 사원정보수정(화면)
 	@RequestMapping(value = "personnel/empModify.hari", method = RequestMethod.GET)
 	public String empModify(int empNum, Model model) {
-		EmpDto emp = null;
-		
 		try {
-			emp = empservice.empModify(empNum);
+			EmpDto emp = empService.empModify(empNum);
 			model.addAttribute("emp", emp);
 		} catch (Exception e) {
 			log.debug("HrController empModify 예외발생: " + e.getMessage());
@@ -94,9 +94,8 @@ public class HrController {
 	// 사원정보수정(변경)
 	@RequestMapping(value = "personnel/empModify.hari", method = RequestMethod.POST)
 	public String empUpdate(EmpDto emp) {
-		
 		try {
-			empservice.empUpdate(emp);
+			empService.empUpdate(emp);
 		} catch (Exception e) {
 			log.debug("HrController empUpdate 예외발생: " + e.getMessage());
 		}

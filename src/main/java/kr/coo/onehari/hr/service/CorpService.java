@@ -1,5 +1,6 @@
 package kr.coo.onehari.hr.service;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -30,7 +31,6 @@ public class CorpService {
 			CorpDao corpdao = sqlsession.getMapper(CorpDao.class);
 			getTeamCodes = corpdao.getTeamCodes();
 		} catch (Exception e) {
-			System.out.println("CorpService getTeamCodes 예외발생: " + e.getMessage());
 			log.debug("CorpService getTeamCodes 예외발생: " + e.getMessage());
 		}
 		return getTeamCodes;
@@ -44,7 +44,6 @@ public class CorpService {
 			CorpDao corpdao = sqlsession.getMapper(CorpDao.class);
 			getPositionCodes = corpdao.getPositionCodes();
 		} catch (Exception e) {
-			System.out.println("CorpService getPositionCodes 예외발생: " + e.getMessage());
 			log.debug("CorpService getPositionCodes 예외발생: " + e.getMessage());
 		}
 		return getPositionCodes;
@@ -58,7 +57,6 @@ public class CorpService {
 			CorpDao corpdao = sqlsession.getMapper(CorpDao.class);
 			getRankCodes = corpdao.getRankCodes();
 		} catch (Exception e) {
-			System.out.println("CorpService getRankCodes 예외발생: " + e.getMessage());
 			log.debug("CorpService getRankCodes 예외발생: " + e.getMessage());
 		}
 		return getRankCodes;
@@ -72,7 +70,6 @@ public class CorpService {
 			CorpDao corpdao = sqlsession.getMapper(CorpDao.class);
 			getEmploymentCodes = corpdao.getEmploymentCodes();
 		} catch (Exception e) {
-			System.out.println("CorpService getEmploymentCodes 예외발생: " + e.getMessage());
 			log.debug("CorpService getEmploymentCodes 예외발생: " + e.getMessage());
 		}
 		return getEmploymentCodes;
@@ -86,9 +83,21 @@ public class CorpService {
 			CorpDao corpdao = sqlsession.getMapper(CorpDao.class);
 			getRoles = corpdao.getRoles();
 		} catch (Exception e) {
-			System.out.println("CorpService getRoles 예외발생: " + e.getMessage());
 			log.debug("CorpService getRoles 예외발생: " + e.getMessage());
 		}
 		return getRoles;
+	}
+	
+	// 입력된 마지막 사번 가져오기 김진호 2020. 1. 23
+	public int getLastEmpNum() {
+		int empNum = 0;
+		
+		try {
+			CorpDao corpdao = sqlsession.getMapper(CorpDao.class);
+			empNum = corpdao.getLastEmpNum() + 1;
+		} catch (ClassNotFoundException | SQLException e) {
+			log.debug("CorpService getEmpNum 예외발생: " + e.getMessage());
+		}
+		return empNum;
 	}
 }

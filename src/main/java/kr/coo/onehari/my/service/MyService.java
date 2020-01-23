@@ -145,7 +145,7 @@ public class MyService {
 
 	// 김진호 2020. 1. 21 개인정보 프로필 수정(변경)
 	@Transactional
-	public int updateEmpMyInfo(EmpDto empdto) {
+	public int updateEmpMyInfo(EmpDto empdto) throws Exception {
 		MyDao mydao = sqlsession.getMapper(MyDao.class);
 		int result = 0;
 		
@@ -154,6 +154,7 @@ public class MyService {
 			result = mydao.updateSubempMyInfo(empdto);
 		} catch (ClassNotFoundException | SQLException e) {
 			log.debug("MyService myInfo 예외발생: " + e.getMessage());
+			throw e;
 		}
 		return result;
 	}

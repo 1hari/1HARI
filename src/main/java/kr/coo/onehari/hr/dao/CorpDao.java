@@ -30,4 +30,7 @@ public interface CorpDao {
 	
 	// 권한 김진호 2020. 1. 12
 	public List<Role> getRoles() throws ClassNotFoundException, SQLException;
+	
+	// 마지막 사번 가져오기 김진호 2020. 1. 23
+	public int getLastEmpNum() throws ClassNotFoundException, SQLException;
 }

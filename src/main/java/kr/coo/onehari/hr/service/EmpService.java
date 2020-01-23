@@ -1,7 +1,6 @@
 package kr.coo.onehari.hr.service;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -12,10 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.coo.onehari.hr.dao.EmpDao;
-import kr.coo.onehari.hr.dao.CorpDao;
 import kr.coo.onehari.hr.dto.EmpDto;
-import kr.coo.onehari.hr.dto.Team;
-import kr.coo.onehari.my.dao.MyDao;
 import lombok.extern.slf4j.Slf4j;
 
 
