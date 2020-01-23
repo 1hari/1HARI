@@ -75,6 +75,7 @@ $(function(){
 
 	$('#month').change(function(){
 		window.myHorizontalBar.destroy();
+		
 		if($('#month').val() != 0){
 			$.ajax({
 				url: "${pageContext.request.contextPath}/ajax/getEmpTAMonth.hari",
@@ -85,17 +86,66 @@ $(function(){
 					},
 				dataType: "json",
 				success: function(getEmpTAMonth) {
-					console.log();
 					for(var i =0; i<getEmpTAMonth.length; i++){
 						getEmpTAMonth[i].backgroundColor=color(colorArray[i]).alpha(0.5).rgbString();
 						getEmpTAMonth[i].borderColor=colorArray[i];
 					}
-					console.log(getEmpTAMonth);
+					
 					MONTHS=[];
 					MONTHS.push($('#month').val() + '월');
+
+
+				setTimeout(function(){
+					var horizontalBarChartData = {
+							labels: MONTHS,
+							datasets: getEmpTAMonth
+						};
+
+					var ctx = document.getElementById('adminCanvas').getContext('2d');
+					window.myHorizontalBar = new Chart(ctx, {
+						type: 'horizontalBar',
+						data: horizontalBarChartData,
+						options: {
+							// Elements options apply to all of the options unless overridden in a dataset
+							// In this case, we are setting the border of each horizontal bar to be 2px wide
+							elements: {
+								rectangle: {
+									borderWidth: 2,
+								}
+							},
+							responsive: true,
+							legend: {
+								position: 'right',
+							},
+							title: {
+								display: true,
+								text: '월간 근무시간'
+							},
+							tooltips:{
+								enabled: true,
+							}
+						}
+
+					})
+				},1000);
+				}
+			})
+		} 
+		else{
+			$.ajax({
+				url: "${pageContext.request.contextPath}/ajax/getAllEmpTA.hari",
+				type: "post",
+				dataType: "json",
+				success: function(getAllEmpTA) {
+					//java에서 못넣은 색 추가.. 제일 윗쪽에 chart.js에서 준 컬러값 배열 만들어놨음
+					for(var i =0; i<getAllEmpTA.length; i++){
+						getAllEmpTA[i].backgroundColor=color(colorArray[i]).alpha(0.5).rgbString();
+						getAllEmpTA[i].borderColor=colorArray[i];
+					}
+					MONTHS=['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'];
 					var horizontalBarChartData = {
 						labels: MONTHS,
-						datasets: getEmpTAMonth
+						datasets: getAllEmpTA
 					};
 					var ctx = document.getElementById('adminCanvas').getContext('2d');
 					window.myHorizontalBar = new Chart(ctx, {
@@ -121,55 +171,12 @@ $(function(){
 								enabled: true,
 							}
 						}
-					});
+					})
 				}
 			})
-		} else{
-				$.ajax({
-					url: "${pageContext.request.contextPath}/ajax/getAllEmpTA.hari",
-					type: "post",
-					dataType: "json",
-					success: function(getAllEmpTA) {
-						//java에서 못넣은 색 추가.. 제일 윗쪽에 chart.js에서 준 컬러값 배열 만들어놨음
-						for(var i =0; i<getAllEmpTA.length; i++){
-							getAllEmpTA[i].backgroundColor=color(colorArray[i]).alpha(0.5).rgbString();
-							getAllEmpTA[i].borderColor=colorArray[i];
-						}
-						MONTHS=['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'];
-						var horizontalBarChartData = {
-							labels: MONTHS,
-							datasets: getAllEmpTA
-						};
-						var ctx = document.getElementById('adminCanvas').getContext('2d');
-						window.myHorizontalBar = new Chart(ctx, {
-							type: 'horizontalBar',
-							data: horizontalBarChartData,
-							options: {
-								// Elements options apply to all of the options unless overridden in a dataset
-								// In this case, we are setting the border of each horizontal bar to be 2px wide
-								elements: {
-									rectangle: {
-										borderWidth: 2,
-									}
-								},
-								responsive: true,
-								legend: {
-									position: 'right',
-								},
-								title: {
-									display: true,
-									text: '월간 근무시간'
-								},
-								tooltips:{
-									enabled: true,
-								}
-							}
-						});
-					}
-				});
-			}
-		})
+		}
 	})
+})
 
 
 
@@ -240,11 +247,11 @@ $(function(){
 
 	
 
-// 	$.ajax({
-// 		url: "${pageContext.request.contextPath}/ajax/getTA.hari",
-// 		type: "post",
-// 		dataType: "json",
-// 		success: function(getTA) {
+	$.ajax({
+		url: "${pageContext.request.contextPath}/ajax/getTA.hari",
+		type: "post",
+		dataType: "json",
+		success: function(getTA) {
 // 			Chart.defaults.global.tooltips.custom = function(tooltip) {
 // 				// Tooltip Element
 // 				var tooltipEl2 = document.getElementById('chartjs-tooltip2');
@@ -303,43 +310,43 @@ $(function(){
 // 				tooltipEl2.style.fontStyle = tooltip._bodyFontStyle;
 // 				tooltipEl2.style.padding = tooltip.yPadding + 'px ' + tooltip.xPadding + 'px';
 // 			};
-// 			var config = {
-// 				type: 'pie',
-// 				data: {
-// 					datasets: [{
-// 						data: getTA.TAList,
-// 						backgroundColor: [
-// 							window.chartColors.red,
-// 							window.chartColors.orange,
-// 							window.chartColors.yellow,
-// 							window.chartColors.green,
-// 							window.chartColors.blue,
-// 						],
-// 					}],
-// 					labels: [
-// 						'출근',
-// 						'지각',
-// 						'결근',
-// 						'연차',
-// 						'조퇴'
-// 					]
-// 				},
-// 				options: {
-// 					responsive: true,
-// 					legend: {
-// 						display: true,
-// 						position: 'bottom'
-// 					},
-// 					tooltips: {
-// 						enabled: false,
-// 						mode: 'index'
-// 					}
-// 				}
-// 			}
-// 			var ctx = document.getElementById('chart-area').getContext('2d');
-// 			window.myPie = new Chart(ctx, config);
-// 		}
-// 	});
+			var config = {
+				type: 'pie',
+				data: {
+					datasets: [{
+						data: getTA.TAList,
+						backgroundColor: [
+							window.chartColors.red,
+							window.chartColors.orange,
+							window.chartColors.yellow,
+							window.chartColors.green,
+							window.chartColors.blue,
+						],
+					}],
+					labels: [
+						'출근',
+						'지각',
+						'결근',
+						'연차',
+						'조퇴'
+					]
+				},
+				options: {
+					responsive: true,
+					legend: {
+						display: true,
+						position: 'bottom'
+					},
+					tooltips: {
+						enabled: true,
+						mode: 'index'
+					}
+				}
+			}
+			var ctx = document.getElementById('chart-area').getContext('2d');
+			window.myPie = new Chart(ctx, config);
+		}
+	});
 
 
 
