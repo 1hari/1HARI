@@ -108,6 +108,21 @@ public class HrRestController {
 		}
 		return employmentlist;
 	}
+	
+	// 사원등록 시 마지막 사번 가져오기 김진호 2020. 1. 23
+	@RequestMapping(value = "getLastEmpNum.hari", method = RequestMethod.POST)
+	public int getLastEmpNum() {
+		int empNum = 0;
+
+		try {
+			empNum = corpservice.getLastEmpNum();
+			System.out.println("empNum : " + empNum);
+		} catch (Exception e) {
+			log.debug("HrRestController getLastEmpNum 예외발생: " + e.getMessage());
+		}
+		
+		return empNum;
+	}
 
 	// 사원정보수정 시 권한 SELECT BOX 김진호 200112
 	@RequestMapping(value = "getRole.hari", method = RequestMethod.POST)
@@ -364,12 +379,16 @@ public class HrRestController {
 		return jsonObject.toJSONString();
 	}
 
+	// 사원등록 시 이메일 발송(Velocity) 김진호 2020. 1. 21
 	@RequestMapping(value = "personnel/sendMail.hari", method = RequestMethod.POST)
 	public String sendMail(HttpServletRequest req, Principal principal) {
 		MimeMessage message = javaMailSender.createMimeMessage();
 		MimeMessageHelper messageHelper = null;
-		String mail = req.getParameter("mail");
-		String name = req.getParameter("name");
+		String email = req.getParameter("email");
+		String empName = req.getParameter("empName");
+		String empNum = req.getParameter("empNum");
+		String password = req.getParameter("password");
+		
 		StringBuilder path = new StringBuilder();
 		path.append(req.getLocalAddr());
 		path.append(":");
@@ -379,24 +398,24 @@ public class HrRestController {
 		try {
 			messageHelper = new MimeMessageHelper(message, true, "UTF-8");
 			Map model = new HashMap();
-			model.put("mail", mail);
-			model.put("name", name);
+			model.put("email", email);
+			model.put("empName", empName);
+			model.put("empNum", empNum);
+			model.put("password", password);
 			model.put("path", path.toString());
 			String mailBody = VelocityEngineUtils.mergeTemplateIntoString(
 					velocityEngineFactoryBean.createVelocityEngine(), "emailTemplate.vm", "UTF-8", model);
 			messageHelper.setFrom("2020.1hari@gmail.com");
-			messageHelper.setTo(mail);
+			messageHelper.setTo(email);
 			StringBuilder subject = new StringBuilder();
-			subject.append(name);
-			subject.append(" 님 DOBEE에 사원등록이 되었습니다.");
+			subject.append(empName);
+			subject.append(" 님 1HARI 주식회사에 오신 것을 환영합니다.");
 			messageHelper.setSubject(subject.toString());
 			messageHelper.setText(mailBody, true);
-			System.out.println("req.getContextPath()" + req.getContextPath());
 			javaMailSender.send(message);
 		} catch (Exception e) {
 			log.debug("HrRestController sendMail 예외발생: " + e.getMessage());
 		}
-
 		return "redirect:empList.hari";
 	}
 
