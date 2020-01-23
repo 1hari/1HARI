@@ -1,6 +1,7 @@
 package kr.coo.onehari.hr.service;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -441,13 +442,25 @@ public class EmpService {
     }
     
     //형남 0122 존재하는 팀 목록 가져오기
-    public List<Integer> getTeamList() {
+    public List<Integer> getTeamCodeList() {
     	EmpDao dao = sqlsession.getMapper(EmpDao.class);
     	List<Integer> teamList = null;
     	try {
-            teamList=dao.getTeamList();
+            teamList=dao.getTeamCodeList();
     	} catch (ClassNotFoundException | SQLException e) {
-    		log.debug("getTeamList : " + e.getMessage());
+    		log.debug("getTeamCodeList : " + e.getMessage());
+    	}
+    	return teamList;
+    }
+    
+    //형남 0123 존재하는 팀 목록 가져오기
+    public List<String> getTeamNameList() {
+    	EmpDao dao = sqlsession.getMapper(EmpDao.class);
+    	List<String> teamList = null;
+    	try {
+    		teamList=dao.getTeamNameList();
+    	} catch (ClassNotFoundException | SQLException e) {
+    		log.debug("getTeamNameList : " + e.getMessage());
     	}
     	return teamList;
     }

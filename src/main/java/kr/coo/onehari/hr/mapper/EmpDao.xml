@@ -243,8 +243,13 @@
     
     
 	<!-- 팀 리스트 가져오기-->
-	<select id="getTeamList" resultType="Integer">
-		SELECT TEAMCODE FROM TEAM;
+	<select id="getTeamCodeList" resultType="Integer">
+		SELECT TEAMCODE FROM TEAM
+    </select>
+    
+	<!-- 팀 리스트 가져오기-->
+	<select id="getTeamNameList" resultType="String">
+		SELECT TEAMNAME FROM TEAM
     </select>
     
 

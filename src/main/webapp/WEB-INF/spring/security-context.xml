@@ -57,7 +57,7 @@
 							 											from EMP e join EMPROLELIST r
 																		on e.EMPNUM = r.EMPNUM
 																		where e.EMPNUM=?" />
-			<security:password-encoder ref="bCryptPasswordEncoder" />
+<!-- 			<security:password-encoder ref="bCryptPasswordEncoder" /> -->
 		</security:authentication-provider>
 	</security:authentication-manager>
 </beans>

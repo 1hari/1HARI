@@ -22,7 +22,8 @@ window.chartColors = {
 	grey: 'rgb(201, 203, 207)'
 };
 var colorArray=[window.chartColors.red, window.chartColors.orange, window.chartColors.yellow, window.chartColors.green, window.chartColors.blue, window.chartColors.purple, window.chartColors.grey];
-
+var MONTHS = ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'];
+var color = Chart.helpers.color;
 
 $(function(){
 
@@ -130,17 +131,6 @@ $(function(){
 
 
 
-
-
-
-
-	
-
-
-
-
-
-
 	
 	//관리자 차트 부서별 근무시간***********************
 	$.ajax({
@@ -148,89 +138,71 @@ $(function(){
 		type: "post",
 		dataType: "json",
 		success: function(getAllEmpTA) {
-			console.log(typeof(getAllEmpTA));
-			console.log(Object.keys(getAllEmpTA));
-			console.log(getAllEmpTA[0]);
-			console.log(getAllEmpTA.length);
-// 			for(var i=0; i<10; i++){
-// 				console.log(i);
-// 			}
-// 			var dataset=[];
-// 			for(var i=0; i<Object.keys(getAllEmpTA).length; i++){
-// 				console.log('{label: 부서이름,backgroundColor:' + color(colorArray[i]).alpha(0.5).rgbString() + ', borderColor:' +  colorArray[i] + ',	borderWidth: 1, 	data:' + [getAllEmpTA[i]] + '},');
-// 			}
-// 			for(var i=0; i<Object.keys(getAllEmpTA).length; i++){
-// 				dataset.push('{label: 부서이름,backgroundColor: + color(colorArray[i]).alpha(0.5).rgbString(), borderColor:colorArray[i],	borderWidth: 1, 	data:[getAllEmpTA[i]] },');
-// 			}
-// 			console.log(dataset);
-		}
-
-
-	
-	});
-	
-	var MONTHS = ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'];
-	var color = Chart.helpers.color;
-
-	
-
-	
-	var horizontalBarChartData = {
-		labels: MONTHS,
-		datasets: [
-
-
-
-			{
-			label: 'Dataset 1',
-			backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
-			borderColor: window.chartColors.red,
-			borderWidth: 1,
-			data: [
-				101,
-			]
-		}, {
-			label: 'Dataset 2',
-			backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
-			borderColor: window.chartColors.blue,
-			data: [
-				13,
-			]
-		}, {
-			label: 'Dataset 3',
-			backgroundColor: color(window.chartColors.yellow).alpha(0.5).rgbString(),
-			borderColor: window.chartColors.yellow,
-			data: [
-				55,
-			]
-		}
-		]
-
-	};
-
-	
-	var ctx = document.getElementById('adminCanvas').getContext('2d');
-	window.myHorizontalBar = new Chart(ctx, {
-		type: 'horizontalBar',
-		data: horizontalBarChartData,
-		options: {
-			// Elements options apply to all of the options unless overridden in a dataset
-			// In this case, we are setting the border of each horizontal bar to be 2px wide
-			elements: {
-				rectangle: {
-					borderWidth: 2,
-				}
-			},
-			responsive: true,
-			legend: {
-				position: 'right',
-			},
-			title: {
-				display: true,
-				text: 'Chart.js Horizontal Bar Chart'
+			//java에서 못넣은 색 추가.. 제일 윗쪽에 chart.js에서 준 컬러값 배열 만들어놨음
+			for(var i =0; i<getAllEmpTA.length; i++){
+				getAllEmpTA[i].backgroundColor=color(colorArray[i]).alpha(0.5).rgbString();
+				getAllEmpTA[i].borderColor=colorArray[i];
 			}
+			console.log(getAllEmpTA);
+			
+			var horizontalBarChartData = {
+				labels: MONTHS,
+				datasets: getAllEmpTA
+//		 			[
+//		 			{
+//		 			label: 'Dataset 1',
+//		 			backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
+//		 			borderColor: window.chartColors.red,
+//		 			borderWidth: 1,
+//		 			data: [
+//		 				101,
+//		 			]
+//		 		}, {
+//		 			label: 'Dataset 2',
+//		 			backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
+//		 			borderColor: window.chartColors.blue,
+//		 			data: [
+//		 				13,
+//		 			]
+//		 		}, {
+//		 			label: 'Dataset 3',
+//		 			backgroundColor: color(window.chartColors.yellow).alpha(0.5).rgbString(),
+//		 			borderColor: window.chartColors.yellow,
+//		 			data: [
+//		 				55,
+//		 			]
+//		 		}
+//		 		]
+
+			};
+			
+			var ctx = document.getElementById('adminCanvas').getContext('2d');
+			window.myHorizontalBar = new Chart(ctx, {
+				type: 'horizontalBar',
+				data: horizontalBarChartData,
+				options: {
+					// Elements options apply to all of the options unless overridden in a dataset
+					// In this case, we are setting the border of each horizontal bar to be 2px wide
+					elements: {
+						rectangle: {
+							borderWidth: 2,
+						}
+					},
+					responsive: true,
+					legend: {
+						position: 'right',
+					},
+					title: {
+						display: true,
+						text: 'Chart.js Horizontal Bar Chart'
+					}
+				}
+			});
 		}
 	});
+	
+	
+
 	
 	$('#month').change(function(){
 	      if (window.myHorizontalBar) {
@@ -266,7 +238,7 @@ $(function(){
 						]
 					}]
 				};
-				
+				var ctx = document.getElementById('adminCanvas').getContext('2d');
 				window.myHorizontalBar = new Chart(ctx, {
 					type: 'horizontalBar',
 					data: horizontalBarChartData,

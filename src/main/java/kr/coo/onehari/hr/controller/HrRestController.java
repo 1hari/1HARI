@@ -422,19 +422,33 @@ public class HrRestController {
 		return jsonObject.toJSONString();
 	}
 	
-	//형남 0122 팀 별 근무시간 가져오기(월)
+	//형남 0122 팀 별 근무시간 가져오기(전월)
 	@RequestMapping(value = "getAllEmpTA.hari", method = RequestMethod.POST)
 	public String getAllEmpTA(Principal pri) {
-		JSONArray jsonArray = new JSONArray();
-		List<Integer> teamList = new ArrayList<Integer>();
+		JSONArray root = new JSONArray();
+		JSONArray jsonArray = null;
+		List<Integer> teamCodeList = new ArrayList<Integer>();
+		List<String> teamNameList = new ArrayList<String>();
 		List<String> teamWorkTimeList = null;
 		String teamWorkTime=null;
+		JSONObject jsonObject=null;
 		int count=0;
 		try {
-			teamList = empSercive.getTeamList();
-			for (int teamCode : teamList) {
+			//현재 존재하는 팀코드 가져오기
+			teamCodeList = empSercive.getTeamCodeList();
+			//JSON Data에 넣을 label 값(팀 이름) 
+			teamNameList = empSercive.getTeamNameList();
+			System.out.println(teamNameList.toString());
+			//모든 팀에 전월 근무시간 가져오기
+			for (int teamCode : teamCodeList) {
+				//차트에 들어갈 json 데이터 형식으로 추가
+				jsonObject=new JSONObject();
+				jsonObject.put("label", teamNameList.get(count));
+				jsonObject.put("borderWidth", 1);
+				//팀별 + 월별 근무시간 리스트
 				teamWorkTimeList = new ArrayList<String>();
 				for(int i=1; i<13; i++) {
+					jsonArray=new JSONArray();
 					teamWorkTime=empSercive.getTeamMonthWorkTime(teamCode,i);//2001/1,2,3,4,5..
 					if(teamWorkTime ==null) {
 						teamWorkTime="0";
@@ -445,11 +459,73 @@ public class HrRestController {
 				}
 				count++;
 				jsonArray.add(teamWorkTimeList);
+				jsonObject.put("data", jsonArray);
+				root.add(jsonObject);
 			}
 		} catch (Exception e) {
 			log.debug("getAllEmpTA 예외발생: " + e.getMessage());
 		}
-		return jsonArray.toJSONString();
+		return root.toJSONString();
 	}
 	
+	//형남 0122 팀 별 근무시간 가져오기(월별)
+	@RequestMapping(value = "getAllEmpTA.hari", method = RequestMethod.POST)
+	public String getAllEmpTA(Principal pri) {
+		JSONArray root = new JSONArray();
+		JSONArray jsonArray = null;
+		List<Integer> teamCodeList = new ArrayList<Integer>();
+		List<String> teamNameList = new ArrayList<String>();
+		List<String> teamWorkTimeList = null;
+		String teamWorkTime=null;
+		JSONObject jsonObject=null;
+		int count=0;
+		try {
+			//현재 존재하는 팀코드 가져오기
+			teamCodeList = empSercive.getTeamCodeList();
+			//JSON Data에 넣을 label 값(팀 이름) 
+			teamNameList = empSercive.getTeamNameList();
+			System.out.println(teamNameList.toString());
+			//모든 팀에 전월 근무시간 가져오기
+			for (int teamCode : teamCodeList) {
+				//차트에 들어갈 json 데이터 형식으로 추가
+				jsonObject=new JSONObject();
+				jsonObject.put("label", teamNameList.get(count));
+				jsonObject.put("borderWidth", 1);
+				//팀별 + 월별 근무시간 리스트
+				teamWorkTimeList = new ArrayList<String>();
+				for(int i=1; i<13; i++) {
+					jsonArray=new JSONArray();
+					teamWorkTime=empSercive.getTeamMonthWorkTime(teamCode,i);//2001/1,2,3,4,5..
+					if(teamWorkTime ==null) {
+						teamWorkTime="0";
+					}
+					String[] timeSplit=teamWorkTime.split(":");
+					
+					teamWorkTimeList.add(timeSplit[0]);
+				}
+				count++;
+				jsonArray.add(teamWorkTimeList);
+				jsonObject.put("data", jsonArray);
+				root.add(jsonObject);
+			}
+		} catch (Exception e) {
+			log.debug("getAllEmpTA 예외발생: " + e.getMessage());
+		}
+		return root.toJSONString();
+	}
+	
+//	datasets: [
+//
+//
+//
+//				{
+//				label: 'Dataset 1',
+//				backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
+//				borderColor: window.chartColors.red,
+//				borderWidth: 1,
+//				data: [
+//					101,
+//				]
+//			}
+//		]
 }
