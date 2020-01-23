@@ -1,6 +1,7 @@
 package kr.coo.onehari.hr.service;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -439,17 +440,40 @@ public class EmpService {
         return early;
     }
     
-    //형남 0119 이번달 결근기록 yyyy-mm-dd
-    public List<Integer> getTeamList(String empNumStr) {
+    //형남 0122 존재하는 팀 목록 가져오기
+    public List<Integer> getTeamCodeList() {
     	EmpDao dao = sqlsession.getMapper(EmpDao.class);
     	List<Integer> teamList = null;
-    	int empNum=Integer.parseInt(empNumStr);
     	try {
-    		teamList=dao.getTeamList(empNum);
+            teamList=dao.getTeamCodeList();
     	} catch (ClassNotFoundException | SQLException e) {
-    		log.debug("getTeamList : " + e.getMessage());
+    		log.debug("getTeamCodeList : " + e.getMessage());
     	}
     	return teamList;
+    }
+    
+    //형남 0123 존재하는 팀 목록 가져오기
+    public List<String> getTeamNameList() {
+    	EmpDao dao = sqlsession.getMapper(EmpDao.class);
+    	List<String> teamList = null;
+    	try {
+    		teamList=dao.getTeamNameList();
+    	} catch (ClassNotFoundException | SQLException e) {
+    		log.debug("getTeamNameList : " + e.getMessage());
+    	}
+    	return teamList;
+    }
+    
+    //형남 0122 팀 별 근무시간(월)
+    public String getTeamMonthWorkTime(int teamCode, int month) {
+        EmpDao dao = sqlsession.getMapper(EmpDao.class);
+        String totalTime = null;
+        try {
+            totalTime=dao.getTeamMonthWorkTime(teamCode, month);
+        } catch (ClassNotFoundException | SQLException e) {
+            log.debug("getTeamMonthWork : " + e.getMessage());
+        }
+        return totalTime;
     }
 }
 

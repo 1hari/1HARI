@@ -128,6 +128,12 @@ public interface EmpDao {
     //형남 0121 연차 횟수 가져오기(사원 대시보드 차트)
     public Integer getEarly(int empNum) throws ClassNotFoundException, SQLException;
 
-    //현재 존재하는 팀 목록 가져오기
-    public List<Integer> getTeamList(int empNum) throws ClassNotFoundException, SQLException;
+    //현재 존재하는 팀 목록(팀 코드) 가져오기
+    public List<Integer> getTeamCodeList() throws ClassNotFoundException, SQLException;
+    
+    //현재 존재하는 팀 목록(팀 이름) 가져오기
+    public List<String> getTeamNameList() throws ClassNotFoundException, SQLException;
+    
+    //형남 0122 팀 별 근무시간(월)
+    public String getTeamMonthWorkTime(int teamCode, int month) throws ClassNotFoundException, SQLException;
 }
