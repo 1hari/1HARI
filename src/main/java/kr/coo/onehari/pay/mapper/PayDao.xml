@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="kr.coo.onehari.pay.dao.PayDao">
+    <!-- 올해 전체 급여목록-->
+    <select id="getPayList" resultType="kr.coo.onehari.hr.dto.PayDto">
+		SELECT PAYMONTH, EMPNUM, BASICSAL, PAYNPENSION, PAYHINSURANCE, PAYCINSURANCE, EMPINSURANCE, PAYINCOMETAX, PAYLINCOMETAX FROM PAY WHERE YEAR(PAYMONTH) = YEAR(NOW()) AND EMPNUM=#{empNum};
+    </select>
+</mapper>
+
+
