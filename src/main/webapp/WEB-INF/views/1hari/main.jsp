@@ -91,8 +91,8 @@ $(function(){
 	promise_function()
 	.then(chart())
 	.then(successFunction)
-	.catch(errorFunction);
-
+/* 	.catch(errorFunction);
+ */
 
 	$('#month').change(function(){
 		window.myHorizontalBar.destroy();
