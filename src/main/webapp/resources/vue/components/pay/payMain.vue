@@ -2,7 +2,7 @@
   <!-- pay 급여조회 -->
   <div class="container" style="margin-top:5%;">
     <div class="card shadow" style=" height: 500%;">
-      <div class="card-body" style="height:700px;">
+      <div class="card-body" >
         <div>
             <select style = "width:10%;">
               <option>1월</option>
@@ -24,6 +24,7 @@
         <table class="table table-hover" id="payList" >
           <thead>
             <tr>
+              <th class="text-center d-none d-md-table-cell">지급일</th>
               <th class="text-center d-none d-md-table-cell">기본급</th>
               <th class="text-center d-none d-md-table-cell">국민연금</th>
               <th class="text-center d-none d-md-table-cell">건강보험</th>
@@ -37,36 +38,30 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="a1 in server_data.board_list" :key="a1" >
-              <td class="text-center d-none d-md-table-cell">{{a1.content_idx}}</td><!--기본급으로 받으세요 -->
-              <td @click="go_board_read(a1.content_idx)">{{a1.content_subject}}</td><!--국민연금으로 데이터 받으세요-->
+            <tr v-for="pay in server_data.payList" >
+              <td class="text-center d-none d-md-table-cell" style="height=20px">{{pay.payMonth}}</td>
+              <td class="text-center d-none d-md-table-cell">{{pay.basicSal}}</td><!--기본급으로 받으세요 -->
+              <td class="text-center d-none d-md-table-cell">{{pay.payLIncomeTax}}</td>
+              <td class="text-center d-none d-md-table-cell">{{pay.payLIncomeTax}}</td>
+              <td class="text-center d-none d-md-table-cell">{{pay.payLIncomeTax}}</td>
+              <td class="text-center d-none d-md-table-cell">{{pay.payLIncomeTax}}</td>
+              <td class="text-center d-none d-md-table-cell">{{pay.payLIncomeTax}}</td>
+              <td class="text-center d-none d-md-table-cell">{{pay.payLIncomeTax}}</td>
+              <td class="text-center d-none d-md-table-cell">{{pay.payLIncomeTax}}</td><!--실급여로 데이터 받으세요 -->
+              <td class="text-center d-none d-md-table-cell">{{pay.payLIncomeTax}}</td><!--실급여로 데이터 받으세요 -->
+              <td class="text-center d-none d-md-table-cell"><button class ="btn btn-sucess" style = "background-color: #2ab2aa; text-color:white; height:70%; " >급여명세</button></td>
+            </tr>
+          </tbody>
+          
+          <tbody>
+            <tr v-for="a1 in server_data.board_list" >
+              <td class="text-center d-none d-md-table-cell">{{a1.content_idx}}</td>
+              <td @click="go_board_read(a1.content_idx)">{{a1.content_subject}}</td>
               <td class="text-center d-none d-md-table-cell">{{a1.content_writer_name}}</td>
-              <td class="text-center d-none d-md-table-cell">{{a1.content_writer_name}}</td>
-              <td class="text-center d-none d-md-table-cell">{{a1.content_writer_name}}</td>
-              <td class="text-center d-none d-md-table-cell">{{a1.content_writer_name}}</td>
-              <td class="text-center d-none d-md-table-cell">{{a1.content_writer_name}}</td>
-              <td class="text-center d-none d-md-table-cell">{{a1.content_writer_name}}</td>
-              <td class="text-center d-none d-md-table-cell">{{a1.content_date}}</td><!--실급여로 데이터 받으세요 -->
-              <td class="text-center d-none d-md-table-cell"><button class ="btn btn-sucess" style = "background-color: #2ab2aa; text-color:white;">급여명세</button></td>
+              <td class="text-center d-none d-md-table-cell">{{a1.content_date}}</td>
             </tr>
           </tbody>
         </table>
-
-        <div class="d-none d-md-block">
-          <ul class="pagination justify-content-center">
-            <li class="page-item">
-              <router-link :to="'/board_main/' + $route.params.board_idx + '/' + server_data.pre" class="page-link">이전</router-link>
-            </li>
-            <li class="page-item" v-for="page in server_data.page_array" :key="page">
-              <router-link :to="'/board_main/' + $route.params.board_idx + '/' + page" class="page-link">{{page}}</router-link>
-              <!--여러개의 파라미터를 전달할 때 :to 사용-->
-            </li>
-
-            <li class="page-item">
-              <router-link :to="'/board_main/' + $route.params.board_idx + '/' + server_data.next" class="page-link">다음</router-link>
-            </li>
-          </ul>
-        </div>
 
         <!--글쓰기--> 
         <div class="text-right" v-if='$store.state.user_login_chk == true'>
@@ -101,8 +96,9 @@ module.exports = {
       // params.append("year", '2020');
       // params.append("month", '1')
       axios.post("getPayList.hari", params).then((response)=>{
-        console.log(response.data)
         this.server_data=response.data
+        console.log(this.server_data.payList);
+
       })
     }
   },
@@ -117,3 +113,8 @@ module.exports = {
   }
 };
 </script>
+<style>
+	.table td{
+		padding: 3px
+		}
+</style>
