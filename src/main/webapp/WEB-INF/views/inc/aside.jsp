@@ -111,7 +111,7 @@
 						
 						<li class="sidebar-item">
 							<a href="hr_proof.jsp" class="sidebar-link">
-								<i class="mdi mdi mdi-emoticon"></i>
+								<i class="m-r-10 mdi mdi-console"></i>
 								<span class="hide-menu"> 재직 증명 </span>
 							</a>
 						</li>
