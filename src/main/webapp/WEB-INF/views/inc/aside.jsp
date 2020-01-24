@@ -88,7 +88,7 @@
 <%-- 				<se:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_PERSONNEL', 'ROLE_USER')"> --%>
 				
 					<a class="sidebar-link has-arrow waves-effect waves-dark" href="hr_attendance.html" aria-expanded="false" id="theme" style="background: white;">
-						<i class="mdi mdi-view-dashboard"></i>
+						<i class="m-r-10 mdi mdi-account-card-details"></i>
 						<span class="hide-menu">인사 관리</span>
 					</a>
 
@@ -97,7 +97,7 @@
 					<ul aria-expanded="false" class="collapse first-level" id="theme" style="background: white;">
 						<li class="sidebar-item">
 							<a href="${pageContext.request.contextPath}/1hariHr/attendance.hari" class="sidebar-link">
-								<i class="mdi mdi-calendar-check"></i>
+								<i class="m-r-10 mdi mdi-account-multiple-outline"></i>
 								<span class="hide-menu"> 근태 현황 </span>
 							</a>
 						</li>
@@ -113,7 +113,7 @@
 						
 						<li class="sidebar-item">
 							<a href="${pageContext.request.contextPath}/1hariHr/annual.hari" class="sidebar-link">
-								<i class="mdi mdi-note-plus"></i>
+								<i class="m-r-10 mdi mdi-animation"></i>
 								<span class="hide-menu"> 연차 관리 </span>
 							</a>
 						</li>
@@ -146,13 +146,13 @@
 
 				<li class="sidebar-item">
 					<a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
-						<i class="mdi mdi-receipt"></i>
+						<i class="m-r-10 mdi mdi-cash-usd"></i>
 						<span class="hide-menu">급여 관리 </span>
 					</a>
 					<ul aria-expanded="false" class="collapse  first-level" id="theme" style="background: white;">
 						<li class="sidebar-item">
 							<a href="${pageContext.request.contextPath}/1hariPay/payList.hari" class="sidebar-link">
-								<i class="mdi mdi-note-outline"></i>
+								<i class="m-r-10 mdi mdi-cash-multiple"></i>
 								<span class="hide-menu">급여 현황</span>
 							</a>
 						</li>
@@ -161,7 +161,7 @@
 
 				<li class="sidebar-item" id="theme" style="background: white;">
 					<a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false" id="theme" style="background: white;">
-						<i class="mdi mdi-receipt"></i>
+						<i class="m-r-10 mdi mdi-cellphone-link"></i>
 						<span class="hide-menu">전자 결재 </span>
 					</a>
 					
@@ -177,28 +177,28 @@
 						<se:authorize access="hasAnyRole('ROLE_ADMIN')">
 						<li class="sidebar-item">
 							<a href="${pageContext.request.contextPath}/1hariSign/admin/formList.hari" class="sidebar-link">
-								<i class="mdi mdi-note-outline"></i>
+								<i class="m-r-10 mdi mdi-chart-timeline"></i>
 								<span class="hide-menu">양식 관리</span>
 							</a>
 						</li>
 						</se:authorize>
 						<li class="sidebar-item">
 							<a href="#" class="sidebar-link" data-toggle="modal" data-target="#draftModal">
-							<i class="mdi mdi-note-plus"></i>
+							<i class="m-r-10 mdi mdi-clipboard-outline"></i>
 							<span class="hide-menu">문서 기안</span>
 							</a>
 						</li>
 						
 						<li class="sidebar-item">
 							<a href="${pageContext.request.contextPath}/1hariSign/myDocu.hari" class="sidebar-link">
-								<i class="mdi mdi-note-plus"></i>
+								<i class="m-r-10 mdi mdi-clipboard-text"></i>
 								<span class="hide-menu">내 문서함</span>
 							</a>
 						</li>
 						<se:authorize access="hasAnyRole('ROLE_ADMIN')">
 							<li class="sidebar-item">
 								<a href="${pageContext.request.contextPath}/1hariSign/admin/adminDocu.hari" class="sidebar-link">
-									<i class="mdi mdi-note-plus"></i>
+									<i class="m-r-10 mdi mdi-content-copy"></i>
 									<span class="hide-menu">전체 문서함</span>
 								</a>
 							</li>
@@ -209,19 +209,19 @@
 
 				<li class="sidebar-item">
 					<a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
-						<i class="mdi mdi-receipt"></i>
+						<i class="m-r-10 mdi mdi-face-profile"></i>
 						<span class="hide-menu">커뮤 니티 </span>
 					</a>
 					<ul aria-expanded="false" class="collapse  first-level" id="theme" style="background: white;">
 						<li class="sidebar-item">
 							<a href="${pageContext.request.contextPath}/1hariBoard/boardList.hari" class="sidebar-link">
-								<i class="mdi mdi-note-outline"></i>
+								<i class="m-r-10 mdi mdi-file-multiple"></i>
 								<span class="hide-menu">공지 사항 </span>
 							</a>
 						</li>
 							<li class="sidebar-item">
 							<a href="${pageContext.request.contextPath}/1hariDepart/departList.hari" class="sidebar-link">
-								<i class="mdi mdi-note-outline"></i>
+								<i class="m-r-10 mdi mdi-format-float-left"></i>
 								<span class="hide-menu">부서별 게시판 </span>
 							</a>
 						</li>
@@ -230,13 +230,13 @@
 				
 				<li class="sidebar-item">
 					<a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
-						<i class="mdi mdi-receipt"></i>
+						<i class="m-r-10 mdi mdi-email-secure"></i>
 						<span class="hide-menu">사내 메일 </span>
 					</a>
 					<ul aria-expanded="false" class="collapse  first-level" id="theme" style="background: white;">
 						<li class="sidebar-item">
 							<a href="#" class="sidebar-link">
-								<i class="mdi mdi-note-outline"></i>
+								<i class="m-r-10 mdi mdi-email-open-outline"></i>
 								<span class="hide-menu">메일 목록 </span>
 							</a>
 						</li>

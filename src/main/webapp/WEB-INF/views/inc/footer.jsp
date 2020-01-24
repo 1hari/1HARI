@@ -3,9 +3,9 @@
 </div>
 
 <!--bottom 시작 -->
-<footer class="footer text-center">
+<footer class="footer text-center" style="margin-left:5%;">
 	
-	<div style = "text-align: center;">All Rights Reserved by Matrix-admin. Designed and Developed by 1HARI</div>
+	<div>All Rights Reserved by Matrix-admin. Designed and Developed by 1HARI</div>
 </footer>
 <!--bottom 끝-->
 
