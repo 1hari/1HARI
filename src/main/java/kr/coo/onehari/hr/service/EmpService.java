@@ -1,5 +1,6 @@
 package kr.coo.onehari.hr.service;
 
+import java.security.Principal;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
@@ -71,30 +72,37 @@ public class EmpService {
 	//사원정보수정(변경) 2020. 1. 10 양찬식 
 	//시작 시간 : 오후 3시 20분 끝난시간 3시 25분
 	@Transactional
-	public void empUpdate(EmpDto empdto) throws Exception {
+	public int empUpdate(EmpDto empdto, boolean isAdmin) throws Exception {
 		EmpDao empdao = sqlsession.getMapper(EmpDao.class);
+		int result = 0;
+		
 		try {
-			if (empdto.getRoleName().equals("ROLE_USER")) {
-				empdao.empUpdate(empdto);
-				empdao.subempUpdate(empdto);
-				empdao.deleteRolePersonnel(empdto);
-				empdao.deleteRoleAdmin(empdto);
-			} else if (empdto.getRoleName().equals("ROLE_PERSONNEL")) {
-				empdao.empUpdate(empdto);
-				empdao.subempUpdate(empdto);
-				empdao.insertRoleaPersonnel(empdto);
-				empdao.deleteRoleAdmin(empdto);
-			} else if (empdto.getRoleName().equals("ROLE_ADMIN")) {
-				empdao.empUpdate(empdto);
-				empdao.subempUpdate(empdto);
-				empdao.insertRoleaPersonnel(empdto);
-				empdao.insertRoleaAdmin(empdto);
+			if (isAdmin) {
+				if (empdto.getRoleName().equals("ROLE_USER")) {
+					result = empdao.empUpdate(empdto);
+					result = empdao.subempUpdate(empdto);
+					result = empdao.deleteRolePersonnel(empdto);
+					result = empdao.deleteRoleAdmin(empdto);
+				} else if (empdto.getRoleName().equals("ROLE_PERSONNEL")) {
+					result = empdao.empUpdate(empdto);
+					result = empdao.subempUpdate(empdto);
+					result = empdao.insertRoleaPersonnel(empdto);
+					result = empdao.deleteRoleAdmin(empdto);
+				} else if (empdto.getRoleName().equals("ROLE_ADMIN")) {
+					result = empdao.empUpdate(empdto);
+					result = empdao.subempUpdate(empdto);
+					result = empdao.insertRoleaPersonnel(empdto);
+					result = empdao.insertRoleaAdmin(empdto);
+				}
+			} else {
+				result = empdao.empUpdate(empdto);
+				result = empdao.subempUpdate(empdto);
 			}
 		} catch (Exception e) {
 			log.debug("EmpService empUpdate 예외발생: " + e.getMessage());
 			throw e;
 		}
-		/*return result;*/
+		return result;
 	}
 	
 	//사원조회(팀코드,사번,이름,직급)리스트 김정하 2020. 1. 9

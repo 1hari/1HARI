@@ -1,8 +1,15 @@
 package kr.coo.onehari.hr.controller;
 
+import java.security.Principal;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -93,9 +100,28 @@ public class HrController {
 
 	// 사원정보수정(변경)
 	@RequestMapping(value = "personnel/empModify.hari", method = RequestMethod.POST)
-	public String empUpdate(EmpDto emp) {
+	public String empUpdate(EmpDto emp, boolean isAdmin) {
+		// SecurityContext 객체를 선언
+		SecurityContext context = SecurityContextHolder.getContext();
+		// 인증권한 객체를 선언
+		Authentication authentication = context.getAuthentication();
+		
+		Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+		Iterator<? extends GrantedAuthority> iter = authorities.iterator(); 
+		
+		while (iter.hasNext()) {
+			GrantedAuthority auth = iter.next();
+			if (auth.getAuthority().equals("ROLE_ADMIN")) {
+				isAdmin = true;
+				break;
+			} else {
+				isAdmin = false;
+				break;
+			}
+		}
+		
 		try {
-			empService.empUpdate(emp);
+			empService.empUpdate(emp, isAdmin);
 		} catch (Exception e) {
 			log.debug("HrController empUpdate 예외발생: " + e.getMessage());
 		}
