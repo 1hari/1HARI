@@ -109,7 +109,8 @@
 									</div>
 									<div class="form-group">
 										<label for="phoneNum">핸드폰번호</label>
-										<input type="text" id="phoneNum" name="phoneNum" class="form-control" value="${emp.phoneNum}" placeholder="010-0000-0000" required>
+										<span class="checkPhoneNum" style="color: red;"></span>
+										<input id="phoneNum" name="phoneNum" type="text" class="required form-control" value="${emp.phoneNum}" maxlength="13" placeholder="(-) 없이 숫자만 입력하세요">
 									</div>
 									<div class="form-group">
 										<label for="hireDate">입사일</label>
@@ -295,6 +296,41 @@
 				$("#roleSelect").append(role);
 			}
 		});
+
+		var phoneReg = /^01[016789]-\d{3,4}-\d{4}$/; // 핸드폰번호 정규표현식
+		
+		/* 핸드폰번호 입력 시 자동 (-) 삽입  */
+		$('#phoneNum').keyup(function() {
+			var number = this.value.replace(/[^0-9]/g, "");
+			var phone = "";
+
+			if (number.length < 4) {
+				return number;
+			} else if(number.length < 7) {
+				phone += number.substr(0, 3);
+				phone += "-";
+				phone += number.substr(3);
+			} else if(number.length < 11) {
+				phone += number.substr(0, 3);
+				phone += "-";
+				phone += number.substr(3, 3);
+				phone += "-";
+				phone += number.substr(6);
+			} else {
+				phone += number.substr(0, 3);
+				phone += "-";
+				phone += number.substr(3, 4);
+				phone += "-";
+				phone += number.substr(7);
+			}
+			this.value = phone;
+			
+			if (phoneReg.test($('#phoneNum').val())) { // 정규표현식 유효성 검사
+				$('.checkPhoneNum').text(""); // 정규표현식과 일치하면 아무 text를 출력하지 않음
+			} else { // 정규표현식과 일치하지 않으면
+				$('.checkPhoneNum').text("핸드폰번호 형식이 잘못되었습니다.");
+			}
+		})
 	});
 
 	

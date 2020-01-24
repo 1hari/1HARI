@@ -104,7 +104,7 @@
 						
 						<se:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_PERSONNEL')">
 							<li class="sidebar-item">
-								<a href="${pageContext.request.contextPath}/1hariHr/attendance.hari" class="sidebar-link">
+								<a href="${pageContext.request.contextPath}/1hariHr/personnel/taManagement.hari" class="sidebar-link">
 									<i class="mdi mdi-calendar-check"></i>
 									<span class="hide-menu"> 근태 관리 </span>
 								</a>

@@ -516,8 +516,6 @@
 			dataType: "text",
 			method: "post",
 			success: function(data) {
-				console.log(data);
-				console.log('여기보내니');
 				$('#example-form').submit();
 			}
 		})

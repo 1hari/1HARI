@@ -136,4 +136,7 @@ public interface EmpDao {
     
     //형남 0122 팀 별 근무시간(월)
     public String getTeamMonthWorkTime(int teamCode, int month) throws ClassNotFoundException, SQLException;
+    
+    // 관리자 사원근태관리 김진호 2020. 1. 24
+    public String taManagement() throws ClassNotFoundException, SQLException;
 }
