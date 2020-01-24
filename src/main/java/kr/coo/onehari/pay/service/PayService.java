@@ -22,32 +22,29 @@ public class PayService {
 	@Autowired
 	private SqlSession sqlsession;
 	
-	public JSONObject getPayList(String empNumStr) {
+	public List<PayDto> getPayList(String empNumStr) {
 		PayDao dao = sqlsession.getMapper(PayDao.class);
-		JSONObject root=new JSONObject();
-		JSONArray array=new JSONArray();
 		List<PayDto> payList=null;
 		try {
 			payList = dao.getPayList(empNumStr);
-			for (PayDto payDto : payList) {
-				JSONObject object=new JSONObject();
-				object.put("payMonth", payDto.getPayMonth());
-				object.put("basicSal", payDto.getBasicSal());
-				object.put("payNPension", payDto.getPayNPension());
-				object.put("payHInsurance", payDto.getPayHInsurance());
-				object.put("payCInsurance", payDto.getPayCInsurance());
-				object.put("empInsurance", payDto.getEmpInsurance());
-				object.put("payIncomeTax", payDto.getPayIncomeTax());
-				object.put("payLIncomeTax", payDto.getPayLIncomeTax());
-				array.add(object);
-			}
-			root.put("payList", array);
-			
 		} catch (ClassNotFoundException | SQLException e) {
 			log.debug("getPayList : " + e.getMessage());
 		}
-		return root;
+		return payList;
 	}
+	
+	
+	public List<String> getYears(String empNumStr) {
+		PayDao dao = sqlsession.getMapper(PayDao.class);
+		List<String> years=null;
+		try {
+			years = dao.getYears(empNumStr);
+		} catch (ClassNotFoundException | SQLException e) {
+			log.debug("getYears : " + e.getMessage());
+		}
+		return years;
+	}
+	
 	
 }
 

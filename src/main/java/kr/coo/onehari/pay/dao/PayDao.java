@@ -19,4 +19,7 @@ public interface PayDao {
 	//올해 전체 급여리스트
 	public List<PayDto> getPayList(String empNumStr) throws ClassNotFoundException, SQLException;
 	
+	//올해 전체 급여리스트
+	public List<String> getYears(String empNumStr) throws ClassNotFoundException, SQLException;
+	
 }

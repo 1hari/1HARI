@@ -8,6 +8,11 @@
     <select id="getPayList" resultType="kr.coo.onehari.hr.dto.PayDto">
 		SELECT PAYMONTH, EMPNUM, BASICSAL, PAYNPENSION, PAYHINSURANCE, PAYCINSURANCE, EMPINSURANCE, PAYINCOMETAX, PAYLINCOMETAX FROM PAY WHERE YEAR(PAYMONTH) = YEAR(NOW()) AND EMPNUM=#{empNum};
     </select>
+    
+    <!-- 급여받은 월-->
+    <select id="getYears" resultType="String">
+		SELECT DISTINCT DATE_FORMAT(PAYMONTH,"%Y") FROM PAY WHERE EMPNUM=#{empNUm} ORDER BY PAYMONTH ASC
+    </select>
 </mapper>
 
 

@@ -4,19 +4,8 @@
     <div class="card shadow" style=" height: 500%;">
       <div class="card-body" >
         <div>
-            <select style = "width:10%;">
-              <option>1월</option>
-              <option>2월</option>
-              <option>3월</option>
-              <option>4월</option>
-              <option>5월</option>
-              <option>6월</option>
-              <option>7월</option>
-              <option>8월</option>
-              <option>9월</option>
-              <option>10월</option>
-              <option>11월</option>
-              <option>12월</option>
+            <select style = "width:10%;" id="selectYear">
+              <option  v-for="a1 in server_data.years" v-if(server_data.years.length == )>{{a1}}</option>
             </select>
             <span style = "margin-left:75%;" value ="사번">사번</span>
         </div>
@@ -98,13 +87,14 @@ module.exports = {
       axios.post("getPayList.hari", params).then((response)=>{
         this.server_data=response.data
         console.log(this.server_data.payList);
-
+        console.log(this.server_data.years);
       })
     }
   },
   created() {
     // alert(this.$route.params.board_idx) //주소를 관리하는 객체 route, 주소가 바뀌면 route객체도 변경됨, route객체의 변경을 감지해줘야함
     this.getPayList();
+    $("#selectYear").append("<option value='10'>값10</option>");
   },
   watch: {
     $route(to, from) {
