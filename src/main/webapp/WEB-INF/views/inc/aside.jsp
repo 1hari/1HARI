@@ -98,9 +98,18 @@
 						<li class="sidebar-item">
 							<a href="${pageContext.request.contextPath}/1hariHr/attendance.hari" class="sidebar-link">
 								<i class="mdi mdi-calendar-check"></i>
-								<span class="hide-menu"> 근태 관리 </span>
+								<span class="hide-menu"> 근태 현황 </span>
 							</a>
 						</li>
+						
+						<se:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_PERSONNEL')">
+							<li class="sidebar-item">
+								<a href="${pageContext.request.contextPath}/1hariHr/attendance.hari" class="sidebar-link">
+									<i class="mdi mdi-calendar-check"></i>
+									<span class="hide-menu"> 근태 관리 </span>
+								</a>
+							</li>
+						</se:authorize>
 						
 						<li class="sidebar-item">
 							<a href="${pageContext.request.contextPath}/1hariHr/annual.hari" class="sidebar-link">
