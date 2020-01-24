@@ -575,19 +575,19 @@ public class ExcelService {
 				// 행의 세 번째 열 받아오기
 				cell = row.getCell(2);
 				if (null != cell)
-					empdto.setTeamCode((int) cell.getNumericCellValue());
+					empdto.setTeamCode(Integer.parseInt(cell.getStringCellValue()));
 				// 행의 네 번째 열 받아오기
 				cell = row.getCell(3);
 				if (null != cell)
-					empdto.setRankCode((int) cell.getNumericCellValue());
+					empdto.setRankCode(Integer.parseInt(cell.getStringCellValue()));
 				// 행의 다섯 번째 열 받아오기
 				cell = row.getCell(4);
 				if (null != cell)
-					empdto.setPositionCode((int) cell.getNumericCellValue());
+					empdto.setPositionCode(Integer.parseInt(cell.getStringCellValue()));
 				// 행의 여섯 번째 열 받아오기
 				cell = row.getCell(5);
 				if (null != cell)
-					empdto.setEmploymentCode((int) cell.getNumericCellValue());
+					empdto.setEmploymentCode(Integer.parseInt(cell.getStringCellValue()));
 				// 행의 일곱 번째 열 받아오기
 				cell = row.getCell(6);
 				if (null != cell)
