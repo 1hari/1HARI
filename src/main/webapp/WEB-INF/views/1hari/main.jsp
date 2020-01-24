@@ -40,7 +40,9 @@ $(function(){
 							getAllEmpTA[i].backgroundColor=color(colorArray[i]).alpha(0.5).rgbString();
 							getAllEmpTA[i].borderColor=colorArray[i];
 							dataset=getAllEmpTA;
+
 						}
+						console.log(dataset);
 						resolve(true);
 					}
 				})		
@@ -48,11 +50,9 @@ $(function(){
 		}
 	
 	function successFunction(){
-		alert('성공');
 		return false;
 	}
 	function errorFunction(){
-		  alert('에러');
 		  return false;
 	}	
 				

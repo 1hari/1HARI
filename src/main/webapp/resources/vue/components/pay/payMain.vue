@@ -111,23 +111,23 @@ module.exports = {
       //this.$router router 객체 불러오기
       this.$router.push('/board_read/' + this.$route.params.board_idx + '/' + this.$route.params.page + '/' + content_idx) //.push에 파라미터값에 알맞는 컴포넌트를 찾아 그 컴포넌트 주소로 이동시켜줌
     },
-    get_board_data: function() {
+    getPayList: function() {
       var params = new URLSearchParams();
-      params.append("board_idx", this.$route.params.board_idx);
-      params.append("page", this.$route.params.page)
-      axios.post("get_board_list.do", params).then((response)=>{
-      console.log(response.data)
+      params.append("year", this.$route.params.board_idx);
+      params.append("month", this.$route.params.page)
+      axios.post("getPayList.hari", params).then((response)=>{
+        console.log(response.data)
         this.server_data=response.data
       })
     }
   },
   created() {
     //alert(this.$route.params.board_idx) //주소를 관리하는 객체 route, 주소가 바뀌면 route객체도 변경됨, route객체의 변경을 감지해줘야함
-    this.get_board_data();
+    this.getPayList();
   },
   watch: {
     $route(to, from) {
-      this.get_board_data();
+      this.getPayList();
     }
   }
 };
