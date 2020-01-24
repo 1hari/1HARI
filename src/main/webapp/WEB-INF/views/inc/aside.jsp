@@ -190,6 +190,13 @@
 						</li>
 						
 						<li class="sidebar-item">
+							<a href="${pageContext.request.contextPath}/1hariSign/annDraft.hari" class="sidebar-link">
+								<i class="mdi mdi-note-plus"></i>
+								<span class="hide-menu">연차 기안</span>
+							</a>
+						</li>
+						
+						<li class="sidebar-item">
 							<a href="${pageContext.request.contextPath}/1hariSign/myDocu.hari" class="sidebar-link">
 								<i class="m-r-10 mdi mdi-clipboard-text"></i>
 								<span class="hide-menu">내 문서함</span>

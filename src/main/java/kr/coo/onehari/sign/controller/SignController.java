@@ -125,8 +125,8 @@ public class SignController {
 		
 		return "1hariSign.docuDraft";
 	}
-	
-	//문서기안 화면 김정하 / 2020. 1. 12~
+		
+	//문서기안 처리 김정하 / 2020. 1. 12~
 	@RequestMapping(value="docuDraft.hari", method = RequestMethod.POST)
 	public String formDraft(SignDto sign, HttpServletRequest request, Model model) {
 		CommonsMultipartFile file = sign.getFile(); //view에서 DTO에 저장된 파일받아오기
@@ -171,6 +171,46 @@ public class SignController {
 			model.addAttribute("isOk", "false");
 		}
 		return view;
+	}
+	
+	//연차기안 화면 김정하 / 2020. 1. 24~
+	@RequestMapping(value="annDraft.hari", method = RequestMethod.GET)
+	public String annDraft(String signFormCode, String signNum, Model model, Principal principal,String msg, String isOk) {
+			
+		if(signFormCode != null) {
+			if(!signFormCode.equals("0")) {//폼가져오기
+				SignFormDto form = signFormService.selectForm(signFormCode);
+				model.addAttribute("form", form);
+			}
+		}else {
+			//반려문서 가져오기
+			HashMap<String, String> map = new HashMap<String, String>(); 
+			map.put("signNum", signNum);
+			map.put("pg", "3");
+			map.put("cp", "0");
+			map.put("code", "6"); //문서보기
+			List<SignDto> signDocu = signService.selectSignList(map);
+			
+			model.addAttribute("signDocu", signDocu);
+		}
+			
+		//기안자 정보 가져오기
+		EmpDto emp = empService.empDefault(principal.getName());
+		model.addAttribute("emp", emp);
+			
+		//부서 가져오기
+		List<Team> teamList = corpService.getTeamCodes();
+		model.addAttribute("teamList", teamList);
+			
+		//사원 가져오기
+		List<EmpDto> empList = empService.empDefaultList();
+		model.addAttribute("empList", empList);
+			
+		//성공,실패 메시지 전달
+		model.addAttribute("msg", msg);
+		model.addAttribute("isOk", isOk);
+			
+		return "1hariSign.annDraft";
 	}
 	
 	//내 문서함 화면 김정하 / 2020. 1. 7~
