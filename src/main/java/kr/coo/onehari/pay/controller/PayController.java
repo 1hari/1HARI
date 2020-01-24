@@ -11,4 +11,6 @@ public class PayController {
 	public String boardList() {
 		return "1hariPay.payList";
 	}
+	
+	
 }

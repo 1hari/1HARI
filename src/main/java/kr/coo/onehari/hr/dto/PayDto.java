@@ -18,8 +18,6 @@ public class PayDto {
 	private int payHInsurance; //건강보험
 	private int payCInsurance; //장기요양보험
 	private int empInsurance; //고용보험
-	private int carCost; //차량유지비
-	private int mealCost; //식대
 	private int payIncomeTax; //소득세
 	private int payLIncomeTax; //지방소득세
 }

@@ -20,8 +20,8 @@
             </select>
             <span style = "margin-left:75%;" value ="사번">사번</span>
         </div>
-        <h4 class="card-title">{{server_data.board_info_name}}</h4>
-        <table class="table table-hover" id="board_list" >
+        <h4 class="card-title">급여</h4>
+        <table class="table table-hover" id="payList" >
           <thead>
             <tr>
               <th class="text-center d-none d-md-table-cell">기본급</th>
@@ -36,21 +36,6 @@
               <th class="text-center d-none d-md-table-cell">급여명세</th>
             </tr>
           </thead>
-
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td>2</td>
-              <td>3</td>
-              <td>4</td>
-              <td>5</td>
-              <td>6</td>
-              <td>7</td>
-              <td>8</td>
-              <td>9</td>
-              <td><button class ="btn btn-sucess" style = "background-color: #2ab2aa; text-color:white;">급여명세</button></td>
-            </tr> 
-          </tbody>
           <tbody>
             <tr v-for="a1 in server_data.board_list" :key="a1" >
               <td class="text-center d-none d-md-table-cell">{{a1.content_idx}}</td><!--기본급으로 받으세요 -->
@@ -113,8 +98,8 @@ module.exports = {
     },
     getPayList: function() {
       var params = new URLSearchParams();
-      params.append("year", this.$route.params.board_idx);
-      params.append("month", this.$route.params.page)
+      // params.append("year", '2020');
+      // params.append("month", '1')
       axios.post("getPayList.hari", params).then((response)=>{
         console.log(response.data)
         this.server_data=response.data
@@ -122,7 +107,7 @@ module.exports = {
     }
   },
   created() {
-    //alert(this.$route.params.board_idx) //주소를 관리하는 객체 route, 주소가 바뀌면 route객체도 변경됨, route객체의 변경을 감지해줘야함
+    // alert(this.$route.params.board_idx) //주소를 관리하는 객체 route, 주소가 바뀌면 route객체도 변경됨, route객체의 변경을 감지해줘야함
     this.getPayList();
   },
   watch: {
