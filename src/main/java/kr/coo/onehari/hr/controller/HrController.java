@@ -1,6 +1,5 @@
 package kr.coo.onehari.hr.controller;
 
-import java.security.Principal;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -10,7 +9,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -136,4 +134,18 @@ public class HrController {
 		return "1hariHr.teamList";
 	}
 
+	/*
+	 * 관리자 사원근태관리
+	 * 작성자: 김진호
+	 * 날짜: 2020. 1. 24
+	 */
+	@RequestMapping(value = "personnel/taManagement.hari", method = RequestMethod.GET)
+	public String taManagement() {
+		return "1hariHr.taManagement";
+	}
+	
+	@RequestMapping(value = "", method = RequestMethod.POST)
+	public String taManagement(EmpDto emp) {
+		return null;
+	}
 }
