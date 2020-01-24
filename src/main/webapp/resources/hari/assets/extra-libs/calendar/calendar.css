@@ -8,12 +8,12 @@
 }
 
 .fc-toolbar .fc-button-group {
-    border: 1px solid #2AB2AA;
+    border: 1px solid #0489B1;
     border-radius: 4px;
 }
 
 .fc-toolbar .fc-button {
-    background: #2AB2AA;
+    background: #0489B1;
     color: #fff;
     border: none;
 }
@@ -25,7 +25,7 @@
 
 .fc-toolbar .fc-button.fc-state-active {
     background: #fff;
-    color: #2AB2AA;
+    color: #0489B1;
 }
 
 
