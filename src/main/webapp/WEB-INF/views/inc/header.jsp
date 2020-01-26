@@ -684,6 +684,7 @@ function themeChange(formData){
 						<a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<img src="" alt="user" class="rounded-circle" width="31" id="profileFileName">
 						</a>
+						
 						<div class="dropdown-menu dropdown-menu-right animated">
                             <a class="dropdown-item" href="${pageContext.request.contextPath}/1hariMy/myInfo.hari">
 								<i class="ti-user m-r-5 m-l-5"></i> 내 프로필

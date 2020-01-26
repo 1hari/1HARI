@@ -37,7 +37,7 @@ $(function(){
 			<div class="col-md-12">
 					<div class="row row-card-no-pd">
 						<div class="col-sm-6 col-md-3">
-							<div class="card card-stats card-round" style ="border-radius:10px; background-color:#666666;">
+							<div class="card card-stats card-round" style ="border-radius:10px;  box-shadow :5px 5px #999999;  ">
 								<div class="card-body ">
 									<div class="row">
 										<div class="col-5">
@@ -56,7 +56,7 @@ $(function(){
 							</div>
 						</div>
 						<div class="col-sm-6 col-md-3">
-							<div class="card card-stats card-round" style ="border-radius:10px; background-color:#666666;">
+							<div class="card card-stats card-round" style ="border-radius:10px;  box-shadow :5px 5px #999999; ">
 								<div class="card-body">
 									<div class="row">
 										<div class="col-5">
@@ -75,12 +75,12 @@ $(function(){
 							</div>
 						</div>
 						<div class="col-sm-6 col-md-3">
-							<div class="card card-stats card-round" style ="border-radius:10px; background-color:#666666;">
+							<div class="card card-stats card-round" style ="border-radius:10px;  box-shadow :5px 5px #999999; ">
 								<div class="card-body" >
 									<div class="row">
 										<div class="col-5">
 											<div class="icon-big text-center">
-												<i class="fas fa-sync fa-4x"></i>
+												<i class="fas fa-sync fa-4x" style =""></i>
 											</div>
 										</div>
 										<div class="col col-stats">
@@ -94,7 +94,7 @@ $(function(){
 							</div>
 						</div>
 						<div class="col-sm-6 col-md-3">
-							<div class="card card-stats card-round" style ="border-radius:10px; background-color:#666666;">
+							<div class="card card-stats card-round" style ="border-radius:10px; box-shadow :5px 5px #999999; ">
 								<div class="card-body" >
 									<div class="row">
 										<div class="col-5">
