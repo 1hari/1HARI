@@ -4,8 +4,8 @@
     <div class="card shadow" style=" height: 500%;">
       <div class="card-body" >
         <div>
-            <select style = "width:10%;" id="selectYear">
-              <option  v-for="a1 in server_data.years" v-if(server_data.years.length == )>{{a1}}</option>
+            <select style = "width:10%;" id="selectYear" @change="getPayList($event)">
+              <option  v-for="(a1, index) in server_data.years"  v-bind:selected="index == 0">{{a1}}</option>
             </select>
             <span style = "margin-left:75%;" value ="사번">사번</span>
         </div>
@@ -71,7 +71,7 @@ module.exports = {
   data: function() {
     return {
       //여기안에 있는 멤버들을 템플릿 안에서 사용할 수 있음
-      server_data: {}
+      server_data: {},
     };
   },
   methods: {
@@ -81,20 +81,31 @@ module.exports = {
       this.$router.push('/board_read/' + this.$route.params.board_idx + '/' + this.$route.params.page + '/' + content_idx) //.push에 파라미터값에 알맞는 컴포넌트를 찾아 그 컴포넌트 주소로 이동시켜줌
     },
     getPayList: function() {
-      var params = new URLSearchParams();
-      // params.append("year", '2020');
-      // params.append("month", '1')
-      axios.post("getPayList.hari", params).then((response)=>{
-        this.server_data=response.data
-        console.log(this.server_data.payList);
-        console.log(this.server_data.years);
+       var params = new URLSearchParams();
+       if(event.target.value ==undefined){
+        console.log('undefined잡았다~~~~~~~~~~~~~~~~~~~~')
+        params.append("year", "0")
+       }else {
+         params.append("year", event.target.value)
+       }
+       axios.post("getPayList.hari", params).then((response)=>{
+         this.server_data=response.data
+          console.log(this.server_data)
       })
-    }
+     
+    },
+    // onChange: function(event){
+    //   console.log(event.target.value);
+    //   var params = new URLSearchParams();
+    //   params.append("year", event.target.value)
+    //   axios.post("getPayListYear.hari", params).then((response)=>{
+    //     this.server_data=response.data
+    //   })
+    // }
   },
   created() {
     // alert(this.$route.params.board_idx) //주소를 관리하는 객체 route, 주소가 바뀌면 route객체도 변경됨, route객체의 변경을 감지해줘야함
     this.getPayList();
-    $("#selectYear").append("<option value='10'>값10</option>");
   },
   watch: {
     $route(to, from) {
