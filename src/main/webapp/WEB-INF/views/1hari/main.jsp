@@ -742,7 +742,7 @@ $(function(){
 		<!-- ============================================================== -->
 		<div class="row">
 			<div class="col-md-6">
-				<div class="card" style ="box-shadow :10px 10px #666666;">
+				<div class="card" style ="box-shadow :10px 10px #999999; border-radius:10px; border : 4px dashed #bcbcbc;">
 					<div class="card-body" style="padding-bottom: 0">
 						<h4 class="card-title m-b-0" style="margin-bottom:0;" >근무시간 통계</h4>
 							<select class="select2 form-control custom-select select2-hidden-accessible" id="month" style="width: 13%; height:10%; margin-left: 88%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
@@ -767,7 +767,7 @@ $(function(){
 					</div>
 				</div>
 				<!--time line 시작 -->
-				<div class="card" style ="box-shadow :10px 10px #666666;">
+				<div class="card" style ="box-shadow :10px 10px  #999999; border-radius:10px; border : 4px dashed #bcbcbc;">
 					<div class="card-body">
 						<h4 class="card-title m-b-0">당월 근태통계</h4>
 						<div id="canvas-holder" style="width: 300px;">
@@ -817,26 +817,26 @@ $(function(){
 			<div class="col-md-6">
 
 				<!--전자 결재 시작-->
-				<div class="card" style ="box-shadow :10px 10px #666666;">
+				<div class="card" style ="box-shadow :10px 10px #999999; border-radius:10px;border : 4px dashed #bcbcbc;">
 					<div class="card-body">
 						<h5 class="card-title m-b-0">전자 결재</h5>
 					</div>
 					<table class="table">
 						<thead>
 							<tr>
-								<th scope="col">진행중<br>문서
-									<td>0</td>
+								<th scope="col"><i class="far fa-clipboard fa-2x"></i>&nbsp;<h4>진행중문서</h4>
+									<td style ="marign-left:-5%;">0</td>
 								</th>
-								<th scope="col">보류중<br>문서
+								<th scope="col"><i class="far fa-file-alt fa-2x"></i>&nbsp;<h4>보류중문서</h4>
 									<td>2</td>
 								</th>
 							</tr>
 							
 							<tr>
-								<th scope="col">결제중<br>문서
+								<th scope="col"><i class="far fa-edit fa-2x"></i>&nbsp;<h4>결제중문서</h4>
 									<td>0</td>
 								</th>
-								<th scope="col">보류중<br>문서
+								<th scope="col"><i class="far fa-file-archive fa-2x"></i>&nbsp;<h4>결제완료문서</h4>
 									<td>2</td>
 								</th>
 							</tr>
@@ -847,7 +847,7 @@ $(function(){
 
 
 				<!-- todo list 시작 -->
-				<div class="card" style ="box-shadow :10px 10px #666666;">
+				<div class="card" style ="box-shadow :10px 10px #999999; border-radius:10px; border : 4px dashed #bcbcbc;">
 					<div class="card-body">
 						<h4 class="card-title">To Do List</h4>
 						<div class="todo-widget scrollable" style="height: 450px;">

@@ -613,7 +613,7 @@ function themeChange(formData){
 				<!-- Logo -->
 				<!-- ============================================================== -->
 				<a class="navbar-brand" href="${pageContext.request.contextPath}/main.hari"> <!-- 로고 아이콘 시작 -->
-					<b class="logo-icon p-l-10" style= "margin-left: 10%; margin-right: 5%;"> <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
+					<b class="logo-icon p-l-10" style= "margin-left: 7%; margin-right: 8%;"> <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
 						<!-- 로고 아이콘 png-->
 						                        <img src="${pageContext.request.contextPath}/resources/hari/assets/images/logo-text-30-23.png" alt="homepage" class="light-logo" /><!-- style="width: 30%; height: 20%; color:#2ab2aa;" -->
 					</b><!--로고 아이콘 끝  -->
