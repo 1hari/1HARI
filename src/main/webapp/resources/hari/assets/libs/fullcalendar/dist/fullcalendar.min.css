@@ -509,6 +509,10 @@ a.fc-more:hover {
 .fc-icon,
 .fc-toolbar .fc-center {
 	display: inline-block
+
+}
+.fc-center{
+	margin-left:-5%
 }
 
 .fc-day-grid .fc-row {
@@ -719,7 +723,7 @@ a.fc-more:hover {
 .fc-toolbar .fc-right {
 	/* float: right */
 	display : none
-	
+
 }
 
 .fc .fc-toolbar>*>* {

@@ -3,7 +3,7 @@
 </div>
 
 <!--bottom 시작 -->
-<footer class="footer text-center" style="margin-left:5%;">
+<footer class="footer text-center" style="margin-left:15%;">
 	
 	<div>All Rights Reserved by Matrix-admin. Designed and Developed by 1HARI</div>
 </footer>
