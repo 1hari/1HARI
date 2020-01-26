@@ -148,7 +148,7 @@
 
    <!--컨텐츠 시작 -->
     <!--메인 백그라운드 이미지-->
-    <div class="hero-wrap" style="background-image: url(resources/index/images/bg_4.jpg);" data-stellar-background-ratio="0.5">
+    <div class="hero-wrap" style="background-image: url(resources/index/images/bg_2.jpg);" data-stellar-background-ratio="0.5">
       
       <div class="overlay"></div>
       <div class="container">
@@ -167,8 +167,8 @@
 
 			<!--로그인 화면 시작-->
          <c:url value="/login" var="loginURL"/>   
-          <div class="col-lg-4 col-md-6 mt-0 mt-md-5">
-             <form action="${loginURL}" class="request-form ftco-animate" method="post" name="loginform" id="loginform">
+          <div class="col-lg-4 col-md-6 mt-0 mt-md-5" style = "border-radius:10px;">
+             <form action="${loginURL}" class="request-form ftco-animate" method="post" name="loginform" id="loginform"  style ="box-shadow :3px 3px #999999;">
                 <h2>로그인</h2>
                    <div class="form-group">
                       <input type="text" id="username" name="username" class="form-control" placeholder="사번 번호 입력" >

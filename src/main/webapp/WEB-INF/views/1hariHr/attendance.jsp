@@ -130,7 +130,7 @@ $(function(){
 
 		<div class="row" style ="width:100%; height:100%;">
 			<div class="col-md-12">
-				<div class="card">
+				<div class="card"  style ="border-radius:10px;">
 
 
 					<div class="">
@@ -138,7 +138,7 @@ $(function(){
 
 							<!--캘린더 -->
 							<div class="col-lg-12">
-								<div class="card-body b-l calender-sidebar">
+								<div class="card-body b-l calender-sidebar" style ="border-radius:10px; box-shadow :5px 5px #999999; ">
 									<div id="calendar"></div>
 								</div>
 							</div>
