@@ -43,7 +43,7 @@
 							<div style="text-align: right; margin-bottom: 3%;">
 								<a href="empJoin.hari" style="color: white;">
 									<button type="button" class="btn m-t-5 btn-info btn-block waves-effect waves-light" 
-											style="width: 20%; background-color: #20B2AA; margin-right: 1%;">
+											style="width: 20%; margin-right: 1%; border-right-style : solid;">
 										사원등록
 									</button>
 								</a>
