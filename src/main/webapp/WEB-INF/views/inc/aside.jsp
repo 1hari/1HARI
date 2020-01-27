@@ -78,11 +78,21 @@
 	    	
 	    
 	    }
+	    span.hide-menu {
+	    	   text-shadow:
+			    0 1px 0 #ffffff,
+			    0 1.5px 0 #d3d5d6,
+			    0 2px 0 #7c98a1,
+			    0 2.5px 0 #4e727e,
+			    2px 3px 4px rgba(0,0,0,0.1),
+			    2px 3px 4px rgba(0,0,0,0.3);
+			    color: white;}
+		}
 	   
 </style>
 
 <!--left sidebar시작 !!  css는 sidebar.css 파일 참고 -->
-<aside class="left-sidebar" id="theme" data-sidebarbg="skin5" style="background: #white; box-shadow: 6px 6px 6px #f7f7f7; border-right: 2px groove #bcbcbc;">
+<aside class="left-sidebar" id="theme" data-sidebarbg="skin5" style="background: #white; box-shadow: 6px 6px 6px #f7f7f7; ">
 
 	<!-- 사이드바 스크롤-->
 	<div class="scroll-sidebar" id="theme" style="background: #white; opacity:0.9;">

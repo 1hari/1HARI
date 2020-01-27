@@ -660,7 +660,7 @@ function themeChange(formData){
 					<!-- 개인셋팅 -->
 					<li class="nav-item" >
 						<a class="nav-link waves-effect waves-dark" id="theme" style = "color:white;" href="" data-toggle="modal" data-target="#themeModal" aria-haspopup="true" aria-expanded="false">
-							<i class="fas fa-cog font-24"  style="padding-top: 20px;"></i>
+							<i class="fa fa-cog fa-spin fa-fw font-24"  style="padding-top: 20px;"></i>
 						</a>
 					</li>
 					
