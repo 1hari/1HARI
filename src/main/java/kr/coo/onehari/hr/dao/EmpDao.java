@@ -138,6 +138,9 @@ public interface EmpDao {
     //형남 0122 팀 별 근무시간(월)
     public String getTeamMonthWorkTime(int teamCode, int month) throws ClassNotFoundException, SQLException;
     
+    //형남 0127 CEO 정보 가져오기(급여 명세서)
+    public EmpDto getCEO() throws ClassNotFoundException, SQLException;
+    
     // 관리자 사원근태관리 김진호 2020. 1. 24
     public String taManagement() throws ClassNotFoundException, SQLException;
     
@@ -149,4 +152,6 @@ public interface EmpDao {
     
     //연차정보 List 김정하 2020. 1. 27
     public List<AnnUse> getAnnUseList(String empNum) throws ClassNotFoundException, SQLException;
+    
+    
 }

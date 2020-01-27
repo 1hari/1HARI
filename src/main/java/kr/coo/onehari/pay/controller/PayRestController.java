@@ -75,29 +75,16 @@ public class PayRestController {
 		return root;
 	}
 	
-//	@RequestMapping(value = "/getPayListYear.hari", method = RequestMethod.POST)
-//	public  JSONObject getPayListYear(Principal pri, String year) {
-//		JSONObject root=new JSONObject();
-//		JSONArray array=new JSONArray();
-//		List<PayDto> payList = payService.getPayListYear(pri.getName(), year);
-//		try {
-//			for (PayDto payDto : payList) {
-//				JSONObject object=new JSONObject();
-//				object.put("payMonth", payDto.getPayMonth());
-//				object.put("basicSal", payDto.getBasicSal());
-//				object.put("payNPension", payDto.getPayNPension());
-//				object.put("payHInsurance", payDto.getPayHInsurance());
-//				object.put("payCInsurance", payDto.getPayCInsurance());
-//				object.put("empInsurance", payDto.getEmpInsurance());
-//				object.put("payIncomeTax", payDto.getPayIncomeTax());
-//				object.put("payLIncomeTax", payDto.getPayLIncomeTax());
-//				array.add(object);
-//			}
-//			root.put("payList", array);
-//			
-//		} catch (Exception e) {
-//			log.debug("getPayList 예외발생: " + e.getMessage());
-//		}
-//		return root;
-//	}
+	// 사원정보수정(화면)
+	@RequestMapping(value = "/getCEO.hari", method = RequestMethod.POST)
+	public JSONObject empModify() {
+		JSONObject root=new JSONObject();
+		EmpDto ceo=empService.getCEO();
+		try {
+			root.put("CEO", ceo);
+		} catch (Exception e) {
+			log.debug("getPayList 예외발생: " + e.getMessage());
+		}
+		return root;
+	}
 }
