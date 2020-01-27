@@ -21,8 +21,9 @@ var router = new VueRouter({
 			component : httpVueLoader(contextPath+'/resources/vue/components/board/board_main.vue')
 		},
 		{
-			path : '/board_read/:board_idx/:page/:content_idx',
-			component : httpVueLoader(contextPath+'/resources/vue/components/board/board_read.vue')
+			// '/payRead/' + year + '/' + month
+			path : '/payRead/:year/:month',
+			component : httpVueLoader(contextPath+'/resources/vue/components/pay/payRead.vue')
 		},
 		{
 			path : '/board_modify/:board_idx/:page/:content_idx',

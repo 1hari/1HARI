@@ -29,7 +29,8 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="pay in server_data.payList" >
+            <tr v-for="(pay, index) in server_data.payList" >
+              
               <td class="text-center d-none d-md-table-cell" style="height=20px">{{pay.payMonth}}</td>
               <td class="text-center d-none d-md-table-cell">{{pay.basicSal}}</td><!--기본급으로 받으세요 -->
               <td class="text-center d-none d-md-table-cell">{{pay.payNPension}}</td>
@@ -38,9 +39,9 @@
               <td class="text-center d-none d-md-table-cell">{{pay.empInsurance}}</td>
               <td class="text-center d-none d-md-table-cell">{{pay.payIncomeTax}}</td>
               <td class="text-center d-none d-md-table-cell">{{pay.payLIncomeTax}}</td>
-              <td class="text-center d-none d-md-table-cell">{{pay.payLIncomeTax}}</td><!--실급여로 데이터 받으세요 -->
-              <td class="text-center d-none d-md-table-cell">{{pay.payLIncomeTax}}</td><!--실급여로 데이터 받으세요 -->
-              <td class="text-center d-none d-md-table-cell"><button class ="btn btn-sucess" style = "background-color: #2ab2aa; text-color:white; height:70%; " >급여명세</button></td>
+              <td class="text-center d-none d-md-table-cell">{{splitPayMonth[index][0]}}</td><!--실급여로 데이터 받으세요 -->
+              <td class="text-center d-none d-md-table-cell">{{splitPayMonth[index][1]}}</td><!--실급여로 데이터 받으세요 -->
+              <td class="text-center d-none d-md-table-cell"><button class ="btn btn-sucess" style = "background-color: #2ab2aa; text-color:white; height:70%;" @click="payRead(splitPayMonth[index][0],splitPayMonth[index][1])">급여명세</button></td>
             </tr>
           </tbody>
           
@@ -74,13 +75,13 @@ module.exports = {
     return {
       //여기안에 있는 멤버들을 템플릿 안에서 사용할 수 있음
       server_data: {},
+      splitPayMonth:[],
     };
   },
   methods: {
-    go_board_read: function(content_idx) {
-      alert(content_idx)	
+    payRead: function(year, month) {
       //this.$router router 객체 불러오기
-      this.$router.push('/board_read/' + this.$route.params.board_idx + '/' + this.$route.params.page + '/' + content_idx) //.push에 파라미터값에 알맞는 컴포넌트를 찾아 그 컴포넌트 주소로 이동시켜줌
+      this.$router.push('/payRead/' + year + '/' + month) //.push에 파라미터값에 알맞는 컴포넌트를 찾아 그 컴포넌트 주소로 이동시켜줌
     },
     getPayList: function() {
        var params = new URLSearchParams();
@@ -90,16 +91,23 @@ module.exports = {
          params.append("year", event.target.value)
        }
 		axios.post("getPayList.hari", params).then((response)=>{
-		this.server_data=response.data
-		var pays=response.data.payList
-		pays.forEach(pay => {
-			pay.basicSal = numeral(pay.basicSal).format( '₩0,0' )
-			pay.payNPension = numeral(pay.payNPension).format( '₩0,0' )
-			pay.payHInsurance = numeral(pay.payHInsurance).format( '₩0,0' )
-			pay.payCInsurance = numeral(pay.payCInsurance).format( '₩0,0' )
-			pay.empInsurance = numeral(pay.empInsurance).format( '₩0,0' )
-			pay.payIncomeTax = numeral(pay.payIncomeTax).format( '₩0,0' )
-			pay.payLIncomeTax = numeral(pay.payLIncomeTax).format( '₩0,0' )
+      //console.log(response.data);
+      this.server_data=response.data
+      pays=response.data.payList
+      console.log(pays);
+      this.splitPayMonth=[]
+      pays.forEach(pay => {
+        pay.basicSal = numeral(pay.basicSal).format( '₩0,0' )
+        pay.payNPension = numeral(pay.payNPension).format( '₩0,0' )
+        pay.payHInsurance = numeral(pay.payHInsurance).format( '₩0,0' )
+        pay.payCInsurance = numeral(pay.payCInsurance).format( '₩0,0' )
+        pay.empInsurance = numeral(pay.empInsurance).format( '₩0,0' )
+        pay.payIncomeTax = numeral(pay.payIncomeTax).format( '₩0,0' )
+        pay.payLIncomeTax = numeral(pay.payLIncomeTax).format( '₩0,0' )
+        this.splitPayMonth.push(pay.payMonth.split("-"))
+        // console.log(pay.payMonth)
+        console.log(this.splitPayMonth)
+      
 			//console.log(pay.basicSal);
 			//console.log(pay.payNPension);
 			//console.log(pay.payHInsurance);
@@ -108,7 +116,7 @@ module.exports = {
 			//console.log(pay.payIncomeTax);
 			//console.log(pay.payLIncomeTax);
 		});
-		
+		// console.log(this.splitPayMonth)
 		})
      
     },
