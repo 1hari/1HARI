@@ -3016,14 +3016,14 @@ fieldset:disabled a.btn {
 
 .btn-success {
 	color: #fff;
-	background-color: #20b2aa;
-	border-color: #20b2aa
+	background-color: #008dd4;
+	border-color: #008dd4 
 }
 
 .btn-success:hover {
 	color: #fff;
-	background-color: #e1f6fa;
-	border-color: #e1f6fa
+	background-color: #bcbcbc;
+	border-color: #bcbcbc
 }
 
 .btn-success.focus,
@@ -3035,8 +3035,8 @@ fieldset:disabled a.btn {
 .btn-success.disabled,
 .btn-success:disabled {
 	color: #fff;
-	background-color: #20b2aa;
-	border-color: #20b2aa
+	background-color: #008dd4;
+	border-color: #008dd4 
 }
 
 .btn-success:not(:disabled):not(.disabled).active,
@@ -15668,14 +15668,14 @@ fieldset:disabled a.btn {
 
 .btn-success {
 	color: #fff;
-	background-color: #28b779;
-	border-color: #28b779
+	background-color: #008dd4;
+	border-color:  #008dd4
 }
 
 .btn-success:hover {
 	color: #fff;
-	background-color: #219864;
-	border-color: #1f8d5d
+	background-color: #bcbcbc;
+	border-color: #bcbcbc
 }
 
 .btn-success.focus,
@@ -15687,8 +15687,8 @@ fieldset:disabled a.btn {
 .btn-success.disabled,
 .btn-success:disabled {
 	color: #fff;
-	background-color: #28b779;
-	border-color: #28b779
+	background-color: #008dd4;
+	border-color:  #008dd4
 }
 
 .btn-success:not(:disabled):not(.disabled).active,
@@ -28321,14 +28321,14 @@ fieldset:disabled a.btn {
 
 .btn-success {
 	color: #fff;
-	background-color: #2ab2aa;
-	border-color: #2ab2aa;
+	background-color: #008dd4;
+	border-color: #008dd4
 }
 
 .btn-success:hover {
 	color: #fff;
-	background-color: #219864;
-	border-color: #1f8d5d
+	background-color: #bcbcbc;
+	border-color: #bcbcbc
 }
 
 .btn-success.focus,
@@ -28340,8 +28340,8 @@ fieldset:disabled a.btn {
 .btn-success.disabled,
 .btn-success:disabled {
 	color: #fff;
-	background-color: #28b779;
-	border-color: #28b779
+	background-color: #008dd4;
+	border-color: #008dd4
 }
 
 .btn-success:not(:disabled):not(.disabled).active,
@@ -45425,14 +45425,14 @@ fieldset:disabled a.btn {
 
 .btn-success {
 	color: #fff;
-	background-color: #20b2aa;
-	border-color: #20b2aa
+	background-color: #008dd4;
+	border-color: #008dd4 
 }
 
 .btn-success:hover {
 	color: #fff;
-	background-color: #20b2aa;
-	border-color: #20b2aa
+	background-color: #bcbcbc;
+	border-color: #bcbcbc
 }
 
 .btn-success.focus,
@@ -45444,8 +45444,8 @@ fieldset:disabled a.btn {
 .btn-success.disabled,
 .btn-success:disabled {
 	color: #fff;
-	background-color: #20b2aa;
-	border-color: #20b2aa
+	background-color: #008dd4;
+	border-color: #008dd4
 }
 
 .btn-success:not(:disabled):not(.disabled).active,

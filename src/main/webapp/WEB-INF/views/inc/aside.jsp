@@ -74,7 +74,7 @@
 </style>
 
 <!--left sidebar시작 !!  css는 sidebar.css 파일 참고 -->
-<aside class="left-sidebar" id="theme" data-sidebarbg="skin5" style="background: #008dd4;">
+<aside class="left-sidebar" id="theme" data-sidebarbg="skin5" style="background: #008dd4; border-right: thick double #bcbcbc; ">
 
 	<!-- 사이드바 스크롤-->
 	<div class="scroll-sidebar" id="theme" style="background: #008dd4;">
