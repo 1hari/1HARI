@@ -604,7 +604,7 @@ function themeChange(formData){
 	    <header class="topbar" data-navbarbg="skin5"> 
 
 		<nav class="navbar top-navbar navbar-expand-md navbar-dark" >
-              <div class="navbar-header" id="theme" data-logobg="skin5" style="background: #008dd4;">  
+              <div class="navbar-header" id="theme" data-logobg="skin5" style="background: #white;">  
 				<!-- 모바일용 토글러-->
 				<a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)">
 					<i class="ti-menu ti-close"></i>
@@ -636,7 +636,7 @@ function themeChange(formData){
 
 
 			<!--top navbar 더보기 & 검색 -->
-				<div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5" style="background: #008dd4;"> 
+				<div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5" style="background: #white;"> 
 				<!-- ============================================================== -->
 				<!-- toggle and nav items -->
 				<!-- ============================================================== -->

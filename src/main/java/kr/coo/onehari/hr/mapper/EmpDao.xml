@@ -265,6 +265,13 @@
             WHERE T.TEAMCODE = #{param1} AND MONTH(TADATE) = #{param2}
     </select>
     
+	<!-- 형남 0127 CEO 정보 가져오기 -->
+    <select id="getCEO" resultType="kr.coo.onehari.hr.dto.EmpDto">
+        SELECT * FROM EMP E JOIN RANKS R
+        ON E.RANKCODE = R.RANKCODE
+        WHERE E.RANKCODE=3006
+    </select>
+    
     <!--     
     //연차정보 확정(승인) 김정하 2020. 1. 27
     public int updateAnnUse(String signNum) throws ClassNotFoundException, SQLException;

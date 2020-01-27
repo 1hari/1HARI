@@ -479,5 +479,18 @@ public class EmpService {
         }
         return totalTime;
     }
+    
+	//사원정보수정(화면) 2020. 1. 8 양찬식
+	public EmpDto getCEO() {
+		EmpDto emp = null;
+		EmpDao empDao = sqlsession.getMapper(EmpDao.class);
+		
+		try {
+			emp = empDao.getCEO();
+		} catch (Exception e) {
+			log.debug("EmpService empModify 예외발생: " + e.getMessage());
+		}
+		return emp;
+	}
 }
 
