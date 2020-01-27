@@ -532,4 +532,15 @@ public class HrRestController {
 		return root.toJSONString();
 	}
 	
+	@RequestMapping(value = "getTaList.hari", method = RequestMethod.POST)
+	public List<EmpDto> getTaList() {
+		List<EmpDto> getTaList = null;
+		
+		try {
+			getTaList = empSercive.getTaList();
+		} catch (Exception e) {
+			log.debug("HrRestController getTaList 예외발생: " + e.getMessage());
+		}
+		return getTaList;
+	}
 }
