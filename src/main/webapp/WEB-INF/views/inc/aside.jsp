@@ -71,13 +71,21 @@
 	    .display-none{ /*감추기
 	        display:none;
 	    } */
+	    /*aside bar 마우스 오버 액션들 */
+	    a.sidebar-link:hover, a.sidebar-link:active{
+	    	background: #dbdbdb;
+	    	font-size:150%;
+	    	
+	    
+	    }
+	   
 </style>
 
 <!--left sidebar시작 !!  css는 sidebar.css 파일 참고 -->
-<aside class="left-sidebar" id="theme" data-sidebarbg="skin5" style="background: #white; box-shadow: 10px 10px 10px #bcbcbc;">
+<aside class="left-sidebar" id="theme" data-sidebarbg="skin5" style="background: #white; box-shadow: 6px 6px 6px #f7f7f7; border-right: 2px groove #bcbcbc;">
 
 	<!-- 사이드바 스크롤-->
-	<div class="scroll-sidebar" id="theme" style="background: #white; opacity:8;">
+	<div class="scroll-sidebar" id="theme" style="background: #white; opacity:0.9;">
 		<!-- Sidebar 네비게이션-->
 		<nav class="sidebar-nav" >
 			<ul id="sidebarnav" class="p-t-30" style="background: #white;">
@@ -85,8 +93,8 @@
 
 				<li class="sidebar-item" >
 
-				
-					<a class="sidebar-link has-arrow waves-effect waves-dark" href="hr_attendance.html" aria-expanded="false" id="theme" style="background: #white;">
+			
+					<a class="sidebar-link has-arrow waves-effect waves-dark" href="hr_attendance.html" aria-expanded="false" id="theme" class="sidebar-link" style="background: #white;">
 						<i class="m-r-10 mdi mdi-account-card-details"></i>
 						<span class="hide-menu">인사 관리</span>
 					</a>
@@ -159,7 +167,7 @@
 				</li>
 
 				<li class="sidebar-item" id="theme" style="background: #white;">
-					<a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false" id="theme" style="background: #white;">
+					<a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false" id="theme" class="sidebar-link" style="background: #white;">
 						<i class="m-r-10 mdi mdi-cellphone-link"></i>
 						<span class="hide-menu">전자 결재 </span>
 					</a>

@@ -122,7 +122,7 @@ $(function(){
 
 	<!--컨텐츠 내용 시작  -->
 	<!-- ============================================================== -->
-	<div class="container-fluid" style ="width:83%; height: 83%; marign-left:10%;">
+	<div class="container-fluid" style ="width:80%; height: 83%; marign-left:15%; marign-right:-10%;">
 
 		<!-- ============================================================== -->
 		<!-- 컨텐츠 로우 -->
