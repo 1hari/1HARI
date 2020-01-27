@@ -74,11 +74,10 @@
 </style>
 
 <!--left sidebar시작 !!  css는 sidebar.css 파일 참고 -->
-<aside class="left-sidebar" id="theme" data-sidebarbg="skin5" style="background: #white; border-right: thick double #bcbcbc; ">
+<aside class="left-sidebar" id="theme" data-sidebarbg="skin5" style="background: #white; box-shadow: 10px 10px 10px #bcbcbc;">
 
 	<!-- 사이드바 스크롤-->
-	<div class="scroll-sidebar" id="theme" style="background: #white;">
-	
+	<div class="scroll-sidebar" id="theme" style="background: #white; opacity:8;">
 		<!-- Sidebar 네비게이션-->
 		<nav class="sidebar-nav" >
 			<ul id="sidebarnav" class="p-t-30" style="background: #white;">
