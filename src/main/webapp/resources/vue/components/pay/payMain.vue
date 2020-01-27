@@ -3,13 +3,15 @@
   <div class="container" style="margin-top:5%;">
     <div class="card shadow" style=" height: 500%;">
       <div class="card-body" >
-        <div>
-            <select style = "width:10%;" id="selectYear" @change="getPayList($event)">
+        <h4 class="card-title">급여</h4>
+        <div style = "margin-left:85%;">
+           <span>사번: {{server_data.empNum}}</span>
+            <select style = "margin-left:10%;" id="selectYear" @change="getPayList($event)">
               <option  v-for="(a1, index) in server_data.years"  v-bind:selected="index == 0">{{a1}}</option>
             </select>
-            <span style = "margin-left:75%;" value ="사번">사번</span>
+            
         </div>
-        <h4 class="card-title">급여</h4>
+        
         <table class="table table-hover" id="payList" >
           <thead>
             <tr>
@@ -83,8 +85,7 @@ module.exports = {
     getPayList: function() {
        var params = new URLSearchParams();
        if(event.target.value ==undefined){
-        console.log('undefined잡았다~~~~~~~~~~~~~~~~~~~~')
-        params.append("year", "0")
+        params.append("year", "init")
        }else {
          params.append("year", event.target.value)
        }
