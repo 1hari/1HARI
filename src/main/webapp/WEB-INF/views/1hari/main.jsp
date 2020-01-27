@@ -699,11 +699,11 @@ $(function(){
 	<!-- Bread crumb and right sidebar toggle -->
 	<!-- ============================================================== -->
 
-	<div class = "a" style ="width: 100%; height: 250px; opacity:0.8; background-image:url(resources/hari/assets/images/divbg_06.png)"><!-- 대시보드 안에 그림넣기div !!!!!!!!!!!!!!!!1 -->
+	<div class = "a" style ="width: 100%; height: 250px; background-image:url(resources/hari/assets/images/divbg_06.png); opacity:0.8;"><!-- 대시보드 안에 그림넣기div !!!!!!!!!!!!!!!!1 -->
 	<div class="page-breadcrumb">
 		<div class="row">
 			<div class="col-12 d-flex no-block align-items-center">
-				<h4 class="page-title">대시보드</h4>
+				<h1 class="page-title">대시보드</h1>
 				<div class="ml-auto text-right"></div>
 			</div>
 		</div>
@@ -745,7 +745,7 @@ $(function(){
 		<div class="row">
 			<div class="col-md-6">
 			<!-- 근무 통계 시작  -->
-				<div class="card" style ="box-shadow :10px 10px #999999; border-radius:10px; border : 4px dashed #bcbcbc; margin-top:-20%;">
+				<div class="card" style ="box-shadow :10px 10px #999999; border-radius:10px; border : 4px dashed #bcbcbc; margin-top:-20%; margin-left:10%;">
 					<div class="card-body" style="padding-bottom: 0">
 						<h4 class="card-title m-b-0" style="margin-bottom:0;" >근무시간 통계</h4>
 							<select class="select2 form-control custom-select select2-hidden-accessible" id="month" style="width: 13%; height:10%; margin-left: 88%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
@@ -770,7 +770,7 @@ $(function(){
 					</div>
 				</div>
 				<!--time line 시작 -->
-				<div class="card" style ="box-shadow :10px 10px  #999999; border-radius:10px; border : 4px dashed #bcbcbc; ">
+				<div class="card" style ="box-shadow :10px 10px  #999999; border-radius:10px; border : 4px dashed #bcbcbc; margin-left:10%; ">
 					<div class="card-body">
 						<h4 class="card-title m-b-0">당월 근태통계</h4>
 						<div id="canvas-holder" style="width: 300px;">
@@ -820,7 +820,7 @@ $(function(){
 			<div class="col-md-6">
 
 				<!--전자 결재 시작-->
-				<div class="card" style ="box-shadow :10px 10px #999999; border-radius:10px;border : 4px dashed #bcbcbc;  margin-top:-20%;">
+				<div class="card" style ="box-shadow :10px 10px #999999; border-radius:10px;border : 4px dashed #bcbcbc;  margin-top:-20%; margin-right:10%;">
 					<div class="card-body">
 						<h5 class="card-title m-b-0">전자 결재</h5>
 					</div>
@@ -850,7 +850,7 @@ $(function(){
 
 
 				<!-- todo list 시작 -->
-				<div class="card" style ="box-shadow :10px 10px #999999; border-radius:10px; border : 4px dashed #bcbcbc;">
+				<div class="card" style ="box-shadow :10px 10px #999999; border-radius:10px; border : 4px dashed #bcbcbc; margin-right:10%;">
 					<div class="card-body">
 						<h4 class="card-title">To Do List</h4>
 						<div class="todo-widget scrollable" style="height: 450px;">

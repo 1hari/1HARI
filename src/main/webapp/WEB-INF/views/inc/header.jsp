@@ -636,7 +636,7 @@ function themeChange(formData){
 
 
 			<!--top navbar 더보기 & 검색 -->
-				<div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5" style="background: #white; box-shadow: 10px 10px 10px #bcbcbc;"> 
+				<div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5" style="background: #white; box-shadow: 6px 6px 6px #f7f7f7;"> 
 				<!-- ============================================================== -->
 				<!-- toggle and nav items -->
 				<!-- ============================================================== -->
