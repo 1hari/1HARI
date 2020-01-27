@@ -9,10 +9,11 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import kr.coo.onehari.hr.dto.EmpDto;
 import kr.coo.onehari.hr.dto.PayDto;
+import kr.coo.onehari.hr.service.EmpService;
 import kr.coo.onehari.pay.service.PayService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -24,16 +25,19 @@ public class PayRestController {
 	@Autowired
 	private PayService payService;
 	
-	//전체급여 리스트
+	@Autowired
+	private EmpService empService;
+	
+	//급여 리스트
 	@RequestMapping(value = "/getPayList.hari", method = RequestMethod.POST)
-	public  JSONObject getPayList(String year, Principal pri) {
+	public  JSONObject getPayList(Principal pri, String year, String month) {
 		List<String> years = payService.getYears(pri.getName());
 		if(year.equals("init")) {
 			year=years.get(0);
 		}
 		JSONObject root=new JSONObject();
 		JSONArray array=new JSONArray();
-		List<PayDto> payList = payService.getPayListYear(pri.getName(), year);
+		List<PayDto> payList = payService.getPayList(pri.getName(), year, month);
 		try {
 			for (PayDto payDto : payList) {
 				JSONObject object=new JSONObject();
@@ -51,6 +55,20 @@ public class PayRestController {
 			root.put("years", years);
 			root.put("empNum", pri.getName());
 		
+		} catch (Exception e) {
+			log.debug("getPayList 예외발생: " + e.getMessage());
+		}
+		return root;
+	}
+	
+	//급여명세서 조회 시 해당 사원정보 가져오기
+	@RequestMapping(value = "/getEmp.hari", method = RequestMethod.POST)
+	public  JSONObject getEmp(Principal pri) {
+		JSONObject root=new JSONObject();
+		int empNum=Integer.parseInt(pri.getName());
+		EmpDto emp=empService.empModify(empNum);
+		try {
+			root.put("emp", emp);
 		} catch (Exception e) {
 			log.debug("getPayList 예외발생: " + e.getMessage());
 		}

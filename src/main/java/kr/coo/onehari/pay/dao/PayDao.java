@@ -16,13 +16,11 @@ import kr.coo.onehari.hr.dto.PayDto;
 */
 public interface PayDao {
 
-	//올해 전체 급여리스트
-	public List<PayDto> getPayList(String empNumStr) throws ClassNotFoundException, SQLException;
 	
 	//올해 전체 급여리스트
 	public List<String> getYears(String empNumStr) throws ClassNotFoundException, SQLException;
 
 	//올해 전체 급여리스트
-	public List<PayDto> getPayListYear(String empNumStr, String year) throws ClassNotFoundException, SQLException;
+	public List<PayDto> getPayList(String empNumStr, String year, String month) throws ClassNotFoundException, SQLException;
 	
 }

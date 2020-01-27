@@ -22,17 +22,6 @@ public class PayService {
 	@Autowired
 	private SqlSession sqlsession;
 	
-	//급여리스트
-	public List<PayDto> getPayList(String empNumStr) {
-		PayDao dao = sqlsession.getMapper(PayDao.class);
-		List<PayDto> payList=null;
-		try {
-			payList = dao.getPayList(empNumStr);
-		} catch (ClassNotFoundException | SQLException e) {
-			log.debug("getPayList : " + e.getMessage());
-		}
-		return payList;
-	}
 	
 	
 	public List<String> getYears(String empNumStr) {
@@ -47,11 +36,12 @@ public class PayService {
 	}
 	
 	//급여리스트
-	public List<PayDto> getPayListYear(String empNumStr, String year) {
+	public List<PayDto> getPayList(String empNumStr, String year, String month) {
 		PayDao dao = sqlsession.getMapper(PayDao.class);
 		List<PayDto> payList=null;
 		try {
-			payList = dao.getPayListYear(empNumStr, year);
+			payList = dao.getPayList(empNumStr, year, month);
+			System.out.println(payList.toString());
 		} catch (ClassNotFoundException | SQLException e) {
 			log.debug("getPayList : " + e.getMessage());
 		}
