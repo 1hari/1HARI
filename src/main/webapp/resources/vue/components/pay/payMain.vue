@@ -32,11 +32,11 @@
             <tr v-for="pay in server_data.payList" >
               <td class="text-center d-none d-md-table-cell" style="height=20px">{{pay.payMonth}}</td>
               <td class="text-center d-none d-md-table-cell">{{pay.basicSal}}</td><!--기본급으로 받으세요 -->
-              <td class="text-center d-none d-md-table-cell">{{pay.payLIncomeTax}}</td>
-              <td class="text-center d-none d-md-table-cell">{{pay.payLIncomeTax}}</td>
-              <td class="text-center d-none d-md-table-cell">{{pay.payLIncomeTax}}</td>
-              <td class="text-center d-none d-md-table-cell">{{pay.payLIncomeTax}}</td>
-              <td class="text-center d-none d-md-table-cell">{{pay.payLIncomeTax}}</td>
+              <td class="text-center d-none d-md-table-cell">{{pay.payNPension}}</td>
+              <td class="text-center d-none d-md-table-cell">{{pay.payHInsurance}}</td>
+              <td class="text-center d-none d-md-table-cell">{{pay.payCInsurance}}</td>
+              <td class="text-center d-none d-md-table-cell">{{pay.empInsurance}}</td>
+              <td class="text-center d-none d-md-table-cell">{{pay.payIncomeTax}}</td>
               <td class="text-center d-none d-md-table-cell">{{pay.payLIncomeTax}}</td>
               <td class="text-center d-none d-md-table-cell">{{pay.payLIncomeTax}}</td><!--실급여로 데이터 받으세요 -->
               <td class="text-center d-none d-md-table-cell">{{pay.payLIncomeTax}}</td><!--실급여로 데이터 받으세요 -->
@@ -89,10 +89,27 @@ module.exports = {
        }else {
          params.append("year", event.target.value)
        }
-       axios.post("getPayList.hari", params).then((response)=>{
-         this.server_data=response.data
-          console.log(this.server_data)
-      })
+		axios.post("getPayList.hari", params).then((response)=>{
+		this.server_data=response.data
+		var pays=response.data.payList
+		pays.forEach(pay => {
+			pay.basicSal = numeral(pay.basicSal).format( '₩0,0' )
+			pay.payNPension = numeral(pay.payNPension).format( '₩0,0' )
+			pay.payHInsurance = numeral(pay.payHInsurance).format( '₩0,0' )
+			pay.payCInsurance = numeral(pay.payCInsurance).format( '₩0,0' )
+			pay.empInsurance = numeral(pay.empInsurance).format( '₩0,0' )
+			pay.payIncomeTax = numeral(pay.payIncomeTax).format( '₩0,0' )
+			pay.payLIncomeTax = numeral(pay.payLIncomeTax).format( '₩0,0' )
+			//console.log(pay.basicSal);
+			//console.log(pay.payNPension);
+			//console.log(pay.payHInsurance);
+			//console.log(pay.payCInsurance);
+			//console.log(pay.empInsurance);
+			//console.log(pay.payIncomeTax);
+			//console.log(pay.payLIncomeTax);
+		});
+		
+		})
      
     },
     // onChange: function(event){
