@@ -15,7 +15,9 @@ import kr.coo.onehari.sign.dto.SignDto;
 import kr.coo.onehari.sign.dto.SignFormDto;
 import kr.coo.onehari.sign.service.SignFormService;
 import kr.coo.onehari.sign.service.SignService;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @RestController
 @RequestMapping("ajax/")
 public class SignRestController {
@@ -88,12 +90,13 @@ public class SignRestController {
 		return count;
 	}
 	
-	//결재하기 김정하 / 2020. 1. 16
+	//결재하기 김정하 / 2020. 1. 16 String isSign1, String empSign1, String isSign2, String empSign2, String signNum, String signComment, String signCode
 	@RequestMapping("approval.hari")
-	public Map<String, String> signApproval(String isSign1, String empSign1, String isSign2, String empSign2, String signNum, String signComment, String signCode, Principal principal) {
+	public Map<String, String> signApproval(SignDto sign, Principal principal) {
 		//System.out.println(signNum);
 		//System.out.println(isSign1);
 		//System.out.println(isSign2);
+		System.out.println(sign);
 		
 		HashMap<String, String> resultMap = new HashMap<String, String>();
 		
@@ -102,22 +105,31 @@ public class SignRestController {
 		String empNum = principal.getName();
 		
 		//결재1이 0이면서 결재자1이 로그인한 사람 또는 결재2가 0이면서 결재자2가 로그인한 사람
-		if((isSign1.equals("0") && empSign1.equals(empNum)) || (isSign2.equals("0") && empSign2.equals(empNum))) {
+		if((sign.getIsSign1().equals("0") && sign.getEmpSign1().equals(empNum)) || (sign.getIsSign2().equals("0") && sign.getEmpSign2().equals(empNum))) {
 			int result = 0;
 			
 			HashMap<String, String> map = new HashMap<String, String>();
-			System.out.println(signCode);
-			if(signCode == null || signCode == "" || !signCode.equals("4")) {
-				map.put("isSign1", isSign1);
-				map.put("isSign2", isSign2);
+			
+			if(sign.getSignCode().equals(null) || sign.getSignCode().equals("") || !sign.getSignCode().equals("4")) {
+				map.put("isSign1", sign.getIsSign1());
+				map.put("isSign2", sign.getIsSign2());
 			}
 			
-			map.put("signNum", signNum);
-			map.put("signComment", signComment);
-			map.put("signCode", signCode);
+			map.put("signNum", sign.getSignNum());
+			map.put("signComment", sign.getSignComment());
+			map.put("signCode", sign.getSignCode());
 			
-			result = signService.signApproval(map);
-			
+			//신청서가 연차신청서가 아니거나 연차신청서이면서 결재자1일때는 일반결재
+			if(!sign.getSignFormCode().equals("0") || (sign.getSignFormCode().equals("0") && sign.getIsSign1().equals("0"))) {
+				result = signService.signApproval(map);
+			}else {
+				try {
+					result = signService.annSignApproval(map);
+				} catch (Exception e) {
+					log.debug("AnnSignTran : " + e.getMessage());
+				}
+			}
+						
 			if(result > 0 ) {
 				isOk = "true";
 				msg = "처리되었습니다.";

@@ -264,6 +264,34 @@
             ON T.TEAMCODE = E.TEAMCODE
             WHERE T.TEAMCODE = #{param1} AND MONTH(TADATE) = #{param2}
     </select>
+    
+    <!--     
+    //연차정보 확정(승인) 김정하 2020. 1. 27
+    public int updateAnnUse(String signNum) throws ClassNotFoundException, SQLException;
+    
+    //연차정보 List 김정하 2020. 1. 27
+    public List<AnnUse> getAnnUseList(String empNum) throws ClassNotFoundException, SQLException; -->
+    
+    <!-- 연차정보 등록 김정하 2020. 1. 27 -->
+    <insert id="insertAnnUse">
+    	<selectKey resultType="int" keyProperty="signNum" order="BEFORE">
+    		SELECT MAX(SIGNNUM) FROM sign;
+    	</selectKey>
+    	
+    	INSERT INTO annuselist (SIGNNUM, EMPNUM, STARTDATE, ENDDATE, USEANN)
+    	VALUES(
+    		#{signNum},
+    		#{empNum},
+    		#{startDate},
+    		#{endDate},
+    		#{useAnn}    	
+    	)
+    </insert>
+    
+    <update id="updateAnnUse">
+    	UPDATE annuselist SET ISSIGN='1' WHERE SIGNNUM = #{signNum};
+    </update>
+    
 </mapper>
 
 

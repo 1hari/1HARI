@@ -30,6 +30,7 @@ public interface SignDao {
 	//관리자 전체 문서함 페이징 (다이나믹쿼리) 김정하 / 2020. 1. 22
 	public int signAdminPage (Map<String, String> map) throws ClassNotFoundException, SQLException;
 	
-	//관레자 전체 문서함 리스트 (다이나믹쿼리) 김정하 / 2020. 1. 22
+	//관리자 전체 문서함 리스트 (다이나믹쿼리) 김정하 / 2020. 1. 22
 	public List<SignDto> selectSignAdminList (Map<String, String> map) throws ClassNotFoundException, SQLException;
+	
 }

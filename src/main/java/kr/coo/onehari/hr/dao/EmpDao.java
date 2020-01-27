@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
+import kr.coo.onehari.hr.dto.AnnUse;
 import kr.coo.onehari.hr.dto.EmpDto;
 
 /*
@@ -139,4 +140,13 @@ public interface EmpDao {
     
     // 관리자 사원근태관리 김진호 2020. 1. 24
     public String taManagement() throws ClassNotFoundException, SQLException;
+    
+    //연차정보 등록 김정하 2020. 1. 27
+    public int insertAnnUse(AnnUse annUse) throws ClassNotFoundException, SQLException;
+    
+    //연차정보 확정(승인) 김정하 2020. 1. 27
+    public int updateAnnUse(String signNum) throws ClassNotFoundException, SQLException;
+    
+    //연차정보 List 김정하 2020. 1. 27
+    public List<AnnUse> getAnnUseList(String empNum) throws ClassNotFoundException, SQLException;
 }

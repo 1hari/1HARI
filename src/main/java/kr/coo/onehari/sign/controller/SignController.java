@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import kr.coo.onehari.hr.dto.AnnUse;
 import kr.coo.onehari.hr.dto.EmpDto;
 import kr.coo.onehari.hr.dto.Team;
 import kr.coo.onehari.hr.service.CorpService;
@@ -211,6 +212,37 @@ public class SignController {
 		model.addAttribute("isOk", isOk);
 			
 		return "1hariSign.annDraft";
+	}
+	
+	//연차기안 처리 김정하 / 2020. 1. 27~
+	@RequestMapping(value="annDraft.hari", method = RequestMethod.POST)
+	public String annDraft(SignDto sign, AnnUse annUse, Model model) {
+		System.out.println(sign);
+		System.out.println(annUse);
+		
+		sign.setSignFormCode("0");
+		annUse.setEmpNum(sign.getDraftEmp());
+		
+		int result = 0; //signService.insertSign(sign);
+		String view = "";
+		
+		try {
+			result = signService.insertAnn(sign, annUse);
+		} catch (Exception e) {
+			log.debug("AnnInsertTran : " + e.getMessage());
+		}
+		
+		if(result > 0 ) { //DB insert 성공시
+			view = "redirect:signHome.hari";
+			model.addAttribute("msg", "기안완료되었습니다.");
+			model.addAttribute("isOk", "true");
+			
+		}else {
+			view = "redirect:annDraft.hari";
+			model.addAttribute("msg", "기안 실패 되었습니다. 다시 확인 바랍니다.");
+			model.addAttribute("isOk", "false");
+		}
+		return view;
 	}
 	
 	//내 문서함 화면 김정하 / 2020. 1. 7~

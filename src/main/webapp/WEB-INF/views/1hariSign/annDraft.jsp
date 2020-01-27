@@ -46,7 +46,7 @@
 			<div class="col-12">
 				<div class="container">
 					<!--form 태그 시작 -->
-					<form action="" method="POST" enctype="multipart/form-data" id="draftForm">
+					<form action="" method="POST" enctype="multipart/form-data" id="annDraftForm">
 						<div class="row">
 							<div class="col-md-2">
 								<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#signModal">결재자 선택</button>
@@ -84,17 +84,6 @@
 							</div>
 						</div>
 						
-						<!-- 연차 날짜 선택 -->
-						<div class="row">
-							<div class="col-md-12">
-								<div class="input-group input-daterange date">
-		    						<input type="text" class="form-control" value="">
-		    						<div class="input-group-addon"> ~ </div>
-		    						<input type="text" class="form-control" value="">
-								</div>
-							</div>
-						</div>
-						
 						<!-- 제목입력 -->
 						<div class="row">
 							<!-- input 태그 -->
@@ -105,7 +94,25 @@
 								<button type="button" id="draftSubmit" class="btn btn-success" style="display: inline-block;">기안</button>
 							</div>
 						</div><!-- row 끝 -->
-						
+						<!-- 연차 날짜 선택 -->
+						<div class="row">
+							<div class="col-md-12">
+								<div class="row">
+									<div class="col-sm-6">
+										<div class="input-group input-daterange date">
+				    						<input type="text" class="form-control" id="startDate" name="startDate" value="">
+				    						<div class="input-group-addon">&nbsp;&nbsp;~&nbsp;&nbsp;</div>
+				    						<input type="text" class="form-control" id="endDate" name="endDate" value="">
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<div class="input-group">
+											연차 사용 일수 &nbsp;&nbsp;<input type="text" id="useAnn" name="useAnn" value="" style="text-align: center;" readonly>&nbsp;&nbsp;일
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 						<!-- ck 에디터 form -->
 						<textarea name="signContent" id="signContent" rows="10" cols="80">
 							<c:choose>
@@ -113,9 +120,26 @@
 									${form.signFormFormContent}
 								</c:when>
 								<c:otherwise>
-									<c:forEach var="docu" items="${requestScope.signDocu}">
-										${docu.signContent}
-									</c:forEach>
+									<table cellspacing="0" style="border-collapse:collapse; width:712px">
+										<tbody>
+											<tr>
+												<td style="border-bottom:1px solid black; border-left:2px solid black; border-right:1px solid black; border-top:2px solid black; height:42px; text-align:center; vertical-align:middle; white-space:nowrap; width:133px"><span style="font-size:14px"><span style="font-family:&quot;맑은 고딕&quot;,monospace"><span style="color:black">기간 및 일시</span></span></span></td>
+												<td colspan="2" style="border-bottom:1px solid black; border-left:none; border-right:1px solid black; border-top:2px solid black; text-align:center; vertical-align:middle; white-space:nowrap; width:128px"><span style="font-size:14px"><span style="font-family:&quot;맑은 고딕&quot;,monospace"><span style="color:black"></span></span></span></td>
+												<td style="border-bottom:1px solid black; border-left:none; border-right:1px solid black; border-top:2px solid black; text-align:center; vertical-align:middle; white-space:nowrap; width:64px"><span style="font-size:14px"><span style="font-family:&quot;맑은 고딕&quot;,monospace"><span style="color:black">~</span></span></span></td>
+												<td colspan="2" style="border-bottom:1px solid black; border-left:none; border-right:1px solid black; border-top:2px solid black; text-align:center; vertical-align:middle; white-space:nowrap; width:128px"><span style="color:#000000; font-family:맑은 고딕,monospace"><span style="font-size:14px"></span></span></td>
+												<td style="border-bottom:1px solid black; border-left:none; border-right:1px solid black; border-top:2px solid black; text-align:center; vertical-align:middle; white-space:nowrap; width:133px"><span style="font-size:14px"><span style="font-family:&quot;맑은 고딕&quot;,monospace"><span style="color:black">사용일수</span></span></span></td>
+												<td style="border-bottom:1px solid black; border-left:none; border-right:1px solid black; border-top:2px solid black; text-align:center; vertical-align:middle; white-space:nowrap; width:85px"><span style="color:#000000; font-family:맑은 고딕,monospace"><span style="font-size:14px"></span></span></td>
+												<td style="border-bottom:1px solid black; border-left:none; border-right:2px solid black; border-top:2px solid black; text-align:center; vertical-align:middle; white-space:nowrap; width:40px"><span style="font-size:14px"><span style="font-family:&quot;맑은 고딕&quot;,monospace"><span style="color:black">일</span></span></span></td>
+											</tr>
+											<tr>
+												<td style="border-bottom:1px solid black; border-left:2px solid black; border-right:1px solid black; border-top:none; height:117px; text-align:center; vertical-align:middle; white-space:nowrap"><span style="font-size:14px"><span style="font-family:&quot;맑은 고딕&quot;,monospace"><span style="color:black">사유</span></span></span></td>
+												<td colspan="8" style="border-bottom:1px solid black; border-left:none; border-right:2px solid black; border-top:1px solid black; text-align:center; vertical-align:middle; white-space:nowrap"><span style="font-size:14px"><span style="font-family:&quot;맑은 고딕&quot;,monospace"><span style="color:black">　</span></span></span></td>
+											</tr>
+											<tr>
+												<td colspan="9" style="border-bottom:2px solid black; border-left:2px solid black; border-right:2px solid black; border-top:1px solid black; height:170px; text-align:center; vertical-align:middle; white-space:nowrap"><span style="font-size:14px"><span style="font-family:&quot;맑은 고딕&quot;,monospace"><span style="color:black">위의 사유로 연차를 신청하오니&nbsp; 검토 후 결재해 주시기 바랍니다.</span></span></span></td>
+											</tr>
+										</tbody>
+									</table>
 								</c:otherwise>
 							</c:choose>							
 						</textarea>
@@ -174,8 +198,32 @@
 		})
 		
 		$('.date').change(function(){
-			console.log($(this).val());
+			//console.log($('#startDate').val());
+			//console.log($('#endDate').val());
+
+			var startDate = moment($('#startDate').val());
+			var endDate = moment($('#endDate').val());
+			var useAnnAll = endDate.diff(startDate, 'days') // 주말포함일수
+			
+			var useAnn = 0;
+			
+			for(var i = 0; i <= useAnnAll; i++){
+				startDate = moment($('#startDate').val());
+				//console.log("i : " + i);
+				//console.log(a.format("YYYY-MM-DD"));
+
+				var useDate = startDate.add('days',i);
+				//console.log(aa.format("YYYY-MM-DD"));
+				
+				//console.log(aa.day());
+				if(useDate.day() != 0 && useDate.day() != 6){ //0일요일, 6토요일
+					useAnn++;
+				}
+			}
+			//console.log(useAnn);
+			$('#useAnn').val(useAnn);
 		});
+		
 		CKEDITOR.replace('signContent', {
 			// 도구 모음 정의: https://ckeditor.com/docs/ckeditor4/latest/features/toolbar
 			// 기본적으로 CDN의 전체 사전 설정은 필요 이상의 기능을 제공합니다.
@@ -276,11 +324,12 @@
 			let signEmp = false;
 			//console.log($('#empName1').html().trim() == "");
 			//console.log($('#empName2').html());
+			//console.log($('#useAnn').val() == "");
 						
 			//결재선 확인
-			if( $('#empName1').html().trim() == "" || $('#empName2').html().trim() == "" || $('#signTitle').val() == "" ){
+			if( $('#empName1').html().trim() == "" || $('#empName2').html().trim() == "" || $('#signTitle').val() == "" || $('#useAnn').val() == ""){
 				swal({
-					text: "결재선 또는 제목 확인바랍니다.",
+					text: "결재선, 제목, 연차날짜 확인바랍니다.",
 					icon: "warning",
 					button: "닫기"
 				})
@@ -292,11 +341,11 @@
 				var draftEmp = $('#empName0').attr('draftEmp');
 				var empSign1 = $('#empSign1').val();
 				
-				console.log(draftEmp);
-				console.log(empSign1);
+				//console.log(draftEmp);
+				//console.log(empSign1);
 				
- 				send(draftEmp,empSign1);
- 				draftForm.submit();
+ 				//send(draftEmp,empSign1);
+ 				annDraftForm.submit();
 			}
 			
 		}) //기안 클릭 끝

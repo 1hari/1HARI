@@ -174,6 +174,8 @@
 			let	signComment = $('#signComment').val(); //comment 담을 변수
 			
 			let signCode = $(this).attr('signCode');
+
+			let signFormCode = ${docu.signFormCode}
 						
 			$.ajax({
 				url:"${pageContext.request.contextPath}/ajax/approval.hari",
@@ -185,7 +187,8 @@
 					"empSign2" : empSign2,
 					"signNum" : signNum,
 					"signComment" : signComment,
-					"signCode" : signCode
+					"signCode" : signCode,
+					"signFormCode" : signFormCode
 				},
 				success: function(resultMap){
 	 				console.log(resultMap);
