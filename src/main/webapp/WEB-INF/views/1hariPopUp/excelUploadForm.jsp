@@ -12,9 +12,6 @@
 <!-- datepicker script -->
 <script src="${pageContext.request.contextPath}/resources/hari/assets/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 
-<!-- SweetAlert -->
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
 <script type="text/javascript">
 	/* Excel Upload / Download를 위한 script */
 	$(function() {
