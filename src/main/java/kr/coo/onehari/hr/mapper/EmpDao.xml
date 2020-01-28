@@ -310,16 +310,16 @@
     	UPDATE annuselist SET ISSIGN='1' WHERE SIGNNUM = #{signNum};
     </update>
     
-    <!--     
-    //연차정보 List 김정하 2020. 1. 27
-    public List<AnnUse> getAnnUseList(String empNum) throws ClassNotFoundException, SQLException; -->
-    <select id="getAnnUseList">
-    	
+    <!-- 연차정보 List 김정하 2020. 1. 28 -->
+    <select id="getAnnUseList" resultType="kr.coo.onehari.hr.dto.AnnUse">
+    	SELECT SIGNNUM, STARTDATE, ENDDATE, USEANN, ISSIGN
+		FROM annuselist
+		WHERE EMPNUM = #{empNum}
+		ORDER BY STARTDATE DESC
     </select>
     
-    <!-- //연차정보 김정하 2020. 1. 28
-    public EmpAnn getEmpAnn(String empNum) throws ClassNotFoundException, SQLException; -->
-    <select id="getEmpAnn">
+    <!-- 연차정보 김정하 2020. 1. 28 -->
+    <select id="getEmpAnn" resultType="kr.coo.onehari.hr.dto.EmpAnn">
     	SELECT e.EMPNUM, e.TOTALANN, e.USEANN, s.HIREDATE
 		FROM empannlist e JOIN subemp s
         		          ON e.EMPNUM = s.EMPNUM

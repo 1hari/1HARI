@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import kr.coo.onehari.hr.dto.AnnUse;
 import kr.coo.onehari.hr.dto.EmpAnn;
 import kr.coo.onehari.hr.dto.EmpDto;
 import kr.coo.onehari.hr.service.CorpService;
@@ -41,8 +42,12 @@ public class HrController {
 	//연차관리 화면
 	@RequestMapping("annual.hari")
 	public String annual(Principal principal, Model model) {
-		EmpAnn empAnn = empService.getEmpAnn(principal.getName());
+		String loginUser = principal.getName();
+		EmpAnn empAnn = empService.getEmpAnn(loginUser);
+		List<AnnUse> annUseList = empService.getAnnUseList(loginUser);
+		System.out.println(annUseList);
 		model.addAttribute("empAnn", empAnn);
+		model.addAttribute("annUseList", annUseList);
 		
 		return "1hariHr.annual";
 	}

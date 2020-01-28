@@ -21,7 +21,7 @@
 			</div>
 		</div>
 	</div>
-
+	<c:set var="empAnn" value="${requestScope.empAnn}" />
 	<div class="container" style="margin-top: 3%;">
 		<div class="row">
 			<div class="col-md-12">
@@ -38,7 +38,7 @@
 										<div class="col col-stats">
 											<div class="numbers">
 												<p class="card-category">입사일</p>
-												<h4 class="card-title" id="totalTA"></h4>
+												<h4 class="card-title">${empAnn.hireDate}</h4>
 											</div>
 										</div>
 									</div>
@@ -57,7 +57,7 @@
 										<div class="col col-stats">
 											<div class="numbers">
 												<p class="card-category">총 연차</p>
-												<h4 class="card-title" id="getTotalTime">:undefined</h4>
+												<h4 class="card-title">${empAnn.totalAnn}</h4>
 											</div>
 										</div>
 									</div>
@@ -76,7 +76,7 @@
 										<div class="col col-stats">
 											<div class="numbers">
 												<p class="card-category">사용 연차</p>
-												<h4 class="card-title" id="getWeekTotalTime"></h4>
+												<h4 class="card-title">${empAnn.useAnn}</h4>
 											</div>
 										</div>
 									</div>
@@ -95,7 +95,7 @@
 										<div class="col col-stats">
 											<div class="numbers">
 												<p class="card-category">남은 연차</p>
-												<h4 class="card-title" id="getWorkTime"></h4>
+												<h4 class="card-title">${empAnn.totalAnn - empAnn.useAnn}</h4>
 											</div>
 										</div>
 									</div>
@@ -104,16 +104,10 @@
 						</div>
 					</div>
 					<!-- 끝 -->
-					
-					
 			</div>
 		</div>
 	</div>
 	
-	
-<!-- ============================================================== -->
-<!-- End Bread crumb and right sidebar toggle -->
-<!-- ============================================================== -->
 <!-- ============================================================== -->
 <!-- Container fluid  -->
 <!-- ============================================================== -->
@@ -140,13 +134,24 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>										
-										<td>1</td>
-										<td>2020-01-31</td>
-										<td>2020-02-03</td>
-										<td>2</td>
-										<td>승인완료</td>
-									</tr>
+									<c:forEach var="annUse" items="${requestScope.annUseList}">
+										<tr class="signDocu" signNum="${annUse.signNum}">										
+											<td>${annUse.signNum}</td>
+											<td>${annUse.startDate}</td>
+											<td>${annUse.endDate}</td>
+											<td>${annUse.useAnn} 일</td>
+											<td>
+												<c:choose>
+													<c:when test="${annUse.isSign == 0}">
+														미승인
+													</c:when>
+													<c:when test="${annUse.isSign == 1}">
+														승인완료
+													</c:when>												
+												</c:choose>
+											</td>
+										</tr>
+									</c:forEach>
 								</tbody>
 							</table>
 						</div>
@@ -181,4 +186,12 @@
 	*       Basic Table                   *
 	****************************************/
 	$('#zero_config').DataTable();
+
+	//문서 클릭
+	$(".signDocu").click(function(){
+		//console.log($(this).attr("signNum"));
+		let openUrl = "${pageContext.request.contextPath}/1hariSign/signDocuView.hari?signNum="+$(this).attr("signNum");
+		//console.log(openUrl);
+		open(openUrl,"전자결재","statusber=no,menuber=no, width=850, height=800");
+	});//문서 클릭
 </script>
