@@ -66,45 +66,7 @@ $(function(){
 			}
 		})
 		
-	var dataset2;
-		$.ajax({
-			url: "${pageContext.request.contextPath}/ajax/getAllEmpTA.hari",
-			type: "post",
-			dataType: "json",
-			success: function(getAllEmpTA) {
-				//java에서 못넣은 색 추가.. 제일 윗쪽에 chart.js에서 준 컬러값 배열 만들어놨음
-				for(var i =0; i<getAllEmpTA.length; i++){
-					getAllEmpTA[i].backgroundColor=color(colorArray[i]).alpha(0.5).rgbString();
-					getAllEmpTA[i].borderColor=colorArray[i];
-					dataset=getAllEmpTA;
-				}
 
-				var horizontalBarChartData = {
-					labels: MONTHS,
-					datasets: dataset
-				}
-				var ctx = document.getElementById('adminCanvas2').getContext('2d');
-				window.myHorizontalBar = new Chart(ctx, {
-					type: 'bar',
-					data: horizontalBarChartData,
-					options: {
-						elements: {
-							rectangle: {
-							borderWidth: 2,
-							}
-						},
-						responsive: true,
-						legend: {
-							position: 'right',
-						},
-						title: {
-							display: true,
-							text: '부서별 월간 근무시간 통계'
-						}
-					}
-				})
-			}
-		})
 
 	$('#month').change(function(){
 		window.myHorizontalBar.destroy();
@@ -275,7 +237,7 @@ $(function(){
 
 
 	
-
+	var dataset2;
 	$.ajax({
 		url: "${pageContext.request.contextPath}/ajax/getTA.hari",
 		type: "post",
@@ -320,11 +282,13 @@ $(function(){
 	});
 
 	//부서별 연봉 통계 년도 옵션
+	var salYearList=[]
 	$.ajax({
 	url: "${pageContext.request.contextPath}/ajax/getSalYear.hari",
 	type: "post",
 	dataType: "json",
 	success: function(getSalYear) {
+		salYearList=getSalYear
 		console.log(getSalYear)
 		let years = "";
 		$.each(getSalYear, function(index, element) {
@@ -335,8 +299,104 @@ $(function(){
 			}
 		})
 		$("#chartSelect").append(years);
-	}
-});
+		}
+	}).then((getSalYear) =>{
+
+		$.ajax({
+			url: "${pageContext.request.contextPath}/ajax/getTeamSalList.hari",
+			type: "post",
+			data:{
+						"year":getSalYear[0]
+			},
+			dataType: "json",
+			success: function(getTeamSalList) {
+
+				var labels=[];
+				console.log(getTeamSalList)
+				//java에서 못넣은 색 추가.. 제일 윗쪽에 chart.js에서 준 컬러값 배열 만들어놨음
+				for(var i =0; i<getTeamSalList.length; i++){
+					getTeamSalList[i].backgroundColor=color(colorArray[i]).alpha(0.5).rgbString();
+					getTeamSalList[i].borderColor=colorArray[i];
+					dataset2=getTeamSalList;
+					labels.push(getTeamSalList[i].label)
+				}
+				
+				var horizontalBarChartData = {
+					labels: [getSalYear[0]+'년'],
+					datasets: dataset2
+				}
+				var ctx2 = document.getElementById('adminCanvas2').getContext('2d');
+				window.myBar = new Chart(ctx2, {
+					type: 'bar',
+					data: horizontalBarChartData,
+					options: {
+						elements: {
+							rectangle: {
+							borderWidth: 2,
+							}
+						},
+						responsive: true,
+						legend: {
+							position: 'right',
+						},
+						title: {
+							display: true,
+							text: '부서별 연봉 통계'
+						}
+					}
+				})
+			}
+		})
+	}).then((getSalYear) =>{
+		$("#chartSelect").change(function(){
+			window.myBar.destroy();
+			console.log($('#chartSelect').val())
+			$.ajax({
+				url: "${pageContext.request.contextPath}/ajax/getTeamSalList.hari",
+				type: "post",
+				data:{
+							"year": $('#chartSelect').val()
+				},
+				dataType: "json",
+				success: function(getTeamSalList) {
+					console.log(getTeamSalList)
+					//java에서 못넣은 색 추가.. 제일 윗쪽에 chart.js에서 준 컬러값 배열 만들어놨음
+					for(var i =0; i<getTeamSalList.length; i++){
+						getTeamSalList[i].backgroundColor=color(colorArray[i]).alpha(0.5).rgbString();
+						getTeamSalList[i].borderColor=colorArray[i];
+						dataset2=getTeamSalList;
+					}
+					
+					var horizontalBarChartData = {
+						labels: [$('#chartSelect').val()+'년'],
+						datasets: dataset2
+					}
+					var ctx2 = document.getElementById('adminCanvas2').getContext('2d');
+					window.myBar = new Chart(ctx2, {
+						type: 'bar',
+						data: horizontalBarChartData,
+						options: {
+							elements: {
+								rectangle: {
+								borderWidth: 2,
+								}
+							},
+							responsive: true,
+							legend: {
+								position: 'right',
+							},
+							title: {
+								display: true,
+								text: '부서별 연봉 통계'
+							}
+						}
+					})
+				}
+			})
+		})
+	})
+	
+
 
 
 // 	var horizontalBarChartData;
@@ -841,9 +901,8 @@ $(function(){
 				<!--전자 결재 시작-->
 				<div class="card" style ="box-shadow :10px 10px #999999; border-radius:10px; border : 4px dashed #bcbcbc; margin-top:-28%; margin-rignt:10%;">
 					<div class="card-body" style="padding-bottom: 0">
-						<span class="card-title m-b-0" style="margin-bottom:0; font-size: 18px;" >근무시간 통계</span>
+						<span class="card-title m-b-0" style="margin-bottom:0; font-size: 18px;" >연봉 통계</span>
 							<select id="chartSelect" class="select2 form-control custom-select select2-hidden-accessible" id="month" style="width: 13%; height:10%; margin-left: 67%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
-
 							</select>
 						</div>
 					<div id="container" style="width: 100%; height: 100%; margin-bottom: 1%;">

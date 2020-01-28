@@ -546,5 +546,18 @@ public class EmpService {
 		}
     	return yearList;
     }
+	
+	//대시보드 부서별 연봉 연도 셀렉트박스
+	public String getTeamAvgSal(int teamCode, String year) {
+		EmpDao empdao = sqlsession.getMapper(EmpDao.class);
+		String teamAvgSal = null;
+		
+		try {
+			teamAvgSal = empdao.getTeamAvgSal(teamCode, year);
+		} catch (ClassNotFoundException | SQLException e) {
+			log.debug("getTeamAvgSal 예외발생: " + e.getMessage());
+		}
+		return teamAvgSal;
+	}
 }
 

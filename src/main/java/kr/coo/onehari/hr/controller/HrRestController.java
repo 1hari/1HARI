@@ -557,4 +557,42 @@ public class HrRestController {
 		}
 		return yearList;
 	}
+	
+	// 형남 0128 팀별 연봉차트
+	@RequestMapping(value = "getTeamSalList.hari", method = RequestMethod.POST)
+	public String getTeamSalList(String year) {
+		JSONArray root = new JSONArray(); //가장 바깥쪽 배열 - dataset
+		JSONArray teamAvgSalArray = null; //data 값
+		List<Integer> teamCodeList = new ArrayList<Integer>(); //팀코드 리스트
+		List<String> teamNameList = new ArrayList<String>(); //라벨에 넣어줄 팀 이름
+		String teamAvgSal = null; //팀 별 평균 연봉
+		JSONObject jsonObject = null;
+		int count = 0;
+			try {
+				// 현재 존재하는 팀코드 가져오기
+				teamCodeList = empSercive.getTeamCodeList();
+				// JSON Data에 넣을 label 값(팀 이름)
+				teamNameList = empSercive.getTeamNameList();
+				// 모든 팀의 평균연봉 가져와 배열에 하나씩 넣음(dataset 형식에 맞춤)
+				for (int teamCode : teamCodeList) {
+					// 차트에 들어갈 json 데이터 형식으로 추가
+					jsonObject = new JSONObject();
+					jsonObject.put("label", teamNameList.get(count));
+					jsonObject.put("borderWidth", 1);
+					teamAvgSalArray = new JSONArray();
+					teamAvgSal = empSercive.getTeamAvgSal(teamCode, year); //팀 별 평균연봉
+					if (teamAvgSal == null ) {
+						teamAvgSal = "0";
+					}
+					teamAvgSalArray.add(teamAvgSal);
+					jsonObject.put("data", teamAvgSalArray);
+					root.add(jsonObject);
+					count++; //팀 이름 가져올 때 인덱스값
+				}
+				System.out.println("getTeamAvgSal" + root.toString());
+			} catch (Exception e) {
+				log.debug("getEmpTAMonth 예외발생: " + e.getMessage());
+			}
+		return root.toJSONString();
+	}
 }

@@ -162,4 +162,7 @@ public interface EmpDao {
     
     //대시보드 부서별 연봉 연도 셀렉트박스 2020. 1. 28
     public List<String> getSalYear() throws ClassNotFoundException, SQLException;
+    
+    //대시보드 부서별 연봉
+    public String getTeamAvgSal(int teamCode, String year) throws ClassNotFoundException, SQLException;
 }
