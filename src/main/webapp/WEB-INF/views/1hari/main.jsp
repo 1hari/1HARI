@@ -329,9 +329,9 @@ $(function(){
 		let years = "";
 		$.each(getSalYear, function(index, element) {
 			if (index==0) {
-				years += '<option value="' + element.roleName + '" selected>' + element.roleDSCR + '</option>';
+				years += '<option value="' + element + '" selected>' + element + '</option>';
 			} else {
-				years += '<option value="' + element.roleName + '">' + element.roleDSCR + '</option>';
+				years += '<option value="' + element + '">' + element + '</option>';
 			}
 		})
 		$("#chartSelect").append(years);
@@ -843,19 +843,7 @@ $(function(){
 					<div class="card-body" style="padding-bottom: 0">
 						<span class="card-title m-b-0" style="margin-bottom:0; font-size: 18px;" >근무시간 통계</span>
 							<select id="chartSelect" class="select2 form-control custom-select select2-hidden-accessible" id="month" style="width: 13%; height:10%; margin-left: 67%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
-								<option value="0">전체</option>
-								<option value="1">1월</option>
-								<option value="2">2월</option>
-								<option value="3">3월</option>
-								<option value="4">4월</option>
-								<option value="5">5월</option>
-								<option value="6">6월</option>
-								<option value="7">7월</option>
-								<option value="8">8월</option>
-								<option value="9">9월</option>
-								<option value="10">10월</option>
-								<option value="11">11월</option>
-								<option value="12">12월</option>
+
 							</select>
 						</div>
 					<div id="container" style="width: 100%; height: 100%; margin-bottom: 1%;">

@@ -328,12 +328,17 @@
     
 	<!-- 대시보드 부서별 연봉통계 연도 셀렉트박스-->
     <select id="getSalYear" resultType="String">
-		SELECT SUM(P.BASICSAL)
-		FROM EMP E 
-		JOIN PAY P
-		ON E.EMPNUM = P.EMPNUM 
-		JOIN TEAM T
-		ON E.TEAMCODE = T.TEAMCODE
-		WHERE YEAR(NOW()) = YEAR(P.PAYMONTH) AND T.TEAMCODE=#{teamCode}
+		SELECT DISTINCT YEAR(PAYMONTH) FROM PAY ORDER BY PAYMONTH DESC
     </select>
+    
+	<!-- 대시보드 부서별 연봉통계 연도 셀렉트박스-->
+<!--     <select id="getSalYear" resultType="String"> -->
+<!-- 		SELECT SUM(P.BASICSAL) -->
+<!-- 		FROM EMP E  -->
+<!-- 		JOIN PAY P -->
+<!-- 		ON E.EMPNUM = P.EMPNUM  -->
+<!-- 		JOIN TEAM T -->
+<!-- 		ON E.TEAMCODE = T.TEAMCODE -->
+<!-- 		WHERE YEAR(NOW()) = YEAR(P.PAYMONTH) AND T.TEAMCODE=#{teamCode} -->
+<!--     </select> -->
 </mapper>
