@@ -183,54 +183,52 @@ $(function(){
                type: "post",
                dataType: "json",
                success: function(data) {
-               //총 근무일 갱신
-                  $.ajax({
-                     url: "${pageContext.request.contextPath}/ajax/getTotalTA.hari",
-                     type: "post",
-                     dataType: "json",
-                     success: function(totalTA) {
-                        $('#totalTA').text('');
-                        $('#totalTA').append(totalTA);
-                     }
-                  });
-                  //있으면 true, 없으면 false
-                  if(data==true){
-                	 var integerDate= parseInt(getTimeStamp());
-                	 
-                     swal("success", "출근 등록되었습니다.", "success")
-                     $('#endWork').removeAttr('disabled');   
-                     $('#startWork').attr('disabled', 'disabled');
-                     $.ajax({
-                        url: "${pageContext.request.contextPath}/ajax/getDataDate.hari",
-                        type: "post",
-                        dataType: "text",
-                        success: function(dataDate) {
-                           var itemArray2=document.querySelectorAll('.fc-day.fc-widget-content');
-                           if(integerDate < 110000){
-                        	   console.log(integerDate + '1');
-                               for(var i=0;i<itemArray2.length;i++){
-                                   if($(itemArray2[i]).attr('data-date') == dataDate.trim()){
-                                      $(itemArray2[i]).removeAttr("td");
-                                      $(itemArray2[i]).append('<br><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-warning fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">출근</span></div><div class="fc-resizer fc-end-resizer"></div></a></td>');
-                                   }
+               }
+            }).then((data) => {
+                //총 근무일 갱신
+                $.ajax({
+                   url: "${pageContext.request.contextPath}/ajax/getTotalTA.hari",
+                   type: "post",
+                   dataType: "json",
+                   success: function(totalTA) {
+                      $('#totalTA').text('');
+                      $('#totalTA').append(totalTA);
+                   }
+                }).then((value) => {
+                    //있으면 true, 없으면 false
+                    if(data==true){
+                  	 var integerDate= parseInt(getTimeStamp());
+                       swal("success", "출근 등록되었습니다.", "success")
+                       $('#endWork').removeAttr('disabled');   
+                       $('#startWork').attr('disabled', 'disabled');
+                       $.ajax({
+                          url: "${pageContext.request.contextPath}/ajax/getDataDate.hari",
+                          type: "post",
+                          dataType: "text",
+                          success: function(dataDate) {
+							var itemArray2=document.querySelectorAll('.fc-day.fc-widget-content');
+							if(integerDate < 110000){
+								for(var i=0;i<itemArray2.length;i++){
+									if($(itemArray2[i]).attr('data-date') == dataDate.trim()){
+                                        $(itemArray2[i]).removeAttr("td");
+                                        $(itemArray2[i]).append('<br><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-warning fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">출근</span></div><div class="fc-resizer fc-end-resizer"></div></a></td>');
+									}
 								}
-							}else{
-								console.log(integerDate + '2');
-                               for(var i=0;i<itemArray2.length;i++){
-                                   if($(itemArray2[i]).attr('data-date') == dataDate.trim()){
-                                      $(itemArray2[i]).removeAttr("td");
-                                      $(itemArray2[i]).append('<br><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-warning fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">지각</span></div><div class="fc-resizer fc-end-resizer"></div></a></td>');
-                                   }
+   							}else{
+                                 for(var i=0;i<itemArray2.length;i++){
+                                     if($(itemArray2[i]).attr('data-date') == dataDate.trim()){
+                                        $(itemArray2[i]).removeAttr("td");
+                                        $(itemArray2[i]).append('<br><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-warning fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">지각</span></div><div class="fc-resizer fc-end-resizer"></div></a></td>');
+									}
 								}
 							}
-
-                        }
-                     });
-                  }else{
-                     swal("warning", "출근등록 실패, 관리자에게 문의해주세요.", "warning")
-                  }
-               }
-            })
+						}
+					});
+				}else{
+					swal("warning", "출근등록 실패, 관리자에게 문의해주세요.", "warning")
+					}
+				})
+			})
 // 			});
 // 		}else { 
 // 			alert('현재 브라우저에서 지원하지 않는 기능입니다.');
@@ -253,30 +251,31 @@ $(function(){
 			type: "post",
 			dataType: "json",
 			success: function(data) {
+			}
+		}).then((data) => {
 			//있으면 true, 없으면 false
-				if(data==true){
-					swal("success", "퇴근 등록되었습니다.", "success")
-					$('#endWork').attr('disabled', 'disabled');
-					$('#startWork').attr('disabled', 'disabled');
-					$.ajax({
-						url: "${pageContext.request.contextPath}/ajax/getDataDate.hari",
-						type: "post",
-						dataType: "text",
-						success: function(dataDate) {
-							var itemArray=document.querySelectorAll('.fc-day.fc-widget-content');
-							for(var i=0;i<itemArray.length;i++){
-								if($(itemArray[i]).attr('data-date') == dataDate.trim()){
-									$(itemArray[i]).removeAttr("td");
-									$(itemArray[i]).append('<a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-success fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">퇴근</span></div><div class="fc-resizer fc-end-resizer"></div></a>');
-								}
-								
-					        }
-						}
-					});
-				}else{
-					swal("warning", "퇴근 등록에 실패하였습니다. 관리자에게 문의해주세요.", "warning")
-					return;
-				}
+			if(data==true){
+				swal("success", "퇴근 등록되었습니다.", "success")
+				$('#endWork').attr('disabled', 'disabled');
+				$('#startWork').attr('disabled', 'disabled');
+				$.ajax({
+					url: "${pageContext.request.contextPath}/ajax/getDataDate.hari",
+					type: "post",
+					dataType: "text",
+					success: function(dataDate) {
+						var itemArray=document.querySelectorAll('.fc-day.fc-widget-content');
+						for(var i=0;i<itemArray.length;i++){
+							if($(itemArray[i]).attr('data-date') == dataDate.trim()){
+								$(itemArray[i]).removeAttr("td");
+								$(itemArray[i]).append('<a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-success fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">퇴근</span></div><div class="fc-resizer fc-end-resizer"></div></a>');
+							}
+							
+				        }
+					}
+				});
+			}else{
+				swal("warning", "퇴근 등록에 실패하였습니다. 관리자에게 문의해주세요.", "warning")
+				return;
 			}
 		})
 
@@ -295,43 +294,33 @@ $(function(){
 		dataType: "json",
 		success: function(todayStartWorkCheck) {
 			isStart=todayStartWorkCheck;
-			$.ajax({
-				url: "${pageContext.request.contextPath}/ajax/todayAbsentCheck.hari",
-				type: "post",
-				dataType: "json",
-				success: function(todayAbsentCheck) {
-					//퇴근근기록이 있으면 true, 없으면 false
-					isAbsent=todayAbsentCheck;
-// 					console.log(typeof(isStart));
-// 					console.log(typeof(isAbsent));
-// 					console.log(typeof(isEnd));
-					if(isStart == false && isEnd==false && isAbsent==false){
-						$('#startWork').removeAttr('disabled');	
-						$('#endWork').attr('disabled', 'disabled');
-						//출근 미등록 알림 (페이지 이동마다 출근 안찍혀있으면 알림)
-						toastr.error('출근등록 여부를 확인해 주세요', '출근알림', {timeOut: 5000});
-					}else if(isStart == true && isEnd==false && isAbsent==false){
-						$('#startWork').attr('disabled', 'disabled');
-						$('#endWork').removeAttr('disabled');	
-					} else if((isStart == true && isEnd==true && isAbsent==false) || (isStart == true && isEnd==true && isAbsent==true) || (isStart == false && isEnd==false && isAbsent==true) || (isStart == true && isEnd==true && isAbsent==true) || (isStart == true && isEnd==false && isAbsent==true)) {
-						$('#endWork').attr('disabled', 'disabled');
-						$('#startWork').attr('disabled', 'disabled');
-// 					} else if(isStart == true && isEnd==true && isAbsent==true) {
-						
-// 					} else if(isStart == false && isEnd==false && isAbsent==true) {
-// 						$('#endWork').attr('disabled', 'disabled');
-// 						$('#startWork').attr('disabled', 'disabled');
-// 					} else if(isStart == true && isEnd==true && isAbsent==true) {
-// 						$('#endWork').attr('disabled', 'disabled');
-// 						$('#startWork').attr('disabled', 'disabled');
-					} else if(isStart == false && isEnd==true) {
-						swal("warning", "근태오류, 관리자에게 문의해주세요.", "warning")
-					} else{
-						console.log('아무것도 못탐');
-					}
-				}
-			});
 		}
+	}).then((isStart) => {
+		$.ajax({
+			url: "${pageContext.request.contextPath}/ajax/todayAbsentCheck.hari",
+			type: "post",
+			dataType: "json",
+			success: function(todayAbsentCheck) {
+				//퇴근근기록이 있으면 true, 없으면 false
+				isAbsent=todayAbsentCheck;
+				if(isStart == false && isEnd==false && isAbsent==false){
+					$('#startWork').removeAttr('disabled');	
+					$('#endWork').attr('disabled', 'disabled');
+					//출근 미등록 알림 (페이지 이동마다 출근 안찍혀있으면 알림)
+					toastr.error('출근등록 여부를 확인해 주세요', '출근알림', {timeOut: 5000});
+				}else if(isStart == true && isEnd==false && isAbsent==false){
+					$('#startWork').attr('disabled', 'disabled');
+					$('#endWork').removeAttr('disabled');	
+				} else if((isStart == true && isEnd==true && isAbsent==false) || (isStart == true && isEnd==true && isAbsent==true) || (isStart == false && isEnd==false && isAbsent==true) || (isStart == true && isEnd==true && isAbsent==true) || (isStart == true && isEnd==false && isAbsent==true)) {
+					$('#endWork').attr('disabled', 'disabled');
+					$('#startWork').attr('disabled', 'disabled');
+				} else if(isStart == false && isEnd==true) {
+					swal("warning", "근태오류, 관리자에게 문의해주세요.", "warning")
+				} else{
+					console.log('아무것도 못탐');
+				}
+			}
+		});
 	})
 	
 	//오늘 퇴근기록 체크
@@ -342,24 +331,24 @@ $(function(){
 		success: function(data) {
 			//퇴근근기록이 있으면 true, 없으면 false
 			isEnd=data;
-
-			if(isEnd==false && isStart==true){
-				//false 면 현재시간 - 출근시간
-				$.ajax({
-					url: "${pageContext.request.contextPath}/ajax/getWorkTime.hari",
-					type: "post",
-					dataType: "text",
-					success: function(getWorkTime) {
-						if($.trim(getWorkTime) != "empty" ){
-							$('#getWorkTime').text('');
-							$('#getWorkTime').append(getWorkTime);
-						} else{
-							$('#getWorkTime').text('');
-							$('#getWorkTime').append('00:00');
-						}
+		}
+	}).then((value) => {
+		if(isEnd==false && isStart==true){
+			//false 면 현재시간 - 출근시간
+			$.ajax({
+				url: "${pageContext.request.contextPath}/ajax/getWorkTime.hari",
+				type: "post",
+				dataType: "text",
+				success: function(getWorkTime) {
+					if($.trim(getWorkTime) != "empty" ){
+						$('#getWorkTime').text('');
+						$('#getWorkTime').append(getWorkTime);
+					} else{
+						$('#getWorkTime').text('');
+						$('#getWorkTime').append('00:00');
 					}
-				});
-
+				}
+			}).then((value) => {
 				//퇴근전 이번주 현재까지 근무시간
 				$.ajax({
 					url: "${pageContext.request.contextPath}/ajax/getWeekTotalTime.hari",
@@ -375,7 +364,7 @@ $(function(){
 						}
 					}
 				});
-				
+			}).then((value) => {
 				//총 현재까지 근무시간
 				$.ajax({
 					url: "${pageContext.request.contextPath}/ajax/getTotalTime.hari",
@@ -391,23 +380,23 @@ $(function(){
 							$('#getTotalTime').append('00:00');
 						}
 					}
-				});
-			} else{
-				$.ajax({
-					url: "${pageContext.request.contextPath}/ajax/getTodayTotalTime.hari",
-					type: "post",
-					dataType: "text",
-					success: function(getTodayTotalTime) {
-						if($.trim(getTodayTotalTime) != "empty" ){
-							$('#getWorkTime').text('');
-							$('#getWorkTime').append(getTodayTotalTime);
-						} else{
-							$('#getWorkTime').text('');
-							$('#getWorkTime').append('00:00');
-						}
+				})
+			})
+		} else{
+			$.ajax({
+				url: "${pageContext.request.contextPath}/ajax/getTodayTotalTime.hari",
+				type: "post",
+				dataType: "text",
+				success: function(getTodayTotalTime) {
+					if($.trim(getTodayTotalTime) != "empty" ){
+						$('#getWorkTime').text('');
+						$('#getWorkTime').append(getTodayTotalTime);
+					} else{
+						$('#getWorkTime').text('');
+						$('#getWorkTime').append('00:00');
 					}
-				});
-				
+				}
+			}).then((value) => {
 				//퇴근 후 이번주 총 근무시간
 				$.ajax({
 					url: "${pageContext.request.contextPath}/ajax/getWeekWorkTime.hari",
@@ -422,8 +411,8 @@ $(function(){
 							$('#getWeekTotalTime').append('00:00');
 						}
 					}
-				});
-				
+				})
+			}).then((value) => {
 				//총 근무시간
 				$.ajax({
 					url: "${pageContext.request.contextPath}/ajax/getTotalWorkTime.hari",
@@ -439,10 +428,10 @@ $(function(){
 							$('#getTotalTime').append('00:00');
 						}
 					}
-				});
-			}
+				})
+			})
 		}
-	})
+	});
 
 	$('#test').click(function(){
 		$('#theme').css('background', 'red');
