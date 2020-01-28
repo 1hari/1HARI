@@ -302,10 +302,6 @@ $(function(){
 				success: function(todayAbsentCheck) {
 					//퇴근근기록이 있으면 true, 없으면 false
 					isAbsent=todayAbsentCheck;
-					
-					console.log(isStart);
-					console.log(isEnd);
-					console.log(isAbsent);
 // 					console.log(typeof(isStart));
 // 					console.log(typeof(isAbsent));
 // 					console.log(typeof(isEnd));
