@@ -7,9 +7,6 @@
 <!--이 페이지에서만 쓰는  ckeditor 필수 제이쿼리 지우지 마세요! -->
 <script src="https://cdn.ckeditor.com/4.13.1/standard-all/ckeditor.js"></script>
 
-<!-- SweetAlert -->
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
 <!-- Page wrapper  -->
 <!-- ============================================================== -->
 <div class="page-wrapper">

@@ -16,7 +16,7 @@
 //        }
 //    }
    
-   //형남 0110 비밀번호 변경
+	//형남 0110 비밀번호 변경
 	$(function() {
 		//정규표현식
 		let pw_pattern = /^[a-z0-9_]{4,10}$/;
@@ -28,7 +28,7 @@
 		let isExist = false;
 
 		$("#password").keydown(function(key) {
-			if (key.keyCode == 13) {
+			if (key.keyCode == 13) { // 13 = Enter Key
 				login();
 			}
 		});
@@ -50,7 +50,7 @@
 		//인증번호 전송버튼 클릭
 		$('#emailSend').click(function() {
 			//이메일 형식체크
-			if(!email_check){
+			if (!email_check) {
 				swal({
 					text: "이메일을 확인해주세요.",
 					button: "닫기"
@@ -68,9 +68,9 @@
 						},
 					dataType: "text",
 					success: function(data) {
-					//있으면 true, 없으면 false
-					console.log(data);
-					isExist = data;
+						//있으면 true, 없으면 false
+						console.log(data);
+						isExist = data;
 	
 						if (isExist == false) {
 							swal({
@@ -81,8 +81,8 @@
 							return;
 						} else {
 							//인증번호 입력 창 오픈
-							var url = "emailSubmit.hari?email="+$('#email').val();
-							open(url,"Email Check","statusber=no, scrollbar=no, menuber=no, width=560, height=240 top=270 left=530");
+							var url = "emailSubmit.hari?email=" + $('#email').val();
+							open(url, "Email Check", "statusber=no, scrollbar=no, menuber=no, width=560, height=240 top=270 left=530");
 						}
 					}
 				});
@@ -91,7 +91,7 @@
 
 		//창 닫으면 초기화
 		$('#closeModal').click(function() {
-		console.log('cliack');
+			console.log('click closeModal');
 			$('#email').val('');
 			$('#empNum').val('');
 			$('#newPassword').val('');
@@ -100,7 +100,7 @@
 
 		//비밀번호 유효성검사
 		$('#newPassword').keyup(function() {
-			if (pw_pattern.test($(this).val()) != true){
+			if (pw_pattern.test($(this).val()) != true) {
 				$('#pwcheck').text("비밀번호가 조건에 일치하지 않습니다.");
 				pw_check = false;
 			} else {
@@ -111,7 +111,7 @@
 
 		//비밀번호 확인
 		$('#newPassword2').keyup(function() {
-			if($('#newPassword').val() != $('#newPassword2').val()){
+			if ($('#newPassword').val() != $('#newPassword2').val()) {
 				$('#pwckcheck').text("비밀번호가 일치하지 않습니다.");
 				pwck_check = false;
 			} else {
@@ -161,6 +161,8 @@
 			});
 			return;
 		}
+
+		// 로그인 실패 시 알림 구현 해야함
 		$('#loginform').submit();
 	}
 </script>
@@ -203,7 +205,7 @@
                         </div>
                    </div> -->
 						<div class="form-group">
-							<input type="button" value="로그인"  onclick="login();" class="btn btn-primary py-3 px-4">
+							<input type="button" value="로그인" onclick="login();" class="btn btn-primary py-3 px-4">
 							<br>
 							<span data-toggle="modal" data-target="#add-new-event" style="cursor:pointer;">이메일 인증하기</span>
 						</div>
