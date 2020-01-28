@@ -7,7 +7,7 @@
 @import url(icons/themify-icons/themify-icons.css);
 @import url(icons/material-design-iconic-font/css/materialdesignicons.min.css);
 
-/* 첨부파일을 드래그할 영역의 스타일 */
+/* Ã¬Â²Â¨Ã«Â¶â‚¬Ã­Å’Å’Ã¬ÂÂ¼Ã¬Ââ€ž Ã«â€œÅ“Ã«Å¾ËœÃªÂ·Â¸Ã­â€¢Â  Ã¬ËœÂÃ¬â€”Â­Ã¬ÂËœ Ã¬Å Â¤Ã­Æ’â‚¬Ã¬ÂÂ¼ */
 .fileDrop {
     width: 100%;
     height: 70px;
@@ -1975,11 +1975,15 @@ pre code {
 	background-color: transparent
 }
 
-.table td,
+.table td {
+   vertical-align: middle;
+   text-align: center;
+}
 .table th {
-	padding: 1rem;
-	vertical-align: top;
-	border-top: 1px solid #dee2e6
+   padding: 1rem;
+   vertical-align: top;
+   text-align: center;
+   border-top: 1px solid #dee2e6;
 }
 
 .table thead th {
@@ -3060,15 +3064,15 @@ fieldset:disabled a.btn {
 }
 
 .btn-info {
-	color: #fff;
-	background-color: #20B2AA;
-	border-color: #20B2AA
+	color: #ffffff;
+	background-color: black;
+	border-color: black
 }
 
 .btn-info:hover {
-	color: #fff;
-	background-color: #20B2AA;
-	border-color: #20B2AA
+	color: black;
+	background-color: #ffffff;
+	border-color: black
 }
 
 .btn-info.focus,
@@ -12169,7 +12173,8 @@ ul.list-style-none li a:hover {
 
 .table th,
 .table thead th {
-	font-weight: 500
+	font-weight: bold /*Ã«Â³â‚¬ÃªÂ²Â½*/
+	
 }
 
 .nowrap {
@@ -14632,11 +14637,15 @@ pre code {
 	background-color: transparent
 }
 
-.table td,
+.table td {
+   vertical-align: middle;
+   text-align: center;
+}
 .table th {
-	padding: 1rem;
-	vertical-align: top;
-	border-top: 1px solid #dee2e6
+   padding: 1rem;
+   vertical-align: top;
+   text-align: center;
+   border-top: 1px solid #dee2e6;
 }
 
 .table thead th {
@@ -15713,15 +15722,15 @@ fieldset:disabled a.btn {
 }
 
 .btn-info {
-	color: #fff;
-	background-color: #20B2AA;
-	border-color: #20B2AA
+	color: #ffffff;
+	background-color: black;
+	border-color: black
 }
 
 .btn-info:hover {
-	color: #fff;
-	background-color: #20B2AA;
-	border-color: #20B2AA
+	color: black;
+	background-color: #ffffff;
+	border-color: black
 }
 
 .btn-info.focus,
@@ -24823,7 +24832,7 @@ ul.list-style-none li a:hover {
 
 .table th,
 .table thead th {
-	font-weight: 500
+	font-weight: bold /*Ã«Â³â‚¬ÃªÂ²Â½*/
 }
 
 .nowrap {
@@ -27286,11 +27295,15 @@ pre code {
 	background-color: transparent
 }
 
-.table td,
+.table td {
+   vertical-align: middle;
+   text-align: center;
+}
 .table th {
-	padding: 1rem;
-	vertical-align: top;
-	border-top: 1px solid #dee2e6
+   padding: 1rem;
+   vertical-align: top;
+   text-align: center;
+   border-top: 1px solid #dee2e6;
 }
 
 .table thead th {
@@ -28370,15 +28383,15 @@ fieldset:disabled a.btn {
 }
 
 .btn-info {
-	color: #fff;
-	background-color: #20B2AA;
-	border-color: #20B2AA
+	color: #ffffff;
+	background-color: black;
+	border-color: black
 }
 
 .btn-info:hover {
-	color: #fff;
-	background-color: #20B2AA;
-	border-color: #20B2AA
+	color: black;
+	background-color: #ffffff;
+	border-color: black
 }
 
 .btn-info.focus,
@@ -29949,8 +29962,8 @@ input[type=submit].btn-block {
 .custom-file-input:lang(en)~.custom-file-label:after {
 	content: "Browse"
 }
-/* ê°œì¸ ì •ë³´ í”„ë¡œí•„ íŒŒì¼ ì„ íƒ ë¶€ë¶„ css 
-ìˆ˜ì—° */
+/* ÃƒÂªÃ‚Â°Ã…â€œÃƒÂ¬Ã‚ÂÃ‚Â¸ ÃƒÂ¬Ã‚Â Ã¢â‚¬Â¢ÃƒÂ«Ã‚Â³Ã‚Â´ ÃƒÂ­Ã¢â‚¬ÂÃ¢â‚¬Å¾ÃƒÂ«Ã‚Â¡Ã…â€œÃƒÂ­Ã¢â‚¬Â¢Ã¢â‚¬Å¾ ÃƒÂ­Ã…â€™Ã…â€™ÃƒÂ¬Ã‚ÂÃ‚Â¼ ÃƒÂ¬Ã¢â‚¬Å¾Ã‚Â ÃƒÂ­Ã†â€™Ã‚Â ÃƒÂ«Ã‚Â¶Ã¢â€šÂ¬ÃƒÂ«Ã‚Â¶Ã¢â‚¬Å¾ css 
+ÃƒÂ¬Ã‹â€ Ã‹Å“ÃƒÂ¬Ã¢â‚¬â€Ã‚Â° */
 .custom-file-label {
 	position: absolute;
 	top: 0;
@@ -37481,7 +37494,7 @@ ul.list-style-none li a:hover {
 
 .table th,
 .table thead th {
-	font-weight: 500
+	font-weight: bold /*Ã«Â³â‚¬ÃªÂ²Â½*/
 }
 
 .nowrap {
@@ -44393,12 +44406,15 @@ pre code {
 	margin-bottom: 1rem;
 	background-color: transparent
 }
-
-.table td,
+.table td {
+   vertical-align: middle;
+   text-align: center;
+}
 .table th {
-	padding: 1rem;
-	vertical-align: top;
-	border-top: 1px solid #dee2e6
+   padding: 1rem;
+   vertical-align: top;
+   text-align: center;
+   border-top: 1px solid #dee2e6;
 }
 
 .table thead th {
@@ -45478,15 +45494,15 @@ fieldset:disabled a.btn {
 }
 
 .btn-info {
-	color: #fff;
-	background-color: #20B2AA;
-	border-color: #20B2AA
+	color: #ffffff;
+	background-color: black;
+	border-color: black
 }
 
 .btn-info:hover {
-	color: #fff;
-	background-color: #20B2AA;
-	border-color: #20B2AA
+	color: black;
+	background-color: #ffffff;
+	border-color: black
 }
 
 .btn-info.focus,
@@ -54587,7 +54603,7 @@ ul.list-style-none li a:hover {
 
 .table th,
 .table thead th {
-	font-weight: 500
+	font-weight: bold /*Ã«Â³â‚¬ÃªÂ²Â½*/
 }
 
 .nowrap {
@@ -57050,11 +57066,15 @@ pre code {
 	background-color: transparent
 }
 
-.table td,
+.table td {
+   vertical-align: middle;
+   text-align: center;
+}
 .table th {
-	padding: 1rem;
-	vertical-align: top;
-	border-top: 1px solid #dee2e6
+   padding: 1rem;
+   vertical-align: top;
+   text-align: center;
+   border-top: 1px solid #dee2e6;
 }
 
 .table thead th {
@@ -58134,15 +58154,15 @@ fieldset:disabled a.btn {
 }
 
 .btn-info {
-	color: #fff;
-	background-color: #20B2AA;
-	border-color: #20B2AA
+	color: #ffffff;
+	background-color: black;
+	border-color: black
 }
 
 .btn-info:hover {
-	color: #fff;
-	background-color: #20B2AA;
-	border-color: #20B2AA
+	color: black;
+	background-color: #ffffff;
+	border-color: black
 }
 
 .btn-info.focus,
@@ -59178,7 +59198,9 @@ input[type=submit].btn-block {
 .dropdown-item.disabled,
 .dropdown-item:disabled {
 	color: #6c757d;
-	background-color: transparent
+	background-color: transparent;
+	font-size: large;
+	font-weight: bold;
 }
 
 .dropdown-menu.show {
@@ -67244,7 +67266,7 @@ ul.list-style-none li a:hover {
 
 .table th,
 .table thead th {
-	font-weight: 500
+	font-weight: bold /*Ã«Â³â‚¬ÃªÂ²Â½*/
 }
 
 .nowrap {
@@ -69707,11 +69729,15 @@ pre code {
 	background-color: transparent
 }
 
-.table td,
+.table td {
+   vertical-align: middle;
+   text-align: center;
+}
 .table th {
-	padding: 1rem;
-	vertical-align: top;
-	border-top: 1px solid #dee2e6
+   padding: 1rem;
+   vertical-align: top;
+   text-align: center;
+   border-top: 1px solid #dee2e6;
 }
 
 .table thead th {
@@ -70791,15 +70817,15 @@ fieldset:disabled a.btn {
 }
 
 .btn-info {
-	color: #fff;
-	background-color: #20B2AA;
-	border-color: #20B2AA
+	color: #ffffff;
+	background-color: black;
+	border-color: black
 }
 
 .btn-info:hover {
-	color: #fff;
-	background-color: #20B2AA;
-	border-color: #20B2AA
+	color: black;
+	background-color: #ffffff;
+	border-color: black
 }
 
 .btn-info.focus,
@@ -71815,7 +71841,9 @@ input[type=submit].btn-block {
 	text-align: inherit;
 	white-space: nowrap;
 	background-color: transparent;
-	border: 0
+	border: 0;
+	font-size: large;
+	font-weight: bold;
 }
 
 .dropdown-item:focus,
@@ -71835,7 +71863,9 @@ input[type=submit].btn-block {
 .dropdown-item.disabled,
 .dropdown-item:disabled {
 	color: #6c757d;
-	background-color: transparent
+	background-color: transparent;
+	font-size: large;
+	font-weight: bold;
 }
 
 .dropdown-menu.show {
@@ -72370,8 +72400,8 @@ input[type=submit].btn-block {
 .custom-file-input:lang(en)~.custom-file-label:after {
 	content: "Browse"
 }
-/* ê°œì¸ ì •ë³´ í”„ë¡œí•„ íŒŒì¼ ì„ íƒ ë¶€ë¶„ css 
-ìˆ˜ì—° */
+/* ÃƒÂªÃ‚Â°Ã…â€œÃƒÂ¬Ã‚ÂÃ‚Â¸ ÃƒÂ¬Ã‚Â Ã¢â‚¬Â¢ÃƒÂ«Ã‚Â³Ã‚Â´ ÃƒÂ­Ã¢â‚¬ÂÃ¢â‚¬Å¾ÃƒÂ«Ã‚Â¡Ã…â€œÃƒÂ­Ã¢â‚¬Â¢Ã¢â‚¬Å¾ ÃƒÂ­Ã…â€™Ã…â€™ÃƒÂ¬Ã‚ÂÃ‚Â¼ ÃƒÂ¬Ã¢â‚¬Å¾Ã‚Â ÃƒÂ­Ã†â€™Ã‚Â ÃƒÂ«Ã‚Â¶Ã¢â€šÂ¬ÃƒÂ«Ã‚Â¶Ã¢â‚¬Å¾ css 
+ÃƒÂ¬Ã‹â€ Ã‹Å“ÃƒÂ¬Ã¢â‚¬â€Ã‚Â° */
 .custom-file-label {
 	position: absolute;
 	top: 0;
@@ -79903,7 +79933,7 @@ ul.list-style-none li a:hover {
 
 .table th,
 .table thead th {
-	font-weight: 500
+	font-weight: bold /*Ã«Â³â‚¬ÃªÂ²Â½*/
 }
 
 .nowrap {

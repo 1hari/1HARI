@@ -89,16 +89,16 @@
 	<!-- 												<span class="checkmark"></span> -->
 	<!-- 											</label> -->
 	<!-- 										</th> -->
-											<th><span>사번</span></th>
-											<th><span>이름</span></th>
-											<th><span>소속</span></th>
-											<th><span>직급</span></th>
-											<th><span>직책</span></th>
-											<th><span>재직구분</span></th>
+											<th>사번</th>
+											<th>이름</th>
+											<th>소속</th>
+											<th>직급</th>
+											<th>직책</th>
+											<th>재직구분</th>
 	<!-- 										<th>권한</th> -->
-											<th><span>입사일</span></th>
-											<th><span>퇴사일</span></th>
-											<th><span>정보수정</span></th>
+											<th>입사일</th>
+											<th>퇴사일</th>
+											<th>정보수정</th>
 										</tr>
 									</thead>
 									<tbody>

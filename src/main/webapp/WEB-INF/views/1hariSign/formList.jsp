@@ -49,9 +49,9 @@
 							<table id="zero_config" class="table table-striped table-bordered">
 								<thead>
 									<tr>										
-										<th><span>양식번호</span></th>
-										<th><span>양식명</span></th>
-										<th><span>삭제</span></th>
+										<th>양식번호</th>
+										<th>양식명</th>
+										<th>삭제</th>
 									</tr>
 								</thead>
 								<tbody>

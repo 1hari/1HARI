@@ -126,11 +126,11 @@
 							<table id="zero_config" class="table table-striped table-bordered">
 								<thead>
 									<tr>
-										<th><span>문서번호</span></th>
-										<th><span>연차시작일</span></th>
-										<th><span>연차종료일</span></th>
-										<th><span>사용연차</span></th>
-										<th><span>승인여부</span></th>
+										<th>문서번호</th>
+										<th>연차시작일</th>
+										<th>연차종료일</th>
+										<th>사용연차</th>
+										<th>승인여부</th>
 									</tr>
 								</thead>
 								<tbody>

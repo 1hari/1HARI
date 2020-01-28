@@ -21,7 +21,7 @@
     
 	<!-- css 설정 영역 -->
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/hari/dist/css/style.min.css">
-<!-- 다채 사랑 폰트  -->
+	<!-- 다채 사랑 폰트  -->
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/hari/dist/css/stylesheetlove.css">
 
 	<!--toaster (웹 페이지 내 알람) -->

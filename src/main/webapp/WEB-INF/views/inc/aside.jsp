@@ -73,13 +73,18 @@
 	        display:none;
 	    } */
 	    /*aside bar 마우스 오버 액션들 */
-	    a.sidebar-link:hover, a.sidebar-link:active{
+	    
+	   a.sidebar-link:hover, a.sidebar-link:active{
 	    	/* background: #dbdbdb; */
-	    /* 	font-size:150%; */
-	    	font-family: 'Soul Jongdalsae Smooth';
+	 		font-size:200%;
+	    	/* font-family: 'Nanum DaCaeSaRang'; */
 	    
 	    }
-/* 	    span.hide-menu {
+	    span.hide-menu:hover, span.hide-menu:active{
+	    	font-size: 90%;
+	    	
+	    }
+ 	  /*   span.hide-menu {
 	    	   text-shadow:
 			    0 1px 0 #ffffff,
 			    0 1.5px 0 #d3d5d6,
@@ -88,9 +93,8 @@
 			    2px 3px 4px rgba(0,0,0,0.1),
 			    2px 3px 4px rgba(0,0,0,0.3);
 			    color: white;
-			    font-family: 'Soul Jongdalsae Smooth';
-			    }
-		} */
+			    } */
+		
 	   
 </style>
 
