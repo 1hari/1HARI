@@ -463,6 +463,7 @@ public class HrRestController {
 			for (int teamCode : teamCodeList) {
 				// 차트에 들어갈 json 데이터 형식으로 추가
 				jsonObject = new JSONObject();
+
 				jsonObject.put("label", teamNameList.get(count));
 				jsonObject.put("borderWidth", 1);
 				// 팀별 + 월별 근무시간 리스트
@@ -523,7 +524,7 @@ public class HrRestController {
 					teamWorkTimeList.add(timeSplit[0]);
 					jsonObject.put("data", teamWorkTimeList);
 					root.add(jsonObject);
-					
+					count++;
 				}
 				System.out.println(root.toString());
 			} catch (Exception e) {

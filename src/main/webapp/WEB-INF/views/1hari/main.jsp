@@ -27,38 +27,18 @@ var dataset;
 var color = Chart.helpers.color;
 $(function(){
 	var dataset;
-	function promise_function(){
-		  return new Promise(function(resolve, reject){ 
-				$.ajax({
-					url: "${pageContext.request.contextPath}/ajax/getAllEmpTA.hari",
-					type: "post",
-					dataType: "json",
-					success: function(getAllEmpTA) {
-//			 			console.log(getAllEmpTA);
-						//java에서 못넣은 색 추가.. 제일 윗쪽에 chart.js에서 준 컬러값 배열 만들어놨음
-						for(var i =0; i<getAllEmpTA.length; i++){
-							getAllEmpTA[i].backgroundColor=color(colorArray[i]).alpha(0.5).rgbString();
-							getAllEmpTA[i].borderColor=colorArray[i];
-							dataset=getAllEmpTA;
+		$.ajax({
+			url: "${pageContext.request.contextPath}/ajax/getAllEmpTA.hari",
+			type: "post",
+			dataType: "json",
+			success: function(getAllEmpTA) {
+				//java에서 못넣은 색 추가.. 제일 윗쪽에 chart.js에서 준 컬러값 배열 만들어놨음
+				for(var i =0; i<getAllEmpTA.length; i++){
+					getAllEmpTA[i].backgroundColor=color(colorArray[i]).alpha(0.5).rgbString();
+					getAllEmpTA[i].borderColor=colorArray[i];
+					dataset=getAllEmpTA;
+				}
 
-						}
-						console.log(dataset);
-						resolve(true);
-					}
-				})		
-		  });
-		}
-	
-	function successFunction(){
-		return false;
-	}
-	function errorFunction(){
-		  return false;
-	}	
-				
-
-
-			function chart(){
 				var horizontalBarChartData = {
 					labels: MONTHS,
 					datasets: dataset
@@ -68,11 +48,9 @@ $(function(){
 					type: 'horizontalBar',
 					data: horizontalBarChartData,
 					options: {
-						// Elements options apply to all of the options unless overridden in a dataset
-						// In this case, we are setting the border of each horizontal bar to be 2px wide
 						elements: {
 							rectangle: {
-								borderWidth: 2,
+							borderWidth: 2,
 							}
 						},
 						responsive: true,
@@ -81,18 +59,52 @@ $(function(){
 						},
 						title: {
 							display: true,
-							text: 'Chart.js Horizontal Bar Chart'
+							text: '부서별 월간 근무시간 통계'
 						}
 					}
 				})
 			}
-	
-				
-	promise_function()
-	.then(chart())
-	.then(successFunction)
-/* 	.catch(errorFunction);
- */
+		})
+		
+	var dataset2;
+		$.ajax({
+			url: "${pageContext.request.contextPath}/ajax/getAllEmpTA.hari",
+			type: "post",
+			dataType: "json",
+			success: function(getAllEmpTA) {
+				//java에서 못넣은 색 추가.. 제일 윗쪽에 chart.js에서 준 컬러값 배열 만들어놨음
+				for(var i =0; i<getAllEmpTA.length; i++){
+					getAllEmpTA[i].backgroundColor=color(colorArray[i]).alpha(0.5).rgbString();
+					getAllEmpTA[i].borderColor=colorArray[i];
+					dataset=getAllEmpTA;
+				}
+
+				var horizontalBarChartData = {
+					labels: MONTHS,
+					datasets: dataset
+				}
+				var ctx = document.getElementById('adminCanvas2').getContext('2d');
+				window.myHorizontalBar = new Chart(ctx, {
+					type: 'bar',
+					data: horizontalBarChartData,
+					options: {
+						elements: {
+							rectangle: {
+							borderWidth: 2,
+							}
+						},
+						responsive: true,
+						legend: {
+							position: 'right',
+						},
+						title: {
+							display: true,
+							text: '부서별 월간 근무시간 통계'
+						}
+					}
+				})
+			}
+		})
 
 	$('#month').change(function(){
 		window.myHorizontalBar.destroy();
@@ -111,46 +123,41 @@ $(function(){
 						getEmpTAMonth[i].backgroundColor=color(colorArray[i]).alpha(0.5).rgbString();
 						getEmpTAMonth[i].borderColor=colorArray[i];
 					}
-					console.log(getEmpTAMonth);
-					
-					MONTHS=[];
-					MONTHS.push($('#month').val() + '월');
-
-
-// 				setTimeout(function(){
-					var horizontalBarChartData = {
-							labels: MONTHS,
-							datasets: getEmpTAMonth
-						};
-
-					var ctx = document.getElementById('adminCanvas').getContext('2d');
-					window.myHorizontalBar = new Chart(ctx, {
-						type: 'horizontalBar',
-						data: horizontalBarChartData,
-						options: {
-							// Elements options apply to all of the options unless overridden in a dataset
-							// In this case, we are setting the border of each horizontal bar to be 2px wide
-							elements: {
-								rectangle: {
-									borderWidth: 2,
-								}
-							},
-							responsive: true,
-							legend: {
-								position: 'right',
-							},
-							title: {
-								display: true,
-								text: '월간 근무시간'
-							},
-							tooltips:{
-								enabled: true,
-							}
-						}
-
-					})
-// 				},1000);
 				}
+			}).then((getEmpTAMonth) => {
+				MONTHS=[];
+				MONTHS.push($('#month').val() + '월');
+				var horizontalBarChartData = {
+						labels: MONTHS,
+						datasets: getEmpTAMonth
+					};
+
+				var ctx = document.getElementById('adminCanvas').getContext('2d');
+				window.myHorizontalBar = new Chart(ctx, {
+					type: 'horizontalBar',
+					data: horizontalBarChartData,
+					options: {
+						// Elements options apply to all of the options unless overridden in a dataset
+						// In this case, we are setting the border of each horizontal bar to be 2px wide
+						elements: {
+							rectangle: {
+								borderWidth: 2,
+							}
+						},
+						responsive: true,
+						legend: {
+							position: 'right',
+						},
+						title: {
+							display: true,
+							text: '부서별 월간 근무시간 통계'
+						},
+						tooltips:{
+							enabled: true,
+						}
+					}
+
+				})
 			})
 		} 
 		else{
@@ -274,64 +281,6 @@ $(function(){
 		type: "post",
 		dataType: "json",
 		success: function(getTA) {
-// 			Chart.defaults.global.tooltips.custom = function(tooltip) {
-// 				// Tooltip Element
-// 				var tooltipEl2 = document.getElementById('chartjs-tooltip2');
-// 				// Hide if no tooltip
-// 				if (tooltip.opacity === 0) {
-// 					tooltipEl2.style.opacity = 0;
-// 					return;
-// 				}
-
-// 				// Set caret Position
-// 				tooltipEl2.classList.remove('above', 'below', 'no-transform');
-// 				if (tooltip.yAlign) {
-// 					tooltipEl2.classList.add(tooltip.yAlign);
-// 				} else {
-// 					tooltipEl2.classList.add('no-transform');
-// 				}
-
-// 				function getBody(bodyItem) {
-// 					return bodyItem.lines;
-// 				}
-
-// 				// Set Text
-// 				if (tooltip.body) {
-// 					var titleLines = tooltip.title || [];
-// 					var bodyLines = tooltip.body.map(getBody);
-// 					var innerHtml = '<thead>';
-
-// 					titleLines.forEach(function(title) {
-// 						innerHtml += '<tr><th>' + title + '</th></tr>';
-// 					});
-// 					innerHtml += '</thead><tbody>';
-
-// 					bodyLines.forEach(function(body, i) {
-// 						var colors = tooltip.labelColors[i];
-// 						var style = 'background:' + colors.backgroundColor;
-// 						style += '; border-color:' + colors.borderColor;
-// 						style += '; border-width: 2px';
-// 						var span = '<span class="chartjs-tooltip-key" style="' + style + '"></span>';
-// 						innerHtml += '<tr><td>' + span + body + '</td></tr>';
-// 					});
-// 					innerHtml += '</tbody>';
-
-// 					var tableRoot = tooltipEl2.querySelector('table');
-// 					tableRoot.innerHTML = innerHtml;
-// 				}
-
-// 				var positionY = this._chart.canvas.offsetTop;
-// 				var positionX = this._chart.canvas.offsetLeft;
-
-// 				// Display, position, and set styles for font
-// 				tooltipEl2.style.opacity = 1;
-// 				tooltipEl2.style.left = positionX + tooltip.caretX + 'px';
-// 				tooltipEl2.style.top = positionY + tooltip.caretY + 'px';
-// 				tooltipEl2.style.fontFamily = tooltip._bodyFontFamily;
-// 				tooltipEl2.style.fontSize = tooltip.bodyFontSize;
-// 				tooltipEl2.style.fontStyle = tooltip._bodyFontStyle;
-// 				tooltipEl2.style.padding = tooltip.yPadding + 'px ' + tooltip.xPadding + 'px';
-// 			};
 			var config = {
 				type: 'pie',
 				data: {
@@ -370,6 +319,23 @@ $(function(){
 		}
 	});
 
+	//부서별 연봉 통계 년도 옵션
+	$.ajax({ // 권한 비동기 가져오기
+	url: "${pageContext.request.contextPath}/ajax/getRole.hari",
+	type: "post",
+	dataType: "json",
+	success: function(Roles) {
+		let role = "";
+		$.each(Roles, function(index, element) {
+			if ('${emp.roleName}' == element.roleName) {
+				role += '<option value="' + element.roleName + '" selected>' + element.roleDSCR + '</option>';
+			} else {
+				role += '<option value="' + element.roleName + '">' + element.roleDSCR + '</option>';
+			}
+		})
+		$("#roleSelect").append(role);
+	}
+});
 
 
 // 	var horizontalBarChartData;
@@ -759,8 +725,8 @@ $(function(){
 			<!-- 근무 통계 시작  -->
 				<div class="card" style ="box-shadow :10px 10px #999999; border-radius:10px; border : 4px dashed #bcbcbc; margin-top:-28%; margin-left:10%;">
 					<div class="card-body" style="padding-bottom: 0">
-						<h4 class="card-title m-b-0" style="margin-bottom:0;" >근무시간 통계</h4>
-							<select class="select2 form-control custom-select select2-hidden-accessible" id="month" style="width: 13%; height:10%; margin-left: 88%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+						<span class="card-title m-b-0" style="margin-bottom:0; font-size: 18px;" >근무시간 통계</span>
+							<select class="select2 form-control custom-select select2-hidden-accessible" id="month" style="width: 13%; height:10%; margin-left: 65%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
 								<option value="0">전체</option>
 								<option value="1">1월</option>
 								<option value="2">2월</option>
@@ -776,12 +742,53 @@ $(function(){
 								<option value="12">12월</option>
 							</select>
 						</div>
-					<div id="container" style="width: 100%; height: 100%; margin-bottom: 40px;">
-
-						<canvas id="adminCanvas"></canvas>
+					<div id="container" style="width: 100%; height: 100%; margin-bottom: 7%;">
+						<canvas id="adminCanvas" style="height: 10%;"></canvas>
 					</div>
 				</div>
 				<!--근태 통계 -->
+				<div class="card" style ="box-shadow :10px 10px  #999999; border-radius:10px; border : 4px groove #bcbcbc; margin-left:10%; ">
+					<div class="card-body">
+						<h4 class="card-title m-b-0">당월 근태통계</h4>
+						<div id="canvas-holder" style="width: 66%; margin-left: -16%;">
+							<div class="chartjs-size-monitor">
+								<div class="chartjs-size-monitor-expand">
+									<div class="">
+								</div>
+							</div>
+							<div class="chartjs-size-monitor-shrink">
+								<div class="">
+								</div>
+							</div>
+						</div>
+						<div class="chartjs-size-monitor">
+							<div class="chartjs-size-monitor-expand">
+								<div class="">
+								</div>
+							</div>
+							<div class="chartjs-size-monitor-shrink">
+								<div class="">
+								</div>
+							</div>
+						</div>
+						<canvas id="chart-area" width="300" height="300" style="display: block; margin-left: 50%;" class="chartjs-render-monitor"></canvas>
+						<div id="chartjs-tooltip2" class="center" style="opacity: 0; left: 228.854px; top: 223.022px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-style: normal; padding: 6px; font-size: 12px;">
+							<table>
+								<thead>
+								</thead>
+								<tbody>
+									<tr>
+										<td>
+											<span class="chartjs-tooltip-key" style="background:rgb(255, 99, 132); border-color:#fff; border-width: 2px">
+											</span>
+										</td>
+									</tr>
+								</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
 				<div class="card" style ="box-shadow :10px 10px  #999999; border-radius:10px; border : 4px groove #bcbcbc; margin-left:10%; ">
 					<div class="card-body">
 						<h4 class="card-title m-b-0">당월 근태통계</h4>
@@ -830,9 +837,32 @@ $(function(){
 
 			<!--오른쪽 div 컨테이너 부분 시작 (전자결재 + 투두리스트)-->
 			<div class="col-md-6">
-
 				<!--전자 결재 시작-->
-				<div class="card" style ="box-shadow :10px 10px #999999; border-radius:10px; border : 4px groove #bcbcbc;  margin-top:-25%; margin-right:10%;">
+				<div class="card" style ="box-shadow :10px 10px #999999; border-radius:10px; border : 4px dashed #bcbcbc; margin-top:-28%; margin-rignt:10%;">
+					<div class="card-body" style="padding-bottom: 0">
+						<span class="card-title m-b-0" style="margin-bottom:0; font-size: 18px;" >근무시간 통계</span>
+							<select class="select2 form-control custom-select select2-hidden-accessible" id="month" style="width: 13%; height:10%; margin-left: 67%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+								<option value="0">전체</option>
+								<option value="1">1월</option>
+								<option value="2">2월</option>
+								<option value="3">3월</option>
+								<option value="4">4월</option>
+								<option value="5">5월</option>
+								<option value="6">6월</option>
+								<option value="7">7월</option>
+								<option value="8">8월</option>
+								<option value="9">9월</option>
+								<option value="10">10월</option>
+								<option value="11">11월</option>
+								<option value="12">12월</option>
+							</select>
+						</div>
+					<div id="container" style="width: 100%; height: 100%; margin-bottom: 1%;">
+						<canvas id="adminCanvas2" style="height: 0%;"></canvas>
+					</div>
+				</div>
+				<!--전자 결재 끝 -->
+				<div class="card" style ="box-shadow :10px 10px #999999; border-radius:10px; border : 4px dashed #bcbcbc; margin-rignt:10%;">
 					<div class="card-body">
 						<h5 class="card-title m-b-0">전자 결재</h5>
 					</div>
@@ -858,11 +888,7 @@ $(function(){
 						</thead>
 					</table>
 				</div>
-				<!--전자 결재 끝 -->
-
-
-				<!-- todo list 시작 -->
-				<div class="card" style ="box-shadow :10px 10px #999999; border-radius:10px; border : 4px dashed #bcbcbc; margin-right:10%;">
+				<div class="card" style ="box-shadow :10px 10px #999999; border-radius:10px; border : 4px dashed #bcbcbc; margin-rignt:10%;">
 					<div class="card-body">
 						<h4 class="card-title">To Do List</h4>
 						<div class="todo-widget scrollable" style="height: 450px;">
@@ -960,12 +986,16 @@ $(function(){
 						</div>
 					</div>
 				</div>
+				<!--전자 결재 끝 -->
 				<!--투두리스트 끝-->
-
 			</div>
 			<!--col-md-6 컨텐츠 컨테이너 내에서 왼쪽 부분 (전자 결재 + 투두리스트 합친 부분) 끝 -->
-
-		</div>
+			<div class="col-md-6">
+			
+			</div>
+			<div class="col-md-6">
+			
+			</div>
 		<!-- <div class="row"> 부분 끝 div-->
 	</div>
 	<!--<div class="container-fluid"> 부분 끝 div-->
