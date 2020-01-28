@@ -51,8 +51,8 @@ public class LoginFailureHandler implements AuthenticationFailureHandler{
 		request.setAttribute(userpassword, password);
 		//에러메세지 세팅
 		request.setAttribute(errormsgname, errormsg);
-		response.sendRedirect(request.getContextPath() + "/index.hari?error=" + errormsg);
-//		request.getRequestDispatcher(defaultFailureUrl).forward(request, response);
+//		response.sendRedirect(request.getContextPath() + "/index.hari?error=" + errormsg);
+		request.getRequestDispatcher(defaultFailureUrl).forward(request, response);
 	}
 	
 	protected int loginFailureCount(String username) {

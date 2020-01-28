@@ -457,56 +457,62 @@ $(function(){
         }
     }
 
+
+    var itemArray10=document.querySelectorAll('.fc-day.fc-widget-content');
+
+	var getStartList;
 	//이번달 출근기록 yyyy-mm-dd
 	$.ajax({
 		url: "${pageContext.request.contextPath}/ajax/getStartList.hari",
 		type: "post",
 		dataType: "json",
-		success: function(getStartList) {
+		success: function(data) {
 			var itemArray;
-			setTimeout(function(){
-				itemArray=document.querySelectorAll('.fc-day.fc-widget-content');
-			},100);
-			setTimeout(function(){
-   		    	for(var i=0; i<itemArray.length; i++){
-   		            for(var j=0; j<getStartList.startList.length; j++){
-   		               if($(itemArray[i]).attr('data-date') == getStartList.startList[j]){
-   		                  $(itemArray[i]).append('<br><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-warning fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">출근</span></div><div class="fc-resizer fc-end-resizer"></div></a></td>');
-   		               }
-   		            }
-   					for(var j=0; j<getStartList.tardyList.length; j++){
-   		               if($(itemArray[i]).attr('data-date') == getStartList.tardyList[j]){
-   	   		                  $(itemArray[i]).append('<br><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-warning fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">지각</span></div><div class="fc-resizer fc-end-resizer"></div></a></td>');
-						}
-   					}
-   		         }
-   		 	 },200);
-   		     setTimeout(function(){
-   				//이번달 퇴근기록 yyyy-mm-dd
-   				$.ajax({
-   					url: "${pageContext.request.contextPath}/ajax/getEndList.hari",
-   					type: "post",
-   					dataType: "json",
-   					success: function(getEndList) {
-   						var itemArray2=document.querySelectorAll('.fc-day.fc-widget-content');
-   						for(var i=0; i<itemArray2.length; i++){
-   							for(var j=0; j<getEndList.endList.length; j++){
-   								if($(itemArray2[i]).attr('data-date') == getEndList.endList[j]){
-   									$(itemArray2[i]).append('<a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-success fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">퇴근</span></div><div class="fc-resizer fc-end-resizer"></div></a>');
-   								}
-   							}
-   							for(var j=0; j<getEndList.absentList.length; j++){
-   								if($(itemArray2[i]).attr('data-date') == getEndList.absentList[j]){
-   									$(itemArray2[i]).empty();
-   									$(itemArray2[i]).append('<br><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-danger fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">결근</span></div><div class="fc-resizer fc-end-resizer"></div></a></td>');
-   								}
-   							}
-   						}
-   					}
-   				});
-   		 	 },300);
+			getStartList=data
+			var itemArray=document.querySelectorAll('.fc-day.fc-widget-content');
 		}
-	});
+	}).then((itemArray) => {
+		console.log(getStartList)
+		console.log(itemArray)
+		for(var i=0; i<itemArray.length; i++){
+			console.log("커피")
+			for(var j=0; j<getStartList.startList.length; j++){
+				if($(itemArray[i]).attr('data-date') == getStartList.startList[j]){
+					$(itemArray[i]).append('<br><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-warning fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">출근</span></div><div class="fc-resizer fc-end-resizer"></div></a></td>');
+				}
+			}
+			for(var j=0; j<getStartList.tardyList.length; j++){
+				if($(itemArray[i]).attr('data-date') == getStartList.tardyList[j]){
+					$(itemArray[i]).append('<br><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-warning fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">지각</span></div><div class="fc-resizer fc-end-resizer"></div></a></td>');
+				}
+			}
+		}
+	}).then((value) => {
+		//이번달 퇴근기록 yyyy-mm-dd
+		var itemArray2=document.querySelectorAll('.fc-day.fc-widget-content');
+		$.ajax({
+			url: "${pageContext.request.contextPath}/ajax/getEndList.hari",
+			type: "post",
+			dataType: "json",
+			success: function(getEndList) {
+				console.log(itemArray2)
+				for(var i=0; i<itemArray2.length; i++){
+					for(var j=0; j<getEndList.endList.length; j++){
+						if($(itemArray2[i]).attr('data-date') == getEndList.endList[j]){
+							$(itemArray2[i]).append('<a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-success fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">퇴근</span></div><div class="fc-resizer fc-end-resizer"></div></a>');
+						}
+					}
+					for(var j=0; j<getEndList.absentList.length; j++){
+						if($(itemArray2[i]).attr('data-date') == getEndList.absentList[j]){
+							$(itemArray2[i]).empty();
+							$(itemArray2[i]).append('<br><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-danger fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">결근</span></div><div class="fc-resizer fc-end-resizer"></div></a></td>');
+						}
+					}
+				}
+			}
+		});
+	})
+	    console.log(itemArray10 + "수박")
 });
 //사용자 설정 테마색으로 변경
 function getMyTheme(){
