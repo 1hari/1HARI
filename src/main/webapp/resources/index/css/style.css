@@ -8234,14 +8234,14 @@ h1, h2, h3, h4, h5,
   height: 850px; }
   .slider-text h1 {
     font-size: 28px;
-    color: #008dd4;
+    color: #807266;
     line-height: 1.2;
     font-weight: 200;
     }
     .slider-text h1 span {
       font-size: 54px;
       font-weight: 800;
-      color: #008dd4;
+      color: #807266;
       text-transform: uppercase;
       }
     @media (max-width: 767.98px) {
@@ -8471,8 +8471,8 @@ h1, h2, h3, h4, h5,
   .btn:hover, .btn:active, .btn:focus {
     outline: none; }
   .btn.btn-primary {
-    background: #008dd4 !important;
-    border: 1px solid #008dd4 !important;
+    background: #807266 !important;
+    border: 1px solid #807266 !important;
     color: #fff !important;
     }
     .btn.btn-primary:hover {
@@ -8875,7 +8875,7 @@ textarea.form-control {
   visibility: hidden; }
 
 .bg-primary {
-  background: #008dd4 !important;
+  background: #807266 !important;
   }
 
 .media-custom {

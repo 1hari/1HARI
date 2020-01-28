@@ -42,14 +42,14 @@
 						<table class="table">
 							<thead class="thead-light">
 								<tr>
-									<th scope="col">기안일</th>
-									<th scope="col">문서번호</th>
-									<th scope="col">결재양식</th>
-									<th scope="col">제목</th>
-									<th scope="col">기안자 (사번)</th>
-									<th scope="col">중간결재자 (사번)</th>
-									<th scope="col">최종결재자 (사번)</th>
-									<th scope="col">결재상태</th>
+									<th scope="col"><span>기안일</span></th>
+									<th scope="col"><span>문서번호</span></th>
+									<th scope="col"><span>결재양식</span></th>
+									<th scope="col"><span>제목</span></th>
+									<th scope="col"><span>기안자 (사번)</span></th>
+									<th scope="col"><span>중간결재자 (사번)</span></th>
+									<th scope="col"><span>최종결재자 (사번)</span></th>
+									<th scope="col"><span>결재상태</span></th>
 								</tr>
 							</thead>
 							<tbody class="customtable">
@@ -96,14 +96,14 @@
 						<table class="table">
 							<thead class="thead-light">
 								<tr>
-									<th scope="col">기안일</th>
-									<th scope="col">문서번호</th>
-									<th scope="col">결재양식</th>
-									<th scope="col">제목</th>
-									<th scope="col">기안자 (사번)</th>
-									<th scope="col">중간결재자 (사번)</th>
-									<th scope="col">최종결재자 (사번)</th>
-									<th scope="col">결재상태</th>
+									<th scope="col"><span>기안일</span></th>
+									<th scope="col"><span>문서번호</span></th>
+									<th scope="col"><span>결재양식</span></th>
+									<th scope="col"><span>제목</span></th>
+									<th scope="col"><span>기안자 (사번)</span></th>
+									<th scope="col"><span>중간결재자 (사번)</span></th>
+									<th scope="col"><span>최종결재자 (사번)</span></th>
+									<th scope="col"><span>결재상태</span></th>
 								</tr>
 							</thead>
 							<tbody class="customtable">
@@ -150,14 +150,14 @@
 						<table class="table">
 							<thead class="thead-light">
 								<tr>
-									<th scope="col">기안일</th>
-									<th scope="col">문서번호</th>
-									<th scope="col">결재양식</th>
-									<th scope="col">제목</th>
-									<th scope="col">기안자 (사번)</th>
-									<th scope="col">중간결재자 (사번)</th>
-									<th scope="col">최종결재자 (사번)</th>
-									<th scope="col">결재상태</th>
+									<th scope="col"><span>기안일</span></th>
+									<th scope="col"><span>문서번호</span></th>
+									<th scope="col"><span>결재양식</span></th>
+									<th scope="col"><span>제목</span></th>
+									<th scope="col"><span>기안자 (사번)</span></th>
+									<th scope="col"><span>중간결재자 (사번)</span></th>
+									<th scope="col"><span>최종결재자 (사번)</span></th>
+									<th scope="col"><span>결재상태</span></th>
 								</tr>
 							</thead>
 							<tbody class="customtable">
@@ -197,14 +197,14 @@
 						<table class="table">
 							<thead class="thead-light">
 								<tr>
-									<th scope="col">기안일</th>
-									<th scope="col">문서번호</th>
-									<th scope="col">결재양식</th>
-									<th scope="col">제목</th>
-									<th scope="col">기안자 (사번)</th>
-									<th scope="col">중간결재자 (사번)</th>
-									<th scope="col">최종결재자 (사번)</th>
-									<th scope="col">결재상태</th>
+									<th scope="col"><span>기안일</span></th>
+									<th scope="col"><span>문서번호</span></th>
+									<th scope="col"><span>결재양식</span></th>
+									<th scope="col"><span>제목</span></th>
+									<th scope="col"><span>기안자 (사번)</span></th>
+									<th scope="col"><span>중간결재자 (사번)</span></th>
+									<th scope="col"><span>최종결재자 (사번)</span></th>
+									<th scope="col"><span>결재상태</span></th>
 								</tr>
 							</thead>
 							<tbody class="customtable">

@@ -32,7 +32,7 @@
 									<div class="row">
 										<div class="col-5">
 											<div class="icon-big text-center">
-												<i class="fas fa-calendar-alt fa-4x"></i>
+												<i class="fas fa-calendar-alt fa-3x" style = "padding-top:10px;"></i>
 											</div>
 										</div>
 										<div class="col col-stats">
@@ -51,7 +51,7 @@
 									<div class="row">
 										<div class="col-5">
 											<div class="icon-big text-center">
-												<i class="fas fa-history fa-4x"></i>
+												<i class="fas fa-history fa-3x" style = "padding-top:10px;"></i>
 											</div>
 										</div>
 										<div class="col col-stats">
@@ -70,7 +70,7 @@
 									<div class="row">
 										<div class="col-5">
 											<div class="icon-big text-center">
-												<i class="fas fa-sync fa-4x" style=""></i>
+												<i class="fas fa-sync fa-3x" style = "padding-top:10px;"></i>
 											</div>
 										</div>
 										<div class="col col-stats">
@@ -89,7 +89,7 @@
 									<div class="row">
 										<div class="col-5">
 											<div class="icon-big text-center">
-												<i class="fas fa-suitcase fa-4x"></i>
+												<i class="fas fa-suitcase fa-3x" style = "padding-top:10px;"></i>
 											</div>
 										</div>
 										<div class="col col-stats">
@@ -119,18 +119,18 @@
 			<div class="col-12">
 	
 				<!--연차 관리  테이블 -->
-				<div class="card" style ="box-shadow :10px 10px #999999; border-radius:10px; border : 4px dashed #bcbcbc;">
+				<div class="card" style =" border-radius:10px; border : 4px groove #bcbcbc;"> <!-- border : 4px groove #bcbcbc; box-shadow :4px 4px #999999; -->
 					<div class="card-body">
 						<h5 class="card-title">연차 사용 목록</h5>
 						<div class="table-responsive">
 							<table id="zero_config" class="table table-striped table-bordered">
 								<thead>
 									<tr>
-										<th>문서번호</th>
-										<th>연차시작일</th>
-										<th>연차종료일</th>
-										<th>사용연차</th>
-										<th>승인여부</th>
+										<th><span>문서번호</span></th>
+										<th><span>연차시작일</span></th>
+										<th><span>연차종료일</span></th>
+										<th><span>사용연차</span></th>
+										<th><span>승인여부</span></th>
 									</tr>
 								</thead>
 								<tbody>

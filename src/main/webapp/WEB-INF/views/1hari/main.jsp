@@ -784,7 +784,7 @@ $(function(){
 		<div class="row">
 			<div class="col-md-6">
 			<!-- 근무 통계 시작  -->
-				<div class="card" style ="box-shadow :10px 10px #999999; border-radius:10px; border : 4px dashed #bcbcbc; margin-top:-28%; margin-left:10%;">
+				<div class="card" style ="box-shadow :10px 10px #999999; border-radius:10px; border : 4px groove #bcbcbc; margin-top:-28%; margin-left:10%;">
 					<div class="card-body" style="padding-bottom: 0">
 						<span class="card-title m-b-0" style="margin-bottom:0; font-size: 18px;" >근무시간 통계</span>
 							<select class="select2 form-control custom-select select2-hidden-accessible" id="month" style="width: 13%; height:10%; margin-left: 65%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
@@ -899,7 +899,7 @@ $(function(){
 			<!--오른쪽 div 컨테이너 부분 시작 (전자결재 + 투두리스트)-->
 			<div class="col-md-6">
 				<!--전자 결재 시작-->
-				<div class="card" style ="box-shadow :10px 10px #999999; border-radius:10px; border : 4px dashed #bcbcbc; margin-top:-28%; margin-rignt:10%;">
+				<div class="card" style ="box-shadow :10px 10px #999999; border-radius:10px; border : 4px groove #bcbcbc; margin-top:-28%; margin-rignt:10%;">
 					<div class="card-body" style="padding-bottom: 0">
 						<span class="card-title m-b-0" style="margin-bottom:0; font-size: 18px;" >연봉 통계</span>
 							<select id="chartSelect" class="select2 form-control custom-select select2-hidden-accessible" id="month" style="width: 13%; height:10%; margin-left: 67%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
@@ -910,7 +910,7 @@ $(function(){
 					</div>
 				</div>
 				<!--전자 결재 끝 -->
-				<div class="card" style ="box-shadow :10px 10px #999999; border-radius:10px; border : 4px dashed #bcbcbc; margin-rignt:10%;">
+				<div class="card" style ="box-shadow :10px 10px #999999; border-radius:10px; border : 4px groove #bcbcbc; margin-rignt:10%;">
 					<div class="card-body">
 						<h5 class="card-title m-b-0">전자 결재</h5>
 					</div>
