@@ -480,7 +480,6 @@ public class HrRestController {
 				count++;
 				jsonObject.put("data", teamWorkTimeList);
 				root.add(jsonObject);
-				System.out.println("root.toString(): " + root.toString());
 			}
 		} catch (Exception e) {
 			log.debug("getAllEmpTA 예외발생: " + e.getMessage());
@@ -525,7 +524,6 @@ public class HrRestController {
 					root.add(jsonObject);
 					count++;
 				}
-				System.out.println(root.toString());
 			} catch (Exception e) {
 				log.debug("getEmpTAMonth 예외발생: " + e.getMessage());
 			}
@@ -551,7 +549,6 @@ public class HrRestController {
 		
 		try {
 			yearList = empSercive.getSalYear();
-			System.out.println(yearList.toString());
 		} catch (Exception e) {
 			log.debug("getSalYear 예외발생: " + e.getMessage());
 		}
@@ -589,7 +586,6 @@ public class HrRestController {
 					root.add(jsonObject);
 					count++; //팀 이름 가져올 때 인덱스값
 				}
-				System.out.println("getTeamAvgSal" + root.toString());
 			} catch (Exception e) {
 				log.debug("getEmpTAMonth 예외발생: " + e.getMessage());
 			}
