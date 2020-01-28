@@ -119,8 +119,8 @@ public class SignRestController {
 			map.put("signComment", sign.getSignComment());
 			map.put("signCode", sign.getSignCode());
 			
-			//신청서가 연차신청서가 아니거나 연차신청서이면서 결재자1일때는 일반결재
-			if(!sign.getSignFormCode().equals("0") || (sign.getSignFormCode().equals("0") && sign.getIsSign1().equals("0"))) {
+			//신청서가 연차신청서가 아니거나 (연차신청서이면서 결재자1이거나) 결재코드가 반려이면 일반결재
+			if(!sign.getSignFormCode().equals("0") || (sign.getSignFormCode().equals("0") && sign.getIsSign1().equals("0")) || sign.getSignCode().equals("4")) {
 				result = signService.signApproval(map);
 			}else {
 				try {

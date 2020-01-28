@@ -274,10 +274,10 @@
 		//console.log($(this).attr("signNum"));
 		let openUrl = "${pageContext.request.contextPath}/1hariSign/signDocuView.hari?signNum="+$(this).attr("signNum");
 		//console.log(openUrl);
-		open(openUrl,"전자결재","statusber=no,menuber=no, width=850, height=800, top=10");
+		open(openUrl,"전자결재","statusber=no,menuber=no, width=850, height=800");
 	});//문서 클릭
 
 	function reload() {
-		window.location.reload();
+		location.href = "${pageContext.request.contextPath}/1hariSign/signHome.hari";
 	}
 </script>
