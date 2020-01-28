@@ -6,6 +6,9 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/hari/assets/extra-libs/multicheck/multicheck.css">
 <link href="${pageContext.request.contextPath}/resources/hari/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet">
 
+<!-- moment js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"></script>
+
 <!-- Page wrapper  -->
 <!-- ============================================================== -->
 <div class="page-wrapper">
@@ -34,7 +37,7 @@
 			<div class="col-12">
 
 				<!-- 사원 근태관리 테이블 -->
-				<div class="card" style =" border-radius:10px; border : 4px groove #bcbcbc;">
+				<div class="card">
 					<div class="card-body">
 						<h5 class="card-title"></h5>
 						<div class="table-responsive">
@@ -42,26 +45,15 @@
 								<table id="zero_config" class="table table-striped table-bordered">
 									<thead>
 										<tr>
-											<th><span>사원</span></th>
-											<th><span>부서</span></th>
-											<th><span>월요일</span></th>
-											<th><span>화요일</span></th>
-											<th><span>수요일</span></th>
-											<th><span>목요일</span></th>
-											<th><span>금요일</span></th>
-											<th><span>토요일</span></th>
-											<th><span>일요일</span></th>
+											<th>사원</th>
+											<th>부서</th>
+											<th>출근시간</th>
+											<th>퇴근시간</th>
+											<th>수정</th>
 										</tr>
 									</thead>
-									<tbody>
-										<tr>
-											<td>
-												<div>
-													<p> 유재석 회장님 </p>
-													<p> 주간근무시간 </p>
-												</div>
-											</td>
-										</tr>
+									<tbody id="taBody">
+										
 									</tbody>
 									<tfoot>
 									</tfoot>
@@ -99,46 +91,41 @@
 <script src="${pageContext.request.contextPath}/resources/hari/assets/extra-libs/multicheck/datatable-checkbox-init.js"></script>
 <script src="${pageContext.request.contextPath}/resources/hari/assets/extra-libs/multicheck/jquery.multicheck.js"></script>
 <script src="${pageContext.request.contextPath}/resources/hari/assets/extra-libs/DataTables/datatables.min.js"></script>
-<!-- SweetAlert -->
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script>
+	$(function() {
+		
+		$.ajax({ // 근태목록 가져오기
+			url: "${pageContext.request.contextPath}/ajax/getTaList.hari",
+			type: "post",
+			dataType: "json",
+			success: function(TaList) {
+				let empTaList = "";
+				var count = 0;
+				
+				for (var i = 0; i < TaList.length; i++) {
+					if (count == 0) {
+						empTaList += '<tr>'
+									+ '<td><div><span>' + TaList[i].empName + ' ' + TaList[i].rankName +'</span><span>(' + TaList[i].empNum + ')</span></div></td>'
+									+ '<td><div><p>' + TaList[i].teamName + '</p></div></td>'
+									+ '<td><div><span>' + TaList[i].taName + '</span><span> (' + TaList[i].taDate + ')</span></div></td>';
+						count++;
+					} else {
+						if (TaList[i].empNum == TaList[i-1].empNum) {
+							empTaList += '<td><div><span>' + TaList[i].taName + '</span><span> (' + TaList[i].taDate + ')</span></div>'
+									+ '</td></tr>';
+							count = 0;
+						}
+					}
+				}
+				$('#taBody').append(empTaList);
+				$('#zero_config').DataTable();
+			}
+		});
+	})
 	/****************************************
 	*       Basic Table                   *
 	****************************************/
-	$('#zero_config').DataTable();
-
-	/* Excel Upload / Download를 위한 script */
-	function checkFileType(filePath) {
-		var fileFormat = filePath.split(".");
-		if (fileFormat.indexOf("xlsx") > -1) {
-			return true;
-		} else {
-			return false;
-		}
-	}
 	
-	function excelUpload() {
-		var popupUrl = "${pageContext.request.contextPath}/util/personnel/excelUpload.hari";
-		var popupName = "Excel Upload";
-		var popupOption = "statusber=no, scrollbar=no, menuber=no, width=900, height=500 top=270 left=530";
-		
-		window.open(popupUrl, popupName, popupOption);
-	}
-	
-	function excelDownload() {
-		var form = document.empTable;
-		form.action = "${pageContext.request.contextPath}/util/personnel/excelDownload.hari";
-		form.submit();
-	}
 
-	function excelFormDownload() {
-		var form = document.empTable;
-		form.action = "${pageContext.request.contextPath}/util/personnel/excelFormDownload.hari";
-		form.submit();
-	}
-
-	function reload() {
-		window.location.reload();
-	}
 </script>
