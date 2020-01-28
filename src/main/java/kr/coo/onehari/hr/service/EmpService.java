@@ -11,10 +11,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kr.coo.onehari.hr.dao.CorpDao;
 import kr.coo.onehari.hr.dao.EmpDao;
 import kr.coo.onehari.hr.dto.AnnUse;
 import kr.coo.onehari.hr.dto.EmpAnn;
 import kr.coo.onehari.hr.dto.EmpDto;
+import kr.coo.onehari.hr.dto.Role;
 import lombok.extern.slf4j.Slf4j;
 
 
@@ -530,6 +532,19 @@ public class EmpService {
 			log.debug("getAnnUseList 예외발생: " + e.getMessage());
 		}
     	return annUseList;
+    }
+    
+	//대시보드 부서별 연봉 연도 셀렉트박스
+	public List<String> getSalYear() {
+    	EmpDao empdao = sqlsession.getMapper(EmpDao.class);
+    	List<String> yearList = null;
+    	
+    	try {
+    		yearList = empdao.getSalYear();
+		} catch (ClassNotFoundException | SQLException e) {
+			log.debug("getSalYear 예외발생: " + e.getMessage());
+		}
+    	return yearList;
     }
 }
 

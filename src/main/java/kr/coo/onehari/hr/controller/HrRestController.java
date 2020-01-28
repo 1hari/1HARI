@@ -114,7 +114,6 @@ public class HrRestController {
 	@RequestMapping(value = "getLastEmpNum.hari", method = RequestMethod.POST)
 	public int getLastEmpNum() {
 		int empNum = 0;
-
 		try {
 			empNum = corpservice.getLastEmpNum();
 			System.out.println("empNum : " + empNum);
@@ -543,5 +542,19 @@ public class HrRestController {
 			log.debug("HrRestController getTaList 예외발생: " + e.getMessage());
 		}
 		return getTaList;
+	}
+	
+	//대시보드 부서별 연봉통계 셀렉트박스
+	@RequestMapping(value = "getSalYear.hari", method = RequestMethod.POST)
+	public List<String> getSalYear() {
+		List<String> yearList = null;
+
+		try {
+			yearList = empSercive.getSalYear();
+			System.out.println(yearList.toString());
+		} catch (Exception e) {
+			log.debug("getSalYear 예외발생: " + e.getMessage());
+		}
+		return yearList;
 	}
 }

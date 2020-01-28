@@ -320,20 +320,21 @@ $(function(){
 	});
 
 	//부서별 연봉 통계 년도 옵션
-	$.ajax({ // 권한 비동기 가져오기
-	url: "${pageContext.request.contextPath}/ajax/getRole.hari",
+	$.ajax({
+	url: "${pageContext.request.contextPath}/ajax/getSalYear.hari",
 	type: "post",
 	dataType: "json",
-	success: function(Roles) {
-		let role = "";
-		$.each(Roles, function(index, element) {
-			if ('${emp.roleName}' == element.roleName) {
-				role += '<option value="' + element.roleName + '" selected>' + element.roleDSCR + '</option>';
+	success: function(getSalYear) {
+		console.log(getSalYear)
+		let years = "";
+		$.each(getSalYear, function(index, element) {
+			if (index==0) {
+				years += '<option value="' + element.roleName + '" selected>' + element.roleDSCR + '</option>';
 			} else {
-				role += '<option value="' + element.roleName + '">' + element.roleDSCR + '</option>';
+				years += '<option value="' + element.roleName + '">' + element.roleDSCR + '</option>';
 			}
 		})
-		$("#roleSelect").append(role);
+		$("#chartSelect").append(years);
 	}
 });
 
@@ -841,7 +842,7 @@ $(function(){
 				<div class="card" style ="box-shadow :10px 10px #999999; border-radius:10px; border : 4px dashed #bcbcbc; margin-top:-28%; margin-rignt:10%;">
 					<div class="card-body" style="padding-bottom: 0">
 						<span class="card-title m-b-0" style="margin-bottom:0; font-size: 18px;" >근무시간 통계</span>
-							<select class="select2 form-control custom-select select2-hidden-accessible" id="month" style="width: 13%; height:10%; margin-left: 67%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+							<select id="chartSelect" class="select2 form-control custom-select select2-hidden-accessible" id="month" style="width: 13%; height:10%; margin-left: 67%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
 								<option value="0">전체</option>
 								<option value="1">1월</option>
 								<option value="2">2월</option>

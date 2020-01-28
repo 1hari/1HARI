@@ -159,4 +159,7 @@ public interface EmpDao {
     
     //연차정보 김정하 2020. 1. 28
     public EmpAnn getEmpAnn(String empNum) throws ClassNotFoundException, SQLException;
+    
+    //대시보드 부서별 연봉 연도 셀렉트박스 2020. 1. 28
+    public List<String> getSalYear() throws ClassNotFoundException, SQLException;
 }
