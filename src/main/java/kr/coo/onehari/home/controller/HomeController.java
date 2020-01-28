@@ -1,6 +1,8 @@
 package kr.coo.onehari.home.controller;
 
+import java.security.Principal;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Properties;
 import java.util.Random;
 
@@ -23,6 +25,7 @@ import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeUtility;
 
 import kr.coo.onehari.my.controller.MyController;
 import kr.coo.onehari.my.service.MyService;
+import kr.coo.onehari.sign.service.SignService;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -31,6 +34,9 @@ public class HomeController {
 	
 	@Autowired
 	private MyService myService;
+	
+	@Autowired
+	private SignService signService;
 	
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -146,7 +152,39 @@ public class HomeController {
 		}
 	
 	@RequestMapping("/main.hari")
-	public String main() {
+	public String main(Model model, Principal principal) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		
+		//System.out.println(code);
+		
+		String loginUser = principal.getName();
+		
+		map.put("loginUser", loginUser); //현재 로그인한 사번
+		
+		//진행중문서
+		map.put("code", "1"); //결재분류 : 0.전체 / 1.기안 / 2.완료 / 3.반려 / 4.결재할 문서 / 5. 결재한 문서
+		int count = signService.signPage(map);
+		model.addAttribute("ongoing",count);
+		//System.out.println("진행중 : " + count);
+		
+		//반려문서
+		map.put("code", "3"); //결재분류 : 0.전체 / 1.기안 / 2.완료 / 3.반려 / 4.결재할 문서 / 5. 결재한 문서
+		count = signService.signPage(map);
+		model.addAttribute("reject",count);
+		//System.out.println("반려 : " + count);
+		
+		//결재할문서
+		map.put("code", "4"); //결재분류 : 0.전체 / 1.기안 / 2.완료 / 3.반려 / 4.결재할 문서 / 5. 결재한 문서
+		count = signService.signPage(map);
+		model.addAttribute("approve",count);
+		//System.out.println("결재할: " + count);
+		
+		//완료문서
+		map.put("code", "2"); //결재분류 : 0.전체 / 1.기안 / 2.완료 / 3.반려 / 4.결재할 문서 / 5. 결재한 문서
+		count = signService.signPage(map);
+		model.addAttribute("complete",count);
+		//System.out.println("완료 : " + count);
+		
 		return "1hari.main";
 	}
 	

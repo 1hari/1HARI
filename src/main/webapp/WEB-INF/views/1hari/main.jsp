@@ -634,19 +634,19 @@ $(function(){
 						<thead>
 							<tr>
 								<th scope="col"><i class="far fa-clipboard fa-2x"></i>&nbsp;<h4>진행중문서</h4>
-									<td style ="marign-left:-5%;">0</td>
+									<td style ="marign-left:-5%;">${requestScope.ongoing}</td>
 								</th>
-								<th scope="col"><i class="far fa-file-alt fa-2x"></i>&nbsp;<h4>보류중문서</h4>
-									<td>2</td>
+								<th scope="col"><i class="far fa-file-alt fa-2x"></i>&nbsp;<h4>결제반려문서</h4>
+									<td>${requestScope.reject}</td>
 								</th>
 							</tr>
 							
 							<tr>
-								<th scope="col"><i class="far fa-edit fa-2x"></i>&nbsp;<h4>결제중문서</h4>
-									<td>0</td>
+								<th scope="col"><i class="far fa-edit fa-2x"></i>&nbsp;<h4>결제할문서</h4>
+									<td>${requestScope.approve}</td>
 								</th>
 								<th scope="col"><i class="far fa-file-archive fa-2x"></i>&nbsp;<h4>결제완료문서</h4>
-									<td>2</td>
+									<td>${requestScope.complete}</td>
 								</th>
 							</tr>
 						</thead>
