@@ -42,7 +42,7 @@ $(function(){
 									<div class="row">
 										<div class="col-5">
 											<div class="icon-big text-center">
-												<i class="fas fa-calendar-alt fa-4x"></i>
+												<i class="fas fa-calendar-alt fa-3x" style ="padding-top:10px;"></i>
 											</div>
 										</div>
 										<div class="col col-stats">
@@ -61,7 +61,7 @@ $(function(){
 									<div class="row">
 										<div class="col-5">
 											<div class="icon-big text-center">
-												<i class="fas fa-history fa-4x"></i>
+												<i class="fas fa-history fa-3x" style ="padding-top:10px;"></i>
 											</div>
 										</div>
 										<div class="col col-stats">
@@ -80,7 +80,7 @@ $(function(){
 									<div class="row">
 										<div class="col-5">
 											<div class="icon-big text-center">
-												<i class="fas fa-sync fa-4x" style =""></i>
+												<i class="fas fa-sync fa-3x" style ="padding-top:10px;"></i>
 											</div>
 										</div>
 										<div class="col col-stats">
@@ -99,7 +99,7 @@ $(function(){
 									<div class="row">
 										<div class="col-5">
 											<div class="icon-big text-center">
-												<i class="fas fa-suitcase fa-4x"></i>
+												<i class="fas fa-suitcase fa-3x" style ="padding-top:10px;"></i>
 											</div>
 										</div>
 										<div class="col col-stats">
