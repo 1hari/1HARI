@@ -73465,17 +73465,18 @@ input[type=submit].btn-block {
 
 .page-item.active .page-link {
 	z-index: 1;
-	color: #fff;
-	background-color: #2ab2aa;
-	border-color: #2ab2aa
+	color: #807266;
+	background-color: #ffffff;
+	border-color: #807266;
+	border: 2px solid #807266;
 }
 
 .page-item.disabled .page-link {
-	color: #2ab2aa;
+	color: #807266;
 	pointer-events: none;
 	cursor: auto;
 	background-color: #fff;
-	border-color: #dee2e6
+	border-color: #dee2e6;
 }
 
 .pagination-lg .page-link {

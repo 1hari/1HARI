@@ -1,7 +1,7 @@
 <template>
-  <!-- 게시글 리스트 -->
+  <!-- 사원조회 리스트 -->
   <div class="container" style="margin-top:5%;">
-    <div class="card shadow" style=" height: 500%;">
+    <div class="card shadow" style=" height: 500%;  border-radius:10px; border : 4px groove #bcbcbc;">
       <div class="card-body" style="height:700px;">
         <div>
             <select style = "width:10%;">

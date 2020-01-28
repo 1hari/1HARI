@@ -8,14 +8,15 @@
 }
 
 .fc-toolbar .fc-button-group {
-    border: 1px solid #008dd4;
+    border: 1px solid #807266;
     border-radius: 4px;
 }
 
 .fc-toolbar .fc-button {
-    background: #008dd4;
-    color: #fff;
-    border: none;
+    background: #ffffff;
+    color: #807266;
+    /* border: none; */
+    border: 2px solid #807266;
 }
 
 .fc-toolbar .fc-button:hover {

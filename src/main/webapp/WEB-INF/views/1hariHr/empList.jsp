@@ -6,6 +6,13 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/hari/assets/extra-libs/multicheck/multicheck.css">
 <link href="${pageContext.request.contextPath}/resources/hari/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet">
 
+<style>
+	button{
+	
+	
+	}
+
+</style>
 <!-- Page wrapper  -->
 <!-- ============================================================== -->
 <div class="page-wrapper">
@@ -35,7 +42,7 @@
 
 				<!--사원 관리  테이블 -->
 
-				<div class="card">
+				<div class="card" style =" border-radius:10px; border : 4px groove #bcbcbc;">
 					<div class="card-body">
 						<h5 class="card-title"></h5>
 						<div class="table-responsive">
@@ -43,25 +50,25 @@
 							<div style="text-align: right; margin-bottom: 3%;">
 								<a href="empJoin.hari" style="color: white;">
 									<button type="button" class="btn m-t-5 btn-info btn-block waves-effect waves-light" 
-											style="width: 20%; margin-right: 1%; border-right-style : solid;">
+											style="width: 20%; background-color: #20B2AA; margin-right: 1%;  border : 2px solid #807266; font-weight: bold; font-size:medium; color: #807266; background-color:white; ">
 										사원등록
 									</button>
 								</a>
 								<a href="javascript:excelDownload()" style="color: white;">
 									<button type="button" class="btn m-t-5 btn-info btn-block waves-effect waves-light" 
-											style="width: 20%; background-color: #20B2AA; margin-right: 1%;">
+											style="width: 20%; background-color: #20B2AA; margin-right: 1%;  border : 2px solid #807266; font-weight: bold; font-size:medium; color: #807266; background-color:white; ">
 										Excel 다운로드
 									</button>
 								</a>
 								<a href="javascript:excelUpload()" style="color: white;">
 									<button type="button" class="btn m-t-5 btn-info btn-block waves-effect waves-light" 
-											style="width: 20%; background-color: #20B2AA; margin-right: 1%;">
+											style="width: 20%; background-color: #20B2AA; margin-right: 1%;  border : 2px solid #807266; font-weight: bold; font-size:medium; color: #807266; background-color:white; ">
 										Excel 업로드
 									</button>
 								</a>
 								<a href="javascript:excelFormDownload()" style="color: white;">
 									<button type="button" class="btn m-t-5 btn-info btn-block waves-effect waves-light" 
-											style="width: 20%; background-color: #20B2AA; margin-right: 1%;">
+											style="width: 20%; background-color: #20B2AA; margin-right: 1%;  border : 2px solid #807266; font-weight: bold; font-size:medium; color: #807266; background-color:white; ">
 										양식 받기
 									</button>
 								</a>
@@ -82,16 +89,16 @@
 	<!-- 												<span class="checkmark"></span> -->
 	<!-- 											</label> -->
 	<!-- 										</th> -->
-											<th>사번</th>
-											<th>이름</th>
-											<th>소속</th>
-											<th>직급</th>
-											<th>직책</th>
-											<th>재직구분</th>
+											<th><span>사번</span></th>
+											<th><span>이름</span></th>
+											<th><span>소속</span></th>
+											<th><span>직급</span></th>
+											<th><span>직책</span></th>
+											<th><span>재직구분</span></th>
 	<!-- 										<th>권한</th> -->
-											<th>입사일</th>
-											<th>퇴사일</th>
-											<th>정보수정</th>
+											<th><span>입사일</span></th>
+											<th><span>퇴사일</span></th>
+											<th><span>정보수정</span></th>
 										</tr>
 									</thead>
 									<tbody>
@@ -115,7 +122,7 @@
 												<td style="text-align: center;">
 													<a href="empModify.hari?empNum=${emp.empNum}" style="color: white;">
 														<button type="button" class="btn m-t-5 btn-info btn-block waves-effect waves-light" 
-																style="width: 80%; background-color: #20B2AA">
+																style="width: 80%; background-color: #20B2AA; margin-right: 1%;  border : 2px solid #807266; font-weight: bold; font-size:medium; color: #807266; background-color:white; ">
 															수정
 														</button>
 													</a>

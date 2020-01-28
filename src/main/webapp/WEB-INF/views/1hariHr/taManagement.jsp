@@ -34,7 +34,7 @@
 			<div class="col-12">
 
 				<!-- 사원 근태관리 테이블 -->
-				<div class="card">
+				<div class="card" style =" border-radius:10px; border : 4px groove #bcbcbc;">
 					<div class="card-body">
 						<h5 class="card-title"></h5>
 						<div class="table-responsive">
@@ -42,15 +42,15 @@
 								<table id="zero_config" class="table table-striped table-bordered">
 									<thead>
 										<tr>
-											<th>사원</th>
-											<th>부서</th>
-											<th>월요일</th>
-											<th>화요일</th>
-											<th>수요일</th>
-											<th>목요일</th>
-											<th>금요일</th>
-											<th>토요일</th>
-											<th>일요일</th>
+											<th><span>사원</span></th>
+											<th><span>부서</span></th>
+											<th><span>월요일</span></th>
+											<th><span>화요일</span></th>
+											<th><span>수요일</span></th>
+											<th><span>목요일</span></th>
+											<th><span>금요일</span></th>
+											<th><span>토요일</span></th>
+											<th><span>일요일</span></th>
 										</tr>
 									</thead>
 									<tbody>
