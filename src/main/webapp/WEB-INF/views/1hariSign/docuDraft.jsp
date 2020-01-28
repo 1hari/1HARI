@@ -9,6 +9,16 @@
 <!--이 페이지에서만 쓰는  ckeditor 필수 제이쿼리 지우지 마세요! -->
 <script src="https://cdn.ckeditor.com/4.13.1/standard-all/ckeditor.js"></script>
 
+<!--datepicker link 필수 !!! -->
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/hari/assets/libs/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+
+<script src="${pageContext.request.contextPath}/resources/hari/assets/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/hari/assets/libs/bootstrap-datepicker/dist/locales/bootstrap-datepicker.ko.min.js"></script>
+
+<!-- moment -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/ko.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"></script>
+
 <style>
 	.draft > td{
 		border-color:#000000;
@@ -83,11 +93,37 @@
 							<div class="col-md-12">
 								<input type="text" class="form-control" id="signTitle" name="signTitle" placeholder="제목" <c:forEach var="docu" items="${requestScope.signDocu}">
 										value="${docu.signTitle}"
-									</c:forEach>style="width:93%; display: inline;">
+									</c:forEach> style="width:93%; display: inline;">
 								<button type="button" id="draftSubmit" class="btn btn-success" style="display: inline-block;">기안</button>
 							</div>
 						</div><!-- row 끝 -->
-						
+						<c:if test="${form.signFormCode == 0}">
+							<!-- 연차 날짜 선택 -->
+							<div class="row">
+								<div class="col-md-12">
+									<div class="row">
+										<div class="col-sm-3">
+											<div class="input-group">
+												<c:set var="empAnn" value="${requestScope.empAnn}"/>
+												사용 가능 연차 &nbsp;&nbsp;<input type="text" style="text-align: center;" id="ann" value="${empAnn.totalAnn-empAnn.useAnn}" readonly>&nbsp;&nbsp;일
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div class="input-group input-daterange date">
+					    						<input type="text" class="form-control" id="startDate" name="startDate" value="">
+					    						<div class="input-group-addon">&nbsp;&nbsp;~&nbsp;&nbsp;</div>
+					    						<input type="text" class="form-control" id="endDate" name="endDate" value="">
+											</div>
+										</div>
+										<div class="col-sm-3">
+											<div class="input-group">
+												연차 사용 일수 &nbsp;&nbsp;<input type="text" id="useAnn" name="useAnn" value="" style="text-align: center;" readonly>&nbsp;&nbsp;일
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</c:if>
 						<!-- ck 에디터 form -->
 						<textarea name="signContent" id="signContent" rows="10" cols="80">
 							<c:choose>
@@ -236,6 +272,61 @@
 			
 		});//결재자 클릭 끝
 
+		//datepicker 설정
+		$('.date').datepicker({
+					format: "yyyy-mm-dd", // 입사일 Date 형식
+					autoclose: true,
+					todayHighlight: true,
+					language: "ko",
+					orientation: "bottom auto",
+					startDate :new Date(),
+					daysOfWeekDisabled :[0,6]
+		});
+		
+		$('.input-daterange input').each(function() {
+		    $(this).datepicker('clearDates');
+		})
+		//datepicker 설정 끝
+		
+		//날짜선택 시 연차적용일 계산
+		$('.date').change(function(){
+			//console.log($('#startDate').val());
+			//console.log($('#endDate').val());
+
+			var startDate = moment($('#startDate').val());
+			var endDate = moment($('#endDate').val());
+			var useAnnAll = endDate.diff(startDate, 'days') // 주말포함일수
+			
+			var useAnn = 0;
+			
+			for(var i = 0; i <= useAnnAll; i++){
+				startDate = moment($('#startDate').val());
+				//console.log("i : " + i);
+				//console.log(a.format("YYYY-MM-DD"));
+
+				var useDate = startDate.add('days',i);
+				//console.log(aa.format("YYYY-MM-DD"));
+				
+				//console.log(aa.day());
+				if(useDate.day() != 0 && useDate.day() != 6){ //0일요일, 6토요일
+					useAnn++;
+				}
+			}
+			//console.log(useAnn);
+			if($('#ann').val() < useAnn){
+				$('#useAnn').val("");
+				swal({
+					text: "사용가능한 연차일을 "+ (useAnn-$('#ann').val()) +"일 초과했습니다.",
+					icon: "warning",
+					button: "닫기"
+				});
+			}else {
+				$('#useAnn').val(useAnn);
+			}
+			
+		}); //연차적용일 끝
+		
+		
 		//기안submit 클릭
 		$('#draftSubmit').click(function(){
 			let signEmp = false;
@@ -243,9 +334,9 @@
 			//console.log($('#empName2').html());
 						
 			//결재선 확인
-			if( $('#empName1').html().trim() == "" || $('#empName2').html().trim() == "" || $('#signTitle').val() == "" ){
+			if( $('#empName1').html().trim() == "" || $('#empName2').html().trim() == "" || $('#signTitle').val() == "" || $('#useAnn').val() == ""){
 				swal({
-					text: "결재선 또는 제목 확인바랍니다.",
+					text: "결재선, 제목, 연차날짜 확인바랍니다.",
 					icon: "warning",
 					button: "닫기"
 				})

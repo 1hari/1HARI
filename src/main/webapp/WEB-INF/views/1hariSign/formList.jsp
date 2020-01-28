@@ -62,11 +62,13 @@
 													<td>${form.signFormCode}</td>
 													<td>${form.signFormFormName}</td>
 													<td>
-														<a href="formDelete.hari?signFormCode=${form.signFormCode}" style="color: white;">
-															<button type="button" class="btn m-t-5 btn-info btn-block waves-effect waves-light" style="width: 80%; background-color: #20B2AA">
-																삭제
-															</button>
-														</a>
+														<c:if test="${form.signFormCode != 0}"> <!-- 연차신청서 삭제불가 -->
+															<a href="formDelete.hari?signFormCode=${form.signFormCode}" style="color: white;">
+																<button type="button" class="btn m-t-5 btn-info btn-block waves-effect waves-light" style="width: 80%; background-color: #20B2AA">
+																	삭제
+																</button>
+															</a>
+														</c:if>
 													</td>
 												</tr>
 											</c:forEach>
