@@ -1,5 +1,6 @@
 package kr.coo.onehari.hr.controller;
 
+import java.security.Principal;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -14,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import kr.coo.onehari.hr.dto.EmpAnn;
 import kr.coo.onehari.hr.dto.EmpDto;
 import kr.coo.onehari.hr.service.CorpService;
 import kr.coo.onehari.hr.service.EmpService;
@@ -38,7 +40,10 @@ public class HrController {
 	
 	//연차관리 화면
 	@RequestMapping("annual.hari")
-	public String annual() {
+	public String annual(Principal principal, Model model) {
+		EmpAnn empAnn = empService.getEmpAnn(principal.getName());
+		model.addAttribute("empAnn", empAnn);
+		
 		return "1hariHr.annual";
 	}
 	

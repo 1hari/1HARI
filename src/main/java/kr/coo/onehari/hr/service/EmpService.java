@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.coo.onehari.hr.dao.EmpDao;
+import kr.coo.onehari.hr.dto.EmpAnn;
 import kr.coo.onehari.hr.dto.EmpDto;
 import lombok.extern.slf4j.Slf4j;
 
@@ -504,6 +505,18 @@ public class EmpService {
 			log.debug("EmpService 예외발생: " + e.getMessage());
 		}
     	return getTaList;
+    }
+    
+    //사원연차정보 가져오기 김정하 2020. 1. 28
+    public EmpAnn getEmpAnn(String empNum) {
+    	EmpDao empdao = sqlsession.getMapper(EmpDao.class);
+    	EmpAnn empAnn = null;
+    	try {
+			empAnn = empdao.getEmpAnn(empNum);
+		} catch (ClassNotFoundException | SQLException e) {
+			log.debug("getEmpAnn 예외발생: " + e.getMessage());
+		}
+    	return empAnn;
     }
 }
 

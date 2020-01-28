@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import kr.coo.onehari.hr.dto.AnnUse;
+import kr.coo.onehari.hr.dto.EmpAnn;
 import kr.coo.onehari.hr.dto.EmpDto;
 
 /*
@@ -150,9 +151,12 @@ public interface EmpDao {
     //연차정보 확정(승인) 김정하 2020. 1. 27
     public int updateAnnUse(String signNum) throws ClassNotFoundException, SQLException;
     
-    //연차정보 List 김정하 2020. 1. 27
+    //연차사용목록 List 김정하 2020. 1. 27
     public List<AnnUse> getAnnUseList(String empNum) throws ClassNotFoundException, SQLException;
     
     // 관리자 근태목록 김진호 2020. 1. 27
     public List<EmpDto> getTaList() throws ClassNotFoundException, SQLException;
+    
+    //연차정보 김정하 2020. 1. 28
+    public EmpAnn getEmpAnn(String empNum) throws ClassNotFoundException, SQLException;
 }

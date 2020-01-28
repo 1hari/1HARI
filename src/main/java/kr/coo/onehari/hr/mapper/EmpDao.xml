@@ -288,13 +288,7 @@
         WHERE E.RANKCODE=3006
     </select>
     
-    <!--     
-    //연차정보 확정(승인) 김정하 2020. 1. 27
-    public int updateAnnUse(String signNum) throws ClassNotFoundException, SQLException;
-    
-    //연차정보 List 김정하 2020. 1. 27
-    public List<AnnUse> getAnnUseList(String empNum) throws ClassNotFoundException, SQLException; -->
-    
+        
     <!-- 연차정보 등록 김정하 2020. 1. 27 -->
     <insert id="insertAnnUse">
     	<selectKey resultType="int" keyProperty="signNum" order="BEFORE">
@@ -311,10 +305,26 @@
     	)
     </insert>
     
+    <!-- 연차정보 확정(승인) 김정하 2020. 1. 27 -->
     <update id="updateAnnUse">
     	UPDATE annuselist SET ISSIGN='1' WHERE SIGNNUM = #{signNum};
     </update>
     
+    <!--     
+    //연차정보 List 김정하 2020. 1. 27
+    public List<AnnUse> getAnnUseList(String empNum) throws ClassNotFoundException, SQLException; -->
+    <select id="getAnnUseList">
+    	
+    </select>
+    
+    <!-- //연차정보 김정하 2020. 1. 28
+    public EmpAnn getEmpAnn(String empNum) throws ClassNotFoundException, SQLException; -->
+    <select id="getEmpAnn">
+    	SELECT e.EMPNUM, e.TOTALANN, e.USEANN, s.HIREDATE
+		FROM empannlist e JOIN subemp s
+        		          ON e.EMPNUM = s.EMPNUM
+		WHERE e.EMPNUM = #{empNum}
+    </select>
 </mapper>
 
 
