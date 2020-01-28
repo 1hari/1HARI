@@ -48,36 +48,49 @@ public class HomeController {
 			
 			//2.이메일 보내기 위한 변수설정
 			String host = "smtp.gmail.com"; //smtp 서버
-			String subject = "Eye-fi 인증 이메일입니다."; //보내는 제목 설정
-			String fromName = "Eye-fi"; //보내는 이름 설정
-			String from = "eyefi1920@gmail.com"; //보내는 메일 계정
+			String subject = "1HARI HR SYSTEM 비밀번호 변경을 위한 인증메일 입니다."; //보내는 제목 설정
+			String fromName = "1HARI"; //보내는 이름 설정
+			String from = "2020.1hari@gmail.com"; //보내는 메일 계정
 			String authNum = HomeController.authNum(); //인증번호
-			String content ="<table style='table-layout:fixed; width: 100%; height: 100%; margin: 0; font-weight: 400; margin: 0; text-align: left; padding: 0; Sans-serif;'>"
-								+	"<tbody>"
-								+	"<tr><td align='center'>"
-								+	"<table  style='table-layout:fixed; width: 100%; max-width: 580px; border: 1px solid #e1e1e1; border-radius: 8px; text-align: left;'>"
-								+	"<tbody><tr><td align='center' style='padding: 40px 0 45px;'>"
-								+	"<a href='#' target='_blank' style='display:' rel='noreferrer noopener'>"
-								+	"<img src='/image/logo-20B2AA.png' width='200' border='0' alt='1hari' loading='lazy'></a>"
-								+	"</td></tr><tr><td align='center' style='padding-bottom: 24px;'>"
-								+	"<img src='https://cdn.collabee.co/static/mail/20190402/partner_invite.png' width='100' height='126' border='0' style='display: block; margin: 0 auto;' loading='lazy'>"
-								+	" </td></tr><tr><td align='center' style='font-size: 22px; font-weight: bold; line-height: 1.45; color: #222222; padding-bottom: 16px;'>"
-								+	"</td></tr><tr><td align='center' style='font-size: 14px; line-height: 1.57; color: #222222;'>"
-								+	"이제 협업은 훨씬 쉬워집니다.<br>"
-								+	"메일 인증만 해주신다면!"
-								+	"<b>1HARI</b> 가입을 위한 인증을 진행해 주세요.<br>"
-								+	"인증을 완료하려면 아래 인증번호를 입력해주세요."
-								+	"</td></tr><tr><td style='text-align: center; padding-top: 32px; padding-bottom: 66px;'>"
-								+	"<h1>인증번호 ['" + authNum + "']</h1>"
-								+	"</td></tr><tr><td align='center' style='font-size: 12px; line-height: 1.5; color: #888888; font-weight: normal; padding: 24px; background-color: #fafafa; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px'>"
-								+	"본 메일은 발신전용입니다.<br>Copyright Ⓒ 1hari All"
-								+	"Right Reserved"
-								+	"</td></tr></tbody>"
-								+	"</table>"
-								+	"</td>"
-								+ "</tr>" 
-								+	"</tbody>" 
-								+ "</table>";
+			String content = "<table class=\"body\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #f4f7fb; width: 100%;\">"
+							+ "<tbody>"
+							+ "<tr>"
+							+ "<td style=\"font-family: sans-serif; font-size: 14px; vertical-align: top;\">&nbsp;</td>"
+							+ "<td style=\"font-family: sans-serif; font-size: 14px; vertical-align: top; display: block; max-width: 580px; padding: 10px; width: 580px; Margin: 0 auto !important;\">"
+							+ "<div style=\"box-sizing: border-box; display: block; Margin: 0 auto; max-width: 580px; padding: 10px;\">"
+							+ "<table class=\"main\" style=\"border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; background: #fff; border-radius: 3px; width: 100%;\">"
+							+ "<tbody>"
+							+ "<tr>"
+							+ "<td style=\"font-family: sans-serif; font-size: 14px; vertical-align: top; box-sizing: border-box; padding: 20px;\">"
+							+ "<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;\">"
+							+ "<tbody>"
+							+ "<tr>"
+							+ "<td align=\"center\" style=\"font-family: sans-serif; font-size: 14px; vertical-align: top;\">"
+							+ "<img src=\"http://shiftee.io/assets/etc/8426e0b74fa8eebb12c528dfbac5df53-ic-email.png\" height=\"48\" loading=\"lazy\">"
+							+ "<h2>1HARI HR SYSTEM<br>비밀번호 변경을 위한 인증메일 입니다.</h2>"
+							+ "<p>발송된 <b>인증코드</b>를 입력하면</p>"
+							+ "<p>비밀번호 변경을 하실 수 있습니다.</p>"
+							+ "<h1>인증코드 [" + authNum + "]</h1>"
+							+ "<p>인증코드 보안에 유의해 주시기 바랍니다.</p>"
+							+ "<table align=\"center\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"width: 100%; margin: 24px auto; padding: 0; text-align: center;\">"
+							+ "<tbody>"
+							+ "<tr>"
+							+ "<td align=\"center\">"
+							+ "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">"
+							+ "<tbody>"
+							+ "<tr>"
+							+ "<td align=\"center\">"
+							+ "<a href=\"http://192.168.6.9:8090/1HARI/\" target=\"_blank\" rel=\"noreferrer noopener\" style=\"background-color: #0575e6; padding: 10px 18px; border-radius: 4px; display: inline-block; color: #fff; text-decoration: none; box-shadow: 0 2px 3px rgba(0, 0, 0, 0.16);\">"
+							+ "<img src=\"https://i.imgur.com/o9TMF5u.png\" title=\"logo-img-final.png\" alt=\"logoImage\" style=\"width: 30%; height: 10%;\" />"
+							+ "</a>"
+							+ "</td></tr></tbody></table>"
+							+ "</td></tr></tbody></table><br>"
+							+ "<p style=\"font-size: 12px; color: #969faa; text-align: center\">"
+							+ "본 메일은 발신전용입니다.<br>"
+							+ "Copyright Ⓒ 1HARI All Right Reserved"
+							+ "</p>"
+							+ "</td></tr></tbody></table>"
+							+ "</td></tr></tbody></table>";
 			
 			//3.SMTP 설정 및 메일보내기
 			try {
@@ -92,7 +105,7 @@ public class HomeController {
 				
 				Session mailSession = Session.getInstance(props,new javax.mail.Authenticator(){
 				    protected PasswordAuthentication getPasswordAuthentication(){
-					    return new PasswordAuthentication(from,"rhksflwk11!"); // gmail계정
+					    return new PasswordAuthentication(from, "admin1hari"); // gmail계정
 				    }
 				});
 				

@@ -23,7 +23,8 @@
 														<td align="center" style="font-family: sans-serif; font-size: 14px; vertical-align: top;">
 															<img src="http://shiftee.io/assets/etc/8426e0b74fa8eebb12c528dfbac5df53-ic-email.png" height="48" loading="lazy">
 															<h2>1HARI 주식회사에 입사하신 것을 환영합니다.</h2><br>
-															<p>안녕하세요, <b>${empName}</b> 님!<br>
+															<p>
+																안녕하세요, <b>${empName}</b> 님!<br>
 																1HARI SYSTEM에서 편리한 근태환경과 전자결재를 경험해보세요.
 															</p>
 															<p>

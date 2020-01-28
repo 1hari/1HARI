@@ -74,7 +74,7 @@
 	
 						if (isExist == false) {
 							swal({
-								text: "해당 이메일이 존재하지 않습니다.",
+								text: "등록된 이메일과 일치하지 않습니다.",
 								icon: "warning",
 								button: "닫기"
 							});
@@ -260,7 +260,8 @@
 						<!-- /.modal-content -->
 					</div>
 					<!-- /.modal-dialog -->
-				</div>      
+				</div>
+				
 			</div>
 		</div>
 	</div>
