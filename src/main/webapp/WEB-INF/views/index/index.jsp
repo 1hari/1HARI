@@ -15,9 +15,21 @@
 //      	  form.submit();
 //        }
 //    }
-   
+
 	//형남 0110 비밀번호 변경
 	$(function() {
+		var no = '<%= request.getAttribute("ERRORMSG") %>';
+			console.log(no=="null")
+			if(no !="null"){
+				swal({
+					text: no,
+					icon: "warning",
+					button: "확인"
+				})	.then((value)=>{
+					location.href="${pageContext.request.contextPath}/index.hari"
+				})
+
+			}
 		//정규표현식
 		let pw_pattern = /^[a-z0-9_]{4,10}$/;
 		let email_pattern = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
@@ -46,7 +58,6 @@
 
 		var empNum=$('#empNum').val();
 		var email=$('#email').val();
-		console.log(empNum + email);
 		//인증번호 전송버튼 클릭
 		$('#emailSend').click(function() {
 			//이메일 형식체크
@@ -69,7 +80,6 @@
 					dataType: "text",
 					success: function(data) {
 						//있으면 true, 없으면 false
-						console.log(data);
 						isExist = data;
 	
 						if (isExist == false) {
@@ -91,7 +101,6 @@
 
 		//창 닫으면 초기화
 		$('#closeModal').click(function() {
-			console.log('click closeModal');
 			$('#email').val('');
 			$('#empNum').val('');
 			$('#newPassword').val('');

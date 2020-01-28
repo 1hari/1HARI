@@ -121,8 +121,7 @@ $(function(){
 
 				})
 			})
-		} 
-		else{
+		}else{
 			$.ajax({
 				url: "${pageContext.request.contextPath}/ajax/getAllEmpTA.hari",
 				type: "post",
@@ -166,78 +165,11 @@ $(function(){
 				}
 			})
 		}
+
+		})
 	})
-})
 
 
-
-
-			
-// 			var ctx = document.getElementById('adminCanvas').getContext('2d');
-// 			window.myHorizontalBar = new Chart(ctx, {
-// 				type: 'horizontalBar',
-// 				data: horizontalBarChartData,
-// 				options: {
-// 					// Elements options apply to all of the options unless overridden in a dataset
-// 					// In this case, we are setting the border of each horizontal bar to be 2px wide
-// 					elements: {
-// 						rectangle: {
-// 							borderWidth: 2,
-// 						}
-// 					},
-// 					responsive: true,
-// 					legend: {
-// 						position: 'right',
-// 					},
-// 					title: {
-// 						display: true,
-// 						text: 'Chart.js Horizontal Bar Chart'
-// 					}
-// 				}
-// 			})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
-	var dataset2;
 	$.ajax({
 		url: "${pageContext.request.contextPath}/ajax/getTA.hari",
 		type: "post",
@@ -280,8 +212,10 @@ $(function(){
 			window.myPie = new Chart(ctx, config);
 		}
 	});
-
+	
+	
 	//부서별 연봉 통계 년도 옵션
+	var dataset2;
 	var salYearList=[]
 	$.ajax({
 	url: "${pageContext.request.contextPath}/ajax/getSalYear.hari",
@@ -321,14 +255,14 @@ $(function(){
 					labels.push(getTeamSalList[i].label)
 				}
 				
-				var horizontalBarChartData = {
+				var barChartData = {
 					labels: [getSalYear[0]+'년'],
 					datasets: dataset2
 				}
 				var ctx2 = document.getElementById('adminCanvas2').getContext('2d');
 				window.myBar = new Chart(ctx2, {
 					type: 'bar',
-					data: horizontalBarChartData,
+					data: barChartData,
 					options: {
 						elements: {
 							rectangle: {
@@ -355,8 +289,8 @@ $(function(){
 				url: "${pageContext.request.contextPath}/ajax/getTeamSalList.hari",
 				type: "post",
 				data:{
-							"year": $('#chartSelect').val()
-				},
+						"year": $('#chartSelect').val()
+						},
 				dataType: "json",
 				success: function(getTeamSalList) {
 					console.log(getTeamSalList)
@@ -367,14 +301,14 @@ $(function(){
 						dataset2=getTeamSalList;
 					}
 					
-					var horizontalBarChartData = {
+					var barChartData = {
 						labels: [$('#chartSelect').val()+'년'],
 						datasets: dataset2
 					}
 					var ctx2 = document.getElementById('adminCanvas2').getContext('2d');
 					window.myBar = new Chart(ctx2, {
 						type: 'bar',
-						data: horizontalBarChartData,
+						data: barChartData,
 						options: {
 							elements: {
 								rectangle: {
@@ -634,19 +568,19 @@ $(function(){
 						<thead>
 							<tr>
 								<th scope="col"><i class="far fa-clipboard fa-2x"></i>&nbsp;<h4>진행중문서</h4>
-									<td style ="marign-left:-5%;">${requestScope.ongoing}</td>
+                                    <td style ="marign-left:-5%;">${requestScope.ongoing}</td>
 								</th>
-								<th scope="col"><i class="far fa-file-alt fa-2x"></i>&nbsp;<h4>결제반려문서</h4>
-									<td>${requestScope.reject}</td>
+                                <th scope="col"><i class="far fa-file-alt fa-2x"></i>&nbsp;<h4>결제반려문서</h4>
+                                    <td>${requestScope.reject}</td>
 								</th>
 							</tr>
 							
 							<tr>
-								<th scope="col"><i class="far fa-edit fa-2x"></i>&nbsp;<h4>결제할문서</h4>
-									<td>${requestScope.approve}</td>
+                                <th scope="col"><i class="far fa-edit fa-2x"></i>&nbsp;<h4>결제할문서</h4>
+                                    <td>${requestScope.approve}</td>
 								</th>
 								<th scope="col"><i class="far fa-file-archive fa-2x"></i>&nbsp;<h4>결제완료문서</h4>
-									<td>${requestScope.complete}</td>
+                                    <td>${requestScope.complete}</td>
 								</th>
 							</tr>
 						</thead>

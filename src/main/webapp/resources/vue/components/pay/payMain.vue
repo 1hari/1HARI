@@ -105,16 +105,7 @@ module.exports = {
         pay.payIncomeTax = numeral(pay.payIncomeTax).format( '₩0,0' )
         pay.payLIncomeTax = numeral(pay.payLIncomeTax).format( '₩0,0' )
         this.splitPayMonth.push(pay.payMonth.split("-"))
-        // console.log(pay.payMonth)
         console.log(this.splitPayMonth)
-      
-			//console.log(pay.basicSal);
-			//console.log(pay.payNPension);
-			//console.log(pay.payHInsurance);
-			//console.log(pay.payCInsurance);
-			//console.log(pay.empInsurance);
-			//console.log(pay.payIncomeTax);
-			//console.log(pay.payLIncomeTax);
 		});
 		// console.log(this.splitPayMonth)
 		})

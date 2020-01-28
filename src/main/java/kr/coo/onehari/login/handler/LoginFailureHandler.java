@@ -36,9 +36,9 @@ public class LoginFailureHandler implements AuthenticationFailureHandler{
         String errormsg = null;
         int cnt=loginFailureCount(empNum);
         if(exception instanceof BadCredentialsException) {
-            errormsg = "아이디 또는 비밀번호 " + cnt +"회 오류입니다. 다시 확인해주세요.";
+            errormsg = "아이디 또는 비밀번호 " + cnt +"회 오류입니다. 다시 확인해주세요.  5회 오류 시 계정이 비활성화 됩니다.";
         } else if(exception instanceof InternalAuthenticationServiceException) {
-        	errormsg = "아이디 또는 비밀번호 " + cnt +"회 오류입니다. 다시 확인해주세요.";
+        	errormsg = "아이디 또는 비밀번호 " + cnt +"회 오류입니다. 다시 확인해주세요. 5회 오류 시 계정이 비활성화 됩니다.";
         } else if(exception instanceof DisabledException) {
             errormsg = "계정이 비활성화되었습니다. 관리자에게 문의하세요.";
         } else if(exception instanceof CredentialsExpiredException) {
@@ -50,6 +50,7 @@ public class LoginFailureHandler implements AuthenticationFailureHandler{
 		request.setAttribute(username, empNum);
 		request.setAttribute(userpassword, password);
 		//에러메세지 세팅
+		System.out.println(errormsgname);
 		request.setAttribute(errormsgname, errormsg);
 //		response.sendRedirect(request.getContextPath() + "/index.hari?error=" + errormsg);
 		request.getRequestDispatcher(defaultFailureUrl).forward(request, response);
@@ -60,7 +61,7 @@ public class LoginFailureHandler implements AuthenticationFailureHandler{
 		loginService.countFailure(username);
 		//현재 로그인 시도 횟수
 		int cnt = loginService.checkFailureCount(username);
-        if(cnt>=10) {
+        if(cnt>=4) {
         	loginService.disabledUsername(username);
         }
         return cnt;

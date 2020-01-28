@@ -21,7 +21,7 @@
     
 	<!-- css 설정 영역 -->
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/hari/dist/css/style.min.css">
-	<!-- 다채 사랑 폰트  -->
+<!-- 다채 사랑 폰트  -->
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/hari/dist/css/stylesheetlove.css">
 
 	<!--toaster (웹 페이지 내 알람) -->
@@ -47,6 +47,8 @@
     <!-- <script src="${pageContext.request.contextPath}/resources/hari/dist/js/pages/dashboards/dashboard1.js"></script> -->
 	<!--toaster (웹 페이지 내 알람) -->
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <!-- 숫자등 포맷 도와주는 JS -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
     
 
     
