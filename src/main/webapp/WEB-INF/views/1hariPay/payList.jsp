@@ -21,7 +21,6 @@
 // 		        console.log(cssText);
 // 		    }
 		    
-// 		    /** 팝업 */
 // 		    let innerHtml = $container[0].innerHTML
 // 		    let popupWindow = window.open("", "_blank", "width=700,height=800")
 // 		    popupWindow.document.write("<!DOCTYPE html>"+

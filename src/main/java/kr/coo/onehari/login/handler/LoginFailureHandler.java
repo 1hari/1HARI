@@ -15,7 +15,13 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
 import kr.coo.onehari.login.service.LoginService;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
+@Getter
+@Setter
+@ToString
 public class LoginFailureHandler implements AuthenticationFailureHandler{
 	
 	@Autowired	
@@ -36,23 +42,20 @@ public class LoginFailureHandler implements AuthenticationFailureHandler{
         String errormsg = null;
         int cnt=loginFailureCount(empNum);
         if(exception instanceof BadCredentialsException) {
-            errormsg = "아이디 또는 비밀번호 " + cnt +"회 오류입니다. 다시 확인해주세요.  5회 오류 시 계정이 비활성화 됩니다.";
+            errormsg = "아이디 또는 비밀번호 " + cnt +"회 오류입니다. ,5회 오류 시 계정이 비활성화 됩니다.";
         } else if(exception instanceof InternalAuthenticationServiceException) {
-        	errormsg = "아이디 또는 비밀번호 " + cnt +"회 오류입니다. 다시 확인해주세요. 5회 오류 시 계정이 비활성화 됩니다.";
+        	errormsg = "아이디 또는 비밀번호 " + cnt +"회 오류입니다. ,5회 오류 시 계정이 비활성화 됩니다.";
         } else if(exception instanceof DisabledException) {
             errormsg = "계정이 비활성화되었습니다. 관리자에게 문의하세요.";
         } else if(exception instanceof CredentialsExpiredException) {
             errormsg = "비밀번호 유효기간이 만료 되었습니다. 관리자에게 문의하세요.";
         }
-        System.out.println(errormsg);
-//        defaultFailureUrl=request.getContextPath() + "/index.hari?error=" + errormsg;
 
 		request.setAttribute(username, empNum);
 		request.setAttribute(userpassword, password);
+		
 		//에러메세지 세팅
-		System.out.println(errormsgname);
 		request.setAttribute(errormsgname, errormsg);
-//		response.sendRedirect(request.getContextPath() + "/index.hari?error=" + errormsg);
 		request.getRequestDispatcher(defaultFailureUrl).forward(request, response);
 	}
 	
@@ -66,37 +69,4 @@ public class LoginFailureHandler implements AuthenticationFailureHandler{
         }
         return cnt;
     }
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getUserpassword() {
-		return userpassword;
-	}
-
-	public void setUserpassword(String userpassword) {
-		this.userpassword = userpassword;
-	}
-
-	public String getErrormsgname() {
-		return errormsgname;
-	}
-
-	public void setErrormsgname(String errormsgname) {
-		this.errormsgname = errormsgname;
-	}
-
-	public String getDefaultFailureUrl() {
-		return defaultFailureUrl;
-	}
-
-	public void setDefaultFailureUrl(String defaultFailureUrl) {
-		this.defaultFailureUrl = defaultFailureUrl;
-	}
-
 }

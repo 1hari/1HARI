@@ -3,30 +3,25 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-   
+<!-- 시큐리티에서 넘겨준 error 메세지 -->
+<c:set var="error" value="${requestScope.ERRORMSG}" />
 <script type="text/javascript">
 
-	//로그인 시 체크
-//   function login(){
-//        if($('#username').val() ==null || $('#username').trim().val()==""){
-//            alert('아이디를 입력해 주세요');
-//            return;
-//        } else{
-//      	  form.submit();
-//        }
-//    }
-
-	//형남 0110 비밀번호 변경
 	$(function() {
-		var no = '<%= request.getAttribute("ERRORMSG") %>';
-			console.log(no=="null")
-			if(no !="null"){
+		//로그인 실패 여부 확인 및 에러메세지 출력
+		var error ='${error}'
+			//console.log(no !="null" ) true 
+			//console.log(no.trim() != '') false
+			console.log(error)
+			if(error !="null" && error.trim() != ''){ //에러메세지가 null이 아니거나, 빈값이 아니면
+				var errorSpl=error.split(',')
 				swal({
-					text: no,
+					title:errorSpl[0],
+					text: errorSpl[1],
 					icon: "warning",
 					button: "확인"
 				})	.then((value)=>{
-					location.href="${pageContext.request.contextPath}/index.hari"
+					location.href="${pageContext.request.contextPath}"
 				})
 
 			}
