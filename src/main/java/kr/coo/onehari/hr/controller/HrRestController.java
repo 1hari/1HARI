@@ -634,7 +634,6 @@ public class HrRestController {
 		outputMap.put("lastPage", lastPage);
 
 		return outputMap;
-<<<<<<< .merge_file_a01292
 	}
 	
 	// 관리자권한 사원근태수정을 위한 사원정보 가져오기 김진호 2020. 1. 29
@@ -647,7 +646,5 @@ public class HrRestController {
 			log.debug("HrRestController getEmpTa 예외발생: " + e.getMessage());
 		}
 		return empTa;
-=======
->>>>>>> .merge_file_a07832
 	}
 }

@@ -153,9 +153,4 @@ public class HrController {
 	public String taManagement() {
 		return "1hariHr.taManagement";
 	}
-	
-	@RequestMapping(value = "", method = RequestMethod.POST)
-	public String taManagement(EmpDto emp) {
-		return null;
-	}
 }
