@@ -61,7 +61,12 @@
         </div>
       </div>
     </div>
+      <form action="getPayPopUp.hari" method="POST" id='form'>
+        <input type="text" hidden="hidden" name="year" id="year" value="">
+        <input type="text" hidden="hidden" name="month" id="month" value="">
+      </form>
   </div>
+
 </template>
 <style>
 #board_list > tbody > tr {
@@ -81,16 +86,23 @@ module.exports = {
   methods: {
     payRead: function(year, month) {
       //this.$router router 객체 불러오기
-      this.$router.push('/payRead/' + year + '/' + month) //.push에 파라미터값에 알맞는 컴포넌트를 찾아 그 컴포넌트 주소로 이동시켜줌
+      //this.$router.push('/payRead/' + year + '/' + month) //.push에 파라미터값에 알맞는 컴포넌트를 찾아 그 컴포넌트 주소로 이동시켜줌
+       var url ="getPayPopUp.hari?year=" + year +"&month="+ month;
+       open(url, "급여 명세서", "statusber=no, scrollbar=no, menuber=no, width=1000, height=1100 1000=500 left=530");
+      // $('#year').val(year)
+      // $('#month').val(month)
+      // $('#form').submit()
     },
     getPayList: function() {
+
        var params = new URLSearchParams();
        if(event.target.value ==undefined){
         params.append("year", "init")
        }else {
          params.append("year", event.target.value)
        }
-		axios.post("getPayList.hari", params).then((response)=>{
+
+		axios.post(contextPath + "/ajax/getPayList.hari", params).then((response)=>{
       //console.log(response.data);
       this.server_data=response.data
       pays=response.data.payList
