@@ -13,7 +13,7 @@
 
 <script src="${pageContext.request.contextPath}/resources/vue/js/vue-router.js"></script>
 <script src='${pageContext.request.contextPath}/resources/vue/js/teamRouter.js'></script>
-<script src='${pageContext.request.contextPath}/resources/vue/js/app.js'></script>
+<script src='${pageContext.request.contextPath}/resources/vue/js/appTeam.js'></script>
 <style>
 	#board_list>tbody>tr {
 		cursor: pointer;

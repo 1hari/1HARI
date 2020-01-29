@@ -58,7 +58,7 @@
           </thead>
 
           <tbody>
-            <tr v-for="(emp, index) in server_data" >
+            <tr v-for="(emp, index) in server_data.empList" >
               <td class="text-center d-none d-md-table-cell" style="height=20px">{{emp.empNum}}</td>
               <td class="text-center d-none d-md-table-cell">{{emp.empName}}</td>
               <td class="text-center d-none d-md-table-cell">{{emp.teamName}}</td>
@@ -75,15 +75,16 @@
         <div class="d-none d-md-block">
           <ul class="pagination justify-content-center">
             <li class="page-item">
-              <router-link :to="'/board_main/' + $route.params.board_idx + '/' + server_data.pre" class="page-link">이전</router-link>
+              <router-link :to="'/teamMain/' + $store.state.pg + '/' + 1" class="page-link"><<</router-link>
             </li>
-            <li class="page-item" v-for="page in server_data.page_array" :key="page">
-              <router-link :to="'/board_main/' + $route.params.board_idx + '/' + page" class="page-link">{{page}}</router-link>
+
+            <li class="page-item" v-for="page in server_data.page" :key="page">
+              <router-link :to="'/teamMain/' + $store.state.pg + '/' + page" class="page-link">{{page}}</router-link>
               <!--여러개의 파라미터를 전달할 때 :to 사용-->
             </li>
 
             <li class="page-item">
-              <router-link :to="'/board_main/' + $route.params.board_idx + '/' + server_data.next" class="page-link">다음</router-link>
+              <router-link :to="'/teamMain/' + $store.state.pg + '/' + server_data.lastPage" class="page-link">>></router-link>
             </li>
           </ul>
         </div>
@@ -113,9 +114,24 @@ module.exports = {
   },
   methods: {
     getEmpList: function() {
+      var params = new URLSearchParams(); //URL에 붙어오는 parameter를 구분할 수 있다.
+      //console.log(this.$route.params.pg == undefined );
+
+      if(this.$route.params.pg == undefined){
+        params.append("pg", this.$store.state.pg)
+      }else {
+        params.append("pg", this.$route.params.pg)
+      }
+      
+      if(this.$route.params.cp == undefined){
+        params.append("cp", this.$store.state.cp)
+      }else {
+        params.append("cp", this.$route.params.cp)
+      }
+      
       //console.log(contextPath);
-      axios.post(contextPath+"/ajax/getEmpList.hari").then((response)=>{
-      console.log(response.data)
+      axios.post(contextPath+"/ajax/getEmpList.hari",params).then((response)=>{
+        //console.log(response.data)
         this.server_data=response.data
       })
     }
