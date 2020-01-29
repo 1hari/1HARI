@@ -5,66 +5,36 @@
       <div class="card-body" style="height:700px;">
         <div>
             <select style = "width:10%;">
-              <option>1월</option>
-              <option>2월</option>
-              <option>3월</option>
-              <option>4월</option>
-              <option>5월</option>
-              <option>6월</option>
-              <option>7월</option>
-              <option>8월</option>
-              <option>9월</option>
-              <option>10월</option>
-              <option>11월</option>
-              <option>12월</option>
             </select>
-            <span style = "margin-left:75%;" value ="사번">사번</span>
         </div>
-        <h4 class="card-title">{{server_data.board_info_name}}</h4>
-        <table class="table table-hover" id="board_list" >
+
+        <table class="table table-hover" id="zero_config" >
           <thead>
             <tr>
-              <th class="text-center d-none d-md-table-cell">기본급</th>
-              <th class="text-center d-none d-md-table-cell">국민연금</th>
-              <th class="text-center d-none d-md-table-cell">건강보험</th>
-              <th class="text-center d-none d-md-table-cell">장기요양보험</th>
-              <th class="text-center d-none d-md-table-cell">고용보험</th>
-              <th class="text-center d-none d-md-table-cell">소득세</th>
-              <th class="text-center d-none d-md-table-cell">지방소득세</th>
-              <th class="text-center d-none d-md-table-cell">공제금액</th>
-              <th class="text-center d-none d-md-table-cell">실급여</th>
-              <th class="text-center d-none d-md-table-cell">급여명세</th>
+              <th class="text-center d-none d-md-table-cell">사번</th>
+              <th class="text-center d-none d-md-table-cell">이름</th>
+              <th class="text-center d-none d-md-table-cell">소속</th>
+              <th class="text-center d-none d-md-table-cell">직급</th>
+              <th class="text-center d-none d-md-table-cell">직책</th>
+              <th class="text-center d-none d-md-table-cell">재직구분</th>
+              <th class="text-center d-none d-md-table-cell">연락처</th>
+              <th class="text-center d-none d-md-table-cell">이메일</th>
             </tr>
           </thead>
 
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>2</td>
-              <td>3</td>
-              <td>4</td>
-              <td>5</td>
-              <td>6</td>
-              <td>7</td>
-              <td>8</td>
-              <td>9</td>
-              <td><button class ="btn btn-sucess" style = "background-color: #2ab2aa; text-color:white;">급여명세</button></td>
+            <tr v-for="(emp, index) in server_data" >
+              <td class="text-center d-none d-md-table-cell" style="height=20px">{{emp.empNum}}</td>
+              <td class="text-center d-none d-md-table-cell">{{emp.empName}}</td>
+              <td class="text-center d-none d-md-table-cell">{{emp.teamName}}</td>
+              <td class="text-center d-none d-md-table-cell">{{emp.rankName}}</td>
+              <td class="text-center d-none d-md-table-cell">{{emp.positionName}}</td>
+              <td class="text-center d-none d-md-table-cell">{{emp.employmentName}}</td>
+              <td class="text-center d-none d-md-table-cell">{{emp.phoneNum}}</td>
+              <td class="text-center d-none d-md-table-cell">{{emp.email}}</td>
             </tr> 
           </tbody>
-          <tbody>
-            <tr v-for="a1 in server_data.board_list" :key="a1" >
-              <td class="text-center d-none d-md-table-cell">{{a1.content_idx}}</td><!--기본급으로 받으세요 -->
-              <td @click="go_board_read(a1.content_idx)">{{a1.content_subject}}</td><!--국민연금으로 데이터 받으세요-->
-              <td class="text-center d-none d-md-table-cell">{{a1.content_writer_name}}</td>
-              <td class="text-center d-none d-md-table-cell">{{a1.content_writer_name}}</td>
-              <td class="text-center d-none d-md-table-cell">{{a1.content_writer_name}}</td>
-              <td class="text-center d-none d-md-table-cell">{{a1.content_writer_name}}</td>
-              <td class="text-center d-none d-md-table-cell">{{a1.content_writer_name}}</td>
-              <td class="text-center d-none d-md-table-cell">{{a1.content_writer_name}}</td>
-              <td class="text-center d-none d-md-table-cell">{{a1.content_date}}</td><!--실급여로 데이터 받으세요 -->
-              <td class="text-center d-none d-md-table-cell"><button class ="btn btn-sucess" style = "background-color: #2ab2aa; text-color:white;">급여명세</button></td>
-            </tr>
-          </tbody>
+
         </table>
 
         <div class="d-none d-md-block">
@@ -83,20 +53,17 @@
           </ul>
         </div>
 
-        <!--글쓰기--> 
-        <div class="text-right" v-if='$store.state.user_login_chk == true'>
-          <router-link :to="'/board_write/' + $route.params.board_idx" class="btn btn-primary">글쓰기</router-link>
-        </div>
       </div>
     </div>
   </div>
 </template>
 <style>
-#board_list > tbody > tr {
+#zero_config > tbody > tr {
   cursor: pointer;
 }
 </style>
 <script>
+
 module.exports = {
   //템플릿 태그에서 여기에 있는 정보나 함수를 이용할 수 있음
   data: function() {
@@ -106,16 +73,9 @@ module.exports = {
     };
   },
   methods: {
-    go_board_read: function(content_idx) {
-      alert(content_idx)	
-      //this.$router router 객체 불러오기
-      this.$router.push('/board_read/' + this.$route.params.board_idx + '/' + this.$route.params.page + '/' + content_idx) //.push에 파라미터값에 알맞는 컴포넌트를 찾아 그 컴포넌트 주소로 이동시켜줌
-    },
-    get_board_data: function() {
-      var params = new URLSearchParams();
-      params.append("board_idx", this.$route.params.board_idx);
-      params.append("page", this.$route.params.page)
-      axios.post("get_board_list.do", params).then((response)=>{
+    getEmpList: function() {
+      //console.log(contextPath);
+      axios.post(contextPath+"/ajax/getEmpList.hari").then((response)=>{
       console.log(response.data)
         this.server_data=response.data
       })
@@ -123,11 +83,11 @@ module.exports = {
   },
   created() {
     //alert(this.$route.params.board_idx) //주소를 관리하는 객체 route, 주소가 바뀌면 route객체도 변경됨, route객체의 변경을 감지해줘야함
-    this.get_board_data();
+    this.getEmpList();
   },
   watch: {
     $route(to, from) {
-      this.get_board_data();
+      this.getEmpList();
     }
   }
 };

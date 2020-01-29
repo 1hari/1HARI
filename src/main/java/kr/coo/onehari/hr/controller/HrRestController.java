@@ -591,4 +591,12 @@ public class HrRestController {
 			}
 		return root.toJSONString();
 	}
+	
+	
+	//사원리스트 가져오기 김정하 2020. 1. 29
+	@RequestMapping("getEmpList.hari")
+	public List<EmpDto> empList(){
+		List<EmpDto> empList = empSercive.empList();
+		return empList;
+	}
 }

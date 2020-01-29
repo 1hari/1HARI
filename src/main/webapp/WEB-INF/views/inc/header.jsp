@@ -670,6 +670,13 @@ function themeChange(formData){
 						</a>
 						
 						<div class="dropdown-menu dropdown-menu-right animated">
+							<se:authentication property="name" var="LoginUser" />
+							<p class="dropdown-item">
+								${LoginUser} 님 반갑습니다.
+							</p>
+							
+							<div class="dropdown-divider"></div>
+							
                             <a class="dropdown-item" href="${pageContext.request.contextPath}/1hariMy/myInfo.hari">
 								<i class="ti-user m-r-5 m-l-5"></i> 내 프로필
 							</a> <!--경로 1hariMy 폴더안에 myInfo.jsp (controller myInfo.hari를) -->

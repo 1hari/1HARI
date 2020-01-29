@@ -15,65 +15,9 @@ var router = new VueRouter({
 		{
 			path : '/',
 			component : httpVueLoader(contextPath+'/resources/vue/components/team/teamMain.vue')
-		},
-		{
-			path : '/board_main/:board_idx/:page',
-			component : httpVueLoader(contextPath+'/resources/vue/components/board/board_main.vue')
-		},
-		{
-			path : '/board_read/:board_idx/:page/:content_idx',
-			component : httpVueLoader(contextPath+'/resources/vue/components/board/board_read.vue')
-		},
-		{
-			path : '/board_modify/:board_idx/:page/:content_idx',
-			component : httpVueLoader(contextPath+'/resources/vue/components/board/board_modify.vue')
-		},
-		{
-			path : '/board_delete/:board_idx/:page/:content_idx',
-			beforeEnter(to, from, next){ //이전에 어디였고 어디를 요청했음, 함수
-				//to => :board_idx/:page/:content_idx' 파라미터들의 값을 갖고있음
-				var params = new URLSearchParams()
-				params.append('content_idx', to.params.content_idx)
-
-				axios.post('delete_content.do', params).then((response) =>{
-					alert('삭제되었습니다.')
-					next('/board_main/' + to.params.board_idx+'/'+to.params.page)
-				})
-			}
-		},
-		{
-			path : '/board_write/:board_idx',
-			component : httpVueLoader(contextPath+'/resources/vue/components/board/board_write.vue')
-		},
-		{
-			path : '/login',
-			component : httpVueLoader(contextPath+'/resources/vue/components/user/login.vue')
-		},
-		{
-			path : '/join',
-			component : httpVueLoader(contextPath+'/resources/vue/components/user/join.vue')
-		},
-		{
-			path : '/user_modify',
-			component : httpVueLoader(contextPath+'/resources/vue/components/user/user_modify.vue')
-		},
-		{
-			path : '/logout',
-			beforeEnter(to, from, next){ //이전에 어디였고 어디를 요청했음, 함수
-				alert('로그아웃 되었습니다')
-				
-				store.state.user_login_chk = false
-				store.state.user_id = ''
-				store.state.user_name = ''
-				store.state.user_idx = 0
-				
-				sessionStorage.clear()
-				
-				next('/')
-			}
 		}
 	],
-	scrollBehavior(to, from, savedPosition){
+	scrollBehavior(to, from, savedPosition){ //이전화면으로 돌아갈때 스크롤 위치 기억
 		return {
 			x : 0,
 			y : 0

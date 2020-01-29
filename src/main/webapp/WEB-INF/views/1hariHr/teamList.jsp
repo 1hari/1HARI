@@ -8,7 +8,7 @@
 
 <script>
 	var contextPath = '${pageContext.request.contextPath}';
-	console.log(contextPath);
+	//console.log(contextPath);
 </script>
 
 <script src="${pageContext.request.contextPath}/resources/vue/js/vue-router.js"></script>
