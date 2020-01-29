@@ -4,7 +4,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
   <script type="text/javascript">
- // swal("success", "출근 등록되었습니다.", "success");
 	swal({
 		text: "권한이 없는 페이지입니다.",
 		icon: "warning",

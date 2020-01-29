@@ -54,11 +54,6 @@
             </tr>
           </tbody>
         </table>
-
-        <!--글쓰기--> 
-        <div class="text-right" v-if='$store.state.user_login_chk == true'>
-          <router-link :to="'/board_write/' + $route.params.board_idx" class="btn btn-primary">글쓰기</router-link>
-        </div>
       </div>
     </div>
       <form action="getPayPopUp.hari" method="POST" id='form'>
@@ -87,13 +82,8 @@ module.exports = {
   },
   methods: {
     payRead: function(year, month) {
-      //this.$router router 객체 불러오기
-      //this.$router.push('/payRead/' + year + '/' + month) //.push에 파라미터값에 알맞는 컴포넌트를 찾아 그 컴포넌트 주소로 이동시켜줌
        var url ="getPayPopUp.hari?year=" + year +"&month="+ month;
        open(url, "급여 명세서", "statusber=no, scrollbar=no, menuber=no, width=1000, height=1100 1000=500 left=530");
-      // $('#year').val(year)
-      // $('#month').val(month)
-      // $('#form').submit()
     },
     getPayList: function() {
 
@@ -104,8 +94,7 @@ module.exports = {
          params.append("year", event.target.value)
        }
 
-		axios.post(contextPath + "/ajax/getPayList.hari", params).then((response)=>{
-      //console.log(response.data);
+      axios.post(contextPath + "/ajax/getPayList.hari", params).then((response)=>{
       
       this.server_data=response.data
       this.totalDeduction=numeral(this.server_data.payList[0].payNPension + this.server_data.payList[0].payHInsurance + this.server_data.payList[0].payCInsurance +  this.server_data.payList[0].empInsurance + this.server_data.payList[0].payIncomeTax + this.server_data.payList[0].payLIncomeTax).format( '₩0,0' )
@@ -123,33 +112,19 @@ module.exports = {
         pay.payLIncomeTax = numeral(pay.payLIncomeTax).format( '₩0,0' )
         this.splitPayMonth.push(pay.payMonth.split("-"))
         console.log(this.splitPayMonth)
-		});
-		// console.log(this.splitPayMonth)
-		})
+      });
+      })
      
     },
-    // onChange: function(event){
-    //   console.log(event.target.value);
-    //   var params = new URLSearchParams();
-    //   params.append("year", event.target.value)
-    //   axios.post("getPayListYear.hari", params).then((response)=>{
-    //     this.server_data=response.data
-    //   })
-    // }
   },
   created() {
     // alert(this.$route.params.board_idx) //주소를 관리하는 객체 route, 주소가 바뀌면 route객체도 변경됨, route객체의 변경을 감지해줘야함
     this.getPayList();
   },
-  watch: {
-    $route(to, from) {
-      this.getPayList();
-    }
-  }
 };
 </script>
 <style>
-	.table td{
-		padding: 3px
-		}
+   .table td{
+      padding: 3px
+      }
 </style>

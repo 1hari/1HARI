@@ -9,10 +9,8 @@
 	//형남 0110 인증번호 창
 		$(function(){
 			var authNum = '${authNum}';
-			console.log(authNum);
 			
 			$('#authNumCheck').click(function() {
-				//console.log($('#userAuthNum').val());
 				
 				//인증번호 입력값 체크 
 				if($('#userAuthNum').val() == null){

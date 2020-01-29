@@ -1,17 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!-- this page js -->
-<%-- <script src="${pageContext.request.contextPath}/resources/hari/assets/libs/flot/jquery.flot.js"></script> --%>
-<%-- <script src="${pageContext.request.contextPath}/resources/hari/assets/libs/flot/jquery.flot.pie.js"></script> --%>
-<%-- <script src="${pageContext.request.contextPath}/resources/hari/assets/libs/chart/jquery.flot.pie.min.js"></script> --%>
 <script async="" src="//www.google-analytics.com/analytics.js"></script>
 <script src="https://www.chartjs.org/dist/2.9.3/Chart.min.js"></script>
 
 <script type="text/javascript">
 
 'use strict';
-
 window.chartColors = {
 	red: 'rgb(255, 99, 132)',
 	orange: 'rgb(255, 159, 64)',
@@ -223,7 +218,6 @@ $(function(){
 	dataType: "json",
 	success: function(getSalYear) {
 		salYearList=getSalYear
-		console.log(getSalYear)
 		let years = "";
 		$.each(getSalYear, function(index, element) {
 			if (index==0) {
@@ -246,7 +240,6 @@ $(function(){
 			success: function(getTeamSalList) {
 
 				var labels=[];
-				console.log(getTeamSalList)
 				//java에서 못넣은 색 추가.. 제일 윗쪽에 chart.js에서 준 컬러값 배열 만들어놨음
 				for(var i =0; i<getTeamSalList.length; i++){
 					getTeamSalList[i].backgroundColor=color(colorArray[i]).alpha(0.5).rgbString();
@@ -284,7 +277,6 @@ $(function(){
 	}).then((getSalYear) =>{
 		$("#chartSelect").change(function(){
 			window.myBar.destroy();
-			console.log($('#chartSelect').val())
 			$.ajax({
 				url: "${pageContext.request.contextPath}/ajax/getTeamSalList.hari",
 				type: "post",
@@ -293,7 +285,6 @@ $(function(){
 						},
 				dataType: "json",
 				success: function(getTeamSalList) {
-					console.log(getTeamSalList)
 					//java에서 못넣은 색 추가.. 제일 윗쪽에 chart.js에서 준 컬러값 배열 만들어놨음
 					for(var i =0; i<getTeamSalList.length; i++){
 						getTeamSalList[i].backgroundColor=color(colorArray[i]).alpha(0.5).rgbString();

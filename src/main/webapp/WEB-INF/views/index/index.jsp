@@ -10,9 +10,6 @@
 	$(function() {
 		//로그인 실패 여부 확인 및 에러메세지 출력
 		var error ='${error}'
-			//console.log(no !="null" ) true 
-			//console.log(no.trim() != '') false
-			console.log(error)
 			if(error !="null" && error.trim() != ''){ //에러메세지가 null이 아니거나, 빈값이 아니면
 				var errorSpl=error.split(',')
 				swal({

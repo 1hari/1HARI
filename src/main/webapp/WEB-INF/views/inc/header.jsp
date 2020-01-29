@@ -16,7 +16,6 @@ $(function(){
 				if (!value) return;
 				if (opacity) value += ', ' + opacity;
 				if (typeof console === 'object') {
-					//console.log(value.split(",")[0]);
 					var itemArray5=document.querySelectorAll('#theme');
 						
 					for(var i=0;i<itemArray5.length;i++){
@@ -33,7 +32,6 @@ $(function(){
 	//이미지 파일 여부 판단
 	function checkImageType(fileName){
 	    var pattern = /jpg|gif|png|jpeg/gi;
-	    //console.log(fileName.match(pattern));
 	    return fileName.match(pattern);
 	}
 	
@@ -48,8 +46,6 @@ $(function(){
 	    
 	    var files = e.originalEvent.dataTransfer.files; // 드래그한 파일들
 	    imgfile = files[0]; // 첫번째 첨부파일
-	    console.log(imgfile);
-	    console.log("드래그앤드롭으로 파일을 담았지");
 	    formData = new FormData(); // 폼데이터 객체    
 	    formData.append("file", imgfile); // 첨부파일 추가
 	    
@@ -62,7 +58,6 @@ $(function(){
 	        contentType: false,
 	        // ajax  요청이 성공적으로 처리되면
 	        success: function(filenamejson){
-	            //console.log(filenamejson);
 	            if(checkImageType(filenamejson.fileName)){
 	            	$('#filename').val(filenamejson.fileName);
 		        }else {
@@ -79,15 +74,11 @@ $(function(){
 	//선택완료 클릭
 	$('#themeChoice').click(function(){
 		formData = new FormData();
-		console.log(imgfile);
-		console.log("선택완료!!!!")
 		if(imgfile != null){
-			console.log("if문 탔다")
 			formData.append("file",imgfile);
 		}
 		formData.append("themeColor", $('#hue-demo').val()); //선택한 색상 추가
 		themeChange(formData);
-		console.log(imgfile);
 		imgfile = null;
 	});
 
@@ -308,7 +299,7 @@ $(function(){
 				} else if(isStart == false && isEnd==true) {
 					swal("warning", "근태오류, 관리자에게 문의해주세요.", "warning")
 				} else{
-					console.log('아무것도 못탐');
+					swal("warning", "근태오류, 관리자에게 문의해주세요.", "warning")
 				}
 			}
 		});
@@ -506,7 +497,6 @@ function getMyTheme(){
 		type: "post",
 		dataType: "json",
 		success: function(theme) {
-			//console.log(theme);
 			//테마색 변경
 			
 			var itemArray=document.querySelectorAll('#theme');
@@ -533,7 +523,6 @@ function themeChange(formData){
         contentType: false,
         // ajax 업로드 요청이 성공적으로 처리되면
         success: function(resultString){
-           // console.log(resultString.trim());
             if(resultString.trim() == "true"){
             	swal({
 					text: "변경이 완료되었습니다.",
@@ -541,7 +530,6 @@ function themeChange(formData){
 					button: "닫기"
 				}).then((value) => {
 					getMyTheme();
-					console.log("get 끝");
 					formData.delete("file");
 					
 					$('#filename').val("");
