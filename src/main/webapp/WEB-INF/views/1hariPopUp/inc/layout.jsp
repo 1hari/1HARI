@@ -37,6 +37,8 @@
     <script src="${pageContext.request.contextPath}/resources/hari/dist/js/custom.min.js"></script>
     <!--This page JavaScript -->
     <!-- <script src="${pageContext.request.contextPath}/resources/hari/dist/js/pages/dashboards/dashboard1.js"></script> -->
+    <!-- 숫자, 날짜 등 포매팅해주는 JS -->
+	<script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
     
     <!-- SweetAlert -->
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

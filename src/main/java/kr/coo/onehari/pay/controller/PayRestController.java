@@ -19,7 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
-@RequestMapping("/1hariPay")
+@RequestMapping("/ajax")
 public class PayRestController {
 
 	@Autowired
