@@ -2,7 +2,15 @@
 	pageEncoding="UTF-8"%>
 <script type="text/javascript">
 $(function(){
-
+    //총 근무일
+    $.ajax({
+        url: "${pageContext.request.contextPath}/ajax/getTotalTA.hari",
+        type: "post",
+        dataType: "json",
+        success: function(totalTA) {
+            $('#totalTA').append(totalTA);
+        }
+    });
 
 
 });
@@ -24,7 +32,7 @@ $(function(){
 	<div class="page-breadcrumb">
 		<div class="row">
 			<div class="col-12 d-flex no-block align-items-center">
-				<h4 class="page-title">근태 관리</h4>
+				<h4 class="page-title">근태 현황</h4>
 				<div class="ml-auto text-right"></div>
 			</div>
 		</div>
@@ -37,7 +45,7 @@ $(function(){
 			<div class="col-md-12">
 					<div class="row row-card-no-pd">
 						<div class="col-sm-6 col-md-3">
-							<div class="card card-stats card-round" style ="border-radius:10px;  box-shadow :5px 5px #999999;  ">
+							<div class="card card-stats card-round" style ="border-radius:10px;  box-shadow :5px 5px #999999; border: 2px groove #999999; ">
 								<div class="card-body ">
 									<div class="row">
 										<div class="col-5">
@@ -56,7 +64,7 @@ $(function(){
 							</div>
 						</div>
 						<div class="col-sm-6 col-md-3">
-							<div class="card card-stats card-round" style ="border-radius:10px;  box-shadow :5px 5px #999999; ">
+							<div class="card card-stats card-round" style ="border-radius:10px;  box-shadow :5px 5px #999999;  border: 2px groove #999999;">
 								<div class="card-body">
 									<div class="row">
 										<div class="col-5">
@@ -75,7 +83,7 @@ $(function(){
 							</div>
 						</div>
 						<div class="col-sm-6 col-md-3">
-							<div class="card card-stats card-round" style ="border-radius:10px;  box-shadow :5px 5px #999999; ">
+							<div class="card card-stats card-round" style ="border-radius:10px;  box-shadow :5px 5px #999999; border: 2px groove #999999; ">
 								<div class="card-body" >
 									<div class="row">
 										<div class="col-5">
@@ -94,7 +102,7 @@ $(function(){
 							</div>
 						</div>
 						<div class="col-sm-6 col-md-3">
-							<div class="card card-stats card-round" style ="border-radius:10px; box-shadow :5px 5px #999999; ">
+							<div class="card card-stats card-round" style ="border-radius:10px; box-shadow :5px 5px #999999;  border: 2px groove #999999;">
 								<div class="card-body" >
 									<div class="row">
 										<div class="col-5">
@@ -128,7 +136,7 @@ $(function(){
 		<!-- 컨텐츠 로우 -->
 		<!-- ============================================================== -->
 
-		<div class="row" style ="width:100%; height:100%;">
+		<div class="row" style ="width:100%; height:80%;">
 			<div class="col-md-12">
 				<div class="card"  style ="border-radius:10px;">
 
@@ -138,7 +146,7 @@ $(function(){
 
 							<!--캘린더 -->
 							<div class="col-lg-12">
-								<div class="card-body b-l calender-sidebar" style ="border-radius:10px; box-shadow :5px 5px #999999; ">
+								<div class="card-body b-l calender-sidebar" style ="height:100%; border-radius:10px; box-shadow :3px 3px #999999;  border: 2px groove #999999;">
 									<div id="calendar"></div>
 								</div>
 							</div>

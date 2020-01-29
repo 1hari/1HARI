@@ -154,15 +154,7 @@ $(function(){
 		}
 	},1000);
 	
-	//총 근무일
-	$.ajax({
-		url: "${pageContext.request.contextPath}/ajax/getTotalTA.hari",
-		type: "post",
-		dataType: "json",
-		success: function(totalTA) {
-			$('#totalTA').append(totalTA);
-		}
-	});
+
 
 	//출근버튼 + 캘린더
 	$('#startWork').click(function() {
@@ -286,7 +278,6 @@ $(function(){
 // 		}
 	})
 
-
 	//오늘 출근기록 체크
 	$.ajax({
 		url: "${pageContext.request.contextPath}/ajax/todayStartWorkCheck.hari",
@@ -322,6 +313,7 @@ $(function(){
 			}
 		});
 	})
+
 	
 	//오늘 퇴근기록 체크
 	$.ajax({

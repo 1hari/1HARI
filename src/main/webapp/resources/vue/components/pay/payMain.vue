@@ -39,8 +39,8 @@
               <td class="text-center d-none d-md-table-cell">{{pay.empInsurance}}</td>
               <td class="text-center d-none d-md-table-cell">{{pay.payIncomeTax}}</td>
               <td class="text-center d-none d-md-table-cell">{{pay.payLIncomeTax}}</td>
-              <td class="text-center d-none d-md-table-cell">{{splitPayMonth[index][0]}}</td><!--실급여로 데이터 받으세요 -->
-              <td class="text-center d-none d-md-table-cell">{{splitPayMonth[index][1]}}</td><!--실급여로 데이터 받으세요 -->
+              <td class="text-center d-none d-md-table-cell">{{totalDeduction}}</td><!--실급여로 데이터 받으세요 -->
+              <td class="text-center d-none d-md-table-cell">{{realAmount}}</td><!--실급여로 데이터 받으세요 -->
               <td class="text-center d-none d-md-table-cell"><button class ="btn btn-sucess" style = "background-color: #2ab2aa; text-color:white; height:70%;" @click="payRead(splitPayMonth[index][0],splitPayMonth[index][1])">급여명세</button></td>
             </tr>
           </tbody>
@@ -81,6 +81,8 @@ module.exports = {
       //여기안에 있는 멤버들을 템플릿 안에서 사용할 수 있음
       server_data: {},
       splitPayMonth:[],
+      totalDeduction:'',
+      realAmount:'',
     };
   },
   methods: {
@@ -104,7 +106,10 @@ module.exports = {
 
 		axios.post(contextPath + "/ajax/getPayList.hari", params).then((response)=>{
       //console.log(response.data);
+      
       this.server_data=response.data
+      this.totalDeduction=numeral(this.server_data.payList[0].payNPension + this.server_data.payList[0].payHInsurance + this.server_data.payList[0].payCInsurance +  this.server_data.payList[0].empInsurance + this.server_data.payList[0].payIncomeTax + this.server_data.payList[0].payLIncomeTax).format( '₩0,0' )
+      this.realAmount=numeral(this.server_data.payList[0].basicSal -  (this.server_data.payList[0].payNPension + this.server_data.payList[0].payHInsurance + this.server_data.payList[0].payCInsurance +  this.server_data.payList[0].empInsurance + this.server_data.payList[0].payIncomeTax + this.server_data.payList[0].payLIncomeTax)).format( '₩0,0' )
       pays=response.data.payList
       console.log(pays);
       this.splitPayMonth=[]

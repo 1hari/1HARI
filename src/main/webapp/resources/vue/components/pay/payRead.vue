@@ -1,11 +1,11 @@
 <template>
-  <div class="container" style="margin-top:0">
+  <div class="container" style="margin-top:100px">
     <div class="row">
       <div class="col-sm-1"></div>
       <div class="col-sm-8">
-      <button type="button" id="printPay" class="btn btn-outline-secondary" @click="print()">출력하기</button>
-        <div class="card shadow">
-<table cellspacing="0" style="border-collapse:collapse; width:800px">
+        <div class="card shadow" id="printMe">
+			<a href="javascript:printIt(document.getElementById('printme').innerHTML)">Print</a><p>
+<table cellspacing="0" style="border-collapse:collapse; width:800px" id="printme">
 	<tbody>
 		<tr>
 			<td style="background-color:white; border-bottom:none; border-left:none; border-right:none; border-top:none; height:35px; text-align:center; vertical-align:middle; white-space:nowrap; width:33px"><span style="font-size:12px"><span style="font-family:돋움,monospace">　</span></span></td>
@@ -53,7 +53,7 @@
 		<tr>
 			<td style="background-color:white; border-bottom:none; border-left:none; border-right:none; border-top:none; height:29px; text-align:center; vertical-align:middle; white-space:nowrap"><span style="font-size:12px"><span style="font-family:돋움,monospace">　</span></span></td>
 			<td style="background-color:white; border-bottom:none; border-left:none; border-right:none; border-top:none; text-align:center; vertical-align:middle; white-space:nowrap"><span style="font-size:12px"><span style="font-family:돋움,monospace">　</span></span></td>
-			<td colspan="13" rowspan="2" style="background-color:white; border-bottom:none; border-left:none; border-right:.7px solid black; border-top:none; text-align:center; vertical-align:middle; white-space:nowrap"><span style="font-size:19px"><strong><span style="font-family:&quot;맑은 고딕&quot;,monospace">{{year}} 년&nbsp;{{month}}&nbsp;월</span></strong></span></td>
+			<td colspan="13" rowspan="2" style="background-color:white; border-bottom:none; border-left:none; border-right:.7px solid black; border-top:none; text-align:center; vertical-align:middle; white-space:nowrap"><span style="font-size:19px"><strong><span style="font-family:&quot;맑은 고딕&quot;,monospace">{{this.$route.params.year}} 년&nbsp;{{this.$route.params.month}}&nbsp;월</span></strong></span></td>
 			<td colspan="2" style="background-color:white; border-bottom:none; border-left:none; border-right:none; border-top:none; text-align:center; vertical-align:middle; white-space:nowrap"><span style="font-size:13px"><span style="font-family:돋움,monospace">입사일</span></span></td>
 			<td colspan="5" style="background-color:white; border-bottom:none; border-left:none; border-right:.7px solid black; border-top:none; text-align:center; vertical-align:middle; white-space:nowrap"><span style="font-size:13px"><strong><span style="font-family:돋움,monospace">　{{emp.hireDate}}</span></strong></span></td>
 			<td style="background-color:white; border-bottom:none; border-left:none; border-right:none; border-top:none; text-align:center; vertical-align:middle; white-space:nowrap"><span style="font-size:12px"><span style="font-family:돋움,monospace">　</span></span></td>
@@ -305,7 +305,7 @@
 		<tr>
 			<td style="background-color:white; border-bottom:none; border-left:none; border-right:none; border-top:none; height:35px; text-align:center; vertical-align:middle; white-space:nowrap"><span style="font-size:12px"><span style="font-family:돋움,monospace">　</span></span></td>
 			<td style="background-color:white; border-bottom:none; border-left:none; border-right:none; border-top:none; text-align:center; vertical-align:middle; white-space:nowrap"><span style="font-size:12px"><span style="font-family:돋움,monospace">　</span></span></td>
-			<td colspan="20" style="background-color:white; border-bottom:none; border-left:none; border-right:none; border-top:none; text-align:center; vertical-align:middle; white-space:nowrap"><span style="font-size:16px"><span style="font-family:돋움,monospace">{{currYear}} 년&nbsp;{{currMonth}} 월&nbsp;{{currDay}} 일</span></span></td>
+			<td colspan="20" style="background-color:white; border-bottom:none; border-left:none; border-right:none; border-top:none; text-align:center; vertical-align:middle; white-space:nowrap"><span style="font-size:16px"><span style="font-family:돋움,monospace">{{this.$route.params.year}} 년&nbsp;{{this.$route.params.month}} 월&nbsp;{{day[2]}} 일</span></span></td>
 			<td style="background-color:white; border-bottom:none; border-left:none; border-right:none; border-top:none; text-align:center; vertical-align:middle; white-space:nowrap"><span style="font-size:12px"><span style="font-family:돋움,monospace">　</span></span></td>
 			<td style="background-color:white; border-bottom:none; border-left:none; border-right:none; border-top:none; text-align:center; vertical-align:middle; white-space:nowrap"><span style="font-size:12px"><span style="font-family:돋움,monospace">　</span></span></td>
 		</tr>
@@ -360,26 +360,6 @@
   </div>
 </template>
 <script>
-//현재 날짜 구하는 포맷팅
-var date = new Date(); 
-var cYear = date.getFullYear(); 
-var cMonth = new String(date.getMonth()+1); 
-var cDay = new String(date.getDate()); 
-
-// 한자리수일 경우 0을 채워준다. 
-if(cMonth.length == 1){ 
-  cMonth = "0" + cMonth; 
-} 
-if(cDay.length == 1){ 
-  cDay = "0" + cDay; 
-} 
-$(function(){
-	//출력버튼
-	$('#printPay').click(function(){
-		console.log('클릭')
-		window.print()
-	})
-})
 module.exports = {
   data: function() {
     return {
@@ -389,27 +369,15 @@ module.exports = {
       emp:{},
 	  day:'',
 	  CEO:{},
-	  year:'',
-	  month:'',
-	  currYear:'',
-	  currMonth:'',
-	  currDay:'',
     }
   },
   created() {
-
-	console.log(month)
-	this.year=year
-	this.month=month
-	this.currYear=cYear
-	this.currMonth=cMonth
-	this.currDay=cDay
-
     var params = new URLSearchParams();
-	params.append('year', year)
-	params.append('month', month)
-    axios.post(contextPath + "/ajax/getPayList.hari", params).then((response)=>{
-	  this.server_data=response.data
+	params.append('year', this.$route.params.year)
+	params.append('month', this.$route.params.month)
+    axios.post('getPayList.hari', params).then((response)=>{
+      this.server_data=response.data
+      this.day=this.server_data.payList[0].payMonth.split("-")
       //실수령액
       this.totalDeduction=numeral(this.server_data.payList[0].payNPension + this.server_data.payList[0].payHInsurance + this.server_data.payList[0].payCInsurance +  this.server_data.payList[0].empInsurance + this.server_data.payList[0].payIncomeTax + this.server_data.payList[0].payLIncomeTax).format( '₩0,0' )
       this.realAmount=numeral(this.server_data.payList[0].basicSal -  (this.server_data.payList[0].payNPension + this.server_data.payList[0].payHInsurance + this.server_data.payList[0].payCInsurance +  this.server_data.payList[0].empInsurance + this.server_data.payList[0].payIncomeTax + this.server_data.payList[0].payLIncomeTax)).format( '₩0,0' )
@@ -420,25 +388,20 @@ module.exports = {
         this.server_data.payList[0].empInsurance = numeral(this.server_data.payList[0].empInsurance).format( '₩0,0' )
         this.server_data.payList[0].payIncomeTax = numeral(this.server_data.payList[0].payIncomeTax).format( '₩0,0' )
         this.server_data.payList[0].payLIncomeTax = numeral(this.server_data.payList[0].payLIncomeTax).format( '₩0,0' )
+		
     })
     
-    axios.post(contextPath + '/ajax/getEmp.hari', params).then((response)=>{
+    axios.post('getEmp.hari', params).then((response)=>{
       this.emp=response.data.emp
       console.log(this.emp)
 	})
 	
-    axios.post(contextPath + '/ajax/getCEO.hari', params).then((response)=>{
+    axios.post('getCEO.hari', params).then((response)=>{
       this.CEO=response.data.CEO
       console.log(this.CEO)
     })
   },
-  methods: {
-	print: function() {
-		window.print()
-       }
-	}
-  }
-
+};
 
 
 
