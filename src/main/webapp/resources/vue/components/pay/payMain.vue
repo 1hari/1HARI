@@ -39,8 +39,8 @@
               <td class="text-center d-none d-md-table-cell">{{pay.empInsurance}}</td>
               <td class="text-center d-none d-md-table-cell">{{pay.payIncomeTax}}</td>
               <td class="text-center d-none d-md-table-cell">{{pay.payLIncomeTax}}</td>
-              <td class="text-center d-none d-md-table-cell">{{splitPayMonth[index][0]}}</td><!--실급여로 데이터 받으세요 -->
-              <td class="text-center d-none d-md-table-cell">{{splitPayMonth[index][1]}}</td><!--실급여로 데이터 받으세요 -->
+              <td class="text-center d-none d-md-table-cell">{{totalDeduction}}</td><!--실급여로 데이터 받으세요 -->
+              <td class="text-center d-none d-md-table-cell">{{realAmount}}</td><!--실급여로 데이터 받으세요 -->
               <td class="text-center d-none d-md-table-cell"><button class ="btn btn-sucess" style = "background-color: #2ab2aa; text-color:white; height:70%;" @click="payRead(splitPayMonth[index][0],splitPayMonth[index][1])">급여명세</button></td>
             </tr>
           </tbody>
@@ -61,7 +61,12 @@
         </div>
       </div>
     </div>
+      <form action="getPayPopUp.hari" method="POST" id='form'>
+        <input type="text" hidden="hidden" name="year" id="year" value="">
+        <input type="text" hidden="hidden" name="month" id="month" value="">
+      </form>
   </div>
+
 </template>
 <style>
 #board_list > tbody > tr {
@@ -76,23 +81,35 @@ module.exports = {
       //여기안에 있는 멤버들을 템플릿 안에서 사용할 수 있음
       server_data: {},
       splitPayMonth:[],
+      totalDeduction:'',
+      realAmount:'',
     };
   },
   methods: {
     payRead: function(year, month) {
       //this.$router router 객체 불러오기
-      this.$router.push('/payRead/' + year + '/' + month) //.push에 파라미터값에 알맞는 컴포넌트를 찾아 그 컴포넌트 주소로 이동시켜줌
+      //this.$router.push('/payRead/' + year + '/' + month) //.push에 파라미터값에 알맞는 컴포넌트를 찾아 그 컴포넌트 주소로 이동시켜줌
+       var url ="getPayPopUp.hari?year=" + year +"&month="+ month;
+       open(url, "급여 명세서", "statusber=no, scrollbar=no, menuber=no, width=1000, height=1100 1000=500 left=530");
+      // $('#year').val(year)
+      // $('#month').val(month)
+      // $('#form').submit()
     },
     getPayList: function() {
+
        var params = new URLSearchParams();
        if(event.target.value ==undefined){
         params.append("year", "init")
        }else {
          params.append("year", event.target.value)
        }
-		axios.post("getPayList.hari", params).then((response)=>{
+
+		axios.post(contextPath + "/ajax/getPayList.hari", params).then((response)=>{
       //console.log(response.data);
+      
       this.server_data=response.data
+      this.totalDeduction=numeral(this.server_data.payList[0].payNPension + this.server_data.payList[0].payHInsurance + this.server_data.payList[0].payCInsurance +  this.server_data.payList[0].empInsurance + this.server_data.payList[0].payIncomeTax + this.server_data.payList[0].payLIncomeTax).format( '₩0,0' )
+      this.realAmount=numeral(this.server_data.payList[0].basicSal -  (this.server_data.payList[0].payNPension + this.server_data.payList[0].payHInsurance + this.server_data.payList[0].payCInsurance +  this.server_data.payList[0].empInsurance + this.server_data.payList[0].payIncomeTax + this.server_data.payList[0].payLIncomeTax)).format( '₩0,0' )
       pays=response.data.payList
       console.log(pays);
       this.splitPayMonth=[]
