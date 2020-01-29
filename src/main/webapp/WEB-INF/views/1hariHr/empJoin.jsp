@@ -482,7 +482,7 @@
 		if (check1 != check2) // 주민등록번호가 틀릴 때의 처리
 		{
 			swal({
-				text: "주민등록번호에 숫자만 입력해주세요.",
+				text: "주민등록번호를 확인해주세요.",
 				icon: "warning",
 				button: "닫기"
 			});
