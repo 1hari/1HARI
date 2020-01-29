@@ -116,7 +116,7 @@
 
 			// Make the editing area bigger than default.
 			height : 400,
-			width : 1025
+			width : 1000
 			
 		});
 

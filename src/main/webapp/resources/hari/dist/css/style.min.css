@@ -7,7 +7,7 @@
 @import url(icons/themify-icons/themify-icons.css);
 @import url(icons/material-design-iconic-font/css/materialdesignicons.min.css);
 
-/* Ã¬Â²Â¨Ã«Â¶â‚¬Ã­Å’Å’Ã¬ÂÂ¼Ã¬Ââ€ž Ã«â€œÅ“Ã«Å¾ËœÃªÂ·Â¸Ã­â€¢Â  Ã¬ËœÂÃ¬â€”Â­Ã¬ÂËœ Ã¬Å Â¤Ã­Æ’â‚¬Ã¬ÂÂ¼ */
+/* ÃƒÂ¬Ã‚Â²Ã‚Â¨ÃƒÂ«Ã‚Â¶Ã¢â€šÂ¬ÃƒÂ­Ã…â€™Ã…â€™ÃƒÂ¬Ã‚ÂÃ‚Â¼ÃƒÂ¬Ã‚ÂÃ¢â‚¬Å¾ ÃƒÂ«Ã¢â‚¬Å“Ã…â€œÃƒÂ«Ã…Â¾Ã‹Å“ÃƒÂªÃ‚Â·Ã‚Â¸ÃƒÂ­Ã¢â‚¬Â¢Ã‚Â  ÃƒÂ¬Ã‹Å“Ã‚ÂÃƒÂ¬Ã¢â‚¬â€Ã‚Â­ÃƒÂ¬Ã‚ÂÃ‹Å“ ÃƒÂ¬Ã…Â Ã‚Â¤ÃƒÂ­Ã†â€™Ã¢â€šÂ¬ÃƒÂ¬Ã‚ÂÃ‚Â¼ */
 .fileDrop {
     width: 100%;
     height: 70px;
@@ -2954,8 +2954,8 @@ fieldset:disabled a.btn {
 
 .btn-primary.focus,
 .btn-primary:focus {
-	-webkit-box-shadow: 0 0 0 0.2rem rgba(116, 96, 238, 0.5);
-	box-shadow: 0 0 0 0.2rem rgba(116, 96, 238, 0.5)
+	-webkit-box-shadow: #999999;
+	box-shadow: #999999
 }
 
 .btn-primary.disabled,
@@ -2969,15 +2969,15 @@ fieldset:disabled a.btn {
 .btn-primary:not(:disabled):not(.disabled):active,
 .show>.btn-primary.dropdown-toggle {
 	color: #fff;
-	background-color: #4c32e9;
-	border-color: #4226e8
+	background-color: #999999;
+	border-color: #999999
 }
 
 .btn-primary:not(:disabled):not(.disabled).active:focus,
 .btn-primary:not(:disabled):not(.disabled):active:focus,
 .show>.btn-primary.dropdown-toggle:focus {
-	-webkit-box-shadow: 0 0 0 0.2rem rgba(116, 96, 238, 0.5);
-	box-shadow: 0 0 0 0.2rem rgba(116, 96, 238, 0.5)
+	-webkit-box-shadow: #999999;
+	box-shadow: #999999
 }
 
 .btn-secondary {
@@ -5721,7 +5721,7 @@ input[type=submit].btn-block {
 	padding: 0.5rem 0.75rem;
 	margin-left: -1px;
 	line-height: 1.25;
-	color: #7460ee;
+	color: #807266;
 	background-color: #fff;
 	border: 1px solid #dee2e6
 }
@@ -12173,7 +12173,7 @@ ul.list-style-none li a:hover {
 
 .table th,
 .table thead th {
-	font-weight: bold /*Ã«Â³â‚¬ÃªÂ²Â½*/
+	font-weight: bold /*ÃƒÂ«Ã‚Â³Ã¢â€šÂ¬ÃƒÂªÃ‚Â²Ã‚Â½*/
 	
 }
 
@@ -15613,32 +15613,33 @@ fieldset:disabled a.btn {
 	background-color: #999999;
 	border-color: #807266
 }
+
 .btn-primary.focus,
 .btn-primary:focus {
-	-webkit-box-shadow: 0 0 0 0.2rem rgba(116, 96, 238, 0.5);
-	box-shadow: 0 0 0 0.2rem rgba(116, 96, 238, 0.5)
+	-webkit-box-shadow: #999999;
+	box-shadow: #999999
 }
 
 .btn-primary.disabled,
 .btn-primary:disabled {
-	color: #fff;
-	background-color: #7460ee;
-	border-color: #7460ee
+	color: #ffffff;
+	background-color: black;
+	border-color: black
 }
 
 .btn-primary:not(:disabled):not(.disabled).active,
 .btn-primary:not(:disabled):not(.disabled):active,
 .show>.btn-primary.dropdown-toggle {
 	color: #fff;
-	background-color: #4c32e9;
-	border-color: #4226e8
+	background-color: #999999;
+	border-color: #999999
 }
 
 .btn-primary:not(:disabled):not(.disabled).active:focus,
 .btn-primary:not(:disabled):not(.disabled):active:focus,
 .show>.btn-primary.dropdown-toggle:focus {
-	-webkit-box-shadow: 0 0 0 0.2rem rgba(116, 96, 238, 0.5);
-	box-shadow: 0 0 0 0.2rem rgba(116, 96, 238, 0.5)
+	-webkit-box-shadow: #999999;
+	box-shadow: #999999
 }
 
 .btn-secondary {
@@ -18379,7 +18380,7 @@ input[type=submit].btn-block {
 	padding: 0.5rem 0.75rem;
 	margin-left: -1px;
 	line-height: 1.25;
-	color: #7460ee;
+	color: #807266;
 	background-color: #fff;
 	border: 1px solid #dee2e6
 }
@@ -24831,7 +24832,7 @@ ul.list-style-none li a:hover {
 
 .table th,
 .table thead th {
-	font-weight: bold /*Ã«Â³â‚¬ÃªÂ²Â½*/
+	font-weight: bold /*ÃƒÂ«Ã‚Â³Ã¢â€šÂ¬ÃƒÂªÃ‚Â²Ã‚Â½*/
 }
 
 .nowrap {
@@ -28270,32 +28271,33 @@ fieldset:disabled a.btn {
 	background-color: #999999;
 	border-color: #807266
 }
+
 .btn-primary.focus,
 .btn-primary:focus {
-	-webkit-box-shadow: 0 0 0 0.2rem rgba(116, 96, 238, 0.5);
-	box-shadow: 0 0 0 0.2rem rgba(116, 96, 238, 0.5)
+	-webkit-box-shadow: #999999;
+	box-shadow: #999999
 }
 
 .btn-primary.disabled,
 .btn-primary:disabled {
-	color: #fff;
-	background-color: #7460ee;
-	border-color: #7460ee
+	color: #ffffff;
+	background-color: black;
+	border-color: black
 }
 
 .btn-primary:not(:disabled):not(.disabled).active,
 .btn-primary:not(:disabled):not(.disabled):active,
 .show>.btn-primary.dropdown-toggle {
 	color: #fff;
-	background-color: #4c32e9;
-	border-color: #4226e8
+	background-color: #999999;
+	border-color: #999999
 }
 
 .btn-primary:not(:disabled):not(.disabled).active:focus,
 .btn-primary:not(:disabled):not(.disabled):active:focus,
 .show>.btn-primary.dropdown-toggle:focus {
-	-webkit-box-shadow: 0 0 0 0.2rem rgba(116, 96, 238, 0.5);
-	box-shadow: 0 0 0 0.2rem rgba(116, 96, 238, 0.5)
+	-webkit-box-shadow: #999999;
+	box-shadow: #999999
 }
 
 .btn-secondary {
@@ -29960,8 +29962,8 @@ input[type=submit].btn-block {
 .custom-file-input:lang(en)~.custom-file-label:after {
 	content: "Browse"
 }
-/* ÃƒÂªÃ‚Â°Ã…â€œÃƒÂ¬Ã‚ÂÃ‚Â¸ ÃƒÂ¬Ã‚Â Ã¢â‚¬Â¢ÃƒÂ«Ã‚Â³Ã‚Â´ ÃƒÂ­Ã¢â‚¬ÂÃ¢â‚¬Å¾ÃƒÂ«Ã‚Â¡Ã…â€œÃƒÂ­Ã¢â‚¬Â¢Ã¢â‚¬Å¾ ÃƒÂ­Ã…â€™Ã…â€™ÃƒÂ¬Ã‚ÂÃ‚Â¼ ÃƒÂ¬Ã¢â‚¬Å¾Ã‚Â ÃƒÂ­Ã†â€™Ã‚Â ÃƒÂ«Ã‚Â¶Ã¢â€šÂ¬ÃƒÂ«Ã‚Â¶Ã¢â‚¬Å¾ css 
-ÃƒÂ¬Ã‹â€ Ã‹Å“ÃƒÂ¬Ã¢â‚¬â€Ã‚Â° */
+/* ÃƒÆ’Ã‚ÂªÃƒâ€šÃ‚Â°Ãƒâ€¦Ã¢â‚¬Å“ÃƒÆ’Ã‚Â¬Ãƒâ€šÃ‚ÂÃƒâ€šÃ‚Â¸ ÃƒÆ’Ã‚Â¬Ãƒâ€šÃ‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢ÃƒÆ’Ã‚Â«Ãƒâ€šÃ‚Â³Ãƒâ€šÃ‚Â´ ÃƒÆ’Ã‚Â­ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã‚Â«Ãƒâ€šÃ‚Â¡Ãƒâ€¦Ã¢â‚¬Å“ÃƒÆ’Ã‚Â­ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ ÃƒÆ’Ã‚Â­Ãƒâ€¦Ã¢â‚¬â„¢Ãƒâ€¦Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¬Ãƒâ€šÃ‚ÂÃƒâ€šÃ‚Â¼ ÃƒÆ’Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾Ãƒâ€šÃ‚Â ÃƒÆ’Ã‚Â­Ãƒâ€ Ã¢â‚¬â„¢Ãƒâ€šÃ‚Â ÃƒÆ’Ã‚Â«Ãƒâ€šÃ‚Â¶ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â«Ãƒâ€šÃ‚Â¶ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ css 
+ÃƒÆ’Ã‚Â¬Ãƒâ€¹Ã¢â‚¬Â Ãƒâ€¹Ã…â€œÃƒÆ’Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬ÂÃƒâ€šÃ‚Â° */
 .custom-file-label {
 	position: absolute;
 	top: 0;
@@ -31040,7 +31042,7 @@ input[type=submit].btn-block {
 	padding: 0.5rem 0.75rem;
 	margin-left: -1px;
 	line-height: 1.25;
-	color: #2ab2aa;
+	color: #807266;
 	background-color: #fff;
 	border: 1px solid #dee2e6
 }
@@ -37492,7 +37494,7 @@ ul.list-style-none li a:hover {
 
 .table th,
 .table thead th {
-	font-weight: bold /*Ã«Â³â‚¬ÃªÂ²Â½*/
+	font-weight: bold /*ÃƒÂ«Ã‚Â³Ã¢â€šÂ¬ÃƒÂªÃ‚Â²Ã‚Â½*/
 }
 
 .nowrap {
@@ -45380,32 +45382,33 @@ fieldset:disabled a.btn {
 	background-color: #999999;
 	border-color: #807266
 }
+
 .btn-primary.focus,
 .btn-primary:focus {
-	-webkit-box-shadow: 0 0 0 0.2rem rgba(116, 96, 238, 0.5);
-	box-shadow: 0 0 0 0.2rem rgba(116, 96, 238, 0.5)
+	-webkit-box-shadow: #999999;
+	box-shadow: #999999
 }
 
 .btn-primary.disabled,
 .btn-primary:disabled {
-	color: #fff;
-	background-color: #7460ee;
-	border-color: #7460ee
+	color: #ffffff;
+	background-color: black;
+	border-color: black
 }
 
 .btn-primary:not(:disabled):not(.disabled).active,
 .btn-primary:not(:disabled):not(.disabled):active,
 .show>.btn-primary.dropdown-toggle {
 	color: #fff;
-	background-color: #4c32e9;
-	border-color: #4226e8
+	background-color: #999999;
+	border-color: #999999
 }
 
 .btn-primary:not(:disabled):not(.disabled).active:focus,
 .btn-primary:not(:disabled):not(.disabled):active:focus,
 .show>.btn-primary.dropdown-toggle:focus {
-	-webkit-box-shadow: 0 0 0 0.2rem rgba(116, 96, 238, 0.5);
-	box-shadow: 0 0 0 0.2rem rgba(116, 96, 238, 0.5)
+	-webkit-box-shadow: #999999;
+	box-shadow: #999999
 }
 
 .btn-secondary {
@@ -48148,7 +48151,7 @@ input[type=submit].btn-block {
 	padding: 0.5rem 0.75rem;
 	margin-left: -1px;
 	line-height: 1.25;
-	color: #7460ee;
+	color: #807266;
 	background-color: #fff;
 	border: 1px solid #dee2e6
 }
@@ -54600,7 +54603,7 @@ ul.list-style-none li a:hover {
 
 .table th,
 .table thead th {
-	font-weight: bold /*Ã«Â³â‚¬ÃªÂ²Â½*/
+	font-weight: bold /*ÃƒÂ«Ã‚Â³Ã¢â€šÂ¬ÃƒÂªÃ‚Â²Ã‚Â½*/
 }
 
 .nowrap {
@@ -58042,30 +58045,30 @@ fieldset:disabled a.btn {
 
 .btn-primary.focus,
 .btn-primary:focus {
-	-webkit-box-shadow: 0 0 0 0.2rem rgba(116, 96, 238, 0.5);
-	box-shadow: 0 0 0 0.2rem rgba(116, 96, 238, 0.5)
+	-webkit-box-shadow: #999999;
+	box-shadow: #999999
 }
 
 .btn-primary.disabled,
 .btn-primary:disabled {
-	color: #fff;
-	background-color: #7460ee;
-	border-color: #7460ee
+	color: #ffffff;
+	background-color: black;
+	border-color: black
 }
 
 .btn-primary:not(:disabled):not(.disabled).active,
 .btn-primary:not(:disabled):not(.disabled):active,
 .show>.btn-primary.dropdown-toggle {
 	color: #fff;
-	background-color: #4c32e9;
-	border-color: #4226e8
+	background-color: #999999;
+	border-color: #999999
 }
 
 .btn-primary:not(:disabled):not(.disabled).active:focus,
 .btn-primary:not(:disabled):not(.disabled):active:focus,
 .show>.btn-primary.dropdown-toggle:focus {
-	-webkit-box-shadow: 0 0 0 0.2rem rgba(116, 96, 238, 0.5);
-	box-shadow: 0 0 0 0.2rem rgba(116, 96, 238, 0.5)
+	-webkit-box-shadow: #999999;
+	box-shadow: #999999
 }
 
 .btn-secondary {
@@ -60811,7 +60814,7 @@ input[type=submit].btn-block {
 	padding: 0.5rem 0.75rem;
 	margin-left: -1px;
 	line-height: 1.25;
-	color: #7460ee;
+	color: #807266;
 	background-color: #fff;
 	border: 1px solid #dee2e6
 }
@@ -67263,7 +67266,7 @@ ul.list-style-none li a:hover {
 
 .table th,
 .table thead th {
-	font-weight: bold /*Ã«Â³â‚¬ÃªÂ²Â½*/
+	font-weight: bold /*ÃƒÂ«Ã‚Â³Ã¢â€šÂ¬ÃƒÂªÃ‚Â²Ã‚Â½*/
 }
 
 .nowrap {
@@ -68812,7 +68815,8 @@ pre code {
 		-webkit-box-flex: 0;
 		-ms-flex: 0 0 50%;
 		flex: 0 0 50%;
-		max-width: 50%
+		max-width: 50%;
+		font: icon;
 	}
 
 	.col-sm-7 {
@@ -69032,7 +69036,9 @@ pre code {
 		-webkit-box-flex: 0;
 		-ms-flex: 0 0 25%;
 		flex: 0 0 25%;
-		max-width: 25%
+		max-width: 25%;
+		font: icon;
+		/* display: table-footer-group; */
 	}
 
 	.col-md-4 {
@@ -70705,30 +70711,30 @@ fieldset:disabled a.btn {
 
 .btn-primary.focus,
 .btn-primary:focus {
-	-webkit-box-shadow: 0 0 0 0.2rem rgba(116, 96, 238, 0.5);
-	box-shadow: 0 0 0 0.2rem rgba(116, 96, 238, 0.5)
+	-webkit-box-shadow: #999999;
+	box-shadow: #999999
 }
 
 .btn-primary.disabled,
 .btn-primary:disabled {
-	color: #fff;
-	background-color: #7460ee;
-	border-color: #7460ee
+	color: #ffffff;
+	background-color: black;
+	border-color: black
 }
 
 .btn-primary:not(:disabled):not(.disabled).active,
 .btn-primary:not(:disabled):not(.disabled):active,
 .show>.btn-primary.dropdown-toggle {
 	color: #fff;
-	background-color: #4c32e9;
-	border-color: #4226e8
+	background-color: #999999;
+	border-color: #999999
 }
 
 .btn-primary:not(:disabled):not(.disabled).active:focus,
 .btn-primary:not(:disabled):not(.disabled):active:focus,
 .show>.btn-primary.dropdown-toggle:focus {
-	-webkit-box-shadow: 0 0 0 0.2rem rgba(116, 96, 238, 0.5);
-	box-shadow: 0 0 0 0.2rem rgba(116, 96, 238, 0.5)
+	-webkit-box-shadow: #999999;
+	box-shadow: #999999
 }
 
 .btn-secondary {
@@ -72397,8 +72403,8 @@ input[type=submit].btn-block {
 .custom-file-input:lang(en)~.custom-file-label:after {
 	content: "Browse"
 }
-/* ÃƒÂªÃ‚Â°Ã…â€œÃƒÂ¬Ã‚ÂÃ‚Â¸ ÃƒÂ¬Ã‚Â Ã¢â‚¬Â¢ÃƒÂ«Ã‚Â³Ã‚Â´ ÃƒÂ­Ã¢â‚¬ÂÃ¢â‚¬Å¾ÃƒÂ«Ã‚Â¡Ã…â€œÃƒÂ­Ã¢â‚¬Â¢Ã¢â‚¬Å¾ ÃƒÂ­Ã…â€™Ã…â€™ÃƒÂ¬Ã‚ÂÃ‚Â¼ ÃƒÂ¬Ã¢â‚¬Å¾Ã‚Â ÃƒÂ­Ã†â€™Ã‚Â ÃƒÂ«Ã‚Â¶Ã¢â€šÂ¬ÃƒÂ«Ã‚Â¶Ã¢â‚¬Å¾ css 
-ÃƒÂ¬Ã‹â€ Ã‹Å“ÃƒÂ¬Ã¢â‚¬â€Ã‚Â° */
+/* ÃƒÆ’Ã‚ÂªÃƒâ€šÃ‚Â°Ãƒâ€¦Ã¢â‚¬Å“ÃƒÆ’Ã‚Â¬Ãƒâ€šÃ‚ÂÃƒâ€šÃ‚Â¸ ÃƒÆ’Ã‚Â¬Ãƒâ€šÃ‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢ÃƒÆ’Ã‚Â«Ãƒâ€šÃ‚Â³Ãƒâ€šÃ‚Â´ ÃƒÆ’Ã‚Â­ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã‚Â«Ãƒâ€šÃ‚Â¡Ãƒâ€¦Ã¢â‚¬Å“ÃƒÆ’Ã‚Â­ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ ÃƒÆ’Ã‚Â­Ãƒâ€¦Ã¢â‚¬â„¢Ãƒâ€¦Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¬Ãƒâ€šÃ‚ÂÃƒâ€šÃ‚Â¼ ÃƒÆ’Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾Ãƒâ€šÃ‚Â ÃƒÆ’Ã‚Â­Ãƒâ€ Ã¢â‚¬â„¢Ãƒâ€šÃ‚Â ÃƒÆ’Ã‚Â«Ãƒâ€šÃ‚Â¶ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â«Ãƒâ€šÃ‚Â¶ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ css 
+ÃƒÆ’Ã‚Â¬Ãƒâ€¹Ã¢â‚¬Â Ãƒâ€¹Ã…â€œÃƒÆ’Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬ÂÃƒâ€šÃ‚Â° */
 .custom-file-label {
 	position: absolute;
 	top: 0;
@@ -73477,7 +73483,7 @@ input[type=submit].btn-block {
 	padding: 0.5rem 0.75rem;
 	margin-left: -1px;
 	line-height: 1.25;
-	color: #2ab2aa;
+	color: #807266;
 	background-color: #fff;
 	border: 1px solid #dee2e6
 }
@@ -79930,7 +79936,7 @@ ul.list-style-none li a:hover {
 
 .table th,
 .table thead th {
-	font-weight: bold /*Ã«Â³â‚¬ÃªÂ²Â½*/
+	font-weight: bold /*ÃƒÂ«Ã‚Â³Ã¢â€šÂ¬ÃƒÂªÃ‚Â²Ã‚Â½*/
 }
 
 .nowrap {

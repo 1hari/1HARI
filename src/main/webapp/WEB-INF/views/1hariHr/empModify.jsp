@@ -78,13 +78,14 @@
 	<!--컨텐츠 제목 끝 -->
 
 	<!-- ============================================================== -->
-	<div class="container-fluid">
+	<div class="container-fluid" style= "margin-top:3%;">
+	
 		<!-- ============================================================== -->
 		<!-- Start Page Content -->
 		<!-- ============================================================== -->
 		<div class="row">
 			<div class="col-12">
-				<div class="container" style="background-color: #ffffff;">
+				<div class="container" style ="border-radius:10px;  box-shadow :3px 3px #999999; border: 2px groove #999999;">
 					<div class="row setup-content" id="step-1">
 						<div class="col-md-12">
 							<!--form 태그 시작 -->
@@ -148,7 +149,7 @@
 	 									</div>
 									</se:authorize>
 									<div class="form-group" align="right">
-										<button type="submit" style ="color: #fff; background-color: #20B2AA; border-color: #20B2AA;" class="btn btn-success">수정하기</button>
+										<button type="submit" style ="color: #807266; background-color: #fff; border-color: #807266;" class="btn btn-success">수정하기</button>
 									</div>
 								</div>									
 							</form>
