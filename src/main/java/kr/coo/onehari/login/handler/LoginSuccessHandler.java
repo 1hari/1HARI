@@ -21,7 +21,12 @@ import org.springframework.security.web.savedrequest.SavedRequest;
 
 import kr.coo.onehari.hr.dto.EmpDto;
 import kr.coo.onehari.login.service.LoginService;
-
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+@Getter
+@Setter
+@ToString
 public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler
 		implements AuthenticationSuccessHandler {
 	
@@ -56,33 +61,13 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
-		System.out.println("login.toString(): "+ login);
-		System.out.println("권한성공");
 	    String username = request.getParameter(loginidname);
-	    System.out.println(username);
 	    login.loginCntInit(username);
 		clearAuthenticationAttributes(request);
 		resultRedirectStrategy(request, response, authentication);
 		SimpleDateFormat format = new SimpleDateFormat("yyyy:MM:dd");
-		System.out.println(format.format(new Date()));
 		
 
 	}
 	
-	public String getLoginidname() {
-		return loginidname;
-	}
-
-	public void setLoginidname(String loginidname) {
-		this.loginidname = loginidname;
-	}
-
-	public String getDefaultUrl() {
-		return defaultUrl;
-	}
-
-	public void setDefaultUrl(String defaultUrl) {
-		this.defaultUrl = defaultUrl;
-	}
-
 }

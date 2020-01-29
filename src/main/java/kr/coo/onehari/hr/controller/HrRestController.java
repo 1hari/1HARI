@@ -62,7 +62,6 @@ public class HrRestController {
 		try {
 			teamlist = corpservice.getTeamCodes();
 		} catch (Exception e) {
-			System.out.println("Ajax TeamCode 예외발생: " + e.getMessage());
 			log.debug("Ajax TeamCode 예외발생: " + e.getMessage());
 		}
 		return teamlist;
@@ -76,7 +75,6 @@ public class HrRestController {
 		try {
 			positionlist = corpservice.getPositionCodes();
 		} catch (Exception e) {
-			System.out.println("Ajax PositionCode 예외발생: " + e.getMessage());
 			log.debug("Ajax PositionCode 예외발생: " + e.getMessage());
 		}
 		return positionlist;
@@ -90,7 +88,6 @@ public class HrRestController {
 		try {
 			ranklist = corpservice.getRankCodes();
 		} catch (Exception e) {
-			System.out.println("Ajax RankCode 예외발생: " + e.getMessage());
 			log.debug("Ajax RankCode 예외발생: " + e.getMessage());
 		}
 		return ranklist;
@@ -104,7 +101,6 @@ public class HrRestController {
 		try {
 			employmentlist = corpservice.getEmploymentCodes();
 		} catch (Exception e) {
-			System.out.println("Ajax EmploymentCode 예외발생: " + e.getMessage());
 			log.debug("Ajax EmploymentCode 예외발생: " + e.getMessage());
 		}
 		return employmentlist;
@@ -116,7 +112,6 @@ public class HrRestController {
 		int empNum = 0;
 		try {
 			empNum = corpservice.getLastEmpNum();
-			System.out.println("empNum : " + empNum);
 		} catch (Exception e) {
 			log.debug("HrRestController getLastEmpNum 예외발생: " + e.getMessage());
 		}
@@ -132,7 +127,6 @@ public class HrRestController {
 		try {
 			rolelist = corpservice.getRoles();
 		} catch (Exception e) {
-			System.out.println("Ajax Role 예외발생: " + e.getMessage());
 			log.debug("Ajax Role 예외발생: " + e.getMessage());
 		}
 		return rolelist;

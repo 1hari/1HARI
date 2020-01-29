@@ -61,16 +61,6 @@
 
 	<!-- 사원정보수정 화면 김진호 2020. 1. 10 -->
 	<select id="empModify" resultType="kr.coo.onehari.hr.dto.EmpDto">
-<!--  		SELECT E.EMPNUM, E.EMPNAME, E.TEAMCODE, T.TEAMNAME, E.RANKCODE, R.RANKNAME, E.POSITIONCODE, P.POSITIONNAME, EM.EMPLOYMENTCODE, EM.EMPLOYMENTNAME, S.BIRTH, S.PHONENUM, S.EMAIL, S.HIREDATE, S.LEAVEDATE, ER.ROLENAME -->
-<!-- 		FROM emp AS E  -->
-<!-- 		JOIN subemp AS S ON E.EMPNUM = S.EMPNUM -->
-<!-- 		JOIN team AS T ON E.TEAMCODE = T.TEAMCODE -->
-<!-- 		JOIN ranks AS R ON E.RANKCODE = R.RANKCODE -->
-<!-- 		JOIN position AS P ON E.POSITIONCODE = P.POSITIONCODE -->
-<!-- 		JOIN employment AS EM ON E.EMPLOYMENTCODE = EM.EMPLOYMENTCODE -->
-<!-- 		JOIN emprolelist AS ER ON E.EMPNUM = ER.EMPNUM -->
-<!-- 		WHERE E.EMPNUM=#{empNum} -->
- 		
 		SELECT @rownum := @rownum + 1 AS ROWNUM, E.EMPNUM, E.EMPNAME, E.PASSWORD, E.TEAMCODE, T.TEAMNAME, E.RANKCODE, R.RANKNAME, E.POSITIONCODE, P.POSITIONNAME, EM.EMPLOYMENTCODE, EM.EMPLOYMENTNAME, S.BIRTH, S.PHONENUM, S.EMAIL, S.HIREDATE, S.LEAVEDATE, ER.ROLENAME, RO.ROLEDSCR 
 		FROM EMP AS E
 			JOIN subemp AS S ON E.EMPNUM = S.EMPNUM
@@ -124,17 +114,6 @@
 		WHERE empnum = #{empNum} AND rolename = 'ROLE_PERSONNEL'
 	</delete>
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
    	<!-- 사원 출근기능 형남 0112 -->
 	<update id="insertStartWorkTA" parameterType="Integer">
 		UPDATE TALIST
@@ -174,11 +153,6 @@
 		SELECT COUNT(*) FROM TALIST WHERE EMPNUM = #{empNum} AND (TACODE=1 OR TACODE=3)
 	</select>
 	
-    <!-- 오늘 출근시간 구하기-->
-<!--     <select id="getStartWorkTime" resultType="Date"> -->
-<!--         SELECT TADATE FROM TALIST WHERE EMPNUM=#{empNum} AND DATE(TADATE) = DATE(NOW()) -->
-<!--     </select> -->
-    
     <!-- 현재까지 근무시간-->
     <select id="getWorkTime" resultType="String">
 		SELECT DATE_FORMAT(SEC_TO_TIME((SELECT TIME_TO_SEC(NOW()) - (SELECT TIME_TO_SEC((SELECT TADATE FROM TALIST AS TEMP WHERE EMPNUM=#{empNum} AND (TACODE=1 OR TACODE=3) AND DATE(tadate) = DATE(NOW())))))),"%H:%i")
@@ -371,5 +345,4 @@
 			JOIN ta AS TA ON TL.TACODE = TA.TACODE
 		WHERE E.EMPNUM = 1002 AND TL.SCHEDULEDATE = '2020-01-28' AND TL.TACODE = 6
 	</select>
-	
 </mapper>

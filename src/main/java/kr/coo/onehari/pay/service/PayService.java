@@ -41,7 +41,6 @@ public class PayService {
 		List<PayDto> payList=null;
 		try {
 			payList = dao.getPayList(empNumStr, year, month);
-			System.out.println(payList.toString());
 		} catch (ClassNotFoundException | SQLException e) {
 			log.debug("getPayList : " + e.getMessage());
 		}
