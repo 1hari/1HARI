@@ -341,4 +341,26 @@
 		ON e.teamcode = t.TEAMCODE
 		WHERE #{param2} = YEAR(P.PAYMONTH) AND T.TEAMCODE=#{param1}
     </select>
+    
+    <!-- 사원리스트 page 김정하 / 2020. 1. 29 -->
+    <select id="empListPage" parameterType="hashmap" resultType="kr.coo.onehari.hr.dto.EmpDto">
+	    SELECT E.EMPNUM, E.EMPNAME, T.TEAMCODE, T.TEAMNAME, R.RANKCODE, R.RANKNAME, P.POSITIONCODE, P.POSITIONNAME, EM.EMPLOYMENTCODE, EM.EMPLOYMENTNAME, S.BIRTH, S.RESNUM, S.PHONENUM, S.EMAIL, S.HIREDATE, S.LEAVEDATE
+		FROM emp AS E 
+			JOIN subemp AS S ON E.EMPNUM = S.EMPNUM
+			JOIN team AS T ON E.TEAMCODE = T.TEAMCODE
+			JOIN ranks AS R ON E.RANKCODE = R.RANKCODE	
+			JOIN position AS P ON E.POSITIONCODE = P.POSITIONCODE
+			JOIN employment AS EM ON E.EMPLOYMENTCODE = EM.EMPLOYMENTCODE
+        ORDER BY E.EMPNUM ASC
+        LIMIT ${pg}
+		<if test="cp != '0'">
+			OFFSET ${cp}
+		</if>
+	</select>
+	
+	<!-- 사원리스트 page처리 김정하 / 2020. 1. 29 -->
+	<select id="empListPageCount" resultType="int">
+		SELECT COUNT(EMPNUM) FROM emp
+	</select>
+    
 </mapper>

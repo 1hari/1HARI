@@ -4,6 +4,7 @@ import java.security.Principal;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -558,6 +559,31 @@ public class EmpService {
 			log.debug("getTeamAvgSal 예외발생: " + e.getMessage());
 		}
 		return teamAvgSal;
+	}
+	
+	//사원목록 Page 김정하 2020. 1. 29
+	public List<EmpDto> empListPage(Map<String, String> map) {
+		List<EmpDto> emplist = null;
+		EmpDao empdao = sqlsession.getMapper(EmpDao.class);
+		
+		try {
+			emplist = empdao.empListPage(map);
+		} catch (Exception e) {
+			log.debug("EmpService empListPage 예외발생: " + e.getMessage());
+		}
+		return emplist;
+	}
+	
+	//사원목록 page 처리 김정하 2020. 1. 29
+	public int empListPageCount() {
+		int count = 0;
+		EmpDao empdao = sqlsession.getMapper(EmpDao.class);
+		try {
+			count = empdao.empListPageCount();
+		} catch (ClassNotFoundException | SQLException e) {
+			log.debug("EmpService empListPageCount 예외발생: " + e.getMessage());
+		}
+		return count;
 	}
 }
 
