@@ -45,6 +45,7 @@
 								<table id="zero_config" class="table table-striped table-bordered">
 									<thead>
 										<tr>
+											<th>사번</th>
 											<th>사원</th>
 											<th>부서</th>
 											<th>출근시간</th>
@@ -101,31 +102,52 @@
 			dataType: "json",
 			success: function(TaList) {
 				let empTaList = "";
-				var count = 0;
+				let count = 0;
 				
 				for (var i = 0; i < TaList.length; i++) {
 					if (count == 0) {
 						empTaList += '<tr>'
-									+ '<td><div><span>' + TaList[i].empName + ' ' + TaList[i].rankName +'</span><span>(' + TaList[i].empNum + ')</span></div></td>'
-									+ '<td><div><p>' + TaList[i].teamName + '</p></div></td>'
-									+ '<td><div><span>' + TaList[i].taName + '</span><span> (' + TaList[i].taDate + ')</span></div></td>';
+										+ '<td>' + TaList[i].empNum + '</td>'
+										+ '<td>' + TaList[i].empName + ' ' + TaList[i].rankName +'</td>'
+										+ '<td>' + TaList[i].teamName + '</td>'
+										+ '<td>' + TaList[i].taName + ' (' + TaList[i].taDate + ')</td>';
 						count++;
 					} else {
 						if (TaList[i].empNum == TaList[i-1].empNum) {
-							empTaList += '<td><div><span>' + TaList[i].taName + '</span><span> (' + TaList[i].taDate + ')</span></div>'
-									+ '</td></tr>';
+							empTaList += '<td>' + TaList[i].taName + ' (' + TaList[i].taDate + ')</td>'
+										+ '<td><button type="button" class="editEmpTa btn btn-success"><i class="fa fa-edit"></i> 퇴근기록수정</button></td>'
+									+ '</tr>';
 							count = 0;
 						}
 					}
 				}
 				$('#taBody').append(empTaList);
+				/* 비동기 데이터 호출 후 DataTable 호출 */
 				$('#zero_config').DataTable();
+
+				getEmpTa();
 			}
 		});
+		
+		function getEmpTa() {
+			$('.editEmpTa').click(function() {
+				let tr = $(this).closest('tr'); // 나와 조상요소 중 첫번째 tr //.parent() 바로 상위요소 찾기
+				let empNum = { "empNum" : tr.children().html() }; // 나와 조상요소 중 첫번째 tr의 자식의 값
+				tr.children().empty();
+				$.ajax({
+					url: "${pageContext.request.contextPath}/ajax/getEmpTa.hari",
+					data: empNum,
+					type: "post",
+					dataType: "json",
+					success: function(empTa) {
+						console.log(empTa);
+						let td = "";
+						td += '<td>' + empTa.empNum + '</td>';
+							
+					}
+				})
+			})
+		}
 	})
-	/****************************************
-	*       Basic Table                   *
-	****************************************/
 	
-
 </script>

@@ -3,6 +3,7 @@ package kr.coo.onehari.hr.dao;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import kr.coo.onehari.hr.dto.AnnUse;
 import kr.coo.onehari.hr.dto.EmpAnn;
@@ -165,4 +166,13 @@ public interface EmpDao {
     
     //대시보드 부서별 연봉
     public String getTeamAvgSal(int teamCode, String year) throws ClassNotFoundException, SQLException;
+    
+    //사원목록 page 김정하 / 2020. 1. 29
+ 	public List<EmpDto> empListPage(Map<String, String> map) throws ClassNotFoundException, SQLException;
+ 	
+ 	//사원목록 page처리 김정하 / 2020. 1. 29
+ 	public int empListPageCount() throws ClassNotFoundException, SQLException;
+ 	
+    //연차정보 김진호 2020. 1. 29
+    public EmpDto getEmpTa(int empNum) throws ClassNotFoundException, SQLException;
 }

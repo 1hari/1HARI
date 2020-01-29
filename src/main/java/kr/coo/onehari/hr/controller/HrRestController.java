@@ -595,8 +595,56 @@ public class HrRestController {
 	
 	//사원리스트 가져오기 김정하 2020. 1. 29
 	@RequestMapping("getEmpList.hari")
-	public List<EmpDto> empList(){
-		List<EmpDto> empList = empSercive.empList();
-		return empList;
+	public Map empList(String pg, String cp){
+		System.out.println(pg);
+		System.out.println(cp);
+		
+		//DB parameter 로 보내는 map
+		HashMap<String, String> map = new HashMap<String, String>();
+		
+		//vue로 내보내는 Map
+		HashMap outputMap = new HashMap<>();
+		
+		
+		int offset = Integer.parseInt(cp);
+		
+		if(offset == 1) {
+			offset = 0;
+		}else {
+			offset = (offset-1)*Integer.parseInt(pg);
+		}
+		map.put("pg", pg); //page 에 보여줄 갯수
+		map.put("cp", Integer.toString(offset)); //보여줄 페이지
+		
+		List<EmpDto> empList = empSercive.empListPage(map);
+		outputMap.put("empList",empList);
+		
+		int count = empSercive.empListPageCount();
+		int lastPage = (count/Integer.parseInt(pg));
+		
+		ArrayList<Integer> page = new ArrayList<Integer>();
+		
+		for (int i = 1; i <= lastPage; i++) {
+			page.add(i);
+		}
+		
+		System.out.println(page);
+
+		outputMap.put("page", page);
+		outputMap.put("lastPage", lastPage);
+
+		return outputMap;
+	}
+	
+	// 관리자권한 사원근태수정을 위한 사원정보 가져오기 김진호 2020. 1. 29
+	@RequestMapping(value = "getEmpTa.hari", method = RequestMethod.POST)
+	public EmpDto getEmpTa(int empNum) {
+		EmpDto empTa = null;
+		try {
+			empTa = empSercive.getEmpTa(empNum);
+		} catch (Exception e) {
+			log.debug("HrRestController getEmpTa 예외발생: " + e.getMessage());
+		}
+		return empTa;
 	}
 }
