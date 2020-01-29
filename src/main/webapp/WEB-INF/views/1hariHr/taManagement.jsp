@@ -50,7 +50,7 @@
 											<th>부서</th>
 											<th>출근시간</th>
 											<th>퇴근시간</th>
-											<th>수정</th>
+											<th>퇴근처리</th>
 										</tr>
 									</thead>
 									<tbody id="taBody">
@@ -113,9 +113,14 @@
 										+ '<td>' + TaList[i].taName + ' (' + TaList[i].taDate + ')</td>';
 						count++;
 					} else {
-						if (TaList[i].empNum == TaList[i-1].empNum) {
+						if (TaList[i].empNum == TaList[i-1].empNum && TaList[i].taCode == 6) {
 							empTaList += '<td>' + TaList[i].taName + ' (' + TaList[i].taDate + ')</td>'
 										+ '<td><button type="button" class="editEmpTa btn btn-success"><i class="fa fa-edit"></i> 퇴근처리</button></td>'
+									+ '</tr>';
+							count = 0;
+						} else {
+							empTaList += '<td>' + TaList[i].taName + ' (' + TaList[i].taDate + ')</td>'
+										+ '<td></td>' // 결근이 아닐 경우 퇴근처리 버튼을 만들지 않음
 									+ '</tr>';
 							count = 0;
 						}
@@ -134,6 +139,7 @@
 				let tr = $(this).closest('tr'); // 나와 조상요소 중 첫번째 tr //.parent() 바로 상위요소 찾기
 				let empNum = { "empNum" : tr.children().html() }; // 나와 조상요소 중 첫번째 tr의 자식의 값
 				let td = tr.children().eq(4);
+				console.log(tr);
 				tr.children().eq(4).html("");
 				$.ajax({
 					url: "${pageContext.request.contextPath}/ajax/getEmpTa.hari",
@@ -141,7 +147,6 @@
 					type: "post",
 					dataType: "json",
 					success: function(empTa) {
-						td.html();
 					}
 				})
 			})
