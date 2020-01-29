@@ -16,7 +16,6 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.ui.Model;
 import org.springframework.ui.velocity.VelocityEngineFactoryBean;
 import org.springframework.ui.velocity.VelocityEngineUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -62,6 +61,7 @@ public class HrRestController {
 		try {
 			teamlist = corpservice.getTeamCodes();
 		} catch (Exception e) {
+			System.out.println("Ajax TeamCode 예외발생: " + e.getMessage());
 			log.debug("Ajax TeamCode 예외발생: " + e.getMessage());
 		}
 		return teamlist;
@@ -75,6 +75,7 @@ public class HrRestController {
 		try {
 			positionlist = corpservice.getPositionCodes();
 		} catch (Exception e) {
+			System.out.println("Ajax PositionCode 예외발생: " + e.getMessage());
 			log.debug("Ajax PositionCode 예외발생: " + e.getMessage());
 		}
 		return positionlist;
@@ -88,6 +89,7 @@ public class HrRestController {
 		try {
 			ranklist = corpservice.getRankCodes();
 		} catch (Exception e) {
+			System.out.println("Ajax RankCode 예외발생: " + e.getMessage());
 			log.debug("Ajax RankCode 예외발생: " + e.getMessage());
 		}
 		return ranklist;
@@ -101,6 +103,7 @@ public class HrRestController {
 		try {
 			employmentlist = corpservice.getEmploymentCodes();
 		} catch (Exception e) {
+			System.out.println("Ajax EmploymentCode 예외발생: " + e.getMessage());
 			log.debug("Ajax EmploymentCode 예외발생: " + e.getMessage());
 		}
 		return employmentlist;
@@ -112,6 +115,7 @@ public class HrRestController {
 		int empNum = 0;
 		try {
 			empNum = corpservice.getLastEmpNum();
+			System.out.println("empNum : " + empNum);
 		} catch (Exception e) {
 			log.debug("HrRestController getLastEmpNum 예외발생: " + e.getMessage());
 		}
@@ -127,6 +131,7 @@ public class HrRestController {
 		try {
 			rolelist = corpservice.getRoles();
 		} catch (Exception e) {
+			System.out.println("Ajax Role 예외발생: " + e.getMessage());
 			log.debug("Ajax Role 예외발생: " + e.getMessage());
 		}
 		return rolelist;
@@ -587,18 +592,17 @@ public class HrRestController {
 	}
 	
 	
-	//사원리스트 가져오기 김정하 2020. 1. 29
+	//사원리스트+페이징 가져오기 김정하 2020. 1. 29
 	@RequestMapping("getEmpList.hari")
 	public Map empList(String pg, String cp){
-		System.out.println(pg);
-		System.out.println(cp);
+		//System.out.println(pg);
+		//System.out.println(cp);
 		
 		//DB parameter 로 보내는 map
 		HashMap<String, String> map = new HashMap<String, String>();
 		
 		//vue로 내보내는 Map
 		HashMap outputMap = new HashMap<>();
-		
 		
 		int offset = Integer.parseInt(cp);
 		
@@ -614,15 +618,20 @@ public class HrRestController {
 		outputMap.put("empList",empList);
 		
 		int count = empSercive.empListPageCount();
-		int lastPage = (count/Integer.parseInt(pg));
+		int lastPage = count/Integer.parseInt(pg);
+		//System.out.println(lastPage);
 		
+		if(count%Integer.parseInt(pg) > 0) {
+			lastPage++;
+		}
+		//System.out.println(lastPage);
 		ArrayList<Integer> page = new ArrayList<Integer>();
 		
 		for (int i = 1; i <= lastPage; i++) {
 			page.add(i);
 		}
 		
-		System.out.println(page);
+		//System.out.println(page);
 
 		outputMap.put("page", page);
 		outputMap.put("lastPage", lastPage);
