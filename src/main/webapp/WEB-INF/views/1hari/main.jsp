@@ -392,7 +392,7 @@ $(function(){
 	<div class="page-breadcrumb">
 		<div class="row">
 			<div class="col-12 d-flex no-block align-items-center">
-				<h1 class="page-title">대시보드</h1>
+				<h1 class="page-title"></h1>
 				<div class="ml-auto text-right"></div>
 			</div>
 		</div>
@@ -434,7 +434,7 @@ $(function(){
 		<div class="row">
 			<div class="col-md-6">
 			<!-- 근무 통계 시작  -->
-				<div class="card" style ="box-shadow :10px 10px #999999; border-radius:10px; border : 4px groove #bcbcbc; margin-top:-28%; margin-left:10%;">
+				<div class="card" style ="box-shadow :10px 10px #999999; border-radius:10px; border : 4px groove #bcbcbc; margin-top:-35%; margin-left:10%;">
 					<div class="card-body" style="padding-bottom: 0">
 						<span class="card-title m-b-0" style="margin-bottom:0; font-size: 18px;" >근무시간 통계</span>
 							<select class="select2 form-control custom-select select2-hidden-accessible" id="month" style="width: 13%; height:10%; margin-left: 65%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
@@ -546,10 +546,10 @@ $(function(){
 			</div>
 			<!--col-md-6 컨텐츠 컨테이너 내에서 왼쪽 부분 (공지사항 + 타임라인 합친 부분) 끝 -->
 
-			<!--오른쪽 div 컨테이너 부분 시작 (전자결재 + 투두리스트)-->
+			<!--오른쪽 div 컨테이너 부분 시작 (연봉통계 + 전자결재 + 투두리스트)-->
 			<div class="col-md-6">
-				<!--전자 결재 시작-->
-				<div class="card" style ="box-shadow :10px 10px #999999; border-radius:10px; border : 4px groove #bcbcbc; margin-top:-28%; margin-rignt:10%;">
+				<!--연봉 통계 시작-->
+				<div class="card" style ="box-shadow :10px 10px #999999; border-radius:10px; border : 4px groove #bcbcbc; margin-top:-35%; margin-right:10%;">
 					<div class="card-body" style="padding-bottom: 0">
 						<span class="card-title m-b-0" style="margin-bottom:0; font-size: 18px;" >연봉 통계</span>
 							<select id="chartSelect" class="select2 form-control custom-select select2-hidden-accessible" id="month" style="width: 13%; height:10%; margin-left: 67%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
@@ -559,34 +559,36 @@ $(function(){
 						<canvas id="adminCanvas2" style="height: 0%;"></canvas>
 					</div>
 				</div>
-				<!--전자 결재 끝 -->
-				<div class="card" style ="box-shadow :10px 10px #999999; border-radius:10px; border : 4px groove #bcbcbc; margin-rignt:10%;">
+				<!--연봉 통계 끝 -->
+				<!-- 전자 결재 시작 -->
+				<div class="card" style ="box-shadow :10px 10px #999999; border-radius:10px; border : 4px groove #bcbcbc; margin-right:10%;">
 					<div class="card-body">
 						<h5 class="card-title m-b-0">전자 결재</h5>
 					</div>
 					<table class="table">
 						<thead>
-							<tr>
-								<th scope="col"><i class="far fa-clipboard fa-2x"></i>&nbsp;<h4>진행중문서</h4>
-                                    <td style ="marign-left:-5%;">${requestScope.ongoing}</td>
-								</th>
-                                <th scope="col"><i class="far fa-file-alt fa-2x"></i>&nbsp;<h4>결제반려문서</h4>
-                                    <td>${requestScope.reject}</td>
-								</th>
+							<tr style ="vertical-align:left;">
+								<td><i class="far fa-clipboard fa-2x" style ="margin-left:-50%;"></i>&nbsp;<h4 style ="margin-left:-50%;">진행중문서</h4>
+                                    <td style ="margin-left:-80%;">${requestScope.ongoing}</td>
+								</td> 
+                                <td scope="col"><i class="far fa-file-alt fa-2x" style ="margin-left:-50%;"></i>&nbsp;<h4 style ="margin-left:-50%;">결제반려문서</h4>
+                                    <td  style ="margin-left:-80%;">${requestScope.reject}</td>
+								</td>
 							</tr>
-							
-							<tr>
-                                <th scope="col"><i class="far fa-edit fa-2x"></i>&nbsp;<h4>결제할문서</h4>
-                                    <td>${requestScope.approve}</td>
-								</th>
-								<th scope="col"><i class="far fa-file-archive fa-2x"></i>&nbsp;<h4>결제완료문서</h4>
-                                    <td>${requestScope.complete}</td>
-								</th>
+							<tr style ="vertical-align:left;">
+                                <td scope="col"><i class="far fa-edit fa-2x" style ="margin-left:-50%;"></i>&nbsp;<h4 style ="margin-left:-50%;">결제할문서</h4>
+                                    <td style ="margin-left:-80%;">${requestScope.approve}</td>
+								</td>
+								<td scope="col"><i class="far fa-file-archive fa-2x" style ="margin-left:-50%;"></i>&nbsp;<h4 style ="margin-left:-50%;">결제완료문서</h4>
+                                    <td style ="margin-left:-80%;">${requestScope.complete}</td>
+								</td>
 							</tr>
-						</thead>
+						</thead> 
 					</table>
 				</div>
-				<div class="card" style ="box-shadow :10px 10px #999999; border-radius:10px; border : 4px groove #bcbcbc; margin-rignt:10%;">
+				<!-- 전자 결재 끝 -->
+				<!-- to do list -->
+				<div class="card" style ="box-shadow :10px 10px #999999; border-radius:10px; border : 4px groove #bcbcbc; margin-right:10%;">
 					<div class="card-body">
 						<h4 class="card-title">To Do List</h4>
 						<div class="todo-widget scrollable" style="height: 450px;">
@@ -684,10 +686,9 @@ $(function(){
 						</div>
 					</div>
 				</div>
-				<!--전자 결재 끝 -->
 				<!--투두리스트 끝-->
 			</div>
-			<!--col-md-6 컨텐츠 컨테이너 내에서 왼쪽 부분 (전자 결재 + 투두리스트 합친 부분) 끝 -->
+			<!--col-md-6 컨텐츠 컨테이너 내에서 왼쪽 부분 (연봉 통계 + 전자 결재 + 투두리스트 합친 부분) 끝 -->
 			<div class="col-md-6">
 			
 			</div>

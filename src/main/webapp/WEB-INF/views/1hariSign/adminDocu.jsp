@@ -279,14 +279,14 @@
 
 	<!-- Container fluid  -->
 	<!-- ============================================================== -->
-	<div class="container-fluid">
+	<div class="container-fluid" style ="margin-top: 3%;">
 		<!-- ============================================================== -->
 		<!-- Start Page Content -->
 		<!-- ============================================================== -->
 		<div class="row">
 			<div class="col-12">
 				<!--내 문서함 테이블 -->
-				<div class="card">
+				<div class="card"  style=" border-radius:10px; box-shadow :3px 3px #999999;  border: 2px groove #999999;">
 					<div class="card-body">
 						<div class="row">
 							<!-- 문서구분 버튼 -->

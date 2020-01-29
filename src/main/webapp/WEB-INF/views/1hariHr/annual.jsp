@@ -27,7 +27,7 @@
 			<div class="col-md-12">
 					<div class="row row-card-no-pd">
 						<div class="col-sm-6 col-md-3">
-							<div class="card card-stats card-round" style="border-radius:10px;  box-shadow :5px 5px #999999;  ">
+							<div class="card card-stats card-round" style ="border-radius:10px; box-shadow :5px 5px #999999;  border: 2px groove #999999;"">
 								<div class="card-body ">
 									<div class="row">
 										<div class="col-5">
@@ -46,7 +46,7 @@
 							</div>
 						</div>
 						<div class="col-sm-6 col-md-3">
-							<div class="card card-stats card-round" style="border-radius:10px;  box-shadow :5px 5px #999999; ">
+							<div class="card card-stats card-round" style ="border-radius:10px; box-shadow :5px 5px #999999;  border: 2px groove #999999;"">
 								<div class="card-body">
 									<div class="row">
 										<div class="col-5">
@@ -65,7 +65,7 @@
 							</div>
 						</div>
 						<div class="col-sm-6 col-md-3">
-							<div class="card card-stats card-round" style="border-radius:10px;  box-shadow :5px 5px #999999; ">
+							<div class="card card-stats card-round" style ="border-radius:10px; box-shadow :5px 5px #999999;  border: 2px groove #999999;"">
 								<div class="card-body">
 									<div class="row">
 										<div class="col-5">
@@ -84,7 +84,7 @@
 							</div>
 						</div>
 						<div class="col-sm-6 col-md-3">
-							<div class="card card-stats card-round" style="border-radius:10px; box-shadow :5px 5px #999999; ">
+							<div class="card card-stats card-round" style ="border-radius:10px; box-shadow :5px 5px #999999;  border: 2px groove #999999;"">
 								<div class="card-body">
 									<div class="row">
 										<div class="col-5">
@@ -119,7 +119,7 @@
 			<div class="col-12">
 	
 				<!--연차 관리  테이블 -->
-				<div class="card" style =" border-radius:10px; border : 4px groove #bcbcbc;"> <!-- border : 4px groove #bcbcbc; box-shadow :4px 4px #999999; -->
+				<div class="card" style ="border-radius:10px; box-shadow :3px 3px #999999;  border: 2px groove #999999;""> <!-- border : 4px groove #bcbcbc; box-shadow :4px 4px #999999; -->
 					<div class="card-body">
 						<h5 class="card-title">연차 사용 목록</h5>
 						<div class="table-responsive">

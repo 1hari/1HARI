@@ -30,12 +30,14 @@
 			<div class="col-12">
 				<div class="container">
 					<!--form 태그 시작 -->
-					<form action="" method="POST" id="formInsert">
+					<form action="" method="POST" id="formInsert" style = "marign-left:20%;">
 						<div class="row">
 							<!-- input 태그 -->
-							<div class="col-md-12">
-									<input type="text" class="form-control" id="signFormFormName" name="signFormFormName" placeholder="양식명" style="width:93%; display: inline;">
-									<button type="button" id="formInsertSubmit" class="btn btn-success" style="display: inline-block;">등록</button>
+							<div class="col-md-11">
+									<div class="input-group">
+										<input type="text" class="form-control" id="signFormFormName" name="signFormFormName" placeholder="양식명">
+										<button type="button" id="formInsertSubmit" class="btn btn-success">등록</button>
+									</div>
 							</div>
 						</div><!-- row 끝 -->
 						<!-- ck 에디터 form -->
@@ -113,8 +115,9 @@
 			extraPlugins : 'colorbutton,font,justify,print,tableresize,pastefromword,liststyle,pagebreak',
 
 			// Make the editing area bigger than default.
-			height : 600,
-			width : 940
+			height : 400,
+			width : 1025
+			
 		});
 
 	//양식등록 클릭

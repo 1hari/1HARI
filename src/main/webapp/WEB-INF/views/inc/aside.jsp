@@ -48,6 +48,11 @@
 // 			},
 		});//ajax 끝
 	});//document ready 끝
+
+		//ul, li hover, 클릭시 font-size 크기 변경.. 
+	$(function() {
+
+	});
 </script>
 
 <style>
@@ -74,16 +79,47 @@
 	    } */
 	    /*aside bar 마우스 오버 액션들 */
 	    
-	   a.sidebar-link:hover, a.sidebar-link:active{
-	    	/* background: #dbdbdb; */
-	 		font-size:200%;
-	    	/* font-family: 'Nanum DaCaeSaRang'; */
+/* 	    { */
+/* 	    	/* background: #dbdbdb; */
+/* 	 		font-size:70%; */
+/* 	    	/* font-family: 'Nanum DaCaeSaRang'; */
 	    
-	    }
+/* 	    } */
+/* 	    li.sidebar-link:hover, li.sidebar-link:active { */
+/* 	    	font-size: 70%; */
+/* 	    } */
+
 	    span.hide-menu:hover, span.hide-menu:active{
-	    	font-size: 90%;
-	    	
+	    	font-size: 150%;  	
+	    }  
+	    .sidebar-nav:hover {
+	    	color: black;
 	    }
+	    a.sidebar-link.hover, a.sidebar-link:active {
+	    	font-size: 150%; 
+	    }
+	    
+	    .sidebar-item.hover, .sidebar-link:active{
+	    	font-size: 150%;
+	    }
+	/*  	.sidebar-link.hover, .sidebar-link:hover {
+	 		font-size: 150%; 
+	 	} */
+	/*  	.sidebar-nav ul .sidebar-item .first-level.hover, .sidebar-nav ul .sidebar-item .first-level:hover{
+	 		font-size: 150%;
+	 	} */
+
+		/* a.sidebar-link has-arrow waves-effect waves-dark:hover, a.sidebar-link has-arrow waves-effect waves-dark:active{
+			font-size: 200%;
+		} */
+/* 	    ul#sidebarnav:hover, ul#sidebarnav:active{ */
+/* 	    	font-size: 150%; */
+/* 	    } */
+	    
+/* 	    li.sidebar-item.a.sidebar-link:hover, li.sidebar-itema.sidebar-link:active{ */
+/* 	    	font-size: 150%; */
+/* 	    } */
+	    
  	  /*   span.hide-menu {
 	    	   text-shadow:
 			    0 1px 0 #ffffff,
@@ -99,7 +135,7 @@
 </style>
 
 <!--left sidebar시작 !!  css는 sidebar.css 파일 참고 -->
-<aside class="left-sidebar" id="theme" data-sidebarbg="skin5" style="background: white; box-shadow: 6px 6px 6px #f7f7f7; ">
+<aside class="left-sidebar" id="theme" data-sidebarbg="skin5" style="background: white; box-shadow: 6px 6px 6px #white; border-right: 2px groove #999999;">
 
 	<!-- 사이드바 스크롤-->
 	<div class="scroll-sidebar" id="theme" style="background: white; opacity:0.9;">
@@ -109,14 +145,10 @@
 				<!--인사관리-->
 
 				<li class="sidebar-item" >
-
-			
 					<a class="sidebar-link has-arrow waves-effect waves-dark" href="hr_attendance.html" aria-expanded="false" id="theme" class="sidebar-link" style="background: white;">
 						<i class="m-r-10 mdi mdi-account-card-details"></i>
 						<span class="hide-menu">인사 관리</span>
 					</a>
-
-
 
 					<ul aria-expanded="false" class="collapse first-level" id="theme" style="background: white;">
 						<li class="sidebar-item">
@@ -326,7 +358,7 @@
 			
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-					<button type="submit" class="btn btn-primary" id="formChoice">선택완료</button>
+					<button type="submit" class="btn btn-primary" id="formChoice" style="color:#807266;">선택완료</button>
 				</div><!-- modal-footer 끝 -->
 				<input type="hidden" value="" id="signFormCode" name="signFormCode">
 			</form>
