@@ -115,7 +115,7 @@
 					} else {
 						if (TaList[i].empNum == TaList[i-1].empNum) {
 							empTaList += '<td>' + TaList[i].taName + ' (' + TaList[i].taDate + ')</td>'
-										+ '<td><button type="button" class="editEmpTa btn btn-success"><i class="fa fa-edit"></i> 퇴근기록수정</button></td>'
+										+ '<td><button type="button" class="editEmpTa btn btn-success"><i class="fa fa-edit"></i> 퇴근처리</button></td>'
 									+ '</tr>';
 							count = 0;
 						}
@@ -133,17 +133,15 @@
 			$('.editEmpTa').click(function() {
 				let tr = $(this).closest('tr'); // 나와 조상요소 중 첫번째 tr //.parent() 바로 상위요소 찾기
 				let empNum = { "empNum" : tr.children().html() }; // 나와 조상요소 중 첫번째 tr의 자식의 값
-				tr.children().empty();
+				let td = tr.children().eq(4);
+				tr.children().eq(4).html("");
 				$.ajax({
 					url: "${pageContext.request.contextPath}/ajax/getEmpTa.hari",
 					data: empNum,
 					type: "post",
 					dataType: "json",
 					success: function(empTa) {
-						console.log(empTa);
-						let td = "";
-						td += '<td>' + empTa.empNum + '</td>';
-							
+						td.html();
 					}
 				})
 			})

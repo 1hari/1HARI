@@ -26,7 +26,7 @@
 	<!-- ============================================================== -->
 	<!-- Container fluid  -->
 	<!-- ============================================================== -->
-	<div class="container-fluid">
+	<div class="container-fluid" style ="margin-top: 3%;">
 		<!-- ============================================================== -->
 		<!-- Start Page Content -->
 		<!-- ============================================================== -->
@@ -34,7 +34,7 @@
 			<div class="col-12">
 
 				<!--전자결재 관리1  테이블 -->
-				<div class="card">
+				<div class="card" style=" border-radius:10px; box-shadow :3px 3px #999999;  border: 2px groove #999999;">
 					<div class="card-body">
 						<h5 class="card-title m-b-0">결재 대기 문서</h5>
 					</div>
@@ -88,7 +88,7 @@
 				<!--데이터 테이블1 끝 -->
 				<hr>
 				<!--전자결재 관리2  테이블 -->
-				<div class="card">
+				<div class="card"  style=" border-radius:10px; box-shadow :3px 3px #999999;  border: 2px groove #999999;">
 					<div class="card-body">
 						<h5 class="card-title m-b-0">최근 기안 문서</h5>
 					</div>
@@ -142,7 +142,7 @@
 				<!--데이터 테이블2 끝 -->
 				<hr>
 				<!--전자결재 관리3  테이블 -->
-				<div class="card">
+				<div class="card"  style=" border-radius:10px; box-shadow :3px 3px #999999;  border: 2px groove #999999;">
 					<div class="card-body">
 						<h5 class="card-title m-b-0">최근 완료 문서</h5>
 					</div>
@@ -189,7 +189,7 @@
 				<!--데이터 테이블3 끝 -->
 				<hr>
 				<!--전자결재 관리4  테이블 -->
-				<div class="card">
+				<div class="card"  style=" border-radius:10px; box-shadow :3px 3px #999999;  border: 2px groove #999999;">
 					<div class="card-body">
 						<h5 class="card-title m-b-0">최근 반려 문서</h5>
 					</div>

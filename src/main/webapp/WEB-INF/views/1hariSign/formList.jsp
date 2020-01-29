@@ -26,7 +26,7 @@
 	
 	<!-- Container fluid  -->
 	<!-- ============================================================== -->
-	<div class="container-fluid">
+	<div class="container-fluid" style ="margin-top: 3%;">
 		<!-- ============================================================== -->
 		<!-- Start Page Content -->
 		<!-- ============================================================== -->
@@ -35,11 +35,11 @@
 
 				<!--양식 관리  테이블 -->
 
-				<div class="card">
+				<div class="card"  style=" border-radius:10px; box-shadow :3px 3px #999999;  border: 2px groove #999999;">
 					<div class="card-body">
 						<h5 class="card-title"></h5>
 						<div class="table-responsive">
-							<div style="text-align: right; margin-bottom: 5%;">
+							<div style="text-align: right; margin-bottom: 2%;">
 								<a href="formInsert.hari" style="color: white;">
 									<button type="button" class="btn m-t-5 btn-info btn-block waves-effect waves-light" style="width: 20%; background-color: #20B2AA; margin-right: 1%;  border : 2px solid #807266; font-weight: bold; font-size:medium; color: #807266; background-color:white;">
 									양식 등록

@@ -15,7 +15,7 @@
 </style>
 <!-- Page wrapper  -->
 <!-- ============================================================== -->
-<div class="page-wrapper">
+<div class="page-wrapper" >
 	<!-- ============================================================== -->
 	<!-- Bread crumb and right sidebar toggle -->
 	<!-- ============================================================== -->
@@ -33,7 +33,7 @@
 	
 	<!-- Container fluid  -->
 	<!-- ============================================================== -->
-	<div class="container-fluid">
+	<div class="container-fluid" style ="margin-top: 3%;">
 		<!-- ============================================================== -->
 		<!-- Start Page Content -->
 		<!-- ============================================================== -->
@@ -42,7 +42,7 @@
 
 				<!--사원 관리  테이블 -->
 
-				<div class="card" style =" border-radius:10px; border : 4px groove #bcbcbc;">
+				<div class="card" style ="border-radius:10px;  box-shadow :5px 5px #999999; border: 2px groove #999999; ">
 					<div class="card-body">
 						<h5 class="card-title"></h5>
 						<div class="table-responsive">
