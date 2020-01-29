@@ -363,6 +363,7 @@
 		SELECT COUNT(EMPNUM) FROM emp
 	</select>
     
+<<<<<<< .merge_file_a06480
 	<!-- 연차정보 김진호 2020. 1. 29 -->
 	<select id="getEmpTa" resultType="kr.coo.onehari.hr.dto.EmpDto">
 		SELECT E.EMPNUM, E.EMPNAME, TL.TACODE, TL.TADATE, TA.TANAME, TL.TODAYWORK, TL.SCHEDULEDATE
@@ -372,4 +373,6 @@
 		WHERE E.EMPNUM = 1002 AND TL.SCHEDULEDATE = '2020-01-28' AND TL.TACODE = 6
 	</select>
 
+=======
+>>>>>>> .merge_file_a09252
 </mapper>
