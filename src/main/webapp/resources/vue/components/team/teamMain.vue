@@ -2,10 +2,45 @@
   <!-- 사원조회 리스트 -->
   <div class="container" style="margin-top:5%;">
     <div class="card shadow" style=" height: 500%;  border-radius:10px; border : 4px groove #bcbcbc;">
-      <div class="card-body" style="height:700px;">
-        <div>
-            <select style = "width:10%;">
-            </select>
+      <div class="card-body">
+        
+        <div class="row">
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-1">
+              </div>
+              <div class="col-md-7">
+                <div class="row">
+
+                  <div class="custom-control custom-checkbox col-md-3">
+                    <input type="checkbox" class="custom-control-input" v-model="data.searchCheck" id="customControlAutosizing1" value="empNum" checked="checked">
+                      <label class="custom-control-label" for="customControlAutosizing1">사번</label>
+                  </div>
+                  
+                  <div class="custom-control custom-checkbox col-md-3">
+                    <input type="checkbox" class="custom-control-input" v-model="data.searchCheck" id="customControlAutosizing2" value="empName" checked="checked">
+                      <label class="custom-control-label" for="customControlAutosizing2">이름</label>
+                  </div>
+                  
+                  <div class="custom-control custom-checkbox col-md-3">
+                    <input type="checkbox" class="custom-control-input" v-model="data.searchCheck" id="customControlAutosizing3" value="teamName" checked="checked">
+                      <label class="custom-control-label" for="customControlAutosizing3">소속</label>
+                  </div>
+
+                  <div class="custom-control custom-checkbox col-md-3">
+                    <input type="checkbox" class="custom-control-input" v-model="data.searchCheck" id="customControlAutosizing4" value="phoneNum" checked="checked">
+                      <label class="custom-control-label" for="customControlAutosizing4">연락처</label>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <input type="search" class="form-control form-control-sm" placeholder="검색어를 입력하세요." v-model="data.searchKey">
+              </div>
+									
+            </div>
+          </div>
         </div>
 
         <table class="table table-hover" id="zero_config" >
@@ -70,7 +105,11 @@ module.exports = {
   data: function() {
     return {
       //여기안에 있는 멤버들을 템플릿 안에서 사용할 수 있음
-      server_data: {}
+      server_data: {},
+      data : {
+        searchCheck : [],
+        searchKey : ''
+      }
     };
   },
   methods: {
