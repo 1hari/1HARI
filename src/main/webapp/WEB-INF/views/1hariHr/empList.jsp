@@ -51,25 +51,25 @@
 								<a href="empJoin.hari" style="color: white;">
 									<button type="button" class="btn m-t-5 btn-info btn-block waves-effect waves-light" 
 											style="width: 12%; background-color: #20B2AA; margin-right: 1%;  border : 2px solid #807266; font-weight: bold; font-size:medium; color: #000000; background-color:white; ">
-										사원등록
+										사원등록&nbsp;&nbsp;&nbsp;<i class="m-r-10 mdi mdi-lead-pencil"></i>
 									</button>
 								</a>
 								<a href="javascript:excelDownload()" style="color: white;">
 									<button type="button" class="btn m-t-5 btn-info btn-block waves-effect waves-light" 
 											style="width: 12%; background-color: #20B2AA; margin-right: 1%;  border : 2px solid #807266; font-weight: bold; font-size:medium; color: #000000; background-color:white; ">
-										Excel 다운로드
+										Excel 다운로드&nbsp;&nbsp;&nbsp;<i class="m-r-10 mdi mdi-briefcase-download"></i>
 									</button>
 								</a>
 								<a href="javascript:excelUpload()" style="color: white;">
 									<button type="button" class="btn m-t-5 btn-info btn-block waves-effect waves-light" 
 											style="width: 12%; background-color: #20B2AA; margin-right: 1%;  border : 2px solid #807266; font-weight: bold; font-size:medium; color: #000000; background-color:white; ">
-										Excel 업로드
+										Excel 업로드&nbsp;&nbsp;&nbsp;<i class="m-r-10 mdi mdi-briefcase-upload"></i>
 									</button>
 								</a>
 								<a href="javascript:excelFormDownload()" style="color: white;">
 									<button type="button" class="btn m-t-5 btn-info btn-block waves-effect waves-light" 
 											style="width: 12%; background-color: #20B2AA; margin-right: 1%;  border : 2px solid #807266; font-weight: bold; font-size:medium; color: #000000; background-color:white; ">
-										양식 받기
+										양식 받기&nbsp;&nbsp;&nbsp;<i class="m-r-10 mdi mdi-camera-party-mode"></i>
 									</button>
 								</a>
 							</div>
@@ -124,7 +124,7 @@
 														<button type="button" class="btn m-t-5 btn-info btn-block waves-effect waves-light" 
 																style="width: 50%; height:20%; background-color: #20B2AA; margin-right: 1%;  border : 2px solid #807266; font-weight: bold; font-size:medium; color: #000000; background-color:white; ">
 															수정
-														<i class="m-r-10 mdi mdi-lead-pencil"></i></button>
+														<i class="m-r-10 mdi mdi-eraser-variant"></i></button>
 													</a>
 												</td>
 												<!-- <td>
