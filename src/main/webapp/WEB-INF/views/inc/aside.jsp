@@ -5,7 +5,6 @@
 
 <script>
 	$(function(){
-		
 		//품의서 양식 목록 가져오기
 		$.ajax({
 			url:"${pageContext.request.contextPath}/ajax/selectAllForm.hari",
