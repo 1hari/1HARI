@@ -149,8 +149,14 @@
 							empTaList += '<tr>'
 											+ '<td>' + TaList[i].empNum + '</td>' // 사번
 											+ '<td>' + TaList[i].empName + ' ' + TaList[i].rankName +'</td>' // 이름, 직급
-											+ '<td>' + TaList[i].teamName + '</td>' // 부서
-											+ '<td>' + TaList[i].taName + ' (' + TaList[i].taDate + ')</td>'; // 출근, 출근시간
+											+ '<td>' + TaList[i].teamName + '</td>'; // 부서
+							if (TaList[i].taDate != null && TaList[i].taDate != '0000-00-00 00:00:00') {
+								empTaList += '<td>' + TaList[i].taName + ' (' + TaList[i].taDate + ')</td>'; // 출근, 출근시간
+							} else if (TaList[i].taDate == null && TaList[i].taDate != '0000-00-00 00:00:00'){
+								empTaList += '<td>' + TaList[i].taName + ' (출근시간 기록없음)</td>'; // 출근, 출근시간
+							} else if (TaList[i].taDate == '0000-00-00 00:00:00') {
+								empTaList += '';
+							}
 							count++;
 						} else {
 							if (TaList[i].empNum == TaList[i-1].empNum && TaList[i].taCode == 5) { // 퇴근이 아닌 결근처리가 되어있을 경우
@@ -158,10 +164,16 @@
 											+ '<td><button type="button" class="editEmpTa btn btn-success"><i class="fa fa-edit"></i> 퇴근처리</button></td>' // 결근일 경우 퇴근처리 버튼 생성
 										+ '</tr>';
 								count = 0;
-							} else { // 결근이 아닌 정상퇴근기록이 되어있는 경우
-								empTaList += '<td>' + TaList[i].taName + ' (' + TaList[i].taDate + ')</td>'
-											+ '<td></td>' // 결근이 아닐 경우 퇴근처리 버튼을 만들지 않음
-										+ '</tr>';
+							} else { // 결근이 아닌 경우
+								if (TaList[i].taDate != null && TaList[i].taDate != '0000-00-00 00:00:00') {
+									empTaList += '<td>' + TaList[i].taName + ' (' + TaList[i].taDate + ')</td>';
+								} else if (TaList[i].taDate == null && TaList[i].taDate != '0000-00-00 00:00:00'){
+									empTaList += '<td>' + TaList[i].taName + ' (퇴근시간 기록없음)</td>';
+								} else if (TaList[i].taDate == '0000-00-00 00:00:00') {
+									empTaList += '<td colspan="2">' + TaList[i].taName + '</td>';
+								}
+									empTaList += '<td></td>' // 결근이 아닐 경우 퇴근처리 버튼을 만들지 않음
+											+ '</tr>';
 								count = 0;
 							}
 						}
