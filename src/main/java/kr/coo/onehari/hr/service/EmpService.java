@@ -587,15 +587,15 @@ public class EmpService {
 	}
 	
     // 관리자권한 사원근태(비동기) 가져오기 김진호 2020. 1. 29
-    public EmpDto getEmpTa(int empNum) {
+    public int setEmpTa(EmpDto empdto) {
     	EmpDao empdao = sqlsession.getMapper(EmpDao.class);
-    	EmpDto empTa = null;
+    	int result = 0;
     	try {
-			empTa = empdao.getEmpTa(empNum);
+			result = empdao.setEmpTa(empdto);
 		} catch (ClassNotFoundException | SQLException e) {
 			log.debug("EmpService getEmpTa 예외발생: " + e.getMessage());
 		}
-    	return empTa;
+    	return result;
     }
 }
 
