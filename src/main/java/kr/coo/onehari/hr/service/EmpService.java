@@ -535,6 +535,18 @@ public class EmpService {
     	return annUseList;
     }
     
+    //사원 연차1건 가져오기 김정하 2020. 1. 30
+    public AnnUse getAnnUse(String signNum){
+    	EmpDao empdao = sqlsession.getMapper(EmpDao.class);
+    	AnnUse annUse = null;
+    	try {
+    		annUse = empdao.getAnnUse(signNum);
+		} catch (ClassNotFoundException | SQLException e) {
+			log.debug("getAnnUseList 예외발생: " + e.getMessage());
+		}
+    	return annUse;
+    }
+    
 	//대시보드 부서별 연봉 연도 셀렉트박스
 	public List<String> getSalYear() {
     	EmpDao empdao = sqlsession.getMapper(EmpDao.class);

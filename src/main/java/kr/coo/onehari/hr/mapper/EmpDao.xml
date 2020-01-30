@@ -374,4 +374,20 @@
 		SET taCode = 2, taDate = #{taDate}
 		WHERE empNum = #{empNum} AND taCode = 6 AND scheduleDate = '2020-01-28'
 	</update>
+	
+	<!-- 연차목록 1건조회 김정하 2020. 1. 30 -->
+    <select id="getAnnUse" resultType="kr.coo.onehari.hr.dto.AnnUse">
+    	SELECT EMPNUM, STARTDATE, ENDDATE, USEANN
+		FROM annuselist
+		WHERE SIGNNUM = #{signNum}
+    </select>
+    
+    <!-- 연차정보 근태목록에 추가 김정하 2020. 1. 30 -->
+    <insert id="setAnnUseTaList" parameterType="hashmap">
+    	insert into talist(EMPNUM, TACODE, TADATE, SCHEDULEDATE)
+		VALUES 
+		<foreach collection="list" item="item" separator=", ">
+			(#{empNum}, 1, 0, #{item}), (#{empNum}, 4, 0, #{item})
+		</foreach>
+    </insert>
 </mapper>

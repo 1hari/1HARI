@@ -125,7 +125,7 @@ public class SignService {
 	
 	//연차결재하기 김정하 / 2020. 1. 16
 	@Transactional
-	public int annSignApproval(Map<String, String> map) throws Exception {
+	public int annSignApproval(Map<String, String> map, Map annmap) throws Exception {
 		int count = 0;
 		SignDao dao = sqlsession.getMapper(SignDao.class);
 		EmpDao empdao = sqlsession.getMapper(EmpDao.class);
@@ -133,6 +133,7 @@ public class SignService {
 		try {
 			count = dao.signApproval(map);
 			count = empdao.updateAnnUse(map.get("signNum"));
+			count = empdao.setAnnUseTaList(annmap);
 		} catch (ClassNotFoundException | SQLException e) {
 			log.debug("signApproval : " + e.getMessage());
 			throw e;

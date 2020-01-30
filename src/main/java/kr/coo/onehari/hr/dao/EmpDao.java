@@ -175,4 +175,10 @@ public interface EmpDao {
  	
     //연차정보 김진호 2020. 1. 29
     public int setEmpTa(EmpDto empdto) throws ClassNotFoundException, SQLException;
+    
+    //연차목록 1건조회 김정하 2020. 1. 30
+    public AnnUse getAnnUse(String signNum) throws ClassNotFoundException, SQLException;
+    
+    //연차정보 근태목록에 추가 김정하 2020. 1. 30
+    public int setAnnUseTaList(Map map) throws ClassNotFoundException, SQLException;
 }

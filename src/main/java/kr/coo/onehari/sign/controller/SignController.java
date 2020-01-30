@@ -156,7 +156,7 @@ public class SignController {
 		}else { //연차기안 외
 			CommonsMultipartFile file = sign.getFile(); //view에서 DTO에 저장된 파일받아오기
 			String filename = "";
-			System.out.println(sign);
+			//System.out.println(sign);
 			
 			if(file != null) { //파일이 있으면
 				filename = file.getOriginalFilename(); //파일명

@@ -1,7 +1,11 @@
 package kr.coo.onehari.sign.controller;
 
 import java.security.Principal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +15,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import kr.coo.onehari.hr.dto.AnnUse;
+import kr.coo.onehari.hr.service.EmpService;
 import kr.coo.onehari.sign.dto.SignDto;
 import kr.coo.onehari.sign.dto.SignFormDto;
 import kr.coo.onehari.sign.service.SignFormService;
@@ -28,6 +34,10 @@ public class SignRestController {
 	//전자결재 서비스 
 	@Autowired
 	private SignService signService;
+	
+	//EMP 서비스
+	@Autowired
+	private EmpService empService;
 	
 	//품의서 리스트 김정하 / 2020. 1. 8~ 2020. 1. 9 완료
 	@RequestMapping("selectAllForm.hari")
@@ -108,6 +118,7 @@ public class SignRestController {
 		if((sign.getIsSign1().equals("0") && sign.getEmpSign1().equals(empNum)) || (sign.getIsSign2().equals("0") && sign.getEmpSign2().equals(empNum))) {
 			int result = 0;
 			
+			//결재관련 쿼리문에 전달할 map
 			HashMap<String, String> map = new HashMap<String, String>();
 			
 			if(sign.getSignCode().equals(null) || sign.getSignCode().equals("") || !sign.getSignCode().equals("4")) {
@@ -124,7 +135,55 @@ public class SignRestController {
 				result = signService.signApproval(map);
 			}else {
 				try {
-					result = signService.annSignApproval(map);
+					//연차시작일, 종료일 가져오기
+					AnnUse annUse = empService.getAnnUse(sign.getSignNum());
+					List<String> annDate = new ArrayList<String>();
+					
+					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+				
+					//String -> Date
+					Date startDate = dateFormat.parse(annUse.getStartDate());
+					Date endDate = dateFormat.parse(annUse.getEndDate());
+					
+					//getTime() : 1970년 00:00:00 부터 몇초가 지났는지 반환
+					//시간값에 따른 차이점(24*60*60*1000)을 나눠주면 일수가 나온다.
+					long count = startDate.getTime() - endDate.getTime();
+					long days = count / (24*60*60*1000);
+					int daysint = (int) Math.abs(days)+1; //절대값으로 출력
+					//System.out.println(daysint);
+					
+					int useAnn = 0;
+					
+					for(int i = 0; i < daysint; i++) {
+						DateFormat dayFormat = new SimpleDateFormat("E");
+						
+						//시작일로부터 i일 후
+						Calendar cal = Calendar.getInstance();
+						cal.setTime(startDate);
+						cal.add(Calendar.DATE, i);
+						
+						String dayString = dateFormat.format(cal.getTime());
+						//요일계산 위해 Date 형식으로 다시 변환
+						Date date = dateFormat.parse(dayString);
+						
+						//System.out.println(dayFormat.format(date));
+						//토,일이 아니면 사용연차 계산
+						if(!dayFormat.format(date).equals("토") && !dayFormat.format(date).equals("일")){
+							//System.out.println(dayString);
+							annDate.add(dayString);
+							useAnn++;
+						}
+					}
+					
+					//System.out.println("연차 사용일  : " + (useAnn==annUse.getUseAnn()));
+					//System.out.println(annDate);
+					//근태목록추가 쿼리문에 전달할 map
+					HashMap annmap = new HashMap();
+					
+					annmap.put("list", annDate);
+					annmap.put("empNum", annUse.getEmpNum());
+					
+					result = signService.annSignApproval(map,annmap);
 				} catch (Exception e) {
 					log.debug("AnnSignTran : " + e.getMessage());
 				}
