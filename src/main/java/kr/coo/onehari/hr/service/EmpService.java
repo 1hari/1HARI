@@ -499,12 +499,12 @@ public class EmpService {
 	}
 	
     // 관리자권한 근태목록 가져오기 김진호 2020. 1. 27
-    public List<EmpDto> getTaList() {
+    public List<EmpDto> getTaList(String taDate) {
     	EmpDao empdao = sqlsession.getMapper(EmpDao.class);
     	List<EmpDto> getTaList = null;
     	
     	try {
-			getTaList = empdao.getTaList();
+			getTaList = empdao.getTaList(taDate);
 		} catch (ClassNotFoundException | SQLException e) {
 			log.debug("EmpService 예외발생: " + e.getMessage());
 		}

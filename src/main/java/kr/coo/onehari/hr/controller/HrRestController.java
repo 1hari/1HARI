@@ -530,11 +530,11 @@ public class HrRestController {
 	}
 	
 	@RequestMapping(value = "getTaList.hari", method = RequestMethod.POST)
-	public List<EmpDto> getTaList() {
+	public List<EmpDto> getTaList(String taDate) {
 		List<EmpDto> getTaList = null;
 		
 		try {
-			getTaList = empSercive.getTaList();
+			getTaList = empSercive.getTaList(taDate);
 		} catch (Exception e) {
 			log.debug("HrRestController getTaList 예외발생: " + e.getMessage());
 		}

@@ -156,7 +156,7 @@ public interface EmpDao {
     public List<AnnUse> getAnnUseList(String empNum) throws ClassNotFoundException, SQLException;
     
     // 관리자 근태목록 김진호 2020. 1. 27
-    public List<EmpDto> getTaList() throws ClassNotFoundException, SQLException;
+    public List<EmpDto> getTaList(String taDate) throws ClassNotFoundException, SQLException;
     
     //연차정보 김정하 2020. 1. 28
     public EmpAnn getEmpAnn(String empNum) throws ClassNotFoundException, SQLException;
