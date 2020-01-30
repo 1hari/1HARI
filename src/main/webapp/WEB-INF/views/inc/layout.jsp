@@ -43,6 +43,8 @@
     <script src="${pageContext.request.contextPath}/resources/hari/dist/js/sidebarmenu.js"></script>
     <!--Custom JavaScript -->
     <script src="${pageContext.request.contextPath}/resources/hari/dist/js/custom.min.js"></script>
+    <!--Custom JavaScript -->
+    <script src="${pageContext.request.contextPath}/resources/hari/dist/js/xy_convert.js"></script>
     <!--This page JavaScript -->
     <!-- <script src="${pageContext.request.contextPath}/resources/hari/dist/js/pages/dashboards/dashboard1.js"></script> -->
 	<!--toaster (웹 페이지 내 알람) -->

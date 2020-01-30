@@ -269,6 +269,14 @@
 		    <version>1.4.7</version>
 		</dependency>
 		
+		<!-- https://mvnrepository.com/artifact/org.apache.cxf/cxf-core -->
+		<dependency>
+		    <groupId>org.apache.cxf</groupId>
+		    <artifactId>cxf-core</artifactId>
+		    <version>3.3.4</version>
+		</dependency>
+		
+		
 		<!-- 아무도 설명하지 않았지만 여기 다 있음 -->
 		<dependency>
 			<groupId>org.springframework</groupId>

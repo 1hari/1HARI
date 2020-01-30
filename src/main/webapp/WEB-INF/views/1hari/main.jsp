@@ -21,6 +21,65 @@ var MONTHS = ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9
 var dataset;
 var dataset2;
 var color = Chart.helpers.color;
+/*공통정보*/
+var addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/";
+var servicekey = "serviceKey=ckJdBLYy4BEBjKn2aXypvENewx09cAsw8TX96K6Ck%2BCnpp7C8GNon1%2FIvuVRGU4XX8U4dcQxppyEf1pt52NXZA%3D%3D";
+var AppTest = "&MobileOS=ETC&MobileApp=AppTest";
+var contentTypeId = "&contentTypeId=12";
+var pramContentId = "&contentId=";
+//	var contentid = "${requestScope.contentId}";
+/*Json*/
+var numOfRows = "&numOfRows=10";
+var numOfRows2 = "&numOfRows=1";
+var numOfRows4 = "&numOfRows=4";
+var pageNo = "&pageNo=1";
+var areaCode = "&areaCode=";
+var Sigungu = "&sigunguCode=";
+var type = "&_type=json";
+var type2 = "&_type=json&";
+/*서비스*/
+var pramDetailImage = "detailImage?";
+var pramDetailCommon = "detailCommon?";
+var pramDetailIntro = "detailIntro?";
+var pramLocationBasedList = "locationBasedList?";
+var pramDetailInfo = "detailInfo?";
+/*기타*/
+var etc2 = "&imageYN=Y&subImageYN=Y";
+var pramSubImage = "&cat1=&cat2=&cat3=&listYN=Y";
+var pramImage = "&imageYN=Y";
+var pramSubImage = "&subImageYN=Y";
+var pramOverView = "&overviewYN=Y";
+var pramMapInfo = "&mapinfoYN=Y";
+var pramAddrInfo = "&addrinfoYN=Y";
+var pramCatCode = "&catcodeYN=Y";
+var pramDefault = "&defaultYN=Y";
+var pramFirstImage = "&firstImageYN=Y";
+var pramAreaCode = "&areacodeYN=Y";
+var pramArrrange = "&arrange=";
+var pramMapX = "&mapX=";
+var pramMapY = "&mapY=";
+var pramRadius = "&radius=3000";
+var pramListYN = "&listYN=Y";
+var pramrange = "&radius=3000";
+var loArray = "&arrange=E";
+/*변수*/
+var api = "";
+var api2 = "";
+var api3 = "";
+var api4 = "";
+var api5 = "";
+var api6 = "";
+var x = "";
+var y = "";
+var apilocation = "";
+var apiCommon = "";
+// var api = addr + pramDetailImage + servicekey + numOfRows + pageNo /*이미지조회*/
+// 		+ AppTest + pramContentId + contentid + type2 + etc2;
+
+// var api2 = addr + pramDetailCommon + servicekey + numOfRows + pageNo /*공통조회*/
+// 		+ AppTest + pramContentId + contentid + contentTypeId
+// 		+ pramDefault + pramFirstImage + pramAreaCode + pramCatCode
+// 		+ pramAddrInfo + pramMapInfo + pramOverView + type;
 $(function(){
 	$.ajax({
 		url: "${pageContext.request.contextPath}/ajax/getAllEmpTA.hari",
@@ -315,6 +374,75 @@ $(function(){
 			})
 		})
 	})
+
+	//날씨 API
+		var rs = dfs_xy_conv("toXY", 37.525913599999996, 126.83591679999999);
+		console.log(rs)
+// 		var fixLatitude=parseFloat(37.525913599999996);
+// 		var fixLongitude=parseFloat(126.83591679999999);
+		var date = new Date();
+		var year = date.getFullYear();
+		var month = date.getMonth()+1;
+		if(month<10){
+			month = "0" + month;
+		}
+		var day = date.getDate();
+		if(day<10){
+			day = "0" + day; 
+		}
+		var hour = date.getHours();
+		var minutes = date.getMinutes();
+		if (minutes < 41) {
+			hour -= 1;
+		}
+		if (hour < 10) {
+			hour = "0" + hour;
+		}
+		//http://apis.data.go.kr/1360000/VilageFcstInfoService/getVilageFcst?serviceKey=PXss7TDZfDqmwbPtPSbrN5TR36wq4zETwTgTFsmDjWxyz0vVMWAI2NyzOqsou8m4%2FjrhI0joz7sLmoKctlkUkw%3D%3D&numOfRows=10&pageNo=1&base_date=20200130&base_time=0230&nx=55&ny=127
+		console.log(year + month + day + hour + minutes)
+		var xValue = rs.x;
+		var yValue = rs.y;
+		var weatherApi = "http://apis.data.go.kr/1360000/VilageFcstInfoService/getVilageFcst";
+		var weatherServiceKey = "?ServiceKey="
+				+ "PXss7TDZfDqmwbPtPSbrN5TR36wq4zETwTgTFsmDjWxyz0vVMWAI2NyzOqsou8m4%2FjrhI0joz7sLmoKctlkUkw%3D%3D";
+		//&numOfRows=10&pageNo=1&base_date=20200130&base_time=0230&nx=55&ny=127
+		var numOfRows = "&numOfRows=9&pageNo=1"
+		var base_date = "&base_date=" + year + month + day
+		var base_time = "&base_time=" + hour + "00";
+		var nx = "&nx=" + xValue;
+		var ny = "&ny=" + yValue;
+ 		var dataType = "&dataType=json";
+		var weatherUrl = weatherApi + weatherServiceKey + base_date + base_time + numOfRows + nx + ny + dataType;
+		console.log(weatherUrl)
+// 		var jsonWeatherUrl = { "weatherUrl" : weatherUrl };
+		$.ajax({
+			url : "${pageContext.request.contextPath}/ajax/getWeather.hari",
+			dataType : 'json',
+			type : "get",
+			data : { "weatherUrl" : weatherUrl },
+			success : function(getWeather) {
+					console.log(getWeather.response.body.items)
+// 					var icon = $('<i>');
+// 					var totalRain = $('<span>');
+// 					var degree = $('<span>');
+// 						$.each(weatherData.response.body.items.item,function(index,element) {
+// 									if (element.category == "PTY") {
+// 										if (element.obsrValue == 0) {
+// 											$(icon).attr("class","wi wi-day-sunny");
+// 												}else{
+// 													$(icon).attr("class","wi wi-rain");
+// 												}
+// 											}else if (element.category == "RN1") {
+// 												$(totalRain).html("&nbsp;&nbsp;&nbsp;&nbsp;시간당 강수량 : "+ element.obsrValue+ "ml");
+// 											}else if (element.category == "T1H") {
+// 												$(degree).html("&nbsp;&nbsp;&nbsp;&nbsp;현재기온 : "+ element.obsrValue+ "℃ ");
+// 											}
+// 										});
+// 						$("#title").after(totalRain);
+// 						$("#title").after(degree);
+// 						$("#title").after(icon);
+			},
+		});//날씨api END!!
 })
 
 
@@ -424,75 +552,37 @@ $(function(){
 		<div class="row">
 			<div class="col-md-6">
 				<se:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_PERSONNEL')">
-					<!-- 근무 통계 시작  -->
+					<!-- 부서별 근무 통계 시작  -->
 					<div class="card" style ="box-shadow :10px 10px #999999; border-radius:10px; border : 4px groove #bcbcbc; margin-top:-35%; margin-left:10%;">
 						<div class="card-body" style="padding-bottom: 0">
 							<span class="card-title m-b-0" style="margin-bottom:0; font-size: 18px;" >근무시간 통계</span>
-								<select class="select2 form-control custom-select select2-hidden-accessible" id="month" style="width: 13%; height:10%; margin-left: 65%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
-									<option value="0">전체</option>
-									<option value="1">1월</option>
-									<option value="2">2월</option>
-									<option value="3">3월</option>
-									<option value="4">4월</option>
-									<option value="5">5월</option>
-									<option value="6">6월</option>
-									<option value="7">7월</option>
-									<option value="8">8월</option>
-									<option value="9">9월</option>
-									<option value="10">10월</option>
-									<option value="11">11월</option>
-									<option value="12">12월</option>
-								</select>
-							</div>
-							<div id="container" style="width: 100%; height: 100%; margin-bottom: 7%;">
-								<canvas id="adminCanvas" style="height: 10%;"></canvas>
-							</div>
+							<select class="select2 form-control custom-select select2-hidden-accessible" id="month" style="width: 13%; height:10%; margin-left: 65%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+								<option value="0">전체</option>
+								<option value="1">1월</option>
+								<option value="2">2월</option>
+								<option value="3">3월</option>
+								<option value="4">4월</option>
+								<option value="5">5월</option>
+								<option value="6">6월</option>
+								<option value="7">7월</option>
+								<option value="8">8월</option>
+								<option value="9">9월</option>
+								<option value="10">10월</option>
+								<option value="11">11월</option>
+								<option value="12">12월</option>
+							</select>
 						</div>
-					</se:authorize>
-					<!--근태 통계 -->
-					<div class="card" style ="box-shadow :10px 10px  #999999; border-radius:10px; border : 4px groove #bcbcbc; margin-left:10%; ">
-						<div class="card-body">
-							<h4 class="card-title m-b-0">당월 근태통계</h4>
-							<div id="canvas-holder" style="width: 66%; margin-left: -16%;">
-								<div class="chartjs-size-monitor">
-									<div class="chartjs-size-monitor-expand">
-										<div class="">
-										</div>
-									</div>
-									<div class="chartjs-size-monitor-shrink">
-										<div class="">
-										</div>
-									</div>
-							</div>
-							<div class="chartjs-size-monitor">
-								<div class="chartjs-size-monitor-expand">
-									<div class="">
-									</div>
-								</div>
-								<div class="chartjs-size-monitor-shrink">
-									<div class="">
-									</div>
-								</div>
-							</div>
-							<canvas id="chart-area" width="300" height="300" style="display: block; margin-left: 50%;" class="chartjs-render-monitor"></canvas>
-							<div id="chartjs-tooltip2" class="center" style="opacity: 0; left: 228.854px; top: 223.022px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-style: normal; padding: 6px; font-size: 12px;">
-								<table>
-									<thead>
-									</thead>
-									<tbody>
-										<tr>
-											<td><span class="chartjs-tooltip-key" style="background:rgb(255, 99, 132); border-color:#fff; border-width: 2px"></span></td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
+						<div id="container" style="width: 100%; height: 100%; margin-bottom: 7%;">
+							<canvas id="adminCanvas" style="height: 10%;"></canvas>
 						</div>
 					</div>
-				</div>
+				<!-- 부서별 근무 통계 종료 -->
+				</se:authorize>
+				<!--당월 근태 통계 -->
 				<div class="card" style ="box-shadow :10px 10px  #999999; border-radius:10px; border : 4px groove #bcbcbc; margin-left:10%; ">
 					<div class="card-body">
-						<h4 class="card-title m-b-0">당월 근태통계</h4>
-						<div id="canvas-holder" style="width: 300px;">
+						<h4 class="card-title m-b-0">당월 근태 통계</h4>
+						<div id="canvas-holder" style="width: 66%; margin-left: -16%;">
 							<div class="chartjs-size-monitor">
 								<div class="chartjs-size-monitor-expand">
 									<div class="">
@@ -501,15 +591,15 @@ $(function(){
 								<div class="chartjs-size-monitor-shrink">
 									<div class="">
 									</div>
+								</div>
+						</div>
+						<div class="chartjs-size-monitor">
+							<div class="chartjs-size-monitor-expand">
+								<div class="">
 								</div>
 							</div>
-							<div class="chartjs-size-monitor">
-								<div class="chartjs-size-monitor-expand">
-									<div class="">
-									</div>
-								</div>
-								<div class="chartjs-size-monitor-shrink">
-									<div class="">
+							<div class="chartjs-size-monitor-shrink">
+								<div class="">
 								</div>
 							</div>
 						</div>
@@ -528,144 +618,118 @@ $(function(){
 					</div>
 				</div>
 			</div>
-		<!--타임 라인 끝-->
-		</div>
-		<!--col-md-6 컨텐츠 컨테이너 내에서 왼쪽 부분 (공지사항 + 타임라인 합친 부분) 끝 -->
-		<!--오른쪽 div 컨테이너 부분 시작 (연봉통계 + 전자결재 + 투두리스트)-->
-		<div class="col-md-6">
-			<se:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_PERSONNEL')">
-			<!--연봉 통계 시작-->
-				<div class="card" style ="box-shadow :10px 10px #999999; border-radius:10px; border : 4px groove #bcbcbc; margin-top:-35%; margin-right:10%;">
-					<div class="card-body" style="padding-bottom: 0">
-						<span class="card-title m-b-0" style="margin-bottom:0; font-size: 18px;" >연봉 통계</span>
-						<select id="chartSelect" class="select2 form-control custom-select select2-hidden-accessible" id="month" style="width: 13%; height:10%; margin-left: 67%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
-						</select>
-					</div>
-					<div id="container" style="width: 100%; height: 100%; margin-bottom: 1%;">
-						<canvas id="adminCanvas2" style="height: 0%;"></canvas>
-					</div>
-				</div>
-			</se:authorize>
-			<!--연봉 통계 끝 -->
-			<!-- 전자 결재 시작 -->
-			<div class="card" style ="box-shadow :10px 10px #999999; border-radius:10px; border : 4px groove #bcbcbc; margin-right:10%;">
+			<!--당월 근태 통계 종료-->
+			<!-- 무언가.. 시작 -->
+			<div class="card" style ="box-shadow :10px 10px  #999999; border-radius:10px; border : 4px groove #bcbcbc; margin-left:10%; ">
 				<div class="card-body">
-					<h5 class="card-title m-b-0">전자 결재</h5>
-				</div>
-				<table class="table">
-					<thead>
-						<tr style ="vertical-align:left;">
-							<td><i class="far fa-clipboard fa-2x" style ="margin-left:-50%;"></i>&nbsp;<h4 style ="margin-left:-50%;">진행중문서</h4></td> 
-							<td style ="margin-left:-80%;">${requestScope.ongoing}</td>
-							<td scope="col"><i class="far fa-file-alt fa-2x" style ="margin-left:-50%;"></i>&nbsp;<h4 style ="margin-left:-50%;">결제반려문서</h4></td>
-							<td  style ="margin-left:-80%;">${requestScope.reject}</td>
-						</tr>
-						<tr style ="vertical-align:left;">
-							<td scope="col"><i class="far fa-edit fa-2x" style ="margin-left:-50%;"></i>&nbsp;<h4 style ="margin-left:-50%;">결제할문서</h4></td>
-							<td style ="margin-left:-80%;">${requestScope.approve}</td>
-							<td scope="col"><i class="far fa-file-archive fa-2x" style ="margin-left:-50%;"></i>&nbsp;<h4 style ="margin-left:-50%;">결제완료문서</h4></td>
-							<td style ="margin-left:-80%;">${requestScope.complete}</td>
-						</tr>
-					</thead> 
-				</table>
-			</div>
-			<!-- 전자 결재 끝 -->
-			<!-- to do list -->
-			<div class="card" style ="box-shadow :10px 10px #999999; border-radius:10px; border : 4px groove #bcbcbc; margin-right:10%;">
-				<div class="card-body">
-					<h4 class="card-title">To Do List</h4>
-					<div class="todo-widget scrollable" style="height: 450px;">
-						<ul class="list-task todo-list list-group m-b-0" data-role="tasklist">
-							<li class="list-group-item todo-item" data-role="task">
-								<div class="custom-control custom-checkbox">
-									<input type="checkbox" class="custom-control-input" id="customCheck">
-									<label class="custom-control-label todo-label" for="customCheck">
-										<span class="todo-desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span>
-										<span class="badge badge-pill badge-danger float-right">Today</span>
-									</label>
+					<h4 class="card-title m-b-0">당월 근태통계</h4>
+					<div id="canvas-holder" style="width: 300px;">
+						<div class="chartjs-size-monitor">
+							<div class="chartjs-size-monitor-expand">
+								<div class="">
 								</div>
-								
-								<ul class="list-style-none assignedto">
-									<li class="assignee">
-										<img class="rounded-circle" width="40" src="resources/hari/assets/images/users/1.jpg" alt="user" data-toggle="tooltip" data-placement="top" title="" data-original-title="Steave">
-									</li>
-									<li class="assignee">
-										<img class="rounded-circle" width="40" src="resources/hari/assets/images/users/2.jpg" alt="user" data-toggle="tooltip" data-placement="top" title="" data-original-title="Jessica">
-									</li>
-									<li class="assignee">
-										<img class="rounded-circle" width="40" src="resources/hari/assets/images/users/3.jpg" alt="user" data-toggle="tooltip" data-placement="top" title="" data-original-title="Priyanka">
-									</li>
-									<li class="assignee">
-										<img class="rounded-circle" width="40" src="resources/hari/assets/images/users/4.jpg" alt="user" data-toggle="tooltip" data-placement="top" title="" data-original-title="Selina">
-									</li>
-								</ul>
-							</li>
-							<li class="list-group-item todo-item" data-role="task">
-								<div class="custom-control custom-checkbox">
-									<input type="checkbox" class="custom-control-input" id="customCheck1">
-									<label class="custom-control-label todo-label" for="customCheck1">
-										<span class="todo-desc">Lorem Ipsum is simply dummy text of the printing</span>
-										<span class="badge badge-pill badge-primary float-right">1 week </span>
-									</label>
+							</div>
+							<div class="chartjs-size-monitor-shrink">
+								<div class="">
 								</div>
-								<div class="item-date">
-									26 jun 2017
+							</div>
+						</div>
+						<div class="chartjs-size-monitor">
+							<div class="chartjs-size-monitor-expand">
+								<div class="">
 								</div>
-							</li>
-							<li class="list-group-item todo-item" data-role="task">
-								<div class="custom-control custom-checkbox">
-									<input type="checkbox" class="custom-control-input" id="customCheck2">
-									<label class="custom-control-label todo-label" for="customCheck2">
-										<span class="todo-desc">Give Purchase report to</span>
-										<span class="badge badge-pill badge-info float-right">Yesterday</span>
-									</label>
-								</div>
-								<ul class="list-style-none assignedto">
-									<li class="assignee">
-										<img class="rounded-circle" width="40" src="resources/hari/assets/images/users/3.jpg" alt="user" data-toggle="tooltip" data-placement="top" title="" data-original-title="Priyanka">
-									</li>
-									<li class="assignee">
-										<img class="rounded-circle" width="40" src="resources/hari/assets/images/users/4.jpg" alt="user" data-toggle="tooltip" data-placement="top" title="" data-original-title="Selina">
-									</li>
-								</ul>
-							</li>
-							<li class="list-group-item todo-item" data-role="task">
-								<div class="custom-control custom-checkbox">
-									<input type="checkbox" class="custom-control-input" id="customCheck3">
-									<label class="custom-control-label todo-label" for="customCheck3">
-										<span class="todo-desc">Lorem Ipsum is simply dummy text of the printing </span>
-										<span class="badge badge-pill badge-warning float-right">2 weeks</span>
-									</label>
-								</div>
-								<div class="item-date">26 jun 2017</div>
-							</li>
-							<li class="list-group-item todo-item" data-role="task">
-								<div class="custom-control custom-checkbox">
-									<input type="checkbox" class="custom-control-input" id="customCheck4">
-									<label class="custom-control-label todo-label" for="customCheck4">
-										<span class="todo-desc">Give Purchase report to</span>
-										<span class="badge badge-pill badge-info float-right">Yesterday</span>
-									</label>
-								</div>
-								<ul class="list-style-none assignedto">
-									<li class="assignee">
-										<img class="rounded-circle" width="40" src="resources/hari/assets/images/users/3.jpg" alt="user" data-toggle="tooltip" data-placement="top" title="" data-original-title="Priyanka">
-									</li>
-									<li class="assignee">
-										<img class="rounded-circle" width="40" src="resources/hari/assets/images/users/4.jpg" alt="user" data-toggle="tooltip" data-placement="top" title="" data-original-title="Selina">
-									</li>
-								</ul>
-							</li>
-						</ul>
+							</div>
+							<div class="chartjs-size-monitor-shrink">
+								<div class="">
+							</div>
+						</div>
+					</div>
+					<canvas id="chart-area" width="300" height="300" style="display: block; margin-left: 50%;" class="chartjs-render-monitor"></canvas>
+					<div id="chartjs-tooltip2" class="center" style="opacity: 0; left: 228.854px; top: 223.022px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-style: normal; padding: 6px; font-size: 12px;">
+						<table>
+							<thead>
+							</thead>
+							<tbody>
+								<tr>
+									<td><span class="chartjs-tooltip-key" style="background:rgb(255, 99, 132); border-color:#fff; border-width: 2px"></span></td>
+								</tr>
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</div>
-			<!--투두리스트 끝-->
 		</div>
-		<!--col-md-6 컨텐츠 컨테이너 내에서 왼쪽 부분 (연봉 통계 + 전자 결재 + 투두리스트 합친 부분) 끝 -->
-		<!-- <div class="row"> 부분 끝 div-->
+	<!-- 무언가.. 종료 -->
 	</div>
-	<!--<div class="container-fluid"> 부분 끝 div-->
+	<!--col-md-6 컨텐츠 컨테이너 내에서 오른쪽 부분 (연봉통계 + 전자결재) -->
+			<div class="col-md-6">
+				<se:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_PERSONNEL')">
+				<!--부서별 연봉 통계 시작-->
+					<div class="card" style ="box-shadow :10px 10px #999999; border-radius:10px; border : 4px groove #bcbcbc; margin-top:-35%; margin-right:10%;">
+						<div class="card-body" style="padding-bottom: 0">
+							<span class="card-title m-b-0" style="margin-bottom:0; font-size: 18px;" >연봉 통계</span>
+							<select id="chartSelect" class="select2 form-control custom-select select2-hidden-accessible" id="month" style="width: 13%; height:10%; margin-left: 67%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+							</select>
+						</div>
+						<div id="container" style="width: 100%; height: 100%; margin-bottom: 1%;">
+							<canvas id="adminCanvas2" style="height: 0%;"></canvas>
+						</div>
+					</div>
+				</se:authorize>
+				<!--부서별 연봉 통계 끝 -->
+				<!-- 전자 결재 시작 -->
+				<div class="card" style ="box-shadow :10px 10px #999999; border-radius:10px; border : 4px groove #bcbcbc; margin-right:10%;">
+					<div class="card-body">
+						<h5 class="card-title m-b-0">전자 결재</h5>
+					</div>
+					<table class="table">
+						<thead>
+							<tr style ="vertical-align:left;">
+								<td><i class="far fa-clipboard fa-2x" style ="margin-left:-50%;"></i>&nbsp;<h4 style ="margin-left:-50%;">진행중문서</h4></td> 
+								<td style ="margin-left:-80%;">${requestScope.ongoing}</td>
+								<td scope="col"><i class="far fa-file-alt fa-2x" style ="margin-left:-50%;"></i>&nbsp;<h4 style ="margin-left:-50%;">결제반려문서</h4></td>
+								<td  style ="margin-left:-80%;">${requestScope.reject}</td>
+							</tr>
+							<tr style ="vertical-align:left;">
+								<td scope="col"><i class="far fa-edit fa-2x" style ="margin-left:-50%;"></i>&nbsp;<h4 style ="margin-left:-50%;">결제할문서</h4></td>
+								<td style ="margin-left:-80%;">${requestScope.approve}</td>
+								<td scope="col"><i class="far fa-file-archive fa-2x" style ="margin-left:-50%;"></i>&nbsp;<h4 style ="margin-left:-50%;">결제완료문서</h4></td>
+								<td style ="margin-left:-80%;">${requestScope.complete}</td>
+							</tr>
+						</thead> 
+					</table>
+				</div>
+				<!-- 전자 결재 끝 -->
+				<!-- 전자 결재 시작 -->
+				<div class="card" style ="box-shadow :10px 10px #999999; border-radius:10px; border : 4px groove #bcbcbc; margin-right:10%;">
+					<div class="card-body">
+						<h5 class="card-title m-b-0">오늘의 날씨</h5>
+					</div>
+					<table class="table">
+						<thead>
+							<tr style ="vertical-align:left;">
+								<td><i class="far fa-clipboard fa-2x" style ="margin-left:-50%;"></i>&nbsp;<h4 style ="margin-left:-50%;">진행중문서</h4></td> 
+								<td style ="margin-left:-80%;">${requestScope.ongoing}</td>
+								<td scope="col"><i class="far fa-file-alt fa-2x" style ="margin-left:-50%;"></i>&nbsp;<h4 style ="margin-left:-50%;">결제반려문서</h4></td>
+								<td  style ="margin-left:-80%;">${requestScope.reject}</td>
+							</tr>
+							<tr style ="vertical-align:left;">
+								<td scope="col"><i class="far fa-edit fa-2x" style ="margin-left:-50%;"></i>&nbsp;<h4 style ="margin-left:-50%;">결제할문서</h4></td>
+								<td style ="margin-left:-80%;">${requestScope.approve}</td>
+								<td scope="col"><i class="far fa-file-archive fa-2x" style ="margin-left:-50%;"></i>&nbsp;<h4 style ="margin-left:-50%;">결제완료문서</h4></td>
+								<td style ="margin-left:-80%;">${requestScope.complete}</td>
+							</tr>
+						</thead> 
+					</table>
+				</div>
+				<!-- 전자 결재 끝 -->
+			</div>
+		<!--col-md-6 컨텐츠 컨테이너 내에서 오른쪽 부분 (연봉통계 + 전자결재) 종료 -->
+		</div>
+	<!-- <div class="row"> 부분 끝 div-->
+	</div>
+<!--<div class="container-fluid"> 부분 끝 div-->
 </div>
+
 </body>
 
