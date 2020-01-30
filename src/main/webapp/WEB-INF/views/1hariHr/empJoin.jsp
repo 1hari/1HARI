@@ -85,14 +85,14 @@
 	<!--컨텐츠 제목 끝 -->
 
 	<!-- ============================================================== -->
-	<div class="container-fluid">
+	<div class="container-fluid"  style ="margin-top: 3%;">
 		<div class="row">
 			<div class="col-12">
 				<!-- ============================================================== -->
 				<!-- Start Page Content -->
 				<!-- ============================================================== -->
-				<div class="card">
-					<div class="card-body wizard-content">
+				<div class="card" style="width:80%; height:80%; margin-left:10%;" >
+					<div class="card-body wizard-content" style ="border-radius:10px;  box-shadow :3px 3px #999999; border: 2px groove #999999; ">
 						<h6 class="card-subtitle"></h6>
 						<form id="example-form" action="" class="m-t-40" name="joinform" method="post">
 							<div>

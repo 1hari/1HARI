@@ -156,7 +156,7 @@ public interface EmpDao {
     public List<AnnUse> getAnnUseList(String empNum) throws ClassNotFoundException, SQLException;
     
     // 관리자 근태목록 김진호 2020. 1. 27
-    public List<EmpDto> getTaList() throws ClassNotFoundException, SQLException;
+    public List<EmpDto> getTaList(String setDate) throws ClassNotFoundException, SQLException;
     
     //연차정보 김정하 2020. 1. 28
     public EmpAnn getEmpAnn(String empNum) throws ClassNotFoundException, SQLException;
@@ -174,7 +174,7 @@ public interface EmpDao {
  	public int empListPageCount(Map<String, String> map) throws ClassNotFoundException, SQLException;
  	
     //연차정보 김진호 2020. 1. 29
-    public int setEmpTa(EmpDto empdto) throws ClassNotFoundException, SQLException;
+    public int setEmpTa(Map<String, String> map) throws ClassNotFoundException, SQLException;
     
     //연차목록 1건조회 김정하 2020. 1. 30
     public AnnUse getAnnUse(String signNum) throws ClassNotFoundException, SQLException;

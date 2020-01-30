@@ -18,6 +18,10 @@
 	<!-- css 설정 영역 -->
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/hari/dist/css/style.min.css">
 	
+	
+	<!-- css 설정 폰트 설정 추가-->
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/hari/dist/css/stylesheetlove.css">
+	
 	<!--toaster (웹 페이지 내 알람) -->
 	<link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
 	

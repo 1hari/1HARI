@@ -499,12 +499,12 @@ public class EmpService {
 	}
 	
     // 관리자권한 근태목록 가져오기 김진호 2020. 1. 27
-    public List<EmpDto> getTaList() {
+    public List<EmpDto> getTaList(String setDate) {
     	EmpDao empdao = sqlsession.getMapper(EmpDao.class);
     	List<EmpDto> getTaList = null;
     	
     	try {
-			getTaList = empdao.getTaList();
+			getTaList = empdao.getTaList(setDate);
 		} catch (ClassNotFoundException | SQLException e) {
 			log.debug("EmpService 예외발생: " + e.getMessage());
 		}
@@ -599,11 +599,11 @@ public class EmpService {
 	}
 	
     // 관리자권한 사원근태(비동기) 가져오기 김진호 2020. 1. 29
-    public int setEmpTa(EmpDto empdto) {
+    public int setEmpTa(Map<String, String> map) {
     	EmpDao empdao = sqlsession.getMapper(EmpDao.class);
     	int result = 0;
     	try {
-			result = empdao.setEmpTa(empdto);
+			result = empdao.setEmpTa(map);
 		} catch (ClassNotFoundException | SQLException e) {
 			log.debug("EmpService getEmpTa 예외발생: " + e.getMessage());
 		}

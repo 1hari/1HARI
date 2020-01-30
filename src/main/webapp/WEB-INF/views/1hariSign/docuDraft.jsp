@@ -26,6 +26,8 @@
 		border-width:1px 1px 1px;
 		width: 80px;
 	}
+	
+
 </style>
 <!-- Page wrapper  -->
 <!-- ============================================================== -->
@@ -91,10 +93,12 @@
 						<div class="row">
 							<!-- input 태그 -->
 							<div class="col-md-12">
+								<div class="input-group">
 								<input type="text" class="form-control" id="signTitle" name="signTitle" placeholder="제목" <c:forEach var="docu" items="${requestScope.signDocu}">
 										value="${docu.signTitle}"
 									</c:forEach> style="width:93%; display: inline;">
 								<button type="button" id="draftSubmit" class="btn btn-success" style="display: inline-block;">기안</button>
+								</div>
 							</div>
 						</div><!-- row 끝 -->
 						<c:if test="${form.signFormCode == 0}">

@@ -1,12 +1,13 @@
 <template>
   <!-- pay 급여조회 -->
+
   <div class="container" style="margin-top:5%;">
-    <div class="card shadow" style=" height: 500%;">
+    <div class="card" style=" height: 500%;  border-radius:10px;  box-shadow :5px 5px #999999; border: 2px groove #999999;">
       <div class="card-body" >
         <h4 class="card-title">급여</h4>
         <div style = "margin-left:85%;">
            <span>사번: {{server_data.empNum}}</span>
-            <select style = "margin-left:10%;" id="selectYear" @change="getPayList($event)">
+            <select style = "margin-left:10%; border: 2px solid #807266;" id="selectYear" @change="getPayList($event)">
               <option  v-for="(a1, index) in server_data.years"  v-bind:selected="index == 0">{{a1}}</option>
             </select>
             
@@ -41,7 +42,7 @@
               <td class="text-center d-none d-md-table-cell">{{pay.payLIncomeTax}}</td>
               <td class="text-center d-none d-md-table-cell">{{totalDeduction}}</td><!--실급여로 데이터 받으세요 -->
               <td class="text-center d-none d-md-table-cell">{{realAmount}}</td><!--실급여로 데이터 받으세요 -->
-              <td class="text-center d-none d-md-table-cell"><button class ="btn btn-sucess" style = "background-color: #2ab2aa; text-color:white; height:70%;" @click="payRead(splitPayMonth[index][0],splitPayMonth[index][1])">급여명세</button></td>
+              <td class="text-center d-none d-md-table-cell"><button class ="btn btn-sucess" style = "background-color: white; color:black; border:2px solid #807266; font-weight:bold; height:70%;" @click="payRead(splitPayMonth[index][0],splitPayMonth[index][1])">급여명세</button></td>
             </tr>
           </tbody>
           
@@ -61,6 +62,7 @@
         <input type="text" hidden="hidden" name="month" id="month" value="">
       </form>
   </div>
+
 
 </template>
 <style>

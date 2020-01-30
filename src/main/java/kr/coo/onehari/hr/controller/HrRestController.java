@@ -530,11 +530,11 @@ public class HrRestController {
 	}
 	
 	@RequestMapping(value = "getTaList.hari", method = RequestMethod.POST)
-	public List<EmpDto> getTaList() {
+	public List<EmpDto> getTaList(String setDate) {
 		List<EmpDto> getTaList = null;
 		
 		try {
-			getTaList = empSercive.getTaList();
+			getTaList = empSercive.getTaList(setDate);
 		} catch (Exception e) {
 			log.debug("HrRestController getTaList 예외발생: " + e.getMessage());
 		}
@@ -652,10 +652,16 @@ public class HrRestController {
 	
 	// 관리자권한 사원근태수정을 위한 사원정보 가져오기 김진호 2020. 1. 29
 	@RequestMapping(value = "setEmpTa.hari", method = RequestMethod.POST)
-	public int setEmpTa(EmpDto empdto) {
+	public int setEmpTa(EmpDto empdto, String setDate) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		
+		map.put("taDate", empdto.getTaDate());
+		map.put("empNum", Integer.toString(empdto.getEmpNum()));
+		map.put("setDate", setDate);
+		
 		int result = 0;
 		try {
-			result = empSercive.setEmpTa(empdto);
+			result = empSercive.setEmpTa(map);
 		} catch (Exception e) {
 			log.debug("HrRestController setEmpTa 예외발생: " + e.getMessage());
 		}

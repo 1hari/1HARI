@@ -31,8 +31,9 @@
 								<div class="card-body ">
 									<div class="row">
 										<div class="col-5">
-											<div class="icon-big text-center">
-												<i class="fas fa-calendar-alt fa-3x" style = "padding-top:10px;"></i>
+											<div class="icon-big text-center" style = "padding-top:10%;">
+												<i class="m-r-10 mdi mdi-calendar-check fa-3x"  style = "padding-top:15px;"></i>
+											
 											</div>
 										</div>
 										<div class="col col-stats">
@@ -50,8 +51,9 @@
 								<div class="card-body">
 									<div class="row">
 										<div class="col-5">
-											<div class="icon-big text-center">
-												<i class="fas fa-history fa-3x" style = "padding-top:10px;"></i>
+											<div class="icon-big text-center" style = "padding-top:10%;">
+												<i class="m-r-10 mdi mdi-calendar-clock fa-3x" style = "padding-top:10px;"></i>
+											
 											</div>
 										</div>
 										<div class="col col-stats">
@@ -69,8 +71,9 @@
 								<div class="card-body">
 									<div class="row">
 										<div class="col-5">
-											<div class="icon-big text-center">
-												<i class="fas fa-sync fa-3x" style = "padding-top:10px;"></i>
+											<div class="icon-big text-center" style = "padding-top:10%;">
+												<i class="m-r-10 mdi mdi-chart-arc fa-3x" style = "padding-top:10px;"></i>
+											
 											</div>
 										</div>
 										<div class="col col-stats">
@@ -88,10 +91,11 @@
 								<div class="card-body">
 									<div class="row">
 										<div class="col-5">
-											<div class="icon-big text-center">
-												<i class="fas fa-suitcase fa-3x" style = "padding-top:10px;"></i>
+											<div class="icon-big text-center" style = "padding-top:10%;">
+												<i class="m-r-10 mdi mdi-chemical-weapon fa-3x" style = "padding-top:20px;"></i>
+										
 											</div>
-										</div>
+										</div> 
 										<div class="col col-stats">
 											<div class="numbers">
 												<p class="card-category">남은 연차</p>
