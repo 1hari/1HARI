@@ -2026,7 +2026,7 @@ pre code {
 }
 
 .table-striped tbody tr:nth-of-type(odd) {
-	background-color:#e1f6fa;
+	background-color:#cecece;
 }
 
 .table-hover tbody tr:hover {
@@ -44457,7 +44457,7 @@ pre code {
 }
 
 .table-striped tbody tr:nth-of-type(odd) {
-	background-color:#e1f6fa;
+	background-color:#cecece;
 }
 
 .table-hover tbody tr:hover {
