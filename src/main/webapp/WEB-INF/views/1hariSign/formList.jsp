@@ -41,7 +41,7 @@
 						<div class="table-responsive">
 							<div style="text-align: right; margin-bottom: 2%;">
 								<a href="formInsert.hari" style="color: white;">
-									<button type="button" class="btn m-t-5 btn-info btn-block waves-effect waves-light" style="width: 20%; background-color: #20B2AA; margin-right: 1%;  border : 2px solid #807266; font-weight: bold; font-size:medium; color: #807266; background-color:white;">
+									<button type="button" class="btn m-t-5 btn-info btn-block waves-effect waves-light" style="width: 12%; background-color: #20B2AA; margin-right: 1%;  border : 2px solid #807266; font-weight: bold; font-size:medium; color: #000000; background-color:white;">
 									양식 등록
 									</button>
 								</a>
@@ -62,7 +62,7 @@
 													<td>
 														<c:if test="${form.signFormCode != 0}"> <!-- 연차신청서 삭제불가 -->
 															<a href="formDelete.hari?signFormCode=${form.signFormCode}" style="color: white;">
-																<button type="button" class="btn m-t-5 btn-info btn-block waves-effect waves-light" style="width: 20%; background-color: #20B2AA; margin-right: 1%;  border : 2px solid #807266; font-weight: bold; font-size:medium; color: #807266; background-color:white;">
+																<button type="button" class="btn m-t-5 btn-info btn-block waves-effect waves-light" style="width: 12%; background-color: #20B2AA; margin-right: 1%;  border : 2px solid #807266; font-weight: bold; font-size:x-small; color: #000000; background-color:white;">
 																	삭제
 																</button>
 															</a>

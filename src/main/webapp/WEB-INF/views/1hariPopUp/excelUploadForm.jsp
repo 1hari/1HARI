@@ -5,7 +5,8 @@
 <!-- Custom CSS -->
 <link rel="stylesheet" type="text/css"href="${pageContext.request.contextPath}/resources/hari/assets/extra-libs/multicheck/multicheck.css">
 <link href="${pageContext.request.contextPath}/resources/hari/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet">
-
+<!-- 다채 사랑 폰트  -->
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/hari/dist/css/stylesheetlove.css">
 <!--datepicker link 필수 !!! -->
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/hari/assets/libs/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
 <link href="${pageContext.request.contextPath}/resources/hari/dist/css/style.min.css" rel="stylesheet">
@@ -111,16 +112,16 @@
 							action="${pageContext.request.contextPath}/util/personnel/insertExcelEmp.hari">
 						<div class="form-group row">
 							<div class="col-md-12">
-								<div class="custom-file">
-									<input type="file" class="custom-file-input" id="fileInput" name="fileInput" required >
-									<label class="custom-file-label" for="validatedCustomFile">파일을 선택하세요.</label>
+								<div class="custom-file" >
+									<input type="file" class="custom-file-input" id="fileInput" name="fileInput" required  style = "font-family: 'Nanum DaCaeSaRang'; color:black; background-color:#807266; border: 2px solid #807266;" >
+									<label class="custom-file-label" for="validatedCustomFile" style = "color:black; border: 2px solid #807266;">파일을 선택하세요.</label>
 								</div>
 							</div>
 						</div>
-						<button type="button" id="excelInsert" class="btn btn-success" style= "width: 12%; background-color: #20B2AA; margin-left: 75%;">
+						<button type="button" id="excelInsert" class="btn btn-success" style= "width: 10%; background-color: white; margin-left: 75%; color:#000000;font-family: 'Nanum DaCaeSaRang';">
 	    					저장하기
 	    				</button>
-						<button type="button" class="btn btn-success" style="width: 12%; background-color: #20B2AA; " onclick="doExcelUploadProcess()">
+						<button type="button" class="btn btn-success" style="width: 10%; background-color: white; color:#000000;font-family: 'Nanum DaCaeSaRang'; " onclick="doExcelUploadProcess()">
 							올리기
 						</button> <!-- "btn m-t-5 btn-info btn-block waves-effect waves-light -->
 	    			

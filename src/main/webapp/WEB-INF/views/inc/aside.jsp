@@ -267,41 +267,6 @@
 					</ul>
 				</li>
 
-				<li class="sidebar-item">
-					<a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
-						<i class="m-r-10 mdi mdi-face-profile"></i>
-						<span class="hide-menu">커뮤 니티 </span>
-					</a>
-					<ul aria-expanded="false" class="collapse  first-level" id="theme" style="background: white;">
-						<li class="sidebar-item">
-							<a href="${pageContext.request.contextPath}/1hariBoard/boardList.hari" class="sidebar-link">
-								<i class="m-r-10 mdi mdi-file-multiple"></i>
-								<span class="hide-menu">공지 사항 </span>
-							</a>
-						</li>
-							<li class="sidebar-item">
-							<a href="${pageContext.request.contextPath}/1hariDepart/departList.hari" class="sidebar-link">
-								<i class="m-r-10 mdi mdi-format-float-left"></i>
-								<span class="hide-menu">부서별 게시판 </span>
-							</a>
-						</li>
-					</ul>
-				</li>
-				
-				<li class="sidebar-item">
-					<a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
-						<i class="m-r-10 mdi mdi-email-secure"></i>
-						<span class="hide-menu">사내 메일 </span>
-					</a>
-					<ul aria-expanded="false" class="collapse  first-level" id="theme" style="background: white;">
-						<li class="sidebar-item">
-							<a href="#" class="sidebar-link">
-								<i class="m-r-10 mdi mdi-email-open-outline"></i>
-								<span class="hide-menu">메일 목록 </span>
-							</a>
-						</li>
-					</ul>
-				</li>
 			</ul>
 		</nav>
 		<!-- Sidebar 네비게이션 끝 -->

@@ -2645,7 +2645,7 @@ select.form-control-lg:not([size]):not([multiple]) {
 
 .custom-file-input.is-valid~.custom-file-label,
 .was-validated .custom-file-input:valid~.custom-file-label {
-	border-color: #28b779
+	border-color: #807266
 }
 
 .custom-file-input.is-valid~.custom-file-label:before,
@@ -2758,7 +2758,7 @@ select.form-control-lg:not([size]):not([multiple]) {
 
 .custom-file-input.is-invalid~.custom-file-label,
 .was-validated .custom-file-input:invalid~.custom-file-label {
-	border-color: #da542e
+	border-color: #807266
 }
 
 .custom-file-input.is-invalid~.custom-file-label:before,
@@ -15307,7 +15307,7 @@ select.form-control-lg:not([size]):not([multiple]) {
 
 .custom-file-input.is-valid~.custom-file-label,
 .was-validated .custom-file-input:valid~.custom-file-label {
-	border-color: #28b779
+	border-color: #807266
 }
 
 .custom-file-input.is-valid~.custom-file-label:before,
@@ -15420,7 +15420,7 @@ select.form-control-lg:not([size]):not([multiple]) {
 
 .custom-file-input.is-invalid~.custom-file-label,
 .was-validated .custom-file-input:invalid~.custom-file-label {
-	border-color: #da542e
+	border-color: #807266
 }
 
 .custom-file-input.is-invalid~.custom-file-label:before,
@@ -17289,13 +17289,13 @@ input[type=submit].btn-block {
 }
 
 .custom-file-input:focus~.custom-file-label {
-	border-color: rgba(0, 0, 0, 0.25);
+	border-color: #807266;
 	-webkit-box-shadow: transparent;
 	box-shadow: transparent
 }
 
 .custom-file-input:focus~.custom-file-label:after {
-	border-color: rgba(0, 0, 0, 0.25)
+	border-color: #807266
 }
 
 .custom-file-input:lang(en)~.custom-file-label:after {
@@ -27965,7 +27965,7 @@ select.form-control-lg:not([size]):not([multiple]) {
 
 .custom-file-input.is-valid~.custom-file-label,
 .was-validated .custom-file-input:valid~.custom-file-label {
-	border-color: #28b779
+	border-color: #807266
 }
 
 .custom-file-input.is-valid~.custom-file-label:before,
@@ -28078,7 +28078,7 @@ select.form-control-lg:not([size]):not([multiple]) {
 
 .custom-file-input.is-invalid~.custom-file-label,
 .was-validated .custom-file-input:invalid~.custom-file-label {
-	border-color: #da542e
+	border-color: #807266
 }
 
 .custom-file-input.is-invalid~.custom-file-label:before,
@@ -29950,13 +29950,13 @@ input[type=submit].btn-block {
 }
 
 .custom-file-input:focus~.custom-file-label {
-	border-color: rgba(0, 0, 0, 0.25);
+	border-color: #807266;
 	-webkit-box-shadow: transparent;
 	box-shadow: transparent
 }
 
 .custom-file-input:focus~.custom-file-label:after {
-	border-color: rgba(0, 0, 0, 0.25)
+	border-color: #807266
 }
 
 .custom-file-input:lang(en)~.custom-file-label:after {
@@ -45076,7 +45076,7 @@ select.form-control-lg:not([size]):not([multiple]) {
 
 .custom-file-input.is-valid~.custom-file-label,
 .was-validated .custom-file-input:valid~.custom-file-label {
-	border-color: #28b779
+	border-color: #807266
 }
 
 .custom-file-input.is-valid~.custom-file-label:before,
@@ -45189,7 +45189,7 @@ select.form-control-lg:not([size]):not([multiple]) {
 
 .custom-file-input.is-invalid~.custom-file-label,
 .was-validated .custom-file-input:invalid~.custom-file-label {
-	border-color: #da542e
+	border-color: #807266
 }
 
 .custom-file-input.is-invalid~.custom-file-label:before,
@@ -47061,13 +47061,13 @@ input[type=submit].btn-block {
 }
 
 .custom-file-input:focus~.custom-file-label {
-	border-color: rgba(0, 0, 0, 0.25);
+	border-color: #807266;
 	-webkit-box-shadow: transparent;
 	box-shadow: transparent
 }
 
 .custom-file-input:focus~.custom-file-label:after {
-	border-color: rgba(0, 0, 0, 0.25)
+	border-color: #807266
 }
 
 .custom-file-input:lang(en)~.custom-file-label:after {
@@ -57736,7 +57736,7 @@ select.form-control-lg:not([size]):not([multiple]) {
 
 .custom-file-input.is-valid~.custom-file-label,
 .was-validated .custom-file-input:valid~.custom-file-label {
-	border-color: #28b779
+	border-color: #807266
 }
 
 .custom-file-input.is-valid~.custom-file-label:before,
@@ -57849,7 +57849,7 @@ select.form-control-lg:not([size]):not([multiple]) {
 
 .custom-file-input.is-invalid~.custom-file-label,
 .was-validated .custom-file-input:invalid~.custom-file-label {
-	border-color: #da542e
+	border-color: #807266
 }
 
 .custom-file-input.is-invalid~.custom-file-label:before,
@@ -59723,13 +59723,13 @@ input[type=submit].btn-block {
 }
 
 .custom-file-input:focus~.custom-file-label {
-	border-color: rgba(0, 0, 0, 0.25);
+	border-color: #807266;
 	-webkit-box-shadow: transparent;
 	box-shadow: transparent
 }
 
 .custom-file-input:focus~.custom-file-label:after {
-	border-color: rgba(0, 0, 0, 0.25)
+	border-color: #807266
 }
 
 .custom-file-input:lang(en)~.custom-file-label:after {
@@ -70399,10 +70399,10 @@ select.form-control-lg:not([size]):not([multiple]) {
 	-webkit-box-shadow: 0 0 0 1px #eeeeee, 0 0 0 0.2rem rgba(40, 183, 121, 0.25);
 	box-shadow: 0 0 0 1px #eeeeee, 0 0 0 0.2rem rgba(40, 183, 121, 0.25)
 }
-
+s
 .custom-file-input.is-valid~.custom-file-label,
 .was-validated .custom-file-input:valid~.custom-file-label {
-	border-color: #28b779
+	border-color: #807266
 }
 
 .custom-file-input.is-valid~.custom-file-label:before,
@@ -70515,7 +70515,7 @@ select.form-control-lg:not([size]):not([multiple]) {
 
 .custom-file-input.is-invalid~.custom-file-label,
 .was-validated .custom-file-input:invalid~.custom-file-label {
-	border-color: #da542e
+	border-color: #807266
 }
 
 .custom-file-input.is-invalid~.custom-file-label:before,
