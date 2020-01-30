@@ -32,7 +32,7 @@
 							<button type="button" signCode="3" class="btn btn-outline-success approval">결재</button>
 							<button type="button" signCode="4" class="btn btn-outline-danger approval">반려</button>
 						</c:if>
-						<c:if test='${docu.signCode=="4"}'>
+						<c:if test='${docu.signCode=="4" && docu.draftEmp==loginuser}'>
 							<button type="button" class="btn btn-outline-dark" id="draft">재기안</button>
 						</c:if>
 						<button type="button" id="print" class="btn btn-outline-secondary">출력하기</button>

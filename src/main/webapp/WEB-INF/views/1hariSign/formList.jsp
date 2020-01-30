@@ -49,7 +49,6 @@
 							<table id="zero_config" class="table table-striped table-bordered">
 								<thead>
 									<tr>										
-										<th>양식번호</th>
 										<th>양식명</th>
 										<th>삭제</th>
 									</tr>
@@ -59,7 +58,6 @@
 										<c:when test="${requestScope.formList != '[]'}">
 											<c:forEach var="form" items="${requestScope.formList}">
 												<tr>
-													<td>${form.signFormCode}</td>
 													<td>${form.signFormFormName}</td>
 													<td>
 														<c:if test="${form.signFormCode != 0}"> <!-- 연차신청서 삭제불가 -->

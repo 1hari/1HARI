@@ -33,6 +33,11 @@
 					console.log($(this).attr('title'));
 					signFormCode = $(this).attr('title');
 					$('#signFormCode').val(signFormCode);
+					if($('#signFormCode').val() != "품의서"){
+						$('#formChoice').removeAttr('disabled');
+					}else {
+						$('#formChoice').attr('disabled', 'disabled');
+					}
 				})
 				
 			},
@@ -317,13 +322,13 @@
 					</button>
 				</div><!-- modal-header 끝 -->
 			
-				<div class="modal-body" style="height: 450px;">
+				<div class="modal-body" style="height: 250px;">
 					<div class="set_wrap">
 						<section class="search">
-							<div class="search_wrap">
-								<input id="searchInput" class="search" maxlength="20" type="text" placeholder="양식제목">
-								<i class="fas fa-search" value="" title=""></i>
-							</div>
+<!-- 							<div class="search_wrap"> -->
+<!-- 								<input id="searchInput" class="search" maxlength="20" type="text" placeholder="양식제목"> -->
+<!-- 								<i class="fas fa-search" value="" title=""></i> -->
+<!-- 							</div> -->
 						</section>
 					
 						<div class="content_tab_wrap">
@@ -331,7 +336,7 @@
 								<ul>
 									<li class="jstree-open" id="formlist">
 										<i class="jstree-icon">&nbsp;</i>
-										<a title="품의서" rel="FOLDER" href="#" data-bypass="1">
+										<a class="formcode" title="품의서" rel="FOLDER" href="#" data-bypass="1">
 											<i class="far fa-folder-open">&nbsp;</i>품의서
 										</a>
 											
@@ -357,7 +362,7 @@
 			
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-					<button type="submit" class="btn btn-primary" id="formChoice" style="color:#807266;">선택완료</button>
+					<button type="submit" class="btn btn-primary" id="formChoice" style="color:#807266;" disabled="disabled">선택완료</button>
 				</div><!-- modal-footer 끝 -->
 				<input type="hidden" value="" id="signFormCode" name="signFormCode">
 			</form>

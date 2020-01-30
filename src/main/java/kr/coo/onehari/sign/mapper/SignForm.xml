@@ -17,7 +17,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 폼 리스트 가져오기 김정하 / 2020. 1. 8 -->
 	<select id="selectAllForm" resultType="kr.coo.onehari.sign.dto.SignFormDto">
-		SELECT SIGNFORMCODE, SIGNFORMFORMNAME, SIGNFORMFORMCONTENT FROM signform
+		SELECT SIGNFORMCODE, SIGNFORMFORMNAME, SIGNFORMFORMCONTENT FROM signform ORDER BY SIGNFORMCODE
 	</select>
 	
 	<!-- 폼 가져오기 김정하 / 2020. 1. 8-->
