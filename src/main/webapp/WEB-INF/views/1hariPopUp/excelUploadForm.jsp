@@ -106,7 +106,7 @@
 		<!-- ============================================================== -->
 		<div class="row">
 			<div class="col-12">
-				<h5 class="card-title" style="float: left;">Excel Upload</h5>
+				<h5 class="card-title" style="float: left; font-family: 'Nanum DaCaeSaRang'; color:black; background-color:white; font-size:x-large; font-weight:bold;">Excel Upload</h5>
 				<div class="table-responsive">
 					<form id="excelUploadForm" name="insertExcelEmp" method="post" enctype="multipart/form-data"
 							action="${pageContext.request.contextPath}/util/personnel/insertExcelEmp.hari">
@@ -114,7 +114,7 @@
 							<div class="col-md-12">
 								<div class="custom-file" >
 									<input type="file" class="custom-file-input" id="fileInput" name="fileInput" required  style = "font-family: 'Nanum DaCaeSaRang'; color:black; background-color:#807266; border: 2px solid #807266;" >
-									<label class="custom-file-label" for="validatedCustomFile" style = "color:black; border: 2px solid #807266;">파일을 선택하세요.</label>
+									<label class="custom-file-label" for="validatedCustomFile" style = " background-color:white; color:black; font-family: 'Nanum DaCaeSaRang'; border: 2px solid #807266;">파일을 선택하세요.</label>
 								</div>
 							</div>
 						</div>
@@ -129,17 +129,17 @@
 							<thead>
 								<tr>
 	<!-- 											<th>사번</th> -->
-									<th>이름</th>
-									<th>소속</th>
-									<th>직급</th>
-									<th>직책</th>
-									<th>재직구분</th>
-									<th>생년월일</th>
-									<th>주민등록번호</th>
-									<th>핸드폰번호</th>
-									<th>이메일</th>
-									<th>입사일</th>
-									<th>퇴사일</th>
+									<th style = "font-family: 'Nanum DaCaeSaRang'; color:black; background-color:white; font-size:medium; font-weight:bold;">이름</th>
+									<th style = "font-family: 'Nanum DaCaeSaRang'; color:black; background-color:white; font-size:medium; font-weight:bold;">소속</th>
+									<th style = "font-family: 'Nanum DaCaeSaRang'; color:black; background-color:white; font-size:medium; font-weight:bold;">직급</th>
+									<th style = "font-family: 'Nanum DaCaeSaRang'; color:black; background-color:white; font-size:medium; font-weight:bold;">직책</th>
+									<th style = "font-family: 'Nanum DaCaeSaRang'; color:black; background-color:white; font-size:medium; font-weight:bold;">재직구분</th>
+									<th style = "font-family: 'Nanum DaCaeSaRang'; color:black; background-color:white; font-size:medium; font-weight:bold;">생년월일</th>
+									<th style = "font-family: 'Nanum DaCaeSaRang'; color:black; background-color:white; font-size:medium; font-weight:bold;">주민등록번호</th>
+									<th style = "font-family: 'Nanum DaCaeSaRang'; color:black; background-color:white; font-size:medium; font-weight:bold;">핸드폰번호</th>
+									<th style = "font-family: 'Nanum DaCaeSaRang'; color:black; background-color:white; font-size:medium; font-weight:bold;">이메일</th>
+									<th style = "font-family: 'Nanum DaCaeSaRang'; color:black; background-color:white; font-size:medium; font-weight:bold;">입사일</th>
+									<th style = "font-family: 'Nanum DaCaeSaRang'; color:black; background-color:white; font-size:medium; font-weight:bold;">퇴사일</th>
 								</tr>
 							</thead>
 							<tbody id="excelForm">
