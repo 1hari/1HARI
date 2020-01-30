@@ -223,10 +223,10 @@
 						}
 					}
 				} else { // 클릭 이후에 페이지에 들어올 때
-					if (moment(curMonth).month() != selectedMonth) {
+					if (moment(setDate).month() != selectedMonth) {
 						days += '<span class="click"> ' + (i + 1) + ' </span>'; // 1일은 0이기 때문에 +1
 					} else {
-						if (curDay != (i + 1)) {
+						if (moment(setDate).date() != (i + 1)) {
 							days += '<span class="click"> ' + (i + 1) + ' </span>'; // 1일은 0이기 때문에 +1
 						} else {
 							days += '<span class="click" style="color: red;"> ' + (i + 1) + ' </span>'; // 1일은 0이기 때문에 +1
