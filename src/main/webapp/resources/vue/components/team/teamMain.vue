@@ -13,22 +13,22 @@
                 <div class="row">
 
                   <div class="custom-control custom-checkbox col-md-3">
-                    <input type="checkbox" class="custom-control-input" v-model="data.searchCheck" id="customControlAutosizing1" value="empNum" checked="checked">
+                    <input type="checkbox" class="custom-control-input" v-model="searchCheck" id="customControlAutosizing1" value="empNum" checked="checked">
                       <label class="custom-control-label" for="customControlAutosizing1">사번</label>
                   </div>
                   
                   <div class="custom-control custom-checkbox col-md-3">
-                    <input type="checkbox" class="custom-control-input" v-model="data.searchCheck" id="customControlAutosizing2" value="empName" checked="checked">
+                    <input type="checkbox" class="custom-control-input" v-model="searchCheck" id="customControlAutosizing2" value="empName" checked="checked">
                       <label class="custom-control-label" for="customControlAutosizing2">이름</label>
                   </div>
                   
                   <div class="custom-control custom-checkbox col-md-3">
-                    <input type="checkbox" class="custom-control-input" v-model="data.searchCheck" id="customControlAutosizing3" value="teamName" checked="checked">
+                    <input type="checkbox" class="custom-control-input" v-model="searchCheck" id="customControlAutosizing3" value="teamName" checked="checked">
                       <label class="custom-control-label" for="customControlAutosizing3">소속</label>
                   </div>
 
                   <div class="custom-control custom-checkbox col-md-3">
-                    <input type="checkbox" class="custom-control-input" v-model="data.searchCheck" id="customControlAutosizing4" value="phoneNum" checked="checked">
+                    <input type="checkbox" class="custom-control-input" v-model="searchCheck" id="customControlAutosizing4" value="phoneNum" checked="checked">
                       <label class="custom-control-label" for="customControlAutosizing4">연락처</label>
                   </div>
 
@@ -36,9 +36,8 @@
               </div>
 
               <div class="col-md-4">
-                <input type="search" class="form-control form-control-sm" placeholder="검색어를 입력하세요." v-model="data.searchKey">
-              </div>
-									
+                <input type="search" class="form-control form-control-sm" placeholder="검색어를 입력하세요." v-model="searchKey">
+              </div>								
             </div>
           </div>
         </div>
@@ -106,10 +105,8 @@ module.exports = {
     return {
       //여기안에 있는 멤버들을 템플릿 안에서 사용할 수 있음
       server_data: {},
-      data : {
-        searchCheck : [],
-        searchKey : ''
-      }
+      searchCheck : [],
+      searchKey : ''
     };
   },
   methods: {
@@ -129,6 +126,9 @@ module.exports = {
         params.append("cp", this.$route.params.cp)
       }
       
+      params.append("searchCheck", this.searchCheck)
+      params.append("searchKey", this.searchKey)
+      
       //console.log(contextPath);
       axios.post(contextPath+"/ajax/getEmpList.hari",params).then((response)=>{
         //console.log(response.data)
@@ -140,9 +140,38 @@ module.exports = {
     //alert(this.$route.params.board_idx) //주소를 관리하는 객체 route, 주소가 바뀌면 route객체도 변경됨, route객체의 변경을 감지해줘야함
     this.getEmpList();
   },
+  computed : {
+  	watchTarget : function(){
+  		return [this.searchKey, this.searchCheck]
+  	}
+  },
   watch: {
     $route(to, from) {
       this.getEmpList();
+    },
+    watchTarget : function(){
+    	console.log(this.searchKey);
+    	console.log(this.searchCheck);
+    	
+    	var params = new URLSearchParams();
+    	 if(this.$route.params.pg == undefined){
+        params.append("pg", this.$store.state.pg)
+      }else {
+        params.append("pg", this.$route.params.pg)
+      }
+      
+      if(this.$route.params.cp == undefined){
+        params.append("cp", this.$store.state.cp)
+      }else {
+        params.append("cp", this.$route.params.cp)
+      }
+      params.append("searchCheck", this.searchCheck)
+      params.append("searchKey", this.searchKey)
+      
+    	axios.post(contextPath+"/ajax/getEmpList.hari",params).then((response)=>{
+        //console.log(response.data)
+        this.server_data=response.data
+      })
     }
   }
 };

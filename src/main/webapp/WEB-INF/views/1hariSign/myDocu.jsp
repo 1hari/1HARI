@@ -322,7 +322,7 @@
 	                                        
 	                                        <div class="custom-control custom-checkbox col-md-3">
 	                                            <input type="checkbox" class="custom-control-input searchCheck" id="customControlAutosizing4" value="draftEmp" checked="checked">
-	                                            <label class="custom-control-label" for="customControlAutosizing4">기안자</label>
+	                                            <label class="custom-control-label" for="customControlAutosizing4">사번</label>
 	                                        </div>
 	                                        
                                         </div>
