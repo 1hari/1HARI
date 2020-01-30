@@ -124,8 +124,7 @@
 			$('#selectMonth').append(month); // selectBox에 넣기
 			
 			let selectedMonth = moment($('#selectMonth').val()).month(); // 선택되어 있는 현재 월('2020-01')에서 월(01)만 추출
-			
-			selectMonth(selectedMonth);
+			selectMonth(selectedMonth); // 
 			
 			$('#selectMonth').change(function() { // 선택 월이 바뀌는 경우
 				selectedMonth = moment($('#selectMonth').val()).month(); // 선택한 월에서 월만 추출
@@ -150,27 +149,27 @@
 											+ '<td>' + TaList[i].empNum + '</td>' // 사번
 											+ '<td>' + TaList[i].empName + ' ' + TaList[i].rankName +'</td>' // 이름, 직급
 											+ '<td>' + TaList[i].teamName + '</td>'; // 부서
-							if (TaList[i].taDate != null && TaList[i].taDate != '0000-00-00 00:00:00') {
+							if (TaList[i].taDate != null && TaList[i].taDate != '0000-00-00 00:00:00') { // 출근시간 기록이 있고 연차(0000)가 아닌 경우
 								empTaList += '<td>' + TaList[i].taName + ' (' + TaList[i].taDate + ')</td>'; // 출근, 출근시간
-							} else if (TaList[i].taDate == null && TaList[i].taDate != '0000-00-00 00:00:00'){
+							} else if (TaList[i].taDate == null && TaList[i].taDate != '0000-00-00 00:00:00') { // 출근시간 기록이 없고 연차(0000)가 아닌 경우
 								empTaList += '<td>' + TaList[i].taName + ' (출근시간 기록없음)</td>'; // 출근, 출근시간
-							} else if (TaList[i].taDate == '0000-00-00 00:00:00') {
-								empTaList += '';
+							} else if (TaList[i].taDate == '0000-00-00 00:00:00') { // 연차인 경우
+								empTaList += ''; // 연차인 경우 출근을 화면에 출력하지 않고 뒤에 연차 td와 합치기 위해 공백으로 처리
 							}
 							count++;
 						} else {
 							if (TaList[i].empNum == TaList[i-1].empNum && TaList[i].taCode == 5) { // 퇴근이 아닌 결근처리가 되어있을 경우
-								empTaList += '<td>' + TaList[i].taName + ' (' + TaList[i].taDate + ')</td>'
+								empTaList += '<td>' + TaList[i].taName + ' (' + TaList[i].taDate + ')</td>' // 결근, 결근처리시간
 											+ '<td><button type="button" class="editEmpTa btn btn-success"><i class="fa fa-edit"></i> 퇴근처리</button></td>' // 결근일 경우 퇴근처리 버튼 생성
 										+ '</tr>';
 								count = 0;
 							} else { // 결근이 아닌 경우
-								if (TaList[i].taDate != null && TaList[i].taDate != '0000-00-00 00:00:00') {
-									empTaList += '<td>' + TaList[i].taName + ' (' + TaList[i].taDate + ')</td>';
-								} else if (TaList[i].taDate == null && TaList[i].taDate != '0000-00-00 00:00:00'){
-									empTaList += '<td>' + TaList[i].taName + ' (퇴근시간 기록없음)</td>';
-								} else if (TaList[i].taDate == '0000-00-00 00:00:00') {
-									empTaList += '<td colspan="2">' + TaList[i].taName + '</td>';
+								if (TaList[i].taDate != null && TaList[i].taDate != '0000-00-00 00:00:00') { // 퇴근시간 기록이 있고 연차(0000)가 아닌 경우
+									empTaList += '<td>' + TaList[i].taName + ' (' + TaList[i].taDate + ')</td>'; // 퇴근, 퇴근시간
+								} else if (TaList[i].taDate == null && TaList[i].taDate != '0000-00-00 00:00:00') { // 퇴근시간 기록이 없고 연차(0000)가 아닌 경우
+									empTaList += '<td>' + TaList[i].taName + ' (퇴근시간 기록없음)</td>'; // 퇴근시간 기록이 없는 경우
+								} else if (TaList[i].taDate == '0000-00-00 00:00:00') { // 연차인 경우
+									empTaList += '<td colspan="2">' + TaList[i].taName + '</td>'; // 연차인 경우 출퇴근시간 td를 합쳐서
 								}
 									empTaList += '<td></td>' // 결근이 아닐 경우 퇴근처리 버튼을 만들지 않음
 											+ '</tr>';
@@ -182,7 +181,7 @@
 					/* 비동기 데이터 호출 후 DataTable 호출 */
 					$('#zero_config').DataTable();
 					
-					setEmpTa(setDate);
+					setEmpTa(setDate); // 퇴근처리를 위한 함수 호출
 				}
 			});
 		}
@@ -194,22 +193,22 @@
 				let startWorkTime = tr.children().eq(3).html(); // 해당 사원의 출근기록시간 받기
 				// let leaveWorkTime = tr.children().eq(4).html(); // 해당 사원의 결근기록시간 받기
 				
-				startWork = moment(startWorkTime, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD HH:mm:ss");
-				leaveWork = moment(startWork, "YYYY-MM-DD HH:mm:ss").add(9, "hours").format("YYYY-MM-DD HH:mm:ss");
+				startWork = moment(startWorkTime, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD HH:mm:ss"); // 출근시간
+				leaveWork = moment(startWork, "YYYY-MM-DD HH:mm:ss").add(9, "hours").format("YYYY-MM-DD HH:mm:ss"); // 퇴근시간(출근시간 + 9시간)
 				
 				$.ajax({
 					url: "${pageContext.request.contextPath}/ajax/setEmpTa.hari",
 					data: 
 						{
-							"empNum" : empNum,
-							 "taDate" : leaveWork,
-							 "setDate" : setDate
+							"empNum" : empNum, // 사번
+							 "taDate" : leaveWork, // 결근을 퇴근으로 처리하기 위한 시간
+							 "setDate" : setDate // 해당 출퇴근 기록일
 						},
 					type: "post",
 					dataType: "json",
 					success: function() {
-						$('#taBody').empty();
-						getTaList(setDate);
+						$('#taBody').empty(); // 비동기 처리가 완료되면 해당 tbody를 비워주고
+						getTaList(setDate); // 근태목록을 다시 가져온다
 					},
 					error : function(xhr){
 						console.log(xhr.status);
@@ -219,7 +218,7 @@
 			})
 		}
 
-		function selectMonth(selectedMonth, setDate) {
+		function selectMonth(selectedMonth, setDate) { // 해당 월 포함 3개월 전까지 선택할 수 있도록
 			let daysMonth = moment(selectedMonth).month(selectedMonth).daysInMonth(); // 해당 월의 일수를 구해서 변수에 선언
 			let days = "";
 
