@@ -171,7 +171,7 @@ public interface EmpDao {
  	public List<EmpDto> empListPage(Map<String, String> map) throws ClassNotFoundException, SQLException;
  	
  	//사원목록 page처리 김정하 / 2020. 1. 29
- 	public int empListPageCount() throws ClassNotFoundException, SQLException;
+ 	public int empListPageCount(Map<String, String> map) throws ClassNotFoundException, SQLException;
  	
     //연차정보 김진호 2020. 1. 29
     public EmpDto getEmpTa(int empNum) throws ClassNotFoundException, SQLException;

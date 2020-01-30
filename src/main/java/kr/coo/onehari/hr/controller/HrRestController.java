@@ -594,9 +594,11 @@ public class HrRestController {
 	
 	//사원리스트+페이징 가져오기 김정하 2020. 1. 29
 	@RequestMapping("getEmpList.hari")
-	public Map empList(String pg, String cp){
+	public Map empList(String pg, String cp, String[] searchCheck, String searchKey){
 		//System.out.println(pg);
 		//System.out.println(cp);
+		//System.out.println(searchCheck);
+		//System.out.println(searchKey);
 		
 		//DB parameter 로 보내는 map
 		HashMap<String, String> map = new HashMap<String, String>();
@@ -611,13 +613,22 @@ public class HrRestController {
 		}else {
 			offset = (offset-1)*Integer.parseInt(pg);
 		}
+		
+		if(searchCheck != null) {
+			for(String Check : searchCheck) {
+				
+					map.put(Check, Check);
+				
+			}
+		}
+		map.put("searchKey", searchKey);
 		map.put("pg", pg); //page 에 보여줄 갯수
 		map.put("cp", Integer.toString(offset)); //보여줄 페이지
 		
 		List<EmpDto> empList = empSercive.empListPage(map);
 		outputMap.put("empList",empList);
 		
-		int count = empSercive.empListPageCount();
+		int count = empSercive.empListPageCount(map);
 		int lastPage = count/Integer.parseInt(pg);
 		//System.out.println(lastPage);
 		

@@ -575,11 +575,11 @@ public class EmpService {
 	}
 	
 	//사원목록 page 처리 김정하 2020. 1. 29
-	public int empListPageCount() {
+	public int empListPageCount(Map<String, String> map) {
 		int count = 0;
 		EmpDao empdao = sqlsession.getMapper(EmpDao.class);
 		try {
-			count = empdao.empListPageCount();
+			count = empdao.empListPageCount(map);
 		} catch (ClassNotFoundException | SQLException e) {
 			log.debug("EmpService empListPageCount 예외발생: " + e.getMessage());
 		}

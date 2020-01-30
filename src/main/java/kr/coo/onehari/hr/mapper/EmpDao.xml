@@ -325,6 +325,20 @@
 			JOIN ranks AS R ON E.RANKCODE = R.RANKCODE	
 			JOIN position AS P ON E.POSITIONCODE = P.POSITIONCODE
 			JOIN employment AS EM ON E.EMPLOYMENTCODE = EM.EMPLOYMENTCODE
+		<where>
+			<if test="empNum != null">
+				OR E.EMPNUM like concat('%',#{searchKey},'%') 
+			</if>
+			<if test="empName != null">
+				OR E.EMPNAME like concat('%',#{searchKey},'%') 
+			</if>
+			<if test="teamName != null">
+				OR T.TEAMNAME like concat('%',#{searchKey},'%') 
+			</if>
+			<if test="phoneNum != null">
+				OR S.PHONENUM like concat('%',#{searchKey},'%') 
+			</if>
+		</where>
         ORDER BY E.EMPNUM ASC
         LIMIT ${pg}
 		<if test="cp != '0'">
@@ -333,8 +347,25 @@
 	</select>
 	
 	<!-- 사원리스트 page처리 김정하 / 2020. 1. 29 -->
-	<select id="empListPageCount" resultType="int">
-		SELECT COUNT(EMPNUM) FROM emp
+	<select id="empListPageCount" parameterType="hashmap" resultType="int">
+		SELECT COUNT(E.EMPNUM)
+		FROM emp AS E 
+			JOIN subemp AS S ON E.EMPNUM = S.EMPNUM
+			JOIN team AS T ON E.TEAMCODE = T.TEAMCODE
+		<where>
+			<if test="empNum != null">
+				OR E.EMPNUM like concat('%',#{searchKey},'%') 
+			</if>
+			<if test="empName != null">
+				OR E.EMPNAME like concat('%',#{searchKey},'%') 
+			</if>
+			<if test="teamName != null">
+				OR T.TEAMNAME like concat('%',#{searchKey},'%') 
+			</if>
+			<if test="phoneNum != null">
+				OR S.PHONENUM like concat('%',#{searchKey},'%') 
+			</if>
+		</where>
 	</select>
     
 	<!-- 근태기록가져오기 김진호 2020. 1. 29 -->
