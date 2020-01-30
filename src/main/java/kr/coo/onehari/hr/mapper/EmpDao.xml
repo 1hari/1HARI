@@ -55,7 +55,7 @@
 			JOIN employment AS EM ON E.EMPLOYMENTCODE = EM.EMPLOYMENTCODE
 			JOIN talist AS TL ON E.EMPNUM = TL.EMPNUM
 			JOIN ta AS TA ON TL.TACODE = TA.TACODE
-		WHERE DATE_FORMAT(TL.SCHEDULEDATE, '%Y-%m-%d') = DATE(#{taDate})
+		WHERE DATE_FORMAT(TL.SCHEDULEDATE, '%Y-%m-%d') = DATE(#{setDate})
 		ORDER BY E.EMPNUM
 	</select>
 
@@ -369,9 +369,9 @@
 	</select>
     
 	<!-- 근태기록 수정하기 김진호 2020. 1. 29 -->
-	<update id="setEmpTa">
+	<update id="setEmpTa" parameterType="hashmap">
 		UPDATE talist
 		SET taCode = 2, taDate = #{taDate}
-		WHERE empNum = #{empNum} AND taCode = 6 AND scheduleDate = '2020-01-28'
+		WHERE empNum = #{empNum} AND taCode = 5 AND scheduleDate = #{setDate}
 	</update>
 </mapper>
