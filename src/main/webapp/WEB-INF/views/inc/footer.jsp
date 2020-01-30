@@ -30,10 +30,20 @@
 // 	    }
 	})
 	
+	function getContextPath() {//접속주소 + contextPath 구하는 함수
+		//console.log(location.host);
+		var hostIndex = location.href.indexOf(location.host) + location.host.length;
+		return location.href.substring(6, location.href.indexOf('/', hostIndex + 1) );
+	};
+	
 	var wsocket;
+	
 	//웹소켓 연결
 	function connect() {
-		wsocket =new WebSocket("ws://192.168.6.10:8090/1HARI/sign.hari"); 
+		let path = getContextPath();
+		//console.log(path);
+
+		wsocket =new WebSocket("ws:"+path+"/sign.hari"); 
 
 		wsocket.onopen = onOpen;
 		wsocket.onmessage = onMessage;
