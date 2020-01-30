@@ -702,27 +702,41 @@ $(function(){
 				<!-- 전자 결재 끝 -->
 				<!-- 전자 결재 시작 -->
 				<div class="card" style ="box-shadow :10px 10px #999999; border-radius:10px; border : 4px groove #bcbcbc; margin-right:10%;">
-					<div class="card-body">
+					<div class="card-body" style="padding-bottom: 0">
 						<h5 class="card-title m-b-0">오늘의 날씨</h5>
 					</div>
-					<table class="table">
-						<thead>
-							<tr style ="vertical-align:left;">
-								<td><i class="far fa-clipboard fa-2x" style ="margin-left:-50%;"></i>&nbsp;<h4 style ="margin-left:-50%;">진행중문서</h4></td> 
-								<td style ="margin-left:-80%;">${requestScope.ongoing}</td>
-								<td scope="col"><i class="far fa-file-alt fa-2x" style ="margin-left:-50%;"></i>&nbsp;<h4 style ="margin-left:-50%;">결제반려문서</h4></td>
-								<td  style ="margin-left:-80%;">${requestScope.reject}</td>
-							</tr>
-							<tr style ="vertical-align:left;">
-								<td scope="col"><i class="far fa-edit fa-2x" style ="margin-left:-50%;"></i>&nbsp;<h4 style ="margin-left:-50%;">결제할문서</h4></td>
-								<td style ="margin-left:-80%;">${requestScope.approve}</td>
-								<td scope="col"><i class="far fa-file-archive fa-2x" style ="margin-left:-50%;"></i>&nbsp;<h4 style ="margin-left:-50%;">결제완료문서</h4></td>
-								<td style ="margin-left:-80%;">${requestScope.complete}</td>
-							</tr>
-						</thead> 
+					<table class="table" id="weatherTable">
+						<tr style ="vertical-align:left; padding-left: 5%;" >
+							<td  style="width: 33%; height: 20%;" rowspan="2"><img src="${pageContext.request.contextPath}/resources/hari/assets/images/weather_rain.png" alt="user" class="rounded-circle" style="width: 67%; height: 20%;"></td>
+							<td>dddd</td>
+							<td>dddd</td>
+							<td>dddd</td>
+						</tr>
+						<tr style ="vertical-align:left; padding-left: 5%;">
+							<td>ddd</td>
+							<td>ddd</td>
+							<td>ddd</td>
+						</tr>
+<!-- 							<tr style ="vertical-align:left;"> -->
+<!-- 								<td scope="col"><i class="far fa-edit fa-2x" style ="margin-left:-50%;"></i>&nbsp;<h4 style ="margin-left:-50%;">결제할문서</h4></td> -->
+<%-- 								<td style ="margin-left:-80%;">${requestScope.approve}</td> --%>
+<!-- 								<td scope="col"><i class="far fa-file-archive fa-2x" style ="margin-left:-50%;"></i>&nbsp;<h4 style ="margin-left:-50%;">결제완료문서</h4></td> -->
+<%-- 								<td style ="margin-left:-80%;">${requestScope.complete}</td> --%>
+<!-- 							</tr> -->
 					</table>
 				</div>
 				<!-- 전자 결재 끝 -->
+					<div>
+	 	<!-- rain비  우산-->
+		<img src="${pageContext.request.contextPath}/resources/hari/assets/images/weather_rain.png" alt="user" class="rounded-circle" width="100%">
+		<!-- snow 눈 -->
+		<img src="${pageContext.request.contextPath}/resources/hari/assets/images/weather_snow.png" alt="user" class="rounded-circle" width="100%">							
+		<!-- sun 해 -->
+		<img src="${pageContext.request.contextPath}/resources/hari/assets/images/weather_sun.png" alt="user" class="rounded-circle" width="100%">	
+		<!-- storm 구름 흐림 -->
+		<img src="${pageContext.request.contextPath}/resources/hari/assets/images/weather_cloud.png" alt="user" class="rounded-circle" width="100%">	
+		
+	</div>
 			</div>
 		<!--col-md-6 컨텐츠 컨테이너 내에서 오른쪽 부분 (연봉통계 + 전자결재) 종료 -->
 		</div>

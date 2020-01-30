@@ -25,8 +25,8 @@ import org.apache.tomcat.util.http.fileupload.IOUtils;
 @RequestMapping("ajax/")
 public class WeatherController {
 	
-	@Autowired
-	private WeatherService weatherService;
+//	@Autowired
+//	private WeatherService weatherService;
 	
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder; // 비밀번호 암호화
