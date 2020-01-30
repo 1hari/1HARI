@@ -95,58 +95,82 @@
 
 <script>
 	$(function() {
+		let startWork = "";
+		let leaveWork = "";
+
+		getTaList();
 		
-		$.ajax({ // 근태목록 가져오기
-			url: "${pageContext.request.contextPath}/ajax/getTaList.hari",
-			type: "post",
-			dataType: "json",
-			success: function(TaList) {
-				let empTaList = "";
-				let count = 0;
-				
-				for (var i = 0; i < TaList.length; i++) {
-					if (count == 0) {
-						empTaList += '<tr>'
-										+ '<td>' + TaList[i].empNum + '</td>'
-										+ '<td>' + TaList[i].empName + ' ' + TaList[i].rankName +'</td>'
-										+ '<td>' + TaList[i].teamName + '</td>'
-										+ '<td>' + TaList[i].taName + ' (' + TaList[i].taDate + ')</td>';
-						count++;
-					} else {
-						if (TaList[i].empNum == TaList[i-1].empNum && TaList[i].taCode == 6) {
-							empTaList += '<td>' + TaList[i].taName + ' (' + TaList[i].taDate + ')</td>'
-										+ '<td><button type="button" class="editEmpTa btn btn-success"><i class="fa fa-edit"></i> 퇴근처리</button></td>'
-									+ '</tr>';
-							count = 0;
+		function getTaList() { // 근태목록 가져오기
+			$.ajax({
+				url: "${pageContext.request.contextPath}/ajax/getTaList.hari",
+				type: "post",
+				dataType: "json",
+				success: function(TaList) {
+					let empTaList = "";
+					let count = 0;
+					
+					for (var i = 0; i < TaList.length; i++) {
+						if (count == 0) {
+							empTaList += '<tr>'
+											+ '<td>' + TaList[i].empNum + '</td>'
+											+ '<td>' + TaList[i].empName + ' ' + TaList[i].rankName +'</td>'
+											+ '<td>' + TaList[i].teamName + '</td>'
+											+ '<td>' + TaList[i].taName + ' (' + TaList[i].taDate + ')</td>';
+							count++;
 						} else {
-							empTaList += '<td>' + TaList[i].taName + ' (' + TaList[i].taDate + ')</td>'
-										+ '<td></td>' // 결근이 아닐 경우 퇴근처리 버튼을 만들지 않음
-									+ '</tr>';
-							count = 0;
+							if (TaList[i].empNum == TaList[i-1].empNum && TaList[i].taCode == 6) {
+								empTaList += '<td>' + TaList[i].taName + ' (' + TaList[i].taDate + ')</td>'
+											+ '<td><button type="button" class="editEmpTa btn btn-success"><i class="fa fa-edit"></i> 퇴근처리</button></td>'
+										+ '</tr>';
+								count = 0;
+							} else {
+								empTaList += '<td>' + TaList[i].taName + ' (' + TaList[i].taDate + ')</td>'
+											+ '<td></td>' // 결근이 아닐 경우 퇴근처리 버튼을 만들지 않음
+										+ '</tr>';
+								count = 0;
+							}
 						}
 					}
+					$('#taBody').append(empTaList);
+					/* 비동기 데이터 호출 후 DataTable 호출 */
+					$('#zero_config').DataTable();
+	
+					setEmpTa();
 				}
-				$('#taBody').append(empTaList);
-				/* 비동기 데이터 호출 후 DataTable 호출 */
-				$('#zero_config').DataTable();
+			});
+		}
 
-				getEmpTa();
-			}
-		});
-		
-		function getEmpTa() {
+		function setEmpTa() { // 퇴근처리하기
 			$('.editEmpTa').click(function() {
 				let tr = $(this).closest('tr'); // 나와 조상요소 중 첫번째 tr //.parent() 바로 상위요소 찾기
-				let empNum = { "empNum" : tr.children().html() }; // 나와 조상요소 중 첫번째 tr의 자식의 값
-				let td = tr.children().eq(4);
-				console.log(tr);
-				tr.children().eq(4).html("");
+				let empNum = tr.children().html(); // 나와 조상요소 중 첫번째 tr의 자식의 값
+				console.log(empNum);
+				let startWorkTime = tr.children().eq(3).html(); // 해당 사원의 출근기록시간 받기
+				// let leaveWorkTime = tr.children().eq(4).html(); // 해당 사원의 결근기록시간 받기
+				
+				startWork = moment(startWorkTime, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD HH:mm:ss");
+				leaveWork = moment(startWork, "YYYY-MM-DD HH:mm:ss").add(9, "hours").format("YYYY-MM-DD HH:mm:ss");
+				console.log("출근시간")
+				console.log(startWork);
+				console.log("퇴근시간")
+				console.log(leaveWork);
+
 				$.ajax({
-					url: "${pageContext.request.contextPath}/ajax/getEmpTa.hari",
-					data: empNum,
+					url: "${pageContext.request.contextPath}/ajax/setEmpTa.hari",
+					data: 
+						{
+							"empNum" : empNum,
+							 "taDate" : leaveWork
+						},
 					type: "post",
 					dataType: "json",
 					success: function(empTa) {
+						console.log(empNum);
+						getTaList();
+					},
+					error : function(xhr){
+						console.log(xhr.status);
+						console.log('setEmpTa ajax error');
 					}
 				})
 			})

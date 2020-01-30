@@ -640,14 +640,14 @@ public class HrRestController {
 	}
 	
 	// 관리자권한 사원근태수정을 위한 사원정보 가져오기 김진호 2020. 1. 29
-	@RequestMapping(value = "getEmpTa.hari", method = RequestMethod.POST)
-	public EmpDto getEmpTa(int empNum) {
-		EmpDto empTa = null;
+	@RequestMapping(value = "setEmpTa.hari", method = RequestMethod.POST)
+	public int setEmpTa(EmpDto empdto) {
+		int result = 0;
 		try {
-			empTa = empSercive.getEmpTa(empNum);
+			result = empSercive.setEmpTa(empdto);
 		} catch (Exception e) {
-			log.debug("HrRestController getEmpTa 예외발생: " + e.getMessage());
+			log.debug("HrRestController setEmpTa 예외발생: " + e.getMessage());
 		}
-		return empTa;
+		return result;
 	}
 }
