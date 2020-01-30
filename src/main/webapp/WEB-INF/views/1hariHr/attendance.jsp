@@ -243,8 +243,7 @@ $(function(){
 									<div class="row">
 										<div class="col-5">
 											<div class="icon-big text-center">
-												<!-- <i class="fas fa-calendar-alt fa-3x" style ="padding-top:10px;"></i> -->
-												<img src="${pageContext.request.contextPath}/resources/hari/assets/images/weather_snow.png" alt="user" class="rounded-circle" width="31">
+												<i class="fas fa-calendar-alt fa-3x" style ="padding-top:10px;"></i>
 											</div>
 										</div>
 										<div class="col col-stats">

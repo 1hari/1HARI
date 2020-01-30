@@ -27,6 +27,24 @@
 		width: 80px;
 	}
 	
+	#buttonselect {
+		font-size: large;
+		font-weight: bold;
+		background-color: white;
+		color: black;
+		border: 2px solid #807266;
+		font-family: 'Nanum DaCaeSaRang';
+	}
+	.buttonselect{
+		font-size: large;
+		font-weight: bold;
+		background-color: white;
+		color: black;
+		border: 2px solid #807266;
+		font-family: 'Nanum DaCaeSaRang';
+	
+	}
+	
 
 </style>
 <!-- Page wrapper  -->
@@ -44,47 +62,54 @@
 		</div>
 	</div>
 	
-	<div class="container-fluid">
+	
+	<div class="container-fluid" style ="margin-top:2%;">
+	
 		<!-- ============================================================== -->
 		<!-- Start Page Content -->
 		<!-- ============================================================== -->
 		<div class="row" >
 			<div class="col-12">
+				<div class = "col-12" style ="margin-left:10%; width: 80%; height: 100%; background-color: #d9d9d9; opacity:0.8;">
 				<div class="container">
 					<!--form 태그 시작 -->
 					<form action="" method="POST" enctype="multipart/form-data" id="draftForm">
 						<div class="row">
 							<div class="col-md-2">
-								<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#signModal">결재자 선택</button>
+								<button type="button" id="buttonselect" class="btn btn-info btn-sm" data-toggle="modal" data-target="#signModal">결재자 선택</button>
+								
+								
 							</div>
 							<div class="col-md-6">
 							</div>
 							<div class="col-md-4">
 								<c:set var="emp" value="${requestScope.emp}" />
-								<table style="border-color:#000000; border-style:solid; border-width:1px 1px 1px; width:250px; vertical-align:middle; text-align: center;">
-									<tr class="draft" style="height:40px; vertical-align:middle;">
+								<table style="border: 2px solid #807266; width:250px; vertical-align:middle; text-align: center; margin-left:5%;">
+									<tr class="draft" style="height:40px; border: 2px solid #807266; vertical-align:middle;">
 										<td rowspan="3">결<br>재<br>선</td>
 										<!-- 직급 -->
-										<td id="rankName0">${emp.rankName}</td>
-										<td id="rankName1"></td>
-										<td id="rankName2"></td>
+										<td id="rankName0" style="border: 2px solid #807266;">${emp.rankName}</td>
+										
+										
+										<td id="rankName1" style="border: 2px solid #807266;"></td>
+										<td id="rankName2" style="border: 2px solid #807266;"></td>
 									</tr>
-									<tr class="draft" style="height:63px; vertical-align:middle;">
+									<tr class="draft" style="height:63px; border: 2px solid #807266; vertical-align:middle;">
 										<!-- 사원명 -->
-										<td id="empName0" draftEmp="${emp.empNum}">
+										<td id="empName0" draftEmp="${emp.empNum}" style="border: 2px solid #807266;">
 											${emp.empName}
 											<br>(${emp.empNum})
 										</td>
-										<td id="empName1">
+										<td id="empName1" style="border: 2px solid #807266;">
 										</td>
-										<td id="empName2">
+										<td id="empName2" style="border: 2px solid #807266;">
 										</td>
 									</tr>
 									<tr class="draft" style="height:40px; vertical-align:middle;">
 										<!-- 빈칸 : 승인도장 -->
-										<td></td>
-										<td></td>
-										<td></td>
+										<td style="border: 2px solid #807266;"></td>
+										<td style="border: 2px solid #807266;"></td>
+										<td style="border: 2px solid #807266;"></td>
 									</tr>
 								</table>
 							</div>
@@ -92,12 +117,14 @@
 						
 						<div class="row">
 							<!-- input 태그 -->
-							<div class="col-md-12">
-								<div class="input-group">
+							<div class="col-md-11">
+								<div class="input-group" style="margin-left:0.5%;">
+								
 								<input type="text" class="form-control" id="signTitle" name="signTitle" placeholder="제목" <c:forEach var="docu" items="${requestScope.signDocu}">
 										value="${docu.signTitle}"
-									</c:forEach> style="width:93%; display: inline;">
-								<button type="button" id="draftSubmit" class="btn btn-success" style="display: inline-block;">기안</button>
+									</c:forEach> style="width:95%; display: inline;">
+								<button type="button" id="draftSubmit"  class="buttonselect" style="display: inline-block; ">기안</button>
+								
 								</div>
 							</div>
 						</div><!-- row 끝 -->
@@ -144,7 +171,7 @@
 						<!-- ck 에디터 form 끝 -->
 						
 						<div class="form-group row">
-							<div class="col-md-12">
+							<div class="col-md-11">
 								<div class="custom-file">
 									<input type="file" class="custom-file-input" id="validatedCustomFile" required="" name="file">
 									<label class="custom-file-label" for="validatedCustomFile">파일을 선택하세요.</label>
@@ -155,9 +182,11 @@
 <%-- 					<input type="hidden" value="${requestScope.signFormCode}" id="signFormCode" name="signFormCode" > --%>
 					</form>
 				</div><!-- container -->
-			</div><!-- col-12 끝 -->
+			</div><!--뒷배경.. test-->
+		   </div> <!-- class col-12  -->
 		</div><!-- row 끝 -->
 	</div><!-- container-fluid 끝 -->
+
 </div>
 <!-- End Page wrapper  -->
 <!-- this page js -->
@@ -479,7 +508,8 @@
 			</div><!-- modal-body 끝 -->
                        
 			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" data-dismiss="modal">선택완료</button>
+				<button type="button" id="buttonselect" class="btn btn-primary" data-dismiss="modal">선택완료</button>
+				
 			</div><!-- modal-footer 끝 -->
 		</div><!-- modal-content 끝 -->
 	</div><!-- modal-dialog 끝 -->

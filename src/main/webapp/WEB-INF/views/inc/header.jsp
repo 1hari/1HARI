@@ -378,7 +378,7 @@ function themeChange(formData){
             	swal({
 					text: "변경이 완료되었습니다.",
 					icon: "success",
-					button: "닫기"
+					button: "닫기" 
 				}).then((value) => {
 					getMyTheme();
 					formData.delete("file");
