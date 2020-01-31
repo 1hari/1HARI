@@ -388,18 +388,18 @@ $(function(){
 	if(day<10){
 		day = "0" + day; 
 	}
+	var hour = date.getHours();
+	var minutes = date.getMinutes();
+	if (minutes < 46) {
+		hour -= 1;
+	}
     if (minutes < 10) {
         minutes = "0" + minutes;
     }
-	
-	var hour = date.getHours();
-	var minutes = date.getMinutes();
-	if (minutes < 41) {
-		hour -= 1;
-	}
 	if (hour < 10) {
 		hour = "0" + hour;
 	}
+	
 	var xValue = rs.x;
 	var yValue = rs.y;
 	var weatherApi = "http://apis.data.go.kr/1360000/VilageFcstInfoService/getUltraSrtFcst";
@@ -428,16 +428,17 @@ $(function(){
 			'<td id="t1h"></td>' +
 			'<td id="reh"></td>';
 			var weatherAraay=[]
-            for(var i=0; i<getWeather.response.body.items.length; i++){
-                if((getWeather.response.body.items[i].category) != getWeather.response.body.items[i+1].category){
-                    console.log(getWeather.response.body.items[i])
+			weatherAraay.push(getWeather.response.body.items[0])
+            for(var i=1; i<getWeather.response.body.items.length; i++){
+                if((getWeather.response.body.items[i-1].category) != (getWeather.response.body.items[i].category)){
                     weatherAraay.push(getWeather.response.body.items[i])
                     if(i==getWeather.response.body.items.length-1){
-                        break;
+                        return;
                     }
                     continue;
                 }
             }
+            console.log(weatherAraay)
 			
 			//현재날씨
 			if(weatherAraay[1].fcstValue == '0'){ //비 & 눈이 아니면
