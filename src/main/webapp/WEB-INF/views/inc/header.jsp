@@ -515,6 +515,7 @@ function themeChange(formData){
 							<div class="dropdown-divider"></div>
 							
 							<!-- 로그아웃 -->
+							<!-- onclick="document.getElementById('logout-form').submit(); -->
 							<a href="#" class="dropdown-item" onclick="document.getElementById('logout-form').submit();">
 								<i class="fa fa-power-off m-r-5 m-l-5"></i> 로그아웃
 							</a>

@@ -38,18 +38,6 @@ public class WeatherController {
     	InputStream in = null;
     	CachedOutputStream bos = null;
     	String data = null;
-
-//   	String weatherUrl = request.getParameter("weatherUrl");
-//    	
-//    	URL url = new URL(weatherUrl);
-//    	
-//    	InputStream in = url.openStream();
-//    	CachedOutputStream bos = new CachedOutputStream();
-//    	IOUtils.copy(in, bos);
-//    	in.close();
-//    	bos.close();
-//    	
-//    	String data = bos.getOut().toString();
 		try {
 	    	url = new URL(weatherUrl);
 	    	in = url.openStream();
