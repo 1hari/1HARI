@@ -505,14 +505,14 @@ function themeChange(formData){
 					<!-- 개인셋팅 -->
 					<li class="nav-item" >
 						<a class="nav-link waves-effect waves-dark" id="theme" style = "color:white;" href="" data-toggle="modal" data-target="#themeModal" aria-haspopup="true" aria-expanded="false">
-							<i class="fa fa-cog fa-fw font-24"  style="padding-top: 20px;"></i>
+							<i class="fa fa-cog fa-fw font-29"  style="padding-top: 20px;"></i>
 						</a>
 					</li>
 					
 					<!-- 출퇴근 -->
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle waves-effect waves-dark" id="work" style = "color:white;" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							<i class="fas fa-calendar-check font-24" style="padding-top: 20px;"></i>
+							<i class="fas fa-calendar-check font-29" style="padding-top: 18px;"></i>
 						</a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown" >
 							<button class="dropdown-item" id="startWork" disabled="disabled" >출근하기</button>
@@ -527,7 +527,7 @@ function themeChange(formData){
 					<!--내 프로필 시작-->
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							<img src="" alt="user" class="rounded-circle" width="31" id="profileFileName" style= "padding-bottom:10px;">
+							<img src="" alt="user" id="profileFileName" style= "padding-bottom:5px;">
 						</a>
 						
 						<div class="dropdown-menu dropdown-menu-right animated">
