@@ -483,10 +483,6 @@ $(function(){
 })
 
 
-
-
-
-
 </script>
 
 
@@ -593,7 +589,7 @@ $(function(){
 			<div class="col-md-6">
 				<se:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_PERSONNEL')">
 					<!-- 부서별 근무 통계 시작  -->
-					<div class="card" style ="height:28%; box-shadow :0 0 12px #999999; border-radius:10px; margin-left:10%;">
+					<div class="card" style ="height:350px; box-shadow :0 0 12px #999999; border-radius:10px; margin-left:10%;">
 						<div class="card-body" style="padding-bottom: 0">
 							<span class="card-title m-b-0" style="margin-bottom:0; font-size: 18px;" >근무시간 통계</span>
 							<select class="select2 form-control custom-select select2-hidden-accessible" id="month" style="width: 13%; height:10%; margin-left: 65%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
@@ -619,7 +615,7 @@ $(function(){
 				<!-- 부서별 근무 통계 종료 -->
 				</se:authorize>
 				<!--당월 근태 통계 -->
-				<div class="card" style ="height:35%; box-shadow :0 0 12px #999999; border-radius:10px; margin-left:10%; ">
+				<div class="card" style ="height:470px; box-shadow :0 0 12px #999999; border-radius:10px; margin-left:10%; ">
 					<div class="card-body">
 						<h4 class="card-title m-b-0">당월 근태 통계</h4>
 						<div id="canvas-holder" style="width: 66%; margin-left: -16%;">
@@ -643,8 +639,8 @@ $(function(){
 								</div>
 							</div>
 						</div>
-						<canvas id="chart-area" width="300" height="300" style="display: block; margin-left: 50%;" class="chartjs-render-monitor"></canvas>
-						<div id="chartjs-tooltip2" class="center" style="opacity: 0; left: 228.854px; top: 223.022px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-style: normal; padding: 6px; font-size: 12px;">
+						<canvas id="chart-area" width="100%" height="100%" style="display: block; margin-left: 50%; margin-bottom:13%;" class="chartjs-render-monitor"></canvas>
+						<div id="chartjs-tooltip2" class="center" style="opacity: 0; left: 228.854px; top: 223.022px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-style: normal; font-size: 12px;">
 							<table>
 								<thead>
 								</thead>
@@ -660,7 +656,7 @@ $(function(){
 			</div>
 			<!--당월 근태 통계 종료-->
 			<!-- 무언가.. 시작 -->
-			<div class="card" style ="height:20%; width:183%; box-shadow :0 0 12px #999999; border-radius:10px; margin-left:10%; ">
+			<div class="card" style ="height:200px; width:183%; box-shadow :0 0 12px #999999; border-radius:10px; margin-left:10%; ">
 				<div class="card-body">
 					<h4 class="card-title m-b-0">무엇을 넣을까요?</h4>
 					<div id="canvas-holder" style="width: 300px;">
@@ -705,7 +701,7 @@ $(function(){
 			<div class="col-md-6">
 				<se:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_PERSONNEL')">
 				<!--부서별 연봉 통계 시작-->
-					<div class="card" style ="height:28%; box-shadow :0 0 12px #999999; border-radius:10px; margin-right:10%;">
+					<div class="card" style ="height:350px; box-shadow :0 0 12px #999999; border-radius:10px; margin-right:10%;">
 						<div class="card-body" style="padding-bottom: 0">
 							<span class="card-title m-b-0" style="margin-bottom:0; font-size: 18px;" >연봉 통계</span>
 							<select id="chartSelect" class="select2 form-control custom-select select2-hidden-accessible" id="month" style="width: 13%; height:10%; margin-left: 67%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
@@ -718,14 +714,14 @@ $(function(){
 				</se:authorize>
 				<!--부서별 연봉 통계 끝 -->
 				<!-- 전자 결재 시작 -->
-				<div class="card" style ="height:20%; box-shadow :0 0 12px #999999; border-radius:10px; margin-right:10%;">
+				<div class="card" style ="height:250px; box-shadow :0 0 12px #999999; border-radius:10px; margin-right:10%;">
 					<div class="card-body">
 						<h5 class="card-title m-b-0">전자 결재</h5>
 					</div>
 					<table class="table">
 						<thead>
 							<tr style ="vertical-align:left;">
-								<td><i class="far fa-clipboard fa-2x" style ="margin-left:-50%;"></i>&nbsp;;<h4 style ="margin-left:-50%;">진행중문서</h4></td> 
+								<td style ="margin-right:-10%;"><i class="far fa-clipboard fa-2x" style ="margin-left:-50%;"></i>&nbsp;;<h4 style ="margin-left:-50%;">진행중문서</h4></td> 
 								<td style ="margin-left:-80%;">${requestScope.ongoing}</td>
 								<td scope="col"><i class="far fa-file-alt fa-2x" style ="margin-left:-50%;"></i>&nbsp;<h4 style ="margin-left:-50%;">결제반려문서</h4></td>
 								<td  style ="margin-left:-80%;">${requestScope.reject}</td>
@@ -741,7 +737,7 @@ $(function(){
 				</div>
 				<!-- 전자 결재 끝 -->
 				<!-- 전자 결재 시작 -->
-				<div class="card" style ="height:13.5%; box-shadow :0 0 12px #999999; border-radius:10px; margin-right:10%;">
+				<div class="card" style ="height:200px; box-shadow :0 0 12px #999999; border-radius:10px; margin-right:10%;">
 					<div class="card-body" style="padding-bottom: 0">
 						<span class="card-title m-b-0">오늘의 날씨</span>
 						<span class="card-title m-b-0" style="padding-left: 70%;">2020-01-30</span>
