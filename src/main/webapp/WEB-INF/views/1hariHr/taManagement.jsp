@@ -154,7 +154,7 @@
 								empTaList += '<td>' + TaList[i].taName + ' (출근시간 기록없음)</td>'; // 출근, 출근시간
 							} else if (TaList[i].taDate == '0000-00-00 00:00:00') { // 연차인 경우
 // 								empTaList += ''; // 연차인 경우 출근을 화면에 출력하지 않고 뒤에 연차 td와 합치기 위해 공백으로 처리
-								empTaList += '<td>' + TaList[i].taName + ' (출근시간 기록없음)</td>'; // 출근, 출근시간
+								empTaList += '<td>연차</td>'; // 출근, 출근시간
 							}
 							count++;
 						} else {
@@ -182,6 +182,10 @@
 					$('#zero_config').DataTable();
 					
 					setEmpTa(setDate); // 퇴근처리를 위한 함수 호출
+				},
+				error : function(xhr){
+					console.log(xhr.status);
+					console.log('getTaList ajax error');
 				}
 			});
 		}
@@ -249,6 +253,7 @@
 
 			$('.click').click(function() { // 해당 날짜(일)을 선택했을 때
 				setDate = $('#selectMonth').val() + '-' + $(this).text().trim(); // 해당 날짜를 연-월-일로 선언
+				$('#zero_config').DataTable().destroy(); // DataTables 초기화(해당 부분을 empty() 하기 전)
 				$('#taBody').empty();
 				getTaList(setDate); // 해당 날짜 근태목록 가져오기
 				$('#days').empty();
