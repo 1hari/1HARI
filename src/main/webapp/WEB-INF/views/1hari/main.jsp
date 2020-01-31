@@ -376,131 +376,117 @@ $(function(){
 	})
 
 	//날씨 API
-		var rs = dfs_xy_conv("toXY", 37.525913599999996, 126.83591679999999);
-		console.log(rs)
-// 		var fixLatitude=parseFloat(37.525913599999996);
-// 		var fixLongitude=parseFloat(126.83591679999999);
-		var date = new Date();
-		var year = date.getFullYear();
-		var month = date.getMonth()+1;
-		if(month<10){
-			month = "0" + month;
-		}
-		var day = date.getDate();
-		if(day<10){
-			day = "0" + day; 
-		}
-		var hour = date.getHours();
-		var minutes = date.getMinutes();
-		if (minutes < 41) {
-			hour -= 1;
-		}
-		if (hour < 10) {
-			hour = "0" + hour;
-		}
-		//http://apis.data.go.kr/1360000/VilageFcstInfoService/getVilageFcst?serviceKey=PXss7TDZfDqmwbPtPSbrN5TR36wq4zETwTgTFsmDjWxyz0vVMWAI2NyzOqsou8m4%2FjrhI0joz7sLmoKctlkUkw%3D%3D&numOfRows=10&pageNo=1&base_date=20200130&base_time=0230&nx=55&ny=127
-		console.log(year + month + day + hour + minutes)
-		var xValue = rs.x;
-		var yValue = rs.y;
-		var weatherApi = "http://apis.data.go.kr/1360000/VilageFcstInfoService/getUltraSrtFcst";
-		var weatherServiceKey = "?ServiceKey="
-				+ "PXss7TDZfDqmwbPtPSbrN5TR36wq4zETwTgTFsmDjWxyz0vVMWAI2NyzOqsou8m4%2FjrhI0joz7sLmoKctlkUkw%3D%3D";
-		//&numOfRows=10&pageNo=1&base_date=20200130&base_time=0230&nx=55&ny=127
-		var numOfRows = "&numOfRows=100&pageNo=1"
-		var base_date = "&base_date=" + year + month + day
-		var base_time = "&base_time=" + hour + minutes;
-		var nx = "&nx=" + xValue;
-		var ny = "&ny=" + yValue;
- 		var dataType = "&dataType=json"
-		var weatherUrl = weatherApi + weatherServiceKey + base_date + base_time + numOfRows + nx + ny + dataType;
-// 		console.log(weatherUrl)
-// 		var jsonWeatherUrl = { "weatherUrl" : weatherUrl };
-		$.ajax({
-			url : "${pageContext.request.contextPath}/ajax/getWeather.hari",
-			dataType : 'json',
-			type : "get",
-			data : { "weatherUrl" : weatherUrl },
-			success : function(getWeather) {
-				console.log(getWeather)
-				var weatherTitle='<td style="width: 15%; height: 20%;" rowspan="2" id="weatherImg"></td>' +
-				'<td style="width: 10%;">현재날씨</td>'+
-				'<td style="width: 10%;"> 기 온</td>' +
-				'<td style="width: 10%;"> 습 도 </td>"';
-				var weatherContent='<td id="currWeather"></td>' +
-				'<td id="t1h"></td>' +
-				'<td id="reh"></td>';
-				var weatherAraay=[]
-				for(var i=0; i<getWeather.response.body.items.length; i+=4){
-					weatherAraay.push(getWeather.response.body.items[i])
+	var rs = dfs_xy_conv("toXY", 37.525913599999996, 126.83591679999999);
+	console.log(rs)
+	var date = new Date();
+	var year = date.getFullYear();
+	var month = date.getMonth()+1;
+	if(month<10){
+		month = "0" + month;
+	}
+	var day = date.getDate();
+	if(day<10){
+		day = "0" + day; 
+	}
+	var hour = date.getHours();
+	var minutes = date.getMinutes();
+	if (minutes < 46) {
+		hour -= 1;
+	}
+    if (minutes < 10) {
+        minutes = "0" + minutes;
+    }
+	if (hour < 10) {
+		hour = "0" + hour;
+	}
+	var xValue = rs.x;
+	var yValue = rs.y;
+	var weatherApi = "http://apis.data.go.kr/1360000/VilageFcstInfoService/getUltraSrtFcst";
+	var weatherServiceKey = "?ServiceKey="
+			+ "PXss7TDZfDqmwbPtPSbrN5TR36wq4zETwTgTFsmDjWxyz0vVMWAI2NyzOqsou8m4%2FjrhI0joz7sLmoKctlkUkw%3D%3D";
+	var numOfRows = "&numOfRows=100&pageNo=1"
+	var base_date = "&base_date=" + year + month + day
+	var base_time = "&base_time=" + hour + minutes;
+	var nx = "&nx=" + xValue;
+	var ny = "&ny=" + yValue;
+		var dataType = "&dataType=json"
+	var weatherUrl = weatherApi + weatherServiceKey + base_date + base_time + numOfRows + nx + ny + dataType;
+	$.ajax({
+		url : "${pageContext.request.contextPath}/ajax/getWeather.hari",
+		dataType : 'json',
+		type : "get",
+		data : { "weatherUrl" : weatherUrl },
+		success : function(getWeather) {
+			$('#weatherDate').text(year + "년 " + month + "월 " + day +"일")
+			console.log(getWeather)
+			var weatherTitle='<td style="width: 15%; height: 20%;" rowspan="2" id="weatherImg"></td>' +
+			'<td style="width: 10%;">현재날씨</td>'+
+			'<td style="width: 10%;"> 기 온</td>' +
+			'<td style="width: 10%;"> 습 도 </td>"';
+			var weatherContent='<td id="currWeather"></td>' +
+			'<td id="t1h"></td>' +
+			'<td id="reh"></td>';
+			var weatherAraay=[]
+			weatherAraay.push(getWeather.response.body.items[0])
+            for(var i=1; i<getWeather.response.body.items.length; i++){
+                if((getWeather.response.body.items[i-1].category) != (getWeather.response.body.items[i].category)){
+                    weatherAraay.push(getWeather.response.body.items[i])
+                    if(i==getWeather.response.body.items.length-1){
+                        return;
+                    }
+                    continue;
+                }
+            }
+            console.log(weatherAraay)
+			
+			//현재날씨
+			if(weatherAraay[1].fcstValue == '0'){ //비 & 눈이 아니면
+				if(weatherAraay[3].fcstValue == '1'){//맑음
+//						weatherTitle+='<td style="width: 10%;">현재날씨</td>';
+//						weatherContent+='<td id="reh">몰라</td>';
+					$("#weatherTitle").append(weatherTitle);
+					$("#weatherContent").append(weatherContent);
+					$("#weatherImg").append('<img src="${pageContext.request.contextPath}/resources/hari/assets/images/weather_sun.png" alt="현재날씨" class="rounded-circle" style="width: 67%; height: 20%;">');
+					$('#currWeather').text('맑음')
+				}else if(weatherAraay[3].fcstValue == '3'){//구름 많음
+					$("#weatherTitle").append(weatherTitle);
+					$("#weatherContent").append(weatherContent);
+					$("#weatherImg").append('<img src="${pageContext.request.contextPath}/resources/hari/assets/images/weather_cloud.png" alt="현재날씨" class="rounded-circle" style="width: 67%; height: 20%;">');
+					$('#currWeather').text('구름 많음')
+				}else if(weatherAraay[3].fcstValue == '4'){//흐림
+					$("#weatherTitle").append(weatherTitle);
+					$("#weatherContent").append(weatherContent);
+					$("#weatherImg").append('<img src="${pageContext.request.contextPath}/resources/hari/assets/images/weather_blur.png" alt="현재날씨" class="rounded-circle" style="width: 67%; height: 20%;">');
+					$('#currWeather').text('흐림')
 				}
+			}else if(weatherAraay[1].fcstValue == '1'){ //비오면
+				weatherTitle+='<td style="width: 10%;">강우량</td>';
+				weatherContent+='<td id="reh">' + weatherAraay[2].fcstValue + 'mm'  +'</td>';
+				$("#weatherTitle").append(weatherTitle);
+				$("#weatherContent").append(weatherContent);
+				$("#weatherImg").append('<img src="${pageContext.request.contextPath}/resources/hari/assets/images/weather_rain.png" alt="현재날씨" class="rounded-circle" style="width: 67%; height: 20%;">');
+				$('#currWeather').text('비')
 				
-				//현재날씨
-				if(weatherAraay[1].fcstValue == '0'){ //비 & 눈이 아니면
-					if(weatherAraay[3].fcstValue == '1'){//맑음
-						weatherTitle+='<td style="width: 10%;">현재날씨</td>';
-						weatherContent+='<td id="reh">몰라</td>';
-						$("#weatherTitle").append(weatherTitle);
-						$("#weatherContent").append(weatherContent);
-						$("#weatherImg").append('<img src="${pageContext.request.contextPath}/resources/hari/assets/images/weather_sun.png" alt="현재날씨" class="rounded-circle" style="width: 67%; height: 20%;">');
-						$('#currWeather').text('맑음')
-					}else if(weatherAraay[3].fcstValue == '3'){//구름 많음
-						$("#weatherTitle").append(weatherTitle);
-						$("#weatherContent").append(weatherContent);
-						$("#weatherImg").append('<img src="${pageContext.request.contextPath}/resources/hari/assets/images/weather_cloud.png" alt="현재날씨" class="rounded-circle" style="width: 67%; height: 20%;">');
-						$('#currWeather').text('구름 많음')
-					}else if(weatherAraay[3].fcstValue == '4'){//흐림
-						$("#weatherTitle").append(weatherTitle);
-						$("#weatherContent").append(weatherContent);
-						$("#weatherImg").append('<img src="${pageContext.request.contextPath}/resources/hari/assets/images/weather_blur.png" alt="현재날씨" class="rounded-circle" style="width: 67%; height: 20%;">');
-						$('#currWeather').text('흐림')
-					}
-				}else if(weatherAraay[1].fcstValue == '1'){ //비오면
-					weatherTitle+='<td style="width: 10%;">강우량</td>';
-					weatherContent+='<td id="reh">' + weatherAraay[2].fcstValue + 'mm'  +'</td>';
-					$("#weatherTitle").append(weatherTitle);
-					$("#weatherContent").append(weatherContent);
-					$("#weatherImg").append('<img src="${pageContext.request.contextPath}/resources/hari/assets/images/weather_rain.png" alt="현재날씨" class="rounded-circle" style="width: 67%; height: 20%;">');
-					$('#currWeather').text('비')
-					
-				}else if(weatherAraay[1].fcstValue == '2'){ //눈 비 오면
-					weatherTitle+='<td style="width: 10%;">강우량</td>';
-					weatherContent+='<td id="reh">' + weatherAraay[2].fcstValue + 'mm</td>';
-					$("#weatherTitle").append(weatherTitle);
-					$("#weatherContent").append(weatherContent);
-					$("#weatherImg").append('<img src="${pageContext.request.contextPath}/resources/hari/assets/images/weather_snowrain.png" alt="현재날씨" class="rounded-circle" style="width: 67%; height: 20%;">');
-					$('#currWeather').text('눈 비')
-				}else if(weatherAraay[1].fcstValue == '3'){ //눈 오면
-					weatherTitle+='<td style="width: 10%;">적설량</td>';
-					weatherContent+='<td id="reh">' + weatherAraay[2].fcstValue + 'mm</td>';
-					$("#weatherTitle").append(weatherTitle);
-					$("#weatherContent").append(weatherContent);
-					$("#weatherImg").append('<img src="${pageContext.request.contextPath}/resources/hari/assets/images/weather_snow.png" alt="현재날씨" class="rounded-circle" style="width: 67%; height: 20%;">');
-					$('#currWeather').text('눈')
-				}
-				$('#t1h').text(weatherAraay[4].fcstValue + '℃') 
-				$('#reh').text(weatherAraay[6].fcstValue + '%') 
-		
-// 					var icon = $('<i>');
-// 					var totalRain = $('<span>');
-// 					var degree = $('<span>');
-// 						$.each(weatherData.response.body.items.item,function(index,element) {
-// 									if (element.category == "PTY") {
-// 										if (element.obsrValue == 0) {
-// 											$(icon).attr("class","wi wi-day-sunny");
-// 												}else{
-// 													$(icon).attr("class","wi wi-rain");
-// 												}
-// 											}else if (element.category == "RN1") {
-// 												$(totalRain).html("&nbsp;&nbsp;&nbsp;&nbsp;시간당 강수량 : "+ element.obsrValue+ "ml");
-// 											}else if (element.category == "T1H") {
-// 												$(degree).html("&nbsp;&nbsp;&nbsp;&nbsp;현재기온 : "+ element.obsrValue+ "℃ ");
-// 											}
-// 										});
-// 						$("#title").after(totalRain);
-// 						$("#title").after(degree);
-// 						$("#title").after(icon);
-			},
-		});//날씨api END!!
+			}else if(weatherAraay[1].fcstValue == '2'){ //눈 비 오면
+				weatherTitle+='<td style="width: 10%;">강우량</td>';
+				weatherContent+='<td id="reh">' + weatherAraay[2].fcstValue + 'mm</td>';
+				$("#weatherTitle").append(weatherTitle);
+				$("#weatherContent").append(weatherContent);
+				$("#weatherImg").append('<img src="${pageContext.request.contextPath}/resources/hari/assets/images/weather_snowrain.png" alt="현재날씨" class="rounded-circle" style="width: 67%; height: 20%;">');
+				$('#currWeather').text('눈 비')
+			}else if(weatherAraay[1].fcstValue == '3'){ //눈 오면
+				weatherTitle+='<td style="width: 10%;">적설량</td>';
+				weatherContent+='<td id="reh">' + weatherAraay[2].fcstValue + 'mm</td>';
+				$("#weatherTitle").append(weatherTitle);
+				$("#weatherContent").append(weatherContent);
+				$("#weatherImg").append('<img src="${pageContext.request.contextPath}/resources/hari/assets/images/weather_snow.png" alt="현재날씨" class="rounded-circle" style="width: 67%; height: 20%;">');
+				$('#currWeather').text('눈')
+			}
+			$('#t1h').text(weatherAraay[4].fcstValue + '℃') 
+			$('#reh').text(weatherAraay[6].fcstValue + '%') 
+	
+		},
+	});//날씨api END!!
 })
 
 
