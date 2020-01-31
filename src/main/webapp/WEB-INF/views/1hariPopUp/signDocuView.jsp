@@ -7,15 +7,6 @@
 <link rel="stylesheet" type="text/css"href="${pageContext.request.contextPath}/resources/hari/assets/extra-libs/multicheck/multicheck.css">
 <link href="${pageContext.request.contextPath}/resources/hari/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet">
 
-<style>
-	.draft > td{
-		border-color:#000000;
-		border-style:solid;
-		border-width:1px 1px 1px;
-		width: 80px;
-	}
-</style>
-
 <!-- 초기페이지 설정 -->
 <c:forEach var="docu" items="${requestScope.signDocu}">
 <se:authentication property="name" var="loginuser"  />
@@ -233,3 +224,18 @@
 		});
 	</script>
 </c:forEach>
+
+
+<style>
+	body, input, p, span, option, label, select, button, .wizard-content {
+		font-family :맑은고딕,monospace;
+		font-size : 0.8rem;
+		font-weight : inherit;
+	}
+	.draft > td{
+		border-color:#000000;
+		border-style:solid;
+		border-width:1px 1px 1px;
+		width: 80px;
+	}
+</style>
