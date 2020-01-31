@@ -205,9 +205,9 @@
 										}else if(sign.signCode == "2"){
 											signList +='<div role="progressbar" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-striped" style="width: 70%" aria-valuenow="70"></div>';
 										}else if(sign.signCode == "3"){
-											signList +='<div role="progressbar" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-striped bg-success" style="width: 100%" aria-valuenow="100"></div>';
+											signList +='<div role="progressbar" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-striped bg-success" style="width: 95%" aria-valuenow="100"></div>';
 										}else{
-											signList += '<div role="progressbar" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-striped bg-danger" style="width: 100%" aria-valuenow="100"></div>';
+											signList += '<div role="progressbar" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-striped bg-danger" style="width: 95%" aria-valuenow="100"></div>';
 										}
 									signList += '</div>'
 								+'</td>'
@@ -286,7 +286,7 @@
 		<div class="row">
 			<div class="col-12">
 				<!--내 문서함 테이블 -->
-				<div class="card"  style=" border-radius:10px; box-shadow :3px 3px #999999;  border: 2px groove #999999;">
+				<div class="card"  style=" border-radius:10px;  box-shadow :0 0 12px #999999; border-radius:10px;">
 					<div class="card-body">
 						<div class="row">
 							<!-- 문서구분 버튼 -->

@@ -38,7 +38,7 @@
 
 				<!-- 사원 근태관리 테이블 -->
 				<div class="card">
-					<div class="card-body" style ="border-radius:10px; box-shadow :3px 3px #999999;  border: 2px groove #999999;">
+					<div class="card-body" style ="border-radius:10px;border-radius:10px; box-shadow :0 0 12px #999999;">
 						<h5 class="card-title"></h5>
 						<div class="table-responsive">
 							<form id="taTable" name="taTable" method="post" enctype="multipart/form-data">
@@ -104,11 +104,12 @@
 	$(function() {
 		let startWork = ""; // 출근시간 처리를 위한 변수
 		let leaveWork = ""; // 퇴근시간 처리를 위한 변수
-		let setDate = moment().format("YYYY-MM-DD"); // 오늘 날짜
+		let today = moment().format("YYYY-MM-DD"); // 오늘 날짜
 		let curMonth = moment().format("YYYY-MM"); // 현재 월
 		let curDay = moment().date(); // 현재 일
+		let setDate = ""; // 첫 페이지 진입 후 조건식을 위한 변수
 		
-		getTaList(setDate); // 페이지 로딩 후 근태목록 가져오기
+		getTaList(today); // 페이지 로딩 후 오늘의 근태목록 가져오기
 		getThreeMonth(); // 근태목록을 가져온 후 직전 2개월까지 선택할 수 있도록 하는 함수 호출
 
 		function getThreeMonth() { // 직전 2개월 (총 3개월)을 선택할 수 있는 함수
@@ -154,7 +155,7 @@
 								empTaList += '<td>' + TaList[i].taName + ' (출근시간 기록없음)</td>'; // 출근, 출근시간
 							} else if (TaList[i].taDate == '0000-00-00 00:00:00') { // 연차인 경우
 // 								empTaList += ''; // 연차인 경우 출근을 화면에 출력하지 않고 뒤에 연차 td와 합치기 위해 공백으로 처리
-								empTaList += '<td>' + TaList[i].taName + ' (출근시간 기록없음)</td>'; // 출근, 출근시간
+								empTaList += '<td>연차</td>'; // 출근, 출근시간
 							}
 							count++;
 						} else {
@@ -182,6 +183,10 @@
 					$('#zero_config').DataTable();
 					
 					setEmpTa(setDate); // 퇴근처리를 위한 함수 호출
+				},
+				error : function(xhr){
+					console.log(xhr.status);
+					console.log('getTaList ajax error');
 				}
 			});
 		}
@@ -224,12 +229,12 @@
 
 			for (var i = 0; i < daysMonth; i++) {
 				if (setDate == "") { // 오늘 날짜로 페이지를 들어왔을 때
-					if (moment(curMonth).month() != selectedMonth) {
+					if (moment(curMonth).month() != selectedMonth) { // 이번 달과 선택된 달이 같지 않을 때
 						days += '<span class="click"> ' + (i + 1) + ' </span>'; // 1일은 0이기 때문에 +1
-					} else {
-						if (curDay != (i + 1)) {
+					} else { // 이번 달과 선택된 달이 같을 때
+						if (curDay != (i + 1)) { // 오늘 일자와 선택된 일자가 같지 않을 때
 							days += '<span class="click"> ' + (i + 1) + ' </span>'; // 1일은 0이기 때문에 +1
-						} else {
+						} else { // 오늘 일자와 선택된 일자가 같을 때
 							days += '<span class="click" style="color: red;"> ' + (i + 1) + ' </span>'; // 1일은 0이기 때문에 +1
 						}
 					}
@@ -237,9 +242,9 @@
 					if (moment(setDate).month() != selectedMonth) {
 						days += '<span class="click"> ' + (i + 1) + ' </span>'; // 1일은 0이기 때문에 +1
 					} else {
-						if (moment(setDate).date() != (i + 1)) {
+						if (moment(setDate).date() != (i + 1)) { // setDate 일자와 선택된 일자가 같지 않은 경우
 							days += '<span class="click"> ' + (i + 1) + ' </span>'; // 1일은 0이기 때문에 +1
-						} else {
+						} else { // setDate 일자와 선택된 일자가 같은 경우
 							days += '<span class="click" style="color: red;"> ' + (i + 1) + ' </span>'; // 1일은 0이기 때문에 +1
 						}
 					}
@@ -249,6 +254,7 @@
 
 			$('.click').click(function() { // 해당 날짜(일)을 선택했을 때
 				setDate = $('#selectMonth').val() + '-' + $(this).text().trim(); // 해당 날짜를 연-월-일로 선언
+				$('#zero_config').DataTable().destroy(); // DataTables 초기화(해당 부분을 empty() 하기 전)
 				$('#taBody').empty();
 				getTaList(setDate); // 해당 날짜 근태목록 가져오기
 				$('#days').empty();

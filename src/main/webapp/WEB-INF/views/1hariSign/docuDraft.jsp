@@ -44,7 +44,7 @@
 		font-family: 'Nanum DaCaeSaRang';
 	
 	}
-	
+
 
 </style>
 <!-- Page wrapper  -->
@@ -77,8 +77,6 @@
 						<div class="row">
 							<div class="col-md-2">
 								<button type="button" id="buttonselect" class="btn btn-info btn-sm" data-toggle="modal" data-target="#signModal">결재자 선택</button>
-								
-								
 							</div>
 							<div class="col-md-6">
 							</div>
@@ -156,7 +154,7 @@
 							</div>
 						</c:if>
 						<!-- ck 에디터 form -->
-						<textarea name="signContent" id="signContent" rows="10" cols="80">
+						<textarea name="signContent" id="signContent" rows="10" cols="80" >
 							<c:choose>
 								<c:when test="${requestScope.signDocu == null}">
 									${form.signFormFormContent}
@@ -268,8 +266,9 @@
 			extraPlugins: 'colorbutton,font,justify,print,tableresize,pastefromword,liststyle,pagebreak',
 
 			// Make the editing area bigger than default.
-			height: 600,
-			width: 940
+			height: 500,
+			width: 1000
+			
 		});
 		
 		//listCheckbox
