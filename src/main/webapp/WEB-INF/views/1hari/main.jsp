@@ -502,12 +502,14 @@ $(function(){
 		url : newsUrl,
 		dataType : "json",
 		success : function(newsArticles) {
-			for (var i = 0; i < 5; i++) {
-				news += '<tr>' 
-						+ '<td><a href="' + newsArticles.articles[i].url + '" class="link" target="_blank">' + newsArticles.articles[i].title + '</a></td>'
-						+ '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>'
-						+ '<td>' + moment(newsArticles.articles[i].publishedAt).format("YYYY-MM-DD") + '</td>'
-					+ '</tr>';
+			for (var i = 0; i < newsArticles.articles.length; i++) {
+				if (i % 2 == 0) {
+					news += '<tr>' 
+							+ '<td style="width: 58%;"><a href="' + newsArticles.articles[i].url + '" class="link" target="_blank">' + newsArticles.articles[i].title + '</a></td>'
+				} else {
+					news += '<td><a href="' + newsArticles.articles[i].url + '" class="link" target="_blank">' + newsArticles.articles[i].title + '</a></td>'
+						+ '</tr>';
+				}
 			} 
 			$('#news').append(news);
 		}
@@ -759,16 +761,20 @@ $(function(){
 		<!--col-md-6 컨텐츠 컨테이너 내에서 오른쪽 부분 (연봉통계 + 전자결재) 종료 -->
 		</div>
 	<!-- <div class="row"> 부분 끝 div-->
-				<!-- 무언가.. 시작 -->
+			<!-- 뉴스 시작 -->
 			<div class="card" style ="height:200px; width:90%; box-shadow :0 0 12px #999999; border-radius:10px; margin-left:5%; ">
-				<div class="card-body">
+				<div class="card-body scrollable ps-container ps-theme-default ps-active-y">
 					<h4 class="card-title m-b-0">오늘의 뉴스</h4>
-					<table id="news" style="margin-left: 7%;">
+					<table id="news" style="margin-left: 4%;">
 					
 					</table>
+					<div class="ps-scrollbar-y-rail" style="top: 0px; height: auto; right: 3px;">
+						<div class="ps-scrollbar-y" tabindex="0" style="top: 0px; height: auto;">
+						</div>
+					</div>
 				</div>
 			</div>
-		<!-- 무언가.. 종료 -->
+			<!-- 뉴스 끝 -->
 	</div>
 <!--<div class="container-fluid"> 부분 끝 div-->
 </div>
