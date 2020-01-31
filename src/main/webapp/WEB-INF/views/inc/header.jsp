@@ -166,6 +166,7 @@ $(function(){
                type: "post",
                dataType: "json",
                success: function(data) {
+                   isStart=true
                }
             }).then((data) => {
                 //총 근무일 갱신
@@ -234,6 +235,7 @@ $(function(){
 			type: "post",
 			dataType: "json",
 			success: function(data) {
+				isEnd=true
 			}
 		}).then((data) => {
 			//있으면 true, 없으면 false
@@ -341,33 +343,55 @@ $(function(){
         }
     }
     
-	$('#aLogout').click(function(){
-    	if(isEnd==false && isStart==true){
-    		swal({
-    			  title: "Are you sure?",
-    			  text: "Your will not be able to recover this imaginary file!",
-    			  type: "warning",
-    			  showCancelButton: true,
-    			  confirmButtonClass: "btn-danger",
-    			  confirmButtonText: "Yes, delete it!",
-    			  closeOnConfirm: false
-    			},
-    			function(value){
-    			  swal("Deleted!", "Your imaginary file has been deleted.", "success");
-    			  $('#logout-form').submit()
-    			});
-//         	swal({
-//             	title:"경 고",
-//     			text: "퇴근처리되지 않았습니다. 로그아웃 하시겠습니까?",
-//     			icon: "warning",
-//     			button: "확인" 
-//     		}).then((value) => {
-//     			$('#logout-form').submit()
-//     		})
-			return
-    	}
-    	$('#logout-form').submit()
-	})
+// 	$('#aLogout').click(function(){
+//     	if(isEnd==false && isStart==true){
+//     		swal({
+//     			  title: "Are you sure?",
+//     			  text: "Your will not be able to recover this imaginary file!",
+//     			  type: "warning",
+//     			  showCancelButton: true,
+//     			  confirmButtonClass: "btn-danger",
+//     			  confirmButtonText: "Yes, delete it!",
+//     			  closeOnConfirm: false
+//     			},
+//     			function(value){
+//     			  swal("Deleted!", "Your imaginary file has been deleted.", "success");
+//     			  $('#logout-form').submit()
+//     			});
+// //         	swal({
+// //             	title:"경 고",
+// //     			text: "퇴근처리되지 않았습니다. 로그아웃 하시겠습니까?",
+// //     			icon: "warning",
+// //     			button: "확인" 
+// //     		}).then((value) => {
+// //     			$('#logout-form').submit()
+// //     		})
+// 			return
+//     	}
+//     	$('#logout-form').submit()
+// 	})
+
+    $('#aLogout').on('click', function(e){
+        if(isEnd==false && isStart==true){
+            e.preventDefault(); //cancel default action
+            swal({
+                title: "로그아웃 경고",
+                text: "퇴근시간이 기록되지 않았습니다. 정말 로그아웃 하시겠습니까?", 
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            }).then((logout) => {
+              if (logout) {
+                $('#logout-form').submit()
+              }else{
+                  return
+              }
+            });
+        }else{
+            $('#logout-form').submit()
+        }
+    });
+
 
 });
 
