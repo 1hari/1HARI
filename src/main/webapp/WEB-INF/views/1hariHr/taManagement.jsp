@@ -6,9 +6,6 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/hari/assets/extra-libs/multicheck/multicheck.css">
 <link href="${pageContext.request.contextPath}/resources/hari/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet">
 
-<!-- moment js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"></script>
-
 <!-- Page wrapper  -->
 <!-- ============================================================== -->
 <div class="page-wrapper">
@@ -228,13 +225,13 @@
 			let days = "";
 
 			for (var i = 0; i < daysMonth; i++) {
-				/* 첫 페이지 로드 후에도 첫 번째 if문을 타지 않으니 물어보고 삭제하거나 수정 */
+                /* 첫 페이지 로드 후에도 첫 번째 if문을 타지 않으니 물어보고 삭제하거나 수정 */
 				if (setDate == "") { // 오늘 날짜로 페이지를 들어왔을 때
 					if (moment(curMonth).month() != selectedMonth) { // 이번 달과 선택된 달이 같지 않을 때
-						console.log('curMonth');
+                        console.log('curMonth');
 						days += '<span class="click"> ' + (i + 1) + ' </span>'; // 1일은 0이기 때문에 +1
 					} else { // 이번 달과 선택된 달이 같을 때
-						console.log('!= curMonth');
+                        console.log('!= curMonth');
 						if (curDay != (i + 1)) { // 오늘 일자와 선택된 일자가 같지 않을 때
 							days += '<span class="click"> ' + (i + 1) + ' </span>'; // 1일은 0이기 때문에 +1
 						} else { // 오늘 일자와 선택된 일자가 같을 때
@@ -242,16 +239,16 @@
 						}
 					}
 				} else { // 클릭 이후에 페이지에 들어올 때
-					console.log('클릭이후');
-					if (moment(setDate).month() != selectedMonth) { // SelectBox에서 월을 변경하고 일자를 선택하지 않았을 때
-						console.log('month');
-						days += '<span class="click">&nbsp; ' + (i + 1) + '&nbsp; </span>'; // 1일은 0이기 때문에 +1
-					} else { // SelectBox에서 월을 변경하고 일자를 선택했을 때
-						console.log('date');
+                    console.log('클릭이후');
+                    if (moment(setDate).month() != selectedMonth) { // SelectBox에서 월을 변경하고 일자를 선택하지 않았을 때
+                        console.log('month');
+                        days += '<span class="click">&nbsp; ' + (i + 1) + '&nbsp; </span>'; // 1일은 0이기 때문에 +1
+                    } else { // SelectBox에서 월을 변경하고 일자를 선택했을 때
+                        console.log('date');
 						if (moment(setDate).date() != (i + 1)) { // setDate 일자와 선택된 일자가 같지 않은 경우
-							days += '<span class="click">&nbsp; ' + (i + 1) + '&nbsp; </span>'; // 1일은 0이기 때문에 +1
+                            days += '<span class="click">&nbsp; ' + (i + 1) + '&nbsp; </span>'; // 1일은 0이기 때문에 +1
 						} else { // setDate 일자와 선택된 일자가 같은 경우
-							days += '<span class="click" style="color: red;">&nbsp; ' + (i + 1) + '&nbsp; </span>'; // 1일은 0이기 때문에 +1
+                            days += '<span class="click" style="color: red;">&nbsp; ' + (i + 1) + '&nbsp; </span>'; // 1일은 0이기 때문에 +1
 						}
 					}
 				}
