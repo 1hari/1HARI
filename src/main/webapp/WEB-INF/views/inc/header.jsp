@@ -284,7 +284,6 @@ $(function(){
 								$(itemArray[i]).removeAttr("td");
 								$(itemArray[i]).append('<a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-success fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">퇴근</span></div><div class="fc-resizer fc-end-resizer"></div></a>');
 							}
-							
 				        }
 					}
 				});

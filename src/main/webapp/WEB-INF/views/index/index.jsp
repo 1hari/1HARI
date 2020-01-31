@@ -76,7 +76,7 @@
 	
 						if (isExist == false) {
 							swal({
-								text: "등록된 이메일과 일치하지 않습니다.",
+								text: "이메일 또는 사번을 잘못 입력하셨습니다.",
 								icon: "warning",
 								button: "닫기"
 							});

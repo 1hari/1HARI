@@ -389,7 +389,6 @@ public class EmpService {
     	int empNum=Integer.parseInt(empNumStr);
     	try {
     		totalTime=dao.getAnntList(empNum);
-    		System.out.println(totalTime.toString());
     	} catch (ClassNotFoundException | SQLException e) {
     		log.debug("getAnntList : " + e.getMessage());
     	}

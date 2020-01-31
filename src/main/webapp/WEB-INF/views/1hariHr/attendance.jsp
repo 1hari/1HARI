@@ -163,7 +163,6 @@ $(function(){
 								$(itemArray2[i]).append('<br><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-danger fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">결근</span></div><div class="fc-resizer fc-end-resizer"></div></a></td>');
 							}
 						}
-						console.log(getEndList.annList.length)
 						for(var j=0; j<getEndList.annList.length; j++){
 							if($(itemArray2[i]).attr('data-date') == getEndList.annList[j]){
 								$(itemArray2[i]).empty();

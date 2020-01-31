@@ -1,20 +1,19 @@
 package kr.coo.onehari.util.controller;
 
 
+import java.io.InputStream;
+import java.net.URL;
+
+import org.apache.cxf.io.CachedOutputStream;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import kr.coo.onehari.util.service.WeatherService;
 import lombok.extern.slf4j.Slf4j;
-import java.io.InputStream;
-import java.net.URL;
-import org.apache.cxf.io.CachedOutputStream;
-import org.apache.tomcat.util.http.fileupload.IOUtils;
 /*
  * 작성자: 오형남
  * 시작: 2020. 1. 30
@@ -24,9 +23,6 @@ import org.apache.tomcat.util.http.fileupload.IOUtils;
 @RestController
 @RequestMapping("ajax/")
 public class WeatherController {
-	
-//	@Autowired
-//	private WeatherService weatherService;
 	
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder; // 비밀번호 암호화
@@ -47,9 +43,8 @@ public class WeatherController {
 	    	bos.close();
 	    	
 	    	data = bos.getOut().toString();
-	    	System.out.println(data);
 		} catch (Exception e) {
-			log.debug("getAllEmpTA 예외발생: " + e.getMessage());
+			log.debug("getWeather 예외발생: " + e.getMessage());
 		}
 		return data;
 	}
