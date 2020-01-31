@@ -163,12 +163,12 @@ $(function(){
 								$(itemArray2[i]).append('<br><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-danger fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">결근</span></div><div class="fc-resizer fc-end-resizer"></div></a></td>');
 							}
 						}
-						for(var j=0; j<getEndList.anntList.length; j++){
-							if($(itemArray2[i]).attr('data-date') == getEndList.anntList[j]){
+						console.log(getEndList.annList.length)
+						for(var j=0; j<getEndList.annList.length; j++){
+							if($(itemArray2[i]).attr('data-date') == getEndList.annList[j]){
 								$(itemArray2[i]).empty();
 								$(itemArray2[i]).append('<br><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-info fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">연차</span></div><div class="fc-resizer fc-end-resizer"></div></a></td>');
 							}
-							//연차 코드<a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-info fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">Event One</span></div><div class="fc-resizer fc-end-resizer"></div></a>
 						}
 					}
 				}
@@ -176,7 +176,7 @@ $(function(){
 		})
 	})
 
-		//오늘 출근기록 체크
+	//오늘 출근기록 체크
 	$.ajax({
 		url: "${pageContext.request.contextPath}/ajax/todayStartWorkCheck.hari",
 		type: "post",
@@ -196,11 +196,10 @@ $(function(){
 					$('#startWork').removeAttr('disabled');	
 					$('#endWork').attr('disabled', 'disabled');
 					//출근 미등록 알림 (페이지 이동마다 출근 안찍혀있으면 알림)
-					toastr.error('출근등록 여부를 확인해 주세요', '출근알림', {timeOut: 5000});
 				}else if(isStart == true && isEnd==false && isAbsent==false){
 					$('#startWork').attr('disabled', 'disabled');
 					$('#endWork').removeAttr('disabled');	
-				} else if((isStart == true && isEnd==true && isAbsent==false) || (isStart == true && isEnd==true && isAbsent==true) || (isStart == false && isEnd==false && isAbsent==true) || (isStart == true && isEnd==true && isAbsent==true) || (isStart == true && isEnd==false && isAbsent==true)) {
+				} else if((isStart == true && is4End==true && isAbsent==false) || (isStart == true && isEnd==true && isAbsent==true) || (isStart == false && isEnd==false && isAbsent==true) || (isStart == true && isEnd==true && isAbsent==true) || (isStart == true && isEnd==false && isAbsent==true)) {
 					$('#endWork').attr('disabled', 'disabled');
 					$('#startWork').attr('disabled', 'disabled');
 				} else if(isStart == false && isEnd==true) {

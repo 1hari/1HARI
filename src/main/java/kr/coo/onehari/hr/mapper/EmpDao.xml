@@ -215,7 +215,7 @@
     
     <!-- 이번달 연차기록 yyyy-mm-dd-->
 	<select id="getAnntList" resultType="String">
-		SELECT DATE_FORMAT(TADATE,"%Y-%m-%d") FROM TALIST WHERE MONTH(TADATE) = MONTH(NOW()) AND TACODE=4 AND EMPNUM=#{empNum}
+		SELECT SCHEDULEDATE FROM TALIST WHERE TACODE=4 AND EMPNUM=#{empNum}
     </select>
 
 	
