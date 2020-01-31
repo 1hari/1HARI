@@ -303,15 +303,18 @@
 			}
 			
 		});//결재자 클릭 끝
-
+		//console.log(new Date());
+		var twmoment = moment(new Date()).add('days',1).format("YYYY-MM-DD");
+		//console.log(twmoment);
+		
 		//datepicker 설정
 		$('.date').datepicker({
-					format: "yyyy-mm-dd", // 입사일 Date 형식
+					format: "yyyy-mm-dd", // Date 형식
 					autoclose: true,
 					todayHighlight: true,
 					language: "ko",
 					orientation: "bottom auto",
-					startDate :new Date(),
+					startDate :twmoment, //익일부터 선택가능
 					daysOfWeekDisabled :[0,6]
 		});
 		
