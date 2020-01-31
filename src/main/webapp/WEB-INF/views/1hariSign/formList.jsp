@@ -35,13 +35,13 @@
 
 				<!--양식 관리  테이블 -->
 
-				<div class="card"  style=" border-radius:10px; box-shadow :3px 3px #999999;  border: 2px groove #999999;">
+				<div class="card"  style=" border-radius:10px;box-shadow :0 0 12px #999999;">
 					<div class="card-body">
 						<h5 class="card-title"></h5>
 						<div class="table-responsive">
 							<div style="text-align: right; margin-bottom: 2%;">
 								<a href="formInsert.hari" style="color: white;">
-									<button type="button" class="btn m-t-5 btn-info btn-block waves-effect waves-light" style="width: 10%; background-color: #20B2AA; margin-right: 1%;  border : 2px solid #807266; font-weight: bold; font-size:medium; color: #000000; background-color:white;">
+									<button type="button" class="btn m-t-5 btn-info btn-block waves-effect waves-light" style="width: 10%; background-color: #20B2AA; margin-right: 1%;  box-shadow :0 0 12px #999999; border-radius:10px; font-weight: bold; font-size:medium; color: #000000; background-color:white;">
 									양식 등록&nbsp;&nbsp;&nbsp;<i class="m-r-10 mdi mdi-lead-pencil"></i>
 									</button>
 								</a>
@@ -62,7 +62,7 @@
 													<td>
 														<c:if test="${form.signFormCode != 0}"> <!-- 연차신청서 삭제불가 -->
 															<a href="formDelete.hari?signFormCode=${form.signFormCode}" style="color: white;">
-																<button type="button" class="btn m-t-5 btn-info btn-block waves-effect waves-light" style="width: 12%; background-color: #20B2AA; margin-right: 1%;  border : 2px solid #807266; font-weight: bold; font-size:x-small; color: #000000; background-color:white;">
+																<button type="button" class="btn m-t-5 btn-info btn-block waves-effect waves-light" style="width: 12%; background-color: #20B2AA; margin-right: 1%;   box-shadow :0 0 12px #999999; border-radius:10px; font-weight: bold; font-size:x-small; color: #000000; background-color:white;">
 																	삭제&nbsp;&nbsp;&nbsp;<i class="m-r-10 mdi mdi-delete"></i>
 																</button>
 															</a>
