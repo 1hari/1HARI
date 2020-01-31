@@ -139,10 +139,10 @@
 </style>
 
 <!--left sidebar시작 !!  css는 sidebar.css 파일 참고 -->
-<aside class="left-sidebar" id="theme" data-sidebarbg="skin5" style="background: white; box-shadow: 6px 6px 6px #white; border-right: 2px groove #999999;">
+<aside class="left-sidebar" id="theme" data-sidebarbg="skin5" style="background: white; ">
 
 	<!-- 사이드바 스크롤-->
-	<div class="scroll-sidebar" id="theme" style="background: white; opacity:0.9;">
+	<div class="scroll-sidebar" id="theme" style="background: white; ">
 		<!-- Sidebar 네비게이션-->
 		<nav class="sidebar-nav" >
 			<ul id="sidebarnav" class="p-t-30" style="background: white;">
