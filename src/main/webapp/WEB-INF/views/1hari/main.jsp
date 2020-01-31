@@ -428,9 +428,16 @@ $(function(){
 			'<td id="t1h"></td>' +
 			'<td id="reh"></td>';
 			var weatherAraay=[]
-			for(var i=0; i<getWeather.response.body.items.length; i+=4){
-				weatherAraay.push(getWeather.response.body.items[i])
-			}
+            for(var i=0; i<getWeather.response.body.items.length; i++){
+                if((getWeather.response.body.items[i].category) != getWeather.response.body.items[i+1].category){
+                    console.log(getWeather.response.body.items[i])
+                    weatherAraay.push(getWeather.response.body.items[i])
+                    if(i==getWeather.response.body.items.length-1){
+                        break;
+                    }
+                    continue;
+                }
+            }
 			
 			//현재날씨
 			if(weatherAraay[1].fcstValue == '0'){ //비 & 눈이 아니면

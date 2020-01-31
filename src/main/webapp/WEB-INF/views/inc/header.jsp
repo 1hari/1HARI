@@ -166,6 +166,7 @@ $(function(){
                type: "post",
                dataType: "json",
                success: function(data) {
+                   isStart=true;
                }
             }).then((data) => {
                 //총 근무일 갱신
@@ -372,27 +373,29 @@ $(function(){
 // 	})
 
 
-//     $('#aLogout').on('click', function(e){
-//     	if(isEnd==false && isStart==true){
-// 	        e.preventDefault(); //cancel default action
-// 	        //pop up
-// 	        swal({
-// 	            title: "로그아웃 경고",
-// 	            text: "퇴근시간이 기록되지 않았습니다. 정말 로그아웃 하시겠습니까?", 
-// 	            icon: "warning",
-// 	            buttons: true,
-// 	            dangerMode: true,
-// 	        })
-// 	        .then((willDelete) => {
-// 	          if (willDelete) {
-// 	            $('#logout-form').submit()
-// 	          }else{
-// 		          return
-// 		      }
-// 	        });
-// 	        $('#logout-form').submit()
-//     	}
-//     });
+    $('#aLogout').on('click', function(e){
+        console.log(isEnd + "ㅡ" + isStart)
+    	if(isEnd==false && isStart==true){
+	        e.preventDefault(); //cancel default action
+	        swal({
+	            title: "로그아웃 경고",
+	            text: "퇴근시간이 기록되지 않았습니다. 정말 로그아웃 하시겠습니까?", 
+	            icon: "warning",
+	            buttons: true,
+	            dangerMode: true,
+			}).then((logout) => {
+	          if (logout) {
+	            $('#logout-form').submit()
+	          }else{
+		          return
+		      }
+			});
+    	}else{
+        	$('#logout-form').submit()
+        }
+
+    });
+
 });
 
 //사용자 설정 테마색으로 변경
