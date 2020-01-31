@@ -433,7 +433,6 @@ $(function(){
 				for(var i=0; i<getWeather.response.body.items.length; i+=4){
 					weatherAraay.push(getWeather.response.body.items[i])
 				}
-				weatherAraay[1].fcstValue=2;
 				
 				//현재날씨
 				if(weatherAraay[1].fcstValue == '0'){ //비 & 눈이 아니면

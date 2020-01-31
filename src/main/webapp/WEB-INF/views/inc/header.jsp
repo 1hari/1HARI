@@ -340,7 +340,37 @@ $(function(){
             };
         }
     }
+    
+	$('#aLogout').click(function(){
+    	if(isEnd==false && isStart==true){
+    		swal({
+    			  title: "Are you sure?",
+    			  text: "Your will not be able to recover this imaginary file!",
+    			  type: "warning",
+    			  showCancelButton: true,
+    			  confirmButtonClass: "btn-danger",
+    			  confirmButtonText: "Yes, delete it!",
+    			  closeOnConfirm: false
+    			},
+    			function(value){
+    			  swal("Deleted!", "Your imaginary file has been deleted.", "success");
+    			  $('#logout-form').submit()
+    			});
+//         	swal({
+//             	title:"경 고",
+//     			text: "퇴근처리되지 않았습니다. 로그아웃 하시겠습니까?",
+//     			icon: "warning",
+//     			button: "확인" 
+//     		}).then((value) => {
+//     			$('#logout-form').submit()
+//     		})
+			return
+    	}
+    	$('#logout-form').submit()
+	})
+
 });
+
 //사용자 설정 테마색으로 변경
 function getMyTheme(){
 	$.ajax({
@@ -428,14 +458,14 @@ function themeChange(formData){
 				<!-- Logo -->
 				<!-- ============================================================== -->
 				<a class="navbar-brand" href="${pageContext.request.contextPath}/main.hari"> <!-- 로고 아이콘 시작 -->
-					<b class="logo-icon p-l-10"> <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
+				<b class="logo-icon p-l-10"> <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
 						<!-- 로고 아이콘 png-->
-						<img src="${pageContext.request.contextPath}/resources/hari/assets/images/logoimg.png" alt="homepage" class="light-logo" /><!-- style="width: 30%; height: 20%; color:#2ab2aa;" -->
+                        <img src="${pageContext.request.contextPath}/resources/hari/assets/images/logoimg.png" alt="homepage" class="light-logo" /><!-- style="width: 30%; height: 20%; color:#2ab2aa;" -->
 					</b><!--로고 아이콘 끝  -->
 					<!-- 로고 글씨 시작 -->
 					<span class="logo-text" >
 						<!-- 로고 글씨 png-->
-						<img src="${pageContext.request.contextPath}/resources/hari/assets/images/logotext.png" alt="homepage" class="light-logo" />
+                        <img src="${pageContext.request.contextPath}/resources/hari/assets/images/logotext.png" alt="homepage" class="light-logo" />
 					</span> <!-- Logo icon --> <!-- <b class="logo-icon"> --> <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
 					<!-- Dark Logo icon --> <!-- <img src="assets/images/logo-text.png" alt="homepage" class="light-logo" /> -->
 					<!-- </b> --> <!--End Logo icon -->
@@ -516,7 +546,7 @@ function themeChange(formData){
 							
 							<!-- 로그아웃 -->
 							<!-- onclick="document.getElementById('logout-form').submit(); -->
-							<a href="#" class="dropdown-item" onclick="document.getElementById('logout-form').submit();">
+							<a href="#" class="dropdown-item" id="aLogout">
 								<i class="fa fa-power-off m-r-5 m-l-5"></i> 로그아웃
 							</a>
 							<form id="logout-form" action="${pageContext.request.contextPath}/logout" method="POST">
