@@ -2,7 +2,7 @@
   <!-- pay 급여조회 -->
 
   <div class="container" style="margin-top:5%;">
-    <div class="card" style=" height: 500%;  border-radius:10px;  box-shadow :0 0 12px #999999; border: 10px">
+    <div class="card" style=" height: 800px;  border-radius:10px;  box-shadow :0 0 12px #999999; border: 10px">
       <div class="card-body" >
         <h4 class="card-title">급여</h4>
         <div style = "margin-left:85%;">

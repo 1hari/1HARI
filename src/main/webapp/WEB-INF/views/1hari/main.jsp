@@ -388,14 +388,15 @@ $(function(){
 	if(day<10){
 		day = "0" + day; 
 	}
-	var hour = date.getHours();
-	var minutes = date.getMinutes();
-	if (minutes < 46) {
-		hour -= 1;
-	}
     if (minutes < 10) {
         minutes = "0" + minutes;
     }
+	
+	var hour = date.getHours();
+	var minutes = date.getMinutes();
+	if (minutes < 41) {
+		hour -= 1;
+	}
 	if (hour < 10) {
 		hour = "0" + hour;
 	}
@@ -427,17 +428,16 @@ $(function(){
 			'<td id="t1h"></td>' +
 			'<td id="reh"></td>';
 			var weatherAraay=[]
-			weatherAraay.push(getWeather.response.body.items[0])
-            for(var i=1; i<getWeather.response.body.items.length; i++){
-                if((getWeather.response.body.items[i-1].category) != (getWeather.response.body.items[i].category)){
+            for(var i=0; i<getWeather.response.body.items.length; i++){
+                if((getWeather.response.body.items[i].category) != getWeather.response.body.items[i+1].category){
+                    console.log(getWeather.response.body.items[i])
                     weatherAraay.push(getWeather.response.body.items[i])
                     if(i==getWeather.response.body.items.length-1){
-                        return;
+                        break;
                     }
                     continue;
                 }
             }
-            console.log(weatherAraay)
 			
 			//현재날씨
 			if(weatherAraay[1].fcstValue == '0'){ //비 & 눈이 아니면
@@ -488,8 +488,6 @@ $(function(){
 		},
 	});//날씨api END!!
 })
-
-
 
 
 </script>
@@ -550,7 +548,7 @@ $(function(){
 	<!-- Bread crumb and right sidebar toggle -->
 	<!-- ============================================================== -->
 
-	<div class = "a" style ="width: 100%; height: 250px; background-color: #d9d9d9; opacity:0.8;"><!-- 대시보드 안에 그림넣기div background-image:url(resources/hari/assets/images/divbg_10.png); !!!!!!!!!!!!!!!!1 -->
+	
 	<div class="page-breadcrumb">
 		<div class="row">
 			<div class="col-12 d-flex no-block align-items-center">
@@ -586,7 +584,8 @@ $(function(){
 <!-- </div> -->
 <!-- </div> -->
 <!-- </div> -->
-</div><!-- 대시보드 안에 그림 넣기 디브  -->
+
+	
 	<!-- 페이지내 컨텐츠 컨테이너 시작  -->
 	<!-- ============================================================== -->
 	<div class="container-fluid">
@@ -597,7 +596,7 @@ $(function(){
 			<div class="col-md-6">
 				<se:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_PERSONNEL')">
 					<!-- 부서별 근무 통계 시작  -->
-					<div class="card" style ="box-shadow :10px 10px #999999; border-radius:10px; border : 4px groove #bcbcbc; margin-top:-35%; margin-left:10%;">
+					<div class="card" style ="height:350px; box-shadow :0 0 12px #999999; border-radius:10px; margin-left:10%;">
 						<div class="card-body" style="padding-bottom: 0">
 							<span class="card-title m-b-0" style="margin-bottom:0; font-size: 18px;" >근무시간 통계</span>
 							<select class="select2 form-control custom-select select2-hidden-accessible" id="month" style="width: 13%; height:10%; margin-left: 65%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
@@ -623,7 +622,7 @@ $(function(){
 				<!-- 부서별 근무 통계 종료 -->
 				</se:authorize>
 				<!--당월 근태 통계 -->
-				<div class="card" style ="box-shadow :10px 10px  #999999; border-radius:10px; border : 4px groove #bcbcbc; margin-left:10%; ">
+				<div class="card" style ="height:470px; box-shadow :0 0 12px #999999; border-radius:10px; margin-left:10%; ">
 					<div class="card-body">
 						<h4 class="card-title m-b-0">당월 근태 통계</h4>
 						<div id="canvas-holder" style="width: 66%; margin-left: -16%;">
@@ -647,8 +646,8 @@ $(function(){
 								</div>
 							</div>
 						</div>
-						<canvas id="chart-area" width="300" height="300" style="display: block; margin-left: 50%;" class="chartjs-render-monitor"></canvas>
-						<div id="chartjs-tooltip2" class="center" style="opacity: 0; left: 228.854px; top: 223.022px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-style: normal; padding: 6px; font-size: 12px;">
+						<canvas id="chart-area" width="100%" height="100%" style="display: block; margin-left: 50%; margin-bottom:13%;" class="chartjs-render-monitor"></canvas>
+						<div id="chartjs-tooltip2" class="center" style="opacity: 0; left: 228.854px; top: 223.022px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-style: normal; font-size: 12px;">
 							<table>
 								<thead>
 								</thead>
@@ -664,9 +663,9 @@ $(function(){
 			</div>
 			<!--당월 근태 통계 종료-->
 			<!-- 무언가.. 시작 -->
-			<div class="card" style ="box-shadow :10px 10px  #999999; border-radius:10px; border : 4px groove #bcbcbc; margin-left:10%; ">
+			<div class="card" style ="height:200px; width:183%; box-shadow :0 0 12px #999999; border-radius:10px; margin-left:10%; ">
 				<div class="card-body">
-					<h4 class="card-title m-b-0">당월 근태통계</h4>
+					<h4 class="card-title m-b-0">무엇을 넣을까요?</h4>
 					<div id="canvas-holder" style="width: 300px;">
 						<div class="chartjs-size-monitor">
 							<div class="chartjs-size-monitor-expand">
@@ -709,7 +708,7 @@ $(function(){
 			<div class="col-md-6">
 				<se:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_PERSONNEL')">
 				<!--부서별 연봉 통계 시작-->
-					<div class="card" style ="box-shadow :10px 10px #999999; border-radius:10px; border : 4px groove #bcbcbc; margin-top:-35%; margin-right:10%;">
+					<div class="card" style ="height:350px; box-shadow :0 0 12px #999999; border-radius:10px; margin-right:10%;">
 						<div class="card-body" style="padding-bottom: 0">
 							<span class="card-title m-b-0" style="margin-bottom:0; font-size: 18px;" >연봉 통계</span>
 							<select id="chartSelect" class="select2 form-control custom-select select2-hidden-accessible" id="month" style="width: 13%; height:10%; margin-left: 67%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
@@ -722,30 +721,30 @@ $(function(){
 				</se:authorize>
 				<!--부서별 연봉 통계 끝 -->
 				<!-- 전자 결재 시작 -->
-				<div class="card" style ="box-shadow :10px 10px #999999; border-radius:10px; border : 4px groove #bcbcbc; margin-right:10%;">
+				<div class="card" style ="height:250px; box-shadow :0 0 12px #999999; border-radius:10px; margin-right:10%;">
 					<div class="card-body">
 						<h5 class="card-title m-b-0">전자 결재</h5>
 					</div>
 					<table class="table">
 						<thead>
 							<tr style ="vertical-align:left;">
-								<td><i class="far fa-clipboard fa-2x" style ="margin-left:-50%;"></i>&nbsp;<h4 style ="margin-left:-50%;">진행중문서</h4></td> 
-								<td style ="margin-left:-80%;">${requestScope.ongoing}</td>
-								<td scope="col"><i class="far fa-file-alt fa-2x" style ="margin-left:-50%;"></i>&nbsp;<h4 style ="margin-left:-50%;">결제반려문서</h4></td>
-								<td  style ="margin-left:-80%;">${requestScope.reject}</td>
+								<td  scope="col" style="width:120px;margin-left:15%;"><i class="far fa-clipboard fa-2x"></i>&nbsp;<h4>진행중문서</h4></td>
+								<td style ="margin-left:-80%;"><span style="font-size:xx-large;">${requestScope.ongoing}</span></td>
+								<td scope="col" style="width:120px;margin-left:15%;"><i class="far fa-file-alt fa-2x"></i>&nbsp;<h4>결제반려문서</h4></td>
+								<td  style ="margin-left:-80%;font-size:large;"><span  style="font-size:xx-large;">${requestScope.reject}</span></td>
 							</tr>
 							<tr style ="vertical-align:left;">
-								<td scope="col"><i class="far fa-edit fa-2x" style ="margin-left:-50%;"></i>&nbsp;<h4 style ="margin-left:-50%;">결제할문서</h4></td>
-								<td style ="margin-left:-80%;">${requestScope.approve}</td>
-								<td scope="col"><i class="far fa-file-archive fa-2x" style ="margin-left:-50%;"></i>&nbsp;<h4 style ="margin-left:-50%;">결제완료문서</h4></td>
-								<td style ="margin-left:-80%;">${requestScope.complete}</td>
+								<td scope="col" style="width:120px;margin-left:15%;"><i class="far fa-edit fa-2x"></i>&nbsp;<h4>결제할문서</h4></td>
+								<td style ="margin-left:-80%;"><span style="font-size:xx-large;">${requestScope.approve}</span></td>
+								<td scope="col" style="width:120px;margin-left:15%;"><i class="far fa-file-archive fa-2x"></i>&nbsp;<h4>결제완료문서</h4></td>
+								<td style ="margin-left:-80%;"><span style="font-size:xx-large;">${requestScope.complete}</span></td>
 							</tr>
 						</thead> 
 					</table>
 				</div>
 				<!-- 전자 결재 끝 -->
 				<!-- 전자 결재 시작 -->
-				<div class="card" style ="box-shadow :10px 10px #999999; border-radius:10px; border : 4px groove #bcbcbc; margin-right:10%;">
+				<div class="card" style ="height:200px; box-shadow :0 0 12px #999999; border-radius:10px; margin-right:10%;">
 					<div class="card-body" style="padding-bottom: 0">
 						<span class="card-title m-b-0">오늘의 날씨</span>
 						<span class="card-title m-b-0" style="padding-left: 70%;">2020-01-30</span>

@@ -1,7 +1,7 @@
 <template>
   <!-- 사원조회 리스트 -->
   <div class="container" style="margin-top:5%;">
-    <div class="card shadow" style=" height: 500%;  border-radius:10px;box-shadow :0 0 12px #999999; ">
+    <div class="card shadow" style=" border-radius:10px;box-shadow :0 0 12px #999999; ">
       <div class="card-body">
         
         <div class="row">
