@@ -205,9 +205,9 @@
 										}else if(sign.signCode == "2"){
 											signList +='<div role="progressbar" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-striped" style="width: 70%" aria-valuenow="70"></div>';
 										}else if(sign.signCode == "3"){
-											signList +='<div role="progressbar" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-striped bg-success" style="width: 100%" aria-valuenow="100"></div>';
+											signList +='<div role="progressbar" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-striped bg-success" style="width: 95%" aria-valuenow="100"></div>';
 										}else{
-											signList += '<div role="progressbar" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-striped bg-danger" style="width: 100%" aria-valuenow="100"></div>';
+											signList += '<div role="progressbar" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-striped bg-danger" style="width: 95%" aria-valuenow="100"></div>';
 										}
 									signList += '</div>'
 								+'</td>'
