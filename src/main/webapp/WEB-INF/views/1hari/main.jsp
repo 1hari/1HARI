@@ -419,7 +419,6 @@ $(function(){
 		data : { "weatherUrl" : weatherUrl },
 		success : function(getWeather) {
 			$('#weatherDate').text(year + "년 " + month + "월 " + day +"일")
-			console.log(getWeather)
 			var weatherTitle='<td style="width: 15%; height: 20%;" rowspan="2" id="weatherImg"></td>' +
 			'<td style="width: 10%;">현재날씨</td>'+
 			'<td style="width: 10%;"> 기 온</td>' +
@@ -733,7 +732,7 @@ $(function(){
 				<div class="card" style ="height:200px; box-shadow :0 0 12px #999999; border-radius:10px; margin-right:10%;">
 					<div class="card-body" style="padding-bottom: 0">
 						<span class="card-title m-b-0">오늘의 날씨</span>
-						<span class="card-title m-b-0" style="padding-left: 70%;">2020-01-30</span>
+						<span class="card-title m-b-0" style="padding-left: 70%;" id="weatherDate"></span>
 					</div>
 					<table class="table" id="weatherTable">
 						<tr style ="vertical-align:left; padding-left: 5%;" id="weatherTitle">
