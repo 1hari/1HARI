@@ -21,11 +21,11 @@
 												<tbody>
 													<tr>
 														<td align="center" style="font-family: sans-serif; font-size: 14px; vertical-align: top;">
-															<img src="http://shiftee.io/assets/etc/8426e0b74fa8eebb12c528dfbac5df53-ic-email.png" height="48" loading="lazy">
-															<h2>1HARI 주식회사에 입사하신 것을 환영합니다.</h2><br>
+															<img src="https://i.imgur.com/cAZKLW8.png" title="Letter.png"/>
+															<h2><span style="color: #807266;">1HARI</span> 에 입사하신 것을 환영합니다.</h2>
 															<p>
 																안녕하세요, <b>${empName}</b> 님!<br>
-																1HARI SYSTEM에서 편리한 근태환경과 전자결재를 경험해보세요.
+																1HARI HR SYSTEM에서 편리한 근태환경과 전자결재를 경험해보세요.
 															</p>
 															<p>
 																사번: <b>${empNum}</b><br> 생년월일: <b>${password}</b>
@@ -42,10 +42,7 @@
 																				<tbody>
 																					<tr>
 																						<td align="center">
-																							<a href="http://192.168.6.9:8090/1HARI/" target="_blank" rel="noreferrer noopener"
-																								style="background-color: #0575e6; padding: 10px 18px; border-radius: 4px; display: inline-block; color: #fff; text-decoration: none; box-shadow: 0 2px 3px rgba(0, 0, 0, 0.16);">
-																								<img src="https://i.imgur.com/o9TMF5u.png" title="logo-img-final.png" alt="logoImage" style="width: 30%; height: 10%;" />
-																							</a>
+																							<img src="https://i.imgur.com/AddSkzb.gif" title="Logo_1HaRi.gif"/>
 																						</td>
 																					</tr>
 																				</tbody>
