@@ -104,11 +104,12 @@
 	$(function() {
 		let startWork = ""; // 출근시간 처리를 위한 변수
 		let leaveWork = ""; // 퇴근시간 처리를 위한 변수
-		let setDate = moment().format("YYYY-MM-DD"); // 오늘 날짜
+		let today = moment().format("YYYY-MM-DD"); // 오늘 날짜
 		let curMonth = moment().format("YYYY-MM"); // 현재 월
 		let curDay = moment().date(); // 현재 일
+		let setDate = ""; // 첫 페이지 진입 후 조건식을 위한 변수
 		
-		getTaList(setDate); // 페이지 로딩 후 근태목록 가져오기
+		getTaList(today); // 페이지 로딩 후 오늘의 근태목록 가져오기
 		getThreeMonth(); // 근태목록을 가져온 후 직전 2개월까지 선택할 수 있도록 하는 함수 호출
 
 		function getThreeMonth() { // 직전 2개월 (총 3개월)을 선택할 수 있는 함수
@@ -228,12 +229,12 @@
 
 			for (var i = 0; i < daysMonth; i++) {
 				if (setDate == "") { // 오늘 날짜로 페이지를 들어왔을 때
-					if (moment(curMonth).month() != selectedMonth) {
+					if (moment(curMonth).month() != selectedMonth) { // 이번 달과 선택된 달이 같지 않을 때
 						days += '<span class="click"> ' + (i + 1) + ' </span>'; // 1일은 0이기 때문에 +1
-					} else {
-						if (curDay != (i + 1)) {
+					} else { // 이번 달과 선택된 달이 같을 때
+						if (curDay != (i + 1)) { // 오늘 일자와 선택된 일자가 같지 않을 때
 							days += '<span class="click"> ' + (i + 1) + ' </span>'; // 1일은 0이기 때문에 +1
-						} else {
+						} else { // 오늘 일자와 선택된 일자가 같을 때
 							days += '<span class="click" style="color: red;"> ' + (i + 1) + ' </span>'; // 1일은 0이기 때문에 +1
 						}
 					}
@@ -241,9 +242,9 @@
 					if (moment(setDate).month() != selectedMonth) {
 						days += '<span class="click"> ' + (i + 1) + ' </span>'; // 1일은 0이기 때문에 +1
 					} else {
-						if (moment(setDate).date() != (i + 1)) {
+						if (moment(setDate).date() != (i + 1)) { // setDate 일자와 선택된 일자가 같지 않은 경우
 							days += '<span class="click"> ' + (i + 1) + ' </span>'; // 1일은 0이기 때문에 +1
-						} else {
+						} else { // setDate 일자와 선택된 일자가 같은 경우
 							days += '<span class="click" style="color: red;"> ' + (i + 1) + ' </span>'; // 1일은 0이기 때문에 +1
 						}
 					}
