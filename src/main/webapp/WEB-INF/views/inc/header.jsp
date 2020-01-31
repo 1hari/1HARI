@@ -234,6 +234,7 @@ $(function(){
 			type: "post",
 			dataType: "json",
 			success: function(data) {
+				isEnd=true;
 			}
 		}).then((data) => {
 			//있으면 true, 없으면 false
@@ -276,6 +277,7 @@ $(function(){
 		dataType: "json",
 		success: function(todayStartWorkCheck) {
 			isStart=todayStartWorkCheck;
+			console.log(isStart)
 		}
 	}).then((isStart) => {
 		$.ajax({
@@ -341,34 +343,56 @@ $(function(){
         }
     }
     
-	$('#aLogout').click(function(){
-    	if(isEnd==false && isStart==true){
-    		swal({
-    			  title: "Are you sure?",
-    			  text: "Your will not be able to recover this imaginary file!",
-    			  type: "warning",
-    			  showCancelButton: true,
-    			  confirmButtonClass: "btn-danger",
-    			  confirmButtonText: "Yes, delete it!",
-    			  closeOnConfirm: false
-    			},
-    			function(value){
-    			  swal("Deleted!", "Your imaginary file has been deleted.", "success");
-    			  $('#logout-form').submit()
-    			});
-//         	swal({
-//             	title:"경 고",
-//     			text: "퇴근처리되지 않았습니다. 로그아웃 하시겠습니까?",
-//     			icon: "warning",
-//     			button: "확인" 
-//     		}).then((value) => {
-//     			$('#logout-form').submit()
-//     		})
-			return
-    	}
-    	$('#logout-form').submit()
-	})
+// 	$('#aLogout').click(function(){
+//     	if(isEnd==false && isStart==true){
+//     		swal({
+//     			  title: "Are you sure?",
+//     			  text: "Your will not be able to recover this imaginary file!",
+//     			  type: "warning",
+//     			  showCancelButton: true,
+//     			  confirmButtonClass: "btn-danger",
+//     			  confirmButtonText: "Yes, delete it!",
+//     			  closeOnConfirm: false
+//     			},
+//     			function(value){
+//     			  swal("Deleted!", "Your imaginary file has been deleted.", "success");
+//     			  $('#logout-form').submit()
+//     			});
+// //         	swal({
+// //             	title:"경 고",
+// //     			text: "퇴근처리되지 않았습니다. 로그아웃 하시겠습니까?",
+// //     			icon: "warning",
+// //     			button: "확인" 
+// //     		}).then((value) => {
+// //     			$('#logout-form').submit()
+// //     		})
+// 			return
+//     	}
+//     	$('#logout-form').submit()
+// 	})
 
+
+//     $('#aLogout').on('click', function(e){
+//     	if(isEnd==false && isStart==true){
+// 	        e.preventDefault(); //cancel default action
+// 	        //pop up
+// 	        swal({
+// 	            title: "로그아웃 경고",
+// 	            text: "퇴근시간이 기록되지 않았습니다. 정말 로그아웃 하시겠습니까?", 
+// 	            icon: "warning",
+// 	            buttons: true,
+// 	            dangerMode: true,
+// 	        })
+// 	        .then((willDelete) => {
+// 	          if (willDelete) {
+// 	            $('#logout-form').submit()
+// 	          }else{
+// 		          return
+// 		      }
+// 	        });
+// 	        $('#logout-form').submit()
+//     	}
+//     });
 });
 
 //사용자 설정 테마색으로 변경
@@ -512,7 +536,7 @@ function themeChange(formData){
 					<!-- 출퇴근 -->
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle waves-effect waves-dark" id="work" style = "color:white;" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							<i class="fas fa-calendar-check font-29" style="padding-top: 18px;"></i>
+                            <i class="fas fa-calendar-check font-29" style="padding-top: 18px;"></i>
 						</a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown" >
 							<button class="dropdown-item" id="startWork" disabled="disabled" >출근하기</button>
@@ -527,7 +551,7 @@ function themeChange(formData){
 					<!--내 프로필 시작-->
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							<img src="" alt="user" id="profileFileName" style= "padding-bottom:5px;">
+                            <img src="" alt="user" id="profileFileName" style= "padding-bottom:5px;">
 						</a>
 						
 						<div class="dropdown-menu dropdown-menu-right animated">

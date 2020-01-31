@@ -378,8 +378,6 @@ $(function(){
 	//날씨 API
 		var rs = dfs_xy_conv("toXY", 37.525913599999996, 126.83591679999999);
 		console.log(rs)
-// 		var fixLatitude=parseFloat(37.525913599999996);
-// 		var fixLongitude=parseFloat(126.83591679999999);
 		var date = new Date();
 		var year = date.getFullYear();
 		var month = date.getMonth()+1;
@@ -390,6 +388,10 @@ $(function(){
 		if(day<10){
 			day = "0" + day; 
 		}
+        if (minutes < 10) {
+            minutes = "0" + minutes;
+        }
+		
 		var hour = date.getHours();
 		var minutes = date.getMinutes();
 		if (minutes < 41) {
@@ -398,14 +400,11 @@ $(function(){
 		if (hour < 10) {
 			hour = "0" + hour;
 		}
-		//http://apis.data.go.kr/1360000/VilageFcstInfoService/getVilageFcst?serviceKey=PXss7TDZfDqmwbPtPSbrN5TR36wq4zETwTgTFsmDjWxyz0vVMWAI2NyzOqsou8m4%2FjrhI0joz7sLmoKctlkUkw%3D%3D&numOfRows=10&pageNo=1&base_date=20200130&base_time=0230&nx=55&ny=127
-		console.log(year + month + day + hour + minutes)
 		var xValue = rs.x;
 		var yValue = rs.y;
 		var weatherApi = "http://apis.data.go.kr/1360000/VilageFcstInfoService/getUltraSrtFcst";
 		var weatherServiceKey = "?ServiceKey="
 				+ "PXss7TDZfDqmwbPtPSbrN5TR36wq4zETwTgTFsmDjWxyz0vVMWAI2NyzOqsou8m4%2FjrhI0joz7sLmoKctlkUkw%3D%3D";
-		//&numOfRows=10&pageNo=1&base_date=20200130&base_time=0230&nx=55&ny=127
 		var numOfRows = "&numOfRows=100&pageNo=1"
 		var base_date = "&base_date=" + year + month + day
 		var base_time = "&base_time=" + hour + minutes;
@@ -413,14 +412,13 @@ $(function(){
 		var ny = "&ny=" + yValue;
  		var dataType = "&dataType=json"
 		var weatherUrl = weatherApi + weatherServiceKey + base_date + base_time + numOfRows + nx + ny + dataType;
-// 		console.log(weatherUrl)
-// 		var jsonWeatherUrl = { "weatherUrl" : weatherUrl };
 		$.ajax({
 			url : "${pageContext.request.contextPath}/ajax/getWeather.hari",
 			dataType : 'json',
 			type : "get",
 			data : { "weatherUrl" : weatherUrl },
 			success : function(getWeather) {
+				$('#weatherDate').text(year + "년 " + month + "월 " + day +"일")
 				console.log(getWeather)
 				var weatherTitle='<td style="width: 15%; height: 20%;" rowspan="2" id="weatherImg"></td>' +
 				'<td style="width: 10%;">현재날씨</td>'+
@@ -437,8 +435,8 @@ $(function(){
 				//현재날씨
 				if(weatherAraay[1].fcstValue == '0'){ //비 & 눈이 아니면
 					if(weatherAraay[3].fcstValue == '1'){//맑음
-						weatherTitle+='<td style="width: 10%;">현재날씨</td>';
-						weatherContent+='<td id="reh">몰라</td>';
+// 						weatherTitle+='<td style="width: 10%;">현재날씨</td>';
+// 						weatherContent+='<td id="reh">몰라</td>';
 						$("#weatherTitle").append(weatherTitle);
 						$("#weatherContent").append(weatherContent);
 						$("#weatherImg").append('<img src="${pageContext.request.contextPath}/resources/hari/assets/images/weather_sun.png" alt="현재날씨" class="rounded-circle" style="width: 67%; height: 20%;">');
@@ -480,25 +478,6 @@ $(function(){
 				$('#t1h').text(weatherAraay[4].fcstValue + '℃') 
 				$('#reh').text(weatherAraay[6].fcstValue + '%') 
 		
-// 					var icon = $('<i>');
-// 					var totalRain = $('<span>');
-// 					var degree = $('<span>');
-// 						$.each(weatherData.response.body.items.item,function(index,element) {
-// 									if (element.category == "PTY") {
-// 										if (element.obsrValue == 0) {
-// 											$(icon).attr("class","wi wi-day-sunny");
-// 												}else{
-// 													$(icon).attr("class","wi wi-rain");
-// 												}
-// 											}else if (element.category == "RN1") {
-// 												$(totalRain).html("&nbsp;&nbsp;&nbsp;&nbsp;시간당 강수량 : "+ element.obsrValue+ "ml");
-// 											}else if (element.category == "T1H") {
-// 												$(degree).html("&nbsp;&nbsp;&nbsp;&nbsp;현재기온 : "+ element.obsrValue+ "℃ ");
-// 											}
-// 										});
-// 						$("#title").after(totalRain);
-// 						$("#title").after(degree);
-// 						$("#title").after(icon);
 			},
 		});//날씨api END!!
 })
@@ -762,26 +741,13 @@ $(function(){
 				<div class="card" style ="box-shadow :0 0 12px #999999; border-radius:10px; margin-right:10%;">
 					<div class="card-body" style="padding-bottom: 0">
 						<span class="card-title m-b-0">오늘의 날씨</span>
-						<span class="card-title m-b-0" style="padding-left: 70%;">2020-01-30</span>
+						<span class="card-title m-b-0" style="padding-left: 70%;" id="weatherDate"></span>
 					</div>
 					<table class="table" id="weatherTable">
 						<tr style ="vertical-align:left; padding-left: 5%;" id="weatherTitle">
-<%-- 							<td style="width: 33%; height: 20%;" rowspan="2"><img id="weatherImg" src="${pageContext.request.contextPath}/resources/hari/assets/images/weather_rain.png" alt="현재날씨" class="rounded-circle" style="width: 67%; height: 20%;"></td> --%>
-<!-- 							<td style="width: 20%;">현재날씨</td> -->
-<!-- 							<td style="width: 20%;"> 기 온</td> -->
-<!-- 							<td style="width: 20%;"> 습 도 </td> -->
 						</tr>
 						<tr style ="vertical-align:left; padding-left: 5%;" id="weatherContent">
-<!-- 							<td id="currWeather"></td> -->
-<!-- 							<td id="t1h"></td> -->
-<!-- 							<td id="reh"></td> -->
 						</tr>
-<!-- 							<tr style ="vertical-align:left;"> -->
-<!-- 								<td scope="col"><i class="far fa-edit fa-2x" style ="margin-left:-50%;"></i>&nbsp;<h4 style ="margin-left:-50%;">결제할문서</h4></td> -->
-<%-- 								<td style ="margin-left:-80%;">${requestScope.approve}</td> --%>
-<!-- 								<td scope="col"><i class="far fa-file-archive fa-2x" style ="margin-left:-50%;"></i>&nbsp;<h4 style ="margin-left:-50%;">결제완료문서</h4></td> -->
-<%-- 								<td style ="margin-left:-80%;">${requestScope.complete}</td> --%>
-<!-- 							</tr> -->
 					</table>
 				</div>
 				<!-- 전자 결재 끝 -->
