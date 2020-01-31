@@ -490,24 +490,24 @@ $(function(){
 	});//날씨api END!!
 
 	// 뉴스 API
-	var url = 'https://newsapi.org/v2/top-headlines?' +
-			    'country=kr&' +
-			    'apiKey=dd1bdf27c6bb4f229189f5764e1bf04e';
-			//var req = new Request(url);
-			//fetch(req)
-			//.then(function(response) {
-			//   console.log(response.json());
-			//})
+	var newsUrl = 'https://newsapi.org/v2/top-headlines?' +
+				'country=kr&' +
+				'apiKey=dd1bdf27c6bb4f229189f5764e1bf04e';
+	//var req = new Request(url);
+	//fetch(req)
+	//.then(function(response) {
+	//   console.log(response.json());
+	//})
 	let news = "";
 	$.ajax({
-		url : url,
+		url : newsUrl,
 		dataType : "json",
 		success : function(newsArticles) {
-			console.log(newsArticles);
 			for (var i = 0; i < 5; i++) {
 				news += '<tr>' 
-						+ '<td><a href="' + newsArticles.articles[i].url + '" style="text-decoration: none;">' + newsArticles.articles[i].title + '</a></td>'
-						+ '<td>' + newsArticles.articles[i].publishedAt + '</td>'
+						+ '<td><a href="' + newsArticles.articles[i].url + '" class="link" target="_blank">' + newsArticles.articles[i].title + '</a></td>'
+						+ '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>'
+						+ '<td>' + moment(newsArticles.articles[i].publishedAt).format("YYYY-MM-DD") + '</td>'
 					+ '</tr>';
 			} 
 			$('#news').append(news);
@@ -764,7 +764,7 @@ $(function(){
 			<div class="card" style ="height:200px; width:90%; box-shadow :0 0 12px #999999; border-radius:10px; margin-left:5%; ">
 				<div class="card-body">
 					<h4 class="card-title m-b-0">오늘의 뉴스</h4>
-					<table id="news">
+					<table id="news" style="margin-left: 7%;">
 					
 					</table>
 				</div>

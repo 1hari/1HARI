@@ -56,7 +56,7 @@
 			JOIN talist AS TL ON E.EMPNUM = TL.EMPNUM
 			JOIN ta AS TA ON TL.TACODE = TA.TACODE
 		WHERE DATE_FORMAT(TL.SCHEDULEDATE, '%Y-%m-%d') = DATE(#{setDate})
-		ORDER BY E.EMPNUM
+		ORDER BY E.EMPNUM, TL.TALISTNUM
 	</select>
 
 	<!-- 사원정보수정 화면 김진호 2020. 1. 10 -->
