@@ -182,7 +182,6 @@ $(function(){
                     //있으면 true, 없으면 false
                     if(data==true){
                   	 var integerDate= parseInt(getTimeStamp());
-                       swal("success", "출근 등록되었습니다.", "success")
                        $('#endWork').removeAttr('disabled');   
                        $('#startWork').attr('disabled', 'disabled');
                        $.ajax({
@@ -207,12 +206,43 @@ $(function(){
 								}
 							}
 						}
-					});
+					})
+					swal("success", "출근 등록되었습니다.", "success").then((logout) => {
+                        if (logout) {
+                        	location.reload();
+                     	 }
+					})
 				}else{
 					swal("warning", "출근등록 실패, 관리자에게 문의해주세요.", "warning")
 					}
 				})
 			})
+			
+			
+			
+			
+// 			    $('#aLogout').on('click', function(e){
+//         if(isEnd==false && isStart==true){
+//             e.preventDefault(); //cancel default action
+//             swal({
+//                 title: "로그아웃 경고",
+//                 text: "퇴근시간이 기록되지 않았습니다. 정말 로그아웃 하시겠습니까?", 
+//                 icon: "warning",
+//                 buttons: true,
+//                 dangerMode: true,
+//             }).then((logout) => {
+//               if (logout) {
+//                 $('#logout-form').submit()
+//               }else{
+//                   return
+//               }
+//             });
+//         }else{
+//             $('#logout-form').submit()
+//         }
+//     });
+
+			
 // 			});
 // 		}else { 
 // 			alert('현재 브라우저에서 지원하지 않는 기능입니다.');
@@ -258,6 +288,11 @@ $(function(){
 				        }
 					}
 				});
+				swal("success", "퇴근 등록되었습니다.", "success").then((logout) => {
+                    if (logout) {
+                    	location.reload();
+                 	 }
+				})
 			}else{
 				swal("warning", "퇴근 등록에 실패하였습니다. 관리자에게 문의해주세요.", "warning")
 				return;
