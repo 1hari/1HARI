@@ -104,12 +104,11 @@
 	$(function() {
 		let startWork = ""; // 출근시간 처리를 위한 변수
 		let leaveWork = ""; // 퇴근시간 처리를 위한 변수
-		let today = moment().format("YYYY-MM-DD"); // 오늘 날짜
+		let setDate = moment().format("YYYY-MM-DD"); // 오늘 날짜
 		let curMonth = moment().format("YYYY-MM"); // 현재 월
 		let curDay = moment().date(); // 현재 일
-		let setDate = "";
 		
-		getTaList(today); // 페이지 로딩 후 근태목록 가져오기
+		getTaList(setDate); // 페이지 로딩 후 근태목록 가져오기
 		getThreeMonth(); // 근태목록을 가져온 후 직전 2개월까지 선택할 수 있도록 하는 함수 호출
 
 		function getThreeMonth() { // 직전 2개월 (총 3개월)을 선택할 수 있는 함수
@@ -154,7 +153,8 @@
 							} else if (TaList[i].taDate == null && TaList[i].taDate != '0000-00-00 00:00:00') { // 출근시간 기록이 없고 연차(0000)가 아닌 경우
 								empTaList += '<td>' + TaList[i].taName + ' (출근시간 기록없음)</td>'; // 출근, 출근시간
 							} else if (TaList[i].taDate == '0000-00-00 00:00:00') { // 연차인 경우
-								empTaList += ''; // 연차인 경우 출근을 화면에 출력하지 않고 뒤에 연차 td와 합치기 위해 공백으로 처리
+// 								empTaList += ''; // 연차인 경우 출근을 화면에 출력하지 않고 뒤에 연차 td와 합치기 위해 공백으로 처리
+								empTaList += '<td>' + TaList[i].taName + ' (출근시간 기록없음)</td>'; // 출근, 출근시간
 							}
 							count++;
 						} else {
@@ -169,7 +169,7 @@
 								} else if (TaList[i].taDate == null && TaList[i].taDate != '0000-00-00 00:00:00') { // 퇴근시간 기록이 없고 연차(0000)가 아닌 경우
 									empTaList += '<td>' + TaList[i].taName + ' (퇴근시간 기록없음)</td>'; // 퇴근시간 기록이 없는 경우
 								} else if (TaList[i].taDate == '0000-00-00 00:00:00') { // 연차인 경우
-									empTaList += '<td colspan="2">' + TaList[i].taName + '</td>'; // 연차인 경우 출퇴근시간 td를 합쳐서
+									empTaList += '<td>' + TaList[i].taName + '</td>'; // 연차인 경우 출퇴근시간 td를 합쳐서
 								}
 									empTaList += '<td></td>' // 결근이 아닐 경우 퇴근처리 버튼을 만들지 않음
 											+ '</tr>';
@@ -178,7 +178,7 @@
 						}
 					}
 					$('#taBody').append(empTaList);
-					/* 비동기 데이터 호출 후 DataTable 호출 */
+					/* 데이터 호출 후 DataTable 호출 */
 					$('#zero_config').DataTable();
 					
 					setEmpTa(setDate); // 퇴근처리를 위한 함수 호출
@@ -250,9 +250,9 @@
 			$('.click').click(function() { // 해당 날짜(일)을 선택했을 때
 				setDate = $('#selectMonth').val() + '-' + $(this).text().trim(); // 해당 날짜를 연-월-일로 선언
 				$('#taBody').empty();
+				getTaList(setDate); // 해당 날짜 근태목록 가져오기
 				$('#days').empty();
 				selectMonth(moment($('#selectMonth').val()).month(), setDate); // 해당 월의 일수 재조정
-				getTaList(setDate); // 해당 날짜 근태목록 가져오기
 			})
 		}
 	})
