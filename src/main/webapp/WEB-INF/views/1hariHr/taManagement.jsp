@@ -230,22 +230,22 @@
 			for (var i = 0; i < daysMonth; i++) {
 				if (setDate == "") { // 오늘 날짜로 페이지를 들어왔을 때
 					if (moment(curMonth).month() != selectedMonth) { // 이번 달과 선택된 달이 같지 않을 때
-						days += '<span class="click"> ' + (i + 1) + ' </span>'; // 1일은 0이기 때문에 +1
+						days += '<span class="click"> ' + (i + 1) + ' </span>&nbsp;'; // 1일은 0이기 때문에 +1
 					} else { // 이번 달과 선택된 달이 같을 때
 						if (curDay != (i + 1)) { // 오늘 일자와 선택된 일자가 같지 않을 때
-							days += '<span class="click"> ' + (i + 1) + ' </span>'; // 1일은 0이기 때문에 +1
+							days += '<span class="click"> ' + (i + 1) + ' </span>&nbsp;'; // 1일은 0이기 때문에 +1
 						} else { // 오늘 일자와 선택된 일자가 같을 때
-							days += '<span class="click" style="color: red;"> ' + (i + 1) + ' </span>'; // 1일은 0이기 때문에 +1
+							days += '<span class="click" style="color: red;"> ' + (i + 1) + ' </span>&nbsp;'; // 1일은 0이기 때문에 +1
 						}
 					}
 				} else { // 클릭 이후에 페이지에 들어올 때
 					if (moment(setDate).month() != selectedMonth) {
-						days += '<span class="click"> ' + (i + 1) + ' </span>'; // 1일은 0이기 때문에 +1
+						days += '<span class="click"> ' + (i + 1) + ' </span>&nbsp;'; // 1일은 0이기 때문에 +1
 					} else {
 						if (moment(setDate).date() != (i + 1)) { // setDate 일자와 선택된 일자가 같지 않은 경우
-							days += '<span class="click"> ' + (i + 1) + ' </span>'; // 1일은 0이기 때문에 +1
+							days += '<span class="click"> ' + (i + 1) + ' </span>&nbsp;'; // 1일은 0이기 때문에 +1
 						} else { // setDate 일자와 선택된 일자가 같은 경우
-							days += '<span class="click" style="color: red;"> ' + (i + 1) + ' </span>'; // 1일은 0이기 때문에 +1
+							days += '<span class="click" style="color: red;"> ' + (i + 1) + ' </span>&nbsp;'; // 1일은 0이기 때문에 +1
 						}
 					}
 				}

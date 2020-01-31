@@ -564,7 +564,7 @@ $(function(){
 	<!-- Bread crumb and right sidebar toggle -->
 	<!-- ============================================================== -->
 
-	<div class = "a" style ="width: 100%; height: 250px; background-color: #d9d9d9; opacity:0.8;"><!-- 대시보드 안에 그림넣기div background-image:url(resources/hari/assets/images/divbg_10.png); !!!!!!!!!!!!!!!!1 -->
+	
 	<div class="page-breadcrumb">
 		<div class="row">
 			<div class="col-12 d-flex no-block align-items-center">
@@ -600,7 +600,7 @@ $(function(){
 <!-- </div> -->
 <!-- </div> -->
 <!-- </div> -->
-</div><!-- 대시보드 안에 그림 넣기 디브  -->
+
 	<!-- 페이지내 컨텐츠 컨테이너 시작  -->
 	<!-- ============================================================== -->
 	<div class="container-fluid">
@@ -611,7 +611,7 @@ $(function(){
 			<div class="col-md-6">
 				<se:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_PERSONNEL')">
 					<!-- 부서별 근무 통계 시작  -->
-					<div class="card" style ="box-shadow :10px 10px #999999; border-radius:10px; border : 4px groove #bcbcbc; margin-top:-35%; margin-left:10%;">
+					<div class="card" style ="height:28%; box-shadow :0 0 12px #999999; border-radius:10px; margin-left:10%;">
 						<div class="card-body" style="padding-bottom: 0">
 							<span class="card-title m-b-0" style="margin-bottom:0; font-size: 18px;" >근무시간 통계</span>
 							<select class="select2 form-control custom-select select2-hidden-accessible" id="month" style="width: 13%; height:10%; margin-left: 65%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
@@ -637,7 +637,7 @@ $(function(){
 				<!-- 부서별 근무 통계 종료 -->
 				</se:authorize>
 				<!--당월 근태 통계 -->
-				<div class="card" style ="box-shadow :10px 10px  #999999; border-radius:10px; border : 4px groove #bcbcbc; margin-left:10%; ">
+				<div class="card" style ="box-shadow :0 0 12px #999999; border-radius:10px; margin-left:10%; ">
 					<div class="card-body">
 						<h4 class="card-title m-b-0">당월 근태 통계</h4>
 						<div id="canvas-holder" style="width: 66%; margin-left: -16%;">
@@ -678,7 +678,7 @@ $(function(){
 			</div>
 			<!--당월 근태 통계 종료-->
 			<!-- 무언가.. 시작 -->
-			<div class="card" style ="box-shadow :10px 10px  #999999; border-radius:10px; border : 4px groove #bcbcbc; margin-left:10%; ">
+			<div class="card" style ="box-shadow :0 0 12px #999999; border-radius:10px; margin-left:10%; ">
 				<div class="card-body">
 					<h4 class="card-title m-b-0">당월 근태통계</h4>
 					<div id="canvas-holder" style="width: 300px;">
@@ -723,7 +723,7 @@ $(function(){
 			<div class="col-md-6">
 				<se:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_PERSONNEL')">
 				<!--부서별 연봉 통계 시작-->
-					<div class="card" style ="box-shadow :10px 10px #999999; border-radius:10px; border : 4px groove #bcbcbc; margin-top:-35%; margin-right:10%;">
+					<div class="card" style ="height:28%; box-shadow :0 0 12px #999999; border-radius:10px; margin-right:10%;">
 						<div class="card-body" style="padding-bottom: 0">
 							<span class="card-title m-b-0" style="margin-bottom:0; font-size: 18px;" >연봉 통계</span>
 							<select id="chartSelect" class="select2 form-control custom-select select2-hidden-accessible" id="month" style="width: 13%; height:10%; margin-left: 67%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
@@ -736,7 +736,7 @@ $(function(){
 				</se:authorize>
 				<!--부서별 연봉 통계 끝 -->
 				<!-- 전자 결재 시작 -->
-				<div class="card" style ="box-shadow :10px 10px #999999; border-radius:10px; border : 4px groove #bcbcbc; margin-right:10%;">
+				<div class="card" style ="box-shadow :0 0 12px #999999; border-radius:10px; margin-right:10%;">
 					<div class="card-body">
 						<h5 class="card-title m-b-0">전자 결재</h5>
 					</div>
@@ -759,7 +759,7 @@ $(function(){
 				</div>
 				<!-- 전자 결재 끝 -->
 				<!-- 전자 결재 시작 -->
-				<div class="card" style ="box-shadow :10px 10px #999999; border-radius:10px; border : 4px groove #bcbcbc; margin-right:10%;">
+				<div class="card" style ="box-shadow :0 0 12px #999999; border-radius:10px; margin-right:10%;">
 					<div class="card-body" style="padding-bottom: 0">
 						<span class="card-title m-b-0">오늘의 날씨</span>
 						<span class="card-title m-b-0" style="padding-left: 70%;">2020-01-30</span>
