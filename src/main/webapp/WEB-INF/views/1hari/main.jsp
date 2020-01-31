@@ -488,6 +488,31 @@ $(function(){
 	
 		},
 	});//날씨api END!!
+
+	// 뉴스 API
+	var url = 'https://newsapi.org/v2/top-headlines?' +
+			    'country=kr&' +
+			    'apiKey=dd1bdf27c6bb4f229189f5764e1bf04e';
+			//var req = new Request(url);
+			//fetch(req)
+			//.then(function(response) {
+			//   console.log(response.json());
+			//})
+	let news = "";
+	$.ajax({
+		url : url,
+		dataType : "json",
+		success : function(newsArticles) {
+			console.log(newsArticles);
+			for (var i = 0; i < 5; i++) {
+				news += '<tr>' 
+						+ '<td><a href="' + newsArticles.articles[i].url + '" style="text-decoration: none;">' + newsArticles.articles[i].title + '</a></td>'
+						+ '<td>' + newsArticles.articles[i].publishedAt + '</td>'
+					+ '</tr>';
+			} 
+			$('#news').append(news);
+		}
+	})
 })
 
 
@@ -666,46 +691,15 @@ $(function(){
 			<!-- 무언가.. 시작 -->
 			<div class="card" style ="height:200px; width:183%; box-shadow :0 0 12px #999999; border-radius:10px; margin-left:10%; ">
 				<div class="card-body">
-					<h4 class="card-title m-b-0">무엇을 넣을까요?</h4>
-					<div id="canvas-holder" style="width: 300px;">
-						<div class="chartjs-size-monitor">
-							<div class="chartjs-size-monitor-expand">
-								<div class="">
-								</div>
-							</div>
-							<div class="chartjs-size-monitor-shrink">
-								<div class="">
-								</div>
-							</div>
-						</div>
-						<div class="chartjs-size-monitor">
-							<div class="chartjs-size-monitor-expand">
-								<div class="">
-								</div>
-							</div>
-							<div class="chartjs-size-monitor-shrink">
-								<div class="">
-							</div>
-						</div>
-					</div>
-					<canvas id="chart-area" width="300" height="300" style="display: block; margin-left: 50%;" class="chartjs-render-monitor"></canvas>
-					<div id="chartjs-tooltip2" class="center" style="opacity: 0; left: 228.854px; top: 223.022px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-style: normal; padding: 6px; font-size: 12px;">
-						<table>
-							<thead>
-							</thead>
-							<tbody>
-								<tr>
-									<td><span class="chartjs-tooltip-key" style="background:rgb(255, 99, 132); border-color:#fff; border-width: 2px"></span></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
+					<h4 class="card-title m-b-0">오늘의 뉴스</h4>
+					<table id="news">
+					
+					</table>
 				</div>
 			</div>
+		<!-- 무언가.. 종료 -->
 		</div>
-	<!-- 무언가.. 종료 -->
-	</div>
-	<!--col-md-6 컨텐츠 컨테이너 내에서 오른쪽 부분 (연봉통계 + 전자결재) -->
+		<!--col-md-6 컨텐츠 컨테이너 내에서 오른쪽 부분 (연봉통계 + 전자결재) -->
 			<div class="col-md-6">
 				<se:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_PERSONNEL')">
 				<!--부서별 연봉 통계 시작-->
