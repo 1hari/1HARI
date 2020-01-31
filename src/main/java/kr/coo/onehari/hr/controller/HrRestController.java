@@ -366,12 +366,15 @@ public class HrRestController {
 		JSONObject jsonObject = new JSONObject();
 		List<String> endList = null;
 		List<String> absentList = null;
+		List<String> annList = null;
 
 		try {
 			endList = empSercive.getEndList(pri.getName());
 			absentList = empSercive.getAbsentList(pri.getName());
+			annList = empSercive.getAnntList(pri.getName());
 			jsonObject.put("endList", endList);
 			jsonObject.put("absentList", absentList);
+			jsonObject.put("annList", annList);
 		} catch (Exception e) {
 			log.debug("getEndList 예외발생: " + e.getMessage());
 		}

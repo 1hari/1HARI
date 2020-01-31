@@ -145,7 +145,7 @@
 	
 	<!-- 오늘 결근이 있는지 조회 형남 0112-->
 	<select id="todayAbsentCheck" resultType="Integer">
-		SELECT COUNT(*) FROM TALIST WHERE DATE(TADATE) = DATE(NOW()) and EMPNUM=#{empNum} AND TACODE=6
+		SELECT COUNT(*) FROM TALIST WHERE DATE(TADATE) = DATE(NOW()) and EMPNUM=#{empNum} AND TACODE=5
 	</select>
 	
 	<!-- 총 근무일  형남 0112-->
@@ -210,7 +210,12 @@
     
     <!-- 이번달 결근기록 yyyy-mm-dd-->
 	<select id="getAbsentList" resultType="String">
-		SELECT DATE_FORMAT(TADATE,"%Y-%m-%d") FROM TALIST WHERE MONTH(TADATE) = MONTH(NOW()) AND TACODE=6 AND EMPNUM=#{empNum}
+		SELECT DATE_FORMAT(TADATE,"%Y-%m-%d") FROM TALIST WHERE MONTH(TADATE) = MONTH(NOW()) AND TACODE=5 AND EMPNUM=#{empNum}
+    </select>
+    
+    <!-- 이번달 연차기록 yyyy-mm-dd-->
+	<select id="getAnntList" resultType="String">
+		SELECT DATE_FORMAT(TADATE,"%Y-%m-%d") FROM TALIST WHERE MONTH(TADATE) = MONTH(NOW()) AND TACODE=4 AND EMPNUM=#{empNum}
     </select>
 
 	
@@ -222,7 +227,7 @@
        SELECT COUNT(TADATE) FROM TALIST WHERE TACODE=3 AND MONTH(TADATE) = MONTH(NOW()) AND EMPNUM=#{empNum}
     </select>
     <select id="getAbsent" resultType="Integer">
-       SELECT COUNT(TADATE) FROM TALIST WHERE TACODE=6 AND MONTH(TADATE) = MONTH(NOW()) AND EMPNUM=#{empNum}
+       SELECT COUNT(TADATE) FROM TALIST WHERE TACODE=5 AND MONTH(TADATE) = MONTH(NOW()) AND EMPNUM=#{empNum}
     </select>
     <select id="getAnnual" resultType="Integer">
        SELECT COUNT(TADATE) FROM TALIST WHERE TACODE=4 AND MONTH(TADATE) = MONTH(NOW()) AND EMPNUM=#{empNum}

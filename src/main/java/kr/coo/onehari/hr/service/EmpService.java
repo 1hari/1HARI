@@ -381,6 +381,19 @@ public class EmpService {
     	}
     	return totalTime;
     }
+    
+    //형남 0131 이번달 연차기록 yyyy-mm-dd
+    public List<String> getAnntList(String empNumStr) {
+    	EmpDao dao = sqlsession.getMapper(EmpDao.class);
+    	List<String> totalTime = null;
+    	int empNum=Integer.parseInt(empNumStr);
+    	try {
+    		totalTime=dao.getAnntList(empNum);
+    	} catch (ClassNotFoundException | SQLException e) {
+    		log.debug("getAnntList : " + e.getMessage());
+    	}
+    	return totalTime;
+    }
 
     
     //형남 0121 출근 횟수 가져오기(사원 대시보드 차트)

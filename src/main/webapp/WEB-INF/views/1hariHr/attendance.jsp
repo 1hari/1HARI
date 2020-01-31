@@ -163,6 +163,13 @@ $(function(){
 								$(itemArray2[i]).append('<br><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-danger fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">결근</span></div><div class="fc-resizer fc-end-resizer"></div></a></td>');
 							}
 						}
+						for(var j=0; j<getEndList.anntList.length; j++){
+							if($(itemArray2[i]).attr('data-date') == getEndList.anntList[j]){
+								$(itemArray2[i]).empty();
+								$(itemArray2[i]).append('<br><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-info fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">연차</span></div><div class="fc-resizer fc-end-resizer"></div></a></td>');
+							}
+							//연차 코드<a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-info fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">Event One</span></div><div class="fc-resizer fc-end-resizer"></div></a>
+						}
 					}
 				}
 			});
