@@ -70,19 +70,19 @@
 		<!-- ============================================================== -->
 		<div class="row" >
 			<div class="col-12">
-				<div class = "col-12" style ="margin-left:10%; width: 80%; height: 100%; background-color: #d9d9d9; opacity:0.8;">
+				<div class = "col-12" style ="margin-left:10%; width: 80%; height: 100%; background-color: white; border-radius:10px; box-shadow: 0 0 12px #999999; opacity:0.8;">
 				<div class="container">
 					<!--form 태그 시작 -->
 					<form action="" method="POST" enctype="multipart/form-data" id="draftForm">
 						<div class="row">
 							<div class="col-md-2">
-								<button type="button" id="buttonselect" class="btn btn-info btn-sm" data-toggle="modal" data-target="#signModal">결재자 선택</button>
+								<button type="button" id="buttonselect" class="btn btn-info btn-sm" data-toggle="modal" data-target="#signModal" style="margin-top:20%; border-radius:10px; margin-left:10%;">결재자 선택</button>
 							</div>
 							<div class="col-md-6">
 							</div>
 							<div class="col-md-4">
 								<c:set var="emp" value="${requestScope.emp}" />
-								<table style="border: 2px solid #807266; width:250px; vertical-align:middle; text-align: center; margin-left:5%;">
+								<table style="border: 2px solid #807266; width:80%; vertical-align:middle; text-align: center; margin-left:10%; margin-top:10%; margin-bottom:10%; border-radius:5px;">
 									<tr class="draft" style="height:40px; border: 2px solid #807266; vertical-align:middle;">
 										<td rowspan="3">결<br>재<br>선</td>
 										<!-- 직급 -->
@@ -115,12 +115,12 @@
 						
 						<div class="row">
 							<!-- input 태그 -->
-							<div class="col-md-11">
-								<div class="input-group" style="margin-left:0.5%;">
+							<div class="col-md-12">
+								<div class="input-group">
 								
 								<input type="text" class="form-control" id="signTitle" name="signTitle" placeholder="제목" <c:forEach var="docu" items="${requestScope.signDocu}">
 										value="${docu.signTitle}"
-									</c:forEach> style="width:95%; display: inline;">
+									</c:forEach> style="width:95%; display: inline; color:black;">
 								<button type="button" id="draftSubmit"  class="buttonselect" style="display: inline-block; ">기안</button>
 								
 								</div>
@@ -169,10 +169,10 @@
 						<!-- ck 에디터 form 끝 -->
 						
 						<div class="form-group row">
-							<div class="col-md-11">
+							<div class="col-md-12">
 								<div class="custom-file">
 									<input type="file" class="custom-file-input" id="validatedCustomFile" required="" name="file">
-									<label class="custom-file-label" for="validatedCustomFile">파일을 선택하세요.</label>
+									<label class="custom-file-label" for="validatedCustomFile" style ="color:black;">파일을 선택하세요.</label>
 								</div>
 							</div>
 						</div>

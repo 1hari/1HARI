@@ -2662,8 +2662,8 @@ select.form-control-lg:not([size]):not([multiple]) {
 
 .custom-file-input.is-valid:focus~.custom-file-label,
 .was-validated .custom-file-input:valid:focus~.custom-file-label {
-	-webkit-box-shadow: 0 0 0 0.2rem rgba(40, 183, 121, 0.25);
-	box-shadow: 0 0 0 0.2rem rgba(40, 183, 121, 0.25)
+	-webkit-box-shadow:  #807266;
+	box-shadow: #807266
 }
 
 .invalid-feedback {
@@ -2775,8 +2775,8 @@ select.form-control-lg:not([size]):not([multiple]) {
 
 .custom-file-input.is-invalid:focus~.custom-file-label,
 .was-validated .custom-file-input:invalid:focus~.custom-file-label {
-	-webkit-box-shadow: 0 0 0 0.2rem rgba(218, 84, 46, 0.25);
-	box-shadow: 0 0 0 0.2rem rgba(218, 84, 46, 0.25)
+	-webkit-box-shadow:  #807266;
+	box-shadow:  #807266
 }
 
 .form-inline {
@@ -4638,13 +4638,13 @@ input[type=submit].btn-block {
 }
 
 .custom-file-input:focus~.custom-file-label {
-	border-color: rgba(0, 0, 0, 0.25);
-	-webkit-box-shadow: transparent;
-	box-shadow: transparent
+	border-color:  #807266;
+	-webkit-box-shadow:  #807266;
+	box-shadow:  #807266
 }
 
 .custom-file-input:focus~.custom-file-label:after {
-	border-color: rgba(0, 0, 0, 0.25)
+	border-color:  #807266
 }
 
 .custom-file-input:lang(en)~.custom-file-label:after {
@@ -4661,8 +4661,8 @@ input[type=submit].btn-block {
 	padding: 0.375rem 0.75rem;
 	line-height: 1.5;
 	color: #ffffff;
-	background-color: #20B2AA;
-	border: 1px solid #20B2AA;
+	background-color:  #807266;
+	border: 1px solid  #807266;
 	border-radius: 2px
 }
 
@@ -4677,8 +4677,8 @@ input[type=submit].btn-block {
 	padding: 0.375rem 0.75rem;
 	line-height: 1.5;
 	color: #ffffff;
-	background-color: #20B2AA;
-	border-left: 1px solid #20B2AA;
+	background-color:  #807266;
+	border-left: 1px solid  #807266;
 	border-radius: 0 2px 2px 0
 }
 
@@ -15331,8 +15331,8 @@ select.form-control-lg:not([size]):not([multiple]) {
 
 .custom-file-input.is-valid:focus~.custom-file-label,
 .was-validated .custom-file-input:valid:focus~.custom-file-label {
-	-webkit-box-shadow: 0 0 0 0.2rem rgba(40, 183, 121, 0.25);
-	box-shadow: 0 0 0 0.2rem rgba(40, 183, 121, 0.25)
+	-webkit-box-shadow: #807266;
+	box-shadow: #807266
 }
 
 .invalid-feedback {
@@ -15444,8 +15444,8 @@ select.form-control-lg:not([size]):not([multiple]) {
 
 .custom-file-input.is-invalid:focus~.custom-file-label,
 .was-validated .custom-file-input:invalid:focus~.custom-file-label {
-	-webkit-box-shadow: 0 0 0 0.2rem rgba(218, 84, 46, 0.25);
-	box-shadow: 0 0 0 0.2rem rgba(218, 84, 46, 0.25)
+	-webkit-box-shadow:  #807266;
+	box-shadow: #807266
 }
 
 .form-inline {
@@ -17326,8 +17326,8 @@ input[type=submit].btn-block {
 	padding: 0.375rem 0.75rem;
 	line-height: 1.5;
 	color: #4F5467;
-	background-color: #fff;
-	border: 1px solid #e9ecef;
+	background-color:  #807266;
+	border: 1px solid  #807266;
 	border-radius: 2px
 }
 
@@ -27996,8 +27996,8 @@ select.form-control-lg:not([size]):not([multiple]) {
 
 .custom-file-input.is-valid:focus~.custom-file-label,
 .was-validated .custom-file-input:valid:focus~.custom-file-label {
-	-webkit-box-shadow: 0 0 0 0.2rem rgba(40, 183, 121, 0.25);
-	box-shadow: 0 0 0 0.2rem rgba(40, 183, 121, 0.25)
+	-webkit-box-shadow:  #807266;
+	box-shadow:  #807266
 }
 
 .invalid-feedback {
@@ -28109,8 +28109,8 @@ select.form-control-lg:not([size]):not([multiple]) {
 
 .custom-file-input.is-invalid:focus~.custom-file-label,
 .was-validated .custom-file-input:invalid:focus~.custom-file-label {
-	-webkit-box-shadow: 0 0 0 0.2rem rgba(218, 84, 46, 0.25);
-	box-shadow: 0 0 0 0.2rem rgba(218, 84, 46, 0.25)
+	-webkit-box-shadow: #807266;
+	box-shadow:  #807266
 }
 
 .form-inline {
@@ -29996,8 +29996,8 @@ input[type=submit].btn-block {
 	padding: 0.375rem 0.75rem;
 	line-height: 1.5;
 	color: #20b2aa;
-	background-color: #ffffff;
-	border: 1px solid #20b2aa;
+	background-color:  #807266;
+	border: 1px solid  #807266;
 	border-radius: 2px
 	
 }
@@ -30013,8 +30013,8 @@ input[type=submit].btn-block {
 	padding: 0.375rem 0.75rem;
 	line-height: 1.5;
 	color: #ffffff;
-	background-color: #20b2aa;
-	border-left: 1px solid #20b2aa;
+	background-color:  #807266;
+	border-left: 1px solid  #807266;
 	border-radius: 0 2px 2px 0
 }
 
@@ -45115,8 +45115,8 @@ select.form-control-lg:not([size]):not([multiple]) {
 
 .custom-file-input.is-valid:focus~.custom-file-label,
 .was-validated .custom-file-input:valid:focus~.custom-file-label {
-	-webkit-box-shadow: 0 0 0 0.2rem rgba(40, 183, 121, 0.25);
-	box-shadow: 0 0 0 0.2rem rgba(40, 183, 121, 0.25)
+	-webkit-box-shadow:  #807266;
+	box-shadow:  #807266
 }
 
 .invalid-feedback {
@@ -45228,8 +45228,8 @@ select.form-control-lg:not([size]):not([multiple]) {
 
 .custom-file-input.is-invalid:focus~.custom-file-label,
 .was-validated .custom-file-input:invalid:focus~.custom-file-label {
-	-webkit-box-shadow: 0 0 0 0.2rem rgba(218, 84, 46, 0.25);
-	box-shadow: 0 0 0 0.2rem rgba(218, 84, 46, 0.25)
+	-webkit-box-shadow:  #807266;
+	box-shadow:  #807266
 }
 
 .form-inline {
@@ -47113,8 +47113,8 @@ input[type=submit].btn-block {
 	padding: 0.375rem 0.75rem;
 	line-height: 1.5;
 	color: #ffffff;
-	background-color: #20B2AA;
-	border: 1px solid #20B2AA;
+	background-color:  #807266;
+	border: 1px solid  #807266;
 	border-radius: 2px
 }
 
@@ -47129,8 +47129,8 @@ input[type=submit].btn-block {
 	padding: 0.375rem 0.75rem;
 	line-height: 1.5;
 	color: #ffffff;
-	background-color: #20B2AA;
-	border-left: 1px solid #20B2AA;
+	background-color:  #807266;
+	border-left: 1px solid  #807266;
 	border-radius: 0 2px 2px 0
 }
 
@@ -57782,8 +57782,8 @@ select.form-control-lg:not([size]):not([multiple]) {
 
 .custom-file-input.is-valid:focus~.custom-file-label,
 .was-validated .custom-file-input:valid:focus~.custom-file-label {
-	-webkit-box-shadow: 0 0 0 0.2rem rgba(40, 183, 121, 0.25);
-	box-shadow: 0 0 0 0.2rem rgba(40, 183, 121, 0.25)
+	-webkit-box-shadow:  #807266;
+	box-shadow:  #807266
 }
 
 .invalid-feedback {
@@ -57895,8 +57895,8 @@ select.form-control-lg:not([size]):not([multiple]) {
 
 .custom-file-input.is-invalid:focus~.custom-file-label,
 .was-validated .custom-file-input:invalid:focus~.custom-file-label {
-	-webkit-box-shadow: 0 0 0 0.2rem rgba(218, 84, 46, 0.25);
-	box-shadow: 0 0 0 0.2rem rgba(218, 84, 46, 0.25)
+	-webkit-box-shadow:  #807266;
+	box-shadow:  #807266
 }
 
 .form-inline {
@@ -59783,8 +59783,8 @@ input[type=submit].btn-block {
 	padding: 0.375rem 0.75rem;
 	line-height: 1.5;
 	color: #4F5467;
-	background-color: #fff;
-	border: 1px solid #e9ecef;
+	background-color:  #807266;
+	border: 1px solid  #807266;
 	border-radius: 2px
 }
 
@@ -59798,10 +59798,10 @@ input[type=submit].btn-block {
 	height: calc(calc(2.0625rem + 2px) - 1px * 2);
 	padding: 0.375rem 0.75rem;
 	line-height: 1.5;
-	color: #4F5467;
+	color:  #807266;
 	content: "Browse";
-	background-color: #f8f9fa;
-	border-left: 1px solid #e9ecef;
+	background-color:  #fff;
+	border-left: 1px solid  #807266;
 	border-radius: 0 2px 2px 0
 }
 
@@ -70456,8 +70456,8 @@ s
 
 .custom-file-input.is-valid:focus~.custom-file-label,
 .was-validated .custom-file-input:valid:focus~.custom-file-label {
-	-webkit-box-shadow: 0 0 0 0.2rem rgba(40, 183, 121, 0.25);
-	box-shadow: 0 0 0 0.2rem rgba(40, 183, 121, 0.25)
+	-webkit-box-shadow:  #807266;
+	box-shadow:  #807266
 }
 
 .invalid-feedback {
@@ -70569,8 +70569,8 @@ s
 
 .custom-file-input.is-invalid:focus~.custom-file-label,
 .was-validated .custom-file-input:invalid:focus~.custom-file-label {
-	-webkit-box-shadow: 0 0 0 0.2rem rgba(218, 84, 46, 0.25);
-	box-shadow: 0 0 0 0.2rem rgba(218, 84, 46, 0.25)
+	-webkit-box-shadow:  #807266;
+	box-shadow:  #807266
 }
 
 .form-inline {
@@ -72436,13 +72436,13 @@ input[type=submit].btn-block {
 }
 
 .custom-file-input:focus~.custom-file-label {
-	border-color: rgba(0, 0, 0, 0.25);
-	-webkit-box-shadow: transparent;
-	box-shadow: transparent
+	border-color:  #807266;
+	-webkit-box-shadow:  #807266;
+	box-shadow:  #807266
 }
 
 .custom-file-input:focus~.custom-file-label:after {
-	border-color: rgba(0, 0, 0, 0.25)
+	border-color:  #807266
 }
 
 .custom-file-input:lang(en)~.custom-file-label:after {
@@ -72461,7 +72461,7 @@ input[type=submit].btn-block {
 	line-height: 1.5;
 	color: #20b2aa;
 	background-color: #ffffff;
-	border: 1px solid #20b2aa;
+	border: 1px solid  #807266;
 	border-radius: 2px
 	
 }
@@ -72477,8 +72477,8 @@ input[type=submit].btn-block {
 	padding: 0.375rem 0.75rem;
 	line-height: 1.5;
 	color: #ffffff;
-	background-color: #20b2aa;
-	border-left: 1px solid #20b2aa;
+	background-color:  #807266;
+	border-left: 1px solid  #807266;
 	border-radius: 0 2px 2px 0
 }
 

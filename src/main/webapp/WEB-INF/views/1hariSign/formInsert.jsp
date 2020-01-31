@@ -28,20 +28,22 @@
 		<!-- ============================================================== -->
 		<div class="row" >
 			<div class="col-12">
+				<div class = "col-12" style ="margin-left:10%; width: 80%; height: 100%; background-color: white; border-radius:10px; box-shadow: 0 0 12px #999999; opacity:0.8;">
 				<div class="container">
 					<!--form 태그 시작 -->
 					<form action="" method="POST" id="formInsert" style = "marign-left:20%;">
 						<div class="row">
 							<!-- input 태그 -->
-							<div class="col-md-11">
+							<div class="col-md-12" style="margin-top:5%;">
 									<div class="input-group">
 										<input type="text" class="form-control" id="signFormFormName" name="signFormFormName" placeholder="양식명">
-										<button type="button" id="formInsertSubmit" class="btn btn-success">등록</button>
+										<button type="button" id="formInsertSubmit" class="btn-success">등록</button>
 									</div>
 							</div>
 						</div><!-- row 끝 -->
 						<!-- ck 에디터 form -->
-						<textarea name="signFormFormContent" id="signFormFormContent" rows="10" cols="80">
+						<textarea name="signFormFormContent" id="signFormFormContent" rows="10" cols="80"  style="margin-bottom:5%;">
+						
 							양식을 붙여주세요.(워드,엑셀 붙여넣기 가능 / html 태그 입력 시 오른쪽 상단 소스 클릭)
 						</textarea>
 						<!-- ck 에디터 form 끝 -->
@@ -49,6 +51,7 @@
 				</div><!-- container -->
 			</div><!-- col-12 끝 -->
 		</div><!-- row 끝 -->
+		</div>
 	</div><!-- container-fluid 끝 -->
 </div>
 <!-- End Page wrapper  -->
