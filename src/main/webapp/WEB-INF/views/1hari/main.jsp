@@ -721,16 +721,16 @@ $(function(){
 					<table class="table">
 						<thead>
 							<tr style ="vertical-align:left;">
-								<td style ="margin-right:-10%;"><i class="far fa-clipboard fa-2x" style ="margin-left:-50%;"></i>&nbsp;;<h4 style ="margin-left:-50%;">진행중문서</h4></td> 
-								<td style ="margin-left:-80%;">${requestScope.ongoing}</td>
-								<td scope="col"><i class="far fa-file-alt fa-2x" style ="margin-left:-50%;"></i>&nbsp;<h4 style ="margin-left:-50%;">결제반려문서</h4></td>
-								<td  style ="margin-left:-80%;">${requestScope.reject}</td>
+								<td  scope="col" style="width:120px;margin-left:15%;"><i class="far fa-clipboard fa-2x"></i>&nbsp;<h4>진행중문서</h4></td>
+								<td style ="margin-left:-80%;"><span style="font-size:xx-large;">${requestScope.ongoing}</span></td>
+								<td scope="col" style="width:120px;margin-left:15%;"><i class="far fa-file-alt fa-2x"></i>&nbsp;<h4>결제반려문서</h4></td>
+								<td  style ="margin-left:-80%;font-size:large;"><span  style="font-size:xx-large;">${requestScope.reject}</span></td>
 							</tr>
 							<tr style ="vertical-align:left;">
-								<td scope="col"><i class="far fa-edit fa-2x" style ="margin-left:-50%;"></i>&nbsp;<h4 style ="margin-left:-50%;">결제할문서</h4></td>
-								<td style ="margin-left:-80%;">${requestScope.approve}</td>
-								<td scope="col"><i class="far fa-file-archive fa-2x" style ="margin-left:-50%;"></i>&nbsp;<h4 style ="margin-left:-50%;">결제완료문서</h4></td>
-								<td style ="margin-left:-80%;">${requestScope.complete}</td>
+								<td scope="col" style="width:120px;margin-left:15%;"><i class="far fa-edit fa-2x"></i>&nbsp;<h4>결제할문서</h4></td>
+								<td style ="margin-left:-80%;"><span style="font-size:xx-large;">${requestScope.approve}</span></td>
+								<td scope="col" style="width:120px;margin-left:15%;"><i class="far fa-file-archive fa-2x"></i>&nbsp;<h4>결제완료문서</h4></td>
+								<td style ="margin-left:-80%;"><span style="font-size:xx-large;">${requestScope.complete}</span></td>
 							</tr>
 						</thead> 
 					</table>

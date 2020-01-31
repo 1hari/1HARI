@@ -39,7 +39,7 @@
 		<!-- ============================================================== -->
 		<div class="row">
 			<div class="col-12">
-				<div class="container" style ="marign-bottom:3%; background-color:#fff; border-radius:10px;  box-shadow :3px 3px #999999; border: 2px groove #999999; "">
+				<div class="container" style ="marign-bottom:3%; background-color:#fff; border-radius:10px;  box-shadow :0 0 12px #999999;">
 					<div class="row">
 						<div class="col-md-12">
 							<!--form 태그 시작 -->
