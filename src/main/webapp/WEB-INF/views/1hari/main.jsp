@@ -688,16 +688,7 @@ $(function(){
 				</div>
 			</div>
 			<!--당월 근태 통계 종료-->
-			<!-- 무언가.. 시작 -->
-			<div class="card" style ="height:200px; width:183%; box-shadow :0 0 12px #999999; border-radius:10px; margin-left:10%; ">
-				<div class="card-body">
-					<h4 class="card-title m-b-0">오늘의 뉴스</h4>
-					<table id="news">
-					
-					</table>
-				</div>
-			</div>
-		<!-- 무언가.. 종료 -->
+	
 		</div>
 		<!--col-md-6 컨텐츠 컨테이너 내에서 오른쪽 부분 (연봉통계 + 전자결재) -->
 			<div class="col-md-6">
@@ -769,6 +760,16 @@ $(function(){
 		<!--col-md-6 컨텐츠 컨테이너 내에서 오른쪽 부분 (연봉통계 + 전자결재) 종료 -->
 		</div>
 	<!-- <div class="row"> 부분 끝 div-->
+				<!-- 무언가.. 시작 -->
+			<div class="card" style ="height:200px; width:90%; box-shadow :0 0 12px #999999; border-radius:10px; margin-left:5%; ">
+				<div class="card-body">
+					<h4 class="card-title m-b-0">오늘의 뉴스</h4>
+					<table id="news">
+					
+					</table>
+				</div>
+			</div>
+		<!-- 무언가.. 종료 -->
 	</div>
 <!--<div class="container-fluid"> 부분 끝 div-->
 </div>
