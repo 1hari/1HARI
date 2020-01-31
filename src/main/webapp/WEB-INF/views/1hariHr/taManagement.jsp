@@ -38,7 +38,7 @@
 
 				<!-- 사원 근태관리 테이블 -->
 				<div class="card">
-					<div class="card-body" style ="border-radius:10px; box-shadow :3px 3px #999999;  border: 2px groove #999999;">
+					<div class="card-body" style ="border-radius:10px;border-radius:10px; box-shadow :0 0 12px #999999;">
 						<h5 class="card-title"></h5>
 						<div class="table-responsive">
 							<form id="taTable" name="taTable" method="post" enctype="multipart/form-data">
