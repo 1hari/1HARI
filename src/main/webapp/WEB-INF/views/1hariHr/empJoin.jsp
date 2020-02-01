@@ -92,7 +92,7 @@
 				<!-- Start Page Content -->
 				<!-- ============================================================== -->
 				<div class="card" style="width:80%; height:80%; margin-left:10%;" >
-					<div class="card-body wizard-content" style ="border-radius:10px;  box-shadow :3px 3px #999999; border: 2px groove #999999; ">
+					<div class="card-body wizard-content" style ="border-radius:10px;  box-shadow :0 0 12px #999999; border: 10px ">
 						<h6 class="card-subtitle"></h6>
 						<form id="example-form" action="" class="m-t-40" name="joinform" method="post">
 							<div>
