@@ -18,6 +18,10 @@
 	#board_list>tbody>tr {
 		cursor: pointer;
 	}
+	
+	table tbody tr:hover {
+		background-color: black;
+	}
 </style>
 <!-- 조직도 조회 -->
 

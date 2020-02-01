@@ -14,9 +14,10 @@
 
 .fc-toolbar .fc-button {
     background: #ffffff;
-    color: #807266;
+    color: #000000;
     /* border: none; */
-    border: 2px solid #807266;
+    font-weight: bold;
+    border: 1px solid #807266;
 }
 
 .fc-toolbar .fc-button:hover {
