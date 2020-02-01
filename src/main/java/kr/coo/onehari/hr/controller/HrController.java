@@ -33,11 +33,7 @@ public class HrController {
 	@Autowired
 	private CorpService corpService;
 	
-	//근태관리 화면
-	@RequestMapping("attendance.hari")
-	public String attendance() {
-		return "1hariHr.attendance";
-	}
+
 	
 	//연차관리 화면
 	@RequestMapping("annual.hari")
@@ -144,15 +140,6 @@ public class HrController {
 		return "1hariHr.teamList";
 	}
 
-	/*
-	 * 관리자 사원근태관리
-	 * 작성자: 김진호
-	 * 날짜: 2020. 1. 24
-	 */
-	@RequestMapping(value = "personnel/taManagement.hari", method = RequestMethod.GET)
-	public String taManagement() {
-		return "1hariHr.taManagement";
-	}
 	
 	//재직증명서 출력 김정하 / 2020. 2. 1 
 	@RequestMapping("employ.hari")
