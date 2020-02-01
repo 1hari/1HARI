@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="se" uri="http://www.springframework.org/security/tags" %>
 <script type="text/javascript">
-
+var d = new Date();
 $(function(){
 	getMyTheme();
 	var imgfile = null; //첨부파일
@@ -112,7 +112,6 @@ $(function(){
 	
 	//현재시간 예쁘게 출력
 	function getTimeStamp() {
-	  var d = new Date();
 	  var s =
 	    leadingZeros(d.getHours(), 2) +
 	    leadingZeros(d.getMinutes(), 2) +
@@ -324,8 +323,11 @@ $(function(){
 				if(isStart == false && isEnd==false && isAbsent==false){
 					$('#startWork').removeAttr('disabled');	
 					$('#endWork').attr('disabled', 'disabled');
-					//출근 미등록 알림 (페이지 이동마다 출근 안찍혀있으면 알림)
-					toastr.error('출근등록 여부를 확인해 주세요', '출근알림', {timeOut: 5000});
+					//평일 체크
+					if(d.getDay() != 0 && d.getDay() != 6){
+						//출근 미등록 알림 (페이지 이동마다 출근 안찍혀있으면 알림)
+						toastr.error('출근등록 여부를 확인해 주세요', '출근알림', {timeOut: 5000});
+					}
 				}else if(isStart == true && isEnd==false && isAbsent==false){
 					$('#startWork').attr('disabled', 'disabled');
 					$('#endWork').removeAttr('disabled');	
@@ -340,7 +342,6 @@ $(function(){
 			}
 		});
 	})
-
 	
 	//오늘 퇴근기록 체크
 	$.ajax({
@@ -353,9 +354,6 @@ $(function(){
 		}
 	})
 
-	$('#test').click(function(){
-		$('#theme').css('background', 'red');
-	})
 
     if (window.Notification) {
         Notification.requestPermission();
@@ -573,9 +571,8 @@ function themeChange(formData){
 							<i class="fas fa-calendar-check font-29" style="padding-top: 18px;"></i>
 						</a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown" >
-							<button class="dropdown-item" id="startWork" disabled="disabled" ><i class="m-r-10 mdi mdi-treasure-chest"></i>&nbsp;출근하기</button>
+							<button class="dropdown-item" id="startWork" disabled="disabled"><i class="m-r-10 mdi mdi-treasure-chest"></i>&nbsp;출근하기</button>
 							<button class="dropdown-item" id="endWork" disabled="disabled" ><i class="m-r-10 mdi mdi-wallet-travel"></i>&nbsp;퇴근하기</button>
-							<button class="dropdown-item" id="test" >test</button>
 						</div>
 					</li>
 					<!--top navbar 에서 오른쪽 기능 담당 (출/퇴근과 프로필) 끝 -->
