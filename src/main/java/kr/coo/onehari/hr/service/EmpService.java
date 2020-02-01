@@ -148,7 +148,7 @@ public class EmpService {
 		}
 		return result;
 	}
-	//형남 0112 출근(지각)
+	//형남 0112 사원 출근 기능(지각)
 	public int insertStartWorkTardyTA(String empNumStr) {
 		EmpDao dao = sqlsession.getMapper(EmpDao.class);
 		int result = 0;
@@ -161,7 +161,7 @@ public class EmpService {
 		return result;
 	}
 	
-	//형남 0112 퇴근
+	//형남 0112 사원 퇴근 기능
 	public int insertEndWorkTA(String empNumStr) {
 		EmpDao dao = sqlsession.getMapper(EmpDao.class);
 		int result = 0;
@@ -169,7 +169,7 @@ public class EmpService {
 		try {
 			result=dao.insertEndWorkTA(empNum);
 		} catch (ClassNotFoundException | SQLException e) {
-			log.debug("insertStartWorkTA : " + e.getMessage());
+			log.debug("insertEndWorkTA : " + e.getMessage());
 		}
 		return result;
 	}
@@ -621,6 +621,17 @@ public class EmpService {
 			log.debug("EmpService getEmpTa 예외발생: " + e.getMessage());
 		}
     	return result;
+    }
+    
+    //쿼리문 테스트
+    public void queryTest(Map<String, String> map) {
+    	EmpDao empdao = sqlsession.getMapper(EmpDao.class);
+    	int result = 0;
+    	try {
+			result = empdao.setEmpTa(map);
+		} catch (ClassNotFoundException | SQLException e) {
+			log.debug("EmpService getEmpTa 예외발생: " + e.getMessage());
+		}
     }
 }
 

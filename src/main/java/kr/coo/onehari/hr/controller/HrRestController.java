@@ -147,14 +147,12 @@ public class HrRestController {
 	@RequestMapping(value = "startWork.hari", method = RequestMethod.POST)
 	public boolean startWork(Principal pri) {
 		int result = 0;
-		
 		// 지각 구분시간
 		String tardyDateStr = "110000";
 		Date curDate = new Date();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("HHmmss");
 		
 		try {
-			
 			Date tardyDate = dateFormat.parse(tardyDateStr);
 			long tardyDateTime = tardyDate.getTime();
 			curDate = dateFormat.parse(dateFormat.format(curDate));
@@ -417,17 +415,17 @@ public class HrRestController {
 		return "redirect:empList.hari";
 	}
 
-	//형남 0121 출근, 지각, 결근 연차, 조퇴 횟수 가져오기(사원 대시보드 근태차트, chart.js dataset)
+	//형남 0121 출근, 지각, 결근 연차, 조퇴 횟수 가져오기(사원 대시보드 근태차트, chart.js dataset 형식으로 가공)
 	@RequestMapping(value = "getTA.hari", method = RequestMethod.POST)
 	public String getTA(Principal pri) {
 		List<Integer> TAList = new ArrayList<Integer>();
 		JSONObject jsonObject = new JSONObject();
 		try {
-			int work = empSercive.getWork(pri.getName());
-			int tardy = empSercive.getTardy(pri.getName());
-			int absent = empSercive.getAbsent(pri.getName());
-			int annual = empSercive.getAnnual(pri.getName());
-			int early = empSercive.getEarly(pri.getName());
+			int work = empSercive.getWork(pri.getName()); //출근
+			int tardy = empSercive.getTardy(pri.getName()); //지각
+			int absent = empSercive.getAbsent(pri.getName()); //결근
+			int annual = empSercive.getAnnual(pri.getName()); //연차
+			int early = empSercive.getEarly(pri.getName()); //
 			TAList.add(work);
 			TAList.add(tardy);
 			TAList.add(absent);
@@ -458,11 +456,12 @@ public class HrRestController {
 			teamNameList = empSercive.getTeamNameList();
 			// 모든 팀에 전월 근무시간 가져오기
 			for (int teamCode : teamCodeList) {
+				
 				// 차트에 들어갈 json 데이터 형식으로 추가
 				jsonObject = new JSONObject();
-
 				jsonObject.put("label", teamNameList.get(count));
 				jsonObject.put("borderWidth", 1);
+				
 				// 팀별 + 월별 근무시간 리스트
 				teamWorkTimeList = new ArrayList<String>();
 				for (int i = 1; i < 13; i++) {
@@ -471,11 +470,12 @@ public class HrRestController {
 					if (teamWorkTime == null) {
 						teamWorkTime = "0";
 					}
+					//000:000:000
 					String[] timeSplit = teamWorkTime.split(":");
-
+					//시간 단위만 뽑아서 add
 					teamWorkTimeList.add(timeSplit[0]);
 				}
-				count++;
+				count++;//팀 이름 가져올 때 인덱스값
 				jsonObject.put("data", teamWorkTimeList);
 				root.add(jsonObject);
 			}
@@ -511,16 +511,17 @@ public class HrRestController {
 					// 팀별 + 월별 근무시간 리스트
 					teamWorkTimeList = new ArrayList<String>();
 					jsonArray = new JSONArray();
-					teamWorkTime = empSercive.getTeamMonthWorkTime(teamCode, month);// 2001/1,2,3,4,5..
+					teamWorkTime = empSercive.getTeamMonthWorkTime(teamCode, month);
 					if (teamWorkTime == null ) {
 						teamWorkTime = "0";
 					}
-					//split 함수로 잘라서 시간만 가져옴
+					//000:000:000
 					String[] timeSplit = teamWorkTime.split(":");
+					//시간 단위만 뽑아서 add
 					teamWorkTimeList.add(timeSplit[0]);
 					jsonObject.put("data", teamWorkTimeList);
 					root.add(jsonObject);
-					count++;
+					count++;//팀 이름 가져올 때 인덱스값
 				}
 			} catch (Exception e) {
 				log.debug("getEmpTAMonth 예외발생: " + e.getMessage());
@@ -528,10 +529,10 @@ public class HrRestController {
 		return root.toJSONString();
 	}
 	
+	//관리자권한 근태목록 가져오기 김진호 2020. 1. 27
 	@RequestMapping(value = "getTaList.hari", method = RequestMethod.POST)
 	public List<EmpDto> getTaList(String setDate) {
 		List<EmpDto> getTaList = null;
-		
 		try {
 			getTaList = empSercive.getTaList(setDate);
 		} catch (Exception e) {
@@ -540,11 +541,10 @@ public class HrRestController {
 		return getTaList;
 	}
 	
-	//대시보드 부서별 연봉통계 셀렉트박스
+	//형남 0128 대시보드 부서별 연봉통계 차트 연도 셀렉트박스
 	@RequestMapping(value = "getSalYear.hari", method = RequestMethod.POST)
 	public List<String> getSalYear() {
 		List<String> yearList = null;
-		
 		try {
 			yearList = empSercive.getSalYear();
 		} catch (Exception e) {
@@ -553,7 +553,7 @@ public class HrRestController {
 		return yearList;
 	}
 	
-	// 형남 0128 팀별 연봉차트
+	// 형남 0128 대시보드 부서별 연봉차트
 	@RequestMapping(value = "getTeamSalList.hari", method = RequestMethod.POST)
 	public String getTeamSalList(String year) {
 		JSONArray root = new JSONArray(); //가장 바깥쪽 배열 - dataset
@@ -576,6 +576,7 @@ public class HrRestController {
 					jsonObject.put("borderWidth", 1);
 					teamAvgSalArray = new JSONArray();
 					teamAvgSal = empSercive.getTeamAvgSal(teamCode, year); //팀 별 평균연봉
+					//팀에 연봉 데이터가 없으면 0 처리
 					if (teamAvgSal == null ) {
 						teamAvgSal = "0";
 					}
@@ -667,5 +668,24 @@ public class HrRestController {
 		}
 		return result;
 	}
-
+	
+	//대시보드 부서별 연봉통계 셀렉트박스
+//	@RequestMapping(value = "queryTest.hari", method = RequestMethod.GET)
+//	public void queryTest() {
+//		List<EmpDto> empList=empSercive.empList();
+//		for(int j=1; j<13; j++) {
+//			for(int i=0; i<empList.size(); i++) {
+//				if(empList.get(i).getEmploymentCode() ==5001) { //재직중이면
+//					System.out.println(empList.get(i).getHireDate());
+//					//1월에 전 사원 인서트
+//					empSercive.queryTest();
+//				}
+//			}
+//		}
+//
+//		try {
+//		} catch (Exception e) {
+//			log.debug("queryTest 예외발생: " + e.getMessage());
+//		}
+//	}
 }

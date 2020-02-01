@@ -19,8 +19,17 @@
 <script src='${pageContext.request.contextPath}/resources/vue/js/payPopUpRouter.js'></script>
 <script src='${pageContext.request.contextPath}/resources/vue/js/app.js'></script>
 <style>
-	#board_list>tbody>tr {
-		cursor: pointer;
+	body, input, p, span, option, label, select, button, .wizard-content {
+		font-family :맑은고딕,monospace;
+		font-size : 1.3rem;
+		font-weight : inherit;
+	}
+	
+	.draft > td{
+		border-color:#000000;
+		border-style:solid;
+		border-width:1px 1px 1px;
+		width: 80px;
 	}
 </style>
 <!-- 급여 조회 -->

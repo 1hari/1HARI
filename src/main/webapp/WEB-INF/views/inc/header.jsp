@@ -101,14 +101,11 @@ $(function(){
 	var isStart=false; //오늘 출근했는지
 	var isEnd=false;//오늘 퇴근했는지
 	var isAbsent=false;//오늘 결근인지
-	var currYear;
-	var currMonth;
-	var fixLatitude=parseFloat(37.525913599999996);
-	var fixLongitude=parseFloat(126.83591679999999);
+	var fixLatitude=parseFloat(37.525913599999996); //회사의 위도 고정
+	var fixLongitude=parseFloat(126.83591679999999);//회사의 경도 고정
 	var myLatitude; //사용자 위도
-	var myLongitude;////사용자 경도
-	var currTime;
-	var integerTime;
+	var myLongitude;//사용자 경도
+
 	
 	//현재시간 예쁘게 출력
 	function getTimeStamp() {
@@ -132,7 +129,8 @@ $(function(){
 	toastr.options.closeButton = true;	
 	toastr.options.newestOnTop = true;	
 	toastr.options.progressBar = true;	
-
+	
+	var integerTime; //출근 경고 알림 띄어 줄 시간 정수형
 	//현재시간 정수로 비교해 알람창 띄어주기
 	var timeCheck=setInterval(function(){
 		integerTime=parseInt(getTimeStamp());
@@ -146,7 +144,7 @@ $(function(){
 	
 
 
-	//출근버튼 + 캘린더
+	//출근버튼 + 캘린더 출력
 	$('#startWork').click(function() {
 		//테스트 주석
 // 		if (navigator.geolocation) {
@@ -158,14 +156,13 @@ $(function(){
 // 					alert('위치정보가 다릅니다. 로그인 실패');
 // 					return;
 // 				}
-				//캘린더
-				   //형남 0112 출근기능
+		   //형남 0112 출근기능
 			$.ajax({
                url: "${pageContext.request.contextPath}/ajax/startWork.hari",
                type: "post",
                dataType: "json",
                success: function(data) {
-                   isStart=true
+                   isStart=data
                }
             }).then((data) => {
                 //총 근무일 갱신
@@ -177,79 +174,57 @@ $(function(){
                       $('#totalTA').text('');
                       $('#totalTA').append(totalTA);
                    }
-                }).then((value) => {
+                }).then(() => {
                     //있으면 true, 없으면 false
-                    if(data==true){
-                  	 var integerDate= parseInt(getTimeStamp());
+                    if(isStart==true){
+						var integerDate= parseInt(getTimeStamp());
+						//출근기록 성공하면 출근버튼 숨기고 퇴근버튼 표시
 						$('#endWork').removeAttr('style', 'display: none');
 						$('#startWork').attr('style', 'display: none');
-// 						$('#endWork').removeAttr('disabled');   
-// 						$('#startWork').attr('disabled', 'disabled');
+						//오늘 출근일 YYYY-MM-DD 형식으로 가져오기(풀캘린더에 날짜값 형식으로)
 						$.ajax({
-                          url: "${pageContext.request.contextPath}/ajax/getDataDate.hari",
-                          type: "post",
-                          dataType: "text",
-                          success: function(dataDate) {
-							var itemArray2=document.querySelectorAll('.fc-day.fc-widget-content');
-							if(integerDate < 110000){
+							url: "${pageContext.request.contextPath}/ajax/getDataDate.hari",
+							type: "post",
+							dataType: "text",
+							success: function(dataDate) {
+								//풀캘린더 일 단위 속성 전부 가져옴
+								var itemArray2=document.querySelectorAll('.fc-day.fc-widget-content');
+								if(integerDate < 110000){
+								for(var i=0;i<itemArray2.length;i++){
+									//가져온 일 단위 속성의 data-date(yyyy-mm-dd 형식) 속성을 가져와 오늘 날짜와 비교
+									if($(itemArray2[i]).attr('data-date') == dataDate.trim()){ //있으면 i번째 달력 날짜에 출근 스티커 붙임
+                                       $(itemArray2[i]).removeAttr("td");
+                                       $(itemArray2[i]).append('<br><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-warning fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">출근</span></div><div class="fc-resizer fc-end-resizer"></div></a></td>');
+                                       break
+									}	
+								}
+							}else{
 								for(var i=0;i<itemArray2.length;i++){
 									if($(itemArray2[i]).attr('data-date') == dataDate.trim()){
-                                        $(itemArray2[i]).removeAttr("td");
-                                        $(itemArray2[i]).append('<br><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-warning fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">출근</span></div><div class="fc-resizer fc-end-resizer"></div></a></td>');
-									}
-								}
-   							}else{
-                                 for(var i=0;i<itemArray2.length;i++){
-                                     if($(itemArray2[i]).attr('data-date') == dataDate.trim()){
-                                        $(itemArray2[i]).removeAttr("td");
-                                        $(itemArray2[i]).append('<br><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-warning fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">지각</span></div><div class="fc-resizer fc-end-resizer"></div></a></td>');
+										$(itemArray2[i]).removeAttr("td");
+										$(itemArray2[i]).append('<br><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-warning fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">지각</span></div><div class="fc-resizer fc-end-resizer"></div></a></td>');
 									}
 								}
 							}
 						}
 					})
 					swal("success", "출근 등록되었습니다.", "success").then((logout) => {
-                        if (logout) {
-                        	location.reload();
-                     	 }
+						if (logout) {
+							location.reload();
+						}
 					})
 				}else{
 					swal("warning", "출근등록 실패, 관리자에게 문의해주세요.", "warning")
-					}
-				})
+				}
 			})
-			
-			
-			
-			
-// 			    $('#aLogout').on('click', function(e){
-//         if(isEnd==false && isStart==true){
-//             e.preventDefault(); //cancel default action
-//             swal({
-//                 title: "로그아웃 경고",
-//                 text: "퇴근시간이 기록되지 않았습니다. 정말 로그아웃 하시겠습니까?", 
-//                 icon: "warning",
-//                 buttons: true,
-//                 dangerMode: true,
-//             }).then((logout) => {
-//               if (logout) {
-//                 $('#logout-form').submit()
-//               }else{
-//                   return
-//               }
-//             });
-//         }else{
-//             $('#logout-form').submit()
-//         }
-//     });
-
-			
+		})
 // 			});
 // 		}else { 
 // 			alert('현재 브라우저에서 지원하지 않는 기능입니다.');
 // 			return;
 // 		}
 	})
+	
 	$('#endWork').click(function() {
 // 		if (navigator.geolocation) {
 // 			navigator.geolocation.getCurrentPosition(function(position) {
