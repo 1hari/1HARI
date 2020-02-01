@@ -5,9 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
+import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.VerticalAlignment;
@@ -19,7 +21,6 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -40,16 +41,9 @@ public class ExcelService {
 	@Autowired
 	private SqlSession sqlsession;
 	
-	@Autowired
-	private BCryptPasswordEncoder bCryptPasswordEncoder;
-	
 	/**
 	 * 엑셀파일로 만들 리스트 생성
-	 * @param exceldto 
 	 * 
-	 * @param names
-	 * @param prices
-	 * @param quantities
 	 * @return 엑셀파일 리스트
 	 */
 	public List<EmpDto> excelEmpList() {
@@ -78,26 +72,26 @@ public class ExcelService {
 		
 		// 셀 스타일 설정
 		CellStyle centerStyle = workbook.createCellStyle();
-		centerStyle.setAlignment(HorizontalAlignment.CENTER);
-		centerStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+		centerStyle.setAlignment(HorizontalAlignment.CENTER); // 가로 정렬
+		centerStyle.setVerticalAlignment(VerticalAlignment.CENTER); // 세로 정렬
 		
 		CellStyle indentStyle = workbook.createCellStyle();
-		indentStyle.setIndention((short) 1);
+		indentStyle.setIndention((short) 1); // 들여쓰기 설정
 		indentStyle.setVerticalAlignment(VerticalAlignment.CENTER);
-
+		
 		// 입력 설명
 //		// 행 추적을 위한 변수
 //		int rowLocation = 0;
 		
-		Row mergeRow = null;
-		Cell mergeCell = null;
+		Row mergeRow = null; // 병합 셀이 있는 행 생성
+		Cell mergeCell = null; // 병합 셀 생성
 		
 		// 병합 행
-		mergeRow = sheet.createRow(0);
-		mergeCell = mergeRow.createCell(0);
-		mergeCell.setCellValue("사번 입력금지");
-		mergeCell.setCellStyle(indentStyle);
-		sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 11));
+		mergeRow = sheet.createRow(0); // 첫 번째 행 생성
+		mergeCell = mergeRow.createCell(0); // 첫 번째 행에서 첫 번째 열(셀) 생성
+		mergeCell.setCellValue("사번 입력금지"); // 셀에 내용 입력
+		mergeCell.setCellStyle(indentStyle); // indentStyle 셀 서식 설정
+		sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 11)); // 병합 (시작 행, 종료 행, 시작 열, 종료 열)
 		
 		mergeRow = sheet.createRow(1);
 		mergeCell = mergeRow.createCell(0);
