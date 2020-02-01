@@ -153,4 +153,19 @@ public class HrController {
 	public String taManagement() {
 		return "1hariHr.taManagement";
 	}
+	
+	//재직증명서 출력 김정하 / 2020. 2. 1 
+	@RequestMapping("employ.hari")
+	public String employPopUp(Principal principal, Model model) {
+		//증명서 발급할 사원정보
+		EmpDto emp = empService.empModify(Integer.parseInt(principal.getName()));
+		model.addAttribute("emp", emp);
+		
+		//대표자 정보
+		EmpDto ceo=empService.getCEO();
+		model.addAttribute("ceo", ceo);
+		
+		return "1hariPopUp.employPopUp";
+	}
+	
 }

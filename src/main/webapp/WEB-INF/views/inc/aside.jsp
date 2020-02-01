@@ -5,6 +5,15 @@
 
 <script>
 	$(function(){
+
+		//재직증명서 클릭
+		$("#employPopUp").click(function(){
+			//console.log($(this).attr("signNum"));
+			let openUrl = "${pageContext.request.contextPath}/1hariHr/employ.hari";
+			//console.log(openUrl);
+			open(openUrl,"재직증명서","statusber=no,menuber=no, width=850, height=800");
+		});//재직증명서 클릭
+		
 		//품의서 양식 목록 가져오기
 		$.ajax({
 			url:"${pageContext.request.contextPath}/ajax/selectAllForm.hari",
@@ -179,7 +188,7 @@
 						</li>
 						
 						<li class="sidebar-item">
-							<a href="hr_proof.jsp" class="sidebar-link">
+							<a class="sidebar-link" id="employPopUp">
 								<i class="m-r-10 mdi mdi-console"></i>
 								<span class="hide-menu"> 재직 증명 </span>
 							</a>
