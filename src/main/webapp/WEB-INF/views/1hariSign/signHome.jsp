@@ -42,14 +42,14 @@
 						<table class="table">
 							<thead class="thead-light">
 								<tr>
-									<th scope="col"><span>기안일</span></th>
-									<th scope="col"><span>문서번호</span></th>
-									<th scope="col"><span>결재양식</span></th>
-									<th scope="col"><span>제목</span></th>
-									<th scope="col"><span>기안자 (사번)</span></th>
-									<th scope="col"><span>중간결재자 (사번)</span></th>
-									<th scope="col"><span>최종결재자 (사번)</span></th>
-									<th scope="col"><span>결재상태</span></th>
+									<th scope="col" style ="width:13%;">기안일</th>
+									<th scope="col" style ="width:8%;">문서번호</th>
+									<th scope="col" style ="width:10%;">결재양식</th>
+									<th scope="col" style ="width:10%;">제목</th>
+									<th scope="col" style ="width:10%;">기안자 (사번)</th>
+									<th scope="col" style ="width:10%;">중간결재자 (사번)</th>
+									<th scope="col" style ="width:10%;">최종결재자 (사번)</th>
+									<th scope="col" style ="width:10%;">결재상태</th>
 								</tr>
 							</thead>
 							<tbody class="customtable">
@@ -96,14 +96,14 @@
 						<table class="table">
 							<thead class="thead-light">
 								<tr>
-									<th scope="col"><span>기안일</span></th>
-									<th scope="col"><span>문서번호</span></th>
-									<th scope="col"><span>결재양식</span></th>
-									<th scope="col"><span>제목</span></th>
-									<th scope="col"><span>기안자 (사번)</span></th>
-									<th scope="col"><span>중간결재자 (사번)</span></th>
-									<th scope="col"><span>최종결재자 (사번)</span></th>
-									<th scope="col"><span>결재상태</span></th>
+									<th scope="col" style ="width:13%;">기안일</th>
+									<th scope="col" style ="width:8%;">문서번호</th>
+									<th scope="col" style ="width:10%;">결재양식</th>
+									<th scope="col" style ="width:10%;">제목</th>
+									<th scope="col" style ="width:10%;">기안자 (사번)</th>
+									<th scope="col" style ="width:10%;">중간결재자 (사번)</th>
+									<th scope="col" style ="width:10%;">최종결재자 (사번)</th>
+									<th scope="col" style ="width:10%;">결재상태</th>
 								</tr>
 							</thead>
 							<tbody class="customtable">
@@ -150,14 +150,14 @@
 						<table class="table">
 							<thead class="thead-light">
 								<tr>
-									<th scope="col"><span>기안일</span></th>
-									<th scope="col"><span>문서번호</span></th>
-									<th scope="col"><span>결재양식</span></th>
-									<th scope="col"><span>제목</span></th>
-									<th scope="col"><span>기안자 (사번)</span></th>
-									<th scope="col"><span>중간결재자 (사번)</span></th>
-									<th scope="col"><span>최종결재자 (사번)</span></th>
-									<th scope="col"><span>결재상태</span></th>
+									<th scope="col" style ="width:13%;">기안일</th>
+									<th scope="col" style ="width:8%;">문서번호</th>
+									<th scope="col" style ="width:10%;">결재양식</th>
+									<th scope="col" style ="width:10%;">제목</th>
+									<th scope="col" style ="width:10%;">기안자 (사번)</th>
+									<th scope="col" style ="width:10%;">중간결재자 (사번)</th>
+									<th scope="col" style ="width:10%;">최종결재자 (사번)</th>
+									<th scope="col" style ="width:10%;">결재상태</th>
 								</tr>
 							</thead>
 							<tbody class="customtable">
@@ -176,7 +176,7 @@
                                         		<span>${completet.signName}</span>
                                     		</div>
 											<div class="progress">
-												<div role="progressbar" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-striped bg-success" style="width: 100%" aria-valuenow="100"></div>
+												<div role="progressbar" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-striped bg-success" style="width: 95%" aria-valuenow="100"></div>
 											</div>
 										</td>
 									</tr>
@@ -197,14 +197,14 @@
 						<table class="table">
 							<thead class="thead-light">
 								<tr>
-									<th scope="col"><span>기안일</span></th>
-									<th scope="col"><span>문서번호</span></th>
-									<th scope="col"><span>결재양식</span></th>
-									<th scope="col"><span>제목</span></th>
-									<th scope="col"><span>기안자 (사번)</span></th>
-									<th scope="col"><span>중간결재자 (사번)</span></th>
-									<th scope="col"><span>최종결재자 (사번)</span></th>
-									<th scope="col"><span>결재상태</span></th>
+									<th scope="col" style ="width:13%;">기안일</th>
+									<th scope="col" style ="width:8%;">문서번호</th>
+									<th scope="col" style ="width:10%;">결재양식</th>
+									<th scope="col" style ="width:10%;">제목</th>
+									<th scope="col" style ="width:10%;">기안자 (사번)</th>
+									<th scope="col" style ="width:10%;">중간결재자 (사번)</th>
+									<th scope="col" style ="width:10%;">최종결재자 (사번)</th>
+									<th scope="col" style ="width:10%;">결재상태</th>
 								</tr>
 							</thead>
 							<tbody class="customtable">
@@ -223,7 +223,7 @@
                                         		<span>${signReturn.signName}</span>
                                     		</div>
 											<div class="progress">
-												<div role="progressbar" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-striped bg-danger" style="width: 100%" aria-valuenow="100"></div>
+												<div role="progressbar" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-striped bg-danger" style="width: 95%" aria-valuenow="100"></div>
 											</div>
 										</td>
 									</tr>

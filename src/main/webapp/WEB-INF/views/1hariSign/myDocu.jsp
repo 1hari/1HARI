@@ -341,14 +341,16 @@
 					<table class="table">
 						<thead>
 							<tr style = "background-color:#e9ecef;">
-								<th scope="col">기안일</th>
-								<th scope="col">문서번호</th>
-								<th scope="col">결재양식</th>
-								<th scope="col"><span>제목</span></th>
-								<th scope="col"><span>기안자 (사번)</span></th>
-								<th scope="col"><span>중간결재자 (사번)</span></th>
-								<th scope="col"><span>최종결재자 (사번)</span></th>
-								<th scope="col"><span>결재상태</span>결재상태</th>
+								<th scope="col" style ="width:13%;">기안일</th>
+								<th scope="col" style ="width:8%;">문서번호</th>
+								<th scope="col" style ="width:10%;">결재양식</th>
+								<th scope="col" style ="width:10%;">제목</th>
+								<th scope="col" style ="width:10%;">기안자 (사번)</th>
+								<th scope="col" style ="width:10%;">중간결재자 (사번)</th>
+								<th scope="col" style ="width:10%;">최종결재자 (사번)</th>
+								<th scope="col" style ="width:10%;">결재상태</th>
+								
+								
 							</tr>
 						</thead>
 						<tbody id="signListTable">

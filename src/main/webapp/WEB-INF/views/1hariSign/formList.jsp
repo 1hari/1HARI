@@ -62,7 +62,7 @@
 													<td>
 														<c:if test="${form.signFormCode != 0}"> <!-- 연차신청서 삭제불가 -->
 															<a href="formDelete.hari?signFormCode=${form.signFormCode}" style="color: white;">
-																<button type="button" class="btn-success" style="width: 12%; background-color: #20B2AA; margin-right: 1%;   box-shadow :0 0 12px #999999; border-radius:8px; font-weight: bold; font-size:x-small; color: #000000; background-color:white;">
+																<button type="button" class="btn-success" style="width:20%; background-color: #20B2AA; margin-right: 1%;   box-shadow :0 0 12px #999999; border-radius:8px; font-weight: bold; font-size:small; color: #000000; background-color:white;">
 																	삭제&nbsp;&nbsp;&nbsp;<i class="m-r-10 mdi mdi-delete"></i>
 																</button>
 															</a>

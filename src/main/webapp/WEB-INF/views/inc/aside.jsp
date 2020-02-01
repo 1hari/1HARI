@@ -158,7 +158,7 @@
 				<!-- 근태관리 -->
 				<li class="sidebar-item" >
 					<a class="sidebar-link has-arrow waves-effect waves-dark" href="hr_attendance.html" aria-expanded="false" id="theme" class="sidebar-link" style="background: white;">
-						<i class="m-r-10 mdi mdi-account-card-details"></i>
+						<i class="m-r-10 mdi mdi-clipboard-account"></i>
 						<span class="hide-menu">근태 관리</span>
 					</a>
 
