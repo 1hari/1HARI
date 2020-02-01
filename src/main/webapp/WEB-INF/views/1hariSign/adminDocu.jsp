@@ -338,7 +338,7 @@
 					</div>
 					<table class="table">
 						<thead>
-							<tr>
+							<tr style = "background-color:#e9ecef;">
 								<th scope="col">기안일</th>
 								<th scope="col">문서번호</th>
 								<th scope="col">결재양식</th>

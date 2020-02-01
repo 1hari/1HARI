@@ -22,7 +22,7 @@
 		</div>
 	</div>
 	
-	<div class="container-fluid">
+	<div class="container-fluid" style ="margin-top: 3%;">
 		<!-- ============================================================== -->
 		<!-- Start Page Content -->
 		<!-- ============================================================== -->
@@ -36,13 +36,13 @@
 							<!-- input 태그 -->
 							<div class="col-md-12" style="margin-top:5%;">
 									<div class="input-group">
-										<input type="text" class="form-control" id="signFormFormName" name="signFormFormName" placeholder="양식명">
-										<button type="button" id="formInsertSubmit" class="btn-success">등록</button>
+										<input type="text" class="form-control" id="signFormFormName" name="signFormFormName" placeholder="양식명" style="width:88%; display: inline; color:black; border-color:#807266;">
+										<button type="button" id="formInsertSubmit" class="btn-success" style="display: inline-block; width:75px;">등록</button>
 									</div>
 							</div>
 						</div><!-- row 끝 -->
 						<!-- ck 에디터 form -->
-						<textarea name="signFormFormContent" id="signFormFormContent" rows="10" cols="80"  style="margin-bottom:5%;">
+						<textarea name="signFormFormContent" id="signFormFormContent" rows="10" cols="80" >
 						
 							양식을 붙여주세요.(워드,엑셀 붙여넣기 가능 / html 태그 입력 시 오른쪽 상단 소스 클릭)
 						</textarea>

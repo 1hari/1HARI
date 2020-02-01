@@ -42,10 +42,10 @@
 								<table id="zero_config" class="table table-striped table-bordered">
 									<thead>
 										<tr>
-											<th>
+											<th style = "background-color:white;">
 												<select id="selectMonth"></select>
 											</th>
-											<th id="days" colspan="5">
+											<th style = "background-color:white;" id="days" colspan="5">
 											</th>
 										</tr>
 										<tr>

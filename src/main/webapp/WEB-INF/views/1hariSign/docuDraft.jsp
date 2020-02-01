@@ -120,7 +120,7 @@
 								
 								<input type="text" class="form-control" id="signTitle" name="signTitle" placeholder="제목" <c:forEach var="docu" items="${requestScope.signDocu}">
 										value="${docu.signTitle}"
-									</c:forEach> style="width:88%; display: inline; color:black;">
+									</c:forEach> style="width:88%; display: inline; color:black; border-color:#807266;">
 								<button type="button" id="draftSubmit"  class="buttonselect" style="display: inline-block; width:70px;">기안</button>
 								
 								</div>
@@ -139,9 +139,9 @@
 										</div>
 										<div class="col-sm-6">
 											<div class="input-group input-daterange date">
-					    						<input type="text" class="form-control" id="startDate" name="startDate" value="">
+					    						<input type="text" class="form-control" id="startDate" name="startDate" value="" style="border-color:#807266;">
 					    						<div class="input-group-addon">&nbsp;&nbsp;~&nbsp;&nbsp;</div>
-					    						<input type="text" class="form-control" id="endDate" name="endDate" value="">
+					    						<input type="text" class="form-control" id="endDate" name="endDate" value="" style="border-color:#807266;">
 											</div>
 										</div>
 										<div class="col-sm-3">
