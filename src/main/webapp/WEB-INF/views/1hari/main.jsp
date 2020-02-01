@@ -616,7 +616,7 @@ $(function(){
 					<div class="card" style ="height:350px; box-shadow :0 0 12px #999999; border-radius:10px; margin-left:10%;">
 						<div class="card-body" style="padding-bottom: 0">
 							<span class="card-title m-b-0" style="margin-bottom:0; font-size: 18px;" >근무시간 통계</span>
-							<select class="select2 form-control custom-select select2-hidden-accessible" id="month" style="width: 20%; height:30px; margin-left: 65%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+							<select class="select2 form-control custom-select select2-hidden-accessible" id="month" style="width: 20%; height:30px; margin-left: 65%; font-size:small;" data-select2-id="1" tabindex="-1" aria-hidden="true">
 								<option value="0">전체</option>
 								<option value="1">1월</option>
 								<option value="2">2월</option>
@@ -663,7 +663,7 @@ $(function(){
 								</div>
 							</div>
 						</div>
-						<canvas id="chart-area" width="100%" height="100%" style="display: block; margin-left: 50%; margin-bottom:13%;" class="chartjs-render-monitor"></canvas>
+						<canvas id="chart-area" width="100%" height="100%" style="display: block; margin-left: 50%; margin-bottom:13%;font-size:small;" class="chartjs-render-monitor"></canvas>
 						<div id="chartjs-tooltip2" class="center" style="opacity: 0; left: 228.854px; top: 223.022px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-style: normal; font-size: 12px;">
 							<table>
 								<thead>

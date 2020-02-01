@@ -112,7 +112,7 @@
 		                           </div>
 		                           <div>
 		                              <label for="resNum" style="margin-top: 10px; margin-bottom: 0px;">주민등록번호</label>
-		                              <button type="button" class="btn btn-outline-success" style="padding-top: 0px; padding-bottom: 0px;" onclick="CheckForm()">확인</button>
+		                              <button type="button" class="btn btn-success" style="padding-top: 0px; padding-bottom: 0px;" onclick="CheckForm()">확인</button>
 		                              <input type="password" id="resNum" name="resNum" class="required form-control" maxlength="7" placeholder="주민등록번호 뒷자리">
 		                           </div>
 		                           <div>
