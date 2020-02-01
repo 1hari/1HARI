@@ -4,7 +4,8 @@
 	<!--nav 바 시작-->
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 		<div class="container">
-<%-- 	      <a class="navbar-brand" href="${pageContext.request.contextPath}/index/index.hari">1HARI</a> --%>
+	      <img src="${pageContext.request.contextPath}/resources/index/images/logo-60.gif">
+	  <%--     <a class="navbar-brand" href="${pageContext.request.contextPath}/index/index.hari">1HARI</a>  style="margin-left:-13%; width:20%; height:40px;"--%> 
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	 <!--        <span class="oi oi-menu"></span> Menu -->
 			</button>

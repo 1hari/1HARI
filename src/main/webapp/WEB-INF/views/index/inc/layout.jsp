@@ -26,6 +26,11 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/index/css/flaticon.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/index/css/icomoon.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/index/css/style.css">
+    
+    <!-- font-family 다채사랑 추가 -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/index/css/stylesheetlove.css">
+    
+    
 </head>
 <body>
 	<!-- Header  영역 -->

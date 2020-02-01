@@ -191,7 +191,7 @@
 				<c:url value="/login" var="loginURL"/>   
 				<div class="col-lg-4 col-md-6 mt-0 mt-md-5" style = "border-radius:10px;">
 					<form action="${loginURL}" class="request-form ftco-animate" method="post" name="loginform" id="loginform" style ="box-shadow :3px 3px #999999;">
-						<h2>로그인</h2>
+						<h4 style ="font-size: x-large; color: black; font-family: 'Nanum DaCaeSaRang';font-weight: bold;">로그인</h4>
 						<div class="form-group">
 							<input type="text" id="username" name="username" class="form-control" placeholder="사번 입력" >
 							<span id="usernamecheck" style="font-size: 14px; color: red;"></span>
@@ -307,7 +307,7 @@
 				<div class="col-md-3 d-flex align-self-stretch ftco-animate">
 					<div class="media block-6 services d-block">
 						<div class="icon">
-							<span class="flaticon-cooking"></span>
+							 <span class="flaticon-cooking"></span>
 						</div>
 						<div class="media-body">
 							<h3 class="heading mb-3">Restaurant</h3>
