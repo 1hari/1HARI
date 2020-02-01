@@ -181,9 +181,11 @@ $(function(){
                     //있으면 true, 없으면 false
                     if(data==true){
                   	 var integerDate= parseInt(getTimeStamp());
-                       $('#endWork').removeAttr('disabled');   
-                       $('#startWork').attr('disabled', 'disabled');
-                       $.ajax({
+						$('#endWork').removeAttr('style', 'display: none');
+						$('#startWork').attr('style', 'display: none');
+// 						$('#endWork').removeAttr('disabled');   
+// 						$('#startWork').attr('disabled', 'disabled');
+						$.ajax({
                           url: "${pageContext.request.contextPath}/ajax/getDataDate.hari",
                           type: "post",
                           dataType: "text",
@@ -269,9 +271,12 @@ $(function(){
 		}).then((data) => {
 			//있으면 true, 없으면 false
 			if(data==true){
+				
 				swal("success", "퇴근 등록되었습니다.", "success")
-				$('#endWork').attr('disabled', 'disabled');
-				$('#startWork').attr('disabled', 'disabled');
+				$('#endWork').attr('style', 'display: none');
+				$('#startWork').attr('style', 'display: none');
+// 				$('#endWork').attr('disabled', 'disabled');
+// 				$('#startWork').attr('disabled', 'disabled');
 				$.ajax({
 					url: "${pageContext.request.contextPath}/ajax/getDataDate.hari",
 					type: "post",
@@ -321,19 +326,29 @@ $(function(){
 				//퇴근근기록이 있으면 true, 없으면 false
 				isAbsent=todayAbsentCheck;
 				if(isStart == false && isEnd==false && isAbsent==false){
-					$('#startWork').removeAttr('disabled');	
-					$('#endWork').attr('disabled', 'disabled');
+// 					$('#startWork').removeAttr('disabled');	
+// 					$('#endWork').attr('disabled', 'disabled');
+					
+					$('#startWork').removeAttr('style', 'display: none');
+					$('#endWork').attr('style', 'display: none');
 					//평일 체크
 					if(d.getDay() != 0 && d.getDay() != 6){
 						//출근 미등록 알림 (페이지 이동마다 출근 안찍혀있으면 알림)
 						toastr.error('출근등록 여부를 확인해 주세요', '출근알림', {timeOut: 5000});
 					}
 				}else if(isStart == true && isEnd==false && isAbsent==false){
-					$('#startWork').attr('disabled', 'disabled');
-					$('#endWork').removeAttr('disabled');	
+// 					$('#startWork').attr('disabled', 'disabled');
+// 					$('#endWork').removeAttr('disabled');	
+
+					$('#startWork').attr('style', 'display: none');
+					$('#endWork').removeAttr('style', 'display: none');
 				} else if((isStart == true && isEnd==true && isAbsent==false) || (isStart == true && isEnd==true && isAbsent==true) || (isStart == false && isEnd==false && isAbsent==true) || (isStart == true && isEnd==true && isAbsent==true) || (isStart == true && isEnd==false && isAbsent==true)) {
-					$('#endWork').attr('disabled', 'disabled');
-					$('#startWork').attr('disabled', 'disabled');
+// 					$('#endWork').attr('disabled', 'disabled');
+// 					$('#startWork').attr('disabled', 'disabled');
+
+					$('#startWork').attr('style', 'display: none');
+					$('#endWork').attr('style', 'display: none');
+					$('#taComplete').removeAttr('style', 'display: none');
 				} else if(isStart == false && isEnd==true) {
 					swal("warning", "근태오류, 관리자에게 문의해주세요.", "warning")
 				} else{
@@ -561,7 +576,7 @@ function themeChange(formData){
 					<!-- 개인셋팅 -->
 					<li class="nav-item" >
 						<a class="nav-link waves-effect waves-dark" id="theme" style = "color:white;" href="" data-toggle="modal" data-target="#themeModal" aria-haspopup="true" aria-expanded="false">
-							<i class="fa fa-cog fa-fw font-29"  style="padding-top: 20px;"></i>
+							<i class="fa fa-cog fa-fw font-29"  style="padding-top: 20px; "></i>
 						</a>
 					</li>
 					
@@ -571,8 +586,9 @@ function themeChange(formData){
 							<i class="fas fa-calendar-check font-29" style="padding-top: 18px;"></i>
 						</a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown" >
-							<button class="dropdown-item" id="startWork" disabled="disabled"><i class="m-r-10 mdi mdi-treasure-chest"></i>&nbsp;출근하기</button>
-							<button class="dropdown-item" id="endWork" disabled="disabled" ><i class="m-r-10 mdi mdi-wallet-travel"></i>&nbsp;퇴근하기</button>
+							<button class="dropdown-item" id="startWork" style="display: none;"><i class="m-r-10 mdi mdi-treasure-chest"></i>&nbsp;출근하기</button>
+							<button class="dropdown-item" id="endWork" style="display: none;"><i class="m-r-10 mdi mdi-wallet-travel"></i>&nbsp;퇴근하기</button>
+							<button class="dropdown-item" id="taComplete"  style="display: none;">&nbsp;출퇴근 완료</button>
 						</div>
 					</li>
 					<!--top navbar 에서 오른쪽 기능 담당 (출/퇴근과 프로필) 끝 -->
