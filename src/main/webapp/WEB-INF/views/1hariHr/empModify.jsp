@@ -70,7 +70,7 @@
 	<div class="page-breadcrumb">
 		<div class="row">
 			<div class="col-12 d-flex no-block align-items-center">
-				<h3 class="page-title">사원정보수정</h3>
+				<h4 class="page-title">사원정보수정</h4>
 				<div class="ml-auto text-right"></div>
 			</div>
 		</div>

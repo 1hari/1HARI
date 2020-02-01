@@ -497,7 +497,25 @@ function themeChange(formData){
         }
     });
 }
+
+	//mouseover
+  	$(function() {
+  		
+  		document.getElementById("swal-button").addEventListener("mouseover", mouseOver);
+  	  	document.getElementById("swal-button").addEventListener("mouseout", mouseOut);
+
+  	  	function mouseOver() {
+  	  	  document.getElementById("swal-button").style.color = "#999999";
+  	  	}
+  	 	 function mouseOut() {
+  		  document.getElementById("swal-button").style.color = "white";
+  		}
+
+  	});
+
+
 </script>
+
 <!-- ============================================================== -->
 <!-- Preloader - style you can find in spinners.css -->
 <!-- ============================================================== -->
@@ -664,7 +682,7 @@ function themeChange(formData){
 			
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary modelClose">취소</button>
-					<button type=button class="btn btn-info" id="themeSetup">초기화</button>
+					<button type=button class="btn btn-info" id="themeSetup" style= "border:2px solid #999999; background-color: white; color:black; font-weight:bold;">초기화</button>
 					<button type=button class="btn btn-success" id="themeChoice">선택완료</button>
 				</div><!-- modal-footer 끝 -->
 			</form>	

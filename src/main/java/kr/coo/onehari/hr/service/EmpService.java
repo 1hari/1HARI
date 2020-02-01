@@ -174,7 +174,7 @@ public class EmpService {
 		return result;
 	}
 	
-	//형남 0112 오늘 퇴근이 있는지
+	//형남 0112 오늘 퇴근기록이 있는지 체크, 출퇴근 버튼 띄어주는데 사용
 	public int todayEndWorkCheck(String empNumStr) {
 		EmpDao dao = sqlsession.getMapper(EmpDao.class);
 		int result = 0;
@@ -187,7 +187,7 @@ public class EmpService {
 		return result;
 	}
 	
-	//형남 0112 오늘 출근이 있는지
+	//형남 0112 오늘 출근기록이 있는지 체크, 출퇴근 버튼 띄어주는데 사용
 	public int todayStartWorkCheck(String empNumStr) {
 		EmpDao dao = sqlsession.getMapper(EmpDao.class);
 		int result = 0;
@@ -200,7 +200,7 @@ public class EmpService {
 		return result;
 	}
 	
-	//형남 0112 오늘 결근인지
+	//형남 0112 오늘 결근기록이 있는지 체크, 있으면 출퇴근 버튼 숨김
 	public int todayAbsentCheck(String empNumStr) {
 		EmpDao dao = sqlsession.getMapper(EmpDao.class);
 		int result = 0;
@@ -213,7 +213,7 @@ public class EmpService {
 		return result;
 	}
 	
-	//형남 0112 오늘 출근이 있는지
+	//형남 0112 퇴근 시 오늘 근태관리 페이지에 총 근무시간 출력
 	public int getTotalTA(String empNumStr) {
 		EmpDao dao = sqlsession.getMapper(EmpDao.class);
 		int result = 0;
