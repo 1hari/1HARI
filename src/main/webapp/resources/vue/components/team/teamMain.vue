@@ -45,27 +45,27 @@
         <table class="table table-hover" id="zero_config" >
           <thead style = "background-color: #e9ecef;">
             <tr>
-              <th class="text-center d-none d-md-table-cell">사번</th>
-              <th class="text-center d-none d-md-table-cell">이름</th>
-              <th class="text-center d-none d-md-table-cell">소속</th>
-              <th class="text-center d-none d-md-table-cell">직급</th>
-              <th class="text-center d-none d-md-table-cell">직책</th>
-              <th class="text-center d-none d-md-table-cell">재직구분</th>
-              <th class="text-center d-none d-md-table-cell">연락처</th>
-              <th class="text-center d-none d-md-table-cell">이메일</th>
+              <th class="text-center d-none d-md-table-cell" >사번</th>
+              <th class="text-center d-none d-md-table-cell" >이름</th>
+              <th class="text-center d-none d-md-table-cell" >소속</th>
+              <th class="text-center d-none d-md-table-cell" >직급</th>
+              <th class="text-center d-none d-md-table-cell" >직책</th>
+              <th class="text-center d-none d-md-table-cell" >재직구분</th>
+              <th class="text-center d-none d-md-table-cell" >연락처</th>
+              <th class="text-center d-none d-md-table-cell" style="width=50%">이메일</th>
             </tr>
           </thead>
 
           <tbody>
             <tr v-for="(emp, index) in server_data.empList" >
-              <td class="text-center d-none d-md-table-cell" style="height=20px">{{emp.empNum}}</td>
-              <td class="text-center d-none d-md-table-cell">{{emp.empName}}</td>
-              <td class="text-center d-none d-md-table-cell">{{emp.teamName}}</td>
-              <td class="text-center d-none d-md-table-cell">{{emp.rankName}}</td>
-              <td class="text-center d-none d-md-table-cell">{{emp.positionName}}</td>
-              <td class="text-center d-none d-md-table-cell">{{emp.employmentName}}</td>
-              <td class="text-center d-none d-md-table-cell">{{emp.phoneNum}}</td>
-              <td class="text-center d-none d-md-table-cell">{{emp.email}}</td>
+              <td class="text-center d-none d-md-table-cell" style="width: 10%;">{{emp.empNum}}</td>
+              <td class="text-center d-none d-md-table-cell" style="width: 10%;">{{emp.empName}}</td>
+              <td class="text-center d-none d-md-table-cell" style="width: 10%;">{{emp.teamName}}</td>
+              <td class="text-center d-none d-md-table-cell" style="width: 10%;">{{emp.rankName}}</td>
+              <td class="text-center d-none d-md-table-cell" style="width: 15%;">{{emp.positionName}}</td>
+              <td class="text-center d-none d-md-table-cell" style="width: 10%;">{{emp.employmentName}}</td>
+              <td class="text-center d-none d-md-table-cell" style="width: 15%;">{{emp.phoneNum}}</td>
+              <td class="text-center d-none d-md-table-cell" style="width: 20%;">{{emp.email}}</td>
             </tr> 
           </tbody>
 
