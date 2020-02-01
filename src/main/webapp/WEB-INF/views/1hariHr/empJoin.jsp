@@ -340,11 +340,11 @@
 		}
 	});
 
-	/* 핸드폰번호 입력 유효성 검사 */
 	var phoneReg = /^01[016789]-\d{3,4}-\d{4}$/; // 핸드폰번호 정규표현식
 	var emailPattern = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 	var phoneNumCheck = false;
 	var emailCheck = false;
+	var juminCheck = false;
 	
 	form.children("div").steps({
 		headerTag : "h3",
@@ -371,7 +371,7 @@
 				emailCheck = false;
 			}
 			
-			if (phoneNumCheck != false && emailCheck != false) {
+			if (phoneNumCheck != false && emailCheck != false && juminCheck != false) {
 				swal({
 					text: "사원등록이 정상적으로 완료되었습니다.",
 					icon: "success",
@@ -381,7 +381,7 @@
 				});
 			} else {
 				swal({
-					text: "핸드폰번호 형식이 잘못되었습니다.",
+					text: "핸드폰번호 또는 주민등록번호가 잘못되었습니다.",
 					icon: "warning",
 					button: "닫기"
 				});
@@ -416,6 +416,7 @@
 					button: "닫기"
 				});
 				document.joinform.resNum.focus();
+				juminCheck = false;
 				return false;
 			}
 		}
@@ -432,6 +433,7 @@
 					button: "닫기"
 				});
 				document.joinform.resNum.focus();
+				juminCheck = false;
 				return false;
 			}
 		}
@@ -448,6 +450,7 @@
 					button: "닫기"
 				});
 				document.joinform.resNum.focus();
+				juminCheck = false;
 				return false;
 			}
 		}
@@ -476,6 +479,7 @@
 				button: "닫기"
 			});
 			document.joinform.resNum.focus();
+			juminCheck = false;
 			return false;
 		}
 
@@ -487,6 +491,7 @@
 				button: "닫기"
 			});
 			document.joinform.resNum.focus();
+			juminCheck = false;
 			return false;
 		} else {
 			swal({
@@ -494,6 +499,7 @@
 				icon: "success",
 				button: "확인"
 			});
+			juminCheck = true;
 			return true;
 		}
 	}

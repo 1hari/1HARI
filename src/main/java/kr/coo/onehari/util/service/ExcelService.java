@@ -101,7 +101,7 @@ public class ExcelService {
 		
 		mergeRow = sheet.createRow(1);
 		mergeCell = mergeRow.createCell(0);
-		mergeCell.setCellValue("모든 셀 서식은 텍스트 형식으로 설정하세요.");
+		mergeCell.setCellValue("데이터 입력 전, 모든 셀 서식을 반드시 텍스트 형식으로 설정하세요.");
 		mergeCell.setCellStyle(indentStyle);
 		sheet.addMergedRegion(new CellRangeAddress(1, 1, 0, 11));
 		
@@ -111,7 +111,7 @@ public class ExcelService {
 		mergeCell.setCellStyle(indentStyle);
 		sheet.addMergedRegion(new CellRangeAddress(2, 2, 0, 1));
 		mergeCell = mergeRow.createCell(2);
-		mergeCell.setCellValue("[ 2001 : 총무팀 ],  [ 2002 : 인사팀 ], [ 2003 : 영업팀 ]");
+		mergeCell.setCellValue("[ 2001 : 경영지원팀 ], [ 2002 : 영업팀 ], [ 2003 : 마케팅팀 ]");
 		mergeCell.setCellStyle(indentStyle);
 		sheet.addMergedRegion(new CellRangeAddress(2, 2, 2, 11));
 		
@@ -121,7 +121,7 @@ public class ExcelService {
 		mergeCell.setCellStyle(indentStyle);
 		sheet.addMergedRegion(new CellRangeAddress(3, 3, 0, 1));
 		mergeCell = mergeRow.createCell(2);
-		mergeCell.setCellValue("[ 3001 : 대표 ],  [ 3002 : 이사 ], [ 3003 : 부장 ], [ 3004 : 과장 ], [ 3005 : 대리 ], [ 3006 : 사원 ]");
+		mergeCell.setCellValue("[ 3001 : 사원 ], [ 3002 : 대리 ], [ 3003 : 과장 ], [ 3004 : 부장 ], [ 3005 : 이사 ], [ 3006 : 대표 ]");
 		mergeCell.setCellStyle(indentStyle);
 		sheet.addMergedRegion(new CellRangeAddress(3, 3, 2, 11));
 		
@@ -131,7 +131,7 @@ public class ExcelService {
 		mergeCell.setCellStyle(indentStyle);
 		sheet.addMergedRegion(new CellRangeAddress(4, 4, 0, 1));
 		mergeCell = mergeRow.createCell(2);
-		mergeCell.setCellValue("[ 4001 : CEO ],  [ 4002 : 팀장 ], [ 4003 : 파트장 ], [ 4004 : 팀원 ]");
+		mergeCell.setCellValue("[ 4001 : 팀원 ], [ 4002 : 팀장 ], [ 4003 : CEO ]");
 		mergeCell.setCellStyle(indentStyle);
 		sheet.addMergedRegion(new CellRangeAddress(4, 4, 2, 11));
 		
@@ -141,7 +141,7 @@ public class ExcelService {
 		mergeCell.setCellStyle(indentStyle);
 		sheet.addMergedRegion(new CellRangeAddress(5, 5, 0, 1));
 		mergeCell = mergeRow.createCell(2);
-		mergeCell.setCellValue("[ 5001 : 재직 ],  [ 5002 : 휴직 ], [ 5003 : 퇴직 ]");
+		mergeCell.setCellValue("[ 5001 : 재직 ], [ 5002 : 휴직 ], [ 5003 : 퇴직 ]");
 		mergeCell.setCellStyle(indentStyle);
 		sheet.addMergedRegion(new CellRangeAddress(5, 5, 2, 11));
 		
@@ -159,7 +159,7 @@ public class ExcelService {
 		
 		mergeRow = sheet.createRow(8);
 		mergeCell = mergeRow.createCell(0);
-		mergeCell.setCellValue("이메일은 Gmail 아이디만 입력하세요.");
+		mergeCell.setCellValue("이메일은 예제와 같이 입력해주세요.");
 		mergeCell.setCellStyle(indentStyle);
 		sheet.addMergedRegion(new CellRangeAddress(8, 8, 0, 11));
 		
@@ -251,7 +251,7 @@ public class ExcelService {
 		exampleCell = exampleRow.createCell(8);
 		exampleCell.setCellValue("010-1234-1234");
 		exampleCell = exampleRow.createCell(9);
-		exampleCell.setCellValue("hong");
+		exampleCell.setCellValue("hong@gmail.com");
 		exampleCell = exampleRow.createCell(10);
 		exampleCell.setCellValue("2020-01-01");
 		exampleCell = exampleRow.createCell(11);
@@ -351,7 +351,7 @@ public class ExcelService {
 		
 		mergeRow = sheet.createRow(1);
 		mergeCell = mergeRow.createCell(0);
-		mergeCell.setCellValue("모든 셀 서식은 텍스트 형식으로 설정하세요.");
+		mergeCell.setCellValue("데이터 입력 전 모든 셀 서식을 반드시 텍스트 형식으로 설정하세요.");
 		mergeCell.setCellStyle(indentStyle);
 		sheet.addMergedRegion(new CellRangeAddress(1, 1, 0, 11));
 		
@@ -361,7 +361,7 @@ public class ExcelService {
 		mergeCell.setCellStyle(indentStyle);
 		sheet.addMergedRegion(new CellRangeAddress(2, 2, 0, 1));
 		mergeCell = mergeRow.createCell(2);
-		mergeCell.setCellValue("[ 2001 : 총무팀 ],  [ 2002 : 인사팀 ], [ 2003 : 영업팀 ]");
+		mergeCell.setCellValue("[ 2001 : 경영지원팀 ], [ 2002 : 영업팀 ], [ 2003 : 마케팅팀 ]");
 		mergeCell.setCellStyle(indentStyle);
 		sheet.addMergedRegion(new CellRangeAddress(2, 2, 2, 11));
 		
@@ -371,7 +371,7 @@ public class ExcelService {
 		mergeCell.setCellStyle(indentStyle);
 		sheet.addMergedRegion(new CellRangeAddress(3, 3, 0, 1));
 		mergeCell = mergeRow.createCell(2);
-		mergeCell.setCellValue("[ 3001 : 대표 ],  [ 3002 : 이사 ], [ 3003 : 부장 ], [ 3004 : 과장 ], [ 3005 : 대리 ], [ 3006 : 사원 ]");
+		mergeCell.setCellValue("[ 3001 : 사원 ], [ 3002 : 대리 ], [ 3003 : 과장 ], [ 3004 : 부장 ], [ 3005 : 이사 ], [ 3006 : 대표 ]");
 		mergeCell.setCellStyle(indentStyle);
 		sheet.addMergedRegion(new CellRangeAddress(3, 3, 2, 11));
 		
@@ -381,7 +381,7 @@ public class ExcelService {
 		mergeCell.setCellStyle(indentStyle);
 		sheet.addMergedRegion(new CellRangeAddress(4, 4, 0, 1));
 		mergeCell = mergeRow.createCell(2);
-		mergeCell.setCellValue("[ 4001 : CEO ],  [ 4002 : 팀장 ], [ 4003 : 파트장 ], [ 4004 : 팀원 ]");
+		mergeCell.setCellValue("[ 4001 : 팀원 ], [ 4002 : 팀장 ], [ 4003 : CEO ]");
 		mergeCell.setCellStyle(indentStyle);
 		sheet.addMergedRegion(new CellRangeAddress(4, 4, 2, 11));
 		
@@ -391,7 +391,7 @@ public class ExcelService {
 		mergeCell.setCellStyle(indentStyle);
 		sheet.addMergedRegion(new CellRangeAddress(5, 5, 0, 1));
 		mergeCell = mergeRow.createCell(2);
-		mergeCell.setCellValue("[ 5001 : 재직 ],  [ 5002 : 휴직 ], [ 5003 : 퇴직 ]");
+		mergeCell.setCellValue("[ 5001 : 재직 ], [ 5002 : 휴직 ], [ 5003 : 퇴직 ]");
 		mergeCell.setCellStyle(indentStyle);
 		sheet.addMergedRegion(new CellRangeAddress(5, 5, 2, 11));
 		
@@ -409,7 +409,7 @@ public class ExcelService {
 		
 		mergeRow = sheet.createRow(8);
 		mergeCell = mergeRow.createCell(0);
-		mergeCell.setCellValue("이메일은 Gmail 아이디만 입력하세요.");
+		mergeCell.setCellValue("이메일은 예제와 같이 입력해주세요.");
 		mergeCell.setCellStyle(indentStyle);
 		sheet.addMergedRegion(new CellRangeAddress(8, 8, 0, 11));
 		
@@ -501,7 +501,7 @@ public class ExcelService {
 		exampleCell = exampleRow.createCell(8);
 		exampleCell.setCellValue("010-1234-1234");
 		exampleCell = exampleRow.createCell(9);
-		exampleCell.setCellValue("hong");
+		exampleCell.setCellValue("hong@gmail.com");
 		exampleCell = exampleRow.createCell(10);
 		exampleCell.setCellValue("2020-01-01");
 		exampleCell = exampleRow.createCell(11);
