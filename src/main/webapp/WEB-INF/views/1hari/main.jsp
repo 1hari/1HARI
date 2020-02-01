@@ -5,7 +5,7 @@
 <script src="https://www.chartjs.org/dist/2.9.3/Chart.min.js"></script>
 <%@ taglib prefix="se" uri="http://www.springframework.org/security/tags" %>
 <script type="text/javascript">
-
+//차트 util
 'use strict';
 window.chartColors = {
 	red: 'rgb(255, 99, 132)',
@@ -21,72 +21,15 @@ var MONTHS = ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9
 var dataset;
 var dataset2;
 var color = Chart.helpers.color;
-/*공통정보*/
-var addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/";
-var servicekey = "serviceKey=ckJdBLYy4BEBjKn2aXypvENewx09cAsw8TX96K6Ck%2BCnpp7C8GNon1%2FIvuVRGU4XX8U4dcQxppyEf1pt52NXZA%3D%3D";
-var AppTest = "&MobileOS=ETC&MobileApp=AppTest";
-var contentTypeId = "&contentTypeId=12";
-var pramContentId = "&contentId=";
-//	var contentid = "${requestScope.contentId}";
-/*Json*/
-var numOfRows = "&numOfRows=10";
-var numOfRows2 = "&numOfRows=1";
-var numOfRows4 = "&numOfRows=4";
-var pageNo = "&pageNo=1";
-var areaCode = "&areaCode=";
-var Sigungu = "&sigunguCode=";
-var type = "&_type=json";
-var type2 = "&_type=json&";
-/*서비스*/
-var pramDetailImage = "detailImage?";
-var pramDetailCommon = "detailCommon?";
-var pramDetailIntro = "detailIntro?";
-var pramLocationBasedList = "locationBasedList?";
-var pramDetailInfo = "detailInfo?";
-/*기타*/
-var etc2 = "&imageYN=Y&subImageYN=Y";
-var pramSubImage = "&cat1=&cat2=&cat3=&listYN=Y";
-var pramImage = "&imageYN=Y";
-var pramSubImage = "&subImageYN=Y";
-var pramOverView = "&overviewYN=Y";
-var pramMapInfo = "&mapinfoYN=Y";
-var pramAddrInfo = "&addrinfoYN=Y";
-var pramCatCode = "&catcodeYN=Y";
-var pramDefault = "&defaultYN=Y";
-var pramFirstImage = "&firstImageYN=Y";
-var pramAreaCode = "&areacodeYN=Y";
-var pramArrrange = "&arrange=";
-var pramMapX = "&mapX=";
-var pramMapY = "&mapY=";
-var pramRadius = "&radius=3000";
-var pramListYN = "&listYN=Y";
-var pramrange = "&radius=3000";
-var loArray = "&arrange=E";
-/*변수*/
-var api = "";
-var api2 = "";
-var api3 = "";
-var api4 = "";
-var api5 = "";
-var api6 = "";
-var x = "";
-var y = "";
-var apilocation = "";
-var apiCommon = "";
-// var api = addr + pramDetailImage + servicekey + numOfRows + pageNo /*이미지조회*/
-// 		+ AppTest + pramContentId + contentid + type2 + etc2;
 
-// var api2 = addr + pramDetailCommon + servicekey + numOfRows + pageNo /*공통조회*/
-// 		+ AppTest + pramContentId + contentid + contentTypeId
-// 		+ pramDefault + pramFirstImage + pramAreaCode + pramCatCode
-// 		+ pramAddrInfo + pramMapInfo + pramOverView + type;
 $(function(){
+
+	//메인 대시보드 근태차트 데이터 가져오기
 	$.ajax({
 		url: "${pageContext.request.contextPath}/ajax/getAllEmpTA.hari",
 		type: "post",
 		dataType: "json",
 		success: function(getAllEmpTA) {
-			//java에서 못넣은 색 추가.. 제일 윗쪽에 chart.js에서 준 컬러값 배열 만들어놨음
 			for(var i =0; i<getAllEmpTA.length; i++){
 				getAllEmpTA[i].backgroundColor=color(colorArray[i]).alpha(0.5).rgbString();
 				getAllEmpTA[i].borderColor=colorArray[i];
@@ -120,9 +63,11 @@ $(function(){
 	})
 		
 
-
+	//메인 대시보드 근태차트 월 변경 했을 경우
 	$('#month').change(function(){
+		//기존에 있던 차트 삭제
 		window.myHorizontalBar.destroy();
+		//월 선택했을 경우
 		if($('#month').val() != 0){
 			$.ajax({
 				url: "${pageContext.request.contextPath}/ajax/getEmpTAMonth.hari",
@@ -144,15 +89,13 @@ $(function(){
 				var horizontalBarChartData = {
 						labels: MONTHS,
 						datasets: getEmpTAMonth
-					};
+				};
 
 				var ctx = document.getElementById('adminCanvas').getContext('2d');
 				window.myHorizontalBar = new Chart(ctx, {
 					type: 'horizontalBar',
 					data: horizontalBarChartData,
 					options: {
-						// Elements options apply to all of the options unless overridden in a dataset
-						// In this case, we are setting the border of each horizontal bar to be 2px wide
 						elements: {
 							rectangle: {
 								borderWidth: 2,
@@ -170,9 +113,9 @@ $(function(){
 							enabled: true,
 						}
 					}
-
 				})
 			})
+			//전체 선택했을 경우
 		}else{
 			$.ajax({
 				url: "${pageContext.request.contextPath}/ajax/getAllEmpTA.hari",
@@ -302,25 +245,21 @@ $(function(){
 		$("#chartSelect").append(years);
 		}
 	}).then((getSalYear) =>{
-
 		$.ajax({
 			url: "${pageContext.request.contextPath}/ajax/getTeamSalList.hari",
 			type: "post",
 			data:{
 						"year":getSalYear[0]
-			},
+					},
 			dataType: "json",
 			success: function(getTeamSalList) {
-
 				var labels=[];
-				//java에서 못넣은 색 추가.. 제일 윗쪽에 chart.js에서 준 컬러값 배열 만들어놨음
 				for(var i =0; i<getTeamSalList.length; i++){
 					getTeamSalList[i].backgroundColor=color(colorArray[i]).alpha(0.5).rgbString();
 					getTeamSalList[i].borderColor=colorArray[i];
 					dataset2=getTeamSalList;
 					labels.push(getTeamSalList[i].label)
 				}
-				
 				var barChartData = {
 					labels: [getSalYear[0]+'년'],
 					datasets: dataset2
@@ -358,7 +297,6 @@ $(function(){
 						},
 				dataType: "json",
 				success: function(getTeamSalList) {
-					//java에서 못넣은 색 추가.. 제일 윗쪽에 chart.js에서 준 컬러값 배열 만들어놨음
 					for(var i =0; i<getTeamSalList.length; i++){
 						getTeamSalList[i].backgroundColor=color(colorArray[i]).alpha(0.5).rgbString();
 						getTeamSalList[i].borderColor=colorArray[i];
@@ -395,10 +333,13 @@ $(function(){
 	})
 
 	//날씨 API
-	var rs = dfs_xy_conv("toXY", 37.525913599999996, 126.83591679999999);
+	//날씨정보를 받고싶은 위도 경도
+	var rs = dfs_xy_conv("toXY", 37.525913599999996, 126.83591679999999); //
 	var date = new Date();
 	var year = date.getFullYear();
 	var month = date.getMonth()+1;
+
+	//API에서 받는 날짜, 시간 형식
 	if(month<10){
 		month = "0" + month;
 	}
@@ -417,7 +358,8 @@ $(function(){
 	if (hour < 10) {
 		hour = "0" + hour;
 	}
-	
+
+	//API에 요청할 주소 가공
 	var xValue = rs.x;
 	var yValue = rs.y;
 	var weatherApi = "http://apis.data.go.kr/1360000/VilageFcstInfoService/getUltraSrtFcst";
@@ -428,28 +370,34 @@ $(function(){
 	var base_time = "&base_time=" + hour + minutes;
 	var nx = "&nx=" + xValue;
 	var ny = "&ny=" + yValue;
-		var dataType = "&dataType=json"
+	var dataType = "&dataType=json"
 	var weatherUrl = weatherApi + weatherServiceKey + base_date + base_time + numOfRows + nx + ny + dataType;
+	//API에서 응답한 데이터 받기
 	$.ajax({
 		url : "${pageContext.request.contextPath}/ajax/getWeather.hari",
 		dataType : 'json',
 		type : "get",
 		data : { "weatherUrl" : weatherUrl },
 		success : function(getWeather) {
+			//받은 데이터로 테이블 생성
 			$('#weatherDate').text(year + "년 " + month + "월 " + day +"일")
 			var weatherTitle='<td style="width: 15%; height: 20%;" rowspan="2" id="weatherImg"></td>' +
-			'<td style="width: 10%;">현재날씨</td>'+
-			'<td style="width: 10%;"> 기 온</td>' +
-			'<td style="width: 10%;"> 습 도 </td>"';
+										'<td style="width: 10%;">현재날씨</td>'+
+										'<td style="width: 10%;"> 기 온</td>' +
+										'<td style="width: 10%;"> 습 도 </td>"';
 			var weatherContent='<td id="currWeather"></td>' +
-			'<td id="t1h"></td>' +
-			'<td id="reh"></td>';
+											'<td id="t1h"></td>' +
+											'<td id="reh"></td>';
 			var weatherAraay=[]
+			//실황만 필요하므로 응답해준 데이터중 현재시간과 가장 근접한 예보만 배열에 담음
+			//첫번째 값 푸쉬
 			weatherAraay.push(getWeather.response.body.items[0])
+			//받은 데이터 돌면서 각 카테고리의 첫번째 값만 푸쉬
             for(var i=1; i<getWeather.response.body.items.length; i++){
+            	//배열의 마지막 값과 지금 넣을 값을 비교 해 값이 다르면(카테고리 값이 다르면) 푸쉬
                 if((getWeather.response.body.items[i-1].category) != (getWeather.response.body.items[i].category)){
                     weatherAraay.push(getWeather.response.body.items[i])
-                    if(i==getWeather.response.body.items.length-1){
+                    if(i==getWeather.response.body.items.length-1){//마지막 요소
                         return;
                     }
                     continue;
@@ -459,8 +407,6 @@ $(function(){
 			//현재날씨
 			if(weatherAraay[1].fcstValue == '0'){ //비 & 눈이 아니면
 				if(weatherAraay[3].fcstValue == '1'){//맑음
-//						weatherTitle+='<td style="width: 10%;">현재날씨</td>';
-//						weatherContent+='<td id="reh">몰라</td>';
 					$("#weatherTitle").append(weatherTitle);
 					$("#weatherContent").append(weatherContent);
 					$("#weatherImg").append('<img src="${pageContext.request.contextPath}/resources/hari/assets/images/weather_sun.png" alt="현재날씨" class="rounded-circle" style="width: 67%; height: 20%;">');
@@ -509,11 +455,6 @@ $(function(){
 	var newsUrl = 'https://newsapi.org/v2/top-headlines?' +
 				'country=kr&' +
 				'apiKey=dd1bdf27c6bb4f229189f5764e1bf04e';
-	//var req = new Request(url);
-	//fetch(req)
-	//.then(function(response) {
-	//   console.log(response.json());
-	//})
 	let news = "";
 	$.ajax({
 		url : newsUrl,
@@ -532,67 +473,60 @@ $(function(){
 		}
 	})
 })
-
-
 </script>
 
+<style>
+	#canvas-holder {
+		width: 100%;
+		margin-top: 50px;
+		text-align: center;
+	}
+	#chartjs-tooltip2 {
+		opacity: 1;
+		position: absolute;
+		background: rgba(0, 0, 0, .7);
+		color: white;
+		border-radius: 3px;
+		-webkit-transition: all .1s ease;
+		transition: all .1s ease;
+		pointer-events: none;
+		-webkit-transform: translate(-50%, 0);
+		transform: translate(-50%, 0);
+	}
 
-
-	<style>
-		#canvas-holder {
-			width: 100%;
-			margin-top: 50px;
-			text-align: center;
-		}
-		#chartjs-tooltip2 {
-			opacity: 1;
-			position: absolute;
-			background: rgba(0, 0, 0, .7);
-			color: white;
-			border-radius: 3px;
-			-webkit-transition: all .1s ease;
-			transition: all .1s ease;
-			pointer-events: none;
-			-webkit-transform: translate(-50%, 0);
-			transform: translate(-50%, 0);
-		}
-
-		.chartjs-tooltip-key {
-			display: inline-block;
-			width: 10px;
-			height: 10px;
-			margin-right: 10px;
-		}
+	.chartjs-tooltip-key {
+		display: inline-block;
+		width: 10px;
+		height: 10px;
+		margin-right: 10px;
+	}
 	canvas {
 		-moz-user-select: none;
 		-webkit-user-select: none;
 		-ms-user-select: none;
 	}
-	
-	
-	    h1.page-title {
-	    	   text-shadow:
-			    0 1px 0 #ffffff,
-			    0 1.5px 0 #d3d5d6,
-			    0 2px 0 #7c98a1,
-			    0 2.5px 0 #4e727e,
-			    2px 3px 4px rgba(0,0,0,0.1),
-			    2px 3px 4px rgba(0,0,0,0.3);
-			    color: white;}
-		}
-	</style>
+
+    h1.page-title {
+    	   text-shadow:
+		    0 1px 0 #ffffff,
+		    0 1.5px 0 #d3d5d6,
+		    0 2px 0 #7c98a1,
+		    0 2.5px 0 #4e727e,
+		    2px 3px 4px rgba(0,0,0,0.1),
+		    2px 3px 4px rgba(0,0,0,0.3);
+		    color: white;}
+	}
+</style>
 <style type="text/css">/* Chart.js */
-@keyframes chartjs-render-animation{from{opacity:.99}to{opacity:1}}.chartjs-render-monitor{animation:chartjs-render-animation 1ms}.chartjs-size-monitor,.chartjs-size-monitor-expand,.chartjs-size-monitor-shrink{position:absolute;direction:ltr;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1}.chartjs-size-monitor-expand>div{position:absolute;width:1000000px;height:1000000px;left:0;top:0}.chartjs-size-monitor-shrink>div{position:absolute;width:200%;height:200%;left:0;top:0}</style></head>
+@keyframes chartjs-render-animation{from{opacity:.99}to{opacity:1}}.chartjs-render-monitor{animation:chartjs-render-animation 1ms}.chartjs-size-monitor,.chartjs-size-monitor-expand,.chartjs-size-monitor-shrink{position:absolute;direction:ltr;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1}.chartjs-size-monitor-expand>div{position:absolute;width:1000000px;height:1000000px;left:0;top:0}.chartjs-size-monitor-shrink>div{position:absolute;width:200%;height:200%;left:0;top:0}</style>
+</head>
 <body>
-	
 <!-- 페이지 내 컨텐츠 제목 란 시작  -->
 <!-- ============================================================== -->
 <div class="page-wrapper">
 	<!-- ============================================================== -->
 	<!-- Bread crumb and right sidebar toggle -->
 	<!-- ============================================================== -->
-
-	
 	<div class="page-breadcrumb">
 		<div class="row">
 			<div class="col-12 d-flex no-block align-items-center">
