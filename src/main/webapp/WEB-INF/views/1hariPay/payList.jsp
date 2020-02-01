@@ -23,7 +23,7 @@
 <!-- Page wrapper  -->
 <!-- ============================================================== -->
 <!-- vue.js 코드 contents (webapp/vue folder 안에서 이루어짐) -->
-<div class="page-wrapper">
+<div class="page-wrapper" style= "height:800px;">
 	<div class="container-fluid">
 		<!-- ============================================================== -->
 		<!-- Start Page Content -->

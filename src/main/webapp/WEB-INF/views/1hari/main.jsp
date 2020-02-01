@@ -377,7 +377,6 @@ $(function(){
 
 	//날씨 API
 	var rs = dfs_xy_conv("toXY", 37.525913599999996, 126.83591679999999);
-	console.log(rs)
 	var date = new Date();
 	var year = date.getFullYear();
 	var month = date.getMonth()+1;
@@ -437,7 +436,6 @@ $(function(){
                     continue;
                 }
             }
-            console.log(weatherAraay)
 			
 			//현재날씨
 			if(weatherAraay[1].fcstValue == '0'){ //비 & 눈이 아니면

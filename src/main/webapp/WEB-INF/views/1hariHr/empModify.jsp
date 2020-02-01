@@ -85,7 +85,7 @@
 		<!-- ============================================================== -->
 		<div class="row">
 			<div class="col-12">
-				<div class="container" style ="border-radius:10px;  box-shadow :3px 3px #999999; border: 2px groove #999999;">
+				<div class="container" style ="width:60%; border-radius:10px;  box-shadow :0 0 12px #999999; border: 10px;">
 					<div class="row setup-content" id="step-1">
 						<div class="col-md-12">
 							<!--form 태그 시작 -->

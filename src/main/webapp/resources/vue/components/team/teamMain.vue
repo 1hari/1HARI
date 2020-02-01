@@ -43,7 +43,7 @@
         </div>
 
         <table class="table table-hover" id="zero_config" >
-          <thead>
+          <thead style = "background-color: #e9ecef;">
             <tr>
               <th class="text-center d-none d-md-table-cell">사번</th>
               <th class="text-center d-none d-md-table-cell">이름</th>
@@ -95,7 +95,14 @@
 <style>
 #zero_config > tbody > tr {
   cursor: pointer;
+
+  
 }
+.table-bordered td,
+.table-bordered th {
+	border: 1px solid #e1f6fa;
+}
+
 </style>
 <script>
 
