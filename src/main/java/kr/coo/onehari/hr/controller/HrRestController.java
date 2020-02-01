@@ -143,36 +143,38 @@ public class HrRestController {
 		return isExist;
 	}
 
-	// 형남 0112 출근하기
+	// 형남 0112 사원 출근 기능, DB에 출근시간 업데이트 및 출근여부 리턴
 	@RequestMapping(value = "startWork.hari", method = RequestMethod.POST)
 	public boolean startWork(Principal pri) {
 		int result = 0;
-		// 요청시간 String
+		
+		// 지각 구분시간
 		String tardyDateStr = "110000";
-		// 현재시간 Date
 		Date curDate = new Date();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("HHmmss");
-		// 요청시간을 Date로 parsing 후 time가져오기
-
+		
 		try {
+			
 			Date tardyDate = dateFormat.parse(tardyDateStr);
 			long tardyDateTime = tardyDate.getTime();
-			// 현재시간을 요청시간의 형태로 format 후 time 가져오기
 			curDate = dateFormat.parse(dateFormat.format(curDate));
 			long curDateTime = curDate.getTime();
-			// 현재시간이 지각시간보다 크면(지각)
+			
+			//현재시간과 지각구분시간 비교
 			if (curDateTime > tardyDateTime) {
+				//지각
 				result = empSercive.insertStartWorkTardyTA(pri.getName());
 			} else {
+				//정상출근
 				result = empSercive.insertStartWorkTA(pri.getName());
 			}
 		} catch (Exception e) {
-			log.debug("empNumEmail 예외발생: " + e.getMessage());
+			log.debug("startWork 예외발생: " + e.getMessage());
 		}
 		return result > 0 ? true : false;
 	}
 
-	// 형남 0112 퇴근하기
+	// 형남 0112 사원 퇴근 기능, DB에 퇴근시간 업데이트 및 퇴근여부 리턴
 	@RequestMapping(value = "endWork.hari", method = RequestMethod.POST)
 	public boolean endWork(Principal pri) {
 		int result = 0;
@@ -184,7 +186,7 @@ public class HrRestController {
 		return result > 0 ? true : false;
 	}
 
-	// 형남 0112 퇴근조회
+	// 형남 0112 오늘 날짜에 퇴근기록이 있는지 체크, 헤더에 출퇴근 버튼 띄어주는데 사용
 	@RequestMapping(value = "todayEndWorkCheck.hari", method = RequestMethod.POST)
 	public boolean todayEndWorkCheck(Principal pri) {
 		int result = 0;
@@ -196,7 +198,7 @@ public class HrRestController {
 		return result > 0 ? true : false;
 	}
 
-	// 형남 0112 결근조회
+	// 형남 0112 오늘 날짜에 결근기록이 있는지 체크, 있으면 출 퇴근 버튼 숨김
 	@RequestMapping(value = "todayAbsentCheck.hari", method = RequestMethod.POST)
 	public boolean todayAbsentCheck(Principal pri) {
 		int result = 0;
@@ -208,7 +210,7 @@ public class HrRestController {
 		return result > 0 ? true : false;
 	}
 
-	// 형남 0112 출근조회
+	// 형남 0112 오늘 날짜에 출근기록이 있는지 체크, 헤더에 출퇴근 버튼 띄어주는데 사용
 	@RequestMapping(value = "todayStartWorkCheck.hari", method = RequestMethod.POST)
 	public boolean todayStartWorkCheck(Principal pri) {
 		int result = 0;
@@ -220,7 +222,7 @@ public class HrRestController {
 		return result > 0 ? true : false;
 	}
 
-	// 형남 0113 총 근무일조회
+	// 형남 0113 사원의 현재까지 총 근무일, 근태현황 총 근무일 출력
 	@RequestMapping(value = "getTotalTA.hari", method = RequestMethod.POST)
 	public int getTotalTA(Principal pri) {
 		int result = 0;
@@ -232,7 +234,7 @@ public class HrRestController {
 		return result;
 	}
 
-	// 형남 0113 현재까지 근무시간
+	// 형남 0113 사원의 오늘 퇴근 전 현재까지 근무시간(현재시간 - 출근시각)
 	@RequestMapping(value = "getWorkTime.hari", method = RequestMethod.POST)
 	public String getWorkTime(Principal pri) {
 		String totalTime = null;
@@ -247,7 +249,7 @@ public class HrRestController {
 		return totalTime;
 	}
 
-	// 형남 0113 퇴근시간 가져오기
+	// 형남 0113 사원의 오늘 퇴근 후 근무시간(퇴근시각 - 출근시각)
 	@RequestMapping(value = "getTodayTotalTime.hari", method = RequestMethod.POST)
 	public String getTodayTotalTime(Principal pri) {
 		String totalTime = null;
@@ -262,7 +264,7 @@ public class HrRestController {
 		return totalTime;
 	}
 
-	// 형남 0113 이번주 현재까지 총 근무시간
+	// 형남 0113 이번주 현재까지 총 근무시간(이번주 + (현재시간 - 출근시각)) => 퇴근 전
 	@RequestMapping(value = "getWeekTotalTime.hari", method = RequestMethod.POST)
 	public String getWeekTotalTime(Principal pri) {
 		String totalTime = null;
@@ -277,22 +279,7 @@ public class HrRestController {
 		return totalTime;
 	}
 
-	// 형남 0113 현재까지 총 근무시간
-	@RequestMapping(value = "getTotalTime.hari", method = RequestMethod.POST)
-	public String getTotalTime(Principal pri) {
-		String totalTime = null;
-		try {
-			totalTime = empSercive.getTotalTime(pri.getName());
-			if (totalTime == null) {
-				totalTime = "empty";
-			}
-		} catch (Exception e) {
-			log.debug("getTotalTime 예외발생: " + e.getMessage());
-		}
-		return totalTime;
-	}
-
-	// 형남 0115 이번주 총 근무시간
+	// 형남 0115 이번주 총 근무시간 => 퇴근 후
 	@RequestMapping(value = "getWeekWorkTime.hari", method = RequestMethod.POST)
 	public String getWeekWorkTime(Principal pri) {
 		String totalTime = null;
@@ -307,7 +294,22 @@ public class HrRestController {
 		return totalTime;
 	}
 
-	// 형남 0115 총 근무시간
+	// 형남 0113 현재까지 총 근무시간(어제까지 총 근무시간 + (현재시간 - 출근시각)) => 퇴근 전
+	@RequestMapping(value = "getTotalTime.hari", method = RequestMethod.POST)
+	public String getTotalTime(Principal pri) {
+		String totalTime = null;
+		try {
+			totalTime = empSercive.getTotalTime(pri.getName());
+			if (totalTime == null) {
+				totalTime = "empty";
+			}
+		} catch (Exception e) {
+			log.debug("getTotalTime 예외발생: " + e.getMessage());
+		}
+		return totalTime;
+	}
+
+	// 형남 0115 총 근무시간(오늘까지 총 근무시간) => 퇴근 후
 	@RequestMapping(value = "getTotalWorkTime.hari", method = RequestMethod.POST)
 	public String getTotalWorkTime(Principal pri) {
 		String totalTime = null;
@@ -322,7 +324,7 @@ public class HrRestController {
 		return totalTime;
 	}
 
-	// 형남 0114 dataDate 형식으로 가져오기
+	// 형남 0114 오늘 날짜 풀캘린더에 들어가 있는 기본 날짜값 포맷 형식으로 받아오기 => yyyy-mm-dd
 	@RequestMapping(value = "getDataDate.hari", method = RequestMethod.POST)
 	public String getDataDate(Principal pri) {
 		String dataDate = null;
@@ -337,7 +339,7 @@ public class HrRestController {
 		return dataDate;
 	}
 
-	// 형남 0114 이번달 출근기록 yyyy-mm-dd
+	// 형남 0114 이번달 출근일 풀캘린더에 들어가 있는 기본 날짜값 포맷 형식으로 받아오기 => yyyy-mm-dd
 	@RequestMapping(value = "getStartList.hari", method = RequestMethod.POST)
 	public String getStartList(Principal pri) {
 		List<String> startList = null;
@@ -354,7 +356,7 @@ public class HrRestController {
 		return jsonObject.toJSONString();
 	}
 
-	// 형남 0114 이번달 퇴근, 결근 기록 yyyy-mm-dd
+	// 형남 0114 이번달 퇴근일, 결근일, 연차사용일 풀캘린더에 들어가 있는 기본 날짜값 포맷 형식으로 받아오기 => yyyy-mm-dd
 	@RequestMapping(value = "getEndList.hari", method = RequestMethod.POST)
 	public String getEndList(Principal pri) {
 		JSONObject jsonObject = new JSONObject();
@@ -415,7 +417,7 @@ public class HrRestController {
 		return "redirect:empList.hari";
 	}
 
-	// 형남 0121 출근, 지각, 결근 연차, 조퇴 횟수 가져오기(사원 대시보드 차트)
+	//형남 0121 출근, 지각, 결근 연차, 조퇴 횟수 가져오기(사원 대시보드 근태차트, chart.js dataset)
 	@RequestMapping(value = "getTA.hari", method = RequestMethod.POST)
 	public String getTA(Principal pri) {
 		List<Integer> TAList = new ArrayList<Integer>();
@@ -438,7 +440,7 @@ public class HrRestController {
 		return jsonObject.toJSONString();
 	}
 
-	// 형남 0122 팀 별 근무시간 가져오기(전월)
+	//형남 0122 팀 별 근무시간 가져오기(전월, 사원 대시보드 근태차트, chart.js dataset)
 	@RequestMapping(value = "getAllEmpTA.hari", method = RequestMethod.POST)
 	public String getAllEmpTA() {
 		JSONArray root = new JSONArray();
@@ -665,4 +667,5 @@ public class HrRestController {
 		}
 		return result;
 	}
+
 }
