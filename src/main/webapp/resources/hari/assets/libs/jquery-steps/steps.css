@@ -92,8 +92,8 @@ File: css
 .wizard-content .wizard>.steps>ul>li.disabled a,
 .wizard-content .wizard>.steps>ul>li.disabled a:focus,
 .wizard-content .wizard>.steps>ul>li.disabled a:hover {
-    color: #999;
-    cursor: default
+    color: #000000;
+    cursor: default;
 }
 
 .wizard-content .wizard>.steps>ul>li.done a,

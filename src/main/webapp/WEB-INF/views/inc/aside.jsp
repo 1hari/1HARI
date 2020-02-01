@@ -105,9 +105,7 @@
 	    span.hide-menu:hover, span.hide-menu:active{
 	    	font-size: 150%;  	
 	    }  
-	    .sidebar-nav:hover {
-	    	color: black;
-	    }
+	   
 	    a.sidebar-link.hover, a.sidebar-link:active {
 	    	font-size: 150%; 
 	    }
