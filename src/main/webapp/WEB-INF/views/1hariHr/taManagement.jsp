@@ -212,15 +212,16 @@
 				let dateCheck = moment(startWorkAdd, "YYYY-MM-DD").format("YYYY-MM-DD"); // startWorkAdd 날짜가 startWork 날짜와 같은지 다음날인지 체크
 				let startWorkNight = moment(startWork, "YYYY-MM-DD").format("YYYY-MM-DD") + " 23:59:59";
 				let startWorkDiff = moment(startWork);
-				let leaveWorkDiff = moment(startWorkNight);
-				let timeDiff = leaveWorkDiff.diff(startWorkDiff, "seconds");
+				let leaveWorkDiff = "";
 				
-				if (dateCheck != moment(startWork, "YYYY-MM-DD").format("YYYY-MM-DD")) {
+				if (dateCheck != moment(startWork, "YYYY-MM-DD").format("YYYY-MM-DD")) { // 퇴근날짜가 다음 날짜로 넘어갔을 때
 					leaveWork = startWorkNight;
-					todayWork = timeDiff;
-				} else {
+					leaveWorkDiff = moment(startWorkNight);
+					todayWork = leaveWorkDiff.diff(startWorkDiff, "seconds");
+				} else { // 퇴근날짜가 다음 날짜로 넘어가지 않았을 때
 					leaveWork = moment(startWork, "YYYY-MM-DD HH:mm:ss").add(9, "hours").format("YYYY-MM-DD HH:mm:ss"); // 퇴근시간(출근시간 + 9시간)
-					todayWork = timeDiff;
+					leaveWorkDiff = moment(leaveWork);
+					todayWork = leaveWorkDiff.diff(startWorkDiff, "seconds");
 				}
 				
 				$.ajax({
