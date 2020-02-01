@@ -42,7 +42,7 @@
           </div>
         </div>
 
-        <table class="table table-hover" id="zero_config" >
+        <table class="table table-hover table-bordered" id="zero_config" >
           <thead style = "background-color: #e9ecef;">
             <tr>
               <th class="text-center d-none d-md-table-cell" >사번</th>
@@ -92,94 +92,93 @@
     </div>
   </div>
 </template>
+
 <style>
-#zero_config > tbody > tr {
-  cursor: pointer;
-
-  
-}
-.table-bordered td,
-.table-bordered th {
-	border: 1px solid #e1f6fa;
-}
-
+	#zero_config > tbody > tr {
+	  cursor: pointer;
+	}
+	
+	.table-bordered td,
+	.table-bordered th {
+		border: 1px solid #dee2e6;
+	}
 </style>
+
 <script>
-
-module.exports = {
-  //템플릿 태그에서 여기에 있는 정보나 함수를 이용할 수 있음
-  data: function() {
-    return {
-      //여기안에 있는 멤버들을 템플릿 안에서 사용할 수 있음
-      server_data: {},
-      searchCheck : [],
-      searchKey : ''
-    };
-  },
-  methods: {
-    getEmpList: function() {
-      var params = new URLSearchParams(); //URL에 붙어오는 parameter를 구분할 수 있다.
-      //console.log(this.$route.params.pg == undefined );
-
-      if(this.$route.params.pg == undefined){
-        params.append("pg", this.$store.state.pg)
-      }else {
-        params.append("pg", this.$route.params.pg)
-      }
-      
-      if(this.$route.params.cp == undefined){
-        params.append("cp", this.$store.state.cp)
-      }else {
-        params.append("cp", this.$route.params.cp)
-      }
-      
-      params.append("searchCheck", this.searchCheck)
-      params.append("searchKey", this.searchKey)
-      
-      //console.log(contextPath);
-      axios.post(contextPath+"/ajax/getEmpList.hari",params).then((response)=>{
-        //console.log(response.data)
-        this.server_data=response.data
-      })
-    }
-  },
-  created() {
-    //alert(this.$route.params.board_idx) //주소를 관리하는 객체 route, 주소가 바뀌면 route객체도 변경됨, route객체의 변경을 감지해줘야함
-    this.getEmpList();
-  },
-  computed : {
-  	watchTarget : function(){
-  		return [this.searchKey, this.searchCheck]
-  	}
-  },
-  watch: {
-    $route(to, from) {
-      this.getEmpList();
-    },
-    watchTarget : function(){
-    	console.log(this.searchKey);
-    	console.log(this.searchCheck);
-    	
-    	var params = new URLSearchParams();
-    	 if(this.$route.params.pg == undefined){
-        params.append("pg", this.$store.state.pg)
-      }else {
-        params.append("pg", this.$route.params.pg)
-      }
-      
-      if(this.$route.params.cp == undefined){
-        params.append("cp", this.$store.state.cp)
-      }else {
-        params.append("cp", this.$route.params.cp)
-      }
-      params.append("searchCheck", this.searchCheck)
-      params.append("searchKey", this.searchKey)
-      
-    	axios.post(contextPath+"/ajax/getEmpList.hari",params).then((response)=>{
-        //console.log(response.data)
-        this.server_data=response.data
-      })
-    }
-  }
-};
+	module.exports = {
+	  //템플릿 태그에서 여기에 있는 정보나 함수를 이용할 수 있음
+	  data: function() {
+	    return {
+	      //여기안에 있는 멤버들을 템플릿 안에서 사용할 수 있음
+	      server_data: {},
+	      searchCheck : [],
+	      searchKey : ''
+	    };
+	  },
+	  methods: {
+	    getEmpList: function() {
+	      var params = new URLSearchParams(); //URL에 붙어오는 parameter를 구분할 수 있다.
+	      //console.log(this.$route.params.pg == undefined );
+	
+	      if(this.$route.params.pg == undefined){
+	        params.append("pg", this.$store.state.pg)
+	      }else {
+	        params.append("pg", this.$route.params.pg)
+	      }
+	      
+	      if(this.$route.params.cp == undefined){
+	        params.append("cp", this.$store.state.cp)
+	      }else {
+	        params.append("cp", this.$route.params.cp)
+	      }
+	      
+	      params.append("searchCheck", this.searchCheck)
+	      params.append("searchKey", this.searchKey)
+	      
+	      //console.log(contextPath);
+	      axios.post(contextPath+"/ajax/getEmpList.hari",params).then((response)=>{
+	        //console.log(response.data)
+	        this.server_data=response.data
+	      })
+	    }
+	  },
+	  created() {
+	    //alert(this.$route.params.board_idx) //주소를 관리하는 객체 route, 주소가 바뀌면 route객체도 변경됨, route객체의 변경을 감지해줘야함
+	    this.getEmpList();
+	  },
+	  computed : {
+	  	watchTarget : function(){
+	  		return [this.searchKey, this.searchCheck]
+	  	}
+	  },
+	  watch: {
+	    $route(to, from) {
+	      this.getEmpList();
+	    },
+	    watchTarget : function(){
+	    	console.log(this.searchKey);
+	    	console.log(this.searchCheck);
+	    	
+	    	var params = new URLSearchParams();
+	    	 if(this.$route.params.pg == undefined){
+	        params.append("pg", this.$store.state.pg)
+	      }else {
+	        params.append("pg", this.$route.params.pg)
+	      }
+	      
+	      if(this.$route.params.cp == undefined){
+	        params.append("cp", this.$store.state.cp)
+	      }else {
+	        params.append("cp", this.$route.params.cp)
+	      }
+	      params.append("searchCheck", this.searchCheck)
+	      params.append("searchKey", this.searchKey)
+	      
+	    	axios.post(contextPath+"/ajax/getEmpList.hari",params).then((response)=>{
+	        //console.log(response.data)
+	        this.server_data=response.data
+	      })
+	    }
+	  }
+	};
 </script>
