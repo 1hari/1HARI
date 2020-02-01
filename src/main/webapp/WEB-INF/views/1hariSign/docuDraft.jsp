@@ -120,8 +120,8 @@
 								
 								<input type="text" class="form-control" id="signTitle" name="signTitle" placeholder="제목" <c:forEach var="docu" items="${requestScope.signDocu}">
 										value="${docu.signTitle}"
-									</c:forEach> style="width:95%; display: inline; color:black;">
-								<button type="button" id="draftSubmit"  class="buttonselect" style="display: inline-block; ">기안</button>
+									</c:forEach> style="width:88%; display: inline; color:black;">
+								<button type="button" id="draftSubmit"  class="buttonselect" style="display: inline-block; width:70px;">기안</button>
 								
 								</div>
 							</div>
@@ -488,7 +488,7 @@
 									<th>
 										<div class="custom-control custom-radio">
                                             <input type="radio" class="custom-control-input empChoice" id="customControlValidation2" name="radio-stacked" required>
-                                            <label class="custom-control-label" for="customControlValidation2"></label>
+                                            <label class="custom-control-label" for="customControlValidation2" style ="background-color:#807266;"></label>
                                         </div>
 									</th>
 									<!-- 부서 -->
@@ -510,7 +510,7 @@
 			</div><!-- modal-body 끝 -->
                        
 			<div class="modal-footer">
-				<button type="button" id="buttonselect" class="btn btn-primary" data-dismiss="modal">선택완료</button>
+				<button type="button" id="buttonselect" class="btn btn-primary" data-dismiss="modal" style = "border-radius:10px;">선택완료</button>
 				
 			</div><!-- modal-footer 끝 -->
 		</div><!-- modal-content 끝 -->

@@ -573,8 +573,8 @@ function themeChange(formData){
 							<i class="fas fa-calendar-check font-29" style="padding-top: 18px;"></i>
 						</a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown" >
-							<button class="dropdown-item" id="startWork" disabled="disabled" >출근하기</button>
-							<button class="dropdown-item" id="endWork" disabled="disabled" >퇴근하기</button>
+							<button class="dropdown-item" id="startWork" disabled="disabled" ><i class="m-r-10 mdi mdi-treasure-chest"></i>&nbsp;출근하기</button>
+							<button class="dropdown-item" id="endWork" disabled="disabled" ><i class="m-r-10 mdi mdi-wallet-travel"></i>&nbsp;퇴근하기</button>
 							<button class="dropdown-item" id="test" >test</button>
 						</div>
 					</li>
@@ -628,7 +628,7 @@ function themeChange(formData){
 			<form action="/"  enctype="multipart/form-data" method="post">			
 				<div class="modal-header">
 					<h5 class="modal-title" id="exampleModalLabel">개인설정</h5>
-					<button type="button" class="modelClose" aria-label="Close">
+					<button type="button" class="modelClose" aria-label="Close" style ="border:0">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div><!-- modal-header 끝 -->
