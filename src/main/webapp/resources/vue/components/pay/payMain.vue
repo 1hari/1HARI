@@ -2,7 +2,7 @@
   <!-- pay 급여조회 -->
 
   <div class="container" style="margin-top:5%;">
-    <div class="card" style=" height: 800px;  border-radius:10px;  box-shadow :0 0 12px #999999; border: 10px">
+    <div class="card" style="border-radius:10px;  box-shadow :0 0 12px #999999; border: 10px">
       <div class="card-body" >
         <h4 class="card-title">급여</h4>
         <div style = "margin-left:85%;">
@@ -15,7 +15,7 @@
         
         <table class="table table-hover" id="payList" >
           <thead>
-            <tr>
+            <tr style = "background-color: #e9ecef ">
               <th class="text-center d-none d-md-table-cell">지급일</th>
               <th class="text-center d-none d-md-table-cell">기본급</th>
               <th class="text-center d-none d-md-table-cell">국민연금</th>
@@ -42,7 +42,7 @@
               <td class="text-center d-none d-md-table-cell">{{pay.payLIncomeTax}}</td>
               <td class="text-center d-none d-md-table-cell">{{totalDeduction}}</td><!--실급여로 데이터 받으세요 -->
               <td class="text-center d-none d-md-table-cell">{{realAmount}}</td><!--실급여로 데이터 받으세요 -->
-              <td class="text-center d-none d-md-table-cell"><button class ="btn-success" style = "background-color: white; color:black; border-radius:0 0 12px #807266; font-weight:bold; height:70%;" @click="payRead(splitPayMonth[index][0],splitPayMonth[index][1])">급여명세</button></td>
+              <td class="text-center d-none d-md-table-cell"><button class ="btn-success" style = "background-color: white; color:black; border-radius:2px #807266;font-weight:bold; height:70%;" @click="payRead(splitPayMonth[index][0],splitPayMonth[index][1])">급여명세</button></td>
             </tr>
           </tbody>
           
