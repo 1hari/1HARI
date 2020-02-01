@@ -155,12 +155,11 @@
 		<!-- Sidebar 네비게이션-->
 		<nav class="sidebar-nav" >
 			<ul id="sidebarnav" class="p-t-30" style="background: white;">
-				<!--인사관리-->
-
+				<!-- 근태관리 -->
 				<li class="sidebar-item" >
 					<a class="sidebar-link has-arrow waves-effect waves-dark" href="hr_attendance.html" aria-expanded="false" id="theme" class="sidebar-link" style="background: white;">
 						<i class="m-r-10 mdi mdi-account-card-details"></i>
-						<span class="hide-menu">인사 관리</span>
+						<span class="hide-menu">근태 관리</span>
 					</a>
 
 					<ul aria-expanded="false" class="collapse first-level" id="theme" style="background: white;">
@@ -187,10 +186,22 @@
 							</a>
 						</li>
 						
+					</ul>
+				</li>
+				<!--근태관리 끝 -->
+				
+				<!--인사관리-->
+				<li class="sidebar-item" >
+					<a class="sidebar-link has-arrow waves-effect waves-dark" href="hr_attendance.html" aria-expanded="false" id="theme" class="sidebar-link" style="background: white;">
+						<i class="m-r-10 mdi mdi-account-card-details"></i>
+						<span class="hide-menu">인사 관리</span>
+					</a>
+
+					<ul aria-expanded="false" class="collapse first-level" id="theme" style="background: white;">
 						<li class="sidebar-item">
 							<a class="sidebar-link" id="employPopUp">
 								<i class="m-r-10 mdi mdi-console"></i>
-								<span class="hide-menu"> 재직 증명 </span>
+								<span class="hide-menu">재직 증명</span>
 							</a>
 						</li>
 					<se:authorize access="hasAnyRole('ROLE_PERSONNEL', 'ROLE_ADMIN')">
@@ -205,7 +216,7 @@
 						<li class="sidebar-item">
 							<a href="${pageContext.request.contextPath}/1hariHr/personnel/empList.hari" class="sidebar-link">
 								<i class="mdi mdi-multiplication-box"></i>
-								<span class="hide-menu"> 입사 & 퇴사관리 </span>
+								<span class="hide-menu">입퇴사관리</span>
 							</a>
 						</li>
 					</se:authorize>
@@ -216,7 +227,7 @@
 				<li class="sidebar-item">
 					<a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
 						<i class="m-r-10 mdi mdi-cash-usd"></i>
-						<span class="hide-menu">급여 관리 </span>
+						<span class="hide-menu">급여 관리</span>
 					</a>
 					<ul aria-expanded="false" class="collapse  first-level" id="theme" style="background: #white;">
 						<li class="sidebar-item">
@@ -231,7 +242,7 @@
 				<li class="sidebar-item" id="theme" style="background: white;">
 					<a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false" id="theme" class="sidebar-link" style="background: white;">
 						<i class="m-r-10 mdi mdi-cellphone-link"></i>
-						<span class="hide-menu">전자 결재 </span>
+						<span class="hide-menu">전자 결재</span>
 					</a>
 					
 					<ul aria-expanded="false" class="collapse  first-level"  id="theme" style="background: white;">
