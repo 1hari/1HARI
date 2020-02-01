@@ -225,41 +225,60 @@ $(function(){
 		type: "post",
 		dataType: "json",
 		success: function(getTA) {
-			var config = {
-				type: 'pie',
-				data: {
-					datasets: [{
-						data: getTA.TAList,
-						backgroundColor: [
-							window.chartColors.red,
-							window.chartColors.orange,
-							window.chartColors.yellow,
-							window.chartColors.green,
-							window.chartColors.blue,
-						],
-					}],
-					labels: [
-						'출근',
-						'지각',
-						'결근',
-						'연차',
-						'조퇴'
-					]
-				},
-				options: {
-					responsive: true,
-					legend: {
-						display: true,
-						position: 'bottom'
+			
+			//console.log(getTA.TAList[0]==0);
+			//당월 근태 데이터가 있는지 확인
+			var count = 0;
+			$.each(getTA.TAList, function(index,data){
+				//console.log(data==0);
+				if(data == 0){
+					count++;
+				}
+				
+			});
+			//console.log(count);
+			
+			//당월 근태 데이터가 있으면 chart
+			if(count != 5) {
+				var config = {
+					type: 'pie',
+					data: {
+						datasets: [{
+							data: getTA.TAList,
+							backgroundColor: [
+								window.chartColors.red,
+								window.chartColors.orange,
+								window.chartColors.yellow,
+								window.chartColors.green,
+								window.chartColors.blue,
+							],
+						}],
+						labels: [
+							'출근',
+							'지각',
+							'결근',
+							'연차',
+							'조퇴'
+						]
 					},
-					tooltips: {
-						enabled: true,
-						mode: 'index'
+					options: {
+						responsive: true,
+						legend: {
+							display: true,
+							position: 'bottom'
+						},
+						tooltips: {
+							enabled: true,
+							mode: 'index'
+						}
 					}
 				}
+				var ctx = document.getElementById('chart-area').getContext('2d');
+				window.myPie = new Chart(ctx, config);
+			}else {
+				$('#chartTaList').empty();
+				$('#chartTaList').append('<h4 class="card-title m-b-0">당월 근태 통계</h4><h4 class="card-title m-b-0">데이터가 없습니다.</h4>');
 			}
-			var ctx = document.getElementById('chart-area').getContext('2d');
-			window.myPie = new Chart(ctx, config);
 		}
 	});
 	
@@ -584,33 +603,6 @@ $(function(){
 	</div>
 	<!-- 페이지 내 컨텐츠 제목 란 끝  -->
 	
-<!-- <div class="form-group"> -->
-<!-- <label for="position-top-right">Top right</label> -->
-<!-- <div class="minicolors minicolors-theme-bootstrap minicolors-position-top minicolors-position-right minicolors-focus"> -->
-<!-- <input type="text" id="position-top-right" class="form-control demo minicolors-input" data-position="top right" value="#0088cc" size="7"> -->
-<!-- <span class="minicolors-swatch minicolors-sprite minicolors-input-swatch"> -->
-<!-- <span class="minicolors-swatch-color" style="opacity: 1;"></span> -->
-<!-- </span> -->
-<!-- <div class="minicolors-panel minicolors-slider-hue" style="display: block;"> -->
-<!-- <div class="minicolors-slider minicolors-sprite"> -->
-<!-- <div class="minicolors-picker" style="top: 0px;"> -->
-<!-- </div></div><div class="minicolors-opacity-slider minicolors-sprite"> -->
-<!-- <div class="minicolors-picker"> -->
-<!-- </div> -->
-<!-- </div> -->
-<!-- <div class="minicolors-grid minicolors-sprite" style="background-color: rgb(255, 0, 0);"> -->
-<!-- <div class="minicolors-grid-inner"> -->
-<!-- </div> -->
-<!-- <div class="minicolors-picker" style="top: 150px; left: 0px;"> -->
-<!-- <div> -->
-<!-- </div> -->
-<!-- </div> -->
-<!-- </div> -->
-<!-- </div> -->
-<!-- </div> -->
-<!-- </div> -->
-
-	
 	<!-- 페이지내 컨텐츠 컨테이너 시작  -->
 	<!-- ============================================================== -->
 	<div class="container-fluid">
@@ -624,7 +616,7 @@ $(function(){
 					<div class="card" style ="height:350px; box-shadow :0 0 12px #999999; border-radius:10px; margin-left:10%;">
 						<div class="card-body" style="padding-bottom: 0">
 							<span class="card-title m-b-0" style="margin-bottom:0; font-size: 18px;" >근무시간 통계</span>
-							<select class="select2 form-control custom-select select2-hidden-accessible" id="month" style="width: 13%; height:10%; margin-left: 65%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+							<select class="select2 form-control custom-select select2-hidden-accessible" id="month" style="width: 20%; height:30px; margin-left: 65%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
 								<option value="0">전체</option>
 								<option value="1">1월</option>
 								<option value="2">2월</option>
@@ -648,7 +640,7 @@ $(function(){
 				</se:authorize>
 				<!--당월 근태 통계 -->
 				<div class="card" style ="height:470px; box-shadow :0 0 12px #999999; border-radius:10px; margin-left:10%; ">
-					<div class="card-body">
+					<div class="card-body" id="chartTaList">
 						<h4 class="card-title m-b-0">당월 근태 통계</h4>
 						<div id="canvas-holder" style="width: 66%; margin-left: -16%;">
 							<div class="chartjs-size-monitor">
@@ -696,7 +688,7 @@ $(function(){
 					<div class="card" style ="height:350px; box-shadow :0 0 12px #999999; border-radius:10px; margin-right:10%;">
 						<div class="card-body" style="padding-bottom: 0">
 							<span class="card-title m-b-0" style="margin-bottom:0; font-size: 18px;" >연봉 통계</span>
-							<select id="chartSelect" class="select2 form-control custom-select select2-hidden-accessible" id="month" style="width: 13%; height:10%; margin-left: 67%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+							<select id="chartSelect" class="select2 form-control custom-select select2-hidden-accessible" id="month" style="width: 20%; height:30px; margin-left: 70%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
 							</select>
 						</div>
 						<div id="container" style="width: 100%; height: 100%; margin-bottom: 1%;">
