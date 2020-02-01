@@ -32,7 +32,7 @@
 		<security:access-denied-handler error-page="/accessDenied.hari"/>
 		<!-- 중복로그인 방지 -->
 		<security:session-management invalid-session-url="/index.hari">
-			 <security:concurrency-control max-sessions="1" expired-url="/index.hari" error-if-maximum-exceeded="true"/>
+			 <security:concurrency-control max-sessions="1" expired-url="/index.hari" />
 		</security:session-management> 
 	</security:http>
 	
