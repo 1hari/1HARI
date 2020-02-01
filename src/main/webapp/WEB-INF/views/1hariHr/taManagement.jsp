@@ -103,7 +103,8 @@
 		let leaveWork = ""; // 퇴근시간 처리를 위한 변수
 		let today = moment().format("YYYY-MM-DD"); // 오늘 날짜
 		let curMonth = moment().format("YYYY-MM"); // 현재 월
-		let curDay = moment().date(); // 현재 일
+		let curDate = moment().date(); // 현재 일
+		let curDay = moment().format("dddd");
 		let setDate = ""; // 첫 페이지 진입 후 조건식을 위한 변수
 		
 		getTaList(today); // 페이지 로딩 후 오늘의 근태목록 가져오기
@@ -139,39 +140,49 @@
 				success: function(TaList) {
 					let empTaList = "";
 					let count = 0;
-					
-					for (var i = 0; i < TaList.length; i++) {
-						if (count == 0) {
-							empTaList += '<tr>'
-											+ '<td>' + TaList[i].empNum + '</td>' // 사번
-											+ '<td>' + TaList[i].empName + ' ' + TaList[i].rankName +'</td>' // 이름, 직급
-											+ '<td>' + TaList[i].teamName + '</td>'; // 부서
-							if (TaList[i].taDate != null && TaList[i].taDate != '0000-00-00 00:00:00') { // 출근시간 기록이 있고 연차(0000)가 아닌 경우
-								empTaList += '<td>' + TaList[i].taName + ' (' + TaList[i].taDate + ')</td>'; // 출근, 출근시간
-							} else if (TaList[i].taDate == null && TaList[i].taDate != '0000-00-00 00:00:00') { // 출근시간 기록이 없고 연차(0000)가 아닌 경우
-								empTaList += '<td>' + TaList[i].taName + ' (출근시간 기록없음)</td>'; // 출근, 출근시간
-							} else if (TaList[i].taDate == '0000-00-00 00:00:00') { // 연차인 경우
-// 								empTaList += ''; // 연차인 경우 출근을 화면에 출력하지 않고 뒤에 연차 td와 합치기 위해 공백으로 처리
-								empTaList += '<td>연차</td>'; // 출근, 출근시간
-							}
-							count++;
-						} else {
-							if (TaList[i].empNum == TaList[i-1].empNum && TaList[i].taCode == 5) { // 퇴근이 아닌 결근처리가 되어있을 경우
-								empTaList += '<td>' + TaList[i].taName + ' (' + TaList[i].taDate + ')</td>' // 결근, 결근처리시간
-											+ '<td><button type="button" class="editEmpTa btn btn-success"><i class="fa fa-edit"></i> 퇴근처리</button></td>' // 결근일 경우 퇴근처리 버튼 생성
-										+ '</tr>';
-								count = 0;
-							} else { // 결근이 아닌 경우
-								if (TaList[i].taDate != null && TaList[i].taDate != '0000-00-00 00:00:00') { // 퇴근시간 기록이 있고 연차(0000)가 아닌 경우
-									empTaList += '<td>' + TaList[i].taName + ' (' + TaList[i].taDate + ')</td>'; // 퇴근, 퇴근시간
-								} else if (TaList[i].taDate == null && TaList[i].taDate != '0000-00-00 00:00:00') { // 퇴근시간 기록이 없고 연차(0000)가 아닌 경우
-									empTaList += '<td>' + TaList[i].taName + ' (퇴근시간 기록없음)</td>'; // 퇴근시간 기록이 없는 경우
+					if (TaList == "") { // 출퇴근 기록이 없는 주말 체크
+						empTaList += '<tr>'
+									+ '<td colspan="6">오늘은 ' + today + '&nbsp;&nbsp;' + curDay + ' 입니다. 출퇴근 기록이 존재하지 않습니다.</td>'
+									+ '<td style="display: none;"></td>'
+									+ '<td style="display: none;"></td>'
+									+ '<td style="display: none;"></td>'
+									+ '<td style="display: none;"></td>'
+									+ '<td style="display: none;"></td>'
+								+ '</tr>';
+					} else { // 출퇴근 기록이 있는 경우
+						for (var i = 0; i < TaList.length; i++) {
+							if (count == 0) {
+								empTaList += '<tr>'
+												+ '<td>' + TaList[i].empNum + '</td>' // 사번
+												+ '<td>' + TaList[i].empName + ' ' + TaList[i].rankName +'</td>' // 이름, 직급
+												+ '<td>' + TaList[i].teamName + '</td>'; // 부서
+								if (TaList[i].taDate != null && TaList[i].taDate != '0000-00-00 00:00:00') { // 출근시간 기록이 있고 연차(0000)가 아닌 경우
+									empTaList += '<td>' + TaList[i].taName + ' (' + TaList[i].taDate + ')</td>'; // 출근, 출근시간
+								} else if (TaList[i].taDate == null && TaList[i].taDate != '0000-00-00 00:00:00') { // 출근시간 기록이 없고 연차(0000)가 아닌 경우
+									empTaList += '<td>' + TaList[i].taName + ' (출근시간 기록없음)</td>'; // 출근, 출근시간
 								} else if (TaList[i].taDate == '0000-00-00 00:00:00') { // 연차인 경우
-									empTaList += '<td>' + TaList[i].taName + '</td>'; // 연차인 경우 출퇴근시간 td를 합쳐서
+	// 								empTaList += ''; // 연차인 경우 출근을 화면에 출력하지 않고 뒤에 연차 td와 합치기 위해 공백으로 처리
+									empTaList += '<td>연차</td>'; // 출근, 출근시간
 								}
-									empTaList += '<td></td>' // 결근이 아닐 경우 퇴근처리 버튼을 만들지 않음
+								count++;
+							} else {
+								if (TaList[i].empNum == TaList[i-1].empNum && TaList[i].taCode == 5) { // 퇴근이 아닌 결근처리가 되어있을 경우
+									empTaList += '<td>' + TaList[i].taName + ' (' + TaList[i].taDate + ')</td>' // 결근, 결근처리시간
+												+ '<td><button type="button" class="editEmpTa btn btn-success"><i class="fa fa-edit"></i> 퇴근처리</button></td>' // 결근일 경우 퇴근처리 버튼 생성
 											+ '</tr>';
-								count = 0;
+									count = 0;
+								} else { // 결근이 아닌 경우
+									if (TaList[i].taDate != null && TaList[i].taDate != '0000-00-00 00:00:00') { // 퇴근시간 기록이 있고 연차(0000)가 아닌 경우
+										empTaList += '<td>' + TaList[i].taName + ' (' + TaList[i].taDate + ')</td>'; // 퇴근, 퇴근시간
+									} else if (TaList[i].taDate == null && TaList[i].taDate != '0000-00-00 00:00:00') { // 퇴근시간 기록이 없고 연차(0000)가 아닌 경우
+										empTaList += '<td>' + TaList[i].taName + ' (퇴근시간 기록없음)</td>'; // 퇴근시간 기록이 없는 경우
+									} else if (TaList[i].taDate == '0000-00-00 00:00:00') { // 연차인 경우
+										empTaList += '<td>' + TaList[i].taName + '</td>'; // 연차인 경우 출퇴근시간 td를 합쳐서
+									}
+										empTaList += '<td></td>' // 결근이 아닐 경우 퇴근처리 버튼을 만들지 않음
+												+ '</tr>';
+									count = 0;
+								}
 							}
 						}
 					}
@@ -209,6 +220,7 @@
 					type: "post",
 					dataType: "json",
 					success: function() {
+						$('#zero_config').DataTable().destroy(); // DataTables 초기화(해당 부분을 empty() 하기 전)
 						$('#taBody').empty(); // 비동기 처리가 완료되면 해당 tbody를 비워주고
 						getTaList(setDate); // 근태목록을 다시 가져온다
 					},
@@ -232,7 +244,7 @@
 						days += '<span class="click"> ' + (i + 1) + ' </span>'; // 1일은 0이기 때문에 +1
 					} else { // 이번 달과 선택된 달이 같을 때
                         console.log('!= curMonth');
-						if (curDay != (i + 1)) { // 오늘 일자와 선택된 일자가 같지 않을 때
+						if (curDate != (i + 1)) { // 오늘 일자와 선택된 일자가 같지 않을 때
 							days += '<span class="click"> ' + (i + 1) + ' </span>'; // 1일은 0이기 때문에 +1
 						} else { // 오늘 일자와 선택된 일자가 같을 때
 							days += '<span class="click" style="color: red;"> ' + (i + 1) + ' </span>'; // 1일은 0이기 때문에 +1
