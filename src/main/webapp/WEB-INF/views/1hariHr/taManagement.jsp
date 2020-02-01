@@ -42,10 +42,10 @@
 								<table id="zero_config" class="table table-striped table-bordered">
 									<thead>
 										<tr>
-											<th style = "background-color:white;">
+											<th style = "background-color: white;">
 												<select id="selectMonth"></select>
 											</th>
-											<th style = "background-color:white;" id="days" colspan="5">
+											<th style = "background-color: white;" id="days" colspan="5">
 											</th>
 										</tr>
 										<tr>
@@ -101,6 +101,7 @@
 	$(function() {
 		let startWork = ""; // 출근시간 처리를 위한 변수
 		let leaveWork = ""; // 퇴근시간 처리를 위한 변수
+		let todayWork = ""; // 근무시간 처리를 위한 변수
 		let today = moment().format("YYYY-MM-DD"); // 오늘 날짜
 		let curMonth = moment().format("YYYY-MM"); // 현재 월
 		let curDate = moment().date(); // 현재 일
@@ -207,7 +208,20 @@
 				// let leaveWorkTime = tr.children().eq(4).html(); // 해당 사원의 결근기록시간 받기
 				
 				startWork = moment(startWorkTime, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD HH:mm:ss"); // 출근시간
-				leaveWork = moment(startWork, "YYYY-MM-DD HH:mm:ss").add(9, "hours").format("YYYY-MM-DD HH:mm:ss"); // 퇴근시간(출근시간 + 9시간)
+				let startWorkAdd = moment(startWork, "YYYY-MM-DD HH:mm:ss").add(9, "hours").format("YYYY-MM-DD HH:mm:ss"); // 퇴근시간(출근시간 + 9시간)
+				let dateCheck = moment(startWorkAdd, "YYYY-MM-DD").format("YYYY-MM-DD"); // startWorkAdd 날짜가 startWork 날짜와 같은지 다음날인지 체크
+				let startWorkNight = moment(startWork, "YYYY-MM-DD").format("YYYY-MM-DD") + " 23:59:59";
+				let startWorkDiff = moment(startWork);
+				let leaveWorkDiff = moment(startWorkNight);
+				let timeDiff = leaveWorkDiff.diff(startWorkDiff, "seconds");
+				
+				if (dateCheck != moment(startWork, "YYYY-MM-DD").format("YYYY-MM-DD")) {
+					leaveWork = startWorkNight;
+					todayWork = timeDiff;
+				} else {
+					leaveWork = moment(startWork, "YYYY-MM-DD HH:mm:ss").add(9, "hours").format("YYYY-MM-DD HH:mm:ss"); // 퇴근시간(출근시간 + 9시간)
+					todayWork = timeDiff;
+				}
 				
 				$.ajax({
 					url: "${pageContext.request.contextPath}/ajax/setEmpTa.hari",
@@ -215,7 +229,8 @@
 						{
 							"empNum" : empNum, // 사번
 							 "taDate" : leaveWork, // 결근을 퇴근으로 처리하기 위한 시간
-							 "setDate" : setDate // 해당 출퇴근 기록일
+							 "setDate" : setDate, // 해당 출퇴근 기록일
+							 "todayWork" : todayWork
 						},
 					type: "post",
 					dataType: "json",

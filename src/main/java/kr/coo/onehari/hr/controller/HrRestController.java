@@ -651,12 +651,13 @@ public class HrRestController {
 	@RequestMapping(value = "setEmpTa.hari", method = RequestMethod.POST)
 	public int setEmpTa(EmpDto empdto, String setDate) {
 		HashMap<String, String> map = new HashMap<String, String>();
+		int result = 0;
 		
 		map.put("taDate", empdto.getTaDate());
 		map.put("empNum", Integer.toString(empdto.getEmpNum()));
+		map.put("todayWork", empdto.getTodayWork());
 		map.put("setDate", setDate);
 		
-		int result = 0;
 		try {
 			result = empSercive.setEmpTa(map);
 		} catch (Exception e) {
