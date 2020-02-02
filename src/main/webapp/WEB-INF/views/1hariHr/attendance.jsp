@@ -198,7 +198,7 @@ $(function(){
 				}else if(isStart == true && isEnd==false && isAbsent==false){
 					$('#startWork').attr('disabled', 'disabled');
 					$('#endWork').removeAttr('disabled');	
-				} else if((isStart == true && is4End==true && isAbsent==false) || (isStart == true && isEnd==true && isAbsent==true) || (isStart == false && isEnd==false && isAbsent==true) || (isStart == true && isEnd==true && isAbsent==true) || (isStart == true && isEnd==false && isAbsent==true)) {
+				} else if((isStart == true && isEnd==true && isAbsent==false) || (isStart == true && isEnd==true && isAbsent==true) || (isStart == false && isEnd==false && isAbsent==true) || (isStart == true && isEnd==true && isAbsent==true) || (isStart == true && isEnd==false && isAbsent==true)) {
 					$('#endWork').attr('disabled', 'disabled');
 					$('#startWork').attr('disabled', 'disabled');
 				} else if(isStart == false && isEnd==true) {
