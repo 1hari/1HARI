@@ -20,6 +20,7 @@ import org.springframework.ui.velocity.VelocityEngineFactoryBean;
 import org.springframework.ui.velocity.VelocityEngineUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import kr.coo.onehari.hr.dto.EmpDto;
@@ -269,6 +270,25 @@ public class TARestController {
 		try {
 			startList = taService.getStartList(pri.getName());
 			tardyList = taService.getTardyList(pri.getName());
+			jsonObject.put("startList", startList);
+			jsonObject.put("tardyList", tardyList);
+		} catch (Exception e) {
+			log.debug("getStartList 예외발생: " + e.getMessage());
+		}
+		return jsonObject.toJSONString();
+	}
+	
+	// 형남 0202 풀캘린더 월 이동 시 해당 연, 월의 출근일 가져오기
+	@RequestMapping(value = "getStartList.hari", method = RequestMethod.POST, params = {"calYear", "calMonth"})
+	public String getStartList(Principal pri, @RequestParam("calYear")String calYear, @RequestParam("calMonth")String calMonth) {
+		System.out.println(calYear);
+		System.out.println(calMonth);
+		List<String> startList = null;
+		List<String> tardyList = null;
+		JSONObject jsonObject = new JSONObject();
+		try {
+			startList = taService.getStartList(pri.getName(), calYear, calMonth);
+			tardyList = taService.getTardyList(pri.getName(), calYear, calMonth);
 			jsonObject.put("startList", startList);
 			jsonObject.put("tardyList", tardyList);
 		} catch (Exception e) {

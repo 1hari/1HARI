@@ -64,8 +64,14 @@ public interface TADao {
     //이번달 출근기록 yyyy-mm-dd 오형남 / 2020. 1. 14
     public List<String> getStartList(int empNum) throws ClassNotFoundException, SQLException;
     
-    //이번달 출근기록 yyyy-mm-dd 오형남 / 2020. 1. 14
+    //이번달 출근기록 yyyy-mm-dd  캘린더 월 변경시 오형남 / 2020. 2. 22
+    public List<String> getStartListCal(int empNum, String calYear, String calMonth) throws ClassNotFoundException, SQLException;
+    
+    //이번달 지각기록 yyyy-mm-dd 오형남 / 2020. 1. 14
     public List<String> getTardyList(int empNum) throws ClassNotFoundException, SQLException;
+    
+    //이번달 지각기록 yyyy-mm-dd  캘린더 월 변경시 오형남 / 2020. 2. 22
+    public List<String>getTardyListCal(int empNum, String calYear, String calMonth) throws ClassNotFoundException, SQLException;
     
     //이번달 퇴근기록 yyyy-mm-dd 오형남 / 2020. 1. 14
     public List<String> getEndList(int empNum) throws ClassNotFoundException, SQLException;

@@ -88,11 +88,20 @@
 		SELECT DATE_FORMAT(TADATE,"%Y-%m-%d") FROM TALIST WHERE MONTH(TADATE) = MONTH(NOW()) AND TACODE=1 AND EMPNUM=#{empNum}
     </select>
     
-    <!-- 이번달 출근기록 yyyy-mm-dd-->
+    <!-- 이번달 출근기록 yyyy-mm-dd 캘린더 월 변경 시-->
+	<select id="getStartListCal" resultType="String">
+		SELECT DATE_FORMAT(TADATE,"%Y-%m-%d") FROM TALIST WHERE MONTH(TADATE) = #{param3} AND TACODE=1 AND EMPNUM=#{param1} AND YEAR(TADATE) = #{param2}
+    </select>
+    
+    <!-- 이번달 지각기록 yyyy-mm-dd-->
 	<select id="getTardyList" resultType="String">
 		SELECT DATE_FORMAT(TADATE,"%Y-%m-%d") FROM TALIST WHERE MONTH(TADATE) = MONTH(NOW()) AND TACODE=3 AND EMPNUM=#{empNum}
     </select>
-    
+        
+    <!-- 이번달 지각기록 yyyy-mm-dd 캘린더 월 변경 시-->
+	<select id="getTardyListCal" resultType="String">
+		SELECT DATE_FORMAT(TADATE,"%Y-%m-%d") FROM TALIST WHERE MONTH(TADATE) = #{param3} AND TACODE=3 AND EMPNUM=#{param1} AND YEAR(TADATE) = #{param2}
+    </select>
     <!-- 이번달 퇴근기록 yyyy-mm-dd-->
 	<select id="getEndList" resultType="String">
 		SELECT DATE_FORMAT(TADATE,"%Y-%m-%d") FROM TALIST WHERE MONTH(TADATE) = MONTH(NOW()) AND TACODE=2 AND EMPNUM=#{empNum}

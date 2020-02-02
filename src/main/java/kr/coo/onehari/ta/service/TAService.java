@@ -231,13 +231,41 @@ public class TAService {
     	return totalTime;
     }
     
-    //형남 0114 이번달 출근기록 yyyy-mm-dd
+    //형남 0202 이번달 출근기록 yyyy-mm-dd
+    public List<String> getStartList(String empNumStr, String calYear, String calMonth) {
+    	TADao dao = sqlsession.getMapper(TADao.class);
+    	List<String> totalTime = null;
+    	int empNum=Integer.parseInt(empNumStr);
+    	try {
+    		totalTime=dao.getStartListCal(empNum,calYear,calMonth);
+    		System.out.println("출근: " + totalTime.toString());
+    	} catch (ClassNotFoundException | SQLException e) {
+    		log.debug("getStartList : " + e.getMessage());
+    	}
+    	return totalTime;
+    }
+    
+    //형남 0114 이번달 지각기록 yyyy-mm-dd
     public List<String> getTardyList(String empNumStr) {
     	TADao dao = sqlsession.getMapper(TADao.class);
     	List<String> totalTime = null;
     	int empNum=Integer.parseInt(empNumStr);
     	try {
     		totalTime=dao.getTardyList(empNum);
+    	} catch (ClassNotFoundException | SQLException e) {
+    		log.debug("getTardyList : " + e.getMessage());
+    	}
+    	return totalTime;
+    }
+    
+    //형남 0202 이번달 지각기록 yyyy-mm-dd
+    public List<String> getTardyList(String empNumStr, String calYear, String calMonth) {
+    	TADao dao = sqlsession.getMapper(TADao.class);
+    	List<String> totalTime = null;
+    	int empNum=Integer.parseInt(empNumStr);
+    	try {
+    		totalTime=dao.getTardyListCal(empNum,calYear,calMonth);
+    		System.out.println("지각: " + totalTime.toString());
     	} catch (ClassNotFoundException | SQLException e) {
     		log.debug("getTardyList : " + e.getMessage());
     	}
