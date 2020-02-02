@@ -62,7 +62,7 @@
 			} else {
 				//이메일 형식이 맞으면 사번과 이메일이 일치하는 계정이 있는지 확인
 				$.ajax({
-					url: "${pageContext.request.contextPath}/empNumEmail.hari",
+					url: "${pageContext.request.contextPath}/ajax/empNumEmail.hari",
 					type: "post",
 					data:
 						{

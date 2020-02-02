@@ -17,28 +17,25 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 @RequestMapping("/1hariMy")
-public class MyController {	
+public class MyController {
 	/*
-	작성자: 김수연
-	시작: 2020. 1. 7. 19:44
-	완료: 
-	내용: MyController
-	*/
-	
+	 * 작성자: 김수연 시작: 2020. 1. 7. 19:44 완료: 내용: MyController
+	 */
+
 	@Autowired
 	private MyService myService;
-	
+
 	@Autowired
 	private EmpService empService;
-	
+
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder; // 비밀번호 암호화
-	
+
 	// 개인정보 프로필 수정(화면) 김진호 2020. 1. 21
 	@RequestMapping(value = "myInfo.hari", method = RequestMethod.GET)
 	public String myInfo(Model model, Principal principal) {
 		EmpDto emp = null;
-		
+
 		try {
 			emp = empService.empModify(Integer.parseInt(principal.getName()));
 			model.addAttribute("emp", emp);
@@ -47,7 +44,7 @@ public class MyController {
 		}
 		return "1hariMy.myInfo";
 	}
-	
+
 	// 개인정보 프로필 수정(변경) 김진호 2020. 1. 21
 	@RequestMapping(value = "myInfo.hari", method = RequestMethod.POST)
 	public String myInfo(EmpDto empdto, Principal principal) {
@@ -59,7 +56,7 @@ public class MyController {
 			EmpDto updateEmp = empService.empModify(Integer.parseInt(principal.getName()));
 			empdto.setPassword(updateEmp.getPassword());
 		}
-		
+
 		try {
 			myService.updateEmpMyInfo(empdto);
 		} catch (Exception e) {

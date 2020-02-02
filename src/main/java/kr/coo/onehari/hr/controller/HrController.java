@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import kr.coo.onehari.hr.dto.AnnUse;
 import kr.coo.onehari.hr.dto.EmpAnn;
 import kr.coo.onehari.hr.dto.EmpDto;
-import kr.coo.onehari.hr.service.CorpService;
 import kr.coo.onehari.hr.service.EmpService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -26,16 +25,11 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequestMapping("1hariHr/")
 public class HrController {
-	
+
 	@Autowired
 	private EmpService empService;
-	
-	@Autowired
-	private CorpService corpService;
-	
 
-	
-	//연차관리 화면
+	// 연차관리 화면
 	@RequestMapping("annual.hari")
 	public String annual(Principal principal, Model model) {
 		String loginUser = principal.getName();
@@ -44,15 +38,15 @@ public class HrController {
 		System.out.println(annUseList);
 		model.addAttribute("empAnn", empAnn);
 		model.addAttribute("annUseList", annUseList);
-		
+
 		return "1hariHr.annual";
 	}
-	
-	//사원목록 김진호 2020. 1. 7
+
+	// 사원목록 김진호 2020. 1. 7
 	@RequestMapping(value = "personnel/empList.hari", method = RequestMethod.GET)
 	public String empList(Model model) {
 		List<EmpDto> emplist = null;
-		
+
 		try {
 			emplist = empService.empList();
 			model.addAttribute("emplist", emplist);
@@ -61,25 +55,25 @@ public class HrController {
 		}
 		return "1hariHr.empList";
 	}
-	
+
 	// 사원등록 김진호 시작 2020. 1. 7 <> 완성 2020. 1. 10
 	@RequestMapping(value = "personnel/empJoin.hari", method = RequestMethod.GET)
 	public String empJoin() {
 		return "1hariHr.empJoin";
 	}
-	
+
 	// 사원등록 김진호 시작 2020. 1. 7 <> 완성 2020. 1. 10
 	@RequestMapping(value = "personnel/empJoin.hari", method = RequestMethod.POST)
 	public String empJoin(EmpDto empdto, Model model) {
 		String view = "";
-		int result =0;
-		
+		int result = 0;
+
 		try {
 			result = empService.empJoin(empdto);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		if (result > 0) {
 			view = "redirect:empList.hari";
 			model.addAttribute("empdto", empdto);
@@ -109,10 +103,10 @@ public class HrController {
 		SecurityContext context = SecurityContextHolder.getContext();
 		// 인증권한 객체를 선언
 		Authentication authentication = context.getAuthentication();
-		
+
 		Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
-		Iterator<? extends GrantedAuthority> iter = authorities.iterator(); 
-		
+		Iterator<? extends GrantedAuthority> iter = authorities.iterator();
+
 		while (iter.hasNext()) {
 			GrantedAuthority auth = iter.next();
 			if (auth.getAuthority().equals("ROLE_ADMIN")) {
@@ -123,7 +117,7 @@ public class HrController {
 				break;
 			}
 		}
-		
+
 		try {
 			empService.empUpdate(emp, isAdmin);
 		} catch (Exception e) {
@@ -133,26 +127,25 @@ public class HrController {
 		/* return "redirect:empList.hari"; */
 		/* return "redirect:personnel/empList.hari"; */
 	}
-	
-	//User - 사원리스트 김정하 / 2020. 1. 12
+
+	// User - 사원리스트 김정하 / 2020. 1. 12
 	@RequestMapping("teamList.hari")
 	public String teamList() {
 		return "1hariHr.teamList";
 	}
 
-	
-	//재직증명서 출력 김정하 / 2020. 2. 1 
+	// 재직증명서 출력 김정하 / 2020. 2. 1
 	@RequestMapping("employ.hari")
 	public String employPopUp(Principal principal, Model model) {
-		//증명서 발급할 사원정보
+		// 증명서 발급할 사원정보
 		EmpDto emp = empService.empModify(Integer.parseInt(principal.getName()));
 		model.addAttribute("emp", emp);
-		
-		//대표자 정보
-		EmpDto ceo=empService.getCEO();
+
+		// 대표자 정보
+		EmpDto ceo = empService.getCEO();
 		model.addAttribute("ceo", ceo);
-		
+
 		return "1hariPopUp.employPopUp";
 	}
-	
+
 }

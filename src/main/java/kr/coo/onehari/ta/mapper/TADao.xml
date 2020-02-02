@@ -116,25 +116,42 @@
 	<select id="getAnntList" resultType="String">
 		SELECT SCHEDULEDATE FROM TALIST WHERE TACODE=4 AND EMPNUM=#{empNum}
     </select>
-
+    
+    <!-- 이번달 퇴근기록 캘린더 월 변경 시 yyyy-mm-dd-->
+	<select id="getEndListCal" resultType="String">
+		SELECT DATE_FORMAT(TADATE,"%Y-%m-%d") FROM TALIST WHERE MONTH(TADATE) = #{param3} AND TACODE=2 AND EMPNUM=#{param1} AND YEAR(TADATE) = #{param2}
+    </select>
+    
+    <!-- 이번달 결근기록 캘린더 월 변경 시 yyyy-mm-dd-->
+	<select id="getAbsentListCal" resultType="String">
+		SELECT DATE_FORMAT(TADATE,"%Y-%m-%d") FROM TALIST WHERE MONTH(TADATE) = #{param3} AND TACODE=5 AND EMPNUM=#{param1} AND YEAR(TADATE) = #{param2}
+    </select>
+    
+    <!-- 이번달 연차기록 캘린더 월 변경 시 yyyy-mm-dd-->
+	<select id="getAnntListCal" resultType="String">
+		SELECT SCHEDULEDATE FROM TALIST WHERE TACODE=4 AND EMPNUM=#{param1} AND YEAR(SCHEDULEDATE) = #{param2} AND MONTH(SCHEDULEDATE) = #{param3}
+    </select>
 	
-	    <!-- 사원 색 가져오기 출근, 지각, 결근 연차, 조퇴-->
+    <!-- 사원 색 가져오기 출근, 지각, 결근 연차, 조퇴-->
     <select id="getWork" resultType="Integer">
        SELECT COUNT(TADATE) FROM TALIST WHERE TACODE=1 AND MONTH(TADATE) = MONTH(NOW()) AND EMPNUM=#{empNum}
     </select>
+    
     <select id="getTardy" resultType="Integer">
        SELECT COUNT(TADATE) FROM TALIST WHERE TACODE=3 AND MONTH(TADATE) = MONTH(NOW()) AND EMPNUM=#{empNum}
     </select>
+    
     <select id="getAbsent" resultType="Integer">
        SELECT COUNT(TADATE) FROM TALIST WHERE TACODE=5 AND MONTH(TADATE) = MONTH(NOW()) AND EMPNUM=#{empNum}
     </select>
+    
     <select id="getAnnual" resultType="Integer">
        SELECT COUNT(TADATE) FROM TALIST WHERE TACODE=4 AND MONTH(TADATE) = MONTH(NOW()) AND EMPNUM=#{empNum}
     </select>
+    
     <select id="getEarly" resultType="Integer">
        SELECT COUNT(TADATE) FROM TALIST WHERE TACODE=5 AND MONTH(TADATE) = MONTH(NOW()) AND EMPNUM=#{empNum}
     </select>
-    
     
 	<!-- 팀 리스트 가져오기-->
 	<select id="getTeamCodeList" resultType="Integer">
@@ -145,8 +162,6 @@
 	<select id="getTeamNameList" resultType="String">
 		SELECT TEAMNAME FROM TEAM
     </select>
-    
-
 
     <!-- 형남 0122 팀 별 근무시간(월)-->
     <select id="getTeamMonthWorkTime" resultType="String">
@@ -158,7 +173,6 @@
             ON T.TEAMCODE = E.TEAMCODE
             WHERE T.TEAMCODE = #{param1} AND MONTH(TADATE) = #{param2}
     </select>
-    
 
     	<!-- 대시보드 부서별 연봉통계 연도 셀렉트박스-->
     <select id="getSalYear" resultType="String">

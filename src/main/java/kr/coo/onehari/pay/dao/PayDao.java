@@ -1,11 +1,8 @@
 package kr.coo.onehari.pay.dao;
 
-import java.security.Principal;
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.List;
 
-import kr.coo.onehari.hr.dto.EmpDto;
 import kr.coo.onehari.hr.dto.PayDto;
 
 /*

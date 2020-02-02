@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="kr.coo.onehari.home.dao.HomeDao">
+
+	<!--형남 0117 이메일, 사원번호 일치 여부 확인 -->
+	<select id="empNumEmail" resultType="Integer">
+		 <![CDATA[
+			SELECT empnum FROM subemp WHERE empnum=#{param1} AND email=#{param2}
+		]]>
+	</select>
+</mapper>

@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -19,18 +18,18 @@ import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
 
-import kr.coo.onehari.hr.dto.EmpDto;
 import kr.coo.onehari.login.service.LoginService;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
 @Getter
 @Setter
 @ToString
 public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler
 		implements AuthenticationSuccessHandler {
-	
-	@Autowired	
+
+	@Autowired
 	private LoginService login;
 
 	public void setLogin(LoginService login) {
@@ -56,18 +55,15 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
 		}
 
 	}
-	
-	
+
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
-	    String username = request.getParameter(loginidname);
-	    login.loginCntInit(username);
+		String username = request.getParameter(loginidname);
+		login.loginCntInit(username);
 		clearAuthenticationAttributes(request);
 		resultRedirectStrategy(request, response, authentication);
-		SimpleDateFormat format = new SimpleDateFormat("yyyy:MM:dd");
-		
 
 	}
-	
+
 }

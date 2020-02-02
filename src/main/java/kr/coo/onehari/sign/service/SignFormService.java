@@ -23,8 +23,8 @@ import lombok.extern.slf4j.Slf4j;
 public class SignFormService {
 	@Autowired
 	private SqlSession sqlsession;
-	
-	//폼 등록하기 김정하 / 2020. 1. 8
+
+	// 폼 등록하기 김정하 / 2020. 1. 8
 	public int insertForm(SignFormDto form) {
 		int result = 0;
 		SignFormDao dao = sqlsession.getMapper(SignFormDao.class);
@@ -35,20 +35,20 @@ public class SignFormService {
 		}
 		return result;
 	}
-	
-    //폼 리스트 가져오기 김정하 / 2020. 1. 8~
-    public List<SignFormDto> selectAllForm(){
-        List<SignFormDto> list = null;
-        SignFormDao dao = sqlsession.getMapper(SignFormDao.class);
-        try {
-            list = dao.selectAllForm();
-        } catch (ClassNotFoundException | SQLException e) {
-            log.debug("selectAllForm : " + e.getMessage());
-        }
-        return list;
-    }
-	
-	//폼 가져오기 김정하 / 2020. 1. 8
+
+	// 폼 리스트 가져오기 김정하 / 2020. 1. 8~
+	public List<SignFormDto> selectAllForm() {
+		List<SignFormDto> list = null;
+		SignFormDao dao = sqlsession.getMapper(SignFormDao.class);
+		try {
+			list = dao.selectAllForm();
+		} catch (ClassNotFoundException | SQLException e) {
+			log.debug("selectAllForm : " + e.getMessage());
+		}
+		return list;
+	}
+
+	// 폼 가져오기 김정하 / 2020. 1. 8
 	public SignFormDto selectForm(String signFormCode) {
 		SignFormDto form = null;
 		SignFormDao dao = sqlsession.getMapper(SignFormDao.class);
@@ -59,8 +59,8 @@ public class SignFormService {
 		}
 		return form;
 	}
-	
-	//폼 삭제하기 김정하 / 2020. 1. 10
+
+	// 폼 삭제하기 김정하 / 2020. 1. 10
 	public int deleteForm(String signFormCode) {
 		SignFormDao dao = sqlsession.getMapper(SignFormDao.class);
 		int result = 0;
@@ -71,5 +71,5 @@ public class SignFormService {
 		}
 		return result;
 	}
-	
+
 }

@@ -15,13 +15,6 @@
 		]]>
 	</update>
 	
-	<!--형남 0117 이메일, 사원번호 일치갑 여부 확인 -->
-	<select id="empNumEmail" resultType="Integer">
-		 <![CDATA[
-			SELECT empnum FROM subemp WHERE empnum=#{param1} AND email=#{param2}
-		]]>
-	</select>
-	
 	<!-- 사원정보수정 변경 김진호 2020. 1. 10 -->
   	<update id="updateEmpMyInfo" parameterType="kr.coo.onehari.hr.dto.EmpDto">
 		UPDATE EMP

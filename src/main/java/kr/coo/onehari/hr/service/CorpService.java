@@ -15,18 +15,17 @@ import kr.coo.onehari.hr.dto.Role;
 import kr.coo.onehari.hr.dto.Team;
 import lombok.extern.slf4j.Slf4j;
 
-
 @Service
 @Slf4j
 public class CorpService {
-	
+
 	@Autowired
 	private SqlSession sqlsession;
-	
+
 	// 소속목록 가져오기 김진호 200108
 	public List<Team> getTeamCodes() {
 		List<Team> getTeamCodes = null;
-		
+
 		try {
 			CorpDao corpdao = sqlsession.getMapper(CorpDao.class);
 			getTeamCodes = corpdao.getTeamCodes();
@@ -35,11 +34,11 @@ public class CorpService {
 		}
 		return getTeamCodes;
 	}
-	
+
 	// 직책목록 가져오기 김진호 200108
 	public List<Position> getPositionCodes() {
 		List<Position> getPositionCodes = null;
-		
+
 		try {
 			CorpDao corpdao = sqlsession.getMapper(CorpDao.class);
 			getPositionCodes = corpdao.getPositionCodes();
@@ -48,11 +47,11 @@ public class CorpService {
 		}
 		return getPositionCodes;
 	}
-	
+
 	// 직급목록 가져오기 김진호 200108
 	public List<Rank> getRankCodes() {
 		List<Rank> getRankCodes = null;
-		
+
 		try {
 			CorpDao corpdao = sqlsession.getMapper(CorpDao.class);
 			getRankCodes = corpdao.getRankCodes();
@@ -61,11 +60,11 @@ public class CorpService {
 		}
 		return getRankCodes;
 	}
-	
+
 	// 재직구분목록 가져오기 김진호 200108
 	public List<Employment> getEmploymentCodes() {
 		List<Employment> getEmploymentCodes = null;
-		
+
 		try {
 			CorpDao corpdao = sqlsession.getMapper(CorpDao.class);
 			getEmploymentCodes = corpdao.getEmploymentCodes();
@@ -74,11 +73,11 @@ public class CorpService {
 		}
 		return getEmploymentCodes;
 	}
-	
+
 	// 권한목록 가져오기 김진호 2020. 1. 12
 	public List<Role> getRoles() {
 		List<Role> getRoles = null;
-		
+
 		try {
 			CorpDao corpdao = sqlsession.getMapper(CorpDao.class);
 			getRoles = corpdao.getRoles();
@@ -87,11 +86,11 @@ public class CorpService {
 		}
 		return getRoles;
 	}
-	
+
 	// 입력된 마지막 사번 가져오기 김진호 2020. 1. 23
 	public int getLastEmpNum() {
 		int empNum = 0;
-		
+
 		try {
 			CorpDao corpdao = sqlsession.getMapper(CorpDao.class);
 			empNum = corpdao.getLastEmpNum() + 1;

@@ -18,19 +18,19 @@ public interface CorpDao {
 
 	// 소속목록 김진호 2020. 1. 8
 	public List<Team> getTeamCodes() throws ClassNotFoundException, SQLException;
-	
+
 	// 직책목록 김진호 2020. 1. 8
 	public List<Position> getPositionCodes() throws ClassNotFoundException, SQLException;
-	
+
 	// 직급목록 김진호 2020. 1. 8
 	public List<Rank> getRankCodes() throws ClassNotFoundException, SQLException;
-	
+
 	// 재직구분 김진호 2020. 1. 8
 	public List<Employment> getEmploymentCodes() throws ClassNotFoundException, SQLException;
-	
+
 	// 권한 김진호 2020. 1. 12
 	public List<Role> getRoles() throws ClassNotFoundException, SQLException;
-	
+
 	// 마지막 사번 가져오기 김진호 2020. 1. 23
 	public int getLastEmpNum() throws ClassNotFoundException, SQLException;
 }

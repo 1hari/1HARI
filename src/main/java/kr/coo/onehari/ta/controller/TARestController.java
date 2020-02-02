@@ -4,34 +4,16 @@ import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import javax.mail.internet.MimeMessage;
-import javax.servlet.http.HttpServletRequest;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.ui.velocity.VelocityEngineFactoryBean;
-import org.springframework.ui.velocity.VelocityEngineUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import kr.coo.onehari.hr.dto.EmpDto;
-import kr.coo.onehari.hr.dto.Employment;
-import kr.coo.onehari.hr.dto.Position;
-import kr.coo.onehari.hr.dto.Rank;
-import kr.coo.onehari.hr.dto.Role;
-import kr.coo.onehari.hr.dto.Team;
-import kr.coo.onehari.hr.service.CorpService;
-import kr.coo.onehari.hr.service.EmpService;
-import kr.coo.onehari.my.service.MyService;
 import kr.coo.onehari.ta.service.TAService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -43,30 +25,6 @@ public class TARestController {
 	@Autowired
 	private TAService taService;
 
-	@Autowired
-	private MyService myService;
-
-	@Autowired
-	private EmpService empSercive;
-
-	@Autowired
-	private JavaMailSender javaMailSender;
-
-	@Autowired
-	private VelocityEngineFactoryBean velocityEngineFactoryBean;
-
-	// 형남 0110 비밀번호 변경 시 이메일과 사번 일치여부 확인
-	@RequestMapping(value = "empNumEmail.hari", method = RequestMethod.POST)
-	public boolean empNumEmail(EmpDto emp) {
-		boolean isExist = false;
-		try {
-			isExist = myService.empNumEmail(emp);
-		} catch (Exception e) {
-			log.debug("empNumEmail 예외발생: " + e.getMessage());
-		}
-		return isExist;
-	}
-	
 	// 형남 0112 사원 출근 기능, DB에 출근시간 업데이트 및 출근여부 리턴
 	@RequestMapping(value = "startWork.hari", method = RequestMethod.POST)
 	public boolean startWork(Principal pri) {
@@ -75,19 +33,19 @@ public class TARestController {
 		String tardyDateStr = "110000";
 		Date curDate = new Date();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("HHmmss");
-		
+
 		try {
 			Date tardyDate = dateFormat.parse(tardyDateStr);
 			long tardyDateTime = tardyDate.getTime();
 			curDate = dateFormat.parse(dateFormat.format(curDate));
 			long curDateTime = curDate.getTime();
-			
-			//현재시간과 지각구분시간 비교
+
+			// 현재시간과 지각구분시간 비교
 			if (curDateTime > tardyDateTime) {
-				//지각
+				// 지각
 				result = taService.insertStartWorkTardyTA(pri.getName());
 			} else {
-				//정상출근
+				// 정상출근
 				result = taService.insertStartWorkTA(pri.getName());
 			}
 		} catch (Exception e) {
@@ -95,7 +53,7 @@ public class TARestController {
 		}
 		return result > 0 ? true : false;
 	}
-	
+
 	// 형남 0112 사원 퇴근 기능, DB에 퇴근시간 업데이트 및 퇴근여부 리턴
 	@RequestMapping(value = "endWork.hari", method = RequestMethod.POST)
 	public boolean endWork(Principal pri) {
@@ -277,10 +235,11 @@ public class TARestController {
 		}
 		return jsonObject.toJSONString();
 	}
-	
-	// 형남 0202 풀캘린더 월 이동 시 해당 연, 월의 출근일 가져오기
-	@RequestMapping(value = "getStartList.hari", method = RequestMethod.POST, params = {"calYear", "calMonth"})
-	public String getStartList(Principal pri, @RequestParam("calYear")String calYear, @RequestParam("calMonth")String calMonth) {
+
+	// 형남 0202 풀캘린더 월 이동 시 해당 연, 월의 출근, 지각 날짜 가져오기
+	@RequestMapping(value = "getStartList.hari", method = RequestMethod.POST, params = { "calYear", "calMonth" })
+	public String getStartList(Principal pri, @RequestParam("calYear") String calYear,
+			@RequestParam("calMonth") String calMonth) {
 		System.out.println(calYear);
 		System.out.println(calMonth);
 		List<String> startList = null;
@@ -317,17 +276,42 @@ public class TARestController {
 		}
 		return jsonObject.toJSONString();
 	}
-	
-	//형남 0121 출근, 지각, 결근 연차, 조퇴 횟수 가져오기(사원 대시보드 근태차트, chart.js dataset 형식으로 가공)
+
+	// 형남 0202 풀캘린더 월 이동 시 해당 연, 월의 퇴근, 연차, 결근 날짜 가져오기
+	@RequestMapping(value = "getEndList.hari", method = RequestMethod.POST, params = { "calYear", "calMonth" })
+	public String getEndList(Principal pri, @RequestParam("calYear") String calYear,
+			@RequestParam("calMonth") String calMonth) {
+		JSONObject jsonObject = new JSONObject();
+		List<String> endList = null;
+		List<String> absentList = null;
+		List<String> annList = null;
+
+		try {
+			endList = taService.getEndList(pri.getName(), calYear, calMonth);
+			absentList = taService.getAbsentList(pri.getName(), calYear, calMonth);
+			annList = taService.getAnntList(pri.getName(), calYear, calMonth);
+			jsonObject.put("endList", endList);
+			jsonObject.put("absentList", absentList);
+			jsonObject.put("annList", annList);
+			System.out.println("endList: " + endList.toString());
+			System.out.println("absentList: " + absentList.toString());
+			System.out.println("annList: " + annList.toString());
+		} catch (Exception e) {
+			log.debug("getEndList 예외발생: " + e.getMessage());
+		}
+		return jsonObject.toJSONString();
+	}
+
+	// 형남 0121 출근, 지각, 결근 연차, 조퇴 횟수 가져오기(사원 대시보드 근태차트, chart.js dataset 형식으로 가공)
 	@RequestMapping(value = "getTA.hari", method = RequestMethod.POST)
 	public String getTA(Principal pri) {
 		List<Integer> TAList = new ArrayList<Integer>();
 		JSONObject jsonObject = new JSONObject();
 		try {
-			int work = taService.getWork(pri.getName()); //출근
-			int tardy = taService.getTardy(pri.getName()); //지각
-			int absent = taService.getAbsent(pri.getName()); //결근
-			int annual = taService.getAnnual(pri.getName()); //연차
+			int work = taService.getWork(pri.getName()); // 출근
+			int tardy = taService.getTardy(pri.getName()); // 지각
+			int absent = taService.getAbsent(pri.getName()); // 결근
+			int annual = taService.getAnnual(pri.getName()); // 연차
 			int early = taService.getEarly(pri.getName()); //
 			TAList.add(work);
 			TAList.add(tardy);
@@ -341,7 +325,7 @@ public class TARestController {
 		return jsonObject.toJSONString();
 	}
 
-	//형남 0122 팀 별 근무시간 가져오기(전월, 사원 대시보드 근태차트, chart.js dataset)
+	// 형남 0122 팀 별 근무시간 가져오기(전월, 사원 대시보드 근태차트, chart.js dataset)
 	@RequestMapping(value = "getAllEmpTA.hari", method = RequestMethod.POST)
 	public String getAllEmpTA() {
 		JSONArray root = new JSONArray();
@@ -359,12 +343,12 @@ public class TARestController {
 			teamNameList = taService.getTeamNameList();
 			// 모든 팀에 전월 근무시간 가져오기
 			for (int teamCode : teamCodeList) {
-				
+
 				// 차트에 들어갈 json 데이터 형식으로 추가
 				jsonObject = new JSONObject();
 				jsonObject.put("label", teamNameList.get(count));
 				jsonObject.put("borderWidth", 1);
-				
+
 				// 팀별 + 월별 근무시간 리스트
 				teamWorkTimeList = new ArrayList<String>();
 				for (int i = 1; i < 13; i++) {
@@ -373,12 +357,12 @@ public class TARestController {
 					if (teamWorkTime == null) {
 						teamWorkTime = "0";
 					}
-					//000:000:000
+					// 000:000:000
 					String[] timeSplit = teamWorkTime.split(":");
-					//시간 단위만 뽑아서 add
+					// 시간 단위만 뽑아서 add
 					teamWorkTimeList.add(timeSplit[0]);
 				}
-				count++;//팀 이름 가져올 때 인덱스값
+				count++;// 팀 이름 가져올 때 인덱스값
 				jsonObject.put("data", teamWorkTimeList);
 				root.add(jsonObject);
 			}
@@ -400,39 +384,39 @@ public class TARestController {
 		String teamWorkTime = null;
 		JSONObject jsonObject = null;
 		int count = 0;
-			try {
-				// 현재 존재하는 팀코드 가져오기
-				teamCodeList = taService.getTeamCodeList();
-				// JSON Data에 넣을 label 값(팀 이름)
-				teamNameList = taService.getTeamNameList();
-				// 모든 팀에 전월 근무시간 가져오기
-				for (int teamCode : teamCodeList) {
-					// 차트에 들어갈 json 데이터 형식으로 추가
-					jsonObject = new JSONObject();
-					jsonObject.put("label", teamNameList.get(count));
-					jsonObject.put("borderWidth", 1);
-					// 팀별 + 월별 근무시간 리스트
-					teamWorkTimeList = new ArrayList<String>();
-					jsonArray = new JSONArray();
-					teamWorkTime = taService.getTeamMonthWorkTime(teamCode, month);
-					if (teamWorkTime == null ) {
-						teamWorkTime = "0";
-					}
-					//000:000:000
-					String[] timeSplit = teamWorkTime.split(":");
-					//시간 단위만 뽑아서 add
-					teamWorkTimeList.add(timeSplit[0]);
-					jsonObject.put("data", teamWorkTimeList);
-					root.add(jsonObject);
-					count++;//팀 이름 가져올 때 인덱스값
+		try {
+			// 현재 존재하는 팀코드 가져오기
+			teamCodeList = taService.getTeamCodeList();
+			// JSON Data에 넣을 label 값(팀 이름)
+			teamNameList = taService.getTeamNameList();
+			// 모든 팀에 전월 근무시간 가져오기
+			for (int teamCode : teamCodeList) {
+				// 차트에 들어갈 json 데이터 형식으로 추가
+				jsonObject = new JSONObject();
+				jsonObject.put("label", teamNameList.get(count));
+				jsonObject.put("borderWidth", 1);
+				// 팀별 + 월별 근무시간 리스트
+				teamWorkTimeList = new ArrayList<String>();
+				jsonArray = new JSONArray();
+				teamWorkTime = taService.getTeamMonthWorkTime(teamCode, month);
+				if (teamWorkTime == null) {
+					teamWorkTime = "0";
 				}
-			} catch (Exception e) {
-				log.debug("getEmpTAMonth 예외발생: " + e.getMessage());
+				// 000:000:000
+				String[] timeSplit = teamWorkTime.split(":");
+				// 시간 단위만 뽑아서 add
+				teamWorkTimeList.add(timeSplit[0]);
+				jsonObject.put("data", teamWorkTimeList);
+				root.add(jsonObject);
+				count++;// 팀 이름 가져올 때 인덱스값
 			}
+		} catch (Exception e) {
+			log.debug("getEmpTAMonth 예외발생: " + e.getMessage());
+		}
 		return root.toJSONString();
 	}
-	
-	//형남 0128 대시보드 부서별 연봉통계 차트 연도 셀렉트박스
+
+	// 형남 0128 대시보드 부서별 연봉통계 차트 연도 셀렉트박스
 	@RequestMapping(value = "getSalYear.hari", method = RequestMethod.POST)
 	public List<String> getSalYear() {
 		List<String> yearList = null;
@@ -443,44 +427,43 @@ public class TARestController {
 		}
 		return yearList;
 	}
-	
+
 	// 형남 0128 대시보드 부서별 연봉차트
 	@RequestMapping(value = "getTeamSalList.hari", method = RequestMethod.POST)
 	public String getTeamSalList(String year) {
-		JSONArray root = new JSONArray(); //가장 바깥쪽 배열 - dataset
-		JSONArray teamAvgSalArray = null; //data 값
-		List<Integer> teamCodeList = new ArrayList<Integer>(); //팀코드 리스트
-		List<String> teamNameList = new ArrayList<String>(); //라벨에 넣어줄 팀 이름
-		String teamAvgSal = null; //팀 별 평균 연봉
+		JSONArray root = new JSONArray(); // 가장 바깥쪽 배열 - dataset
+		JSONArray teamAvgSalArray = null; // data 값
+		List<Integer> teamCodeList = new ArrayList<Integer>(); // 팀코드 리스트
+		List<String> teamNameList = new ArrayList<String>(); // 라벨에 넣어줄 팀 이름
+		String teamAvgSal = null; // 팀 별 평균 연봉
 		JSONObject jsonObject = null;
 		int count = 0;
-			try {
-				// 현재 존재하는 팀코드 가져오기
-				teamCodeList = taService.getTeamCodeList();
-				// JSON Data에 넣을 label 값(팀 이름)
-				teamNameList = taService.getTeamNameList();
-				// 모든 팀의 평균연봉 가져와 배열에 하나씩 넣음(dataset 형식에 맞춤)
-				for (int teamCode : teamCodeList) {
-					// 차트에 들어갈 json 데이터 형식으로 추가
-					jsonObject = new JSONObject();
-					jsonObject.put("label", teamNameList.get(count));
-					jsonObject.put("borderWidth", 1);
-					teamAvgSalArray = new JSONArray();
-					teamAvgSal = taService.getTeamAvgSal(teamCode, year); //팀 별 평균연봉
-					//팀에 연봉 데이터가 없으면 0 처리
-					if (teamAvgSal == null ) {
-						teamAvgSal = "0";
-					}
-					teamAvgSalArray.add(teamAvgSal);
-					jsonObject.put("data", teamAvgSalArray);
-					root.add(jsonObject);
-					count++; //팀 이름 가져올 때 인덱스값
+		try {
+			// 현재 존재하는 팀코드 가져오기
+			teamCodeList = taService.getTeamCodeList();
+			// JSON Data에 넣을 label 값(팀 이름)
+			teamNameList = taService.getTeamNameList();
+			// 모든 팀의 평균연봉 가져와 배열에 하나씩 넣음(dataset 형식에 맞춤)
+			for (int teamCode : teamCodeList) {
+				// 차트에 들어갈 json 데이터 형식으로 추가
+				jsonObject = new JSONObject();
+				jsonObject.put("label", teamNameList.get(count));
+				jsonObject.put("borderWidth", 1);
+				teamAvgSalArray = new JSONArray();
+				teamAvgSal = taService.getTeamAvgSal(teamCode, year); // 팀 별 평균연봉
+				// 팀에 연봉 데이터가 없으면 0 처리
+				if (teamAvgSal == null) {
+					teamAvgSal = "0";
 				}
-			} catch (Exception e) {
-				log.debug("getEmpTAMonth 예외발생: " + e.getMessage());
+				teamAvgSalArray.add(teamAvgSal);
+				jsonObject.put("data", teamAvgSalArray);
+				root.add(jsonObject);
+				count++; // 팀 이름 가져올 때 인덱스값
 			}
+		} catch (Exception e) {
+			log.debug("getEmpTAMonth 예외발생: " + e.getMessage());
+		}
 		return root.toJSONString();
 	}
-	
-	
+
 }

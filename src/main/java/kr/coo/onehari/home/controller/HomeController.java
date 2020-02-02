@@ -19,11 +19,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeUtility;
 
-import kr.coo.onehari.my.controller.MyController;
 import kr.coo.onehari.my.service.MyService;
 import kr.coo.onehari.sign.service.SignService;
 import lombok.extern.slf4j.Slf4j;
@@ -205,18 +203,6 @@ public class HomeController {
 		return "redirect: index.hari";
 	}
 	
-	//형남 0117 비밀번호 초기화, 변경
-	@ResponseBody
-	@RequestMapping("/empNumEmail.hari")
-	public int empNumEmail(@RequestParam("empNum") String empNum, @RequestParam("email") String email) {
-		int result=0;
-		try {
-			result =myService.empNumEmail(empNum, email);
-			System.out.println("컨트롤러 종료시점: " + result);
-		} catch (Exception e) {
-			log.debug("empNumEmail 예외발생: " + e.getMessage());
-		}
-		return result;
-	}
+
 }
 

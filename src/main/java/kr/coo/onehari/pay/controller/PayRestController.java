@@ -1,6 +1,5 @@
 package kr.coo.onehari.pay.controller;
 
-
 import java.security.Principal;
 import java.util.List;
 
@@ -24,23 +23,23 @@ public class PayRestController {
 
 	@Autowired
 	private PayService payService;
-	
+
 	@Autowired
 	private EmpService empService;
-	
-	//급여 리스트
+
+	// 급여 리스트
 	@RequestMapping(value = "/getPayList.hari", method = RequestMethod.POST)
-	public  JSONObject getPayList(Principal pri, String year, String month) {
+	public JSONObject getPayList(Principal pri, String year, String month) {
 		List<String> years = payService.getYears(pri.getName());
-		if(year.equals("init")) {
-			year=years.get(0);
+		if (year.equals("init")) {
+			year = years.get(0);
 		}
-		JSONObject root=new JSONObject();
-		JSONArray array=new JSONArray();
+		JSONObject root = new JSONObject();
+		JSONArray array = new JSONArray();
 		List<PayDto> payList = payService.getPayList(pri.getName(), year, month);
 		try {
 			for (PayDto payDto : payList) {
-				JSONObject object=new JSONObject();
+				JSONObject object = new JSONObject();
 				object.put("payMonth", payDto.getPayMonth());
 				object.put("basicSal", payDto.getBasicSal());
 				object.put("payNPension", payDto.getPayNPension());
@@ -54,19 +53,19 @@ public class PayRestController {
 			root.put("payList", array);
 			root.put("years", years);
 			root.put("empNum", pri.getName());
-		
+
 		} catch (Exception e) {
 			log.debug("getPayList 예외발생: " + e.getMessage());
 		}
 		return root;
 	}
-	
-	//급여명세서 조회 시 해당 사원정보 가져오기
+
+	// 급여명세서 조회 시 해당 사원정보 가져오기
 	@RequestMapping(value = "/getEmp.hari", method = RequestMethod.POST)
-	public  JSONObject getEmp(Principal pri) {
-		JSONObject root=new JSONObject();
-		int empNum=Integer.parseInt(pri.getName());
-		EmpDto emp=empService.empModify(empNum);
+	public JSONObject getEmp(Principal pri) {
+		JSONObject root = new JSONObject();
+		int empNum = Integer.parseInt(pri.getName());
+		EmpDto emp = empService.empModify(empNum);
 		try {
 			root.put("emp", emp);
 		} catch (Exception e) {
@@ -74,12 +73,12 @@ public class PayRestController {
 		}
 		return root;
 	}
-	
+
 	// 사원정보수정(화면)
 	@RequestMapping(value = "/getCEO.hari", method = RequestMethod.POST)
 	public JSONObject empModify() {
-		JSONObject root=new JSONObject();
-		EmpDto ceo=empService.getCEO();
+		JSONObject root = new JSONObject();
+		EmpDto ceo = empService.getCEO();
 		try {
 			root.put("CEO", ceo);
 		} catch (Exception e) {

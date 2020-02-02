@@ -99,9 +99,6 @@
 		DELETE FROM emprolelist
 		WHERE empnum = #{empNum} AND rolename = 'ROLE_PERSONNEL'
 	</delete>
-	
-
-    
         
     <!-- 연차정보 등록 김정하 2020. 1. 27 -->
     <insert id="insertAnnUse">
@@ -139,8 +136,6 @@
         		          ON e.EMPNUM = s.EMPNUM
 		WHERE e.EMPNUM = #{empNum}
     </select>
-    
-
     
     <!-- 사원리스트 page 김정하 / 2020. 1. 29 -->
     <select id="empListPage" parameterType="hashmap" resultType="kr.coo.onehari.hr.dto.EmpDto">
