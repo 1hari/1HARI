@@ -18,8 +18,6 @@ public class HomeService {
 	@Autowired
 	private SqlSession sqlsession;
 	
-	@Autowired
-	
 	//형남 0110 비밀번호 변경 시 이메일과 사번 일치여부 확인
 	public boolean empNumEmail(EmpDto emp) {
 		HomeDao dao = sqlsession.getMapper(HomeDao.class);

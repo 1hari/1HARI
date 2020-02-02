@@ -13,8 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequestMapping("ajax/")
 public class HomeRestController {
-
-
+	
 	@Autowired
 	private HomeService homeService;
 	
