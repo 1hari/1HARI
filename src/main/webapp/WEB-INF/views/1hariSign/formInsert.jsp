@@ -118,8 +118,8 @@
 			extraPlugins : 'colorbutton,font,justify,print,tableresize,pastefromword,liststyle,pagebreak',
 
 			// Make the editing area bigger than default.
-			height : 400,
-			width : 1000
+			height : '500px',
+			width : '100%'
 			
 		});
 
