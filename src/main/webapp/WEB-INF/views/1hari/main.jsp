@@ -34,13 +34,19 @@ $(function(){
 		success: function(getWorkTimeYear) {
 			var yearList=getWorkTimeYear
 			let years = "";
-			$.each(yearList, function(index, element) {
-				if (index==0) {
-					years += '<option value="' + element + '" selected>' + element + '</option>';
-				} else {
-					years += '<option value="' + element + '">' + element + '</option>';
-				}
-			})
+			//console.log(getWorkTimeYear == "");
+			if(getWorkTimeYear != ""){
+				$.each(yearList, function(index, element) {
+					if (index==0) {
+						years += '<option value="' + element + '" selected>' + element + '</option>';
+					} else {
+						years += '<option value="' + element + '">' + element + '</option>';
+					}
+				})
+			}else {
+				years = '<option>없음</option>';	
+			}
+			
 			$("#workTimeSelectYear").append(years);
 		}
 	}).then(() =>{
@@ -575,6 +581,7 @@ $(function(){
 						<div class="card-body" style="padding-bottom: 0">
 							<span class="card-title m-b-0" style="margin-bottom:0; font-size: 18px;" >근무시간 통계</span>
 							<select class="select2 form-control custom-select select2-hidden-accessible workTimeSelect" id="workTimeSelectYear" style="width: 15%; height:30px; margin-left: 55%; font-size:small;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+								
 							</select>
 							<select class="select2 form-control custom-select select2-hidden-accessible workTimeSelect" id="workTimeSelectMonth" style="width: 12%; height:30px; font-size:small;" data-select2-id="1" tabindex="-1" aria-hidden="true">
 								<option value="0">전체</option>
@@ -648,7 +655,7 @@ $(function(){
 					<div class="card" style ="height:350px; box-shadow :0 0 12px #999999; border-radius:10px; margin-right:10%;">
 						<div class="card-body" style="padding-bottom: 0">
 							<span class="card-title m-b-0" style="margin-bottom:0; font-size: 18px;" >연봉 통계</span>
-							<select id="chartSelect" class="select2 form-control custom-select select2-hidden-accessible"  style="width: 20%; height:30px; margin-left: 70%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+							<select id="chartSelect" class="select2 form-control custom-select select2-hidden-accessible"  style="width: 20%; height:30px; margin-left: 68%; font-size:small;" data-select2-id="1" tabindex="-1" aria-hidden="true">
 							</select>
 						</div>
 						<div id="container" style="width: 100%; height: 100%; margin-bottom: 1%;">
@@ -684,7 +691,7 @@ $(function(){
 				<div class="card" style ="height:200px; box-shadow :0 0 12px #999999; border-radius:10px; margin-right:10%;">
 					<div class="card-body" style="padding-bottom: 0">
 						<span class="card-title m-b-0">오늘의 날씨</span>
-						<span class="card-title m-b-0" style="padding-left: 70%;" id="weatherDate"></span>
+						<span class="card-title m-b-0" style="padding-left: 65%;" id="weatherDate"></span>
 					</div>
 					<table class="table" id="weatherTable">
 						<tr style ="vertical-align:left; padding-left: 5%;" id="weatherTitle">
