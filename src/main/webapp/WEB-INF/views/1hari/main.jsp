@@ -409,6 +409,7 @@ $(function(){
 		type : "get",
 		data : { "weatherUrl" : weatherUrl },
 		success : function(getWeather) {
+			//console.log(getWeather.response.body.items);
 			//받은 데이터로 테이블 생성
 			$('#weatherDate').text(year + "년 " + month + "월 " + day +"일")
 			var weatherTitle='<td style="width: 15%; height: 20%;" rowspan="2" id="weatherImg"></td>' +
@@ -421,12 +422,13 @@ $(function(){
 			var weatherAraay=[]
 			//실황만 필요하므로 응답해준 데이터중 현재시간과 가장 근접한 예보만 배열에 담음
 			//첫번째 값 푸쉬
-			weatherAraay.push(getWeather.response.body.items[0])
+			//console.log(getWeather.response.body.items.item);
+			weatherAraay.push(getWeather.response.body.items.item)
 			//받은 데이터 돌면서 각 카테고리의 첫번째 값만 푸쉬
-            for(var i=1; i<getWeather.response.body.items.length; i++){
+            for(var i=1; i<getWeather.response.body.items.item.length; i++){
             	//배열의 마지막 값과 지금 넣을 값을 비교 해 값이 다르면(카테고리 값이 다르면) 푸쉬
-                if((getWeather.response.body.items[i-1].category) != (getWeather.response.body.items[i].category)){
-                    weatherAraay.push(getWeather.response.body.items[i])
+                if((getWeather.response.body.items.item[i-1].category) != (getWeather.response.body.items.item[i].category)){
+                    weatherAraay.push(getWeather.response.body.items.item[i])
                     if(i==getWeather.response.body.items.length-1){//마지막 요소
                         return;
                     }
