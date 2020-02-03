@@ -171,12 +171,17 @@
             ON ta.EMPNUM = e.empnum
             JOIN TEAM T
             ON T.TEAMCODE = E.TEAMCODE
-            WHERE T.TEAMCODE = #{param1} AND MONTH(TADATE) = #{param2}
+            WHERE T.TEAMCODE = #{param1} AND MONTH(TADATE) = #{param2} AND YEAR(TADATE) = #{param3}
     </select>
 
-    	<!-- 대시보드 부서별 연봉통계 연도 셀렉트박스-->
+   	<!-- 대시보드 부서별 연봉통계 연도 셀렉트박스-->
     <select id="getSalYear" resultType="String">
 		SELECT DISTINCT YEAR(PAYMONTH) FROM PAY ORDER BY PAYMONTH DESC
+    </select>
+
+   	<!-- 대시보드 부서별 연봉 연도 셀렉트박스-->
+    <select id="getWorkTimeYear" resultType="String">
+		SELECT DISTINCT YEAR(scheduledate) FROM talist ORDER BY scheduledate DESC
     </select>
     
 	<!-- 대시보드 부서별 연봉통계 연도 셀렉트박스-->

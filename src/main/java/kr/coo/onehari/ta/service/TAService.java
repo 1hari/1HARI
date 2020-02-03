@@ -434,11 +434,11 @@ public class TAService {
 	}
 
 	// 형남 0122 팀 별 근무시간(월)
-	public String getTeamMonthWorkTime(int teamCode, int month) {
+	public String getTeamMonthWorkTime(int teamCode, int month, int year) {
 		TADao dao = sqlsession.getMapper(TADao.class);
 		String totalTime = null;
 		try {
-			totalTime = dao.getTeamMonthWorkTime(teamCode, month);
+			totalTime = dao.getTeamMonthWorkTime(teamCode, month, year);
 		} catch (ClassNotFoundException | SQLException e) {
 			log.debug("getTeamMonthWork : " + e.getMessage());
 		}
@@ -457,8 +457,21 @@ public class TAService {
 		}
 		return yearList;
 	}
+	
+	// 형남 0202 대시보드 근무시간 통계 차트 연도 셀렉트박스
+	public List<String> getWorkTimeYear() {
+		TADao TADao = sqlsession.getMapper(TADao.class);
+		List<String> yearList = null;
+		
+		try {
+			yearList = TADao.getWorkTimeYear();
+		} catch (ClassNotFoundException | SQLException e) {
+			log.debug("getWorkTimeYear 예외발생: " + e.getMessage());
+		}
+		return yearList;
+	}
 
-	// 대시보드 부서별 연봉 연도 셀렉트박스
+	// 대시보드 부서별 평균 연봉
 	public String getTeamAvgSal(int teamCode, String year) {
 		TADao TADao = sqlsession.getMapper(TADao.class);
 		String teamAvgSal = null;

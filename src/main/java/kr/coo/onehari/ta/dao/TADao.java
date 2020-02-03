@@ -119,12 +119,13 @@ public interface TADao {
     public List<String> getTeamNameList() throws ClassNotFoundException, SQLException;
     
     //형남 0122 팀 별 근무시간(월)
-    public String getTeamMonthWorkTime(int teamCode, int month) throws ClassNotFoundException, SQLException;
-    
- 
+    public String getTeamMonthWorkTime(int teamCode, int month, int year) throws ClassNotFoundException, SQLException;
     
     //대시보드 부서별 연봉 연도 셀렉트박스 2020. 1. 28
     public List<String> getSalYear() throws ClassNotFoundException, SQLException;
+    
+    //대시보드 부서별 연봉 연도 셀렉트박스 2020. 1. 28
+    public List<String> getWorkTimeYear() throws ClassNotFoundException, SQLException;
     
     //대시보드 부서별 연봉
     public String getTeamAvgSal(int teamCode, String year) throws ClassNotFoundException, SQLException;

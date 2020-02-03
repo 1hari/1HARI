@@ -132,7 +132,6 @@ public class HrRestController {
 		String empName = req.getParameter("empName");
 		String empNum = req.getParameter("empNum");
 		String password = req.getParameter("password");
-
 		StringBuilder path = new StringBuilder();
 		path.append(req.getLocalAddr());
 		path.append(":");

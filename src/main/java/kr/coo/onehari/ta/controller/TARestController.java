@@ -3,6 +3,7 @@ package kr.coo.onehari.ta.controller;
 import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -327,9 +328,17 @@ public class TARestController {
 
 	// 형남 0122 팀 별 근무시간 가져오기(전월, 사원 대시보드 근태차트, chart.js dataset)
 	@RequestMapping(value = "getAllEmpTA.hari", method = RequestMethod.POST)
-	public String getAllEmpTA() {
+	public String getAllEmpTA(String yearStr) {
+		System.out.println(yearStr);
+		int year;
+		if(yearStr==null) {
+			Calendar cal= Calendar.getInstance();
+			year=cal.get(cal.YEAR);
+		}else {
+			year=Integer.parseInt(yearStr);
+		}
+		System.out.println(year);
 		JSONArray root = new JSONArray();
-		JSONArray jsonArray = null;
 		List<Integer> teamCodeList = new ArrayList<Integer>();
 		List<String> teamNameList = new ArrayList<String>();
 		List<String> teamWorkTimeList = null;
@@ -352,8 +361,7 @@ public class TARestController {
 				// 팀별 + 월별 근무시간 리스트
 				teamWorkTimeList = new ArrayList<String>();
 				for (int i = 1; i < 13; i++) {
-					jsonArray = new JSONArray();
-					teamWorkTime = taService.getTeamMonthWorkTime(teamCode, i);// 2001/1,2,3,4,5..
+					teamWorkTime = taService.getTeamMonthWorkTime(teamCode, i, year);// 2001/1,2,3,4,5..
 					if (teamWorkTime == null) {
 						teamWorkTime = "0";
 					}
@@ -374,10 +382,10 @@ public class TARestController {
 
 	// 형남 0123 팀 별 근무시간 가져오기(월별)
 	@RequestMapping(value = "getEmpTAMonth.hari", method = RequestMethod.POST)
-	public String getEmpTAMonth(String monthStr) {
+	public String getEmpTAMonth(String yearStr, String monthStr) {
+		int year = Integer.parseInt(yearStr);
 		int month = Integer.parseInt(monthStr);
 		JSONArray root = new JSONArray();
-		JSONArray jsonArray = null;
 		List<Integer> teamCodeList = new ArrayList<Integer>();
 		List<String> teamNameList = new ArrayList<String>();
 		List<String> teamWorkTimeList = null;
@@ -397,8 +405,7 @@ public class TARestController {
 				jsonObject.put("borderWidth", 1);
 				// 팀별 + 월별 근무시간 리스트
 				teamWorkTimeList = new ArrayList<String>();
-				jsonArray = new JSONArray();
-				teamWorkTime = taService.getTeamMonthWorkTime(teamCode, month);
+				teamWorkTime = taService.getTeamMonthWorkTime(teamCode, month, year);
 				if (teamWorkTime == null) {
 					teamWorkTime = "0";
 				}
@@ -424,6 +431,18 @@ public class TARestController {
 			yearList = taService.getSalYear();
 		} catch (Exception e) {
 			log.debug("getSalYear 예외발생: " + e.getMessage());
+		}
+		return yearList;
+	}
+	
+	// 형남 0202 대시보드 근무시간 통계 차트 연도 셀렉트박스
+	@RequestMapping(value = "getWorkTimeYear.hari", method = RequestMethod.POST)
+	public List<String> getWorkTimeYear() {
+		List<String> yearList = null;
+		try {
+			yearList = taService.getWorkTimeYear();
+		} catch (Exception e) {
+			log.debug("getWorkTimeYear 예외발생: " + e.getMessage());
 		}
 		return yearList;
 	}
@@ -461,7 +480,7 @@ public class TARestController {
 				count++; // 팀 이름 가져올 때 인덱스값
 			}
 		} catch (Exception e) {
-			log.debug("getEmpTAMonth 예외발생: " + e.getMessage());
+			log.debug("getTeamSalList 예외발생: " + e.getMessage());
 		}
 		return root.toJSONString();
 	}

@@ -23,58 +23,79 @@ var dataset2;
 var color = Chart.helpers.color;
 
 $(function(){
-
-	//메인 대시보드 근태차트 데이터 가져오기
+	//메인 대시보드 근태차트 옵션 값 생성
 	$.ajax({
-		url: "${pageContext.request.contextPath}/ajax/getAllEmpTA.hari",
+		url: "${pageContext.request.contextPath}/ajax/getWorkTimeYear.hari",
 		type: "post",
 		dataType: "json",
-		success: function(getAllEmpTA) {
-			for(var i =0; i<getAllEmpTA.length; i++){
-				getAllEmpTA[i].backgroundColor=color(colorArray[i]).alpha(0.5).rgbString();
-				getAllEmpTA[i].borderColor=colorArray[i];
-				dataset=getAllEmpTA;
-			}
-			var horizontalBarChartData = {
-				labels: MONTHS,
-				datasets: dataset
-			}
-			var ctx = document.getElementById('adminCanvas').getContext('2d');
-			window.myHorizontalBar = new Chart(ctx, {
-				type: 'horizontalBar',
-				data: horizontalBarChartData,
-				options: {
-					elements: {
-						rectangle: {
-						borderWidth: 2,
-						}
-					},
-					responsive: true,
-					legend: {
-						position: 'right',
-					},
-					title: {
-						display: true,
-						text: '부서별 월간 근무시간 통계'
-					}
+		data:{
+			yearStr:$('#workTimeSelectYear').val()
+		},
+		success: function(getWorkTimeYear) {
+			var yearList=getWorkTimeYear
+			let years = "";
+			$.each(yearList, function(index, element) {
+				if (index==0) {
+					years += '<option value="' + element + '" selected>' + element + '</option>';
+				} else {
+					years += '<option value="' + element + '">' + element + '</option>';
 				}
 			})
+			$("#workTimeSelectYear").append(years);
 		}
+	}).then(() =>{
+		//메인 대시보드 근태차트 데이터 가져오기
+		$.ajax({
+			url: "${pageContext.request.contextPath}/ajax/getAllEmpTA.hari",
+			type: "post",
+			dataType: "json",
+			success: function(getAllEmpTA) {
+				for(var i =0; i<getAllEmpTA.length; i++){
+					getAllEmpTA[i].backgroundColor=color(colorArray[i]).alpha(0.5).rgbString();
+					getAllEmpTA[i].borderColor=colorArray[i];
+					dataset=getAllEmpTA;
+				}
+				var horizontalBarChartData = {
+					labels: MONTHS,
+					datasets: dataset
+				}
+				var ctx = document.getElementById('adminCanvas').getContext('2d');
+				window.myHorizontalBar = new Chart(ctx, {
+					type: 'horizontalBar',
+					data: horizontalBarChartData,
+					options: {
+						elements: {
+							rectangle: {
+							borderWidth: 2,
+							}
+						},
+						responsive: true,
+						legend: {
+							position: 'right',
+						},
+						title: {
+							display: true,
+							text: '부서별 월간 근무시간 통계'
+						}
+					}
+				})
+			}
+		})
 	})
-		
 
 	//메인 대시보드 근태차트 월 변경 했을 경우
-	$('#month').change(function(){
+	$('.workTimeSelect').change(function(){
 		//기존에 있던 차트 삭제
 		window.myHorizontalBar.destroy();
 		//월 선택했을 경우
-		if($('#month').val() != 0){
+		if($('#workTimeSelectMonth').val() != 0){
 			$.ajax({
 				url: "${pageContext.request.contextPath}/ajax/getEmpTAMonth.hari",
 				type: "post",
 				data: 
 					{
-						monthStr:$('#month').val()
+						yearStr:$('#workTimeSelectYear').val(),
+						monthStr:$('#workTimeSelectMonth').val(),
 					},
 				dataType: "json",
 				success: function(getEmpTAMonth) {
@@ -85,7 +106,7 @@ $(function(){
 				}
 			}).then((getEmpTAMonth) => {
 				MONTHS=[];
-				MONTHS.push($('#month').val() + '월');
+				MONTHS.push($('#workTimeSelectMonth').val() + '월');
 				var horizontalBarChartData = {
 						labels: MONTHS,
 						datasets: getEmpTAMonth
@@ -120,6 +141,9 @@ $(function(){
 			$.ajax({
 				url: "${pageContext.request.contextPath}/ajax/getAllEmpTA.hari",
 				type: "post",
+				data:{
+					yearStr:$('#workTimeSelectYear').val()
+				},
 				dataType: "json",
 				success: function(getAllEmpTA) {
 					//java에서 못넣은 색 추가.. 제일 윗쪽에 chart.js에서 준 컬러값 배열 만들어놨음
@@ -546,11 +570,13 @@ $(function(){
 		<div class="row">
 			<div class="col-md-6">
 				<se:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_PERSONNEL')">
-					<!-- 부서별 근무 통계 시작  -->
+					<!-- 부서별 근무시간 통계 시작  -->
 					<div class="card" style ="height:350px; box-shadow :0 0 12px #999999; border-radius:10px; margin-left:10%;">
 						<div class="card-body" style="padding-bottom: 0">
 							<span class="card-title m-b-0" style="margin-bottom:0; font-size: 18px;" >근무시간 통계</span>
-							<select class="select2 form-control custom-select select2-hidden-accessible" id="month" style="width: 20%; height:30px; margin-left: 65%; font-size:small;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+							<select class="select2 form-control custom-select select2-hidden-accessible workTimeSelect" id="workTimeSelectYear" style="width: 15%; height:30px; margin-left: 55%; font-size:small;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+							</select>
+							<select class="select2 form-control custom-select select2-hidden-accessible workTimeSelect" id="workTimeSelectMonth" style="width: 12%; height:30px; font-size:small;" data-select2-id="1" tabindex="-1" aria-hidden="true">
 								<option value="0">전체</option>
 								<option value="1">1월</option>
 								<option value="2">2월</option>
@@ -622,7 +648,7 @@ $(function(){
 					<div class="card" style ="height:350px; box-shadow :0 0 12px #999999; border-radius:10px; margin-right:10%;">
 						<div class="card-body" style="padding-bottom: 0">
 							<span class="card-title m-b-0" style="margin-bottom:0; font-size: 18px;" >연봉 통계</span>
-							<select id="chartSelect" class="select2 form-control custom-select select2-hidden-accessible" id="month" style="width: 20%; height:30px; margin-left: 70%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+							<select id="chartSelect" class="select2 form-control custom-select select2-hidden-accessible"  style="width: 20%; height:30px; margin-left: 70%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
 							</select>
 						</div>
 						<div id="container" style="width: 100%; height: 100%; margin-bottom: 1%;">
@@ -662,22 +688,9 @@ $(function(){
 					</div>
 					<table class="table" id="weatherTable">
 						<tr style ="vertical-align:left; padding-left: 5%;" id="weatherTitle">
-<%-- 							<td style="width: 33%; height: 20%;" rowspan="2"><img id="weatherImg" src="${pageContext.request.contextPath}/resources/hari/assets/images/weather_rain.png" alt="현재날씨" class="rounded-circle" style="width: 67%; height: 20%;"></td> --%>
-<!-- 							<td style="width: 20%;">현재날씨</td> -->
-<!-- 							<td style="width: 20%;"> 기 온</td> -->
-<!-- 							<td style="width: 20%;"> 습 도 </td> -->
 						</tr>
 						<tr style ="vertical-align:left; padding-left: 5%;" id="weatherContent">
-<!-- 							<td id="currWeather"></td> -->
-<!-- 							<td id="t1h"></td> -->
-<!-- 							<td id="reh"></td> -->
 						</tr>
-<!-- 							<tr style ="vertical-align:left;"> -->
-<!-- 								<td scope="col"><i class="far fa-edit fa-2x" style ="margin-left:-50%;"></i>&nbsp;<h4 style ="margin-left:-50%;">결제할문서</h4></td> -->
-<%-- 								<td style ="margin-left:-80%;">${requestScope.approve}</td> --%>
-<!-- 								<td scope="col"><i class="far fa-file-archive fa-2x" style ="margin-left:-50%;"></i>&nbsp;<h4 style ="margin-left:-50%;">결제완료문서</h4></td> -->
-<%-- 								<td style ="margin-left:-80%;">${requestScope.complete}</td> --%>
-<!-- 							</tr> -->
 					</table>
 				</div>
 				<!-- 전자 결재 끝 -->
