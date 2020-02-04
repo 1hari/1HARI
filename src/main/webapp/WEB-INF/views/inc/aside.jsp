@@ -137,14 +137,14 @@
 								<span class="hide-menu">재직 증명</span>
 							</a>
 						</li>
-					<se:authorize access="hasAnyRole('ROLE_PERSONNEL', 'ROLE_ADMIN')">
+					
 						<li class="sidebar-item">
 							<a href="${pageContext.request.contextPath}/1hariHr/teamList.hari" class="sidebar-link">
 								<i class="mdi mdi-emoticon-cool"></i>
 								<span class="hide-menu">사원 조회</span>
 							</a>
 						</li>
-
+					<se:authorize access="hasAnyRole('ROLE_PERSONNEL', 'ROLE_ADMIN')">
 						<!-- 권한처리 메뉴 : ROLE_ADMIN & ROLE_PERSONNEL-->
 						<li class="sidebar-item">
 							<a href="${pageContext.request.contextPath}/1hariHr/personnel/empList.hari" class="sidebar-link">
