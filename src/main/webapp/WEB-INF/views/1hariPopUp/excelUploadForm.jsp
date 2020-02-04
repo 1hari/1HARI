@@ -139,35 +139,44 @@
 				contentType: false,
 				type: "POST",
 				success: function(excelData){
-					let formdata = "";
-					$.each(excelData, function(index, data) {
-						$.each(data, function(index, element){
-							
-						/* document.getElementById('excelForm').innerHTML = JSON.stringify(emp.empNum); */
-						formdata += '<tr>'
-									+ '<td><input type="text" name="empdto[' + index + '].empName" value="' + element.empName + '" style="width: 54px;"></td>'
-									+ '<td><input type="text" name="empdto[' + index + '].teamCode" value="' + element.teamCode + '" style="width: 54px;"></td>'
-									+ '<td><input type="text" name="empdto[' + index + '].rankCode" value="' + element.rankCode + '" style="width: 54px;"></td>'
-									+ '<td><input type="text" name="empdto[' + index + '].positionCode" value="' + element.positionCode + '" style="width: 54px;"></td>'
-									+ '<td><input type="text" name="empdto[' + index + '].employmentCode" value="' + element.employmentCode + '" style="width: 54px;"></td>'
-									+ '<td><input type="text" name="empdto[' + index + '].birth" class="datepicker-autoclose" value="' + element.birth + '" style="width: 54px;"></td>'
-									+ '<td><input type="text" name="empdto[' + index + '].resNum" value="' + element.resNum + '" style="width: 70px;"></td>'
-									+ '<td><input type="text" name="empdto[' + index + '].phoneNum" value="' + element.phoneNum + '" style="width: 100px;"></td>'
-									+ '<td><input type="text" name="empdto[' + index + '].email" value="' + element.email + '" style="width: 140px;"></td>'
-									+ '<td><input type="text" name="empdto[' + index + '].hireDate" value="' + element.hireDate + '" style="width: 80px;"></td>'
-									+ '<td><input type="text" name="empdto[' + index + '].leaveDate" value="' + element.leaveDate + '" style="width: 80px;"></td>'
-									+ '</tr>'
+					console.log(excelData.list[0] == undefined)
+					if(excelData.list[0] != undefined){
+						let formdata = "";
+						$.each(excelData, function(index, data) {
+							$.each(data, function(index, element){
+								
+							/* document.getElementById('excelForm').innerHTML = JSON.stringify(emp.empNum); */
+							formdata += '<tr>'
+										+ '<td><input type="text" name="empdto[' + index + '].empName" value="' + element.empName + '" style="width: 54px;"></td>'
+										+ '<td><input type="text" name="empdto[' + index + '].teamCode" value="' + element.teamCode + '" style="width: 54px;"></td>'
+										+ '<td><input type="text" name="empdto[' + index + '].rankCode" value="' + element.rankCode + '" style="width: 54px;"></td>'
+										+ '<td><input type="text" name="empdto[' + index + '].positionCode" value="' + element.positionCode + '" style="width: 54px;"></td>'
+										+ '<td><input type="text" name="empdto[' + index + '].employmentCode" value="' + element.employmentCode + '" style="width: 54px;"></td>'
+										+ '<td><input type="text" name="empdto[' + index + '].birth" class="datepicker-autoclose" value="' + element.birth + '" style="width: 54px;"></td>'
+										+ '<td><input type="text" name="empdto[' + index + '].resNum" value="' + element.resNum + '" style="width: 70px;"></td>'
+										+ '<td><input type="text" name="empdto[' + index + '].phoneNum" value="' + element.phoneNum + '" style="width: 100px;"></td>'
+										+ '<td><input type="text" name="empdto[' + index + '].email" value="' + element.email + '" style="width: 140px;"></td>'
+										+ '<td><input type="text" name="empdto[' + index + '].hireDate" value="' + element.hireDate + '" style="width: 80px;"></td>'
+										+ '<td><input type="text" name="empdto[' + index + '].leaveDate" value="' + element.leaveDate + '" style="width: 80px;"></td>'
+										+ '</tr>'
+							})
 						})
-					})
-					$('#excelForm').append(formdata);
-					$('.datepicker-autoclose').datepicker(
-						{
-							format: "yymmdd", // 생년월일 Date 형식
-							autoclose: true,
-							todayHighlight: true
-						}
-					);
-					/* document.getElementById('excelForm').innerHTML = JSON.stringify(data); */
+						$('#excelForm').append(formdata);
+						$('.datepicker-autoclose').datepicker(
+							{
+								format: "yymmdd", // 생년월일 Date 형식
+								autoclose: true,
+								todayHighlight: true
+							}
+						);
+						/* document.getElementById('excelForm').innerHTML = JSON.stringify(data); */
+					}else{
+						swal({
+							text: "잘못된 파일양식입니다. 양식에 맞는 파일을 선택해주세요.",
+							icon: "warning",
+							button: "닫기"
+						});
+					}
 				}
 			})
 		}

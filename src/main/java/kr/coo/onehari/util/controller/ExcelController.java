@@ -50,7 +50,6 @@ public class ExcelController {
 			file = request.getFile(iterator.next());
 		}
 		List<EmpDto> list = excelService.uploadExcelFile(file);
-
 		model.addAttribute("list", list);
 		
 		return "jsonView";

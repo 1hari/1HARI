@@ -539,29 +539,17 @@ public class ExcelService {
 			OPCPackage opcPackage = OPCPackage.open(excelFile.getInputStream());
 			@SuppressWarnings("resource")
 			XSSFWorkbook workbook = new XSSFWorkbook(opcPackage);
-
+			
 			// 첫번째 시트 불러오기
 			XSSFSheet sheet = workbook.getSheetAt(0);
-
+			
 			for (int i = 12; i < sheet.getLastRowNum() + 1; i++) {
+				System.out.println("예외 전");
 				// 입력 예제 다음 행부터 데이터를 받아오기 위해 i = 12
 				EmpDto empdto = new EmpDto();
 				XSSFRow row = sheet.getRow(i);
-
-				// 행이 존재하기 않으면 패스
-//				if (null == row) { // 값을 제대로 받아오지 못해서 주석처리
-//					continue;
-//				}
 				XSSFCell cell = null;
-//				SimpleDateFormat sdf = new SimpleDateFormat();
-//				String hireDate = "";
-//				String leaveDate = "";
 				
-				// 행의 첫 번째 열 받아오기
-//				cell = row.getCell(0);
-//				System.out.println("0: " + cell);
-//				if (null != cell)
-//					empdto.setEmpNum((int) cell.getNumericCellValue());
 				// 행의 두 번째 열 받아오기
 				cell = row.getCell(1);
 				if (null != cell)
@@ -614,20 +602,4 @@ public class ExcelService {
 		return list;
 	}
 	
-	// Excel 파일 사원등록
-//	@Transactional
-//	public int insertExcelEmp(HashMap<String, List<EmpDto>> map) throws Exception {
-//		ExcelDao exceldao = sqlsession.getMapper(ExcelDao.class);
-//				
-//		int result = 0;
-//		try {
-//			result = exceldao.insertExcelEmp(map);
-//			result = exceldao.insertExcelSubEmp(map);
-//		} catch (ClassNotFoundException | SQLException e) {
-//			System.out.println("ExcelService insertExcelEmp 예외발생: " + e.getMessage());
-//			log.debug("ExcelService insertExcelEmp 예외발생: " + e.getMessage());
-//			throw e;
-//		}
-//		return result;
-//	}
 }
