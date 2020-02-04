@@ -116,7 +116,9 @@ blockquote {
 
 b,
 strong {
-  font-weight: bolder; }
+  font-weight: bolder;
+  font-size: large;
+  }
 
 small {
   font-size: 80%; }
@@ -351,8 +353,9 @@ hr {
 
 small,
 .small {
-  font-size: 80%;
-  font-weight: 400; }
+  font-size: 100%;
+  font-weight: bold;
+  }
 
 mark,
 .mark {
@@ -1594,7 +1597,7 @@ pre {
   height: calc(2.25rem + 2px);
   padding: 0.375rem 0.75rem;
   font-size: 1rem;
-  font-weight: 400;
+  font-weight: bold;
   line-height: 1.5;
   color: #495057;
   background-color: #fff;
@@ -1605,7 +1608,8 @@ pre {
   transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
   -o-transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out; }
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+  }
   @media screen and (prefers-reduced-motion: reduce) {
     .form-control {
       -webkit-transition: none;
@@ -2031,7 +2035,7 @@ textarea.form-control {
 .btn {
   display: inline-block;
   font-weight: 400;
-  color: #ff6161;
+  color: #505050;
   text-align: center;
   vertical-align: middle;
   -webkit-user-select: none;
@@ -8354,10 +8358,12 @@ h1, h2, h3, h4, h5,
     padding-right: 0;
     background: transparent !important;
     color: rgba(0, 0, 0, 0.9) !important;
-    font-size: 16px;
+    font-size: x-large;
+    font-weight: bold;
     border-radius: 0px;
     -webkit-box-shadow: none !important;
-    box-shadow: none !important; }
+    box-shadow: none !important;
+    }
     .request-form .form-control::-webkit-input-placeholder {
       /* Chrome/Opera/Safari */
       color: rgba(0, 0, 0, 0.9); }
