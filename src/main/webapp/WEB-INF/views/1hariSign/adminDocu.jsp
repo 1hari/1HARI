@@ -100,7 +100,7 @@
 									</div>
 									
 								</div>
-							</div>
+							</div>       
 							
 						</div>
 						
@@ -108,10 +108,10 @@
 					<table class="table"  style = "margin-left:2%; width:96%;">
 						<thead>
 							<tr style = "background-color:#e9ecef;">
-								<th scope="col" style ="width:13%;">기안일</th>
+								<th scope="col" style ="width:10%;">기안일</th>
 								<th scope="col" style ="width:6%;">문서번호</th>
 								<th scope="col" style ="width:6%;">결재양식</th>
-								<th scope="col" style ="width:15%;">제목</th>
+								<th scope="col" style ="width:18%;">제목</th>
 								<th scope="col" style ="width:9%;">기안자 (사번)</th>
 								<th scope="col" style ="width:9%;">중간결재자 (사번)</th>
 								<th scope="col" style ="width:9%;">최종결재자 (사번)</th>
@@ -363,12 +363,12 @@
 								+ "<td>"+sign.empSign1Name + " " + sign.empSign1RankName + " ("+sign.empSign1+")</td>"
 								+ "<td>"+sign.empSign2Name + " " + sign.empSign2RankName + " ("+sign.empSign2+")</td>"
 								+ "<td>"
-									+ '<div class="d-flex no-block align-items-center m-t-15">'
+									+ '<div class="d-flex no-block align-items-center m-t-15" style="margin-left:5%;">'
 										+'<span>'+sign.signName+'</span>'
                         			+ '</div>'
-									+ '<div class="progress">';
+									+ '<div class="progress" style="margin-left:5%;">';
 										if(sign.signCode == "1") {
-											signList += '<div role="progressbar" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-striped bg-info" style="width: 30%" aria-valuenow="50"></div>'; 
+											signList += '<div role="progressbar" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-striped bg-danger" style="width: 30%" aria-valuenow="30"></div>'; 
 										}else if(sign.signCode == "2"){
 											signList +='<div role="progressbar" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-striped" style="width: 70%" aria-valuenow="70"></div>';
 										}else if(sign.signCode == "3"){

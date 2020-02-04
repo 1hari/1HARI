@@ -47,10 +47,10 @@
 						<table class="table" style = "margin-left:2%; width:96%">
 							<thead class="thead-light">
 								<tr>
-									<th scope="col" style ="width:10%;">기안일</th>
-									<th scope="col" style ="width:6%;">문서번호</th>
-									<th scope="col" style ="width:8%;">결재양식</th>
-									<th scope="col" style ="width:10%;">제목</th>
+									<th scope="col" style ="width:8%;">기안일</th>
+									<th scope="col" style ="width:3%;">문서번호</th>
+									<th scope="col" style ="width:7%;">결재양식</th>
+									<th scope="col" style ="width:15%;">제목</th>
 									<th scope="col" style ="width:8%;">기안자 (사번)</th>
 									<th scope="col" style ="width:8%;">중간결재자 (사번)</th>
 									<th scope="col" style ="width:8%;">최종결재자 (사번)</th>
@@ -69,13 +69,13 @@
 										<td>${waiting.empSign1Name} ${waiting.empSign1RankName} (${waiting.empSign1})</td>
 										<td>${waiting.empSign2Name} ${waiting.empSign2RankName} (${waiting.empSign2})</td>
 										<td>
-											<div class="d-flex no-block align-items-center m-t-15">
+											<div class="d-flex no-block align-items-center m-t-15" style="margin-left:5%;">
                                         		<span>${waiting.signName}</span>
                                     		</div>
-											<div class="progress">
+											<div class="progress" style = "margin-left:5%;">
 												<c:choose>
 													<c:when test="${waiting.signCode == 1}">
-														<div role="progressbar" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-striped bg-info" style="width: 30%" aria-valuenow="30"></div>
+														<div role="progressbar" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-striped bg-danger" style="width: 30%" aria-valuenow="30"></div>
 													</c:when>
 													<c:otherwise>
 														<div role="progressbar" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-striped" style="width: 70%" aria-valuenow="70"></div>
@@ -101,14 +101,14 @@
 						<table class="table"   style = "margin-left:2%; width:96%">
 							<thead class="thead-light">
 								<tr>
-									<th scope="col" style ="width:12%;">기안일</th>
-									<th scope="col" style ="width:6%;">문서번호</th>
-									<th scope="col" style ="width:10%;">결재양식</th>
-									<th scope="col" style ="width:13%;">제목</th>
-									<th scope="col" style ="width:10%;">기안자 (사번)</th>
-									<th scope="col" style ="width:10%;">중간결재자 (사번)</th>
-									<th scope="col" style ="width:10%;">최종결재자 (사번)</th>
-									<th scope="col" style ="width:10%;">결재상태</th>
+									<th scope="col" style ="width:8%;">기안일</th>
+									<th scope="col" style ="width:3%;">문서번호</th>
+									<th scope="col" style ="width:7%;">결재양식</th>
+									<th scope="col" style ="width:15%;">제목</th>
+									<th scope="col" style ="width:8%;">기안자 (사번)</th>
+									<th scope="col" style ="width:8%;">중간결재자 (사번)</th>
+									<th scope="col" style ="width:8%;">최종결재자 (사번)</th>
+									<th scope="col" style ="width:8%;">결재상태</th>
 								</tr>
 							</thead>
 							<tbody class="customtable">
@@ -123,13 +123,13 @@
 										<td>${draft.empSign1Name} ${draft.empSign1RankName} (${draft.empSign1})</td>
 										<td>${draft.empSign2Name} ${draft.empSign2RankName} (${draft.empSign2})</td>
 										<td>
-											<div class="d-flex no-block align-items-center m-t-15">
+											<div class="d-flex no-block align-items-center m-t-15" style = "margin-left:5%;">
                                         		<span>${draft.signName}</span>
                                     		</div>
-											<div class="progress">
+											<div class="progress" style = "margin-left:5%;">
 												<c:choose>
 													<c:when test="${draft.signCode == 1}">
-														<div role="progressbar" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-striped bg-info" style="width: 30%" aria-valuenow="30"></div>
+														<div role="progressbar" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-striped bg-danger" style="width: 30%" aria-valuenow="30"></div>
 													</c:when>
 													<c:otherwise>
 														<div role="progressbar" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-striped" style="width: 70%" aria-valuenow="70"></div>
@@ -155,14 +155,14 @@
 						<table class="table"  style = "margin-left:2%; width:96%">
 							<thead class="thead-light" >
 								<tr>
-									<th scope="col" style ="width:12%;">기안일</th>
-									<th scope="col" style ="width:6%;">문서번호</th>
-									<th scope="col" style ="width:10%;">결재양식</th>
-									<th scope="col" style ="width:10%;">제목</th>
-									<th scope="col" style ="width:10%;">기안자 (사번)</th>
-									<th scope="col" style ="width:10%;">중간결재자 (사번)</th>
-									<th scope="col" style ="width:10%;">최종결재자 (사번)</th>
-									<th scope="col" style ="width:10%;">결재상태</th>
+									<th scope="col" style ="width:8%;">기안일</th>
+									<th scope="col" style ="width:3%;">문서번호</th>
+									<th scope="col" style ="width:7%;">결재양식</th>
+									<th scope="col" style ="width:15%;">제목</th>
+									<th scope="col" style ="width:8%;">기안자 (사번)</th>
+									<th scope="col" style ="width:8%;">중간결재자 (사번)</th>
+									<th scope="col" style ="width:8%;">최종결재자 (사번)</th>
+									<th scope="col" style ="width:8%;">결재상태</th>
 								</tr>
 							</thead>
 							<tbody class="customtable">
@@ -177,10 +177,10 @@
 										<td>${completet.empSign1Name} ${completet.empSign1RankName} (${completet.empSign1})</td>
 										<td>${completet.empSign2Name} ${completet.empSign2RankName} (${completet.empSign2})</td>
 										<td>
-											<div class="d-flex no-block align-items-center m-t-15">
+											<div class="d-flex no-block align-items-center m-t-15" style = "margin-left:5%;">
                                         		<span>${completet.signName}</span>
                                     		</div>
-											<div class="progress">
+											<div class="progress" style = "margin-left:5%;">
 												<div role="progressbar" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-striped bg-success" style="width: 95%" aria-valuenow="100"></div>
 											</div>
 										</td>
@@ -202,14 +202,14 @@
 						<table class="table"  style = "margin-left:2%; width:96%">
 							<thead class="thead-light">
 								<tr>
-									<th scope="col" style ="width:12%;">기안일</th>
-									<th scope="col" style ="width:6%;">문서번호</th>
-									<th scope="col" style ="width:10%;">결재양식</th>
-									<th scope="col" style ="width:10%;">제목</th>
-									<th scope="col" style ="width:10%;">기안자 (사번)</th>
-									<th scope="col" style ="width:10%;">중간결재자 (사번)</th>
-									<th scope="col" style ="width:10%;">최종결재자 (사번)</th>
-									<th scope="col" style ="width:10%;">결재상태</th>
+									<th scope="col" style ="width:8%;">기안일</th>
+									<th scope="col" style ="width:3%;">문서번호</th>
+									<th scope="col" style ="width:7%;">결재양식</th>
+									<th scope="col" style ="width:15%;">제목</th>
+									<th scope="col" style ="width:8%;">기안자 (사번)</th>
+									<th scope="col" style ="width:8%;">중간결재자 (사번)</th>
+									<th scope="col" style ="width:8%;">최종결재자 (사번)</th>
+									<th scope="col" style ="width:8%;">결재상태</th>
 								</tr>
 							</thead>
 							<tbody class="customtable">
@@ -224,10 +224,10 @@
 										<td>${signReturn.empSign1Name} ${signReturn.empSign1RankName} (${signReturn.empSign1})</td>
 										<td>${signReturn.empSign2Name} ${signReturn.empSign2RankName} (${signReturn.empSign2})</td>
 										<td>
-											<div class="d-flex no-block align-items-center m-t-15">
+											<div class="d-flex no-block align-items-center m-t-15" style = "margin-left:5%;">
                                         		<span>${signReturn.signName}</span>
                                     		</div>
-											<div class="progress">
+											<div class="progress" style = "margin-left:5%; ">
 												<div role="progressbar" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-striped bg-danger" style="width: 95%" aria-valuenow="100"></div>
 											</div>
 										</td>
