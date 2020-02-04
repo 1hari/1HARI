@@ -3,71 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="se" uri="http://www.springframework.org/security/tags" %>
 
-<script>
-	$(function(){
-
-		//재직증명서 클릭
-		$("#employPopUp").click(function(){
-			//console.log($(this).attr("signNum"));
-			let openUrl = "${pageContext.request.contextPath}/1hariHr/employ.hari";
-			//console.log(openUrl);
-			open(openUrl,"재직증명서","statusber=no,menuber=no, width=850, height=800");
-		});//재직증명서 클릭
-		
-		//품의서 양식 목록 가져오기
-		$.ajax({
-			url:"${pageContext.request.contextPath}/ajax/selectAllForm.hari",
-			type:"post",
-			success: function(list){
-// 				console.log(list);
-				var formlist = "<ul>";
-				$.each(list, function(index, form){
-					//문서1개 시작 <i class="far fa-file-alt">&nbsp;</i> 아이콘 안먹힘..
-					formlist += '<li class="jstree-leaf">'
-									+'<i class="jstree-icon">&nbsp;</i>'
-									+'<a class="formcode" title="'+form.signFormCode+'" rel="FORM" href="#" data-bypass="1">'
-									+form.signFormFormName
-									+'</a>'
-								+'</li>'
-					//문서1개 끝
-				}) //each 끝
-				formlist += "</ul>";
-				
-				$('#formlist').append(formlist);
-				$('#formTree').jstree(); //비동기 완료 후 태그생성 -> jstree 활성화
-
-				var signFormCode;
-				//품의서 선택 시
-				$('.formcode').click(function() {
-					console.log($(this).attr('title'));
-					signFormCode = $(this).attr('title');
-					$('#signFormCode').val(signFormCode);
-					if($('#signFormCode').val() != "품의서"){
-						$('#formChoice').removeAttr('disabled');
-					}else {
-						$('#formChoice').attr('disabled', 'disabled');
-					}
-				})
-				
-			},
-			error: function(xhr){
-				console.log(xhr.status);
-			},
-// 			beforeSend:function(){//이미지 보여주기
-// 				$('.wrap-loading').removeClass('display-none');
-// 			},
-// 			complete:function(){ //이미지 감추기
-// 		        $('.wrap-loading').addClass('display-none');
-// 			},
-		});//ajax 끝
-	});//document ready 끝
-
-		//ul, li hover, 클릭시 font-size 크기 변경.. 
-	$(function() {
-
-	});
-</script>
-
 <style>
 	/* .wrap-loading{ /*화면 전체를 어둡게 합니다.
 		    position: fixed;
@@ -352,3 +287,65 @@
 		</div><!-- modal-content 끝 -->
 	</div><!-- modal-dialog 끝 -->
 </div><!--  draftModal 끝 -->
+
+<script type="text/javascript">
+	$(function(){
+		//재직증명서 클릭
+		$("#employPopUp").click(function(){
+			//console.log($(this).attr("signNum"));
+			let openUrl = "${pageContext.request.contextPath}/1hariHr/employ.hari";
+			//console.log(openUrl);
+			open(openUrl,"재직증명서","statusber=no,menuber=no, width=850, height=800");
+		});//재직증명서 클릭
+		
+		//품의서 양식 목록 가져오기
+		$.ajax({
+			url:"${pageContext.request.contextPath}/ajax/selectAllForm.hari",
+			type:"post",
+			success: function(list){
+// 				console.log(list);
+				var formlist = "<ul>";
+				$.each(list, function(index, form){
+					//문서1개 시작 <i class="far fa-file-alt">&nbsp;</i> 아이콘 안먹힘..
+					formlist += '<li class="jstree-leaf">'
+									+'<i class="jstree-icon">&nbsp;</i>'
+									+'<a class="formcode" title="'+form.signFormCode+'" rel="FORM" href="#" data-bypass="1">'
+									+form.signFormFormName
+									+'</a>'
+								+'</li>'
+					//문서1개 끝
+				}) //each 끝
+				formlist += "</ul>";
+				
+				$('#formlist').append(formlist);
+				$('#formTree').jstree(); //비동기 완료 후 태그생성 -> jstree 활성화
+
+				var signFormCode;
+				//품의서 선택 시
+				$('.formcode').click(function() {
+					console.log($(this).attr('title'));
+					signFormCode = $(this).attr('title');
+					$('#signFormCode').val(signFormCode);
+					if($('#signFormCode').val() != "품의서"){
+						$('#formChoice').removeAttr('disabled');
+					}else {
+						$('#formChoice').attr('disabled', 'disabled');
+					}
+				})
+				
+			},
+			error: function(xhr){
+				console.log(xhr.status);
+			},
+// 			beforeSend:function(){//이미지 보여주기
+// 				$('.wrap-loading').removeClass('display-none');
+// 			},
+// 			complete:function(){ //이미지 감추기
+// 		        $('.wrap-loading').addClass('display-none');
+// 			},
+		});//ajax 끝
+	});//document ready 끝
+
+		//ul, li hover, 클릭시 font-size 크기 변경.. 
+</script>
+
