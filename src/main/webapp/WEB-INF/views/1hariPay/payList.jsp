@@ -10,7 +10,15 @@
 <!-- Page wrapper  -->
 <!-- ============================================================== -->
 <!-- vue.js 코드 contents (webapp/vue folder 안에서 이루어짐) -->
-<div class="page-wrapper" style= "height:800px;">
+<div class="page-wrapper" style= "height:700px;">
+	<div class="page-breadcrumb">
+		<div class="row">
+			<div class="col-12 d-flex no-block align-items-center">
+				<h4 class="page-title">사원 조회</h4>
+				<div class="ml-auto text-right"></div>
+			</div>
+		</div>
+	</div>
 	<div class="container-fluid">
 		<!-- ============================================================== -->
 		<!-- Start Page Content -->

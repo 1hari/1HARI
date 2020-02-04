@@ -83,7 +83,7 @@
 		<!-- ============================================================== -->
 		<div class="row">
 			<div class="col-12">
-				<div class="container" style ="width:60%; border-radius:10px;  box-shadow :0 0 12px #999999; border: 10px;">
+				<div class="container" style ="width:60%; border-radius:10px;  box-shadow :7px 7px #505050;">
 					<div class="row setup-content" id="step-1">
 						<div class="col-md-12">
 							<!--form 태그 시작 -->
@@ -92,47 +92,47 @@
 								<div class="col-sm-12" style="margin-top: 3%;">
 									<div class="form-group">
 										<label for="empName">이름</label> 
-										<input type="text" id="empName" name="empName" class="form-control" value="${emp.empName}" readonly>
+										<input type="text" id="empName" name="empName" class="form-control" value="${emp.empName}" readonly style =" border-radius:10px; border:2px solid #807266">
 									</div>
 									<div class="form-group">
 										<label for="empNum">사번</label> 
-										<input  type="text" id="empNum" name="empNum" class="form-control" value="${emp.empNum}" readonly>
+										<input  type="text" id="empNum" name="empNum" class="form-control" value="${emp.empNum}" readonly style =" border-radius:10px; border:2px solid #807266">
 									</div>
 									<div class="form-group">
 										<label for="birth">생년월일</label>
-										<input type="text" id="birth" name="birth" class="form-control" value="${emp.birth}" readonly>
+										<input type="text" id="birth" name="birth" class="form-control" value="${emp.birth}" readonly style =" border-radius:10px; border:2px solid #807266">
 									</div>
 									<div class="form-group">
 										<label for="email">이메일</label>
-										<input type="text" id="email" name="email" class="form-control" value="${emp.email}" readonly>
+										<input type="text" id="email" name="email" class="form-control" value="${emp.email}" readonly style =" border-radius:10px; border:2px solid #807266">
 									</div>
 									<div class="form-group">
 										<label for="phoneNum">핸드폰번호</label>
 										<span class="checkPhoneNum" style="color: red;"></span>
-										<input id="phoneNum" name="phoneNum" type="text" class="required form-control" value="${emp.phoneNum}" maxlength="13" placeholder="(-) 없이 숫자만 입력하세요">
+										<input id="phoneNum" name="phoneNum" type="text" class="required form-control" value="${emp.phoneNum}" maxlength="13" placeholder="(-) 없이 숫자만 입력하세요" style =" border-radius:10px; border:2px solid #807266">
 									</div>
 									<div class="form-group">
 										<label for="hireDate">입사일</label>
-										<input type="text" id="hireDate" name="hireDate" class="form-control" value="${emp.hireDate}" readonly>
+										<input type="text" id="hireDate" name="hireDate" class="form-control" value="${emp.hireDate}" readonly style =" border-radius:10px; border:2px solid #807266">
 									</div>
 									<div class="form-group">
 										<label for="teamCode">소속</label>
-										<select id="teamSelect" name="teamCode" class="form-control" style="height: 100%;" required>
+										<select id="teamSelect" name="teamCode" class="form-control" style="height: 100%;  border-radius:10px; border:2px solid #807266" required>
 										</select>
 									</div>
 									<div class="form-group">
 										<label for="positionCode">직책</label>
-										<select id="positionSelect" name="positionCode" class="form-control" style="height: 100%;" required>
+										<select id="positionSelect" name="positionCode" class="form-control" style="height: 100%;  border-radius:10px; border:2px solid #807266" required>
 										</select>
 									</div>
 									<div class="form-group">
 										<label for="rankCode">직급</label>
-										<select id="rankSelect" name="rankCode" class="form-control" style="height: 100%;" required>
+										<select id="rankSelect" name="rankCode" class="form-control" style="height: 100%;  border-radius:10px; border:2px solid #807266" required>
 										</select>
 									</div>
 									<div class="form-group">
 										<label for="employmentCode">재직구분</label>
-										<select id="employmentSelect" name="employmentCode" class="form-control" style="height: 100%;" required>
+										<select id="employmentSelect" name="employmentCode" class="form-control" style="height: 100%;  border-radius:10px; border:2px solid #807266" required>
 										</select>
 									</div>
 									<div class="form-group" id="leaveDateDiv" style="display: none;">
@@ -142,7 +142,7 @@
 									<se:authorize access="hasRole('ROLE_ADMIN')">
 	 									<div class="form-group">
 	 										<label for="roleName">권한</label>
-	 										<select id="roleSelect" name="roleName" class="form-control" style="height: 100%;" required>
+	 										<select id="roleSelect" name="roleName" class="form-control" style="height: 100%;  border-radius:10px; border:2px solid #807266" required>
 	 										</select>
 	 									</div>
 									</se:authorize>

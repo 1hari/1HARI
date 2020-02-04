@@ -1,13 +1,13 @@
 <template>
   <!-- pay 급여조회 -->
 
-  <div class="container" style="margin-top:5%;">
-    <div class="card" style="border-radius:10px;  box-shadow :0 0 12px #999999; border: 10px">
-      <div class="card-body" >
+  <div class="container" style="margin-top:4%; width:150%;">
+    <div class="card" style=" border-radius:10px; box-shadow :7px 7px #505050; margin-left: -8%; width:115%; ">
+      <div class="card-body" style=" border-radius:10px; box-shadow :7px 7px #505050; " >
         <h4 class="card-title">급여</h4>
         <div style = "margin-left:85%;">
            <span>사번: {{server_data.empNum}}</span>
-            <select style = "margin-left:10%; border: 2px solid #807266;" id="selectYear" @change="getPayList($event)">
+            <select style = "margin-left:25%; border: 2px solid #807266;" id="selectYear" @change="getPayList($event)">
               <option  v-for="(a1, index) in server_data.years"  v-bind:selected="index == 0">{{a1}}</option>
             </select>
             
@@ -42,7 +42,7 @@
               <td class="text-center d-none d-md-table-cell">{{pay.payLIncomeTax}}</td>
               <td class="text-center d-none d-md-table-cell">{{totalDeduction}}</td><!--실급여로 데이터 받으세요 -->
               <td class="text-center d-none d-md-table-cell">{{realAmount}}</td><!--실급여로 데이터 받으세요 -->
-              <td class="text-center d-none d-md-table-cell"><button class ="btn-success" style = "background-color: white; color:black; border-radius:2px #807266;font-weight:bold; height:70%;" @click="payRead(splitPayMonth[index][0],splitPayMonth[index][1])">급여명세</button></td>
+              <td class="text-center d-none d-md-table-cell"><button class ="btn-success" style = "background-color: white; color:black; border-radius:7px border-color:#807266; font-weight:bold; height:70%;" @click="payRead(splitPayMonth[index][0],splitPayMonth[index][1])">급여명세</button></td>
             </tr>
           </tbody>
           
@@ -68,6 +68,12 @@
 <style>
 #board_list > tbody > tr {
   cursor: pointer;
+  
+ 	.table-bordered td,
+	.table-bordered th {
+		border: 2px solid #505050;
+		height: 45px;
+	}
 }
 </style>
 <script>

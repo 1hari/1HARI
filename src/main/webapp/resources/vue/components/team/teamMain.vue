@@ -1,8 +1,8 @@
 <template>
   <!-- 사원조회 리스트 -->
-  <div class="container" style="margin-top:5%;">
-    <div class="card shadow" style=" border-radius:10px;box-shadow :0 0 12px #999999; ">
-      <div class="card-body">
+  <div class="container" style="margin-top:4%; width:150%;">
+    <div class="card shadow" style=" border-radius:10px; box-shadow :7px 7px #505050; margin-left: -8%; width:115%; ">
+      <div class="card-body" style=" border-radius:10px; box-shadow :7px 7px #505050; ">
         
         <div class="row">
           <div class="col-md-12">
@@ -41,8 +41,8 @@
             </div>
           </div>
         </div>
-
-        <table class="table table-hover table-bordered" id="zero_config" >
+		
+        <table class="table table-hover table-bordered" id="zero_config" style="margin-top:3%;">
           <thead style = "background-color: #e9ecef;">
             <tr>
               <th class="text-center d-none d-md-table-cell" >사번</th>
@@ -100,7 +100,8 @@
 	
 	.table-bordered td,
 	.table-bordered th {
-		border: 1px solid #dee2e6;
+		border: 2px solid #505050;
+		height: 45px;
 	}
 </style>
 
