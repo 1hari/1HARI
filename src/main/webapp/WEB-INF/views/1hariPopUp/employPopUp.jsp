@@ -6,8 +6,8 @@
 <!-- Custom CSS -->
 <link rel="stylesheet" type="text/css"href="${pageContext.request.contextPath}/resources/hari/assets/extra-libs/multicheck/multicheck.css">
 <link href="${pageContext.request.contextPath}/resources/hari/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet">
-	<!-- css 설정 폰트 설정 추가-->
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/hari/dist/css/stylesheetlove.css">
+<!-- css 설정 폰트 설정 추가-->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/hari/dist/css/stylesheetlove.css">
 	
 <div class="page-wrapper" style="margin-left: 0%;">
 	<div class="container-fluid">

@@ -10,11 +10,6 @@
 <!--datepicker link 필수 !!! -->
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/hari/assets/libs/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
 
-<!--아래 3개는 마이 정보에서 필요한 js -->
-<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
-
-<script src="${pageContext.request.contextPath}/resources/hari/assets/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-<!--필수 js 지우지 말기 -->
 
 <!-- 컨텐츠 제목 -->
 <!-- ============================================================== -->
@@ -133,9 +128,8 @@
 <script src="${pageContext.request.contextPath}/resources/hari/dist/js/pages/mask/mask.init.js"></script>
 <script src="${pageContext.request.contextPath}/resources/hari/assets/libs/select2/dist/js/select2.full.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/hari/assets/libs/select2/dist/js/select2.min.js"></script>
-
 <script src="${pageContext.request.contextPath}/resources/hari/assets/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-
+<!--필수 js 지우지 말기 -->
 <script type="text/javascript">
 	$(function() {
 		let pwdReg = /^[A-Za-z0-9]{4,16}$/; // 4~16자리의 영문+숫자 조합의 비밀번호 정규표현식
