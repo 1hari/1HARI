@@ -39,7 +39,7 @@
 
 				<!-- 사원 근태관리 테이블 -->
 				<div class="card">
-					<div class="card-body" style ="border-radius:10px;border-radius:10px; box-shadow :0 0 12px #999999;">
+					<div class="card-body" style ="border-radius:10px;border-radius:10px; box-shadow :8px 8px #505050;">
 						<h5 class="card-title"></h5>
 						<div class="table-responsive">
 							<form id="taTable" name="taTable" method="post" enctype="multipart/form-data">
@@ -177,7 +177,7 @@
 							} else {
 								if (TaList[i].empNum == TaList[i-1].empNum && TaList[i].taCode == 5) { // 퇴근이 아닌 결근처리가 되어있을 경우
 									empTaList += '<td>' + TaList[i].taName + ' (' + TaList[i].taDate + ')</td>' // 결근, 결근처리시간
-												+ '<td><button type="button" class="editEmpTa btn btn-success"><i class="fa fa-edit"></i> 퇴근처리</button></td>' // 결근일 경우 퇴근처리 버튼 생성
+												+ '<td><button type="button" class="editEmpTa btn btn-success" style ="border-radius:7px;"><i class="fa fa-edit"></i> 퇴근처리</button></td>' // 결근일 경우 퇴근처리 버튼 생성
 											+ '</tr>';
 									count = 0;
 								} else { // 결근이 아닌 경우

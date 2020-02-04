@@ -2020,12 +2020,12 @@ pre code {
 }
 
 .table-bordered {
-	border: 1px solid #dee2e6
+	border: 2px solid #505050
 }
 
 .table-bordered td,
 .table-bordered th {
-	border: 1px solid #dee2e6
+	border: 2px solid #505050
 }
 
 .table-bordered thead td,
@@ -10972,7 +10972,7 @@ a.text-purple:hover {
 
 	.table-bordered td,
 	.table-bordered th {
-		border: 1px solid #dee2e6 !important
+		border: 2px solid #505050 !important
 	}
 }
 
@@ -14680,7 +14680,7 @@ pre code {
 
 .table thead th {
 	vertical-align: bottom;
-	border-bottom: 2px solid #dee2e6
+	border: 2px solid #505050;
 }
 
 .table tbody+tbody {
@@ -14697,12 +14697,12 @@ pre code {
 }
 
 .table-bordered {
-	border: 1px solid #dee2e6
+	border: 2px solid #505050
 }
 
 .table-bordered td,
 .table-bordered th {
-	border: 1px solid #dee2e6
+	border: 2px solid #505050
 }
 
 .table-bordered thead td,
@@ -23647,7 +23647,7 @@ a.text-purple:hover {
 
 	.table-bordered td,
 	.table-bordered th {
-		border: 1px solid #dee2e6 !important
+		border: 2px solid #505050 !important
 	}
 }
 
@@ -27350,7 +27350,7 @@ pre code {
 
 .table thead th {
 	vertical-align: bottom;
-	border-bottom: 2px solid #e1f6fa;
+	border: 2px solid #505050;
 }
 
 .table tbody+tbody {
@@ -27367,12 +27367,12 @@ pre code {
 }
 
 .table-bordered {
-	border: 1px solid #dee2e6
+	border: 2px solid #505050
 }
 
 .table-bordered td,
 .table-bordered th {
-	border: 1px solid #e1f6fa;
+	border: 2px solid #505050
 }
 
 .table-bordered thead td,
@@ -36320,7 +36320,7 @@ a.text-purple:hover {
 
 	.table-bordered td,
 	.table-bordered th {
-		border: 1px solid #dee2e6 !important
+		border: 2px solid #505050 !important
 	}
 }
 
@@ -44472,7 +44472,7 @@ pre code {
 
 .table thead th {
 	vertical-align: bottom;
-	border-bottom: 2px solid #dee2e6
+	border: 2px solid #505050
 }
 
 .table tbody+tbody {
@@ -44489,12 +44489,12 @@ pre code {
 }
 
 .table-bordered {
-	border: 1px solid #dee2e6
+	border: 2px solid #505050
 }
 
 .table-bordered td,
 .table-bordered th {
-	border: 1px solid #dee2e6
+	border: 2px solid #505050
 }
 
 .table-bordered thead td,
@@ -53439,7 +53439,7 @@ a.text-purple:hover {
 
 	.table-bordered td,
 	.table-bordered th {
-		border: 1px solid #dee2e6 !important
+		border: 2px solid #505050 !important
 	}
 }
 
@@ -57142,7 +57142,7 @@ pre code {
 
 .table thead th {
 	vertical-align: bottom;
-	border-bottom: 2px solid #dee2e6
+	border-bottom: 2px solid #505050
 }
 
 .table tbody+tbody {
@@ -57159,12 +57159,12 @@ pre code {
 }
 
 .table-bordered {
-	border: 1px solid #dee2e6
+	border: 2px solid #505050
 }
 
 .table-bordered td,
 .table-bordered th {
-	border: 1px solid #dee2e6
+	border: 2px solid #505050
 }
 
 .table-bordered thead td,
@@ -66113,7 +66113,7 @@ a.text-purple:hover {
 
 	.table-bordered td,
 	.table-bordered th {
-		border: 1px solid #dee2e6 !important
+		border: 2px solid #505050 !important
 	}
 }
 
@@ -69819,7 +69819,7 @@ pre code {
 
 .table thead th {
 	vertical-align: bottom;
-	border-bottom: 2px solid #e1f6fa;
+	border: 2px solid #505050;
 }
 
 .table tbody+tbody {
@@ -69827,7 +69827,7 @@ pre code {
 }
 
 .table .table {
-	background-color: #eeeeee
+	background-color: #e9ecef
 }
 
 .table-sm td,
@@ -69836,12 +69836,12 @@ pre code {
 }
 
 .table-bordered {
-	border: 1px solid #dee2e6
+	border: 2px solid #505050
 }
 
 .table-bordered td,
 .table-bordered th {
-	border: 1px solid #e1f6fa;
+	border: 2px solid #505050
 }
 
 .table-bordered thead td,
@@ -78794,7 +78794,7 @@ a.text-purple:hover {
 
 	.table-bordered td,
 	.table-bordered th {
-		border: 1px solid #dee2e6 !important
+		border: 2px solid #505050 !important
 	}
 }
 

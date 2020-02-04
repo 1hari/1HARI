@@ -580,7 +580,7 @@ $(function(){
 			<div class="col-md-6">
 				<se:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_PERSONNEL')">
 					<!-- 부서별 근무시간 통계 시작  -->
-					<div class="card" style ="height:350px; box-shadow :0 0 12px #999999; border-radius:10px; margin-left:10%;">
+					<div class="card" style ="height:350px; box-shadow :9px 9px #505050; border-radius:10px; margin-left:10%;">
 						<div class="card-body" style="padding-bottom: 0">
 							<span class="card-title m-b-0" style="margin-bottom:0; font-size: 18px;" >근무시간 통계</span>
 							<select class="select2 form-control custom-select select2-hidden-accessible workTimeSelect" id="workTimeSelectYear" style="width: 15%; height:30px; margin-left: 55%; font-size:small;" data-select2-id="1" tabindex="-1" aria-hidden="true">
@@ -609,7 +609,7 @@ $(function(){
 				<!-- 부서별 근무 통계 종료 -->
 				</se:authorize>
 				<!--당월 근태 통계 -->
-				<div class="card" style ="height:470px; box-shadow :0 0 12px #999999; border-radius:10px; margin-left:10%; ">
+				<div class="card" style ="height:470px; box-shadow :9px 9px #505050; border-radius:10px; margin-left:10%; ">
 					<div class="card-body" id="chartTaList">
 						<h4 class="card-title m-b-0">당월 근태 통계</h4>
 						<div id="canvas-holder" style="width: 66%; margin-left: -16%;">
@@ -655,7 +655,7 @@ $(function(){
 			<div class="col-md-6">
 				<se:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_PERSONNEL')">
 				<!--부서별 연봉 통계 시작-->
-					<div class="card" style ="height:350px; box-shadow :0 0 12px #999999; border-radius:10px; margin-right:10%;">
+					<div class="card" style ="height:350px; box-shadow :9px 9px #505050; border-radius:10px; margin-right:10%;">
 						<div class="card-body" style="padding-bottom: 0">
 							<span class="card-title m-b-0" style="margin-bottom:0; font-size: 18px;" >연봉 통계</span>
 							<select id="chartSelect" class="select2 form-control custom-select select2-hidden-accessible"  style="width: 20%; height:30px; margin-left: 68%; font-size:small;" data-select2-id="1" tabindex="-1" aria-hidden="true">
@@ -668,7 +668,7 @@ $(function(){
 				</se:authorize>
 				<!--부서별 연봉 통계 끝 -->
 				<!-- 전자 결재 시작 -->
-				<div class="card" style ="height:250px; box-shadow :0 0 12px #999999; border-radius:10px; margin-right:10%;">
+				<div class="card" style ="height:250px; box-shadow :9px 9px #505050; border-radius:10px; margin-right:10%;">
 					<div class="card-body">
 						<h5 class="card-title m-b-0">전자 결재</h5>
 					</div>
@@ -691,7 +691,7 @@ $(function(){
 				</div>
 				<!-- 전자 결재 끝 -->
 				<!-- 전자 결재 시작 -->
-				<div class="card" style ="height:200px; box-shadow :0 0 12px #999999; border-radius:10px; margin-right:10%;">
+				<div class="card" style ="height:200px; box-shadow :9px 9px #505050; border-radius:10px; margin-right:10%;">
 					<div class="card-body" style="padding-bottom: 0">
 						<span class="card-title m-b-0">오늘의 날씨</span>
 						<span class="card-title m-b-0" style="padding-left: 65%;" id="weatherDate"></span>
@@ -709,7 +709,7 @@ $(function(){
 		</div>
 	<!-- <div class="row"> 부분 끝 div-->
 			<!-- 뉴스 시작 -->
-			<div class="card" style ="height:200px; width:90%; box-shadow :0 0 12px #999999; border-radius:10px; margin-left:5%; ">
+			<div class="card" style ="height:200px; width:90%; box-shadow :9px 9px #505050; border-radius:10px; margin-left:5%; ">
 				<div class="card-body scrollable ps-container ps-theme-default ps-active-y">
 					<h4 class="card-title m-b-0">오늘의 뉴스</h4>
 					<table id="news" style="margin-left: 4%;">

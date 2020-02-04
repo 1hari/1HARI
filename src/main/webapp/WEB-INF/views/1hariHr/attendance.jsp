@@ -243,7 +243,7 @@ $(function(){
 			<div class="col-md-12">
 					<div class="row row-card-no-pd">
 						<div class="col-sm-6 col-md-3">
-							<div class="card card-stats card-round" style ="border-radius:10px;  box-shadow: 0 0 12px #999999;  ">
+							<div class="card card-stats card-round" style ="border-radius:10px;  box-shadow: 7px 7px #505050;">
 								<div class="card-body ">
 									<div class="row">
 										<div class="col-5">
@@ -262,7 +262,7 @@ $(function(){
 							</div>
 						</div>
 						<div class="col-sm-6 col-md-3">
-							<div class="card card-stats card-round" style ="border-radius:10px; box-shadow: 0 0 12px #999999; ">
+							<div class="card card-stats card-round" style ="border-radius:10px;  box-shadow: 7px 7px #505050; ">
 								<div class="card-body">
 									<div class="row">
 										<div class="col-5">
@@ -281,7 +281,7 @@ $(function(){
 							</div>
 						</div>
 						<div class="col-sm-6 col-md-3">
-							<div class="card card-stats card-round" style ="border-radius:10px; box-shadow: 0 0 12px #999999; ">
+							<div class="card card-stats card-round" style ="border-radius:10px;  box-shadow: 7px 7px #505050;">
 								<div class="card-body" >
 									<div class="row">
 										<div class="col-5">
@@ -300,7 +300,7 @@ $(function(){
 							</div>
 						</div>
 						<div class="col-sm-6 col-md-3">
-							<div class="card card-stats card-round" style ="border-radius:10px; box-shadow: 0 0 12px #999999;  ">
+							<div class="card card-stats card-round" style ="border-radius:10px;  box-shadow: 7px 7px #505050; ">
 								<div class="card-body" >
 									<div class="row">
 										<div class="col-5">
@@ -344,7 +344,7 @@ $(function(){
 
 							<!--캘린더 -->
 							<div class="col-lg-12">
-								<div class="card-body b-l calender-sidebar" style ="height:100%; border-radius:10px; box-shadow :0 0 12px #999999; ">
+								<div class="card-body b-l calender-sidebar" style ="height:100%; border-radius:10px;  box-shadow: 7px 7px #505050;">
 									<div id="calendar"></div>
 								</div>
 							</div>
