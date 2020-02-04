@@ -74,6 +74,7 @@
 		<div class="row">
 			<div class="col-md-6">
 				<se:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_PERSONNEL')">
+				<input type="hidden" id="isAddmin" value="형남">
 					<!-- 부서별 근무시간 통계 시작  -->
 					<div class="card" style ="height:350px; box-shadow :9px 9px #505050; border-radius:10px; margin-left:10%;">
 						<div class="card-body" style="padding-bottom: 0">
@@ -263,7 +264,6 @@
 				yearStr:$('#workTimeSelectYear').val()
 			},
 			success: function(getWorkTimeYear) {
-				console.log(getWorkTimeYear)
 				var yearList=getWorkTimeYear
 				let years = "";
 				//console.log(getWorkTimeYear == "");
@@ -282,46 +282,49 @@
 				$("#workTimeSelectYear").append(years);
 			}
 		}).then(() =>{
-			//메인 대시보드 근태차트 데이터 가져오기
-			$.ajax({
-				url: "${pageContext.request.contextPath}/ajax/getAllEmpTA.hari",
-				type: "post",
-				dataType: "json",
-				success: function(getAllEmpTA) {
-					for(var i =0; i<getAllEmpTA.length; i++){
-						getAllEmpTA[i].backgroundColor=color(colorArray[i]).alpha(0.5).rgbString();
-						getAllEmpTA[i].borderColor=colorArray[i];
-						dataset=getAllEmpTA;
-					}
-					var horizontalBarChartData = {
-						labels: MONTHS,
-						datasets: dataset
-					}
-					var ctx = document.getElementById('adminCanvas').getContext('2d');
-					window.myHorizontalBar = new Chart(ctx, {
-						type: 'horizontalBar',
-						data: horizontalBarChartData,
-						options: {
-							elements: {
-								rectangle: {
-								borderWidth: 2,
-								}
-							},
-							responsive: true,
-							legend: {
-								position: 'right',
-							},
-							title: {
-								display: true,
-								text: '부서별 월간 근무시간 통계'
-							}
+			//메인 대시보드 근무시간 통계 데이터 가져오기
+			if($('#isAddmin').val() != undefined){
+				$.ajax({
+					url: "${pageContext.request.contextPath}/ajax/getAllEmpTA.hari",
+					type: "post",
+					dataType: "json",
+					success: function(getAllEmpTA) {
+						for(var i =0; i<getAllEmpTA.length; i++){
+							getAllEmpTA[i].backgroundColor=color(colorArray[i]).alpha(0.5).rgbString();
+							getAllEmpTA[i].borderColor=colorArray[i];
+							dataset=getAllEmpTA;
 						}
-					})
-				}
-			})
+						var horizontalBarChartData = {
+							labels: MONTHS,
+							datasets: dataset
+						}
+						var ctx = document.getElementById('adminCanvas').getContext('2d');
+						window.myHorizontalBar = new Chart(ctx, {
+							type: 'horizontalBar',
+							data: horizontalBarChartData,
+							options: {
+								elements: {
+									rectangle: {
+									borderWidth: 2,
+									}
+								},
+								responsive: true,
+								legend: {
+									position: 'right',
+								},
+								title: {
+									display: true,
+									text: '부서별 월간 근무시간 통계'
+								}
+							}
+						})
+					}
+				})
+			}
+			
 		})
-	
-		//메인 대시보드 근태차트 월 변경 했을 경우
+		
+		//메인 대시보드 근무시간 월 변경 했을 경우
 		$('.workTimeSelect').change(function(){
 			//기존에 있던 차트 삭제
 			window.myHorizontalBar.destroy();
@@ -431,7 +434,6 @@
 			data:{strYear: year},
 			dataType: "json",
 			success: function(getTA) {
-				console.log(getTA)
 				//console.log(getTA.TAList[0]==0);
 				//당월 근태 데이터가 있는지 확인
 				var count = 0;
@@ -507,47 +509,49 @@
 			$("#chartSelect").append(years);
 			}
 		}).then((getSalYear) =>{
-			$.ajax({
-				url: "${pageContext.request.contextPath}/ajax/getTeamSalList.hari",
-				type: "post",
-				data:{
-							"year":getSalYear[0]
-						},
-				dataType: "json",
-				success: function(getTeamSalList) {
-					var labels=[];
-					for(var i =0; i<getTeamSalList.length; i++){
-						getTeamSalList[i].backgroundColor=color(colorArray[i]).alpha(0.5).rgbString();
-						getTeamSalList[i].borderColor=colorArray[i];
-						dataset2=getTeamSalList;
-						labels.push(getTeamSalList[i].label)
-					}
-					var barChartData = {
-						labels: [getSalYear[0]+'년'],
-						datasets: dataset2
-					}
-					var ctx2 = document.getElementById('adminCanvas2').getContext('2d');
-					window.myBar = new Chart(ctx2, {
-						type: 'bar',
-						data: barChartData,
-						options: {
-							elements: {
-								rectangle: {
-								borderWidth: 2,
-								}
+			if($('#isAddmin').val() != undefined){
+				$.ajax({
+					url: "${pageContext.request.contextPath}/ajax/getTeamSalList.hari",
+					type: "post",
+					data:{
+								"year":getSalYear[0]
 							},
-							responsive: true,
-							legend: {
-								position: 'right',
-							},
-							title: {
-								display: true,
-								text: '부서별 연봉 통계'
-							}
+					dataType: "json",
+					success: function(getTeamSalList) {
+						var labels=[];
+						for(var i =0; i<getTeamSalList.length; i++){
+							getTeamSalList[i].backgroundColor=color(colorArray[i]).alpha(0.5).rgbString();
+							getTeamSalList[i].borderColor=colorArray[i];
+							dataset2=getTeamSalList;
+							labels.push(getTeamSalList[i].label)
 						}
-					})
-				}
-			})
+						var barChartData = {
+							labels: [getSalYear[0]+'년'],
+							datasets: dataset2
+						}
+						var ctx2 = document.getElementById('adminCanvas2').getContext('2d');
+						window.myBar = new Chart(ctx2, {
+							type: 'bar',
+							data: barChartData,
+							options: {
+								elements: {
+									rectangle: {
+									borderWidth: 2,
+									}
+								},
+								responsive: true,
+								legend: {
+									position: 'right',
+								},
+								title: {
+									display: true,
+									text: '부서별 연봉 통계'
+								}
+							}
+						})
+					}
+				})
+			}
 		}).then((getSalYear) =>{
 			$("#chartSelect").change(function(){
 				window.myBar.destroy();
