@@ -3,6 +3,23 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+	.swal-button {
+		background-color: #807266;
+		
+	}
+	.swal-button:not([disabled]):hover {
+		background-color: #c2c2c2;
+		
+	}
+	.swal-text { 
+		font-weight: bold;
+		font-size: large;
+		color: black
+	}
+	
+
+</style>
 <!-- 시큐리티에서 넘겨준 error 메세지 -->
 <c:set var="error" value="${requestScope.ERRORMSG}" />
 
@@ -22,8 +39,8 @@
 				<!--로그인 화면 시작-->
 				<c:url value="/login" var="loginURL"/>   
 				<div class="col-lg-4 col-md-6 mt-0 mt-md-5" style = "border-radius:10px;">
-					<form action="${loginURL}" class="request-form ftco-animate" method="post" name="loginform" id="loginform" style ="box-shadow :3px 3px #999999;">
-						<h4 style ="font-size: x-large; color: black; font-family: 'Nanum DaCaeSaRang';font-weight: bold;">로그인</h4>
+					<form action="${loginURL}" class="request-form ftco-animate" method="post" name="loginform" id="loginform" style ="box-shadow :4px 4px #505050;">
+						<h4 style ="font-size: xx-large; color: black; font-family: 'Nanum DaCaeSaRang'; font-weight: bold; ">로그인</h4>
 						<div class="form-group">
 							<input type="text" id="username" name="username" class="form-control" placeholder="사번 입력" >
 							<span id="usernamecheck" style="font-size: 14px; color: red;"></span>
@@ -33,9 +50,9 @@
 							<span id="passwordcheck" style="font-size: 14px; color: red;"></span>
 						</div>
 						<div class="form-group">
-							<input type="button" value="로그인" onclick="login();" class="btn btn-primary py-3 px-4">
+							<input type="button" value="로그인" onclick="login();" class="btn btn-primary py-3 px-4" style = "font-weight: bold; font-size: large; font-family: 'Nanum DaCaeSaRang';">
 							<br>
-							<span data-toggle="modal" data-target="#add-new-event" style="cursor:pointer;">이메일 인증하기</span>
+							<span data-toggle="modal" data-target="#add-new-event" style="cursor:pointer; font-family:'Nanum DaCaeSaRang'; font-weight: bold; font-size: large;">비밀번호 변경</span>
 						</div>
 					</form>
 				</div>
@@ -46,41 +63,43 @@
 					<div class="modal-dialog">
 						<div class="modal-content">
 							<div class="modal-header">
-								<h5>이메일 인증하기</h5>
+								<h5 style =" font-family:'Nanum DaCaeSaRang';  font-weight: bold; font-size: x-large;">이메일 인증하기</h5>
+								
 								<button type="button" class="close" id="closeModal"data-dismiss="modal" aria-hidden="true">×</button>
 							</div>
 							<div class="modal-body">
 								<form action="${pageContext.request.contextPath}/updatePassword.hari" method="post" id="update">
 									<div class="input-group">
-										<span class="input-group-addon" >
-											<small>&nbsp;</small>
+										<span class="input-group-addon" style="margin-left:1%;" >
+											
 											<i class="fa fa-user fa-2x"></i>
 										</span>
 										<small>&nbsp;&nbsp;</small>
-										<input type="text" class="form-control" id="empNum" name="empNum" placeholder="사번 입력">
+										<input type="text" class="form-control" id="empNum" name="empNum" placeholder="사번 입력" style="border:2px solid #807266">
 									</div>
 									<small>&nbsp;</small>
+									
 									<div class="input-group">
 										<span class="input-group-addon">
 											<i class="fa fa-envelope fa-2x"></i>
 										</span>
 										<small>&nbsp;</small>
-										<input type="text" class="form-control" id="email" name="email" placeholder="이메일 주소 입력">
+										<input type="text" class="form-control" id="email" name="email" placeholder="이메일 주소 입력" style="border:2px solid #807266">
 									</div>
-									<small id="emailcheck">이메일을 입력해주세요.</small><br>
-									<button type="button" class="btn btn-default" id=emailSend>
+									
+									<button type="button" class="btn btn-default" id=emailSend style="margin-top:2%; margin-left:73%;">
 										<strong>
 											<i class="fa fa-paper-plane fa-1x"></i>&nbsp;인증번호 전송
 										</strong>
 									</button>
-									<input type="password" id="newPassword" name="newPassword"class="form-control" disabled="disabled">
+									<input type="password" id="newPassword" name="newPassword"class="form-control" disabled="disabled" style = "border-radius:10px; border:2px solid #807266">
 									<small id="pwcheck">비밀번호는 4자~10자 입니다.</small>
-									<input type="password" id="newPassword2" name="newPassword2"class="form-control" disabled="disabled">
+									<input type="password" id="newPassword2" name="newPassword2"class="form-control" disabled="disabled" style = "border-radius:10px; border:2px solid #807266">
 									<small id="pwckcheck">비밀번호를 다시 한 번 입력해주세요.</small>
 									<br>
 									<br>
 									<div style="text-align:center;">
-										<button type="button" id="updatePassword" class="btn btn-primary py-3 px-4" disabled="disabled">변경하기</button>
+										<button type="button" id="updatePassword" class="btn btn-primary py-3 px-4" style = "font-weight: bold; font-size: large; font-family: 'Nanum DaCaeSaRang';">변경하기</button>
 									</div>
 								</form>
 							</div>
@@ -201,6 +220,7 @@
 			if (!email_check) {
 				swal({
 					text: "이메일을 확인해주세요.",
+					icon: "warning",
 					button: "닫기"
 				});
 				return;
