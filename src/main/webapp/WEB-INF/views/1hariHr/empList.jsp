@@ -6,14 +6,7 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/hari/assets/extra-libs/multicheck/multicheck.css">
 <link href="${pageContext.request.contextPath}/resources/hari/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet">
 
-<style>
-	button{
-	
-	
-	}
-
-</style>
-<!-- Page wrapper  -->
+<!-- Page wrapper -->
 <!-- ============================================================== -->
 <div class="page-wrapper" >
 	<!-- ============================================================== -->
@@ -171,10 +164,8 @@
 <script src="${pageContext.request.contextPath}/resources/hari/assets/extra-libs/multicheck/jquery.multicheck.js"></script>
 <script src="${pageContext.request.contextPath}/resources/hari/assets/extra-libs/DataTables/datatables.min.js"></script>
 
-<script>
-	/****************************************
-	*       Basic Table                   *
-	****************************************/
+<script type="text/javascript">
+	/* DataTables */
 	$('#zero_config').DataTable();
 
 	/* Excel Upload / Download를 위한 script */

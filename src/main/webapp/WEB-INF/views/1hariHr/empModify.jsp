@@ -11,8 +11,6 @@
 
 <!--아래 3개는 사원 등록에서 필요한 js -->
 <!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
-<script src="${pageContext.request.contextPath}/resources/hari/assets/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-<!--필수 js 지우지 말기 -->
 
 <style>
 	.stepwizard-step p {
@@ -184,10 +182,8 @@
 <script src="${pageContext.request.contextPath}/resources/hari/assets/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/hari/assets/libs/bootstrap-datepicker/dist/locales/bootstrap-datepicker.ko.min.js"></script>
 
-<script>
-	/****************************************
-	*      필수 테이블 1. 데이터 테이블 , 2. datepicker 제이쿼리 스크립트 *
-	****************************************/
+<script type="text/javascript">
+	/* datepicker */
 	$('.leavedatepicker').datepicker(
 		{
 			format: "yyyy-mm-dd", // 입사일 Date 형식
@@ -333,8 +329,6 @@
 			}
 		})
 	});
-
-	
 </script>
 
 

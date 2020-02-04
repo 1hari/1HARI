@@ -8,16 +8,7 @@
 
 <c:set var="year" value="${requestScope.year}" />
 <c:set var="month" value="${requestScope.month}" />
-<script>
-	var contextPath = '${pageContext.request.contextPath}';
-  	var year ='${year}'
-	var month ='${month}'
 
-</script>
-
-<script src="${pageContext.request.contextPath}/resources/vue/js/vue-router.js"></script>
-<script src='${pageContext.request.contextPath}/resources/vue/js/payPopUpRouter.js'></script>
-<script src='${pageContext.request.contextPath}/resources/vue/js/app.js'></script>
 <style>
 	body, input, p, span, option, label, select, button, .wizard-content {
 		font-family :맑은고딕,monospace;
@@ -52,3 +43,11 @@
 </div>
 <!-- ============================================================== -->
 <!-- End Page wrapper  -->
+<script>
+	var contextPath = '${pageContext.request.contextPath}';
+  	var year ='${year}'
+	var month ='${month}'
+</script>
+<script src="${pageContext.request.contextPath}/resources/vue/js/vue-router.js"></script>
+<script src='${pageContext.request.contextPath}/resources/vue/js/payPopUpRouter.js'></script>
+<script src='${pageContext.request.contextPath}/resources/vue/js/app.js'></script>

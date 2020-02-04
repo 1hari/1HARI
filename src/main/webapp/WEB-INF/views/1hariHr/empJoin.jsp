@@ -16,10 +16,6 @@
 <!--아래 사원 등록에서 필요한 js -->
 <!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
 
-<!-- this page js , 1단계 2단계 3단계 제출 구성 쿼리 필수! 지우지 마세요 -->
-<script src="${pageContext.request.contextPath}/resources/hari/assets/libs/jquery-steps/build/jquery.steps.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/hari/assets/libs/jquery-validation/dist/jquery.validate.min.js"></script>
-
 <style>
 	.stepwizard-step p {
 		margin-top: 10px;
@@ -191,11 +187,12 @@
 <script src="${pageContext.request.contextPath}/resources/hari/assets/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/hari/assets/libs/bootstrap-datepicker/dist/locales/bootstrap-datepicker.ko.min.js"></script>
 
+<!-- this page js , 1단계 2단계 3단계 제출 구성 쿼리 필수! 지우지 마세요 -->
+<script src="${pageContext.request.contextPath}/resources/hari/assets/libs/jquery-steps/build/jquery.steps.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/hari/assets/libs/jquery-validation/dist/jquery.validate.min.js"></script>
+
 <script type="text/javascript">
-/****************************************
-*      필수 테이블 1. 데이터 테이블 , 2. datepicker 제이쿼리 스크립트 *
-****************************************/
-/*datepicker*/
+	/*datepicker*/
 	$(function() {
 		$('.hiredatepicker').datepicker(
 			{
@@ -524,7 +521,6 @@
 			}
 		})
 	}
-	
 </script>
 
 
