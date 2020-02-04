@@ -34,7 +34,7 @@
 			<div class="col-12">
 
 				<!--전자결재 관리1  테이블 -->
-				<div class="card" style=" border-radius:10px; box-shadow :0 0 12px #999999;">
+				<div class="card" style="border-radius:8px;  box-shadow: 6px 6px #505050;">
 					<div class="card-body">
 						<h5 class="card-title m-b-0">결재 대기 문서</h5>
 					</div>
@@ -42,10 +42,10 @@
 						<table class="table">
 							<thead class="thead-light">
 								<tr>
-									<th scope="col" style ="width:13%;">기안일</th>
-									<th scope="col" style ="width:8%;">문서번호</th>
+									<th scope="col" style ="width:12%;">기안일</th>
+									<th scope="col" style ="width:6%;">문서번호</th>
 									<th scope="col" style ="width:10%;">결재양식</th>
-									<th scope="col" style ="width:10%;">제목</th>
+									<th scope="col" style ="width:13%;">제목</th>
 									<th scope="col" style ="width:10%;">기안자 (사번)</th>
 									<th scope="col" style ="width:10%;">중간결재자 (사번)</th>
 									<th scope="col" style ="width:10%;">최종결재자 (사번)</th>
@@ -88,7 +88,7 @@
 				<!--데이터 테이블1 끝 -->
 				<hr>
 				<!--전자결재 관리2  테이블 -->
-				<div class="card"  style=" border-radius:10px;box-shadow :0 0 12px #999999;">
+				<div class="card"  style="border-radius:8px;   box-shadow: 6px 6px #505050;">
 					<div class="card-body">
 						<h5 class="card-title m-b-0">최근 기안 문서</h5>
 					</div>
@@ -96,8 +96,8 @@
 						<table class="table">
 							<thead class="thead-light">
 								<tr>
-									<th scope="col" style ="width:13%;">기안일</th>
-									<th scope="col" style ="width:8%;">문서번호</th>
+									<th scope="col" style ="width:12%;">기안일</th>
+									<th scope="col" style ="width:6%;">문서번호</th>
 									<th scope="col" style ="width:10%;">결재양식</th>
 									<th scope="col" style ="width:10%;">제목</th>
 									<th scope="col" style ="width:10%;">기안자 (사번)</th>
@@ -142,7 +142,7 @@
 				<!--데이터 테이블2 끝 -->
 				<hr>
 				<!--전자결재 관리3  테이블 -->
-				<div class="card"  style=" border-radius:10px;box-shadow :0 0 12px #999999;">
+				<div class="card"  style="border-radius:8px;   box-shadow: 6px 6px #505050;">
 					<div class="card-body">
 						<h5 class="card-title m-b-0">최근 완료 문서</h5>
 					</div>
@@ -150,8 +150,8 @@
 						<table class="table">
 							<thead class="thead-light">
 								<tr>
-									<th scope="col" style ="width:13%;">기안일</th>
-									<th scope="col" style ="width:8%;">문서번호</th>
+									<th scope="col" style ="width:12%;">기안일</th>
+									<th scope="col" style ="width:6%;">문서번호</th>
 									<th scope="col" style ="width:10%;">결재양식</th>
 									<th scope="col" style ="width:10%;">제목</th>
 									<th scope="col" style ="width:10%;">기안자 (사번)</th>
@@ -189,7 +189,7 @@
 				<!--데이터 테이블3 끝 -->
 				<hr>
 				<!--전자결재 관리4  테이블 -->
-				<div class="card"  style=" border-radius:10px; box-shadow :0 0 12px #999999;">
+				<div class="card"  style="border-radius:8px;  box-shadow: 6px 6px #505050;">
 					<div class="card-body">
 						<h5 class="card-title m-b-0">최근 반려 문서</h5>
 					</div>
@@ -197,8 +197,8 @@
 						<table class="table">
 							<thead class="thead-light">
 								<tr>
-									<th scope="col" style ="width:13%;">기안일</th>
-									<th scope="col" style ="width:8%;">문서번호</th>
+									<th scope="col" style ="width:12%;">기안일</th>
+									<th scope="col" style ="width:6%;">문서번호</th>
 									<th scope="col" style ="width:10%;">결재양식</th>
 									<th scope="col" style ="width:10%;">제목</th>
 									<th scope="col" style ="width:10%;">기안자 (사번)</th>

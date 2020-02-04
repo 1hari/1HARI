@@ -34,7 +34,7 @@
 		<!-- ============================================================== -->
 		<div class="row">
 			<div class="col-12">
-				<div class="container" style ="marign-bottom:3%; background-color:#fff; border-radius:10px; box-shadow: 0 0 12px #999999;">
+				<div class="container" style ="marign-bottom:3%; background-color:#fff; border-radius:10px; box-shadow:7px 7px #505050">
 					<div class="row">
 						<div class="col-md-12">
 							<!--form 태그 시작 -->
@@ -44,62 +44,62 @@
 									<div class="col-sm-6">
 										<div class="form-group">
 											<label for="empName">이름</label> 
-											<input type="text" id="empName" name="empName" class="form-control" value="${emp.empName}" readonly>
+											<input type="text" id="empName" name="empName" class="form-control" value="${emp.empName}" readonly style="border-radius:10px; border:2px solid #807266">
 										</div>
 										<div class="form-group">
 											<label for="empNum">사번</label> 
-											<input type="text" id="empNum" name="empNum" class="form-control" value="${emp.empNum}" readonly>
+											<input type="text" id="empNum" name="empNum" class="form-control" value="${emp.empNum}" readonly style="border-radius:10px; border:2px solid #807266">
 										</div>
 										<div class="form-group">
 											<label for="birth">생년월일</label>
-											<input type="text" id="birth" name="birth" class="form-control" value="${emp.birth}" readonly>
+											<input type="text" id="birth" name= "birth" class="form-control" value="${emp.birth}" readonly style="border-radius:10px; border:2px solid #807266">
 										</div>
 										<div class="form-group">
 											<label for="hireDate">입사일</label>
-											<input type="text" id="hireDate" name="hireDate" class="form-control" value="${emp.hireDate}" readonly>
+											<input type="text" id="hireDate" name="hireDate" class="form-control" value="${emp.hireDate}" readonly style="border-radius:10px; border:2px solid #807266">
 										</div>
 										<div class="form-group">
 											<label for="empNum">비밀번호</label>
 											<span id="pwdCheck" style="color: red;"></span>
-											<input type="password" id="password" name="password" class="form-control" required="required">
+											<input type="password" id="password" name="password" class="form-control" required="required" style="border-radius:10px; border:2px solid #807266">
 										</div>
 										<div class="form-group">
 											<label for="birth">비밀번호 확인</label>
 											<span id="pwdReCheck" style="color: red;"></span>
-											<input type="password" id="passwordCheck" class="form-control" required="required">
+											<input type="password" id="passwordCheck" class="form-control" required="required" style="border-radius:10px; border:2px solid #807266">
 										</div>
 									</div>
 									<div class="col-sm-6">
 										<div class="form-group">
 											<label for="teamCode">소속</label>
-											<input type="text" class="form-control" value="${emp.teamName}" readonly>
+											<input type="text" class="form-control" value="${emp.teamName}" readonly style="border-radius:10px; border:2px solid #807266">
 										</div>
 										<div class="form-group">
 											<label for="positionCode">직책</label>
-											<input type="text" class="form-control" value="${emp.positionName}" readonly>
+											<input type="text" class="form-control" value="${emp.positionName}" readonly style="border-radius:10px; border:2px solid #807266">
 										</div>
 										<div class="form-group">
 											<label for="rankCode">직급</label>
-											<input type="text" class="form-control" value="${emp.rankName}" readonly>
+											<input type="text" class="form-control" value="${emp.rankName}" readonly style="border-radius:10px; border:2px solid #807266">
 										</div>
 										<div class="form-group">
 											<label for="employmentCode">재직구분</label>
-											<input type="text" class="form-control" value="${emp.employmentName}" readonly>
+											<input type="text" class="form-control" value="${emp.employmentName}" readonly style="border-radius:10px; border:2px solid #807266">
 										</div>
 										<div class="form-group">
 											<label for="phoneNum">핸드폰번호</label>
 											<span id="phoneNumCheck" style="color: red;"></span>
-											<input type="text" id="phoneNum" name="phoneNum" class="form-control" value="${emp.phoneNum}" placeholder="(-) 없이 숫자만 입력하세요." maxlength="13" required>
+											<input type="text" id="phoneNum" name="phoneNum" class="form-control" value="${emp.phoneNum}" placeholder="(-) 없이 숫자만 입력하세요." maxlength="13" required style="border-radius:10px; border:2px solid #807266">
 										</div>
 										<div class="form-group">
 											<label for="email">이메일</label>
 											<span id="emailCheck" style="color: red;"></span>
-											<input id="email" name="email" type="text" class="form-control" value="${emp.email}" required>
+											<input id="email" name="email" type="text" class="form-control" value="${emp.email}" required style="border-radius:10px; border:2px solid #807266">
 										</div>
 									</div>									
 								</div>
 								<div class="form-group" align="right">
-									<button type="button" id="submitButton" style ="color: #807266; background-color: #fff; border-color: #807266;" class="btn btn-success">수정하기</button>
+									<button type="button" id="submitButton" style ="color: black; background-color: #fff; border-color: #807266;" class="btn btn-success">수정하기</button>
 								</div>
 							</form>
 							<!--폼 action 태그 끝 -->
