@@ -6,8 +6,8 @@
 <!-- Custom CSS -->
 <link rel="stylesheet" type="text/css"href="${pageContext.request.contextPath}/resources/hari/assets/extra-libs/multicheck/multicheck.css">
 <link href="${pageContext.request.contextPath}/resources/hari/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet">
-<!-- css 설정 폰트 설정 추가-->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/hari/dist/css/stylesheetlove.css">
+	<!-- css 설정 폰트 설정 추가-->
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/hari/dist/css/stylesheetlove.css">
 	
 <div class="page-wrapper" style="margin-left: 0%;">
 	<div class="container-fluid">
@@ -147,5 +147,14 @@
 	}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"></script>
-<script src="${pageContext.request.contextPath}/resources/hari/customjs/1hariPopUp/employPopUp.js"></script>
-
+<script>
+	var date = moment(new Date()).format("YYYY-MM-DD");
+	console.log(date); 
+	$('#employDate').html('${emp.hireDate} ~ '+date);
+	$('#todayDate').html(date);
+	$('#ceoName').html("1HARI 대표 ${ceo.empName}");
+	//출력버튼
+	$('#print').click(function(){
+		window.print();
+	});
+</script>

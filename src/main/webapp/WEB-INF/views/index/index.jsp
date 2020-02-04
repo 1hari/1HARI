@@ -179,12 +179,6 @@
 						<span>HR system</span>
 					</h1>
 					<p class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"></p>
-<!--             <div id="timer" class="d-flex"> -->
-<!--                     <div class="time" id="days"></div> -->
-<!--                     <div class="time pl-3" id="hours"></div> -->
-<!--                     <div class="time pl-3" id="minutes"></div> -->
-<!--                     <div class="time pl-3" id="seconds"></div> -->
-<!--              </div> -->
 				</div>
 				<div class="col-lg-2 col"></div>
 				<!--로그인 화면 시작-->
@@ -200,11 +194,6 @@
 							<input type="password" id="password" name="password" class="form-control" placeholder="비밀번호 입력" >
 							<span id="passwordcheck" style="font-size: 14px; color: red;"></span>
 						</div>
-                  <!--  <div class="form-group">
-                        <div class="checkbox">
-                           <label><input type="checkbox" value="" class="mr-2">사원 번호 기억하기</label>
-                        </div>
-                   </div> -->
 						<div class="form-group">
 							<input type="button" value="로그인" onclick="login();" class="btn btn-primary py-3 px-4">
 							<br>

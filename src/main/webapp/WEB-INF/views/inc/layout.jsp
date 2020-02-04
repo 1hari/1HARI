@@ -11,9 +11,7 @@
 	<title>
 		<tiles:getAsString name="title"/>	
 	</title>
-	<script type="text/javascript">
-		const root= "${pageContext.request.contextPath}";
-	</script>
+	
 	<!-- font awesome 아이콘 -->
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -60,7 +58,9 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/hari/assets/libs/jquery-minicolors/jquery.minicolors.css">
 <script src="${pageContext.request.contextPath}/resources/hari/assets/libs/jquery-minicolors/jquery.minicolors.min.js"></script>
 
+    <script type="text/javascript">
 
+    </script>
     
     
     

@@ -5,7 +5,8 @@
 <script src="https://cdn.jsdelivr.net/npm/http-vue-loader@1.4.1/src/httpVueLoader.min.js"></script>
 <script src="https://unpkg.com/vuex"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<%-- <script src="${pageContext.request.contextPath}/resources/hari/customjs/1hariPay/payList.js"></script> --%>
+
+
 <script>
 	var contextPath = '${pageContext.request.contextPath}';
 </script>
