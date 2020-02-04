@@ -66,6 +66,7 @@
 		line-height: 1.428571429;
 		border-radius: 0px;
 	}
+
 </style>
 
 <!-- 컨텐츠 제목 -->
@@ -92,7 +93,7 @@
 				<!-- Start Page Content -->
 				<!-- ============================================================== -->
 				<div class="card" style="width:80%; height:80%; margin-left:10%;" >
-					<div class="card-body wizard-content" style ="border-radius:10px;  box-shadow :0 0 12px #999999; border: 10px ">
+					<div class="card-body wizard-content" style ="border-radius:10px;  box-shadow :7px 7px #505050; border: 10px ">
 						<h6 class="card-subtitle"></h6>
 						<form id="example-form" action="" class="m-t-40" name="joinform" method="post">
 							<div>
@@ -104,53 +105,53 @@
 		                           </div>
 		                           <div>
 		                              <label for="empName" style="margin-top: 10px; margin-bottom: 0px;">이름</label> 
-		                              <input id="empName" name="empName" type="text" class="required form-control"> 
+		                              <input id="empName" name="empName" type="text" class="required form-control" style = "border-radius:10px;  border:2px solid #807266"> 
 		                           </div>
 		                           <div>
 		                              <label for="birthFull" style="margin-top: 10px; margin-bottom: 0px;">생년월일</label> 
-		                              <input type="text" id="birth" name="birth" class="required form-control birthdatepicker" placeholder="yymmdd">
+		                              <input type="text" id="birth" name="birth" class="required form-control birthdatepicker" placeholder="yymmdd"  style = "border-radius:10px;  border:2px solid #807266">
 		                           </div>
 		                           <div>
 		                              <label for="resNum" style="margin-top: 10px; margin-bottom: 0px;">주민등록번호</label>
-		                              <button type="button" class="btn btn-success" style="padding-top: 0px; padding-bottom: 0px;" onclick="CheckForm()">확인</button>
-		                              <input type="password" id="resNum" name="resNum" class="required form-control" maxlength="7" placeholder="주민등록번호 뒷자리">
+		                              <button type="button" class="btn btn-success" style="padding-top: 0px; padding-bottom: 0px; border-radius:7px; border:2px solid #807266 " onclick="CheckForm()">확인</button>
+		                              <input type="password" id="resNum" name="resNum" class="required form-control" maxlength="7" placeholder="주민등록번호 뒷자리"  style = "border-radius:10px;  border:2px solid #807266">
 		                           </div>
 		                           <div>
 		                              <label for="phoneNum" style="margin-top: 10px; margin-bottom: 0px;">핸드폰번호</label> 
 		                              <span class="checkPhoneNum" style="color: red;"></span>
-		                              <input id="phoneNum" name="phoneNum" type="text" class="required form-control" maxlength="13" placeholder="(-) 없이 숫자만 입력하세요">
+		                              <input id="phoneNum" name="phoneNum" type="text" class="required form-control" maxlength="13" placeholder="(-) 없이 숫자만 입력하세요"  style = "border-radius:10px;  border:2px solid #807266">
 		                           </div>
 		                           <div>
 		                              <label for="email" style="margin-top: 10px; margin-bottom: 0px;">이메일</label>
 		                              <span id="emailCheck" style="color: red;"></span>
-		                              <input id="email" name="email" type="text" class="required form-control">
+		                              <input id="email" name="email" type="text" class="required form-control"  style = "border-radius:10px; border:2px solid #807266">
 		                           </div>
 		                        </section>
 		
 								<h3>재직 정보</h3>
 								<section>
 									<label for="teamCode">소속</label> 
-									<select class="required form-control" id="teamSelect" name="teamCode" style="height: 300%; margin-bottom: 1%;">
+									<select class="required form-control" id="teamSelect" name="teamCode" style="height: 300%; margin-bottom: 1%; border-radius:10px; border:2px solid #807266">
 										<option hidden>소속을 선택하세요</option>
 									</select> 
 									
 									<label for="positionCode">직책</label> 
-									<select class="required form-control" id="positionSelect" name="positionCode" style="height: 300%; margin-bottom: 1%;">
+									<select class="required form-control" id="positionSelect" name="positionCode" style="height: 300%; margin-bottom: 1%;  border-radius:10px; border:2px solid #807266">
 										<option hidden>직책을 선택하세요</option>
 									</select> 
 									
 									<label for="rankcode">직급</label> 
-									<select class="required form-control" id="rankSelect" name="rankCode" style="height: 300%; margin-bottom: 1%;">
+									<select class="required form-control" id="rankSelect" name="rankCode" style="height: 300%; margin-bottom: 1%;  border-radius:10px; border:2px solid #807266">
 										<option hidden>직급을 선택하세요</option>
 									</select> 
 									
 									<label for="employmentcode">재직구분</label> 
-									<select class="required form-control" id="employmentSelect" name="employmentCode" style="height: 300%; margin-bottom: 1%;">
+									<select class="required form-control" id="employmentSelect" name="employmentCode" style="height: 300%; margin-bottom: 1%;  border-radius:10px; border:2px solid #807266">
 										<option hidden>재직 유형을 선택하세요</option>
 									</select>
 									<div>
 										<label for="hireDate" style="margin-top: 10px; margin-bottom: 0px;">입사일</label>
-										<input type="text" id="hireDate" name="hireDate" class="form-control hiredatepicker" placeholder="yyyy-mm-dd">
+										<input type="text" id="hireDate" name="hireDate" class="form-control hiredatepicker" placeholder="yyyy-mm-dd" style =" border-radius:10px; border:2px solid #807266">
 									</div>
 								</section>
 		
