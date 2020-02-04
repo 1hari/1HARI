@@ -106,7 +106,7 @@
 				<!--당월 근태 통계 -->
 				<div class="card" style ="height:470px; box-shadow :9px 9px #505050; border-radius:10px; margin-left:10%; ">
 					<div class="card-body" id="chartTaList">
-						<h4 class="card-title m-b-0">당월 근태 통계</h4>
+						<h4 class="card-title m-b-0" id="taChartDate"></h4>
 						<div id="canvas-holder" style="width: 66%; margin-left: -16%;">
 							<div class="chartjs-size-monitor">
 								<div class="chartjs-size-monitor-expand">
@@ -243,8 +243,17 @@
 	var dataset;
 	var dataset2;
 	var color = Chart.helpers.color;
-	
+
+	const date = new Date();
+	const year = date.getFullYear();
+	let month = date.getMonth()+1;
+	let day = date.getDate();
+	let hour = date.getHours();
+	let minutes = date.getMinutes();
+	let week = ['일', '월', '화', '수', '목', '금', '토'];
 	$(function() {
+		//메인 대시보드 근태차트 날짜
+		$('#taChartDate').text(year + "년 " + month + "월 " + day + "일 " + week[date.getDay()]+ "요일")
 		//메인 대시보드 근태차트 옵션 값 생성
 		$.ajax({
 			url: "${pageContext.request.contextPath}/ajax/getWorkTimeYear.hari",
@@ -419,9 +428,10 @@
 		$.ajax({
 			url: "${pageContext.request.contextPath}/ajax/getTA.hari",
 			type: "post",
+			data:{strYear: year},
 			dataType: "json",
 			success: function(getTA) {
-				
+				console.log(getTA)
 				//console.log(getTA.TAList[0]==0);
 				//당월 근태 데이터가 있는지 확인
 				var count = 0;
@@ -430,7 +440,6 @@
 					if(data == 0){
 						count++;
 					}
-					
 				});
 				//console.log(count);
 				
@@ -454,7 +463,6 @@
 								'지각',
 								'결근',
 								'연차',
-								'조퇴'
 							]
 						},
 						options: {
@@ -477,6 +485,7 @@
 				}
 			}
 		});
+
 		
 		//부서별 연봉 통계 년도 옵션
 		var dataset2;
@@ -588,20 +597,16 @@
 		//날씨 API
 		//날씨정보를 받고싶은 위도 경도
 		var rs = dfs_xy_conv("toXY", 37.525913599999996, 126.83591679999999); //
-		var date = new Date();
-		var year = date.getFullYear();
-		var month = date.getMonth()+1;
-	
+		
 		//API에서 받는 날짜, 시간 형식
 		if(month<10){
 			month = "0" + month;
 		}
-		var day = date.getDate();
+		
 		if(day<10){
 			day = "0" + day; 
 		}
-		var hour = date.getHours();
-		var minutes = date.getMinutes();
+
 		if (minutes < 46) {
 			hour -= 1;
 		}

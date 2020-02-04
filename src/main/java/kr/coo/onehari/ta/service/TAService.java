@@ -344,12 +344,12 @@ public class TAService {
 	}
 
 	// 형남 0121 출근 횟수 가져오기(사원 대시보드 차트)
-	public int getWork(String empNumStr) {
+	public int getWork(String empNumStr, int year) {
 		TADao dao = sqlsession.getMapper(TADao.class);
 		int work = 0;
 		int empNum = Integer.parseInt(empNumStr);
 		try {
-			work = dao.getWork(empNum);
+			work = dao.getWork(empNum, year);
 		} catch (ClassNotFoundException | SQLException e) {
 			log.debug("getWork : " + e.getMessage());
 		}
@@ -357,12 +357,12 @@ public class TAService {
 	}
 
 	// 형남 0121 출근 횟수 가져오기(사원 대시보드 차트)
-	public int getTardy(String empNumStr) {
+	public int getTardy(String empNumStr, int year) {
 		TADao dao = sqlsession.getMapper(TADao.class);
 		int tardy = 0;
 		int empNum = Integer.parseInt(empNumStr);
 		try {
-			tardy = dao.getTardy(empNum);
+			tardy = dao.getTardy(empNum, year);
 		} catch (ClassNotFoundException | SQLException e) {
 			log.debug("getTardy : " + e.getMessage());
 		}
@@ -370,12 +370,12 @@ public class TAService {
 	}
 
 	// 형남 0121 출근 횟수 가져오기(사원 대시보드 차트)
-	public int getAbsent(String empNumStr) {
+	public int getAbsent(String empNumStr, int year) {
 		TADao dao = sqlsession.getMapper(TADao.class);
 		int absent = 0;
 		int empNum = Integer.parseInt(empNumStr);
 		try {
-			absent = dao.getAbsent(empNum);
+			absent = dao.getAbsent(empNum, year);
 		} catch (ClassNotFoundException | SQLException e) {
 			log.debug("getAbsent : " + e.getMessage());
 		}
@@ -383,12 +383,12 @@ public class TAService {
 	}
 
 	// 형남 0121 출근 횟수 가져오기(사원 대시보드 차트)
-	public int getAnnual(String empNumStr) {
+	public int getAnnual(String empNumStr, int year) {
 		TADao dao = sqlsession.getMapper(TADao.class);
 		int annual = 0;
 		int empNum = Integer.parseInt(empNumStr);
 		try {
-			annual = dao.getAnnual(empNum);
+			annual = dao.getAnnual(empNum, year);
 		} catch (ClassNotFoundException | SQLException e) {
 			log.debug("getAnnual : " + e.getMessage());
 		}
@@ -396,18 +396,17 @@ public class TAService {
 	}
 
 	// 형남 0121 출근 횟수 가져오기(사원 대시보드 차트)
-	public int getEarly(String empNumStr) {
-		TADao dao = sqlsession.getMapper(TADao.class);
-		int early = 0;
-		int empNum = Integer.parseInt(empNumStr);
-		try {
-			dao.getEarly(empNum);
-			early = dao.getEarly(empNum);
-		} catch (ClassNotFoundException | SQLException e) {
-			log.debug("getEarly : " + e.getMessage());
-		}
-		return early;
-	}
+//	public int getEarly(String empNumStr, int year) {
+//		TADao dao = sqlsession.getMapper(TADao.class);
+//		int early = 0;
+//		int empNum = Integer.parseInt(empNumStr);
+//		try {
+//			early = dao.getEarly(empNum, year);
+//		} catch (ClassNotFoundException | SQLException e) {
+//			log.debug("getEarly : " + e.getMessage());
+//		}
+//		return early;
+//	}
 
 	// 형남 0122 존재하는 팀 목록 가져오기
 	public List<Integer> getTeamCodeList() {

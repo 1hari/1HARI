@@ -305,20 +305,22 @@ public class TARestController {
 
 	// 형남 0121 출근, 지각, 결근 연차, 조퇴 횟수 가져오기(사원 대시보드 근태차트, chart.js dataset 형식으로 가공)
 	@RequestMapping(value = "getTA.hari", method = RequestMethod.POST)
-	public String getTA(Principal pri) {
+	public String getTA(Principal pri, String strYear) {
 		List<Integer> TAList = new ArrayList<Integer>();
 		JSONObject jsonObject = new JSONObject();
+		int year=Integer.parseInt(strYear);
+		System.out.println(year);
 		try {
-			int work = taService.getWork(pri.getName()); // 출근
-			int tardy = taService.getTardy(pri.getName()); // 지각
-			int absent = taService.getAbsent(pri.getName()); // 결근
-			int annual = taService.getAnnual(pri.getName()); // 연차
-			int early = taService.getEarly(pri.getName()); //
+			int work = taService.getWork(pri.getName(), year); // 출근
+			int tardy = taService.getTardy(pri.getName(), year); // 지각
+			int absent = taService.getAbsent(pri.getName(), year); // 결근
+			int annual = taService.getAnnual(pri.getName(), year); // 연차
+//			int early = taService.getEarly(pri.getName(), year); 
 			TAList.add(work);
 			TAList.add(tardy);
 			TAList.add(absent);
 			TAList.add(annual);
-			TAList.add(early);
+//			TAList.add(early);
 			jsonObject.put("TAList", TAList);
 		} catch (Exception e) {
 			log.debug("getTA 예외발생: " + e.getMessage());
