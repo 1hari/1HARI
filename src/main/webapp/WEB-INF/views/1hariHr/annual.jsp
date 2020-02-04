@@ -193,7 +193,7 @@
 	//문서 클릭
 	$(".signDocu").click(function(){
 		//console.log($(this).attr("signNum"));
-		let openUrl = root + "/1hariSign/signDocuView.hari?signNum="+$(this).attr("signNum");
+		let openUrl = "${pageContext.request.contextPath}/1hariSign/signDocuView.hari?signNum="+$(this).attr("signNum");
 		//console.log(openUrl);
 		open(openUrl,"전자결재","statusber=no,menuber=no, width=850, height=800");
 	});//문서 클릭

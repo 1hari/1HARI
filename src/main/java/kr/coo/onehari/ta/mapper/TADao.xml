@@ -165,10 +165,10 @@
 
     <!-- 형남 0122 팀 별 근무시간(월)-->
     <select id="getTeamMonthWorkTime" resultType="String">
-        SELECT SEC_TO_TIME(SUM(TA.TODAYWORK))
+        SELECT SEC_TO_TIME(ROUND((SUM(TA.TODAYWORK)/(SELECT COUNT(EMPNUM) FROM EMP WHERE TEAMCODE=#{param1}))))
         FROM 
             TALIST AS TA JOIN EMP E
-            ON ta.EMPNUM = e.empnum
+            ON TA.EMPNUM = E.EMPNUM
             JOIN TEAM T
             ON T.TEAMCODE = E.TEAMCODE
             WHERE T.TEAMCODE = #{param1} AND MONTH(TADATE) = #{param2} AND YEAR(TADATE) = #{param3}

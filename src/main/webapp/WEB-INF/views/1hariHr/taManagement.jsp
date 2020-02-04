@@ -145,8 +145,6 @@
 				success: function(TaList) {
 					let noDate = moment(setDate, 'YYYY-MM-DD').format('YYYY-MM-DD');
 					let noDay = moment(noDate).format('dddd');
-					console.log(noDate);
-					console.log(noDay);
 					let empTaList = "";
 					let count = 0;
 					if (TaList == "") { // 출퇴근 기록이 없는 주말 체크
@@ -170,7 +168,6 @@
 								} else if (TaList[i].taDate == null && TaList[i].taDate != '0000-00-00 00:00:00') { // 출근시간 기록이 없고 연차(0000)가 아닌 경우
 									empTaList += '<td>' + TaList[i].taName + ' (출근시간 기록없음)</td>'; // 출근, 출근시간
 								} else if (TaList[i].taDate == '0000-00-00 00:00:00') { // 연차인 경우
-	// 								empTaList += ''; // 연차인 경우 출근을 화면에 출력하지 않고 뒤에 연차 td와 합치기 위해 공백으로 처리
 									empTaList += '<td>연차</td>'; // 출근, 출근시간
 								}
 								count++;
@@ -201,7 +198,7 @@
 					
 					setEmpTa(setDate); // 퇴근처리를 위한 함수 호출
 				},
-				error : function(xhr){
+				error: function(xhr){
 					console.log(xhr.status);
 					console.log('getTaList ajax error');
 				}
@@ -248,7 +245,7 @@
 						$('#taBody').empty(); // 비동기 처리가 완료되면 해당 tbody를 비워주고
 						getTaList(setDate); // 근태목록을 다시 가져온다
 					},
-					error : function(xhr){
+					error: function(xhr){
 						console.log(xhr.status);
 						console.log('setEmpTa ajax error');
 					}
@@ -264,10 +261,8 @@
                 /* 첫 페이지 로드 후에도 첫 번째 if문을 타지 않으니 물어보고 삭제하거나 수정 */
 				if (setDate == "") { // 오늘 날짜로 페이지를 들어왔을 때
 					if (moment(curMonth).month() != selectedMonth) { // 이번 달과 선택된 달이 같지 않을 때
-                        console.log('curMonth');
 						days += '<span class="click"> ' + (i + 1) + ' </span>'; // 1일은 0이기 때문에 +1
 					} else { // 이번 달과 선택된 달이 같을 때
-                        console.log('!= curMonth');
 						if (curDate != (i + 1)) { // 오늘 일자와 선택된 일자가 같지 않을 때
 							days += '<span class="click"> ' + (i + 1) + ' </span>'; // 1일은 0이기 때문에 +1
 						} else { // 오늘 일자와 선택된 일자가 같을 때
@@ -275,12 +270,9 @@
 						}
 					}
 				} else { // 클릭 이후에 페이지에 들어올 때
-                    console.log('클릭이후');
                     if (moment(setDate).month() != selectedMonth) { // SelectBox에서 월을 변경하고 일자를 선택하지 않았을 때
-                        console.log('month');
                         days += '<span class="click">&nbsp; ' + (i + 1) + '&nbsp; </span>'; // 1일은 0이기 때문에 +1
                     } else { // SelectBox에서 월을 변경하고 일자를 선택했을 때
-                        console.log('date');
 						if (moment(setDate).date() != (i + 1)) { // setDate 일자와 선택된 일자가 같지 않은 경우
                             days += '<span class="click">&nbsp; ' + (i + 1) + '&nbsp; </span>'; // 1일은 0이기 때문에 +1
 						} else { // setDate 일자와 선택된 일자가 같은 경우
