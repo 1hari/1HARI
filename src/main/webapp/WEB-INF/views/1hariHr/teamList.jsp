@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+
+
+
 
 <style>
 	#board_list>tbody>tr {
@@ -40,6 +44,12 @@
 <!-- ============================================================== -->
 <!-- End Page wrapper  -->
 
+<!-- 이 부분이 script 최상단에 있어야 함 -->
+<script type="text/javascript">
+	var contextPath = '${pageContext.request.contextPath}';
+	//console.log(contextPath);
+</script>
+
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/http-vue-loader@1.4.1/src/httpVueLoader.min.js"></script>
 <script src="https://unpkg.com/vuex"></script>
@@ -48,8 +58,3 @@
 <script src="${pageContext.request.contextPath}/resources/vue/js/vue-router.js"></script>
 <script src='${pageContext.request.contextPath}/resources/vue/js/teamRouter.js'></script>
 <script src='${pageContext.request.contextPath}/resources/vue/js/appTeam.js'></script>
-
-<script type="text/javascript">
-	var contextPath = '${pageContext.request.contextPath}';
-	//console.log(contextPath);
-</script>
