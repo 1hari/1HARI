@@ -28,7 +28,7 @@
 		<!-- ============================================================== -->
 		<div class="row" >
 			<div class="col-12">
-				<div class = "col-12" style ="margin-left:10%; width: 80%; height: 100%; background-color: white; border-radius:10px; box-shadow: 0 0 12px #999999; opacity:0.8;">
+				<div class = "col-12" style ="margin-left:10%; width: 80%; height: 100%; background-color: white; border-radius:10px; box-shadow: 7px 7px #505050; opacity:0.8;">
 				<div class="container">
 					<!--form 태그 시작 -->
 					<form action="" method="POST" id="formInsert" style = "marign-left:20%;">

@@ -27,6 +27,11 @@
 	    .display-none{ /*감추기*/
 	        display:none;
 	    }
+	    
+	     #signListTable td{
+	    	border: 2px solid #505050;
+	    
+	    }
 </style>
 <!-- Page wrapper  -->
 <!-- ============================================================== -->
@@ -50,7 +55,7 @@
 		<div class="row">
 			<div class="col-12">
 				<!--내 문서함 테이블 -->
-				<div class="card"  style=" border-radius:10px;  box-shadow :0 0 12px #999999; border-radius:10px;">
+				<div class="card"  style=" box-shadow :7px 7px #505050; border-radius:10px;">
 					<div class="card-body">
 						<div class="row">
 							<!-- 문서구분 버튼 -->
@@ -104,13 +109,13 @@
 						<thead>
 							<tr style = "background-color:#e9ecef;">
 								<th scope="col" style ="width:13%;">기안일</th>
-								<th scope="col" style ="width:8%;">문서번호</th>
-								<th scope="col" style ="width:10%;">결재양식</th>
-								<th scope="col" style ="width:10%;">제목</th>
-								<th scope="col" style ="width:10%;">기안자 (사번)</th>
-								<th scope="col" style ="width:10%;">중간결재자 (사번)</th>
-								<th scope="col" style ="width:10%;">최종결재자 (사번)</th>
-								<th scope="col" style ="width:10%;">결재상태</th>
+								<th scope="col" style ="width:6%;">문서번호</th>
+								<th scope="col" style ="width:6%;">결재양식</th>
+								<th scope="col" style ="width:15%;">제목</th>
+								<th scope="col" style ="width:9%;">기안자 (사번)</th>
+								<th scope="col" style ="width:9%;">중간결재자 (사번)</th>
+								<th scope="col" style ="width:9%;">최종결재자 (사번)</th>
+								<th scope="col" style ="width:13%;">결재상태</th>
 							</tr>
 						</thead>
 						<tbody id="signListTable">

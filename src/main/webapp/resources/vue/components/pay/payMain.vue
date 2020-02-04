@@ -13,7 +13,7 @@
             
         </div>
         
-        <table class="table table-hover" id="payList" >
+        <table class="table table-hover table-bordered" id="payList" >
           <thead>
             <tr style = "background-color: #e9ecef ">
               <th class="text-center d-none d-md-table-cell">지급일</th>
@@ -66,15 +66,13 @@
 
 </template>
 <style>
-#board_list > tbody > tr {
-  cursor: pointer;
-  
+
  	.table-bordered td,
 	.table-bordered th {
 		border: 2px solid #505050;
 		height: 45px;
 	}
-}
+
 </style>
 <script>
 module.exports = {

@@ -94,15 +94,14 @@
 </template>
 
 <style>
-	#zero_config > tbody > tr {
-	  cursor: pointer;
-	}
+
 	
 	.table-bordered td,
 	.table-bordered th {
 		border: 2px solid #505050;
 		height: 45px;
 	}
+	
 </style>
 
 <script>

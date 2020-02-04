@@ -35,7 +35,7 @@
 
 				<!--양식 관리  테이블 -->
 
-				<div class="card"  style=" border-radius:10px;box-shadow :0 0 12px #999999;">
+				<div class="card"  style=" border-radius:10px; box-shadow :7px 7px #505050;">
 					<div class="card-body">
 						<h5 class="card-title"></h5>
 						<div class="table-responsive">

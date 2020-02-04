@@ -5,7 +5,12 @@
 <!-- Custom CSS -->
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/hari/assets/extra-libs/multicheck/multicheck.css">
 <link href="${pageContext.request.contextPath}/resources/hari/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet">
+<style>
+.customtable td {
+	border: 2px solid #000000;
+}
 
+</style>
 <!-- Page wrapper  -->
 <!-- ============================================================== -->
 <div class="page-wrapper">
@@ -99,7 +104,7 @@
 									<th scope="col" style ="width:12%;">기안일</th>
 									<th scope="col" style ="width:6%;">문서번호</th>
 									<th scope="col" style ="width:10%;">결재양식</th>
-									<th scope="col" style ="width:10%;">제목</th>
+									<th scope="col" style ="width:13%;">제목</th>
 									<th scope="col" style ="width:10%;">기안자 (사번)</th>
 									<th scope="col" style ="width:10%;">중간결재자 (사번)</th>
 									<th scope="col" style ="width:10%;">최종결재자 (사번)</th>
