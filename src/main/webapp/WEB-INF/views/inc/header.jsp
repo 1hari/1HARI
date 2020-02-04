@@ -93,7 +93,7 @@ $(function(){
 	$('#themeSetup').click(function(){
 		formData = new FormData();
 		formData.append("profileFileName","defaultprofile.png");
-		formData.append("themeColor","20B2AA");
+		formData.append("themeColor","807266");
 		themeChange(formData)
 	});
 	
@@ -442,19 +442,19 @@ function themeChange(formData){
 }
 
 	//mouseover
-  	$(function() {
+//   	$(function() {
   		
-  		document.getElementById("swal-button").addEventListener("mouseover", mouseOver);
-  	  	document.getElementById("swal-button").addEventListener("mouseout", mouseOut);
+//   		document.getElementById("swal-button").addEventListener("mouseover", mouseOver);
+//   	  	document.getElementById("swal-button").addEventListener("mouseout", mouseOut);
 
-  	  	function mouseOver() {
-  	  	  document.getElementById("swal-button").style.color = "#999999";
-  	  	}
-  	 	 function mouseOut() {
-  		  document.getElementById("swal-button").style.color = "white";
-  		}
+//   	  	function mouseOver() {
+//   	  	  document.getElementById("swal-button").style.color = "#999999";
+//   	  	}
+//   	 	 function mouseOut() {
+//   		  document.getElementById("swal-button").style.color = "white";
+//   		}
 
-  	});
+//   	});
 
 
 </script>
