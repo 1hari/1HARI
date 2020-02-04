@@ -4,38 +4,6 @@
 <%@ taglib prefix="se" uri="http://www.springframework.org/security/tags" %>
 
 <style>
-	/* .wrap-loading{ /*화면 전체를 어둡게 합니다.
-		    position: fixed;
-		    left:0;
-		    right:0;
-		    top:0;
-		    bottom:0;
-		    background: rgba(0,0,0,0.2); /*not in ie 
-		    filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#20000000', endColorstr='#20000000');    /* ie 
-		}
-
-	    .wrap-loading div{ /*로딩 이미지
-	        position: fixed;
-	        top:50%;
-	        left:50%;
-	        margin-left: -21px;
-	        margin-top: -21px;
-	    }
-	
-	    .display-none{ /*감추기
-	        display:none;
-	    } */
-	    /*aside bar 마우스 오버 액션들 */
-	    
-/* 	    { */
-/* 	    	/* background: #dbdbdb; */
-/* 	 		font-size:70%; */
-/* 	    	/* font-family: 'Nanum DaCaeSaRang'; */
-	    
-/* 	    } */
-/* 	    li.sidebar-link:hover, li.sidebar-link:active { */
-/* 	    	font-size: 70%; */
-/* 	    } */
 
 	    span.hide-menu:hover, span.hide-menu:active{
 	    	font-size: 150%;  	
@@ -48,34 +16,6 @@
 	    .sidebar-item.hover, .sidebar-link:active{
 	    	font-size: 150%;
 	    }
-	/*  	.sidebar-link.hover, .sidebar-link:hover {
-	 		font-size: 150%; 
-	 	} */
-	/*  	.sidebar-nav ul .sidebar-item .first-level.hover, .sidebar-nav ul .sidebar-item .first-level:hover{
-	 		font-size: 150%;
-	 	} */
-
-		/* a.sidebar-link has-arrow waves-effect waves-dark:hover, a.sidebar-link has-arrow waves-effect waves-dark:active{
-			font-size: 200%;
-		} */
-/* 	    ul#sidebarnav:hover, ul#sidebarnav:active{ */
-/* 	    	font-size: 150%; */
-/* 	    } */
-	    
-/* 	    li.sidebar-item.a.sidebar-link:hover, li.sidebar-itema.sidebar-link:active{ */
-/* 	    	font-size: 150%; */
-/* 	    } */
-	    
- 	  /*   span.hide-menu {
-	    	   text-shadow:
-			    0 1px 0 #ffffff,
-			    0 1.5px 0 #d3d5d6,
-			    0 2px 0 #7c98a1,
-			    0 2.5px 0 #4e727e,
-			    2px 3px 4px rgba(0,0,0,0.1),
-			    2px 3px 4px rgba(0,0,0,0.3);
-			    color: white;
-			    } */
 		
 	   
 </style>
@@ -243,10 +183,6 @@
 				<div class="modal-body" style="height: 250px;">
 					<div class="set_wrap">
 						<section class="search">
-<!-- 							<div class="search_wrap"> -->
-<!-- 								<input id="searchInput" class="search" maxlength="20" type="text" placeholder="양식제목"> -->
-<!-- 								<i class="fas fa-search" value="" title=""></i> -->
-<!-- 							</div> -->
 						</section>
 					
 						<div class="content_tab_wrap">
@@ -257,27 +193,14 @@
 										<a class="formcode" title="품의서" rel="FOLDER" href="#" data-bypass="1">
 											<i class="far fa-folder-open">&nbsp;</i>품의서
 										</a>
-											
 										<ul>	
-<%-- 											<c:forEach var="form" items="${requestScope.list}"> --%>
-<!-- 												문서1개 시작									 -->
-<!-- 												<li class="jstree-leaf"> -->
-<!-- 													<i class="jstree-icon">&nbsp;</i> -->
-<%-- 													<a title="${form.signFormFormName}" rel="FORM" href="#" data-bypass="1"> --%>
-<%-- 														<!-- <i class="far fa-file-alt">&nbsp;</i> -->${form.signFormFormName} --%>
-<!-- 													</a> -->
-<!-- 												</li> -->
-<!-- 												문서1개 끝 -->
-<%-- 											</c:forEach> --%>
 										</ul>
-										
 									</li><!-- jstree-open 끝 -->
 								</ul>
 							</div> <!-- formTree 끝 -->
 						</div> <!-- content_tab_wrap 끝 -->
 					</div><!-- set_wrap 끝 -->
 				</div><!-- modal-body 끝 -->
-			
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
 					<button type="submit" class="btn btn-primary" id="formChoice" style="color:#807266;" disabled="disabled">선택완료</button>
@@ -303,7 +226,6 @@
 			url:"${pageContext.request.contextPath}/ajax/selectAllForm.hari",
 			type:"post",
 			success: function(list){
-// 				console.log(list);
 				var formlist = "<ul>";
 				$.each(list, function(index, form){
 					//문서1개 시작 <i class="far fa-file-alt">&nbsp;</i> 아이콘 안먹힘..
@@ -337,15 +259,7 @@
 			error: function(xhr){
 				console.log(xhr.status);
 			},
-// 			beforeSend:function(){//이미지 보여주기
-// 				$('.wrap-loading').removeClass('display-none');
-// 			},
-// 			complete:function(){ //이미지 감추기
-// 		        $('.wrap-loading').addClass('display-none');
-// 			},
 		});//ajax 끝
 	});//document ready 끝
-
-		//ul, li hover, 클릭시 font-size 크기 변경.. 
 </script>
 

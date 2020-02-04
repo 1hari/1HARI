@@ -75,7 +75,7 @@
 											<div class="progress">
 												<c:choose>
 													<c:when test="${waiting.signCode == 1}">
-														<div role="progressbar" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-striped bg-danger" style="width: 30%" aria-valuenow="30"></div>
+														<div role="progressbar" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-striped bg-info" style="width: 30%" aria-valuenow="30"></div>
 													</c:when>
 													<c:otherwise>
 														<div role="progressbar" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-striped" style="width: 70%" aria-valuenow="70"></div>
@@ -129,7 +129,7 @@
 											<div class="progress">
 												<c:choose>
 													<c:when test="${draft.signCode == 1}">
-														<div role="progressbar" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-striped bg-danger" style="width: 30%" aria-valuenow="30"></div>
+														<div role="progressbar" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-striped bg-info" style="width: 30%" aria-valuenow="30"></div>
 													</c:when>
 													<c:otherwise>
 														<div role="progressbar" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-striped" style="width: 70%" aria-valuenow="70"></div>

@@ -241,8 +241,6 @@ public class TARestController {
 	@RequestMapping(value = "getStartList.hari", method = RequestMethod.POST, params = { "calYear", "calMonth" })
 	public String getStartList(Principal pri, @RequestParam("calYear") String calYear,
 			@RequestParam("calMonth") String calMonth) {
-		System.out.println(calYear);
-		System.out.println(calMonth);
 		List<String> startList = null;
 		List<String> tardyList = null;
 		JSONObject jsonObject = new JSONObject();
@@ -294,9 +292,6 @@ public class TARestController {
 			jsonObject.put("endList", endList);
 			jsonObject.put("absentList", absentList);
 			jsonObject.put("annList", annList);
-			System.out.println("endList: " + endList.toString());
-			System.out.println("absentList: " + absentList.toString());
-			System.out.println("annList: " + annList.toString());
 		} catch (Exception e) {
 			log.debug("getEndList 예외발생: " + e.getMessage());
 		}
@@ -309,7 +304,6 @@ public class TARestController {
 		List<Integer> TAList = new ArrayList<Integer>();
 		JSONObject jsonObject = new JSONObject();
 		int year=Integer.parseInt(strYear);
-		System.out.println(year);
 		try {
 			int work = taService.getWork(pri.getName(), year); // 출근
 			int tardy = taService.getTardy(pri.getName(), year); // 지각
@@ -331,7 +325,6 @@ public class TARestController {
 	// 형남 0122 팀 별 근무시간 가져오기(전월, 사원 대시보드 근태차트, chart.js dataset)
 	@RequestMapping(value = "getAllEmpTA.hari", method = RequestMethod.POST)
 	public String getAllEmpTA(String yearStr) {
-		System.out.println(yearStr);
 		int year;
 		if(yearStr==null) {
 			Calendar cal= Calendar.getInstance();
@@ -339,7 +332,6 @@ public class TARestController {
 		}else {
 			year=Integer.parseInt(yearStr);
 		}
-		System.out.println(year);
 		JSONArray root = new JSONArray();
 		List<Integer> teamCodeList = new ArrayList<Integer>();
 		List<String> teamNameList = new ArrayList<String>();

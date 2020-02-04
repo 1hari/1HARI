@@ -139,7 +139,6 @@
 				contentType: false,
 				type: "POST",
 				success: function(excelData){
-					console.log(excelData.list[0] == undefined)
 					if(excelData.list[0] != undefined){
 						let formdata = "";
 						$.each(excelData, function(index, data) {

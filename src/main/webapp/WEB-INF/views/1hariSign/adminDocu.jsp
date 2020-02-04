@@ -368,7 +368,7 @@
                         			+ '</div>'
 									+ '<div class="progress">';
 										if(sign.signCode == "1") {
-											signList += '<div role="progressbar" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-striped bg-danger" style="width: 30%" aria-valuenow="30"></div>'; 
+											signList += '<div role="progressbar" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-striped bg-info" style="width: 30%" aria-valuenow="50"></div>'; 
 										}else if(sign.signCode == "2"){
 											signList +='<div role="progressbar" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-striped" style="width: 70%" aria-valuenow="70"></div>';
 										}else if(sign.signCode == "3"){

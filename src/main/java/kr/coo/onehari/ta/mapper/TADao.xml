@@ -149,10 +149,6 @@
        SELECT COUNT(TADATE) FROM TALIST WHERE TACODE=4 AND YEAR(TADATE) = #{param2} AND MONTH(TADATE) = MONTH(NOW()) AND EMPNUM=#{param1}
     </select>
     
-<!--     <select id="getEarly" resultType="Integer"> -->
-<!--        SELECT COUNT(TADATE) FROM TALIST WHERE TACODE=5 AND MONTH(TADATE) = MONTH(NOW()) AND EMPNUM=#{empNum} -->
-<!--     </select> -->
-    
 	<!-- 팀 리스트 가져오기-->
 	<select id="getTeamCodeList" resultType="Integer">
 		SELECT TEAMCODE FROM TEAM

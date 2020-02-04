@@ -109,9 +109,6 @@ public interface TADao {
     //형남 0121 연차 횟수 가져오기(사원 대시보드 차트)
     public Integer getAnnual(int empNum, int year) throws ClassNotFoundException, SQLException;
     
-    //형남 0121 조퇴 횟수 가져오기(사원 대시보드 차트)
-//    public Integer getEarly(int empNum, int year) throws ClassNotFoundException, SQLException;
-
     //현재 존재하는 팀 목록(팀 코드) 가져오기
     public List<Integer> getTeamCodeList() throws ClassNotFoundException, SQLException;
     

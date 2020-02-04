@@ -544,7 +544,6 @@ public class ExcelService {
 			XSSFSheet sheet = workbook.getSheetAt(0);
 			
 			for (int i = 12; i < sheet.getLastRowNum() + 1; i++) {
-				System.out.println("예외 전");
 				// 입력 예제 다음 행부터 데이터를 받아오기 위해 i = 12
 				EmpDto empdto = new EmpDto();
 				XSSFRow row = sheet.getRow(i);
