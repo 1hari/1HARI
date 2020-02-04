@@ -44,17 +44,17 @@
 						<h5 class="card-title m-b-0">결재 대기 문서</h5>
 					</div>
 					<div class="table-responsive">
-						<table class="table">
+						<table class="table" style = "margin-left:2%; width:96%">
 							<thead class="thead-light">
 								<tr>
-									<th scope="col" style ="width:12%;">기안일</th>
+									<th scope="col" style ="width:10%;">기안일</th>
 									<th scope="col" style ="width:6%;">문서번호</th>
-									<th scope="col" style ="width:10%;">결재양식</th>
-									<th scope="col" style ="width:13%;">제목</th>
-									<th scope="col" style ="width:10%;">기안자 (사번)</th>
-									<th scope="col" style ="width:10%;">중간결재자 (사번)</th>
-									<th scope="col" style ="width:10%;">최종결재자 (사번)</th>
-									<th scope="col" style ="width:10%;">결재상태</th>
+									<th scope="col" style ="width:8%;">결재양식</th>
+									<th scope="col" style ="width:10%;">제목</th>
+									<th scope="col" style ="width:8%;">기안자 (사번)</th>
+									<th scope="col" style ="width:8%;">중간결재자 (사번)</th>
+									<th scope="col" style ="width:8%;">최종결재자 (사번)</th>
+									<th scope="col" style ="width:8%;">결재상태</th>
 								</tr>
 							</thead>
 							<tbody class="customtable">
@@ -98,7 +98,7 @@
 						<h5 class="card-title m-b-0">최근 기안 문서</h5>
 					</div>
 					<div class="table-responsive">
-						<table class="table">
+						<table class="table"   style = "margin-left:2%; width:96%">
 							<thead class="thead-light">
 								<tr>
 									<th scope="col" style ="width:12%;">기안일</th>
@@ -152,8 +152,8 @@
 						<h5 class="card-title m-b-0">최근 완료 문서</h5>
 					</div>
 					<div class="table-responsive">
-						<table class="table">
-							<thead class="thead-light">
+						<table class="table"  style = "margin-left:2%; width:96%">
+							<thead class="thead-light" >
 								<tr>
 									<th scope="col" style ="width:12%;">기안일</th>
 									<th scope="col" style ="width:6%;">문서번호</th>
@@ -199,7 +199,7 @@
 						<h5 class="card-title m-b-0">최근 반려 문서</h5>
 					</div>
 					<div class="table-responsive">
-						<table class="table">
+						<table class="table"  style = "margin-left:2%; width:96%">
 							<thead class="thead-light">
 								<tr>
 									<th scope="col" style ="width:12%;">기안일</th>

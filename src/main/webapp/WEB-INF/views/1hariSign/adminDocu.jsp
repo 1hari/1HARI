@@ -105,7 +105,7 @@
 						</div>
 						
 					</div>
-					<table class="table">
+					<table class="table"  style = "margin-left:2%; width:96%;">
 						<thead>
 							<tr style = "background-color:#e9ecef;">
 								<th scope="col" style ="width:13%;">기안일</th>
