@@ -105,7 +105,7 @@ public class ExcelService {
 		mergeCell.setCellStyle(indentStyle);
 		sheet.addMergedRegion(new CellRangeAddress(2, 2, 0, 1));
 		mergeCell = mergeRow.createCell(2);
-		mergeCell.setCellValue("[ 2001 : 경영지원팀 ], [ 2002 : 영업팀 ], [ 2003 : 마케팅팀 ]");
+		mergeCell.setCellValue("[ 2001 : 경영지원팀 ], [ 2002 : 영업팀 ], [ 2003 : 마케팅팀 ], [ 2004 : 서비스팀 ]");
 		mergeCell.setCellStyle(indentStyle);
 		sheet.addMergedRegion(new CellRangeAddress(2, 2, 2, 11));
 		
@@ -355,7 +355,7 @@ public class ExcelService {
 		mergeCell.setCellStyle(indentStyle);
 		sheet.addMergedRegion(new CellRangeAddress(2, 2, 0, 1));
 		mergeCell = mergeRow.createCell(2);
-		mergeCell.setCellValue("[ 2001 : 경영지원팀 ], [ 2002 : 영업팀 ], [ 2003 : 마케팅팀 ]");
+		mergeCell.setCellValue("[ 2001 : 경영지원팀 ], [ 2002 : 영업팀 ], [ 2003 : 마케팅팀 ], [ 2004 : 서비스팀 ]");
 		mergeCell.setCellStyle(indentStyle);
 		sheet.addMergedRegion(new CellRangeAddress(2, 2, 2, 11));
 		
