@@ -185,17 +185,17 @@
 <script src="${pageContext.request.contextPath}/resources/hari/assets/extra-libs/multicheck/datatable-checkbox-init.js"></script>
 <script src="${pageContext.request.contextPath}/resources/hari/assets/extra-libs/multicheck/jquery.multicheck.js"></script>
 <script src="${pageContext.request.contextPath}/resources/hari/assets/extra-libs/DataTables/datatables.min.js"></script>
-<script>
-	/****************************************
-	*       Basic Table                   *
-	****************************************/
-	$('#zero_config').DataTable();
 
+<script type="text/javascript">
+	/* DataTables */
+	$('#zero_config').DataTable();
+	
 	//문서 클릭
 	$(".signDocu").click(function(){
 		//console.log($(this).attr("signNum"));
-		let openUrl = "${pageContext.request.contextPath}/1hariSign/signDocuView.hari?signNum="+$(this).attr("signNum");
+		let openUrl = root + "/1hariSign/signDocuView.hari?signNum="+$(this).attr("signNum");
 		//console.log(openUrl);
 		open(openUrl,"전자결재","statusber=no,menuber=no, width=850, height=800");
 	});//문서 클릭
 </script>
+
