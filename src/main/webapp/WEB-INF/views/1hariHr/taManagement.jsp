@@ -143,11 +143,15 @@
 				data : { "setDate" : setDate },
 				dataType: "json",
 				success: function(TaList) {
+					let noDate = moment(setDate, 'YYYY-MM-DD').format('YYYY-MM-DD');
+					let noDay = moment(noDate).format('dddd');
+					console.log(noDate);
+					console.log(noDay);
 					let empTaList = "";
 					let count = 0;
 					if (TaList == "") { // 출퇴근 기록이 없는 주말 체크
 						empTaList += '<tr>'
-									+ '<td colspan="6">오늘은 ' + today + '&nbsp;&nbsp;' + curDay + ' 입니다. 출퇴근 기록이 존재하지 않습니다.</td>'
+									+ '<td colspan="6">' + noDate + '&nbsp;&nbsp;' + noDay + ' 입니다. 출퇴근 기록이 존재하지 않습니다.</td>'
 									+ '<td style="display: none;"></td>'
 									+ '<td style="display: none;"></td>'
 									+ '<td style="display: none;"></td>'
