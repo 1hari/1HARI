@@ -177,7 +177,12 @@
 							</div>
 						</div>
 						<input type="hidden" id="draftEmp" name="draftEmp" value="${emp.empNum}">
-<%-- 					<input type="hidden" value="${requestScope.signFormCode}" id="signFormCode" name="signFormCode" > --%>
+						<c:if test="${requestScope.signDocu != null}">
+							<c:forEach var="docu" items="${requestScope.signDocu}">
+								<input type="hidden" value="${docu.signFormCode}" id="signFormCode" name="signFormCode" >
+							</c:forEach>							
+						</c:if>
+
 					</form>
 				</div><!-- container -->
 			</div><!--뒷배경.. test-->
@@ -314,7 +319,7 @@
 					todayHighlight: true,
 					language: "ko",
 					orientation: "bottom auto",
-					startDate :twmoment, //익일부터 선택가능
+					//startDate :twmoment, //익일부터 선택가능
 					daysOfWeekDisabled :[0,6]
 		});
 		

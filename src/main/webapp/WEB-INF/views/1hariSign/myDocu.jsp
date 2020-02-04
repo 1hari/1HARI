@@ -9,7 +9,7 @@
 <script>
 	var code = 0 //결재분류 : 0.전체 / 1.기안 / 2.완료 / 3.반려 / 4.결재할 문서
 	var cp = 1; //보여줄 페이지
-	var pg = 3; //한 페이지에 보여줄 갯수
+	var pg = 10; //한 페이지에 보여줄 갯수
 	var signDate = "false";
 	var signNum = "false";
 	var signTitle = "false";

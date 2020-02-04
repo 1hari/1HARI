@@ -32,6 +32,7 @@ $(function(){
 			yearStr:$('#workTimeSelectYear').val()
 		},
 		success: function(getWorkTimeYear) {
+			console.log(getWorkTimeYear)
 			var yearList=getWorkTimeYear
 			let years = "";
 			//console.log(getWorkTimeYear == "");

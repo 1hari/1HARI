@@ -139,7 +139,7 @@ public class SignController {
 	@RequestMapping(value="docuDraft.hari", method = RequestMethod.POST)
 	public String formDraft(SignDto sign, AnnUse annUse, HttpServletRequest request, Model model) {
 		int result = 0;
-		
+		//System.out.println(sign.getSignFormCode());
 		//연차기안시
 		if(sign.getSignFormCode().equals("0")) {
 			sign.setSignFormCode("0");
