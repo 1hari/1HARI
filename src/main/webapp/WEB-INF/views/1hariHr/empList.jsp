@@ -181,7 +181,7 @@
 	function excelUpload() {
 		var popupUrl = "${pageContext.request.contextPath}/util/personnel/excelUpload.hari";
 		var popupName = "Excel Upload";
-		var popupOption = "statusber=no, scrollbar=no, menuber=no, width=900, height=500 top=270 left=530";
+		var popupOption = "statusber=no, scrollbar=no, menuber=no, width=900, height=750 top=10 left=530";
 		
 		window.open(popupUrl, popupName, popupOption);
 	}
