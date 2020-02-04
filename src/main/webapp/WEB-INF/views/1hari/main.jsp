@@ -253,7 +253,7 @@
 	let week = ['일', '월', '화', '수', '목', '금', '토'];
 	$(function() {
 		//메인 대시보드 근태차트 날짜
-		$('#taChartDate').text(year + "년 " + month + "월 " + day + "일 " + week[date.getDay()]+ "요일")
+		$('#taChartDate').text(year + "년 " + month + "월 ")
 		//메인 대시보드 근태차트 옵션 값 생성
 		$.ajax({
 			url: "${pageContext.request.contextPath}/ajax/getWorkTimeYear.hari",

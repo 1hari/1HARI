@@ -65,6 +65,8 @@
 				<!--top navbar 더보기 & 검색  끝 -->
 				<!--top navbar 에서 오른쪽 기능 담당 (출/퇴근과 프로필)-->
 				<ul class="navbar-nav float-right">
+					<li class="nav-item" style="padding-top: 6%; color: white;" id="todayDate">
+					</li>
 					<!-- 개인셋팅 -->
 					<li class="nav-item" >
 						<a class="nav-link waves-effect waves-dark" id="theme" style = "color:white;" href="" data-toggle="modal" data-target="#themeModal" aria-haspopup="true" aria-expanded="false">
@@ -257,6 +259,13 @@
 		var fixLongitude=parseFloat(126.83591679999999);//회사의 경도 고정
 		var myLatitude; //사용자 위도
 		var myLongitude;//사용자 경도
+		const date = new Date();
+		const year = date.getFullYear();
+		let month = date.getMonth()+1;
+		let day = date.getDate();
+		let hour = date.getHours();
+		let minutes = date.getMinutes();
+		let week = ['일', '월', '화', '수', '목', '금', '토'];
 	
 		
 		//현재시간 예쁘게 출력
@@ -293,7 +302,11 @@
 				clearInterval(timeCheck);
 			}
 		},1000);
-	
+
+		//헤더 오늘 날짜
+		$('#todayDate').text(year + "년 " + month + "월 " + day + "일 " + week[date.getDay()]+ "요일")
+		
+		
 		//출근버튼 + 캘린더 출력
 		$('#startWork').click(function() {
 			//테스트 주석
