@@ -18,9 +18,10 @@
 	
 	<!-- 조직도에서 부서별 사원을 출력해주기 위해 김정하 / 2020. 1. 9 -->
 	<select id="empDefaultList" resultType="kr.coo.onehari.hr.dto.EmpDto">
-		SELECT E.EMPNUM, E.EMPNAME, E.TEAMCODE, R.RANKCODE, R.RANKNAME
+		SELECT E.EMPNUM, E.EMPNAME, E.TEAMCODE, R.RANKCODE, R.RANKNAME, E.EMPLOYMENTCODE
 		FROM emp AS E
-		JOIN ranks AS R ON E.RANKCODE = R.RANKCODE
+				JOIN ranks AS R ON E.RANKCODE = R.RANKCODE
+		WHERE E.EMPLOYMENTCODE != 5003
 	</select>
 	
 	<!-- 조직도에서 기안자 출력해주기 위해 김정하 / 2020. 1. 10 -->

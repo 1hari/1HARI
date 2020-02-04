@@ -544,7 +544,7 @@ function themeChange(formData){
 					<!--내 프로필 시작-->
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							<img src="" alt="user" id="profileFileName" style= "padding-bottom:5px;">
+							<img src="" alt="user" id="profileFileName" style= "padding-bottom:5px;" class="rounded-circle">
 						</a>
 						<div class="dropdown-menu dropdown-menu-right animated">
 							<se:authentication property="name" var="LoginUser" />
