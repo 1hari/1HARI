@@ -132,7 +132,7 @@
 <!--필수 js 지우지 말기 -->
 <script type="text/javascript">
 	$(function() {
-		let pwdReg = /^[A-Za-z0-9]{4,16}$/; // 4~16자리의 영문+숫자 조합의 비밀번호 정규표현식
+		let pwdReg = /^[A-Za-z0-9]{4,10}$/; // 4~16자리의 영문+숫자 조합의 비밀번호 정규표현식
 		let phoneReg = /^01[016789]-\d{3,4}-\d{4}$/; // 핸드폰번호 정규표현식
 		let emailPattern = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 		//0부터9a부터zA부터Z까지 (-, _, . 가 있어도 되고 없어도 되고, 0부터9a부터zA부터Z까지)반복횟수 상관없이가능
@@ -143,7 +143,7 @@
 		// 비밀번호 입력 유효성 검사
 		$('#password').keyup(function() {
 			if (!pwdReg.test($('#password').val())) {
-				$('#pwdCheck').text("4~16자리의 영문 + 숫자 조합의 비밀번호를 입력해주세요.");
+				$('#pwdCheck').text("4~10자리의 영문 + 숫자 조합의 비밀번호를 입력해주세요.");
 				pwdValidation = false;
 			} else {
 				$('#pwdCheck').text("");
