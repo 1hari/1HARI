@@ -211,8 +211,6 @@
 				let empNum = tr.children().html(); // 나와 조상요소 중 첫번째 tr의 자식의 값
 				let startWorkTime = tr.children().eq(3).html(); // 해당 사원의 출근기록시간 받기
 				let startWorkTimeId = tr.children().eq(3).id; // 해당 사원의 출근기록시간 받기
-				console.log(setDate)
-				console.log('출근 (출근시간 기록없음)' ==startWorkTime)
 				if('출근 (출근시간 기록없음)' ==startWorkTime){
 					todayWork=32400
 					leaveWork=setDate + " 18:00:00"
