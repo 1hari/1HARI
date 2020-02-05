@@ -319,7 +319,7 @@
 					todayHighlight: true,
 					language: "ko",
 					orientation: "bottom auto",
-					//startDate :twmoment, //익일부터 선택가능
+					startDate :twmoment, //익일부터 선택가능
 					daysOfWeekDisabled :[0,6]
 		});
 		

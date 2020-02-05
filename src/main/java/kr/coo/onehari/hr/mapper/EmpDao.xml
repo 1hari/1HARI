@@ -201,10 +201,10 @@
     
     <!-- 연차정보 근태목록에 추가 김정하 2020. 1. 30 -->
     <insert id="setAnnUseTaList" parameterType="hashmap">
-    	insert into talist(EMPNUM, TACODE, TADATE, SCHEDULEDATE)
+    	insert into talist(EMPNUM, TACODE, SCHEDULEDATE)
 		VALUES 
 		<foreach collection="list" item="item" separator=", ">
-			(#{empNum}, 1, 0, #{item}), (#{empNum}, 4, 0, #{item})
+			(#{empNum}, 1, #{item}), (#{empNum}, 4, #{item})
 		</foreach>
     </insert>
     	<!-- 형남 0127 CEO 정보 가져오기 -->

@@ -193,10 +193,10 @@
 						}
 					}
 					$('#taBody').append(empTaList);
+					setEmpTa(setDate); // 퇴근처리를 위한 함수 호출
 					/* 데이터 호출 후 DataTable 호출 */
 					$('#zero_config').DataTable();
-					
-					setEmpTa(setDate); // 퇴근처리를 위한 함수 호출
+
 				},
 				error: function(xhr){
 					console.log(xhr.status);
@@ -207,6 +207,7 @@
 
 		function setEmpTa(setDate) { // 퇴근처리하기
 			$('.editEmpTa').click(function() {
+				console.log("??");
 				let tr = $(this).closest('tr'); // 나와 조상요소 중 첫번째 tr //.parent() 바로 상위요소 찾기
 				let empNum = tr.children().html(); // 나와 조상요소 중 첫번째 tr의 자식의 값
 				let startWorkTime = tr.children().eq(3).html(); // 해당 사원의 출근기록시간 받기
