@@ -31,8 +31,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(pay, index) in server_data.payList" >
-              
+            <tr v-for="(pay, index) in server_data.payList">
               <td class="text-center d-none d-md-table-cell" style="height=20px">{{pay.payMonth}}</td>
               <td class="text-center d-none d-md-table-cell">{{pay.basicSal}}</td><!--기본급으로 받으세요 -->
               <td class="text-center d-none d-md-table-cell">{{pay.payNPension}}</td>
@@ -93,11 +92,11 @@ module.exports = {
        open(url, "급여 명세서", "statusber=no, scrollbar=no, menuber=no, width=1000, height=1100 1000=500 left=530");
     },
     getPayList: function() {
-
        var params = new URLSearchParams();
-       if(event.target.value ==undefined){
+       if(event.target.value ==undefined){ //연도 따로 설정안했을경우(첫 로딩 시)
+         console.log(event.target.value)
         params.append("year", "init")
-       }else {
+       }else { //선택한 연도가 있을경우
          params.append("year", event.target.value)
        }
 

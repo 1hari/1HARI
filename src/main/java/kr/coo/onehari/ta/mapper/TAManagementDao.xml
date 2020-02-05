@@ -31,10 +31,9 @@
 	
 	<!-- 근태수정(출근 안찍혀있을 경우 출근 수정) 오형남 2020. 2. 5 -->
 	<update id="setEmpStart" parameterType="hashmap">
-		UPDATE talist
+		UPDATE TALIST
 		SET taCode = 1,
-		taDate = #{todayStartDate},
-		todayWork = #{todayWork}
+		taDate = #{todayStartDate} 
 		WHERE empNum = #{empNum} AND taCode = 1 AND scheduleDate = #{setDate}
 	</update>
 </mapper>

@@ -210,8 +210,7 @@
 				let tr = $(this).closest('tr'); // 나와 조상요소 중 첫번째 tr //.parent() 바로 상위요소 찾기
 				let empNum = tr.children().html(); // 나와 조상요소 중 첫번째 tr의 자식의 값
 				let startWorkTime = tr.children().eq(3).html(); // 해당 사원의 출근기록시간 받기
-				let startWorkTimeId = tr.children().eq(3).id; // 해당 사원의 출근기록시간 받기
-
+				let todayStartDate;
 				//출근기록도 없으면 출퇴근시간 고정 해 수정
 				if('출근 (출근시간 기록없음)' ==startWorkTime){
 					todayWork=32400
