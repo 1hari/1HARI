@@ -50,7 +50,7 @@
 		 Notification.requestPermission(function (permission) {
 			console.log(permission);
 	    });
-		notifications 알림 권한확인 
+		//notifications 알림 권한확인 
 		if (window.Notification) {
 	        Notification.requestPermission(); //사용자 권한을 받아오는 함수
 	    }

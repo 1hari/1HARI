@@ -222,7 +222,7 @@
 	</div>
 <!--<div class="container-fluid"> 부분 끝 div-->
 </div>
-<div class="wrap-loading">
+<div class="wrap-loading display-none">
 	<div><img src="${pageContext.request.contextPath}/resources/hari/assets/images/preloader.gif"></div>
 </div>
 </body>
@@ -255,6 +255,7 @@
 	let hour = date.getHours();
 	let minutes = date.getMinutes();
 	let week = ['일', '월', '화', '수', '목', '금', '토'];
+	
 	$(function() {
 		//메인 대시보드 근태차트 날짜
 		$('#taChartDate').text(year + "년 " + month + "월 ")
@@ -288,6 +289,7 @@
 		}).then(() =>{
 			//메인 대시보드 근무시간 통계 데이터 가져오기
 			if($('#isAddmin').val() != undefined){
+				console.log("ddd");
 				$.ajax({
 					url: "${pageContext.request.contextPath}/ajax/getAllEmpTA.hari",
 					type: "post",
@@ -324,6 +326,7 @@
 						})
 					},
 					beforeSend:function(){//이미지 보여주기
+						console.log("ddd");
 						$('.wrap-loading').removeClass('display-none');
 					},
 					complete:function(){ //이미지 감추기
@@ -354,12 +357,6 @@
 							getEmpTAMonth[i].backgroundColor=color(colorArray[i]).alpha(0.5).rgbString();
 							getEmpTAMonth[i].borderColor=colorArray[i];
 						}
-					},
-					beforeSend:function(){//이미지 보여주기
-						$('.wrap-loading').removeClass('display-none');
-					},
-					complete:function(){ //이미지 감추기
-				        $('.wrap-loading').addClass('display-none');
 					}
 				}).then((getEmpTAMonth) => {
 					MONTHS=[];
