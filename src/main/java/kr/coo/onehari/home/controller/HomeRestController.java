@@ -17,16 +17,15 @@ public class HomeRestController {
 	@Autowired
 	private HomeService homeService;
 	
-	// 형남 0110 비밀번호 변경 시 이메일과 사번 일치여부 확인
-	@RequestMapping(value = "/empNumEmail.hari", method = RequestMethod.POST)
-	public boolean empNumEmail(EmpDto emp) {
-		boolean isExist = false;
-		try {
-			isExist = homeService.empNumEmail(emp);
-		} catch (Exception e) {
-			log.debug("empNumEmail 예외발생: " + e.getMessage());
-		}
-		return isExist;
-	}
-	
+    //형남 0117 비밀번호 초기화, 변경
+    @RequestMapping("/empNumEmail.hari")
+    public boolean empNumEmail(String empNum, String email) {
+        boolean result=false;
+        try {
+            result =homeService.empNumEmail(empNum, email);
+        } catch (Exception e) {
+            log.debug("empNumEmail 예외발생: " + e.getMessage());
+        }
+        return result;
+    }
 }

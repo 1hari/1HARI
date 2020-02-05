@@ -11,5 +11,5 @@ import java.sql.SQLException;
 public interface HomeDao {
 
 	//형남 0110 비밀번호 변경 시 사번, 이메일 조회
-	public int empNumEmail(int empNum, String email) throws ClassNotFoundException, SQLException;
+	public int empNumEmail(String empNum, String email) throws ClassNotFoundException, SQLException;
 }

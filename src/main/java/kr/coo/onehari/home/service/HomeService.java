@@ -19,11 +19,11 @@ public class HomeService {
 	private SqlSession sqlsession;
 	
 	//형남 0110 비밀번호 변경 시 이메일과 사번 일치여부 확인
-	public boolean empNumEmail(EmpDto emp) {
+	public boolean empNumEmail(String empNum, String email) {
 		HomeDao dao = sqlsession.getMapper(HomeDao.class);
 		int result = 0;
 		try {
-			result=dao.empNumEmail(emp.getEmpNum(), emp.getEmail());
+			result=dao.empNumEmail(empNum, email);
 		} catch (ClassNotFoundException | SQLException e) {
 			log.debug("empNumEmailService : " + e.getMessage());
 		}

@@ -238,7 +238,7 @@
 							"empNum": $('#empNum').val(),
 							"email": $('#email').val()
 						},
-					dataType: "text",
+					dataType: "json",
 					success: function(data) {
 						//있으면 true, 없으면 false
 						isExist = data;

@@ -8,7 +8,7 @@
 	<!--형남 0117 이메일, 사원번호 일치 여부 확인 -->
 	<select id="empNumEmail" resultType="Integer">
 		 <![CDATA[
-			SELECT empnum FROM subemp WHERE empnum=#{param1} AND email=#{param2}
+			SELECT COUNT(empnum) FROM subemp WHERE empnum=#{param1} AND email=#{param2}
 		]]>
 	</select>
 </mapper>
