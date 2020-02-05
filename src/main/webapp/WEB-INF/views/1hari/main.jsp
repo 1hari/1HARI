@@ -49,6 +49,7 @@
 	@keyframes chartjs-render-animation{from{opacity:.99}to{opacity:1}}.chartjs-render-monitor{animation:chartjs-render-animation 1ms}.chartjs-size-monitor,.chartjs-size-monitor-expand,.chartjs-size-monitor-shrink{position:absolute;direction:ltr;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1}.chartjs-size-monitor-expand>div{position:absolute;width:1000000px;height:1000000px;left:0;top:0}.chartjs-size-monitor-shrink>div{position:absolute;width:200%;height:200%;left:0;top:0}</style>
 </head>
 <body>
+
 <!-- 페이지 내 컨텐츠 제목 란 시작  -->
 <!-- ============================================================== -->
 <div class="page-wrapper">
@@ -64,7 +65,7 @@
 		</div>
 	</div>
 	<!-- 페이지 내 컨텐츠 제목 란 끝  -->
-	
+
 	<!-- 페이지내 컨텐츠 컨테이너 시작  -->
 	<!-- ============================================================== -->
 	<div class="container-fluid">
@@ -221,7 +222,9 @@
 	</div>
 <!--<div class="container-fluid"> 부분 끝 div-->
 </div>
-
+<div class="wrap-loading">
+	<div><img src="${pageContext.request.contextPath}/resources/hari/assets/images/preloader.gif"></div>
+</div>
 </body>
 
 <script async="" src="//www.google-analytics.com/analytics.js"></script>
@@ -264,9 +267,10 @@
 				yearStr:$('#workTimeSelectYear').val()
 			},
 			success: function(getWorkTimeYear) {
+				
 				var yearList=getWorkTimeYear
 				let years = "";
-				//console.log(getWorkTimeYear == "");
+				//console.log(getWorkTimeYear);
 				if(getWorkTimeYear != ""){
 					$.each(yearList, function(index, element) {
 						if (index==0) {
@@ -318,6 +322,12 @@
 								}
 							}
 						})
+					},
+					beforeSend:function(){//이미지 보여주기
+						$('.wrap-loading').removeClass('display-none');
+					},
+					complete:function(){ //이미지 감추기
+				        $('.wrap-loading').addClass('display-none');
 					}
 				})
 			}
@@ -344,6 +354,12 @@
 							getEmpTAMonth[i].backgroundColor=color(colorArray[i]).alpha(0.5).rgbString();
 							getEmpTAMonth[i].borderColor=colorArray[i];
 						}
+					},
+					beforeSend:function(){//이미지 보여주기
+						$('.wrap-loading').removeClass('display-none');
+					},
+					complete:function(){ //이미지 감추기
+				        $('.wrap-loading').addClass('display-none');
 					}
 				}).then((getEmpTAMonth) => {
 					MONTHS=[];
@@ -493,20 +509,20 @@
 		var dataset2;
 		var salYearList=[]
 		$.ajax({
-		url: "${pageContext.request.contextPath}/ajax/getSalYear.hari",
-		type: "post",
-		dataType: "json",
-		success: function(getSalYear) {
-			salYearList=getSalYear
-			let years = "";
-			$.each(getSalYear, function(index, element) {
-				if (index==0) {
-					years += '<option value="' + element + '" selected>' + element + '</option>';
-				} else {
-					years += '<option value="' + element + '">' + element + '</option>';
-				}
-			})
-			$("#chartSelect").append(years);
+			url: "${pageContext.request.contextPath}/ajax/getSalYear.hari",
+			type: "post",
+			dataType: "json",
+			success: function(getSalYear) {
+				salYearList=getSalYear
+				let years = "";
+				$.each(getSalYear, function(index, element) {
+					if (index==0) {
+						years += '<option value="' + element + '" selected>' + element + '</option>';
+					} else {
+						years += '<option value="' + element + '">' + element + '</option>';
+					}
+				})
+				$("#chartSelect").append(years);
 			}
 		}).then((getSalYear) =>{
 			if($('#isAddmin').val() != undefined){
@@ -712,7 +728,7 @@
 				$('#t1h').text(weatherAraay[4].fcstValue + '℃') 
 				$('#reh').text(weatherAraay[6].fcstValue + '%') 
 		
-			},
+			}
 		});//날씨api END!!
 	
 		// 뉴스 API
@@ -738,4 +754,27 @@
 		})
 	})
 </script>
+<style>
+	.wrap-loading { /*화면 전체를 어둡게 합니다.*/
+	    position: fixed;
+	    left:0;
+	    right:0;
+	    top:0;
+	    bottom:0;
+	    background: rgba(0,0,0,0.2); /*not in ie */
+	    filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#20000000', endColorstr='#20000000');    /* ie */
+	}
+
+	.wrap-loading div{ /*로딩 이미지*/
+		position: fixed;
+		top:50%;
+		left:50%;
+		margin-left: -21px;
+		margin-top: -21px;
+	}
+	
+ 	.display-none{ /*감추기*/
+ 		display:none;
+ 	}
+</style>
 

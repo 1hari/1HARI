@@ -57,21 +57,6 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/hari/assets/libs/jquery-minicolors/jquery.minicolors.css">
 <script src="${pageContext.request.contextPath}/resources/hari/assets/libs/jquery-minicolors/jquery.minicolors.min.js"></script>
 
-    <script type="text/javascript">
-
-    </script>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <!--  -->
 </head>
 <body>
 	<!-- header 영역 -->

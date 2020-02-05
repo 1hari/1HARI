@@ -6,34 +6,6 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/hari/assets/extra-libs/multicheck/multicheck.css">
 <link href="${pageContext.request.contextPath}/resources/hari/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet">
 
-<style>
-	.wrap-loading{ /*화면 전체를 어둡게 합니다.*/
-		    position: fixed;
-		    left:0;
-		    right:0;
-		    top:0;
-		    bottom:0;
-		    background: rgba(0,0,0,0.2); /*not in ie */
-		    filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#20000000', endColorstr='#20000000');    /* ie */
-		}
-
-	    .wrap-loading div{ /*로딩 이미지*/
-	        position: fixed;
-	        top:50%;
-	        left:50%;
-	        margin-left: -21px;
-	        margin-top: -21px;
-	    }
-	
-	    .display-none{ /*감추기*/
-	        display:none;
-	    }
-	    
-	    #signListTable td{
-	    	border: 2px solid #505050;
-	    
-	    }
-</style>
 <!-- Page wrapper  -->
 <!-- ============================================================== -->
 <div class="page-wrapper">
@@ -178,6 +150,32 @@
 </div>
 <!-- ============================================================== -->
 <!-- End Page wrapper  -->
+<div class="wrap-loading">
+	<div><img src="${pageContext.request.contextPath}/resources/hari/assets/images/preloader.gif"></div>
+</div>
+<style>
+	.wrap-loading{ /*화면 전체를 어둡게 합니다.*/
+		    position: fixed;
+		    left:0;
+		    right:0;
+		    top:0;
+		    bottom:0;
+		    background: rgba(0,0,0,0.2); /*not in ie */
+		    filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#20000000', endColorstr='#20000000');    /* ie */
+		}
+
+	    .wrap-loading div{ /*로딩 이미지*/
+	        position: fixed;
+	        top:50%;
+	        left:50%;
+	        margin-left: -21px;
+	        margin-top: -21px;
+	    }
+	
+	    .display-none{ /*감추기*/
+	        display:none;
+	    }
+</style>
 <script>
 	var code = 0 //결재분류 : 0.전체 / 1.기안 / 2.완료 / 3.반려 / 4.결재할 문서
 	var cp = 1; //보여줄 페이지
@@ -323,12 +321,12 @@
 			error: function(xhr){
 				console.log(xhr.status);
 			},
-// 			beforeSend:function(){//이미지 보여주기
-// 				$('.wrap-loading').removeClass('display-none');
-// 			},
-// 			complete:function(){ //이미지 감추기
-// 		        $('.wrap-loading').addClass('display-none');
-// 			}
+			beforeSend:function(){//이미지 보여주기
+				$('.wrap-loading').removeClass('display-none');
+			},
+			complete:function(){ //이미지 감추기
+		        $('.wrap-loading').addClass('display-none');
+			}
 		});//ajax 끝
 	}//페이징처리 끝
 	
@@ -400,12 +398,12 @@
 			error: function(xhr){
 				console.log(xhr.status);
 			},
-// 			beforeSend:function(){//이미지 보여주기
-// 				$('.wrap-loading').removeClass('display-none');
-// 			},
-// 			complete:function(){ //이미지 감추기
-// 		        $('.wrap-loading').addClass('display-none');
-// 			}
+			beforeSend:function(){//이미지 보여주기
+				$('.wrap-loading').removeClass('display-none');
+			},
+			complete:function(){ //이미지 감추기
+		        $('.wrap-loading').addClass('display-none');
+			}
 		});//ajax 끝
 	}//전자결재 가져오기 끝
 

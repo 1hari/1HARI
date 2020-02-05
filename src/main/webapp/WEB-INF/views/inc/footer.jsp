@@ -45,15 +45,15 @@
 <script>
 	$(document).ready(function() {
 		connect();
-// 		var Notification = window.Notification || window.mozNotification || window.webkitNotification;
+		var Notification = window.Notification || window.mozNotification || window.webkitNotification;
 
-// 		 Notification.requestPermission(function (permission) {
-// 			console.log(permission);
-// 	    });
-		// notifications 알림 권한확인 
-// 		if (window.Notification) {
-// 	        Notification.requestPermission(); //사용자 권한을 받아오는 함수
-// 	    }
+		 Notification.requestPermission(function (permission) {
+			console.log(permission);
+	    });
+		notifications 알림 권한확인 
+		if (window.Notification) {
+	        Notification.requestPermission(); //사용자 권한을 받아오는 함수
+	    }
 	})
 	
 	function getContextPath() {//접속주소 + contextPath 구하는 함수
@@ -109,9 +109,8 @@
 	//notifications : http 적용불가
     function signNotify(msg) {
         //알림 권한이 없으면 경고창
-        if (Notification.permission !== 'granted') {
-            swal("warning", "notification is disabled", "warning")
-        }else {
+        if (Notification.permission == 'granted') {
+            
             var instance = new Notification('Notification title', {
                 icon: '${pageContext.request.contextPath}/resources/hari/assets/images/favicon.png',
                 body: msg,

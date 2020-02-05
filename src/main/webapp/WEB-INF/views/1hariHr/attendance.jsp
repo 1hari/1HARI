@@ -141,77 +141,8 @@
 				</div>
 			</div>
 		</div>
-
-		<!-- BEGIN MODAL -->
-		<div class="modal none-border" id="my-event">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h4 class="modal-title">
-							<strong>Add Event</strong>
-						</h4>
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					</div>
-					<div class="modal-body"></div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
-						<button type="button" class="btn btn-success save-event waves-effect waves-light">Create event</button>
-						<button type="button" class="btn btn-danger delete-event waves-effect waves-light" data-dismiss="modal">Delete</button>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-		<!-- Modal Add Category -->
-		<div class="modal fade none-border" id="add-new-event">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h4 class="modal-title">
-							<strong>Add</strong> a category
-						</h4>
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					</div>
-					
-					<div class="modal-body">
-						<form>
-							<div class="row">
-								<div class="col-md-6">
-									<label class="control-label">Category Name</label>
-									<input class="form-control form-white" placeholder="Enter name" type="text" name="category-name" />
-								</div>
-								
-								<div class="col-md-6">
-									<label class="control-label">Choose Category Color</label>
-									<select class="form-control form-white" data-placeholder="Choose a color..." name="category-color">
-										<option value="success">Success</option>
-										<option value="danger">Danger</option>
-										<option value="info">Info</option>
-										<option value="primary">Primary</option>
-										<option value="warning">Warning</option>
-										<option value="inverse">Inverse</option>
-									</select>
-								</div>
-							</div>
-						</form>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-danger waves-effect waves-light save-category" data-dismiss="modal">Save</button>
-						<button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
-					</div>
-					
-				</div>
-			</div>
-		</div>
 		<!-- ============================================================== -->
 		<!-- End PAge Content -->
-		<!-- ============================================================== -->
-		<!-- ============================================================== -->
-		<!-- Right sidebar -->
-		<!-- ============================================================== -->
-		<!-- .right-sidebar -->
-		<!-- ============================================================== -->
-		<!-- End Right sidebar -->
 		<!-- ============================================================== -->
 	</div>
 	<!-- ============================================================== -->
@@ -251,8 +182,18 @@
 			success: function(data) {
 				//퇴근근기록이 있으면 true, 없으면 false
 				isEnd=data;
+				console.log(isEnd);
 			}
 		}).then((value) => {
+			$.ajax({
+				url: "${pageContext.request.contextPath}/ajax/todayStartWorkCheck.hari",
+				type: "post",
+				dataType: "json",
+				success: function(todayStartWorkCheck) {
+					isStart=todayStartWorkCheck;
+					console.log(todayStartWorkCheck);
+				}
+			}).then((value) => {
 			if(isEnd==false && isStart==true){
 				//false 면 현재시간 - 출근시간
 				$.ajax({
@@ -405,40 +346,6 @@
 				});
 			})
 		})
-	
-		//오늘 출근기록 체크
-		$.ajax({
-			url: "${pageContext.request.contextPath}/ajax/todayStartWorkCheck.hari",
-			type: "post",
-			dataType: "json",
-			success: function(todayStartWorkCheck) {
-				isStart=todayStartWorkCheck;
-			}
-		}).then((isStart) => {
-			$.ajax({
-				url: "${pageContext.request.contextPath}/ajax/todayAbsentCheck.hari",
-				type: "post",
-				dataType: "json",
-				success: function(todayAbsentCheck) {
-					//퇴근근기록이 있으면 true, 없으면 false
-					isAbsent=todayAbsentCheck;
-					if(isStart == false && isEnd==false && isAbsent==false){
-						$('#startWork').removeAttr('disabled');	
-						$('#endWork').attr('disabled', 'disabled');
-						//출근 미등록 알림 (페이지 이동마다 출근 안찍혀있으면 알림)
-					}else if(isStart == true && isEnd==false && isAbsent==false){
-						$('#startWork').attr('disabled', 'disabled');
-						$('#endWork').removeAttr('disabled');	
-					} else if((isStart == true && isEnd==true && isAbsent==false) || (isStart == true && isEnd==true && isAbsent==true) || (isStart == false && isEnd==false && isAbsent==true) || (isStart == true && isEnd==true && isAbsent==true) || (isStart == true && isEnd==false && isAbsent==true)) {
-						$('#endWork').attr('disabled', 'disabled');
-						$('#startWork').attr('disabled', 'disabled');
-					} else if(isStart == false && isEnd==true) {
-						swal("warning", "근태오류, 관리자에게 문의해주세요.", "warning")
-					} else{
-						swal("warning", "근태오류, 관리자에게 문의해주세요.", "warning")
-					}
-				}
-			});
 		})
 	});
 </script>

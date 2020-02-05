@@ -11,6 +11,7 @@
 		<div class="lds-pos"></div>
 	</div>
 </div>
+
 <!-- ============================================================== -->
 <!-- Main wrapper - style you can find in pages.scss -->
 <!-- ============================================================== -->
@@ -319,73 +320,31 @@
 	// 					alert('위치정보가 다릅니다. 로그인 실패');
 	// 					return;
 	// 				}
-			   //형남 0112 출근기능
-				$.ajax({
-	               url: "${pageContext.request.contextPath}/ajax/startWork.hari",
-	               type: "post",
-	               dataType: "json",
-	               success: function(data) {
-	                   isStart=data
-	               }
-	            }).then((data) => {
-	                //총 근무일 갱신
-	                $.ajax({
-	                   url: "${pageContext.request.contextPath}/ajax/getTotalTA.hari",
-	                   type: "post",
-	                   dataType: "json",
-	                   success: function(totalTA) {
-	                      $('#totalTA').text('');
-	                      $('#totalTA').append(totalTA);
-	                   }
-	                }).then(() => {
-	                    //있으면 true, 없으면 false
-	                    if(isStart==true){
-							var integerDate= parseInt(getTimeStamp());
-							//출근기록 성공하면 출근버튼 숨기고 퇴근버튼 표시
-							$('#endWork').removeAttr('style', 'display: none');
-							$('#startWork').attr('style', 'display: none');
-							//오늘 출근일 YYYY-MM-DD 형식으로 가져오기(풀캘린더에 날짜값 형식으로)
-							$.ajax({
-								url: "${pageContext.request.contextPath}/ajax/getDataDate.hari",
-								type: "post",
-								dataType: "text",
-								success: function(dataDate) {
-									//풀캘린더 일 단위 속성 전부 가져옴
-									var itemArray2=document.querySelectorAll('.fc-day.fc-widget-content');
-									if(integerDate < 110000){
-									for(var i=0;i<itemArray2.length;i++){
-										//가져온 일 단위 속성의 data-date(yyyy-mm-dd 형식) 속성을 가져와 오늘 날짜와 비교
-										if($(itemArray2[i]).attr('data-date') == dataDate.trim()){ //있으면 i번째 달력 날짜에 출근 스티커 붙임
-	                                       $(itemArray2[i]).removeAttr("td");
-	                                       $(itemArray2[i]).append('<br><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-warning fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">출근</span></div><div class="fc-resizer fc-end-resizer"></div></a></td>');
-	                                       break
-										}	
-									}
-								}else{
-									for(var i=0;i<itemArray2.length;i++){
-										if($(itemArray2[i]).attr('data-date') == dataDate.trim()){
-											$(itemArray2[i]).removeAttr("td");
-											$(itemArray2[i]).append('<br><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-warning fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">지각</span></div><div class="fc-resizer fc-end-resizer"></div></a></td>');
-										}
-									}
-								}
-							}
-						})
-						swal("success", "출근 등록되었습니다.", "success").then((logout) => {
-							if (logout) {
-								location.reload();
-							}
-						})
-					}else{
-						swal("warning", "출근등록 실패, 관리자에게 문의해주세요.", "warning")
-					}
-				})
+			//형남 0112 출근기능
+			$.ajax({
+				url: "${pageContext.request.contextPath}/ajax/startWork.hari",
+				type: "post",
+				dataType: "json",
+				success: function(data) {
+					isStart=data
+				}
+			}).then((data) => {
+				//있으면 true, 없으면 false
+				if(isStart==true){
+					var integerDate= parseInt(getTimeStamp());
+					//출근기록 성공하면 출근버튼 숨기고 퇴근버튼 표시
+					$('#endWork').removeAttr('style', 'display: none');
+					$('#startWork').attr('style', 'display: none');
+						
+					swal("success", "출근 등록되었습니다.", "success").then((logout) => {
+						if (logout) {
+							location.reload();
+						}
+					})
+				}else{
+					swal("warning", "출근등록 실패, 관리자에게 문의해주세요.", "warning")
+				}
 			})
-	// 			});
-	// 		}else { 
-	// 			alert('현재 브라우저에서 지원하지 않는 기능입니다.');
-	// 			return;
-	// 		}
 		})
 		
 		//퇴근버튼
@@ -414,22 +373,7 @@
 					//버튼 감추기
 					$('#endWork').attr('style', 'display: none');
 					$('#startWork').attr('style', 'display: none');
-					$.ajax({
-						url: "${pageContext.request.contextPath}/ajax/getDataDate.hari",
-						type: "post",
-						dataType: "text",
-						success: function(dataDate) {
-							//풀캘린더 일 단위 속성 전부 가져옴
-							var itemArray=document.querySelectorAll('.fc-day.fc-widget-content');
-							for(var i=0;i<itemArray.length;i++){
-								//가져온 일 단위 속성의 data-date(yyyy-mm-dd 형식) 속성을 가져와 오늘 날짜와 비교
-								if($(itemArray[i]).attr('data-date') == dataDate.trim()){//있으면 i번째 달력 날짜에 퇴근 스티커 붙임
-									$(itemArray[i]).removeAttr("td");
-									$(itemArray[i]).append('<a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-success fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">퇴근</span></div><div class="fc-resizer fc-end-resizer"></div></a>');
-								}
-					        }
-						}
-					});
+					
 					swal("success", "퇴근 등록되었습니다.", "success").then((logout) => {
 	                    if (logout) {
 	                    	location.reload();
@@ -440,12 +384,6 @@
 					return;
 				}
 			})
-	
-	// 			});
-	// 		}else { 
-	// 			alert('현재 브라우저에서 지원하지 않는 기능입니다.');
-	// 			return;
-	// 		}
 		})
 	
 		//오늘 출근기록 체크
@@ -509,10 +447,7 @@
 	    }
 		
 	    function notify() {
-	        if (Notification.permission !== 'granted') {
-	            swal("warning", "notification is disabled", "warning")
-	        }
-	        else {
+	        if (Notification.permission == 'granted') {
 	            var notification = new Notification('Notification title', {
 	                icon: '${pageContext.request.contextPath}/resources/hari/assets/images/favicon.png',
 	                body: '출근 미등록 상태입니다. 확인해주세요.',
@@ -603,19 +538,4 @@
 	        }
 	    });
 	}
-	
-		//mouseover
-	//   	$(function() {
-	  		
-	//   		document.getElementById("swal-button").addEventListener("mouseover", mouseOver);
-	//   	  	document.getElementById("swal-button").addEventListener("mouseout", mouseOut);
-	
-	//   	  	function mouseOver() {
-	//   	  	  document.getElementById("swal-button").style.color = "#999999";
-	//   	  	}
-	//   	 	 function mouseOut() {
-	//   		  document.getElementById("swal-button").style.color = "white";
-	//   		}
-	
-	//   	});
 </script>

@@ -178,7 +178,7 @@
 					"signFormCode" : signFormCode
 				},
 				success: function(resultMap){
-	 				console.log(resultMap);
+	 				//console.log(resultMap);
 	 				var icon;
 	 				
 	 				if(resultMap.isOk == 'true'){
