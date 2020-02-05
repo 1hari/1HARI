@@ -198,8 +198,8 @@ File: css
 
 .wizard-content .wizard>.actions>ul>li>a[href="#previous"] {
     background-color: #fff;
-    color: #54667a;
-    border: 1px solid #d9d9d9
+    color: #000000;
+    border: 2px solid #807266;
 }
 
 .wizard-content .wizard>.actions>ul>li>a[href="#previous"]:focus,
@@ -216,7 +216,8 @@ File: css
 .wizard-content .wizard>.actions>ul>li.disabled>a,
 .wizard-content .wizard>.actions>ul>li.disabled>a:focus,
 .wizard-content .wizard>.actions>ul>li.disabled>a:hover {
-    color: #999
+    color: #000000;
+    border: 2px solid #807266;
 }
 
 .wizard-content .wizard>.actions>ul>li.disabled>a[href="#previous"],

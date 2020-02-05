@@ -42,7 +42,7 @@
               <td class="text-center d-none d-md-table-cell">{{pay.payLIncomeTax}}</td>
               <td class="text-center d-none d-md-table-cell">{{totalDeduction}}</td><!--실급여로 데이터 받으세요 -->
               <td class="text-center d-none d-md-table-cell">{{realAmount}}</td><!--실급여로 데이터 받으세요 -->
-              <td class="text-center d-none d-md-table-cell"><button class ="btn-success" style = "background-color: white; color:black; border-radius:7px border-color:#807266; font-weight:bold; height:70%;" @click="payRead(splitPayMonth[index][0],splitPayMonth[index][1])">급여명세</button></td>
+              <td class="text-center d-none d-md-table-cell"><button class ="btn-success" style = "background-color: white; color:black; border-radius:5px border:2px solid #807266; font-weight:bold; height:70%;" @click="payRead(splitPayMonth[index][0],splitPayMonth[index][1])">급여명세</button></td>
             </tr>
           </tbody>
           
