@@ -4,7 +4,7 @@
   <div class="container" style="margin-top:4%; width:150%;">
     <div class="card" style=" border-radius:10px; box-shadow :7px 7px #505050; margin-left: -8%; width:115%; ">
       <div class="card-body" style=" border-radius:10px; box-shadow :7px 7px #505050; " >
-        <h4 class="card-title">급여</h4>
+
         <div style = "margin-left:85%;">
            <span>사번: {{server_data.empNum}}</span>
             <select style = "margin-left:25%; border: 2px solid #807266;" id="selectYear" @change="getPayList($event)">
@@ -13,7 +13,8 @@
             
         </div>
         
-        <table class="table table-hover table-bordered" id="payList" >
+        <table class="table table-hover table-bordered" id="payList" style="margin-top:3%;">
+        
           <thead>
             <tr style = "background-color: #e9ecef ">
               <th class="text-center d-none d-md-table-cell">지급일</th>

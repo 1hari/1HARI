@@ -14,7 +14,7 @@
 	<div class="page-breadcrumb">
 		<div class="row">
 			<div class="col-12 d-flex no-block align-items-center">
-				<h4 class="page-title">사원 조회</h4>
+				<h4 class="page-title">급여 현황</h4>
 				<div class="ml-auto text-right"></div>
 			</div>
 		</div>
