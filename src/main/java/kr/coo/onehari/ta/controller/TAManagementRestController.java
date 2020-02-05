@@ -34,17 +34,22 @@ public class TAManagementRestController {
 
 	// 관리자권한 사원근태수정을 위한 사원정보 가져오기 김진호 2020. 1. 29
 	@RequestMapping(value = "setEmpTa.hari", method = RequestMethod.POST)
-	public int setEmpTa(EmpDto empdto, String setDate) {
+	public int setEmpTa(EmpDto empdto, String setDate, String todayStartDate) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		int result = 0;
-
 		map.put("taDate", empdto.getTaDate());
 		map.put("empNum", Integer.toString(empdto.getEmpNum()));
 		map.put("todayWork", empdto.getTodayWork());
 		map.put("setDate", setDate);
+		map.put("todayStartDate", todayStartDate);
 
 		try {
-			result = taManagementService.setEmpTa(map);
+			if(empdto.getTodayWork() == "32400" || empdto.getTodayWork().contentEquals("32400")) {
+				result = taManagementService.setEmpTaStartNull(map);
+			}else {
+				result = taManagementService.setEmpTa(map);
+			}
+			
 		} catch (Exception e) {
 			log.debug("HrRestController setEmpTa 예외발생: " + e.getMessage());
 		}

@@ -28,4 +28,22 @@
 		todayWork = #{todayWork}
 		WHERE empNum = #{empNum} AND taCode = 5 AND scheduleDate = #{setDate}
 	</update>
+	
+	<!-- 근태수정(출근 안찍혀있을 경우 출근 수정) 오형남 2020. 2. 5 -->
+	<update id="setEmpStart" parameterType="hashmap">
+		UPDATE talist
+		SET taCode = 1,
+		taDate = #{todayStartDate},
+		todayWork = #{todayWork}
+		WHERE empNum = #{empNum} AND taCode = 1 AND scheduleDate = #{setDate}
+	</update>
+	
+	<!-- 근태수정(출근 안찍혀있을 경우 퇴근 수정) 오형남 2020. 2. 5 -->
+	<update id="setEmpEnd" parameterType="hashmap">
+<!-- 		UPDATE talist -->
+<!-- 		SET taCode = 2, -->
+<!-- 		taDate = #{taDate}, -->
+<!-- 		todayWork = #{todayWork} -->
+<!-- 		WHERE empNum = #{empNum} AND taCode = 5 AND scheduleDate = #{setDate} -->
+	</update>
 </mapper>

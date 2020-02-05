@@ -43,4 +43,17 @@ public class TAManagementService {
 		}
 		return result;
 	}
+	
+	// 관리자권한 사원근태(비동기), 가져오기 김진호 2020. 1. 29
+	public int setEmpTaStartNull(Map<String, String> map) {
+		TAManagementDao taManagementDao = sqlsession.getMapper(TAManagementDao.class);
+		int result = 0;
+		try {
+			result += taManagementDao.setEmpStart(map);
+			result += taManagementDao.setEmpTa(map);
+		} catch (ClassNotFoundException | SQLException e) {
+			log.debug("setEmpTaStartNull getEmpTa 예외발생: " + e.getMessage());
+		}
+		return result;
+	}
 }

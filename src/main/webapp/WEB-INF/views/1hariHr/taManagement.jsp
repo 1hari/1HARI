@@ -166,7 +166,7 @@
 								if (TaList[i].taDate != null && TaList[i].taDate != '0000-00-00 00:00:00') { // 출근시간 기록이 있고 연차(0000)가 아닌 경우
 									empTaList += '<td>' + TaList[i].taName + ' (' + TaList[i].taDate + ')</td>'; // 출근, 출근시간
 								} else if (TaList[i].taDate == null && TaList[i].taDate != '0000-00-00 00:00:00') { // 출근시간 기록이 없고 연차(0000)가 아닌 경우
-									empTaList += '<td>' + TaList[i].taName + ' (출근시간 기록없음)</td>'; // 출근, 출근시간
+									empTaList += '<td id="startNull">' + TaList[i].taName + ' (출근시간 기록없음)</td>'; // 출근, 출근시간
 								} else if (TaList[i].taDate == '0000-00-00 00:00:00') { // 연차인 경우
 									empTaList += '<td>연차</td>'; // 출근, 출근시간
 								}
@@ -204,30 +204,35 @@
 				}
 			});
 		}
-
+		
 		function setEmpTa(setDate) { // 퇴근처리하기
 			$('.editEmpTa').click(function() {
-				console.log("??");
 				let tr = $(this).closest('tr'); // 나와 조상요소 중 첫번째 tr //.parent() 바로 상위요소 찾기
 				let empNum = tr.children().html(); // 나와 조상요소 중 첫번째 tr의 자식의 값
 				let startWorkTime = tr.children().eq(3).html(); // 해당 사원의 출근기록시간 받기
-				// let leaveWorkTime = tr.children().eq(4).html(); // 해당 사원의 결근기록시간 받기
-				
-				startWork = moment(startWorkTime, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD HH:mm:ss"); // 출근시간
-				let startWorkAdd = moment(startWork, "YYYY-MM-DD HH:mm:ss").add(9, "hours").format("YYYY-MM-DD HH:mm:ss"); // 퇴근시간(출근시간 + 9시간)
-				let dateCheck = moment(startWorkAdd, "YYYY-MM-DD").format("YYYY-MM-DD"); // startWorkAdd 날짜가 startWork 날짜와 같은지 다음날인지 체크
-				let startWorkNight = moment(startWork, "YYYY-MM-DD").format("YYYY-MM-DD") + " 23:59:59";
-				let startWorkDiff = moment(startWork);
-				let leaveWorkDiff = "";
-				
-				if (dateCheck != moment(startWork, "YYYY-MM-DD").format("YYYY-MM-DD")) { // 퇴근날짜가 다음 날짜로 넘어갔을 때
-					leaveWork = startWorkNight;
-					leaveWorkDiff = moment(startWorkNight);
-					todayWork = leaveWorkDiff.diff(startWorkDiff, "seconds");
-				} else { // 퇴근날짜가 다음 날짜로 넘어가지 않았을 때
-					leaveWork = moment(startWork, "YYYY-MM-DD HH:mm:ss").add(9, "hours").format("YYYY-MM-DD HH:mm:ss"); // 퇴근시간(출근시간 + 9시간)
-					leaveWorkDiff = moment(leaveWork);
-					todayWork = leaveWorkDiff.diff(startWorkDiff, "seconds");
+				let startWorkTimeId = tr.children().eq(3).id; // 해당 사원의 출근기록시간 받기
+				console.log(setDate)
+				console.log('출근 (출근시간 기록없음)' ==startWorkTime)
+				if('출근 (출근시간 기록없음)' ==startWorkTime){
+					todayWork=32400
+					leaveWork=setDate + " 18:00:00"
+					todayStartDate=setDate + " 09:00:00"
+				}else{
+					startWork = moment(startWorkTime, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD HH:mm:ss"); // 출근시간
+					let startWorkAdd = moment(startWork, "YYYY-MM-DD HH:mm:ss").add(9, "hours").format("YYYY-MM-DD HH:mm:ss"); // 퇴근시간(출근시간 + 9시간)
+					let dateCheck = moment(startWorkAdd, "YYYY-MM-DD").format("YYYY-MM-DD"); // startWorkAdd 날짜가 startWork 날짜와 같은지 다음날인지 체크
+					let startWorkNight = moment(startWork, "YYYY-MM-DD").format("YYYY-MM-DD") + " 23:59:59";
+					let startWorkDiff = moment(startWork);
+					let leaveWorkDiff = "";
+					if (dateCheck != moment(startWork, "YYYY-MM-DD").format("YYYY-MM-DD")) { // 퇴근날짜가 다음 날짜로 넘어갔을 때
+						leaveWork = startWorkNight;
+						leaveWorkDiff = moment(startWorkNight);
+						todayWork = leaveWorkDiff.diff(startWorkDiff, "seconds");
+					} else { // 퇴근날짜가 다음 날짜로 넘어가지 않았을 때
+						leaveWork = moment(startWork, "YYYY-MM-DD HH:mm:ss").add(9, "hours").format("YYYY-MM-DD HH:mm:ss"); // 퇴근시간(출근시간 + 9시간)
+						leaveWorkDiff = moment(leaveWork);
+						todayWork = leaveWorkDiff.diff(startWorkDiff, "seconds");
+					}
 				}
 				
 				$.ajax({
@@ -237,7 +242,8 @@
 							"empNum" : empNum, // 사번
 							 "taDate" : leaveWork, // 결근을 퇴근으로 처리하기 위한 시간
 							 "setDate" : setDate, // 해당 출퇴근 기록일
-							 "todayWork" : todayWork
+							 "todayWork" : todayWork,
+							 "todayStartDate": todayStartDate
 						},
 					type: "post",
 					dataType: "json",
@@ -285,7 +291,11 @@
 			$('#days').append(days);
 
 			$('.click').click(function() { // 해당 날짜(일)을 선택했을 때
-				setDate = $('#selectMonth').val() + '-' + $(this).text().trim(); // 해당 날짜를 연-월-일로 선언
+				var clickDay=$(this).text().trim();
+				if(clickDay < 10){
+					clickDay ='0' +  clickDay
+				}
+				setDate = $('#selectMonth').val() + '-' + clickDay; // 해당 날짜를 연-월-일로 선언
 				$('#zero_config').DataTable().destroy(); // DataTables 초기화(해당 부분을 empty() 하기 전)
 				$('#taBody').empty();
 				getTaList(setDate); // 해당 날짜 근태목록 가져오기
