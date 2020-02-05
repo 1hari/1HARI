@@ -223,9 +223,6 @@ hr.fc-divider {
 	vertical-align: top
 }
 
-.fc td.fc-today {
-	border-style: double
-}
 
 a[data-goto]:hover {
 	text-decoration: underline
@@ -538,10 +535,6 @@ a.fc-more:hover {
 	border: 0 solid red
 }
 
-.fc-bootstrap3 .fc-today.alert,
-.fc-bootstrap4 .fc-today.alert {
-	border-radius: 0
-}
 
 .fc-unselectable {
 	-webkit-user-select: none;
@@ -576,9 +569,6 @@ a.fc-more:hover {
 	background: #eee
 }
 
-.fc-unthemed td.fc-today {
-	background: #fcf8e3
-}
 
 .fc-unthemed .fc-disabled-day {
 	background: #d7d7d7;
