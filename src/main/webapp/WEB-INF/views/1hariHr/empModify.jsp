@@ -9,9 +9,6 @@
 <!--datepicker link 필수 !!! -->
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/hari/assets/libs/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
 
-<!--아래 3개는 사원 등록에서 필요한 js -->
-<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
-
 <style>
 	.stepwizard-step p {
 		margin-top: 10px;
@@ -184,11 +181,17 @@
 
 <script type="text/javascript">
 	/* datepicker */
+	//입사일
+	var hireDate = $('#hireDate').val();
+	
+	//퇴사일은 입사일 이후부터 설정가능
+	hireDate=moment(hireDate, "YYYY-MM-DD").add('days',1).format("YYYY-MM-DD");
 	$('.leavedatepicker').datepicker(
 		{
 			format: "yyyy-mm-dd", // 입사일 Date 형식
 			autoclose: true,
 			todayHighlight: true,
+			startDate :hireDate, 
 			language: "ko"
 		}
 	);

@@ -65,29 +65,16 @@
 									</button>
 								</a>
 							</div>
-<!-- 							<div style="text-align: right; margin-bottom: 1%;"> -->
-<!-- 								<input type="file" id="excelFile" name="excelFile" style="width: 300px;"> -->
-<!-- 								<button type="button" class="btn m-t-5 btn-info btn-block waves-effect waves-light"  -->
-<!-- 										id="uploadExcel" style="width: 20%; background-color: #20B2AA; margin-right: 1%;" onclick="excelUpload()">Excel 업로드 -->
-<!-- 								</button> -->
-<!-- 							</div> -->
 							<form id="empTable" name="empTable" method="post" enctype="multipart/form-data">
 								<table id="zero_config" class="table table-striped table-bordered">
 									<thead>
 										<tr>
-	<!-- 										<th> -->
-	<!-- 											<label class="customcheckbox m-b-20"> -->
-	<!-- 												<input type="checkbox" class="listCheckbox"> -->
-	<!-- 												<span class="checkmark"></span> -->
-	<!-- 											</label> -->
-	<!-- 										</th> -->
 											<th>사번</th>
 											<th>이름</th>
 											<th>소속</th>
 											<th>직급</th>
 											<th>직책</th>
 											<th>재직구분</th>
-	<!-- 										<th>권한</th> -->
 											<th>입사일</th>
 											<th>퇴사일</th>
 											<th>정보수정</th>
@@ -96,19 +83,12 @@
 									<tbody>
 										<c:forEach var="emp" items="${requestScope.emplist}">
 											<tr>
-	<!-- 											<th> -->
-	<!-- 												<label class="customcheckbox m-b-20"> -->
-	<!-- 													<input type="checkbox" class="listCheckbox"> -->
-	<!-- 													<span class="checkmark"></span> -->
-	<!-- 												</label> -->
-	<!-- 											</th> -->
 												<td>${emp.empNum}</td>
 												<td>${emp.empName}</td>
 												<td>${emp.teamName}</td>
 												<td>${emp.rankName}</td>
 												<td>${emp.positionName}</td>
 												<td>${emp.employmentName}</td>
-	<%-- 											<td>${emp.roleDSCR}</td> --%>
 												<td>${emp.hireDate}</td>
 												<td>${emp.leaveDate}</td>
 												<td style="text-align: center;">
@@ -119,11 +99,6 @@
 														<i class="m-r-10 mdi mdi-eraser-variant"></i></button>
 													</a>
 												</td>
-												<!-- <td>
-													<button type="button" class="btn m-t-5 btn-info btn-block waves-effect waves-light" style="width: 80%; background-color: #20B2AA">
-														<a href="#" style="color: white;">삭제</a>
-													</button>
-												</td> -->
 											</tr>
 										</c:forEach>
 									</tbody>
@@ -132,7 +107,6 @@
 								</table>
 							</form>
 						</div>
-
 					</div>
 				</div>
 				<!--데이터 테이블 끝 -->

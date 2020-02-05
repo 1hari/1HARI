@@ -308,9 +308,7 @@
 			}
 			
 		});//결재자 클릭 끝
-		//console.log(new Date());
 		var twmoment = moment(new Date()).add('days',1).format("YYYY-MM-DD");
-		//console.log(twmoment);
 		
 		//datepicker 설정
 		$('.date').datepicker({
