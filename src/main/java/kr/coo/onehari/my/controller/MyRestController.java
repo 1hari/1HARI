@@ -42,7 +42,7 @@ public class MyRestController {
 
 	@RequestMapping("setMyTheme.hari")
 	public String setMyTheme(Theme theme, HttpServletRequest request, Principal principal) {
-		System.out.println(theme);
+		//System.out.println(theme);
 		theme.setEmpNum(Integer.parseInt(principal.getName()));
 
 		MultipartFile file = theme.getFile(); // view에서 DTO에 저장된 파일받아오기

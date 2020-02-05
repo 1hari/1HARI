@@ -29,7 +29,7 @@ public class LoginLog {
 			}
 		}
 		
-		System.out.println("접속ID : " + principal.getName() + " / 접속IP : " + req.getRemoteAddr());
+		//System.out.println("접속ID : " + principal.getName() + " / 접속IP : " + req.getRemoteAddr());
 		log.info("접속ID : " + principal.getName() + " / 접속IP : " + req.getRemoteAddr());
 	}
 

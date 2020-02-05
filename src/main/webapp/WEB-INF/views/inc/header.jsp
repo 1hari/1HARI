@@ -248,7 +248,7 @@
 		$('#themeSetup').click(function(){
 			formData = new FormData();
 			formData.append("profileFileName","defaultprofile.png");
-			formData.append("themeColor","807266");
+			formData.append("themeColor","#807266");
 			themeChange(formData)
 		});
 		
