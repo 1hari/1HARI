@@ -46,7 +46,7 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
 			} else if (exception instanceof InternalAuthenticationServiceException) {
 				errormsg = "아이디 또는 비밀번호 " + cnt + "회 오류입니다. ,5회 오류 시 계정이 비활성화 됩니다.";
 			} else if (exception instanceof DisabledException) {
-				errormsg = "계정이 비활성화되었습니다. 관리자에게 문의하세요.";
+				errormsg = "계정이 비활성화되었습니다. ,이메일 인증 후 비밀번호를 변경해주세요.";
 			} else if (exception instanceof CredentialsExpiredException) {
 				errormsg = "비밀번호 유효기간이 만료 되었습니다. 관리자에게 문의하세요.";
 			}
