@@ -8,19 +8,21 @@
 	<update id="insertStartWorkTA" parameterType="Integer">
 		UPDATE TALIST
 		SET TADATE=NOW()
-		WHERE EMPNUM=#{empNum} AND TACODE=1 AND TADATE IS NULL
+		WHERE EMPNUM=1001 AND TACODE=#{empNum} AND TADATE IS NULL AND SCHEDULEDATE=DATE_FORMAT(NOW(),"%Y-%m-%d")
 	</update>
 	
    	<!-- 사원 출근기능(지각) 형남 0120 -->
 	<update id="insertStartWorkTardyTA" parameterType="Integer">
 		UPDATE TALIST
 		SET TADATE=NOW(), TACODE=3 
-		WHERE EMPNUM=#{empNum} AND TACODE=1 AND TADATE IS NULL
+		WHERE EMPNUM=#{empNum} AND TACODE=1 AND TADATE IS NULL AND SCHEDULEDATE=DATE_FORMAT(NOW(),"%Y-%m-%d")
 	</update>
 	
 	<!-- 사원 퇴근기능 형남 0112 -->
 	<update id="insertEndWorkTA" parameterType="Integer">
-		UPDATE TALIST SET TODAYWORK = (SELECT TIME_TO_SEC(NOW()) - (SELECT TIME_TO_SEC((SELECT TADATE FROM (SELECT TADATE FROM TALIST WHERE DATE(TADATE) = DATE(NOW()) AND EMPNUM=#{empNum} AND (TACODE=1 OR TACODE=3)) TL2)))), TADATE= NOW()WHERE EMPNUM=#{empNum} AND TACODE=2 AND TADATE IS NULL;
+		UPDATE TALIST 
+		SET TODAYWORK = (SELECT TIME_TO_SEC(NOW()) - (SELECT TIME_TO_SEC((SELECT TADATE FROM (SELECT TADATE FROM TALIST 
+		WHERE DATE(TADATE) = DATE(NOW()) AND EMPNUM=#{empNum} AND (TACODE=1 OR TACODE=3)) TL2)))), TADATE= NOW()WHERE EMPNUM=#{empNum} AND TACODE=2 AND TADATE IS NULL AND SCHEDULEDATE=DATE_FORMAT(NOW(),"%Y-%m-%d")
 	</update>
 	
 	<!-- 오늘 퇴근기록이 있는지 조회 형남 0112-->
@@ -172,12 +174,12 @@
 
    	<!-- 대시보드 부서별 연봉통계 연도 셀렉트박스-->
     <select id="getSalYear" resultType="String">
-		SELECT DISTINCT YEAR(PAYMONTH) FROM PAY ORDER BY year(PAYMONTH) DESC
+        SELECT DISTINCT YEAR(PAYMONTH) FROM PAY ORDER BY year(PAYMONTH) DESC
     </select>
 
    	<!-- 대시보드 부서별 연봉 연도 셀렉트박스-->
     <select id="getWorkTimeYear" resultType="String">
-		SELECT DISTINCT YEAR(scheduledate) FROM talist ORDER BY year(scheduledate) DESC
+        SELECT DISTINCT YEAR(scheduledate) FROM talist ORDER BY year(scheduledate) DESC
     </select>
     
 	<!-- 대시보드 부서별 연봉통계 연도 셀렉트박스-->
