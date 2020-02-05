@@ -305,7 +305,7 @@
 							datasets: dataset
 						}
 						var ctx = document.getElementById('adminCanvas').getContext('2d');
-						window.myHorizontalBar = new Chart(ctx, {
+						window.myHorizontalBar = new Chart(ctx, {//차트 그리는부분
 							type: 'horizontalBar',
 							data: horizontalBarChartData,
 							options: {
@@ -334,9 +334,226 @@
 					}
 				})
 			}
-			
+			//부서별 연봉 통계 년도 옵션
+			var dataset2;
+			var salYearList=[]
+			$.ajax({
+				url: "${pageContext.request.contextPath}/ajax/getSalYear.hari",
+				type: "post",
+				dataType: "json",
+				success: function(getSalYear) {
+					salYearList=getSalYear
+					let years = "";
+					$.each(getSalYear, function(index, element) {
+						if (index==0) {
+							years += '<option value="' + element + '" selected>' + element + '</option>';
+						} else {
+							years += '<option value="' + element + '">' + element + '</option>';
+						}
+					})
+					$("#chartSelect").append(years);
+				}
+			}).then((getSalYear) =>{
+				//대시보드 연봉통계 차트
+				if($('#isAddmin').val() != undefined){
+					$.ajax({
+						url: "${pageContext.request.contextPath}/ajax/getTeamSalList.hari",
+						type: "post",
+						data:{
+									"year":getSalYear[0]
+								},
+						dataType: "json",
+						success: function(getTeamSalList) {
+							var labels=[];
+							for(var i =0; i<getTeamSalList.length; i++){
+								getTeamSalList[i].backgroundColor=color(colorArray[i]).alpha(0.5).rgbString();
+								getTeamSalList[i].borderColor=colorArray[i];
+								dataset2=getTeamSalList;
+								labels.push(getTeamSalList[i].label)
+							}
+							var barChartData = {
+								labels: [getSalYear[0]+'년'],
+								datasets: dataset2
+							}
+							var ctx2 = document.getElementById('adminCanvas2').getContext('2d');
+							window.myBar = new Chart(ctx2, {//차트 그리는부분
+								type: 'bar',
+								data: barChartData,
+								options: {
+									elements: {
+										rectangle: {
+										borderWidth: 2,
+										}
+									},
+									responsive: true,
+									legend: {
+										position: 'right',
+									},
+									title: {
+										display: true,
+										text: '부서별 연봉 통계'
+									}
+								}
+							})
+						}
+					})
+				}
+			}).then((getSalYear) =>{
+				$("#chartSelect").change(function(){
+					window.myBar.destroy();
+					$.ajax({
+						url: "${pageContext.request.contextPath}/ajax/getTeamSalList.hari",
+						type: "post",
+						data:{
+								"year": $('#chartSelect').val()
+								},
+						dataType: "json",
+						success: function(getTeamSalList) {
+							for(var i =0; i<getTeamSalList.length; i++){
+								getTeamSalList[i].backgroundColor=color(colorArray[i]).alpha(0.5).rgbString();
+								getTeamSalList[i].borderColor=colorArray[i];
+								dataset2=getTeamSalList;
+							}
+							
+							var barChartData = {
+								labels: [$('#chartSelect').val()+'년'],
+								datasets: dataset2
+							}
+							var ctx2 = document.getElementById('adminCanvas2').getContext('2d');
+							window.myBar = new Chart(ctx2, {//차트 그리는부분
+								type: 'bar',
+								data: barChartData,
+								options: {
+									elements: {
+										rectangle: {
+										borderWidth: 2,
+										}
+									},
+									responsive: true,
+									legend: {
+										position: 'right',
+									},
+									title: {
+										display: true,
+										text: '부서별 연봉 통계'
+									}
+								}
+							})
+						}
+					})
+				})
+			})
 		})
 		
+		//부서별 연봉 통계 년도 옵션
+		var dataset2;
+		var salYearList=[]
+		$.ajax({
+			url: "${pageContext.request.contextPath}/ajax/getSalYear.hari",
+			type: "post",
+			dataType: "json",
+			success: function(getSalYear) {
+				salYearList=getSalYear
+				let years = "";
+				$.each(getSalYear, function(index, element) {
+					if (index==0) {
+						years += '<option value="' + element + '" selected>' + element + '</option>';
+					} else {
+						years += '<option value="' + element + '">' + element + '</option>';
+					}
+				})
+				$("#chartSelect").append(years);
+			}
+		}).then((getSalYear) =>{
+			//대시보드 연봉통계 차트
+			if($('#isAddmin').val() != undefined){
+				$.ajax({
+					url: "${pageContext.request.contextPath}/ajax/getTeamSalList.hari",
+					type: "post",
+					data:{
+								"year":getSalYear[0]
+							},
+					dataType: "json",
+					success: function(getTeamSalList) {
+						var labels=[];
+						for(var i =0; i<getTeamSalList.length; i++){
+							getTeamSalList[i].backgroundColor=color(colorArray[i]).alpha(0.5).rgbString();
+							getTeamSalList[i].borderColor=colorArray[i];
+							dataset2=getTeamSalList;
+							labels.push(getTeamSalList[i].label)
+						}
+						var barChartData = {
+							labels: [getSalYear[0]+'년'],
+							datasets: dataset2
+						}
+						var ctx2 = document.getElementById('adminCanvas2').getContext('2d');
+						window.myBar = new Chart(ctx2, {//차트 그리는부분
+							type: 'bar',
+							data: barChartData,
+							options: {
+								elements: {
+									rectangle: {
+									borderWidth: 2,
+									}
+								},
+								responsive: true,
+								legend: {
+									position: 'right',
+								},
+								title: {
+									display: true,
+									text: '부서별 연봉 통계'
+								}
+							}
+						})
+					}
+				})
+			}
+		}).then((getSalYear) =>{
+			$("#chartSelect").change(function(){
+				window.myBar.destroy();
+				$.ajax({
+					url: "${pageContext.request.contextPath}/ajax/getTeamSalList.hari",
+					type: "post",
+					data:{
+							"year": $('#chartSelect').val()
+							},
+					dataType: "json",
+					success: function(getTeamSalList) {
+						for(var i =0; i<getTeamSalList.length; i++){
+							getTeamSalList[i].backgroundColor=color(colorArray[i]).alpha(0.5).rgbString();
+							getTeamSalList[i].borderColor=colorArray[i];
+							dataset2=getTeamSalList;
+						}
+						
+						var barChartData = {
+							labels: [$('#chartSelect').val()+'년'],
+							datasets: dataset2
+						}
+						var ctx2 = document.getElementById('adminCanvas2').getContext('2d'); 
+						window.myBar = new Chart(ctx2, { //차트 그리는부분
+							type: 'bar',
+							data: barChartData,
+							options: {
+								elements: {
+									rectangle: {
+									borderWidth: 2,
+									}
+								},
+								responsive: true,
+								legend: {
+									position: 'right',
+								},
+								title: {
+									display: true,
+									text: '부서별 연봉 통계'
+								}
+							}
+						})
+					}
+				})
+			})
+		})
 		//메인 대시보드 근무시간 월 변경 했을 경우
 		$('.workTimeSelect').change(function(){
 			//기존에 있던 차트 삭제
@@ -390,7 +607,7 @@
 						}
 					})
 				})
-				//전체 선택했을 경우
+			//전체 선택했을 경우
 			}else{
 				$.ajax({
 					url: "${pageContext.request.contextPath}/ajax/getAllEmpTA.hari",
@@ -500,116 +717,6 @@
 				}
 			}
 		});
-
-		
-		//부서별 연봉 통계 년도 옵션
-		var dataset2;
-		var salYearList=[]
-		$.ajax({
-			url: "${pageContext.request.contextPath}/ajax/getSalYear.hari",
-			type: "post",
-			dataType: "json",
-			success: function(getSalYear) {
-				salYearList=getSalYear
-				let years = "";
-				$.each(getSalYear, function(index, element) {
-					if (index==0) {
-						years += '<option value="' + element + '" selected>' + element + '</option>';
-					} else {
-						years += '<option value="' + element + '">' + element + '</option>';
-					}
-				})
-				$("#chartSelect").append(years);
-			}
-		}).then((getSalYear) =>{
-			if($('#isAddmin').val() != undefined){
-				$.ajax({
-					url: "${pageContext.request.contextPath}/ajax/getTeamSalList.hari",
-					type: "post",
-					data:{
-								"year":getSalYear[0]
-							},
-					dataType: "json",
-					success: function(getTeamSalList) {
-						var labels=[];
-						for(var i =0; i<getTeamSalList.length; i++){
-							getTeamSalList[i].backgroundColor=color(colorArray[i]).alpha(0.5).rgbString();
-							getTeamSalList[i].borderColor=colorArray[i];
-							dataset2=getTeamSalList;
-							labels.push(getTeamSalList[i].label)
-						}
-						var barChartData = {
-							labels: [getSalYear[0]+'년'],
-							datasets: dataset2
-						}
-						var ctx2 = document.getElementById('adminCanvas2').getContext('2d');
-						window.myBar = new Chart(ctx2, {
-							type: 'bar',
-							data: barChartData,
-							options: {
-								elements: {
-									rectangle: {
-									borderWidth: 2,
-									}
-								},
-								responsive: true,
-								legend: {
-									position: 'right',
-								},
-								title: {
-									display: true,
-									text: '부서별 연봉 통계'
-								}
-							}
-						})
-					}
-				})
-			}
-		}).then((getSalYear) =>{
-			$("#chartSelect").change(function(){
-				window.myBar.destroy();
-				$.ajax({
-					url: "${pageContext.request.contextPath}/ajax/getTeamSalList.hari",
-					type: "post",
-					data:{
-							"year": $('#chartSelect').val()
-							},
-					dataType: "json",
-					success: function(getTeamSalList) {
-						for(var i =0; i<getTeamSalList.length; i++){
-							getTeamSalList[i].backgroundColor=color(colorArray[i]).alpha(0.5).rgbString();
-							getTeamSalList[i].borderColor=colorArray[i];
-							dataset2=getTeamSalList;
-						}
-						
-						var barChartData = {
-							labels: [$('#chartSelect').val()+'년'],
-							datasets: dataset2
-						}
-						var ctx2 = document.getElementById('adminCanvas2').getContext('2d');
-						window.myBar = new Chart(ctx2, {
-							type: 'bar',
-							data: barChartData,
-							options: {
-								elements: {
-									rectangle: {
-									borderWidth: 2,
-									}
-								},
-								responsive: true,
-								legend: {
-									position: 'right',
-								},
-								title: {
-									display: true,
-									text: '부서별 연봉 통계'
-								}
-							}
-						})
-					}
-				})
-			})
-		})
 	
 		//날씨 API
 		//날씨정보를 받고싶은 위도 경도
