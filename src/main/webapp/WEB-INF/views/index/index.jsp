@@ -99,7 +99,7 @@
 									<br>
 									<br>
 									<div style="text-align:center;">
-										<button type="button" id="updatePassword" class="btn btn-primary py-3 px-4" style = "font-weight: bold; font-size: large; font-family: 'Nanum DaCaeSaRang';">변경하기</button>
+										<button type="button" id="updatePassword" class="btn btn-primary" style = "font-weight: bold; font-size: large; font-family: 'Nanum DaCaeSaRang';">변경하기</button>
 									</div>
 								</form>
 							</div>
@@ -120,44 +120,48 @@
 				<div class="col-md-3 d-flex align-self-stretch ftco-animate">
 					<div class="media block-6 services d-block">
 						<div class="icon">
-							<span class="flaticon-placeholder"></span>
+							<!-- <span class="flaticon-placeholder"></span> -->
+							<img src ="${pageContext.request.contextPath}/resources/index/images/3.png" style ="width:70px;height:80px;">
 						</div>
 						<div class="media-body">
-							<h3 class="heading mb-3">Venue</h3>
-							<p>   203 Fake St. Mountain View, San Francisco, California, USA</p>
+							<h5 class="heading mb-3" style ="color:white;">근태 관리</h5>
+							<p style ="font-size:large; color:white;">본인의 근태 현황을 확인할 수 있고, 관리자가 전체 부서의 근태현황을 확인할 수 있습니다</p>
 						</div>
 					</div>      
 				</div>
 				<div class="col-md-3 d-flex align-self-stretch ftco-animate">
 					<div class="media block-6 services d-block">
 						<div class="icon">
-							<span class="flaticon-world"></span>
+							<!-- <span class="flaticon-world"></span> -->
+							<img src ="${pageContext.request.contextPath}/resources/index/images/1.png" style ="width:70px;height:80px;">
 						</div>
 						<div class="media-body">
-							<h3 class="heading mb-3">Transport</h3>
-							<p>A small river named Duden flows by their place and supplies.</p>
+							<h5 class="heading mb-3" style ="color:white;">인사 관리</h5>
+							<p style ="font-size:large; color:white;">본인의 재직증명을 출력할 수 있고, 관리자가 사원 조회를 할 수 있고, 입/퇴사 관리를 할 수 있습니다</p>
 						</div>
 					</div>
 				</div>
 				<div class="col-md-3 d-flex align-self-stretch ftco-animate">
 					<div class="media block-6 services d-block">
 						<div class="icon">
-							<span class="flaticon-hotel"></span>
+							<!-- <span class="flaticon-hotel"></span> -->
+							<img src ="${pageContext.request.contextPath}/resources/index/images/5.png" style ="width:70px;height:80px;">
 						</div>
 						<div class="media-body">
-							<h3 class="heading mb-3">Hotel</h3>
-							<p>A small river named Duden flows by their place and supplies.</p>
+							<h5 class="heading mb-3" style =" color:white;">급여 관리</h5>
+							<p style ="font-size:large; color:white;">본인의 급여 현황을 확인할 수 있고, 급여 명세서를 출력할 수 있습니다</p>
 						</div>
 					</div>
 				</div>
 				<div class="col-md-3 d-flex align-self-stretch ftco-animate">
 					<div class="media block-6 services d-block">
 						<div class="icon">
-							 <span class="flaticon-cooking"></span>
+							 <!-- <span class="flaticon-cooking"></span> -->
+							 <img src ="${pageContext.request.contextPath}/resources/index/images/6.png" style ="width:70px;height:80px;">
 						</div>
 						<div class="media-body">
-							<h3 class="heading mb-3">Restaurant</h3>
-							<p>A small river named Duden flows by their place and supplies.</p>
+							<h5 class="heading mb-3" style ="color:white;">전자 결재</h5>
+							<p style ="font-size:large; color:white;">품의서를 업로드할 수 있고, 문서함에서 확인할 수 있습니다</p>
 						</div>
 					</div>
 				</div>

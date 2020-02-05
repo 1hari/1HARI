@@ -69,7 +69,7 @@
 
  	.table-bordered td,
 	.table-bordered th {
-		border: 2px solid #505050;
+		border: 1px solid #505050;
 		height: 45px;
 	}
 

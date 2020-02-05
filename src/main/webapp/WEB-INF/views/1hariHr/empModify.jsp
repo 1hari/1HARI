@@ -147,7 +147,7 @@
 	 									</div>
 									</se:authorize>
 									<div class="form-group" align="right">
-										<button type="submit" style ="color: #807266; background-color: #fff; border-color: #807266;" class="btn btn-success">수정하기</button>
+										<button type="submit" style ="color: #000000; background-color: #fff; border-color: #807266;" class="btn btn-success">수정하기</button>
 									</div>
 								</div>									
 							</form>

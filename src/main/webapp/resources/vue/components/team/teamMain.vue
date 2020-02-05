@@ -102,6 +102,24 @@
 		height: 45px;
 	}
 	
+	
+	page-item.active .page-link {
+		z-index: 1;
+		color: #807266;
+		background-color: #ffffff;
+		border-color: #807266;
+		border: 2px solid #807266;
+		
+	}
+	
+	.page-item.disabled .page-link {
+		color: #807266;
+		pointer-events: none;
+		cursor: auto;
+		background-color: #fff;
+		border-color: #dee2e6;
+ 	}
+	
 </style>
 
 <script>

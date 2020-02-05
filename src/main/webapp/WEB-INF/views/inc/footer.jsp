@@ -1,11 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 </div>
+<style>
+	@media (min-width:576px) {
+	.footer text-center {
+		max-width: 540px
+	}
+}
 
+@media (min-width:768px) {
+	.footer text-center {
+		max-width: 720px
+	}
+}
+
+@media (min-width:992px) {
+	.footer text-center {
+		max-width: 960px
+	}
+}
+
+@media (min-width:1600px) {
+	.footer text-center {
+		max-width: 1140px
+	}
+}
+
+
+</style>
 <!--bottom 시작 -->
-<footer class="footer text-center" style="margin-left:15%;">
+<footer class="footer text-center" style = "margin-left:15%;">
 	
-	<div>All Rights Reserved by Matrix-admin. Designed and Developed by 1HARI</div>
+	<div>Designed and Developed by 1HARI</div>
 </footer>
 <!--bottom 끝-->
 

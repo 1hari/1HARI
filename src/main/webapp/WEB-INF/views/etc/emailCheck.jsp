@@ -5,12 +5,12 @@
 	<form method="post" action="" name="emailcheck">
 		<div class="form-group" style="text-align:center">
 			<br>
-			<label class="control-label" for="email">인증번호를 입력하세요.</label>
+			<label class="control-label" for="email" style ="font-size:large; font-weight:bold; color: black; font-family: 'Nanum DaCaeSaRang';">인증번호를 입력하세요.</label>
 			<br>
-			<input type="text" class="form-control " id="userAuthNum" name="userAuthNum" style="width:80%;text-align:center;display:inline;"/>
+			<input type="text" class="form-control " id="userAuthNum" name="userAuthNum" style="width:80%;text-align:center;display:inline;border:2px solid #807266; background-color:white;"/>
 			<br>
 				<div style="padding-top: 15px">
-				<button type="button" class="btn btn-primary" id="authNumCheck">확인</button>
+				<button type="button" class="btn btn-primary" id="authNumCheck" style ="border:2px solid #807266; background-color:white; font-size:large; font-weight:bold; color: black; font-family: 'Nanum DaCaeSaRang';">확인</button>
 			</div>
 		</div>
 	</form>
