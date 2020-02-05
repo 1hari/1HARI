@@ -47,10 +47,8 @@ public class HomeController {
 	//형남 0110 이메일인증
 	@RequestMapping("/emailSubmit.hari")
 	public String emailSubmit(@RequestParam("email") String email, Model model) {
-			//1. 데이터 받기
-			System.out.println(email);
 			
-			//2.이메일 보내기 위한 변수설정
+			//1.이메일 보내기 위한 변수설정
 			String host = "smtp.gmail.com"; //smtp 서버
 			String subject = "1HARI HR SYSTEM 비밀번호 변경을 위한 인증메일 입니다."; //보내는 제목 설정
 			String fromName = "1HARI"; //보내는 이름 설정
@@ -95,7 +93,7 @@ public class HomeController {
 							+ "</td></tr></tbody></table>"
 							+ "</td></tr></tbody></table>";
 			
-			//3.SMTP 설정 및 메일보내기
+			//2.SMTP 설정 및 메일보내기
 			try {
 				Properties props = new Properties();
 				props.put("mail.smtp.starttls.enable", "true");

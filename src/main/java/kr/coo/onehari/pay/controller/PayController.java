@@ -16,8 +16,6 @@ public class PayController {
 	
 	@RequestMapping("/getPayPopUp.hari")
 	public String getPayPopUp(@RequestParam("year") String year, @RequestParam("month") String month, Model model)  {
-		System.out.println(year);
-		System.out.println(month);
 		model.addAttribute("year", year);
 		model.addAttribute("month", month);
 		return "1hariPopUp.payPopUp";

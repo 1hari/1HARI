@@ -24,11 +24,6 @@ public class HomeService {
 		int result = 0;
 		try {
 			result=dao.empNumEmail(emp.getEmpNum(), emp.getEmail());
-			if(result >0) {
-				System.out.println("empNumEmailService: 해당 계정이 존재함");
-			}else {
-				System.out.println("empNumEmailService: 해당 계정이 존재하지 않음");
-			}
 		} catch (ClassNotFoundException | SQLException e) {
 			log.debug("empNumEmailService : " + e.getMessage());
 		}
