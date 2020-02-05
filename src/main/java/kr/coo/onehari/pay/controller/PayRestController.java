@@ -1,6 +1,7 @@
 package kr.coo.onehari.pay.controller;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.json.simple.JSONArray;
@@ -30,7 +31,12 @@ public class PayRestController {
 	// 급여 리스트
 	@RequestMapping(value = "/getPayList.hari", method = RequestMethod.POST)
 	public JSONObject getPayList(Principal pri, String year, String month) {
-		List<String> years = payService.getYears(pri.getName());
+		List<String> years = new ArrayList<String>();
+		if(payService.getYears(pri.getName()).isEmpty()) {
+			years.add("없음");
+		}
+		years.addAll(payService.getYears(pri.getName()));
+		System.out.println(years);
 		if (year.equals("init")) {
 			year = years.get(0);
 		}
