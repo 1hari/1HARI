@@ -8,7 +8,7 @@
 	<update id="insertStartWorkTA" parameterType="Integer">
 		UPDATE TALIST
 		SET TADATE=NOW()
-		WHERE EMPNUM=1001 AND TACODE=#{empNum} AND TADATE IS NULL AND SCHEDULEDATE=DATE_FORMAT(NOW(),"%Y-%m-%d")
+		WHERE EMPNUM=#{empNum} AND TACODE=1 AND TADATE IS NULL AND SCHEDULEDATE=DATE_FORMAT(NOW(),"%Y-%m-%d")
 	</update>
 	
    	<!-- 사원 출근기능(지각) 형남 0120 -->

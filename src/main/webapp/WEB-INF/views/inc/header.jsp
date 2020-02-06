@@ -307,9 +307,13 @@
 		//헤더 오늘 날짜
 		$('#todayDate').text(year + "년 " + month + "월 " + day + "일 " + week[date.getDay()]+ "요일")
 		
-		
+		console.log(date.getDay())
 		//출근버튼 + 캘린더 출력
 		$('#startWork').click(function() {
+			if(date.getDay() == 0 || date.getDay() == 6){
+				swal("근태알림", "오늘은 주말입니다. 주말은 근태등록이 불가능합니다.", "warning")
+				return
+			}
 			//테스트 주석
 	// 		if (navigator.geolocation) {
 	// 			navigator.geolocation.getCurrentPosition(function(position) {
@@ -342,7 +346,7 @@
 						}
 					})
 				}else{
-					swal("warning", "출근등록 실패, 관리자에게 문의해주세요.", "warning")
+					swal("근태알림", "출근등록 실패, 관리자에게 문의해주세요.", "warning")
 				}
 			})
 		})
@@ -369,18 +373,18 @@
 			}).then(() => {
 				//퇴근 성공하면
 				if(isEnd==true){
-					swal("success", "퇴근 등록되었습니다.", "success")
+					swal("근태알림", "퇴근 등록되었습니다.", "success")
 					//버튼 감추기
 					$('#endWork').attr('style', 'display: none');
 					$('#startWork').attr('style', 'display: none');
 					
-					swal("success", "퇴근 등록되었습니다.", "success").then((logout) => {
+					swal("근태알림", "퇴근 등록되었습니다.", "success").then((logout) => {
 	                    if (logout) {
 	                    	location.reload();
 	                 	 }
 					})
 				}else{
-					swal("warning", "퇴근 등록에 실패하였습니다. 관리자에게 문의해주세요.", "warning")
+					swal("근태알림", "퇴근 등록에 실패하였습니다. 관리자에게 문의해주세요.", "warning")
 					return;
 				}
 			})
@@ -422,9 +426,9 @@
 						$('#taComplete').removeAttr('style', 'display: none');
 						//오류사항
 					} else if(isStart == false && isEnd==true) {
-						swal("warning", "근태오류, 관리자에게 문의해주세요.", "warning")
+						swal("근태알림", "근태오류, 관리자에게 문의해주세요.", "warning")
 					} else{
-						swal("warning", "근태오류, 관리자에게 문의해주세요.", "warning")
+						swal("근태알림", "근태오류, 관리자에게 문의해주세요.", "warning")
 					}
 				}
 			});
