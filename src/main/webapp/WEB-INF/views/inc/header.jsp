@@ -306,8 +306,6 @@
 
 		//헤더 오늘 날짜
 		$('#todayDate').text(year + "년 " + month + "월 " + day + "일 " + week[date.getDay()]+ "요일")
-		
-		console.log(date.getDay())
 		//출근버튼 + 캘린더 출력
 		$('#startWork').click(function() {
 			if(date.getDay() == 0 || date.getDay() == 6){
