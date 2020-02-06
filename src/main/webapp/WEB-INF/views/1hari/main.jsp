@@ -574,6 +574,13 @@
 							getEmpTAMonth[i].backgroundColor=color(colorArray[i]).alpha(0.5).rgbString();
 							getEmpTAMonth[i].borderColor=colorArray[i];
 						}
+					},
+					beforeSend:function(){//이미지 보여주기
+						console.log("ddd");
+						$('.wrap-loading').removeClass('display-none');
+					},
+					complete:function(){ //이미지 감추기
+				        $('.wrap-loading').addClass('display-none');
 					}
 				}).then((getEmpTAMonth) => {
 					MONTHS=[];
@@ -652,6 +659,13 @@
 								}
 							}
 						})
+					},
+					beforeSend:function(){//이미지 보여주기
+						console.log("ddd");
+						$('.wrap-loading').removeClass('display-none');
+					},
+					complete:function(){ //이미지 감추기
+				        $('.wrap-loading').addClass('display-none');
 					}
 				})
 			}
@@ -865,7 +879,7 @@
 	    right:0;
 	    top:0;
 	    bottom:0;
-	    background: rgba(0,0,0,0.2); /*not in ie */
+	    background: rgba(0,0,0,0.1); /*not in ie */
 	    filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#20000000', endColorstr='#20000000');    /* ie */
 	}
 

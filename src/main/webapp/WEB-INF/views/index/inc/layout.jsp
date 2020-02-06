@@ -14,22 +14,19 @@
     
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/index/css/owl.carousel.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/index/css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/index/css/magnific-popup.css">
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/index/css/aos.css">
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/index/css/ionicons.min.css">
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/index/css/bootstrap-datepicker.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/index/css/jquery.timepicker.css">
-    
+       
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/index/css/flaticon.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/index/css/icomoon.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/index/css/style.css">
     
     <!-- font-family 다채사랑 추가 -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/index/css/stylesheetlove.css">
-    
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/index/css/stylesheetlove.css"> 
     
 </head>
 <body>

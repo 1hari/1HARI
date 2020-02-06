@@ -7,7 +7,7 @@
     
     <!-- 급여받은 월-->
     <select id="getYears" resultType="String">
-		SELECT DISTINCT DATE_FORMAT(PAYMONTH,"%Y") FROM PAY WHERE EMPNUM=#{empNUm} ORDER BY PAYMONTH DESC
+		SELECT DISTINCT DATE_FORMAT(PAYMONTH,"%Y") AS 'PAYMONTH' FROM PAY WHERE EMPNUM=#{empNum} ORDER BY PAYMONTH DESC
     </select>
     
 	<!-- 올해 전체 급여목록-->
