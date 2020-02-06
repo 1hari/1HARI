@@ -289,7 +289,6 @@
 		}).then(() =>{
 			//메인 대시보드 근무시간 통계 데이터 가져오기
 			if($('#isAddmin').val() != undefined){
-				console.log("ddd");
 				$.ajax({
 					url: "${pageContext.request.contextPath}/ajax/getAllEmpTA.hari",
 					type: "post",
@@ -326,7 +325,6 @@
 						})
 					},
 					beforeSend:function(){//이미지 보여주기
-						console.log("ddd");
 						$('.wrap-loading').removeClass('display-none');
 					},
 					complete:function(){ //이미지 감추기
