@@ -47,10 +47,10 @@
 							</div>
 						</div>
 						<button type="button" id="excelInsert" class="btn btn-success" style= "width: 10%; background-color: white; margin-left: 75%; color:#000000;font-family: 'Nanum DaCaeSaRang';">
-	    					저장하기
+	    					등록하기
 	    				</button>
 						<button type="button" class="btn btn-success" style="width: 10%; background-color: white; color:#000000;font-family: 'Nanum DaCaeSaRang'; " onclick="doExcelUploadProcess()">
-							올리기
+							미리보기
 						</button> <!-- "btn m-t-5 btn-info btn-block waves-effect waves-light -->
 	    			
 						<table id="zero_config" class="table table-striped table-bordered">
@@ -94,7 +94,7 @@
 			console.log($('#fileInput').val())
 			if($('#fileInput').val().trim()==""){
 				swal({
-					text: "저장할 파일을 선택해주세요.",
+					text: "미리보기 후 등록가능합니다.",
 					icon: "warning",
 					button: "닫기"
 				});

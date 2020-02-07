@@ -28,7 +28,7 @@
 																1HARI HR SYSTEM에서 편리한 근태환경과 전자결재를 경험해보세요.
 															</p>
 															<p>
-																사번: <b>${empNum}</b><br> 생년월일: <b>${password}</b>
+																사번: <b>${empNum}</b><br> 초기 비밀번호: <b>${password}</b>
 															</p>
 															<p>
 																사번과 생년월일로 1HARI SYSTEM에 접속하실 수 있습니다.<br>
