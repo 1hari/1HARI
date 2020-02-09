@@ -45,15 +45,15 @@
 <script>
 	$(document).ready(function() {
 		connect();
-		var Notification = window.Notification || window.mozNotification || window.webkitNotification;
+// 		var Notification = window.Notification || window.mozNotification || window.webkitNotification;
 
-		 Notification.requestPermission(function (permission) {
-			console.log(permission);
-	    });
-		//notifications 알림 권한확인 
-		if (window.Notification) {
-	        Notification.requestPermission(); //사용자 권한을 받아오는 함수
-	    }
+// 		Notification.requestPermission(function (permission) {
+// 			console.log(permission);
+// 	    });
+// 		//notifications 알림 권한확인 
+// 		if (window.Notification) {
+// 	        Notification.requestPermission(); //사용자 권한을 받아오는 함수
+// 	    }
 	})
 	
 	function getContextPath() {//접속주소 + contextPath 구하는 함수
@@ -77,11 +77,11 @@
 	}
 
 	function onOpen(evt) {
-		console.log("websocket 연결");
+		//console.log("websocket 연결");
 	}
 
 	function onClose(evt) {
-		console.log("websocket 연결해제");
+		//console.log("websocket 연결해제");
 	}
 	
 	//로그아웃에서 호출할 함수 (연결해제)

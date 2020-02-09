@@ -97,20 +97,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					JOIN team te <!-- 기안자 부서 테이블 -->
 						ON e.TEAMCODE = te.TEAMCODE
 		<where>
-			<!-- 검색구분 -->
-			<if test='signDate == "true"'>
-				OR s.SIGNDATE like concat('%',#{searchKey},'%') 
-			</if>
-			<if test='signNum == "true"'>
-				OR s.SIGNNUM like concat('%',#{searchKey},'%')
-			</if>
-			<if test='signTitle == "true"'>
-				OR s.SIGNTITLE like concat('%',#{searchKey},'%')
-			</if>		
-			<if test='draftEmp == "true"'>
-				OR s.DRAFTEMP like concat('%',#{searchKey},'%')
-			</if>
-		
+			
+				<!-- 검색구분 -->
+				<if test='signDate == "true"'>
+					OR s.SIGNDATE like concat('%',#{searchKey},'%') 
+				</if>
+				<if test='signNum == "true"'>
+					OR s.SIGNNUM like concat('%',#{searchKey},'%')
+				</if>
+				<if test='signTitle == "true"'>
+					OR s.SIGNTITLE like concat('%',#{searchKey},'%')
+				</if>		
+				<if test='draftEmp == "true"'>
+					OR s.DRAFTEMP like concat('%',#{searchKey},'%')
+				</if>
+						
 			<choose>
 				<!-- 문서구분 -->
 				<!-- 전체문서 : 결재자1 OR (결재1완료 AND 결재자2) OR 기안자 -->
