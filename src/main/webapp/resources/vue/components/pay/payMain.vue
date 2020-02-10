@@ -85,7 +85,6 @@ module.exports = {
     getPayList: function() {
        var params = new URLSearchParams();
        if(event.target.value ==undefined){ //연도 따로 설정안했을경우(첫 로딩 시)
-         console.log(event.target.value)
         params.append("year", "init")
        }else { //선택한 연도가 있을경우
          params.append("year", event.target.value)
@@ -97,7 +96,6 @@ module.exports = {
       this.totalDeduction=numeral(this.server_data.payList[0].payNPension + this.server_data.payList[0].payHInsurance + this.server_data.payList[0].payCInsurance +  this.server_data.payList[0].empInsurance + this.server_data.payList[0].payIncomeTax + this.server_data.payList[0].payLIncomeTax).format( '₩0,0' )
       this.realAmount=numeral(this.server_data.payList[0].basicSal -  (this.server_data.payList[0].payNPension + this.server_data.payList[0].payHInsurance + this.server_data.payList[0].payCInsurance +  this.server_data.payList[0].empInsurance + this.server_data.payList[0].payIncomeTax + this.server_data.payList[0].payLIncomeTax)).format( '₩0,0' )
       pays=response.data.payList
-      console.log(pays);
       this.splitPayMonth=[]
       pays.forEach(pay => {
         pay.basicSal = numeral(pay.basicSal).format( '₩0,0' )
@@ -108,7 +106,6 @@ module.exports = {
         pay.payIncomeTax = numeral(pay.payIncomeTax).format( '₩0,0' )
         pay.payLIncomeTax = numeral(pay.payLIncomeTax).format( '₩0,0' )
         this.splitPayMonth.push(pay.payMonth.split("-"))
-        console.log(this.splitPayMonth)
       });
       })
      

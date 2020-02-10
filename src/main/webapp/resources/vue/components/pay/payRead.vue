@@ -391,7 +391,6 @@ module.exports = {
   },
   created() {
 
-	console.log(month)
 	this.year=year
 	this.month=month
 	this.currYear=cYear
