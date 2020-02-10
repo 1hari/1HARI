@@ -22,31 +22,29 @@
 <script type="text/javascript">
 //형남 0110 인증번호 창
 	$(function(){
-		var authNum = '${authNum}';
+		var authNum = '${authNum}'; //인증번호
 		
-		$('#authNumCheck').click(function() {
+		$('#authNumCheck').click(function() { //인증번호 확인
 			
 			//인증번호 입력값 체크 
-			if($('#userAuthNum').val() == null){
+			if($('#userAuthNum').val() == null){ //인증번호 칸 빈값
 				swal({
 					text: "인증번호가 입력되지 않았습니다.",
 					button: "닫기"
 				});
-				
 				$('#userAuthNum').focus();
-			}else if($('#userAuthNum').val() != authNum){
+			}else if($('#userAuthNum').val() != authNum){ //인증번호가 일치하지 않는 경우
 				swal({
 					text: "인증번호가 일치하지 않습니다.",
 					button: "닫기"
 				});
-
 				$('#userAuthNum').focus();
 			//인증번호 일치
 			}else if($('#userAuthNum').val() == authNum){
 				swal({
 					text: "인증되었습니다.",
 					button: "확인"
-				}).then((value) => {
+				}).then((value) => { // 인증번호 확인에 성공하면 이메일 다시 못바꾸고 비밀번호 칸 disabled 해제
 					$('#emailCheckReturn', parent.opener.document).val("true");
 					$('#newPassword', parent.opener.document).removeAttr('disabled');
 					$('#newPassword2', parent.opener.document).removeAttr('disabled');
@@ -55,7 +53,7 @@
 					$('#emailSend', parent.opener.document).attr('disabled', 'disabled');
 					$('#email', parent.opener.document).attr("readonly", "readonly");
 					$('#emailcheck', parent.opener.document).text("이메일 인증이 완료되었습니다.");
-					window.self.close();
+					window.self.close(); 
 				});
 				
 			}

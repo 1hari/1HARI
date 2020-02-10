@@ -32,7 +32,7 @@
           </thead>
           <tbody>
             <tr v-for="(pay, index) in server_data.payList">
-              <td class="text-center d-none d-md-table-cell" style="height=20px">{{pay.payMonth}}</td>
+              <td class="text-center d-none d-md-table-cell" >{{pay.payMonth}}</td>
               <td class="text-center d-none d-md-table-cell">{{pay.basicSal}}</td><!--기본급으로 받으세요 -->
               <td class="text-center d-none d-md-table-cell">{{pay.payNPension}}</td>
               <td class="text-center d-none d-md-table-cell">{{pay.payHInsurance}}</td>
@@ -42,7 +42,7 @@
               <td class="text-center d-none d-md-table-cell">{{pay.payLIncomeTax}}</td>
               <td class="text-center d-none d-md-table-cell">{{totalDeduction}}</td><!--실급여로 데이터 받으세요 -->
               <td class="text-center d-none d-md-table-cell">{{realAmount}}</td><!--실급여로 데이터 받으세요 -->
-              <td class="text-center d-none d-md-table-cell"><button class ="btn-success" style = "background-color: white; color:black; border-radius:5px border:2px solid #807266; font-weight:bold; height:70%;" @click="payRead(splitPayMonth[index][0],splitPayMonth[index][1])">급여명세</button></td>
+              <td class="text-center d-none d-md-table-cell"><input type="button" class ="btn-success" value='급여명세' style = "background-color: white; color:black; border-radius:5px border:2px solid #807266; font-weight:bold; height:70%;" @click="payRead(splitPayMonth[index][0],splitPayMonth[index][1])" ></td>
             </tr>
           </tbody>
           
@@ -65,15 +65,6 @@
 
 
 </template>
-<style>
-
- 	.table-bordered td,
-	.table-bordered th {
-		border: 1px solid #505050;
-		height: 45px;
-	}
-
-</style>
 <script>
 module.exports = {
   //템플릿 태그에서 여기에 있는 정보나 함수를 이용할 수 있음
@@ -124,13 +115,12 @@ module.exports = {
     },
   },
   created() {
-    // alert(this.$route.params.board_idx) //주소를 관리하는 객체 route, 주소가 바뀌면 route객체도 변경됨, route객체의 변경을 감지해줘야함
     this.getPayList();
   },
 };
 </script>
 <style>
    .table td{
-      padding: 3px
+      padding: 0px
       }
 </style>

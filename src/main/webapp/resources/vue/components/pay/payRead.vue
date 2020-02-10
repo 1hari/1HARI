@@ -373,13 +373,6 @@ if(cMonth.length == 1){
 if(cDay.length == 1){ 
   cDay = "0" + cDay; 
 } 
-$(function(){
-	//출력버튼
-	$('#printPay').click(function(){
-		console.log('클릭')
-		window.print()
-	})
-})
 module.exports = {
   data: function() {
     return {
@@ -424,12 +417,10 @@ module.exports = {
     
     axios.post(contextPath + '/ajax/getEmp.hari', params).then((response)=>{
       this.emp=response.data.emp
-      console.log(this.emp)
 	})
 	
     axios.post(contextPath + '/ajax/getCEO.hari', params).then((response)=>{
       this.CEO=response.data.CEO
-      console.log(this.CEO)
     })
   },
   methods: {

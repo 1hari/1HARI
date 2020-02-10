@@ -36,7 +36,6 @@ public class PayRestController {
 			years.add("없음");
 		}
 		years.addAll(payService.getYears(pri.getName()));
-		System.out.println(years);
 		if (year.equals("init")) {
 			year = years.get(0);
 		}
