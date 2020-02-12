@@ -257,9 +257,9 @@
 	let week = ['일', '월', '화', '수', '목', '금', '토'];
 	
 	$(function() {
-		//메인 대시보드 근태차트 날짜
+		//메인 대시보드 근무시간 통계 차트
 		$('#taChartDate').text(year + "년 " + month + "월 ")
-		//메인 대시보드 근태차트 옵션 값 생성
+		//메인 대시보드근무시간 통계 차트 옵션 값 생성
 		$.ajax({
 			url: "${pageContext.request.contextPath}/ajax/getWorkTimeYear.hari",
 			type: "post",
@@ -268,13 +268,11 @@
 				yearStr:$('#workTimeSelectYear').val()
 			},
 			success: function(getWorkTimeYear) {
-				
-				var yearList=getWorkTimeYear
+				var yearList=getWorkTimeYear //
 				let years = "";
-				//console.log(getWorkTimeYear);
 				if(getWorkTimeYear != ""){
 					$.each(yearList, function(index, element) {
-						if (index==0) {
+						if (index==0) {  //첫번째 요소 selected
 							years += '<option value="' + element + '" selected>' + element + '</option>';
 						} else {
 							years += '<option value="' + element + '">' + element + '</option>';
@@ -288,24 +286,24 @@
 			}
 		}).then(() =>{
 			//메인 대시보드 근무시간 통계 데이터 가져오기
-			if($('#isAddmin').val() != undefined){
+			if($('#isAddmin').val() != undefined){ // 관리자만 보여주는 차트
 				$.ajax({
 					url: "${pageContext.request.contextPath}/ajax/getAllEmpTA.hari",
 					type: "post",
 					dataType: "json",
-					success: function(getAllEmpTA) {
-						for(var i =0; i<getAllEmpTA.length; i++){
-							getAllEmpTA[i].backgroundColor=color(colorArray[i]).alpha(0.5).rgbString();
+					success: function(getAllEmpTA) { //json 객체로 dataset 형식에 맞춰 리턴받음
+						for(var i =0; i<getAllEmpTA.length; i++){ //팀 갯수 만큼 반복
+							getAllEmpTA[i].backgroundColor=color(colorArray[i]).alpha(0.5).rgbString(); //팀마다 색 부여
 							getAllEmpTA[i].borderColor=colorArray[i];
 							dataset=getAllEmpTA;
 						}
 						var horizontalBarChartData = {
-							labels: MONTHS,
-							datasets: dataset
+							labels: MONTHS, //[1월,2월..12월]
+							datasets: dataset //getAllEmpTA
 						}
 						var ctx = document.getElementById('adminCanvas').getContext('2d');
 						window.myHorizontalBar = new Chart(ctx, {//차트 그리는부분
-							type: 'horizontalBar',
+							type: 'horizontalBar', //수평차트
 							data: horizontalBarChartData,
 							options: {
 								elements: {
@@ -315,7 +313,7 @@
 								},
 								responsive: true,
 								legend: {
-									position: 'right',
+									position: 'right', //라벨위치
 								},
 								title: {
 									display: true,
@@ -323,7 +321,7 @@
 								}
 							}
 						})
-					},
+					}, 
 					beforeSend:function(){//이미지 보여주기
 						$('.wrap-loading').removeClass('display-none');
 					},
@@ -344,7 +342,7 @@
 					salYearList=getSalYear
 					let years = "";
 					$.each(getSalYear, function(index, element) {
-						if (index==0) {
+						if (index==0) { //첫번째 요소 selected
 							years += '<option value="' + element + '" selected>' + element + '</option>';
 						} else {
 							years += '<option value="' + element + '">' + element + '</option>';
@@ -354,7 +352,7 @@
 				}
 			}).then((getSalYear) =>{
 				//대시보드 연봉통계 차트
-				if($('#isAddmin').val() != undefined){
+				if($('#isAddmin').val() != undefined){ // 관리자만 보여주는 차트
 					$.ajax({
 						url: "${pageContext.request.contextPath}/ajax/getTeamSalList.hari",
 						type: "post",
@@ -529,8 +527,6 @@
 							type: 'horizontalBar',
 							data: horizontalBarChartData,
 							options: {
-								// Elements options apply to all of the options unless overridden in a dataset
-								// In this case, we are setting the border of each horizontal bar to be 2px wide
 								elements: {
 									rectangle: {
 										borderWidth: 2,
@@ -551,7 +547,6 @@
 						})
 					},
 					beforeSend:function(){//이미지 보여주기
-						console.log("ddd");
 						$('.wrap-loading').removeClass('display-none');
 					},
 					complete:function(){ //이미지 감추기
@@ -568,16 +563,13 @@
 			data:{strYear: year},
 			dataType: "json",
 			success: function(getTA) {
-				//console.log(getTA);
 				//당월 근태 데이터가 있는지 확인
 				var count = 0;
 				$.each(getTA.TAList, function(index,data){
-					//console.log(data==0);
 					if(data == 0){
 						count++;
 					}
 				});
-				//console.log(count);
 				
 				//당월 근태 데이터가 있으면 chart
 				if(count != 4) {
@@ -615,7 +607,7 @@
 					}
 					var ctx = document.getElementById('chart-area').getContext('2d');
 					window.myPie = new Chart(ctx, config);
-				}else {
+				}else { //등록된 근태가 없으면
 					$('#chartTaList').empty();
 					$('#chartTaList').append('<h4 class="card-title m-b-0">당월 근태 통계</h4><h4 class="card-title m-b-0">데이터가 없습니다.</h4>');
 				}
@@ -624,7 +616,9 @@
 	
 		//날씨 API
 		//날씨정보를 받고싶은 위도 경도
-		var rs = dfs_xy_conv("toXY", 37.525913599999996, 126.83591679999999); //
+		var fixLatitude=parseFloat(37.525913599999996); //회사의 위도 고정
+		var fixLongitude=parseFloat(126.83591679999999);//회사의 경도 고정
+		var rs = dfs_xy_conv("toXY", fixLatitude, fixLongitude); //
 		
 		//API에서 받는 날짜, 시간 형식
 		if(month<10){
@@ -646,18 +640,18 @@
 		}
 	
 		//API에 요청할 주소 가공
-		var xValue = rs.x;
-		var yValue = rs.y;
-		var weatherApi = "http://apis.data.go.kr/1360000/VilageFcstInfoService/getUltraSrtFcst";
-		var weatherServiceKey = "?ServiceKey="
+		var xValue = rs.x; //API에서 요구하는 위도 형식
+		var yValue = rs.y; //API에서 요구하는 경도 형식
+		var weatherApi = "http://apis.data.go.kr/1360000/VilageFcstInfoService/getUltraSrtFcst"; //API 주소
+		var weatherServiceKey = "?ServiceKey=" //서비스키
 				+ "PXss7TDZfDqmwbPtPSbrN5TR36wq4zETwTgTFsmDjWxyz0vVMWAI2NyzOqsou8m4%2FjrhI0joz7sLmoKctlkUkw%3D%3D";
 		var numOfRows = "&numOfRows=100&pageNo=1"
-		var base_date = "&base_date=" + year + month + day
-		var base_time = "&base_time=" + hour + minutes;
-		var nx = "&nx=" + xValue;
-		var ny = "&ny=" + yValue;
-		var dataType = "&dataType=json"
-		var weatherUrl = weatherApi + weatherServiceKey + base_date + base_time + numOfRows + nx + ny + dataType;
+		var base_date = "&base_date=" + year + month + day //요청 날짜
+		var base_time = "&base_time=" + hour + minutes; //요청 시간
+		var nx = "&nx=" + xValue;  //위도
+		var ny = "&ny=" + yValue; //경도
+		var dataType = "&dataType=json" //리턴받을 타입
+		var weatherUrl = weatherApi + weatherServiceKey + base_date + base_time + numOfRows + nx + ny + dataType; //요청주소 조합
 		//API에서 응답한 데이터 받기
 		$.ajax({
 			url : "${pageContext.request.contextPath}/ajax/getWeather.hari",
@@ -667,18 +661,17 @@
 			success : function(getWeather) {
 				//console.log(getWeather.response.body.items);
 				//받은 데이터로 테이블 생성
-				$('#weatherDate').text(year + "년 " + month + "월 " + day +"일")
-				var weatherTitle='<td style="width: 15%; height: 20%;" rowspan="2" id="weatherImg"></td>' +
+				$('#weatherDate').text(year + "년 " + month + "월 " + day +"일") //API 날짜 출력
+				var weatherTitle='<td style="width: 15%; height: 20%;" rowspan="2" id="weatherImg"></td>' + //기본 테이블 구조
 											'<td style="width: 10%;">현재날씨</td>'+
 											'<td style="width: 10%;"> 기 온</td>' +
 											'<td style="width: 10%;"> 습 도 </td>"';
-				var weatherContent='<td id="currWeather"></td>' +
+				var weatherContent='<td id="currWeather"></td>' + //기본 컨텐츠 구조
 												'<td id="t1h"></td>' +
 												'<td id="reh"></td>';
 				var weatherAraay=[]
 				//실황만 필요하므로 응답해준 데이터중 현재시간과 가장 근접한 예보만 배열에 담음
 				//첫번째 값 푸쉬
-				//console.log(getWeather.response.body.items.item);
 				weatherAraay.push(getWeather.response.body.items.item)
 				//받은 데이터 돌면서 각 카테고리의 첫번째 값만 푸쉬
 	            for(var i=1; i<getWeather.response.body.items.item.length; i++){
@@ -733,9 +726,8 @@
 					$("#weatherImg").append('<img src="${pageContext.request.contextPath}/resources/hari/assets/images/weather_snow.png" alt="현재날씨" class="rounded-circle" style="width: 67%; height: 20%;">');
 					$('#currWeather').text('눈')
 				}
-				$('#t1h').text(weatherAraay[4].fcstValue + '℃') 
-				$('#reh').text(weatherAraay[6].fcstValue + '%') 
-		
+				$('#t1h').text(weatherAraay[4].fcstValue + '℃') //기온
+				$('#reh').text(weatherAraay[6].fcstValue + '%') //습도
 			}
 		});//날씨api END!!
 	
